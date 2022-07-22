@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The EUTXO Model - The Helios Programming Language</title>
+        <title>Control Flow and Printing - The Helios Programming Language</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_2/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Primitive_Types.html"><strong aria-hidden="true">2.1.</strong> Primitive Types</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.2.</strong> Control Flow and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_Structs.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_3/01_The_EUTXO_Model.html" class="active"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_2/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Primitive_Types.html"><strong aria-hidden="true">2.1.</strong> Primitive Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Control_Flow_and_Printing.html" class="active"><strong aria-hidden="true">2.2.</strong> Control Flow and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Structs.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,94 +142,53 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="the-eutxo-model"><a class="header" href="#the-eutxo-model">The EUTXO Model</a></h1>
-<p>This section wouldn't be possible without <a href="https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e">this</a> great blog post by the awesome <a href="https://github.com/dav009">David Pryzbilla</a>.</p>
-<h2 id="accounts-model-vs-eutxo-model"><a class="header" href="#accounts-model-vs-eutxo-model">Accounts Model vs EUTXO Model</a></h2>
-<p>Smart contracts on Cardano are quite different from those on Ethereum.</p>
-<h3 id="ethereum-style-smart-contracts-accounts-model"><a class="header" href="#ethereum-style-smart-contracts-accounts-model">Ethereum-style Smart Contracts (Accounts Model)</a></h3>
-<p>Ethereum and other EVM-based blockchains use the Accounts model in which there are user wallets
-and smart contracts are represented using <code>accounts</code> which are like objects stored onchain.</p>
-<p>Contracts on Ethereum run via the EVM(Ethereum Virtual Machine),
-the EVM can be thought of as a sort global onchain computer that smart contracts take turns to run on before being accepted onChain.</p>
-<h3 id="components-of-a-utxo"><a class="header" href="#components-of-a-utxo">Components of a UTXO</a></h3>
-<p>On EUTXO blockchain the ledger is made up of many UTXOs(Unspent Transcation Outputs). A UTXO has three components:</p>
-<ul>
-<li>tokens(Native Cardano Tokens</li>
-<li>A Validator Script</li>
-<li>A Datum.</li>
-</ul>
-<h4 id="datums"><a class="header" href="#datums">Datums</a></h4>
-<p>These are data stored onChain associated with a particular UTXO. This is used to store state in Smart Contracts.
-<strong>Note</strong>: To be exact on Cardano previously the Datum couldn't be stored onChain but as of PlutusV2 we now have actual onChain(inline) datums.</p>
-<h4 id="validators"><a class="header" href="#validators">Validators</a></h4>
-<p>A validators is a function that runs when a transaction attempts to spend a UTXO,
-it returns a boolean which determines if the UTXO can be spent.
-Validators contain the 'business logic' of a smart contract.</p>
-<p>For example for a simple swap one could lock up some tokens in a UTXO with a validator that returns <code>true</code> if <strong>x</strong> amount of ADA is sent to your address.</p>
-<p>A UTXO can only be spent once. In every transaction some UTXOs are destroyed,
-<strong>Transaction Inputs (TxInputs)</strong> and new UTXOs are created, <strong>Transaction Inputs</strong>.
-For a transaction to be valid it must satisfy some things:</p>
-<ul>
-<li>The total amount of tokens in the <strong>Transaction Inputs</strong> must be equal to those in the <strong>Transaction Ouputs</strong>.</li>
-<li>The validators for all the <strong>Transaction Inputs</strong> must evaluate to <code>true</code>.</li>
-</ul>
-<h2 id="pros-and-cons-of-the-eutxo-model"><a class="header" href="#pros-and-cons-of-the-eutxo-model">Pros and Cons of the EUTXO Model</a></h2>
-<h3 id="pros"><a class="header" href="#pros">Pros</a></h3>
-<ul>
-<li>
-<p><strong>No Gas Fees</strong></p>
-<p>EUTXO contracts are deterministic this means that you can verify if a transaction will suceed before posting it to the blockchain.
-This is means no gas fees.</p>
-</li>
-<li>
-<p><strong>Easier to Audit</strong></p>
-<p>The <strong>locally-scoped</strong> aspect of EUTXO contracts reduces the potential attack surface by a lot.
-This makes auditing way easier because you're auditing a <strong>single</strong> function.</p>
-</li>
-<li>
-<p><strong>Concurrency</strong>
-If designed properly EUTXO smart contracts paired with</p>
-</li>
-<li>
-<p><strong>Better for Layer 2s</strong></p>
-<p>The local nature of EUTXO lends itself well to building Layer 2 scaling solutions
-such as sidechains(Milkomeda), state channels</p>
-</li>
-<li>
-<p><strong>Simpler</strong>
-Though not immediately obvious EUTXO smart contracts are often simpler than
-an equivalent Solidity smart contract.</p>
-</li>
-<li>
-<p><strong>No Reentrancy Attacks</strong>
-Reentrancy attacks such as the <a href="https://en.wikipedia.org/wiki/The_DAO_(organization)">DAO hack</a>.</p>
-</li>
-</ul>
-<h3 id="cons"><a class="header" href="#cons">Cons</a></h3>
-<ul>
-<li>
-<p><strong>Concurrency Issues</strong>: If EUTXO contracts aren't designed properly they can encounter <strong>contention</strong>. <strong>Contention</strong> occurs when two transaction try
-to spend the same UTXO, this isn't possible and leads to UX issues.
-This is not usually an issue on Ethereum as the EVM usually handles ordering smart contract calls.</p>
-<p>It's best to keep this in mind when designing smart contracts.</p>
-</li>
-</ul>
-<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
-<p>It's totally normal if you're still confused about EUTXO it's not immediately intuitive.
-In EUTXO smart contracts are more about specifying the requirements for tokens to be spent.
-It is worth the extra effort as it often leads to contracts that are simpler overall.</p>
-<p>I advise your read the article linked at the top even if you understand EUTXO, it's
-written for the Ergo blockchain but a lot of the concepts carry over into cardano.</p>
+                        <h1 id="control-flow-printing-and-traces"><a class="header" href="#control-flow-printing-and-traces">Control Flow, Printing and Traces</a></h1>
+<h2 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h2>
+<p>Helios supports <code>if/else</code> statements.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if (true) {
+    23
+} else {
+    42
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In Helios <code>if</code>/<code>else</code> statements are expressions.
+So the last expression is implicitly returned much like Rust and Ruby.
+This is valid syntax: </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>x: Int = if (true) {
+            42
+        } else {
+            24
+        };
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Note</strong>: Compile-time constants can't be set to the result of an <code>if</code>/<code>else</code> expression.</p>
+<h2 id="printing-and-traces"><a class="header" href="#printing-and-traces">Printing and Traces</a></h2>
+<p>For debuggin purposes Helios has a <code>print</code> function.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>print(&quot;Imagine something cool.&quot;)
+trace(21 &gt; 32, &quot;Should be true&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Note:</strong> Traces are <strong>horrible</strong> for production code as they lead to bloated validators.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../chapter_3/00_Blockchain_Programming_in_Helios.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../chapter_1/01_Primitive_Types.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../helios_builtins/Helios_Builtins.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../chapter_1/03_Functions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -239,11 +198,11 @@ written for the Ergo blockchain but a lot of the concepts carry over into cardan
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../chapter_3/00_Blockchain_Programming_in_Helios.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../chapter_1/01_Primitive_Types.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../helios_builtins/Helios_Builtins.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../chapter_1/03_Functions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
