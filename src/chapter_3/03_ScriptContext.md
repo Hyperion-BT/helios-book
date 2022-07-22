@@ -29,7 +29,7 @@ struct Tx {
     id: TxId,
     inputs: []TxInput,          // Transaction inputs
     outputs: []TxOutput,        // Transaction outputs
-    fee: Value,                 // Fee paid by this transaction
+    fee: Value,                 // Fee paid for this transaction
     time_range: TimeRange,     // Valid range for this transaction
     signatories: []PubKeyHash, // Signatories of the transaction
 }
