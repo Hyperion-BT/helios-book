@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_2/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Primitive_Types.html"><strong aria-hidden="true">2.1.</strong> Primitive Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.2.</strong> Control Flow and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Structs.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html" class="active"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Primitive_Types.html"><strong aria-hidden="true">2.1.</strong> Primitive Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.2.</strong> Control Flow and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Structs.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html" class="active"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,25 +142,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="vesting-contract"><a class="header" href="#vesting-contract">Vesting Contract</a></h1>
-<p>To put what we've done so far to use we're going to build a simple 'vesting' contract.
-This contract will lock up some tokens for</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>enum VestingRedeemer {
-    Cancel{},
-    Collect{}
-}
-
-struct VestingDatum {
-    creator: PubKeyHash,
-    beneficiary: PubKeyHash,
-    deadline: Time
-}
-
-<span class="boring">}
-</span></code></pre></pre>
+                        <h1 id="project-1-vesting-contract"><a class="header" href="#project-1-vesting-contract">Project #1: Vesting Contract</a></h1>
 
                     </main>
 
