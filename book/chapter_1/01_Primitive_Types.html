@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_2/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_Primitive_Types.html" class="active"><strong aria-hidden="true">2.1.</strong> Primitive Types</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.2.</strong> Control Flow and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_Structs.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_3/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_2/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Primitive_Types.html" class="active"><strong aria-hidden="true">2.1.</strong> Primitive Types</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.2.</strong> Control Flow and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_Structs.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_3/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,73 +142,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="section-11-primitive-types"><a class="header" href="#section-11-primitive-types">Section 1.1: Primitive Types</a></h1>
-<h2 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h2>
-<p>Helios has five primitive types. All variables in Helios are <strong>immutable</strong>.</p>
-<br/>
-<table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Literal</th><th style="text-align: left">Haskell Equivalent</th></tr></thead><tbody>
-<tr><td style="text-align: left">Bool</td><td style="text-align: left"><code>true</code> or <code>false</code></td><td style="text-align: left"><code>Bool</code></td></tr>
-<tr><td style="text-align: left">Int</td><td style="text-align: left"><code>42</code> or <code>0b11010011</code> or <code>0x7b</code></td><td style="text-align: left"><code>Integer</code> (unbounded integer)</td></tr>
-<tr><td style="text-align: left">String</td><td style="text-align: left"><code>&quot;stringy&quot;</code> or <code>'stringier'</code></td><td style="text-align: left">?</td></tr>
-<tr><td style="text-align: left">ByteArray</td><td style="text-align: left"><code>#thisisabytestring</code></td><td style="text-align: left"><code>ByteString</code></td></tr>
-</tbody></table>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// Boolean values
-booly: Bool = true;
-
-// Integers
-inty: Int = 42;
-
-// Strings
-stringy: String = &quot;All your codes belongs to us.&quot;;
-
-// BytesArrays
-byte_array: ByteArray = #0x3132424;
-<span class="boring">}
-</span></code></pre></pre>
-<p><strong>Note:</strong> Helios has support for compile time constansts, constants are declared using the <code>const</code> keyword and must be named in all caps:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>const AGE: Int = 2132;
-<span class="boring">}
-</span></code></pre></pre>
-<h2 id="list-a"><a class="header" href="#list-a">List ([]a)</a></h2>
-<p>Helios has a list type list just like a the Haskell <code>List</code> type.
-It's type signature is <code>[]a</code> where a is the type of items in the list.
-Notably Helios list items aren't accessed using square brackets, <code>[]</code> for indexing instead the</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// A list of Integers
-just_some_ints: []Int = []Int{1, 2, 3, 4, 5};
-<span class="boring">}
-</span></code></pre></pre>
-<h3 id="useful-methods"><a class="header" href="#useful-methods">Useful Methods</a></h3>
-<p>Helios lists have a lot of methods you'd normally find in other languages</p>
-<pre><code class="language-golang">// List Methods.
-fib_list: []Int = []Int{1, 1, 2, 3, 5};
-
-trace(fib_list.len() != 5, &quot;This will print if the length of fib_list is 8.&quot;);
-
-// Note: Throws error if index is out of range. 
-trace(fib_list.get(4) != 5, &quot;This will print if the element at index 4 is 3.&quot;)
-
-// Note: Throws an error if list is empty.
-trace(fib_list.head() != 1, &quot;Gets the element at the front of the list.&quot;)
-
-// Note: Throws an error if the list is empty.
-trace(fib_list.tail() != 5, &quot;Returns the element at the end of the list.&quot;);
-
-trace(fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5}, 
-    &quot;Prepends item to the front of a list.&quot;)
-
-trace(!([]Int{}).is_empty(), &quot;Checks if a list is empty.&quot;)
-</code></pre>
-<h3 id="map-wip"><a class="header" href="#map-wip">Map? [WIP]</a></h3>
-<p>In future Helios might have a <code>Map</code> data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.</p>
+                        <h1 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h1>
 
                     </main>
 
@@ -239,6 +173,22 @@ trace(!([]Int{}).is_empty(), &quot;Checks if a list is empty.&quot;)
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
