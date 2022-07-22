@@ -115,6 +115,7 @@ func show(self: String) -> String;
 `__helios__bytearray`
 
 ## List ([]a)
+---
 
 ### Associated Functions
 
@@ -122,7 +123,7 @@ func show(self: String) -> String;
 func new[a]() -> []a;
 ```
 
-### Operators:
+### Operators
 
 `__eq`, `__neq`,`__add`
 
@@ -138,9 +139,9 @@ func head[a](self: []a) -> a;
 // @returns The element at the end of the list.
 // @notice Throws an error if the list is empty.
 func tail[a](self: []a) -> a;
-````
+```
 
-### Methods:
+### Methods
 
 ```go
 func serialize(self: []a) -> ByteArray;
@@ -181,6 +182,7 @@ func map[a, b](self: []a, transformation: (a) -> b) -> []b;
 `__helios__list`
 
 ## Map
+---
 
 ### Operators
 
@@ -195,6 +197,7 @@ func map[a, b](self: []a, transformation: (a) -> b) -> []b;
 `__helios__map`
 
 ## Option[a]
+---
 
 `Option[a]` is an enum used to represent an optional value.
 
@@ -218,6 +221,7 @@ Option[a] {
 `__helios__option`
 
 ## Option::Some
+---
 
 ### Associated Functions
 
@@ -247,6 +251,7 @@ func serialize(self: Option[a]) -> ByteArray;
 `__helios__option__some`
 
 ## Option::None
+---
 
 ### Associated Functions
 
@@ -272,6 +277,7 @@ func serialize(self: Option[a]) -> ByteArray;
 `__helios__option__none`
 
 ## PubKeyHash, ValidatorHash, MintingPolicyHash, DatumHash
+---
 
 ### Associated Functions
 
@@ -289,6 +295,7 @@ serialize, show
 `__helios__hash`
 
 ## ScriptContext
+---
 
 ### Operators
 
@@ -321,8 +328,9 @@ func get_current_input(self: ScriptContext) -> TxInput;
 ### Internal Namespace
 
 `__helios__scriptcontext`
-           
+
 ## Tx
+---
 
 This struct stores the data related to a signed transaction.
 
@@ -384,20 +392,22 @@ func value_locked_by_datum(self: Tx, datum_hash: Datum)
 `__helios__tx`
 
 ## TxId
+---
 
-### Operators:
+### Operators
 
-`__eq`,`__neq` 
+`__eq`,`__neq`
 
-### Methods:
+### Methods
 
 serialize
 
 ### Internal Namespace
 
-`__helios__txid` 
+`__helios__txid`
 
 ## TxInput
+---
 
 ### Operators
 
@@ -422,6 +432,7 @@ serialize
 `__helios__txinput`
 
 ## TxOutput
+---
 
 ### Operators
 
@@ -448,6 +459,7 @@ hidden:      get_datum_hash
 `__helios__txoutput`
 
 ## Txoutputid
+---
 
 ### Associated Functions
 
@@ -467,6 +479,7 @@ serialize
 `__helios__txoutputid`
 
 ## Address
+---
 
 ### Operators
 
@@ -491,6 +504,7 @@ hidden:      is_staked
 __helios`__add`ress
 
 ## Credential
+---
 
 ### Operators
 
@@ -506,6 +520,7 @@ hidden:      is_pubkey, is_validator
 `__helios__credential`
 
 ## Credential::PubKey
+---
 
 ### Associated Functions
 
@@ -534,6 +549,7 @@ serialize
 `__helios__credential__pubkey`
 
 ## Credential::Validator
+---
 
 ### Associated Functions
 
@@ -561,6 +577,7 @@ serialize
 `__helios__credential__validator`
 
 ## StakingCredential
+---
 
 ### Operators:
 
@@ -575,6 +592,7 @@ serialize
 `__helios__stakingcredential`
 
 ## Time
+---
 
 Represents time in POSIX format.
 
@@ -597,6 +615,7 @@ serialize, show
 `__helios__time`
 
 ## Duration
+---
 
 // FIX DEFINITION
 `Time` can be thought of as a vector quantity with direction, while `Duration` is a scalar quantity only having magnitude.
@@ -620,6 +639,7 @@ serialize
 `__helios__duration`
 
 ## TimeRange
+---
 
 ### Operators
 
@@ -639,6 +659,7 @@ serialize
 `__helios__timerange`
 
 ## AssetClass
+---
 
 ### Associated Functions
  
@@ -660,6 +681,7 @@ serialize
 `__helios__assetclass`
 
 ## Value
+---
 
 ### Associated Functions
 

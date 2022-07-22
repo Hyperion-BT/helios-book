@@ -48,7 +48,6 @@ impl Tx {
 
 ```
 
-
 ```rust
 struct txInput {
     output_id: Int,
