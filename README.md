@@ -2,6 +2,7 @@
 
 This is meant to be the main documentation for the Helios programming language.
 Helios is a DSL for writing smart contracts for the Cardano blockchain.
+Suggestions are welcome on the the [Helios Discord](https://discord.gg/2hT2QFvj).
 
 ## Usage
 
