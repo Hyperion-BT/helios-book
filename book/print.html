@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/01_Primitive_Types.html"><strong aria-hidden="true">2.1.</strong> Primitive Types</a></li><li class="chapter-item expanded "><a href="chapter_1/02_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.2.</strong> Control Flow and Printing</a></li><li class="chapter-item expanded "><a href="chapter_1/03_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="chapter_1/04_Structs.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">2.3.</strong> Blockchain Types</a></li><li class="chapter-item expanded "><a href="chapter_1/04_Functions.html"><strong aria-hidden="true">2.4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.5.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="chapter_1/06_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="chapter_1/07_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,53 +167,86 @@ func main(ctx: ScriptContext) -&gt; Bool {
 <span class="boring">}
 </span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="chapter-2"><a class="header" href="#chapter-2">Chapter 2</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="section-11-primitive-types"><a class="header" href="#section-11-primitive-types">Section 1.1: Primitive Types</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="variables"><a class="header" href="#variables">Variables</a></h1>
+<p>Variables in Helios are <em>immutable</em>. This means that once a variable is declared, it's value cannot change.</p>
+<h2 id="declaring-a-variable"><a class="header" href="#declaring-a-variable">Declaring a Variable</a></h2>
+<pre><code class="language-rust  noplaypen">num: Int = 42;
+</code></pre>
+<p>From the variable declaration above we can tell about <code>num</code>:
+1. It is immutable.
+2. It's value is <code>42</code>.
+3. It's type is <code>Int</code>.</p>
+<p><code>Int</code> is the builtin numeric type in Helios it represents an unbounded integer. See <a href="chapter_1/./02_Builtin_Types.html">Builtin Types</a> for more details.</p>
+<h2 id="type-annotations"><a class="header" href="#type-annotations">Type Annotations</a></h2>
+<p>A variable declaration must contain a <em>type annotation.</em>.
+This is done not just for helping the compiler but also to make Helios code more readable. A few more example of type annotations.</p>
+<pre><code class="language-rust  noplaypen">a_string: String = &quot;something cool&quot;;
+a_list_of_fib_ints: []Int = []Int{1, 1, 2, 3, 5};
+</code></pre>
+<h2 id="constants"><a class="header" href="#constants">Constants</a></h2>
+<p>Helios has support for compile time constansts, constants are declared using the <code>const</code> keyword and must be named in all caps:</p>
+<pre><code class="language-rust  noplaypen">const AGE: Int = 2132;
+</code></pre>
+<p><strong>Note</strong>: Constants can't be set to the result of an <code>if</code>/<code>else</code> expression.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="builtin-types"><a class="header" href="#builtin-types">Builtin Types</a></h1>
 <h2 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h2>
-<p>Helios has five primitive types. All variables in Helios are <strong>immutable</strong>.</p>
-<br/>
-<table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Literal</th><th style="text-align: left">Haskell Equivalent</th></tr></thead><tbody>
-<tr><td style="text-align: left">Bool</td><td style="text-align: left"><code>true</code> or <code>false</code></td><td style="text-align: left"><code>Bool</code></td></tr>
-<tr><td style="text-align: left">Int</td><td style="text-align: left"><code>42</code> or <code>0b11010011</code> or <code>0x7b</code></td><td style="text-align: left"><code>Integer</code> (unbounded integer)</td></tr>
-<tr><td style="text-align: left">String</td><td style="text-align: left"><code>&quot;stringy&quot;</code> or <code>'stringier'</code></td><td style="text-align: left">?</td></tr>
-<tr><td style="text-align: left">ByteArray</td><td style="text-align: left"><code>#thisisabytestring</code></td><td style="text-align: left"><code>ByteString</code></td></tr>
-</tbody></table>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// Boolean values
-booly: Bool = true;
-
-// Integers
-inty: Int = 42;
-
-// Strings
-stringy: String = &quot;All your codes belongs to us.&quot;;
-
-// BytesArrays
-byte_array: ByteArray = #0x3132424;
-<span class="boring">}
-</span></code></pre></pre>
-<p><strong>Note:</strong> Helios has support for compile time constansts, constants are declared using the <code>const</code> keyword and must be named in all caps:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>const AGE: Int = 2132;
-<span class="boring">}
-</span></code></pre></pre>
+<p>Helios has 6 primitive types:
+1. <code>Int</code> (an unbounded integer)
+2. <code>Bool</code> (Boolean <code>true</code> or <code>false</code>)
+3. <code>ByteArray</code> (array of bytes)
+4. <code>String</code> (fixed-length string)
+5. <code>List</code> (linked list)
+6. <code>Map</code> (A hashmap) [WIP]</p>
+<h2 id="int"><a class="header" href="#int">Int</a></h2>
+<p>Helios' <code>Int</code> type represents an unbounded integer like Haskell's <code>Integer</code> type.</p>
+<pre><code class="language-rust noplaypen">// Helios has support for multiple Integer literal formats
+normal_literal: Int = 17;
+bits_literal: Int = 0b10001;
+hex_literal: Int = 0x11;
+idk_literal: Int = 0o121;
+</code></pre>
+<h2 id="bool"><a class="header" href="#bool">Bool</a></h2>
+<p>The <code>Bool</code> type has two possible values: <code>true</code> or <code>false</code>. Boolean values are typically used for conditional logic or validation, for example in <code>if</code> expressions. Booleans can be negated using the negation operator (<code>!</code>),</p>
+<pre><code class="language-rust noplaypen">func returns_false() -&gt; Bool {
+    !true
+}
+</code></pre>
+<p>Booleans can also be converted into <code>Int</code>s using the <code>to_int</code> method.</p>
+<pre><code class="language-rust noplaypen">x: Int = (true).to_int();  // x == 1
+y: Int = (false).to_int(); // y == 0
+</code></pre>
+<h2 id="bytearray"><a class="header" href="#bytearray">ByteArray</a></h2>
+<p>The <code>ByteArray</code> type as you've likely guessed represents an array of bytes.</p>
+<pre><code class="language-rust noplaypen">simple_bytearray: ByteArray = #af2r221md;
+</code></pre>
+<p>All most core Helios types including all other primitve types can be converted to a <code>ByteArray</code> using the <code>serialize</code> method.</p>
+<pre><code class="language-rust noplaypen">result: ByteArray = (1231).serialize();
+</code></pre>
+<h2 id="string"><a class="header" href="#string">String</a></h2>
+<p>Helios strings can be declared using single (<code>'</code>) or double (<code>&quot;</code>) quotes.</p>
+<pre><code class="language-ts noplaypen">single_quotes: String = 'Oh wow';
+double_quotes: String = &quot;Wow I did it again&quot;;
+</code></pre>
+<p>Strings in Helios are of static-length and immutable.
+This means a string cannot 'grow' to accomodate more characters after it is declared.
+When concatenating strings in Helios a new string is created.</p>
+<pre><code class="language-rust noplaypen">string_1: String = &quot;Hel&quot;;
+string_2: String = &quot;ios&quot;;
+result: String = string_1 + string_2; // &quot;Helios&quot;
+</code></pre>
 <h2 id="list-a"><a class="header" href="#list-a">List ([]a)</a></h2>
 <p>Helios has a list type list just like a the Haskell <code>List</code> type.
 It's type signature is <code>[]a</code> where a is the type of items in the list.
-Notably Helios list items aren't accessed using square brackets, <code>[]</code> for indexing instead the</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// A list of Integers
-just_some_ints: []Int = []Int{1, 2, 3, 4, 5};
-<span class="boring">}
-</span></code></pre></pre>
+Notably Helios list items aren't accessed using square brackets, <code>[]</code> for indexing instead the <code>get</code> method is used method is used, check out <a href="chapter_1/../helios_builtins/Helios_Builtins.html">Helios Builtins</a>.</p>
+<pre><code class="language-rust noplaypen">// A list of Integers
+some_ints: []Int = []Int{1, 2, 3, 4, 5};
+
+// Getting an element in a list
+x: Int = some_ints.get(2)    // x == 3
+</code></pre>
 <h3 id="useful-methods"><a class="header" href="#useful-methods">Useful Methods</a></h3>
-<p>Helios lists have a lot of methods you'd normally find in other languages</p>
-<pre><code class="language-golang">// List Methods.
+<p>Helios lists have a lot of useful methods you'd normally find in other languages</p>
+<pre><code class="language-rust noplaypen">// List Methods.
 fib_list: []Int = []Int{1, 1, 2, 3, 5};
 
 trace(fib_list.len() != 5, &quot;This will print if the length of fib_list is 8.&quot;);
@@ -233,52 +266,26 @@ trace(fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5},
 trace(!([]Int{}).is_empty(), &quot;Checks if a list is empty.&quot;)
 </code></pre>
 <h3 id="map-wip"><a class="header" href="#map-wip">Map? [WIP]</a></h3>
-<p>In future Helios might have a <code>Map</code> data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="control-flow-printing-and-traces"><a class="header" href="#control-flow-printing-and-traces">Control Flow, Printing and Traces</a></h1>
-<h2 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h2>
-<p>Helios supports <code>if/else</code> statements.</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>if (true) {
-    23
-} else {
-    42
-}
-<span class="boring">}
-</span></code></pre></pre>
-<p>In Helios <code>if</code>/<code>else</code> statements are expressions.
-So the last expression is implicitly returned much like Rust and Ruby.
-This is valid syntax: </p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>x: Int = if (true) {
-            42
-        } else {
-            24
-        };
-<span class="boring">}
-</span></code></pre></pre>
-<p><strong>Note</strong>: Compile-time constants can't be set to the result of an <code>if</code>/<code>else</code> expression.</p>
-<h2 id="printing-and-traces"><a class="header" href="#printing-and-traces">Printing and Traces</a></h2>
-<p>For debuggin purposes Helios has a <code>print</code> function.</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>print(&quot;Imagine something cool.&quot;)
-trace(21 &gt; 32, &quot;Should be true&quot;);
-<span class="boring">}
-</span></code></pre></pre>
-<p><strong>Note:</strong> Traces are <strong>horrible</strong> for production code as they lead to bloated validators.</p>
+<p>In future Helios might have a fleshed out <code>Map</code> data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.</p>
+<h2 id="more-information"><a class="header" href="#more-information">More Information</a></h2>
+<p>For more information on the Builtin type check out <a href="chapter_1/../helios_builtins/Helios_Builtins.html">Builtin Types</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="blockchain-types"><a class="header" href="#blockchain-types">Blockchain Types</a></h1>
+<p>Helios has native types for representing blockchain primitives.</p>
+<pre><code>1. Address
+2. Credential
+3. Time
+4. Duration
+5. TimeRange</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
-<p>Functions are at the core of Helios as it's a functional language.
-In Helios functions are declared using the <code>func</code> keyword.</p>
-<pre><code class="language-go">func add(a: Int, b: Int) -&gt; Int {
-    a + b  // There is no 'return' statement in Helios.
+<p>Functions are at the core of Helios. All Helios functions are <em>pure</em>, this means they have no side-effects and always return the same result when given the same arguments.</p>
+<p>Functions are declared using the <code>func</code> keyword.
+Helios has no <code>return</code> statement, the last expression in a function is <em>implicitly returned</em> like in Rust.</p>
+<pre><code class="language-go  noplaypen">func add(a: Int, b: Int) -&gt; Int {
+    a + b 
 }
-
-func fib(n: Int) -&gt; Int {
+</code></pre>
+<p>Helios has recursion recursion as you'd expect.</p>
+<pre><code class="language-go  noplaypen">func fib(n: Int) -&gt; Int {
     // Helios is expression based so the branches of an if/else loop return expressions.
     if (n &lt; 1) {
         1
@@ -288,23 +295,24 @@ func fib(n: Int) -&gt; Int {
 }
 </code></pre>
 <h2 id="lambdaanonymous-functions"><a class="header" href="#lambdaanonymous-functions">Lambda/Anonymous Functions</a></h2>
-<p>Helios also supports anonymous functions without needing the <code>func</code> keyword. This is for convenience when using higher order functions.</p>
-<pre><code class="language-ts">// Anonymous functions with typing
+<p>Helios also has support for anonymous functions without needing the <code>func</code> keyword.
+This is for convenience when using higher order functions.</p>
+<pre><code class="language-rust  noplaypen">// Anonymous functions with typing
 is_even: (Int) -&gt; Bool = (n: Int) { (n % 2) == 0 };
 </code></pre>
 <p><strong>Note:</strong> Normal Functions should be chosen when possible for better clarity.</p>
 <h2 id="first-class-functions"><a class="header" href="#first-class-functions">First-Class Functions</a></h2>
-<p>Functions are <em>mostly</em> first-class citizens in Helios that means:</p>
+<p>Functions are first-class citizens in Helios that means:</p>
 <h3 id="1-functions-can-be-passed-as-arguments"><a class="header" href="#1-functions-can-be-passed-as-arguments">1. Functions can be passed as arguments</a></h3>
-<pre><code class="language-ts">evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
+<pre><code class="language-ts  noplaypen">evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
 </code></pre>
 <h3 id="2-functions-can-be-returned-from-functions"><a class="header" href="#2-functions-can-be-returned-from-functions">2. Functions can be returned from functions</a></h3>
-<pre><code class="language-ts">add: (Int) -&gt; (Int) -&gt; Int = (a: Int) { (b: Int) { a + b } };
+<pre><code class="language-rust  noplaypen">add: (Int) -&gt; (Int) -&gt; Int = (a: Int) { (b: Int) { a + b } };
 </code></pre>
-<p><strong>Note:</strong> I kind of partly lied when I told you that Helios has first-class functions,
-functions can't be stored in lists or structs so they aren't <em><strong>completely</strong></em> first-class.</p>
+<p><strong>Note:</strong> Ok I <em>kind of</em> lied when I told you that Helios has first-class functions,
+functions can't be stored in lists or structs so they aren't <strong>technically</strong> first-class.</p>
 <h2 id="example-code"><a class="header" href="#example-code">Example Code</a></h2>
-<pre><code class="language-go">// Fibonnaci
+<pre><code class="language-go  noplaypen">// Fibonnaci
 func fib(n: Int) -&gt; Int {
     if (n &lt; 2) {
         n
@@ -430,6 +438,43 @@ rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
 res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
 <span class="boring">}
 </span></code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="control-flow-printing-and-traces"><a class="header" href="#control-flow-printing-and-traces">Control Flow, Printing and Traces</a></h1>
+<h2 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h2>
+<p>Helios supports <code>if/else</code> statements.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if (true) {
+    23
+} else {
+    42
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p>In Helios <code>if</code>/<code>else</code> statements are expressions.
+So the last expression is implicitly returned much like Rust and Ruby.
+This is valid syntax: </p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>x: Int = if (true) {
+            42
+        } else {
+            24
+        };
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Note</strong>: Compile-time constants can't be set to the result of an <code>if</code>/<code>else</code> expression.</p>
+<h2 id="printing-and-traces"><a class="header" href="#printing-and-traces">Printing and Traces</a></h2>
+<p>For debuggin purposes Helios has a <code>print</code> function.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>print(&quot;Imagine something cool.&quot;)
+trace(21 &gt; 32, &quot;Should be true&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Note:</strong> Traces are <strong>horrible</strong> for production code as they lead to bloated validators.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="blockchain-programming-in-helios"><a class="header" href="#blockchain-programming-in-helios">Blockchain Programming in Helios</a></h1>
 <p>Helios <em>is</em> a DSL(Domain Specific Language) made for writing smart contracts.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-eutxo-model"><a class="header" href="#the-eutxo-model">The EUTXO Model</a></h1>
@@ -656,28 +701,28 @@ struct VestingDatum {
 <tr><td style="text-align: left"><code>and</code></td><td style="text-align: left"><code>__and</code></td></tr>
 <tr><td style="text-align: left"><code>or</code></td><td style="text-align: left"><code>__or</code></td></tr>
 </tbody></table>
-<h2 id="int"><a class="header" href="#int">Int</a></h2>
+<h2 id="int-1"><a class="header" href="#int-1">Int</a></h2>
 <hr />
 <h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
 <p><code>__eq</code>, <code>__neq</code>, <code>__neg</code>, <code>__pos</code>, <code>__add</code>, <code>__sub</code>, <code>__mul</code>, <code>__div</code>, <code>__mod</code>, <code>__geq</code>, <code>__gt</code>, <code>__leq</code>, <code>__lt</code></p>
 <h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
-<pre><code class="language-go">func serialize(self: Int) -&gt; ByteArray;
+<pre><code class="language-go  noplaypen">func serialize(self: Int) -&gt; ByteArray;
 func to_bool(self: Int) -&gt; Bool;
 func show(self: Int) -&gt; String;
 </code></pre>
 <h3 id="internal-namespace"><a class="header" href="#internal-namespace">Internal Namespace</a></h3>
 <p><code>__helios__int</code></p>
-<h2 id="bool"><a class="header" href="#bool">Bool</a></h2>
+<h2 id="bool-1"><a class="header" href="#bool-1">Bool</a></h2>
 <hr />
 <h3 id="associated-functions"><a class="header" href="#associated-functions">Associated Functions</a></h3>
-<pre><code class="language-go">func and(bool_1: Bool, bool_2: Bool) -&gt; Bool
+<pre><code class="language-go  noplaypen">func and(bool_1: Bool, bool_2: Bool) -&gt; Bool
 
 func or(bool_1: Bool, bool_2: Bool) -&gt; Bool
 </code></pre>
 <h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
 <p><code>__eq</code>, <code>__neq</code>, <code>__not</code>, <code>__and</code> (desugars as <code>and</code>), <code>__or</code> (desugars as <code>or</code>)</p>
 <h3 id="methods-2"><a class="header" href="#methods-2">Methods:</a></h3>
-<pre><code class="language-go">func serialize(self: Bool) -&gt; ByteArray;
+<pre><code class="language-go  noplaypen">func serialize(self: Bool) -&gt; ByteArray;
 
 func to_int(self: Bool) -&gt; Int;
 
@@ -685,25 +730,25 @@ func show(self: Bool) -&gt; String;
 </code></pre>
 <h3 id="internal-namespace-1"><a class="header" href="#internal-namespace-1">Internal Namespace</a></h3>
 <p><code>__helios__bool</code></p>
-<h2 id="string"><a class="header" href="#string">String</a></h2>
+<h2 id="string-1"><a class="header" href="#string-1">String</a></h2>
 <hr />
 <h3 id="operators-2"><a class="header" href="#operators-2">Operators</a></h3>
 <p><code>__eq</code>, <code>__neq</code>,<code>__add</code></p>
 <h3 id="methods-3"><a class="header" href="#methods-3">Methods</a></h3>
-<pre><code class="language-go">func serialize(self: Bool) -&gt; ByteArray;
+<pre><code class="language-go  noplaypen">func serialize(self: Bool) -&gt; ByteArray;
 
 func encode_utf8(self: Bool) -&gt; String;
 </code></pre>
 <h3 id="internal-namespace-2"><a class="header" href="#internal-namespace-2">Internal Namespace</a></h3>
 <p><code>__helios__string</code></p>
-<h2 id="bytearray"><a class="header" href="#bytearray">ByteArray</a></h2>
+<h2 id="bytearray-1"><a class="header" href="#bytearray-1">ByteArray</a></h2>
 <hr />
 <h3 id="operators-3"><a class="header" href="#operators-3">Operators</a></h3>
 <p><code>__eq</code>, <code>__neq</code>,<code>__add</code> </p>
 <h3 id="getters"><a class="header" href="#getters">Getters</a></h3>
 <p><code>.length</code>, returns the length of the <code>ByteArray</code>.</p>
 <h3 id="methods-4"><a class="header" href="#methods-4">Methods:</a></h3>
-<pre><code class="language-go">func serialize(self: String) -&gt; ByteArray;
+<pre><code class="language-go  noplaypen">func serialize(self: String) -&gt; ByteArray;
 
 func length(self: String) -&gt; Int;
 
@@ -722,12 +767,12 @@ func show(self: String) -&gt; String;
 <h2 id="list-a-1"><a class="header" href="#list-a-1">List ([]a)</a></h2>
 <hr />
 <h3 id="associated-functions-1"><a class="header" href="#associated-functions-1">Associated Functions</a></h3>
-<pre><code class="language-go">func new[a]() -&gt; []a;
+<pre><code class="language-go  noplaypen">func new[a]() -&gt; []a;
 </code></pre>
 <h3 id="operators-4"><a class="header" href="#operators-4">Operators</a></h3>
 <p><code>__eq</code>, <code>__neq</code>,<code>__add</code></p>
 <h3 id="getters-1"><a class="header" href="#getters-1">Getters</a></h3>
-<pre><code class="language-go">func lenght(self: []a) -&gt; Int;
+<pre><code class="language-go  noplaypen">func lenght(self: []a) -&gt; Int;
 
 // @returns The element at the front of the list
 // @notice Throws an error if the list is empty.
@@ -738,7 +783,7 @@ func head[a](self: []a) -&gt; a;
 func tail[a](self: []a) -&gt; a;
 </code></pre>
 <h3 id="methods-5"><a class="header" href="#methods-5">Methods</a></h3>
-<pre><code class="language-go">func serialize(self: []a) -&gt; ByteArray;
+<pre><code class="language-go  noplaypen">func serialize(self: []a) -&gt; ByteArray;
 
 func is_empty(self: []a) -&gt; Bool;
 
@@ -783,7 +828,7 @@ func map[a, b](self: []a, transformation: (a) -&gt; b) -&gt; []b;
 <h2 id="optiona"><a class="header" href="#optiona">Option[a]</a></h2>
 <hr />
 <p><code>Option[a]</code> is an enum used to represent an optional value.</p>
-<pre><code class="language-go">Option[a] {
+<pre><code class="language-go  noplaypen">Option[a] {
     Some { a },
     None
 }
@@ -797,13 +842,13 @@ func map[a, b](self: []a, transformation: (a) -&gt; b) -&gt; []b;
 <h2 id="optionsome"><a class="header" href="#optionsome">Option::Some</a></h2>
 <hr />
 <h3 id="associated-functions-2"><a class="header" href="#associated-functions-2">Associated Functions</a></h3>
-<pre><code class="language-go">func new[a](value: a) -&gt; Option[a];
+<pre><code class="language-go  noplaypen">func new[a](value: a) -&gt; Option[a];
 func cast[a](value: a) -&gt; Option[a];
 </code></pre>
 <h3 id="operators-7"><a class="header" href="#operators-7">Operators:</a></h3>
 <p><code>__eq</code>,<code>__neq</code> </p>
 <h3 id="getters-2"><a class="header" href="#getters-2">Getters</a></h3>
-<pre><code class="language-go">// @returns The the value in a Some variant.
+<pre><code class="language-go  noplaypen">// @returns The the value in a Some variant.
 // @notice Throws an error if called on a None variant.
 func value[a](self: Option[a]) -&gt; a;
 </code></pre>
@@ -814,7 +859,7 @@ func value[a](self: Option[a]) -&gt; a;
 <h2 id="optionnone"><a class="header" href="#optionnone">Option::None</a></h2>
 <hr />
 <h3 id="associated-functions-3"><a class="header" href="#associated-functions-3">Associated Functions</a></h3>
-<pre><code class="language-go">func new[a]() -&gt; Option[a];
+<pre><code class="language-go  noplaypen">func new[a]() -&gt; Option[a];
 
 // ! UNSURE
 func cast[a]() -&gt; Option[a];
@@ -822,7 +867,7 @@ func cast[a]() -&gt; Option[a];
 <h3 id="operators-8"><a class="header" href="#operators-8">Operators</a></h3>
 <p><code>__eq</code>,<code>__neq</code></p>
 <h3 id="methods-9"><a class="header" href="#methods-9">Methods:</a></h3>
-<pre><code class="language-go">func serialize(self: Option[a]) -&gt; ByteArray;
+<pre><code class="language-go  noplaypen">func serialize(self: Option[a]) -&gt; ByteArray;
 </code></pre>
 <h3 id="internal-namespace-8"><a class="header" href="#internal-namespace-8">Internal Namespace</a></h3>
 <p><code>__helios__option__none</code></p>
@@ -841,13 +886,13 @@ func cast[a]() -&gt; Option[a];
 <h3 id="operators-10"><a class="header" href="#operators-10">Operators</a></h3>
 <p><code>__eq</code>,<code>__neq</code></p>
 <h3 id="getters-3"><a class="header" href="#getters-3">Getters</a></h3>
-<pre><code class="language-go">struct ScriptContext {
+<pre><code class="language-go  noplaypen">struct ScriptContext {
     tx: Tx,
     ...
 }
 </code></pre>
 <h3 id="methods-11"><a class="header" href="#methods-11">Methods</a></h3>
-<pre><code class="language-go">func serialize(self: ScriptContext) -&gt; ByteArray;
+<pre><code class="language-go  noplaypen">func serialize(self: ScriptContext) -&gt; ByteArray;
 
 // ! UNSURE
 func get_spending_purpose_output_id(self: ScriptContext) -&gt; Int;
@@ -866,7 +911,7 @@ func get_current_input(self: ScriptContext) -&gt; TxInput;
 <h3 id="operators-11"><a class="header" href="#operators-11">Operators:</a></h3>
 <p><code>__eq</code>,<code>__neq</code> </p>
 <h3 id="getters-4"><a class="header" href="#getters-4">Getters</a></h3>
-<pre><code class="language-go">struct Tx {
+<pre><code class="language-go  noplaypen">struct Tx {
     id: TxId,                    // Transaction ID
     inputs: []TxInputs,          // Transactin Inputs
     outputs: []TxOutputs,        // Transaction Outputs
@@ -877,7 +922,7 @@ func get_current_input(self: ScriptContext) -&gt; TxInput;
 }
 </code></pre>
 <h3 id="methods-12"><a class="header" href="#methods-12">Methods</a></h3>
-<pre><code class="language-go">func serialize(self: Tx) -&gt; ByteArray;
+<pre><code class="language-go  noplaypen">func serialize(self: Tx) -&gt; ByteArray;
 
 // @returns The current POSIX time.
 func now(self: Tx) -&gt; Time; 
@@ -923,7 +968,7 @@ func value_locked_by_datum(self: Tx, datum_hash: Datum)
 <h3 id="operators-13"><a class="header" href="#operators-13">Operators</a></h3>
 <p><code>__eq</code>,<code>__neq</code></p>
 <h3 id="getters-5"><a class="header" href="#getters-5">Getters</a></h3>
-<pre><code class="language-go">struct TxInput {
+<pre><code class="language-go  noplaypen">struct TxInput {
     output_id: TxOutputId,
     output: TxOutput
 }
@@ -938,7 +983,7 @@ func value_locked_by_datum(self: Tx, datum_hash: Datum)
 <h3 id="operators-14"><a class="header" href="#operators-14">Operators</a></h3>
 <p><code>__eq</code>,<code>__neq</code></p>
 <h3 id="getters-6"><a class="header" href="#getters-6">Getters</a></h3>
-<pre><code class="language-go">struct TxOutput {
+<pre><code class="language-go  noplaypen">struct TxOutput {
     //! UNSURE
     address: Address,
     value: Value,
@@ -966,7 +1011,7 @@ new</p>
 <h3 id="operators-16"><a class="header" href="#operators-16">Operators</a></h3>
 <p><code>__eq</code>,<code>__neq</code> </p>
 <h3 id="getters-7"><a class="header" href="#getters-7">Getters</a></h3>
-<pre><code class="language-go">struct Address {
+<pre><code class="language-go  noplaypen">struct Address {
     credential: Credential,
     staking_credential: StakingCredential
 }
@@ -978,6 +1023,11 @@ hidden:      is_staked</p>
 <p>__helios<code>__add</code>ress</p>
 <h2 id="credential"><a class="header" href="#credential">Credential</a></h2>
 <hr />
+<pre><code class="language-rust  noplaypen">enum Credential {
+    Pubkey { hash: PubKeyHash },
+    Validator { hash: ValidatorHash }
+}
+</code></pre>
 <h3 id="operators-17"><a class="header" href="#operators-17">Operators</a></h3>
 <p><code>__eq</code>,<code>__neq</code></p>
 <h3 id="methods-18"><a class="header" href="#methods-18">Methods</a></h3>
@@ -993,7 +1043,7 @@ cast</p>
 <h3 id="operators-18"><a class="header" href="#operators-18">Operators</a></h3>
 <p><code>__eq</code>,<code>__neq</code></p>
 <h3 id="getters-8"><a class="header" href="#getters-8">Getters</a></h3>
-<pre><code class="language-go">enum Credential {
+<pre><code class="language-go  noplaypen">enum Credential {
     PubKey { hash: PubKeyHash },
     ...
 }
@@ -1009,7 +1059,7 @@ cast</p>
 <h3 id="operators-19"><a class="header" href="#operators-19">Operators</a></h3>
 <p><code>__eq</code>,<code>__neq</code></p>
 <h3 id="getters-9"><a class="header" href="#getters-9">Getters</a></h3>
-<pre><code class="language-go">enum Credential {
+<pre><code class="language-go  noplaypen">enum Credential {
     ...
     Validator { hash: ValidatorHash },
 }
@@ -1030,7 +1080,7 @@ cast</p>
 <hr />
 <p>Represents time in POSIX format.</p>
 <h3 id="associated-functions-8"><a class="header" href="#associated-functions-8">Associated Functions</a></h3>
-<pre><code class="language-go">func new(raw: Int) -&gt; Time;
+<pre><code class="language-go  noplaypen">func new(raw: Int) -&gt; Time;
 </code></pre>
 <h3 id="operators-21"><a class="header" href="#operators-21">Operators</a></h3>
 <p><code>__eq</code>, <code>__neq</code>, <code>__add</code>, <code>__sub</code>, <code>__geq</code>, <code>__gt</code>, <code>__leq</code>, <code>__lt</code></p>
@@ -1043,7 +1093,7 @@ cast</p>
 <p>// FIX DEFINITION
 <code>Time</code> can be thought of as a vector quantity with direction, while <code>Duration</code> is a scalar quantity only having magnitude.</p>
 <h3 id="associated-functions-9"><a class="header" href="#associated-functions-9">Associated Functions</a></h3>
-<pre><code class="language-go">func new(raw: Int) -&gt; Duration;
+<pre><code class="language-go  noplaypen">func new(raw: Int) -&gt; Duration;
 </code></pre>
 <h3 id="operators-22"><a class="header" href="#operators-22">Operators</a></h3>
 <p><code>__eq</code>, <code>__neq</code>, <code>__add</code>, <code>__sub</code>, <code>__mul</code>, <code>__div</code>, ``, <code>__geq</code>, <code>__gt</code>, <code>__leq</code>, <code>__lt</code> </p>
@@ -1056,7 +1106,7 @@ cast</p>
 <h3 id="operators-23"><a class="header" href="#operators-23">Operators</a></h3>
 <p><code>__eq</code>,<code>__neq</code></p>
 <h3 id="methods-24"><a class="header" href="#methods-24">Methods</a></h3>
-<pre><code class="language-go">// @returns The start of TimeRange.
+<pre><code class="language-go  noplaypen">// @returns The start of TimeRange.
 func get_start(self: TimeRange) -&gt; Time;
 </code></pre>
 <p>serialize</p>
@@ -1066,7 +1116,7 @@ func get_start(self: TimeRange) -&gt; Time;
 <hr />
 <h3 id="associated-functions-10"><a class="header" href="#associated-functions-10">Associated Functions</a></h3>
 <p>// TODO</p>
-<pre><code class="language-go"></code></pre>
+<pre><code class="language-go  noplaypen"></code></pre>
 <p>ada, new</p>
 <h3 id="operators-24"><a class="header" href="#operators-24">Operators:</a></h3>
 <p><code>__eq</code>,<code>__neq</code></p>

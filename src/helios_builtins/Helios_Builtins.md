@@ -23,7 +23,7 @@
 
 ### Methods
 
-```go
+```go, noplaypen
 func serialize(self: Int) -> ByteArray;
 func to_bool(self: Int) -> Bool;
 func show(self: Int) -> String;
@@ -38,7 +38,7 @@ func show(self: Int) -> String;
 
 ### Associated Functions
 
-```go
+```go, noplaypen
 func and(bool_1: Bool, bool_2: Bool) -> Bool
 
 func or(bool_1: Bool, bool_2: Bool) -> Bool
@@ -50,7 +50,7 @@ func or(bool_1: Bool, bool_2: Bool) -> Bool
 
 ### Methods:
 
-```go
+```go, noplaypen
 func serialize(self: Bool) -> ByteArray;
 
 func to_int(self: Bool) -> Int;
@@ -71,7 +71,7 @@ func show(self: Bool) -> String;
 
 ### Methods
 
-```go
+```go, noplaypen
 func serialize(self: Bool) -> ByteArray;
 
 func encode_utf8(self: Bool) -> String;
@@ -94,7 +94,7 @@ func encode_utf8(self: Bool) -> String;
 
 ### Methods:
 
-```go
+```go, noplaypen
 func serialize(self: String) -> ByteArray;
 
 func length(self: String) -> Int;
@@ -119,7 +119,7 @@ func show(self: String) -> String;
 
 ### Associated Functions
 
-```go
+```go, noplaypen
 func new[a]() -> []a;
 ```
 
@@ -129,7 +129,7 @@ func new[a]() -> []a;
 
 ### Getters
 
-```go
+```go, noplaypen
 func lenght(self: []a) -> Int;
 
 // @returns The element at the front of the list
@@ -143,7 +143,7 @@ func tail[a](self: []a) -> a;
 
 ### Methods
 
-```go
+```go, noplaypen
 func serialize(self: []a) -> ByteArray;
 
 func is_empty(self: []a) -> Bool;
@@ -201,7 +201,7 @@ func map[a, b](self: []a, transformation: (a) -> b) -> []b;
 
 `Option[a]` is an enum used to represent an optional value.
 
-```go
+```go, noplaypen
 Option[a] {
     Some { a },
     None
@@ -225,7 +225,7 @@ Option[a] {
 
 ### Associated Functions
 
-```go
+```go, noplaypen
 func new[a](value: a) -> Option[a];
 func cast[a](value: a) -> Option[a];
 ```
@@ -236,7 +236,7 @@ func cast[a](value: a) -> Option[a];
 
 ### Getters
 
-```go
+```go, noplaypen
 // @returns The the value in a Some variant.
 // @notice Throws an error if called on a None variant.
 func value[a](self: Option[a]) -> a;
@@ -255,7 +255,7 @@ func serialize(self: Option[a]) -> ByteArray;
 
 ### Associated Functions
 
-```go
+```go, noplaypen
 func new[a]() -> Option[a];
 
 // ! UNSURE
@@ -268,7 +268,7 @@ func cast[a]() -> Option[a];
 
 ### Methods:
 
-```go
+```go, noplaypen
 func serialize(self: Option[a]) -> ByteArray;
 ```
 
@@ -303,7 +303,7 @@ serialize, show
 
 ### Getters
 
-```go
+```go, noplaypen
 struct ScriptContext {
     tx: Tx,
     ...
@@ -312,7 +312,7 @@ struct ScriptContext {
 
 ### Methods
 
-```go
+```go, noplaypen
 func serialize(self: ScriptContext) -> ByteArray;
 
 // ! UNSURE
@@ -340,7 +340,7 @@ This struct stores the data related to a signed transaction.
 
 ### Getters
 
-```go
+```go, noplaypen
 struct Tx {
     id: TxId,                    // Transaction ID
     inputs: []TxInputs,          // Transactin Inputs
@@ -354,7 +354,7 @@ struct Tx {
 
 ### Methods
 
-```go
+```go, noplaypen
 func serialize(self: Tx) -> ByteArray;
 
 // @returns The current POSIX time.
@@ -415,7 +415,7 @@ serialize
 
 ### Getters
 
-```go
+```go, noplaypen
 struct TxInput {
     output_id: TxOutputId,
     output: TxOutput
@@ -440,7 +440,7 @@ serialize
 
 ### Getters
 
-```go
+```go, noplaypen
 struct TxOutput {
     //! UNSURE
     address: Address,
@@ -487,7 +487,7 @@ serialize
 
 ### Getters
 
-```go
+```go, noplaypen
 struct Address {
     credential: Credential,
     staking_credential: StakingCredential
@@ -505,6 +505,13 @@ __helios`__add`ress
 
 ## Credential
 ---
+
+```rust, noplaypen
+enum Credential {
+    Pubkey { hash: PubKeyHash },
+    Validator { hash: ValidatorHash }
+}
+```
 
 ### Operators
 
@@ -533,7 +540,7 @@ cast
 
 ### Getters
 
-```go
+```go, noplaypen
 enum Credential {
     PubKey { hash: PubKeyHash },
     ...
@@ -561,7 +568,7 @@ cast
 
 ### Getters
 
-```go
+```go, noplaypen
 enum Credential {
     ...
     Validator { hash: ValidatorHash },
@@ -598,7 +605,7 @@ Represents time in POSIX format.
 
 ### Associated Functions
 
-```go
+```go, noplaypen
 func new(raw: Int) -> Time;
 ```
 
@@ -622,7 +629,7 @@ serialize, show
 
 ### Associated Functions
  
-```go
+```go, noplaypen
 func new(raw: Int) -> Duration;
 ```
 
@@ -647,7 +654,7 @@ serialize
 
 ### Methods
 
-```go
+```go, noplaypen
 // @returns The start of TimeRange.
 func get_start(self: TimeRange) -> Time;
 ```
@@ -664,7 +671,7 @@ serialize
 ### Associated Functions
  
 // TODO
-```go
+```go, noplaypen
 ```
 ada, new
 

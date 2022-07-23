@@ -8,8 +8,9 @@
   - [Blockchain Types](./chapter_1/03_Blockchain_Types.md)
   - [Functions](./chapter_1/04_Functions.md)
   - [Structs and Enums](./chapter_1/05_Structs_and_Enums.md)
-  - [Comments and Printing](./chapter_1/06_Comments_and_Printing.md)
-  - [Control Flow and Printing](./chapter_1/07_Control_Flow_and_Printing.md)
+  - [Methods and Associated Functions](./chapter_1/06_Methods_and_Associated_Functions.md)
+  - [Comments and Printing](./chapter_1/07_Comments_and_Printing.md)
+  - [Control Flow and Printing](./chapter_1/08_Control_Flow_and_Printing.md)
 
 - [Chapter 2](./chapter_2/00_Blockchain_Programming_in_Helios.md)
   - [The EUTXO Model](./chapter_2/01_The_EUTXO_Model.md)

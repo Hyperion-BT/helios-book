@@ -14,7 +14,7 @@ Helios has 6 primitive types:
 
 Helios' `Int` type represents an unbounded integer like Haskell's `Integer` type.
 
-```rust
+```rust,noplaypen
 // Helios has support for multiple Integer literal formats
 normal_literal: Int = 17;
 bits_literal: Int = 0b10001;
@@ -26,7 +26,7 @@ idk_literal: Int = 0o121;
 
 The `Bool` type has two possible values: `true` or `false`. Boolean values are typically used for conditional logic or validation, for example in `if` expressions. Booleans can be negated using the negation operator (`!`),
 
-```rust
+```rust,noplaypen
 func returns_false() -> Bool {
     !true
 }
@@ -34,7 +34,7 @@ func returns_false() -> Bool {
 
 Booleans can also be converted into `Int`s using the `to_int` method.
 
-```rust
+```rust,noplaypen
 x: Int = (true).to_int();  // x == 1
 y: Int = (false).to_int(); // y == 0
 ```
@@ -43,13 +43,13 @@ y: Int = (false).to_int(); // y == 0
 
 The `ByteArray` type as you've likely guessed represents an array of bytes.
 
-```rust
+```rust,noplaypen
 simple_bytearray: ByteArray = #af2r221md;
 ```
 
 All most core Helios types including all other primitve types can be converted to a `ByteArray` using the `serialize` method.
 
-```rust
+```rust,noplaypen
 result: ByteArray = (1231).serialize();
 ```
 
@@ -57,7 +57,7 @@ result: ByteArray = (1231).serialize();
 
 Helios strings can be declared using single (`'`) or double (`"`) quotes.
 
-```ts
+```ts,noplaypen
 single_quotes: String = 'Oh wow';
 double_quotes: String = "Wow I did it again";
 ```
@@ -66,7 +66,7 @@ Strings in Helios are of static-length and immutable.
 This means a string cannot 'grow' to accomodate more characters after it is declared.
 When concatenating strings in Helios a new string is created.
 
-```rust
+```rust,noplaypen
 string_1: String = "Hel";
 string_2: String = "ios";
 result: String = string_1 + string_2; // "Helios"
@@ -78,7 +78,7 @@ Helios has a list type list just like a the Haskell `List` type.
 It's type signature is `[]a` where a is the type of items in the list.
 Notably Helios list items aren't accessed using square brackets, `[]` for indexing instead the `get` method is used method is used, check out [Helios Builtins](../helios_builtins/Helios_Builtins.md/#list-a).
 
-```rust
+```rust,noplaypen
 // A list of Integers
 some_ints: []Int = []Int{1, 2, 3, 4, 5};
 
@@ -90,7 +90,7 @@ x: Int = some_ints.get(2)    // x == 3
 
 Helios lists have a lot of useful methods you'd normally find in other languages
 
-```golang
+```rust,noplaypen
 // List Methods.
 fib_list: []Int = []Int{1, 1, 2, 3, 5};
 

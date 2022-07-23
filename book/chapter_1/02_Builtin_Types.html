@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Project #1: Vesting Contract - The Helios Programming Language</title>
+        <title>Builtin Types - The Helios Programming Language</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">2.3.</strong> Blockchain Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.5.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html" class="active"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html" class="active"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">2.3.</strong> Blockchain Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.5.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,35 +142,97 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="vesting-contract"><a class="header" href="#vesting-contract">Vesting Contract</a></h1>
-<p>To put what we've done so far to use we're going to build a simple 'vesting' contract.
-This contract will lock up some tokens for</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>enum VestingRedeemer {
-    Cancel{},
-    Collect{}
+                        <h1 id="builtin-types"><a class="header" href="#builtin-types">Builtin Types</a></h1>
+<h2 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h2>
+<p>Helios has 6 primitive types:
+1. <code>Int</code> (an unbounded integer)
+2. <code>Bool</code> (Boolean <code>true</code> or <code>false</code>)
+3. <code>ByteArray</code> (array of bytes)
+4. <code>String</code> (fixed-length string)
+5. <code>List</code> (linked list)
+6. <code>Map</code> (A hashmap) [WIP]</p>
+<h2 id="int"><a class="header" href="#int">Int</a></h2>
+<p>Helios' <code>Int</code> type represents an unbounded integer like Haskell's <code>Integer</code> type.</p>
+<pre><code class="language-rust noplaypen">// Helios has support for multiple Integer literal formats
+normal_literal: Int = 17;
+bits_literal: Int = 0b10001;
+hex_literal: Int = 0x11;
+idk_literal: Int = 0o121;
+</code></pre>
+<h2 id="bool"><a class="header" href="#bool">Bool</a></h2>
+<p>The <code>Bool</code> type has two possible values: <code>true</code> or <code>false</code>. Boolean values are typically used for conditional logic or validation, for example in <code>if</code> expressions. Booleans can be negated using the negation operator (<code>!</code>),</p>
+<pre><code class="language-rust noplaypen">func returns_false() -&gt; Bool {
+    !true
 }
+</code></pre>
+<p>Booleans can also be converted into <code>Int</code>s using the <code>to_int</code> method.</p>
+<pre><code class="language-rust noplaypen">x: Int = (true).to_int();  // x == 1
+y: Int = (false).to_int(); // y == 0
+</code></pre>
+<h2 id="bytearray"><a class="header" href="#bytearray">ByteArray</a></h2>
+<p>The <code>ByteArray</code> type as you've likely guessed represents an array of bytes.</p>
+<pre><code class="language-rust noplaypen">simple_bytearray: ByteArray = #af2r221md;
+</code></pre>
+<p>All most core Helios types including all other primitve types can be converted to a <code>ByteArray</code> using the <code>serialize</code> method.</p>
+<pre><code class="language-rust noplaypen">result: ByteArray = (1231).serialize();
+</code></pre>
+<h2 id="string"><a class="header" href="#string">String</a></h2>
+<p>Helios strings can be declared using single (<code>'</code>) or double (<code>&quot;</code>) quotes.</p>
+<pre><code class="language-ts noplaypen">single_quotes: String = 'Oh wow';
+double_quotes: String = &quot;Wow I did it again&quot;;
+</code></pre>
+<p>Strings in Helios are of static-length and immutable.
+This means a string cannot 'grow' to accomodate more characters after it is declared.
+When concatenating strings in Helios a new string is created.</p>
+<pre><code class="language-rust noplaypen">string_1: String = &quot;Hel&quot;;
+string_2: String = &quot;ios&quot;;
+result: String = string_1 + string_2; // &quot;Helios&quot;
+</code></pre>
+<h2 id="list-a"><a class="header" href="#list-a">List ([]a)</a></h2>
+<p>Helios has a list type list just like a the Haskell <code>List</code> type.
+It's type signature is <code>[]a</code> where a is the type of items in the list.
+Notably Helios list items aren't accessed using square brackets, <code>[]</code> for indexing instead the <code>get</code> method is used method is used, check out <a href="../helios_builtins/Helios_Builtins.html">Helios Builtins</a>.</p>
+<pre><code class="language-rust noplaypen">// A list of Integers
+some_ints: []Int = []Int{1, 2, 3, 4, 5};
 
-struct VestingDatum {
-    creator: PubKeyHash,
-    beneficiary: PubKeyHash,
-    deadline: Time
-}
+// Getting an element in a list
+x: Int = some_ints.get(2)    // x == 3
+</code></pre>
+<h3 id="useful-methods"><a class="header" href="#useful-methods">Useful Methods</a></h3>
+<p>Helios lists have a lot of useful methods you'd normally find in other languages</p>
+<pre><code class="language-rust noplaypen">// List Methods.
+fib_list: []Int = []Int{1, 1, 2, 3, 5};
 
-<span class="boring">}
-</span></code></pre></pre>
+trace(fib_list.len() != 5, &quot;This will print if the length of fib_list is 8.&quot;);
+
+// Note: Throws error if index is out of range. 
+trace(fib_list.get(4) != 5, &quot;This will print if the element at index 4 is 3.&quot;)
+
+// Note: Throws an error if list is empty.
+trace(fib_list.head() != 1, &quot;Gets the element at the front of the list.&quot;)
+
+// Note: Throws an error if the list is empty.
+trace(fib_list.tail() != 5, &quot;Returns the element at the end of the list.&quot;);
+
+trace(fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5}, 
+    &quot;Prepends item to the front of a list.&quot;)
+
+trace(!([]Int{}).is_empty(), &quot;Checks if a list is empty.&quot;)
+</code></pre>
+<h3 id="map-wip"><a class="header" href="#map-wip">Map? [WIP]</a></h3>
+<p>In future Helios might have a fleshed out <code>Map</code> data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.</p>
+<h2 id="more-information"><a class="header" href="#more-information">More Information</a></h2>
+<p>For more information on the Builtin type check out <a href="../helios_builtins/Helios_Builtins.html">Builtin Types</a>.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../chapter_2/03_ScriptContext.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../chapter_1/01_Variables.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../helios_builtins/Helios_Builtins.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../chapter_1/03_Blockchain_Types.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -180,11 +242,11 @@ struct VestingDatum {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../chapter_2/03_ScriptContext.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../chapter_1/01_Variables.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../helios_builtins/Helios_Builtins.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../chapter_1/03_Blockchain_Types.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

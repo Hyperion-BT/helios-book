@@ -4,7 +4,7 @@ Variables in Helios are *immutable*. This means that once a variable is declared
 
 ## Declaring a Variable
 
-```rust
+```rust, noplaypen
 num: Int = 42;
 ```
 
@@ -20,7 +20,7 @@ From the variable declaration above we can tell about `num`:
 A variable declaration must contain a *type annotation.*.
 This is done not just for helping the compiler but also to make Helios code more readable. A few more example of type annotations.
 
-```rust
+```rust, noplaypen
 a_string: String = "something cool";
 a_list_of_fib_ints: []Int = []Int{1, 1, 2, 3, 5};
 ```
@@ -29,8 +29,8 @@ a_list_of_fib_ints: []Int = []Int{1, 1, 2, 3, 5};
 
 Helios has support for compile time constansts, constants are declared using the `const` keyword and must be named in all caps:
 
-```rust
+```rust, noplaypen
 const AGE: Int = 2132;
 ```
 
-**Note**: Constants can't be set to the result of an `if`/`else` expression.
+> **Note**: Constants can't be set to the result of an `if`/`else` expression.
