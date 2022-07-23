@@ -64,14 +64,17 @@ A Collatz' sequence starts with a random number, n and follows very simple rules
 
 ```go, noplaypen
 func collatz(current: Int, accumulator: []Int) -> []Int {
+
+    // Rule (1)
     if (current == 1) {
-        // Rule (1)
         accumulator.prepend(current) 
+
+    // Rule (2)
     } else if (current % 2 == even) {
-        // Rule (2)
         collatz((current / 2), accumulator.prepend(current))
+
+    // Rule (3)
     } else {
-        // Rule (3)
         collatz(((current * 3) + 1), accumulator.prepend(current))      
     }
 }
