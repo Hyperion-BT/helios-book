@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">2.3.</strong> Blockchain Types</a></li><li class="chapter-item expanded "><a href="chapter_1/04_Functions.html"><strong aria-hidden="true">2.4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.5.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="chapter_1/06_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="chapter_1/07_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">2.3.</strong> Blockchain Types</a></li><li class="chapter-item expanded "><a href="chapter_1/04_Functions.html"><strong aria-hidden="true">2.4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.5.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.6.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.8.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -152,11 +152,8 @@ It's heavily inspired by Rust, Go and Sway.</p>
 <li>There should be one and preferrably only one way to do everything.</li>
 </ul>
 <br/>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// All Helios programs begin with a script purpose.
-validator always_true;
+<pre><code class="language-go  noplaypen">// All Helios programs begin with a script purpose.
+validator always_true; 
 
 // The 'main' function contains the core validator logic.
 func main(ctx: ScriptContext) -&gt; Bool {
@@ -164,8 +161,7 @@ func main(ctx: ScriptContext) -&gt; Bool {
     // Helios is an expression based language
     true
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="chapter-2"><a class="header" href="#chapter-2">Chapter 2</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="variables"><a class="header" href="#variables">Variables</a></h1>
 <p>Variables in Helios are <em>immutable</em>. This means that once a variable is declared, it's value cannot change.</p>
@@ -187,7 +183,9 @@ a_list_of_fib_ints: []Int = []Int{1, 1, 2, 3, 5};
 <p>Helios has support for compile time constansts, constants are declared using the <code>const</code> keyword and must be named in all caps:</p>
 <pre><code class="language-rust  noplaypen">const AGE: Int = 2132;
 </code></pre>
+<blockquote>
 <p><strong>Note</strong>: Constants can't be set to the result of an <code>if</code>/<code>else</code> expression.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="builtin-types"><a class="header" href="#builtin-types">Builtin Types</a></h1>
 <h2 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h2>
 <p>Helios has 6 primitive types:
@@ -270,12 +268,31 @@ trace(!([]Int{}).is_empty(), &quot;Checks if a list is empty.&quot;)
 <h2 id="more-information"><a class="header" href="#more-information">More Information</a></h2>
 <p>For more information on the Builtin type check out <a href="chapter_1/../helios_builtins/Helios_Builtins.html">Builtin Types</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="blockchain-types"><a class="header" href="#blockchain-types">Blockchain Types</a></h1>
-<p>Helios has native types for representing blockchain primitives.</p>
-<pre><code>1. Address
-2. Credential
-3. Time
-4. Duration
-5. TimeRange</code></pre>
+<p>Helios has native types for representing blockchain primitives. These include:
+1. Address
+2. Credential</p>
+<h2 id="address"><a class="header" href="#address">Address</a></h2>
+<p>The <code>Address</code> type holds the data about a cardano address. It's defined as:</p>
+<pre><code class="language-rust  noplaypen">struct Address {
+    credential: Credential,
+    staking_credential: StakingCredential
+}
+</code></pre>
+<p>As you can see it's a wrapper around a <code>Credential</code> and a <code>StakingCredential</code>.
+The <code>StakingCredential</code> type is opaque and is used via it's methods.</p>
+<h2 id="credential"><a class="header" href="#credential">Credential</a></h2>
+<p>This type represents an onchain credential.
+A credential is used to determine if a UTXO can be spent in a transaction.
+It is defined as:</p>
+<pre><code class="language-rust  noplaypen">enum Credential {
+    PubKey { hash: PubKeyHash},
+    Validator { hash: ValidatorHash }
+}
+</code></pre>
+<p>As you can see a UTXO can either be locked by a public key or validator script whose hash is stored onchain.</p>
+<blockquote>
+<p><strong>Note</strong>: <code>PubKeyHash</code> and <code>ValidatorHash</code> are type-safe wrapper around the <code>ByteArray</code> type.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
 <p>Functions are at the core of Helios. All Helios functions are <em>pure</em>, this means they have no side-effects and always return the same result when given the same arguments.</p>
 <p>Functions are declared using the <code>func</code> keyword.
@@ -300,7 +317,9 @@ This is for convenience when using higher order functions.</p>
 <pre><code class="language-rust  noplaypen">// Anonymous functions with typing
 is_even: (Int) -&gt; Bool = (n: Int) { (n % 2) == 0 };
 </code></pre>
+<blockquote>
 <p><strong>Note:</strong> Normal Functions should be chosen when possible for better clarity.</p>
+</blockquote>
 <h2 id="first-class-functions"><a class="header" href="#first-class-functions">First-Class Functions</a></h2>
 <p>Functions are first-class citizens in Helios that means:</p>
 <h3 id="1-functions-can-be-passed-as-arguments"><a class="header" href="#1-functions-can-be-passed-as-arguments">1. Functions can be passed as arguments</a></h3>
@@ -309,8 +328,10 @@ is_even: (Int) -&gt; Bool = (n: Int) { (n % 2) == 0 };
 <h3 id="2-functions-can-be-returned-from-functions"><a class="header" href="#2-functions-can-be-returned-from-functions">2. Functions can be returned from functions</a></h3>
 <pre><code class="language-rust  noplaypen">add: (Int) -&gt; (Int) -&gt; Int = (a: Int) { (b: Int) { a + b } };
 </code></pre>
+<blockquote>
 <p><strong>Note:</strong> Ok I <em>kind of</em> lied when I told you that Helios has first-class functions,
 functions can't be stored in lists or structs so they aren't <strong>technically</strong> first-class.</p>
+</blockquote>
 <h2 id="example-code"><a class="header" href="#example-code">Example Code</a></h2>
 <pre><code class="language-go  noplaypen">// Fibonnaci
 func fib(n: Int) -&gt; Int {
@@ -352,24 +373,62 @@ fib_: (Int) -&gt; Int =  (n: Int) -&gt; {
     }
 };
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="structs"><a class="header" href="#structs">Structs</a></h1>
-<p>Structs in Helios are a lot like those in Rust and Records in Haskell. Structs are defined using the <code>struct</code> keyword. All fields in a Helios struct must be used or the compile will</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// Rational (fractional type)
+<div style="break-before: page; page-break-before: always;"></div><h1 id="structs-and-enums"><a class="header" href="#structs-and-enums">Structs and Enums</a></h1>
+<h2 id="structs"><a class="header" href="#structs">Structs</a></h2>
+<p>Structs in Helios are a named grouping of types.
+They are also known as <em>product types</em>.
+They are similar to structs in other languages like Rust.</p>
+<pre><code class="language-rust  noplaypen">// Rational (fractional type)
 struct Rational {
     top: Int,
     bottom: Int,
 }
-<span class="boring">}
-</span></code></pre></pre>
+
+// Instantiating a struct
+x: Rational = Rational { top: 1, bottom: 3 }
+</code></pre>
+<h2 id="enums"><a class="header" href="#enums">Enums</a></h2>
+<p>Enums are used to represent types that have multiple variants.
+Enums are also known as <code>sum types</code>.
+They're useful for datums and redeemers with differing content.</p>
+<pre><code class="language-go  noplaypen">enum FanSetting {
+    On{ speed: Int },
+    Off{}
+}
+</code></pre>
+<h3 id="the-switch-expression"><a class="header" href="#the-switch-expression">The <code>switch</code> expression</a></h3>
+<p>The <code>switch</code> expression is used to pattern-match on enum variants.</p>
+<pre><code class="language-rust  noplaypen">enum Datum {
+    Submission{...}, // content of Submission has the same syntax as a regular struct-type
+    Queue{...},
+    Post{...}
+}
+
+switch (expr) {
+    case (x: Datum::Submission) { // double-colon to reference the sub-type
+        ... // expression must use x
+    },
+    case Datum::Queue {
+        ... // x not used, so can't be declared
+    },
+    default { // default must come last if all sub-types of Datum aren't handled explicitely
+        true
+    }
+}
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="methods-and-associated-functions"><a class="header" href="#methods-and-associated-functions">Methods and Associated Functions</a></h2>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
-<p>Structs in Helios have methods with syntax much like OOP languages. Methods are declared within <code>impl</code> blocks.</p>
+<p>Structs and Enums in Helios have methods with syntax much like OOP languages. Methods are declared within <code>impl</code> blocks.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>impl Rational {
+</span>struct Rational {
+    top: Int,
+    bottom: Int
+}
+
+impl Rational {
     // Methods take an argument 'self' of the same type of the Struct
 
     func add(self: Rational, rhs: Rational) -&gt; Rational {
@@ -438,7 +497,23 @@ rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
 res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
 <span class="boring">}
 </span></code></pre></pre>
-<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="control-flow-printing-and-traces"><a class="header" href="#control-flow-printing-and-traces">Control Flow, Printing and Traces</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="comments-and-printing"><a class="header" href="#comments-and-printing">Comments and Printing</a></h1>
+<h2 id="comments"><a class="header" href="#comments">Comments</a></h2>
+<p>In Helios comments are declared using two forward slashes (<code>//</code>).</p>
+<pre><code class="language-rust  noplaypen">// This is a comment.
+</code></pre>
+<h2 id="printing"><a class="header" href="#printing">Printing</a></h2>
+<p>For debugging purposes Helios has a <code>print</code> function.</p>
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>print(&quot;Imagine something cool.&quot;)
+<span class="boring">}
+</span></code></pre></pre>
+<blockquote>
+<p><strong>Note:</strong> Printing is <strong>horrible</strong> for production code as they lead to bloated validators.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="control-flow-printing-and-traces"><a class="header" href="#control-flow-printing-and-traces">Control Flow, Printing and Traces</a></h1>
 <h2 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h2>
 <p>Helios supports <code>if/else</code> statements.</p>
 <pre><pre class="playground"><code class="language-rust">
@@ -453,7 +528,7 @@ res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
 </span></code></pre></pre>
 <p>In Helios <code>if</code>/<code>else</code> statements are expressions.
 So the last expression is implicitly returned much like Rust and Ruby.
-This is valid syntax: </p>
+This is valid syntax:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -464,17 +539,9 @@ This is valid syntax: </p>
         };
 <span class="boring">}
 </span></code></pre></pre>
+<blockquote>
 <p><strong>Note</strong>: Compile-time constants can't be set to the result of an <code>if</code>/<code>else</code> expression.</p>
-<h2 id="printing-and-traces"><a class="header" href="#printing-and-traces">Printing and Traces</a></h2>
-<p>For debuggin purposes Helios has a <code>print</code> function.</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>print(&quot;Imagine something cool.&quot;)
-trace(21 &gt; 32, &quot;Should be true&quot;);
-<span class="boring">}
-</span></code></pre></pre>
-<p><strong>Note:</strong> Traces are <strong>horrible</strong> for production code as they lead to bloated validators.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="blockchain-programming-in-helios"><a class="header" href="#blockchain-programming-in-helios">Blockchain Programming in Helios</a></h1>
 <p>Helios <em>is</em> a DSL(Domain Specific Language) made for writing smart contracts.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-eutxo-model"><a class="header" href="#the-eutxo-model">The EUTXO Model</a></h1>
@@ -1006,7 +1073,7 @@ new</p>
 <p>serialize</p>
 <h3 id="internal-namespace-15"><a class="header" href="#internal-namespace-15">Internal Namespace</a></h3>
 <p><code>__helios__txoutputid</code></p>
-<h2 id="address"><a class="header" href="#address">Address</a></h2>
+<h2 id="address-1"><a class="header" href="#address-1">Address</a></h2>
 <hr />
 <h3 id="operators-16"><a class="header" href="#operators-16">Operators</a></h3>
 <p><code>__eq</code>,<code>__neq</code> </p>
@@ -1021,7 +1088,7 @@ new</p>
 hidden:      is_staked</p>
 <h3 id="internal-namespace-16"><a class="header" href="#internal-namespace-16">Internal Namespace</a></h3>
 <p>__helios<code>__add</code>ress</p>
-<h2 id="credential"><a class="header" href="#credential">Credential</a></h2>
+<h2 id="credential-1"><a class="header" href="#credential-1">Credential</a></h2>
 <hr />
 <pre><code class="language-rust  noplaypen">enum Credential {
     Pubkey { hash: PubKeyHash },

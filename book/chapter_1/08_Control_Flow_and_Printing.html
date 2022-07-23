@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">2.3.</strong> Blockchain Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.5.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Control_Flow_and_Printing.html" class="active"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Chapter 1</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">2.3.</strong> Blockchain Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.5.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.6.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html" class="active"><strong aria-hidden="true">2.8.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Chapter 2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -157,7 +157,7 @@
 </span></code></pre></pre>
 <p>In Helios <code>if</code>/<code>else</code> statements are expressions.
 So the last expression is implicitly returned much like Rust and Ruby.
-This is valid syntax: </p>
+This is valid syntax:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -168,23 +168,15 @@ This is valid syntax: </p>
         };
 <span class="boring">}
 </span></code></pre></pre>
+<blockquote>
 <p><strong>Note</strong>: Compile-time constants can't be set to the result of an <code>if</code>/<code>else</code> expression.</p>
-<h2 id="printing-and-traces"><a class="header" href="#printing-and-traces">Printing and Traces</a></h2>
-<p>For debuggin purposes Helios has a <code>print</code> function.</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>print(&quot;Imagine something cool.&quot;)
-trace(21 &gt; 32, &quot;Should be true&quot;);
-<span class="boring">}
-</span></code></pre></pre>
-<p><strong>Note:</strong> Traces are <strong>horrible</strong> for production code as they lead to bloated validators.</p>
+</blockquote>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../chapter_1/06_Comments_and_Printing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../chapter_1/07_Comments_and_Printing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
@@ -198,7 +190,7 @@ trace(21 &gt; 32, &quot;Should be true&quot;);
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../chapter_1/06_Comments_and_Printing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../chapter_1/07_Comments_and_Printing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 

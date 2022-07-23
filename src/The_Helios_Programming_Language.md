@@ -10,9 +10,9 @@ It's heavily inspired by Rust, Go and Sway.
 
 <br/>
 
-```rust
+```go, noplaypen
 // All Helios programs begin with a script purpose.
-validator always_true;
+validator always_true; 
 
 // The 'main' function contains the core validator logic.
 func main(ctx: ScriptContext) -> Bool {
