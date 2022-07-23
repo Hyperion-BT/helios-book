@@ -29,4 +29,4 @@ $ mdbook serve
   ...
 ```
 
-The book will be served at port `localhos:3000`
+The book will be served at port `localhost:3000`
