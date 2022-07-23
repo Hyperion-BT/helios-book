@@ -19,7 +19,7 @@ $ git clone https://github.com/Hyperion-BT/Helios-Book
   ...
 ```
 
-Finally cd into the directory and run the mdbook local server.
+Finally `cd` into the directory and run the mdbook local server.
 
 ```shell
 $ cd Helios-Book
@@ -27,3 +27,5 @@ $ cd Helios-Book
 $ mdbook serve
   ...
 ```
+
+The book will be served at port `localhos:3000`
