@@ -181,23 +181,14 @@ is_even: (Int) -&gt; Bool = (n: Int) { (n % 2) == 0 };
 <p><strong>Note:</strong> Ok I <em>kind of</em> lied when I told you that Helios has first-class functions,
 functions can't be stored in lists or structs so they aren't <strong>technically</strong> first-class.</p>
 </blockquote>
-<h2 id="example-code"><a class="header" href="#example-code">Example Code</a></h2>
-<pre><code class="language-go  noplaypen">// Fibonnaci
-func fib(n: Int) -&gt; Int {
-    if (n &lt; 2) {
-        n
-    } else {
-        fib(n-1) + fib(n-2)
-    }
-}
-
-// A Collatz Sequence function :)
-// A Collatz' sequence starts with a random number, n and follows
-// very simple rules to decide the next number in the sequence.
-// (1) If n is 1 the sequence is over.
-// (2) If n is even the next number is n / 2.
-// (3) If n is odd the next number is (n * 3) + 1.
-func collatz(current: Int, accumulator: []Int) -&gt; []Int {
+<h2 id="example-collatz-sequence-function-"><a class="header" href="#example-collatz-sequence-function-">Example: Collatz Sequence function :)</a></h2>
+<p>A Collatz' sequence starts with a random number, n and follows very simple rules to decide the next number in the sequence.</p>
+<ul>
+<li>If n is 1 the sequence is over.</li>
+<li>If n is even the next number is n / 2.</li>
+<li>If n is odd the next number is (n * 3) + 1.</li>
+</ul>
+<pre><code class="language-go  noplaypen">func collatz(current: Int, accumulator: []Int) -&gt; []Int {
     if (current == 1) {
         // Rule (1)
         accumulator.prepend(current) 
@@ -209,18 +200,6 @@ func collatz(current: Int, accumulator: []Int) -&gt; []Int {
         collatz(((current * 3) + 1), accumulator.prepend(current))      
     }
 }
-
-// More Lambdaassss
-add: (Int, Int) -&gt; Int = (a: Int, b: Int) -&gt; { a + b };
-
-// Please don't do this
-fib_: (Int) -&gt; Int =  (n: Int) -&gt; {
-    if (n &lt; 2) {
-        n
-    } else {
-        fib_(n-1) + fib_(n-2)
-    }
-};
 </code></pre>
 
                     </main>

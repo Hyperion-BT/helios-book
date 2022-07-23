@@ -144,14 +144,17 @@
                     <main>
                         <h1 id="builtin-types"><a class="header" href="#builtin-types">Builtin Types</a></h1>
 <h2 id="primitive-types"><a class="header" href="#primitive-types">Primitive Types</a></h2>
-<p>Helios has 6 primitive types:
-1. <code>Int</code> (an unbounded integer)
-2. <code>Bool</code> (Boolean <code>true</code> or <code>false</code>)
-3. <code>ByteArray</code> (array of bytes)
-4. <code>String</code> (fixed-length string)
-5. <code>List</code> (linked list)
-6. <code>Map</code> (A hashmap) [WIP]</p>
+<p>Helios has 6 primitive types:</p>
+<ul>
+<li><code>Int</code> (an unbounded integer)</li>
+<li><code>Bool</code> (Boolean <code>true</code> or <code>false</code>)</li>
+<li><code>ByteArray</code> (array of bytes)</li>
+<li><code>String</code> (fixed-length string)</li>
+<li><code>List</code> (linked list)</li>
+<li><code>Map</code> (A hashmap) [WIP]</li>
+</ul>
 <h2 id="int"><a class="header" href="#int">Int</a></h2>
+<hr />
 <p>Helios' <code>Int</code> type represents an unbounded integer like Haskell's <code>Integer</code> type.</p>
 <pre><code class="language-rust noplaypen">// Helios has support for multiple Integer literal formats
 normal_literal: Int = 17;
@@ -160,6 +163,7 @@ hex_literal: Int = 0x11;
 idk_literal: Int = 0o121;
 </code></pre>
 <h2 id="bool"><a class="header" href="#bool">Bool</a></h2>
+<hr />
 <p>The <code>Bool</code> type has two possible values: <code>true</code> or <code>false</code>. Boolean values are typically used for conditional logic or validation, for example in <code>if</code> expressions. Booleans can be negated using the negation operator (<code>!</code>),</p>
 <pre><code class="language-rust noplaypen">func returns_false() -&gt; Bool {
     !true
@@ -170,6 +174,7 @@ idk_literal: Int = 0o121;
 y: Int = (false).to_int(); // y == 0
 </code></pre>
 <h2 id="bytearray"><a class="header" href="#bytearray">ByteArray</a></h2>
+<hr />
 <p>The <code>ByteArray</code> type as you've likely guessed represents an array of bytes.</p>
 <pre><code class="language-rust noplaypen">simple_bytearray: ByteArray = #af2r221md;
 </code></pre>
@@ -177,6 +182,7 @@ y: Int = (false).to_int(); // y == 0
 <pre><code class="language-rust noplaypen">result: ByteArray = (1231).serialize();
 </code></pre>
 <h2 id="string"><a class="header" href="#string">String</a></h2>
+<hr />
 <p>Helios strings can be declared using single (<code>'</code>) or double (<code>&quot;</code>) quotes.</p>
 <pre><code class="language-ts noplaypen">single_quotes: String = 'Oh wow';
 double_quotes: String = &quot;Wow I did it again&quot;;
@@ -189,6 +195,7 @@ string_2: String = &quot;ios&quot;;
 result: String = string_1 + string_2; // &quot;Helios&quot;
 </code></pre>
 <h2 id="list-a"><a class="header" href="#list-a">List ([]a)</a></h2>
+<hr />
 <p>Helios has a list type list just like a the Haskell <code>List</code> type.
 It's type signature is <code>[]a</code> where a is the type of items in the list.
 Notably Helios list items aren't accessed using square brackets, <code>[]</code> for indexing instead the <code>get</code> method is used method is used, check out <a href="../helios_builtins/Helios_Builtins.html">Helios Builtins</a>.</p>
@@ -219,7 +226,8 @@ trace(fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5},
 
 trace(!([]Int{}).is_empty(), &quot;Checks if a list is empty.&quot;)
 </code></pre>
-<h3 id="map-wip"><a class="header" href="#map-wip">Map? [WIP]</a></h3>
+<h2 id="map-wip"><a class="header" href="#map-wip">Map? [WIP]</a></h2>
+<hr />
 <p>In future Helios might have a fleshed out <code>Map</code> data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.</p>
 <h2 id="more-information"><a class="header" href="#more-information">More Information</a></h2>
 <p>For more information on the Builtin type check out <a href="../helios_builtins/Helios_Builtins.html">Builtin Types</a>.</p>

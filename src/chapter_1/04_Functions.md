@@ -55,24 +55,14 @@ add: (Int) -> (Int) -> Int = (a: Int) { (b: Int) { a + b } };
 > **Note:** Ok I *kind of* lied when I told you that Helios has first-class functions,
 functions can't be stored in lists or structs so they aren't **technically** first-class.
 
-## Example Code
+## Example: Collatz Sequence function :)
+A Collatz' sequence starts with a random number, n and follows very simple rules to decide the next number in the sequence.
+
+- If n is 1 the sequence is over.
+- If n is even the next number is n / 2.
+- If n is odd the next number is (n * 3) + 1.
 
 ```go, noplaypen
-// Fibonnaci
-func fib(n: Int) -> Int {
-    if (n < 2) {
-        n
-    } else {
-        fib(n-1) + fib(n-2)
-    }
-}
-
-// A Collatz Sequence function :)
-// A Collatz' sequence starts with a random number, n and follows
-// very simple rules to decide the next number in the sequence.
-// (1) If n is 1 the sequence is over.
-// (2) If n is even the next number is n / 2.
-// (3) If n is odd the next number is (n * 3) + 1.
 func collatz(current: Int, accumulator: []Int) -> []Int {
     if (current == 1) {
         // Rule (1)
@@ -85,16 +75,4 @@ func collatz(current: Int, accumulator: []Int) -> []Int {
         collatz(((current * 3) + 1), accumulator.prepend(current))      
     }
 }
-
-// More Lambdaassss
-add: (Int, Int) -> Int = (a: Int, b: Int) -> { a + b };
-
-// Please don't do this
-fib_: (Int) -> Int =  (n: Int) -> {
-    if (n < 2) {
-        n
-    } else {
-        fib_(n-1) + fib_(n-2)
-    }
-};
 ```

@@ -5,6 +5,7 @@ Helios has native types for representing blockchain primitives. These include:
     2. Credential
 
 ## Address
+---
 
 The `Address` type holds the data about a cardano address. It's defined as:
 
@@ -19,6 +20,7 @@ As you can see it's a wrapper around a `Credential` and a `StakingCredential`.
 The `StakingCredential` type is opaque and is used via it's methods.
 
 ## Credential
+---
 
 This type represents an onchain credential.
 A credential is used to determine if a UTXO can be spent in a transaction.

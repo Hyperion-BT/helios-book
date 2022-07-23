@@ -3,14 +3,15 @@
 ## Primitive Types
 
 Helios has 6 primitive types:
-    1. `Int` (an unbounded integer)
-    2. `Bool` (Boolean `true` or `false`)
-    3. `ByteArray` (array of bytes)
-    4. `String` (fixed-length string)
-    5. `List` (linked list)
-    6. `Map` (A hashmap) [WIP]
+- `Int` (an unbounded integer)
+- `Bool` (Boolean `true` or `false`)
+- `ByteArray` (array of bytes)
+- `String` (fixed-length string)
+- `List` (linked list)
+- `Map` (A hashmap) [WIP]
 
 ## Int
+---
 
 Helios' `Int` type represents an unbounded integer like Haskell's `Integer` type.
 
@@ -23,6 +24,7 @@ idk_literal: Int = 0o121;
 ```
 
 ## Bool
+---
 
 The `Bool` type has two possible values: `true` or `false`. Boolean values are typically used for conditional logic or validation, for example in `if` expressions. Booleans can be negated using the negation operator (`!`),
 
@@ -40,6 +42,7 @@ y: Int = (false).to_int(); // y == 0
 ```
 
 ## ByteArray
+---
 
 The `ByteArray` type as you've likely guessed represents an array of bytes.
 
@@ -54,6 +57,7 @@ result: ByteArray = (1231).serialize();
 ```
 
 ## String
+---
 
 Helios strings can be declared using single (`'`) or double (`"`) quotes.
 
@@ -73,6 +77,7 @@ result: String = string_1 + string_2; // "Helios"
 ```
 
 ## List (\[\]a)
+---
 
 Helios has a list type list just like a the Haskell `List` type.
 It's type signature is `[]a` where a is the type of items in the list.
@@ -111,7 +116,8 @@ trace(fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5},
 trace(!([]Int{}).is_empty(), "Checks if a list is empty.")
 ```
 
-### Map? \[WIP\]
+## Map? \[WIP\]
+---
 
 In future Helios might have a fleshed out `Map` data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.
 

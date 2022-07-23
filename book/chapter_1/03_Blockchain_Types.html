@@ -147,6 +147,7 @@
 1. Address
 2. Credential</p>
 <h2 id="address"><a class="header" href="#address">Address</a></h2>
+<hr />
 <p>The <code>Address</code> type holds the data about a cardano address. It's defined as:</p>
 <pre><code class="language-rust  noplaypen">struct Address {
     credential: Credential,
@@ -156,6 +157,7 @@
 <p>As you can see it's a wrapper around a <code>Credential</code> and a <code>StakingCredential</code>.
 The <code>StakingCredential</code> type is opaque and is used via it's methods.</p>
 <h2 id="credential"><a class="header" href="#credential">Credential</a></h2>
+<hr />
 <p>This type represents an onchain credential.
 A credential is used to determine if a UTXO can be spent in a transaction.
 It is defined as:</p>
