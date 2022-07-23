@@ -25,7 +25,7 @@ Finally `cd` into the directory and run the mdbook local server.
 ```shell
 $ cd Helios-Book
   ...
-$ mdbook serve
+$ mdbook serve --open
   ...
 ```
 
