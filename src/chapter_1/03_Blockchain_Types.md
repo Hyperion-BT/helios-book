@@ -1,8 +1,9 @@
 # Blockchain Types
 
 Helios has native types for representing blockchain primitives. These include:
-    1. Address
-    2. Credential
+
+- Address
+- Credential
 
 ## Address
 ---
