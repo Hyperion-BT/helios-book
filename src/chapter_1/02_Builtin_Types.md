@@ -47,7 +47,7 @@ y: Int = (false).to_int(); // y == 0
 The `ByteArray` type as you've likely guessed represents an array of bytes.
 
 ```rust,noplaypen
-simple_bytearray: ByteArray = #af2r221md;
+simple_bytearray: ByteArray = #af2r221ad;
 ```
 
 All most core Helios types including all other primitve types can be converted to a `ByteArray` using the `serialize` method.
