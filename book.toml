@@ -1,6 +1,0 @@
-[book]
-authors = ["Daniel Onyesoh"]
-language = "en"
-multilingual = false
-src = "src"
-title = "The Helios Programming Language"
