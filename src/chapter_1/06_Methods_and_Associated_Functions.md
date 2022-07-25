@@ -46,7 +46,7 @@ impl Rational {
 }
 
 test_car: Car = Car::new("Model 3",  0, 0);
-trace(Car::RANDOM_CONSTANTS == 1232, "Never log");
+print((Car::RANDOM_CONSTANTS).show()) // This would print out 1231
 ```
 
 ## Finished Code

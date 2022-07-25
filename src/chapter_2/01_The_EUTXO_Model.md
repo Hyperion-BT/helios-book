@@ -57,6 +57,7 @@ For a transaction to be valid it must satisfy some things:
     This makes auditing way easier because you're auditing a **single** function.
 
 - **Concurrency**
+
     If designed properly EUTXO smart contracts paired with
 
 - **Better for Layer 2s**
@@ -65,11 +66,13 @@ For a transaction to be valid it must satisfy some things:
     such as sidechains(Milkomeda), state channels
 
 - **Simpler**
+
     Though not immediately obvious EUTXO smart contracts are often simpler than
     an equivalent Solidity smart contract.
 
 - **No Reentrancy Attacks**
-    Reentrancy attacks such as the [DAO hack](https://en.wikipedia.org/wiki/The_DAO_(organization)).
+
+    Reentrancy attacks such as the [DAO hack](https://en.wikipedia.org/wiki/The_DAO_(organization)) cannot occur.
 
 ### Cons
 

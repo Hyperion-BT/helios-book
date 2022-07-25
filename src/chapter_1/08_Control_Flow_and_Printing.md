@@ -24,4 +24,6 @@ x: Int = if (true) {
         };
 ```
 
-> **Note**: Compile-time constants can't be set to the result of an `if`/`else` expression.
+> **Note**: Compile-time constants can't be set to the result of an `if`/`else` expression because the expression is evaluated at run time while the value of a constant is set at compile time.
+
+TODO: Talk about else if and logical operators

@@ -2,8 +2,11 @@
 
 Functions are at the core of Helios. All Helios functions are *pure*, this means they have no side-effects and always return the same result when given the same arguments.
 
+> Note: All functions must return a value in Helios
+
 Functions are declared using the `func` keyword.
 Helios has no `return` statement, the last expression in a function is *implicitly returned* like in Rust.
+
 
 ```go, noplaypen
 func add(a: Int, b: Int) -> Int {

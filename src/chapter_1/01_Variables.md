@@ -9,9 +9,9 @@ num: Int = 42;
 ```
 
 From the variable declaration above we can tell about `num`:
-    1. It is immutable.
-    2. It's value is `42`.
-    3. It's type is `Int`.
+1. It is immutable.
+2. It's value is `42`.
+3. It's type is `Int`.
 
 `Int` is the builtin numeric type in Helios it represents an unbounded integer. See [Builtin Types](./02_Builtin_Types.md) for more details.
 
@@ -33,4 +33,4 @@ Helios has support for compile time constansts, constants are declared using the
 const AGE: Int = 2132;
 ```
 
-> **Note**: Constants can't be set to the result of an `if`/`else` expression.
+> **Note**: Constants can't be set to the result of an `if`/`else` expression because the value needs to be known at compile time.

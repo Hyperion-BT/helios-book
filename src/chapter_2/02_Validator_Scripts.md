@@ -2,9 +2,9 @@
 
 In the last chapter we learnt that validators are functions that return a boolean (`true`  or `false`) when validating a transaction. In Helios validators are functions that take three arguments:
 
-- The Redeemer: A piece of data attached to the transaction.
-- The Datum: Data stored onchain linked to the UTXO.
-- The ScriptContext: This is huge struct that holds data about the transaction spending the UTXO.
+- **The Redeemer**: A piece of data attached to the transaction.
+- **The Datum**: Data stored onchain linked to the UTXO.
+- **The ScriptContext**: This is huge struct that holds data about the transaction spending the UTXO.
 
 The Redeemer and the Datum are user-defined but the `ScriptContext` struct is the same across all validators.
 

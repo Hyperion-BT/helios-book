@@ -8,7 +8,7 @@ Helios has 6 primitive types:
 - `ByteArray` (array of bytes)
 - `String` (fixed-length string)
 - `List` (linked list)
-- `Map` (A hashmap) [WIP]
+- `Map` (A hashmap) \[WIP\]
 
 ## Int
 ---
@@ -17,10 +17,13 @@ Helios' `Int` type represents an unbounded integer like Haskell's `Integer` type
 
 ```rust,noplaypen
 // Helios has support for multiple Integer literal formats
-normal_literal: Int = 17;
-bits_literal: Int = 0b10001;
-hex_literal: Int = 0x11;
-idk_literal: Int = 0o121;
+normal_literal: Int = 17; // This is a base 10 value
+
+bits_literal: Int = 0b10001; // This is a base 2 value
+
+hex_literal: Int = 0x11; // This is a base 16 value
+
+oct_literal: Int = 0o121; // This is a base 8 value
 ```
 
 ## Bool
@@ -80,7 +83,7 @@ result: String = string_1 + string_2; // "Helios"
 ---
 
 Helios has a list type list just like a the Haskell `List` type.
-It's type signature is `[]a` where a is the type of items in the list.
+It's type signature is `[]a` where `a` is the type of items in the list.
 Notably Helios list items aren't accessed using square brackets, `[]` for indexing instead the `get` method is used method is used, check out [Helios Builtins](../helios_builtins/Helios_Builtins.md/#list-a).
 
 ```rust,noplaypen
@@ -99,21 +102,31 @@ Helios lists have a lot of useful methods you'd normally find in other languages
 // List Methods.
 fib_list: []Int = []Int{1, 1, 2, 3, 5};
 
-trace(fib_list.len() != 5, "This will print if the length of fib_list is 8.");
+// This function returns the length of the list
+print((fib_list.len()).show()) // This will print out the lenght of the list
 
+
+// This function returns the value at a specified index
 // Note: Throws error if index is out of range. 
-trace(fib_list.get(4) != 5, "This will print if the element at index 4 is 3.")
+print((fib_list.get(4)).show()) // This will print out the value at index 4 which is 5.
 
-// Note: Throws an error if list is empty.
-trace(fib_list.head() != 1, "Gets the element at the front of the list.")
 
-// Note: Throws an error if the list is empty.
-trace(fib_list.tail() != 5, "Returns the element at the end of the list.");
+// This function gets the first element of the list
+// It will throw an error if the list is empty
+print((fib_list.head()).show()) // This will print out the first value in the list
 
-trace(fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5}, 
-    "Prepends item to the front of a list.")
 
-trace(!([]Int{}).is_empty(), "Checks if a list is empty.")
+// This function gets the last element of the list
+// It will throw an error if the list is empty
+print((fib_list.tail()).show()) // This will print out the last value in the list
+
+
+// This function would adds an item to the list at a specified index
+print((fib_list.prepend(0)).show()) // This will print out a new list value 0 added in front of the old list
+
+
+// This fucntion checks if the list is empty
+print((fib_list.is_empty()).show()) // This will print out true if the list is empty
 ```
 
 ## Map? \[WIP\]
