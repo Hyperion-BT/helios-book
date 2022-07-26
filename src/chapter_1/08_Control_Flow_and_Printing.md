@@ -17,7 +17,7 @@ So the last expression is implicitly returned much like Rust and Ruby.
 This is valid syntax:
 
 ```rust
-const x: Int = if (true) {
+x: Int = if (true) {
             42
         } else {
             24

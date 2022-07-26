@@ -50,11 +50,11 @@ the *left* side of their declaration.
 
 ```rust, noplaypen
 // Lambda with full typing
-const is_even: (Int) -> Bool = (n: Int) -> Bool { (n % 2) == 0 };
+is_even: (Int) -> Bool = (n: Int) -> Bool { (n % 2) == 0 };
 
 // Lambda without type inference
 // Note: Return type must still be specified
-const is_even = (n: Int) -> Bool { (n % 2) == 0 };
+is_even = (n: Int) -> Bool { (n % 2) == 0 };
 ```
 
 > **Note:** Normal Functions should be chosen when possible for better clarity.
@@ -66,13 +66,13 @@ Functions are first-class citizens in Helios that means:
 ### 1. Functions can be passed as arguments
 
 ```ts, noplaypen
-const evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
+evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
 ```
 
 ### 2. Functions can be returned from functions
 
 ```rust, noplaypen
-const add = (a: Int) -> (Int) -> Int { (b: Int) -> Int { a + b } };
+add = (a: Int) -> (Int) -> Int { (b: Int) -> Int { a + b } };
 ```
 
 > **Note:** Ok I *kind of* lied when I told you that Helios has first-class functions,

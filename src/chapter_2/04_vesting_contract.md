@@ -51,8 +51,8 @@ There are two cases when the validator should return `true`:
 
 ```go, noplaypen
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
-    const tx: Tx = context.tx;
-    const tx_valid_range: TimeRange = tx.time_range;
+    tx: Tx = context.tx;
+    tx_valid_range: TimeRange = tx.time_range;
 
     match (redeemer) {
         case Redeemer::Cancel {
@@ -92,8 +92,8 @@ enum Redeemer {
 }
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
-    const tx: Tx = context.tx;
-    const tx_valid_range: TimeRange = tx.time_range;
+    tx: Tx = context.tx;
+    tx_valid_range: TimeRange = tx.time_range;
 
     match (redeemer) {
         case Redeemer::Cancel {

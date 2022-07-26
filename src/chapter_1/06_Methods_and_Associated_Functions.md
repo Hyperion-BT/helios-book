@@ -41,7 +41,7 @@ rational_1.add(rational_2);
 // 'rational.add' returns a function of type ((Rational) -> Rational) 
 // the first '(Rational) ->' in 'add' is set to rational_1
 // that can be used immediately or stored like any other value.
-const add_to_rational_1: (Rational) -> Rational = rational_1.add;
+add_to_rational_1: (Rational) -> Rational = rational_1.add;
 
 // Note: add_to_rational_1(rational_2) == rational_1.add(rational_2)
 ```
@@ -101,12 +101,12 @@ impl Rational {
 
 }
 
-const rational_1: Rational = Rational::new(1, 5); // 1/5 or 0.2
-const rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
+rational_1: Rational = Rational::new(1, 5); // 1/5 or 0.2
+rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
 
-const res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
+res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
 
 // Using Associated functions
-const fifty_fifty: Rational = Rational::new(1, 2) // 1/2 or 0.5
+fifty_fifty: Rational = Rational::new(1, 2) // 1/2 or 0.5
 
 ```
