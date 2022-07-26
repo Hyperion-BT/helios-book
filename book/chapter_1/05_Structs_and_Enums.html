@@ -154,12 +154,12 @@ struct Rational {
 }
 
 // Instantiating a struct
-x: Rational = Rational { top: 1, bottom: 3 }
+const x: Rational = Rational { top: 1, bottom: 3 }
 
 // OR
 
 // Type is inferred for struct literals
-x = Rational { top: 1, bottom: 3 }
+const x = Rational { top: 1, bottom: 3 }
 </code></pre>
 <h2 id="enums"><a class="header" href="#enums">Enums</a></h2>
 <p>Enums are used to represent types that have multiple variants.
@@ -171,10 +171,10 @@ They're useful for datums and redeemers with differing content.</p>
 }
 
 // Instantiating an Enum
-current_setting: FanSetting = FanSetting::On { speed: 5 };
+const current_setting: FanSetting = FanSetting::On { speed: 5 };
 
 // Enums also have type inference for literals
-current_setting = FanSetting::On { speed: 5 };
+const current_setting = FanSetting::On { speed: 5 };
 
 </code></pre>
 <h3 id="the-switch-expression"><a class="header" href="#the-switch-expression">The <code>'switch'</code> expression</a></h3>

@@ -31,17 +31,21 @@ enum Redeemer {
 
 There are two cases when the validator should return `true`:
 
-### Vesting Cancel
+- **Cancel**
 
-In this case the 'owner' wishes to cancel to the contract and get back their funds.
-For a Cancel to suceed the following have to be checked
+  In this case the 'owner' wishes to cancel to the contract and get back their funds.
+  For a Cancel to suceed the following have to be checked
 
-- The owner signed the transaction.
-- The Vesting deadline hasn't passed.
+  - The owner signed the transaction.
+  - The deadline hasn't passed.
 
-### Vesting Claim
+- **Vesting Claim**
 
-A 'Claim' occurs when the 'beneficiary'
+  A 'Claim' occurs when the 'beneficiary' wishes to claim the tokens vested for them.
+  For it to be valid the following have to be checked:
+
+  - The beneficiary signed the transaction.
+  - The deadline has passed.
 
 ## The Main Function
 
