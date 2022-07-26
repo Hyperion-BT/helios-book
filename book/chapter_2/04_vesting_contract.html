@@ -166,15 +166,26 @@ for more info <a href="../helios_builtins/Helios_Builtins.html">Helios Builtins<
 }
 </code></pre>
 <p>There are two cases when the validator should return <code>true</code>:</p>
-<h3 id="vesting-cancel"><a class="header" href="#vesting-cancel">Vesting Cancel</a></h3>
+<ul>
+<li>
+<p><strong>Cancel</strong></p>
 <p>In this case the 'owner' wishes to cancel to the contract and get back their funds.
 For a Cancel to suceed the following have to be checked</p>
 <ul>
 <li>The owner signed the transaction.</li>
-<li>The Vesting deadline hasn't passed.</li>
+<li>The deadline hasn't passed.</li>
 </ul>
-<h3 id="vesting-claim"><a class="header" href="#vesting-claim">Vesting Claim</a></h3>
-<p>A 'Claim' occurs when the 'beneficiary'</p>
+</li>
+<li>
+<p><strong>Vesting Claim</strong></p>
+<p>A 'Claim' occurs when the 'beneficiary' wishes to claim the tokens vested for them.
+For it to be valid the following have to be checked:</p>
+<ul>
+<li>The beneficiary signed the transaction.</li>
+<li>The deadline has passed.</li>
+</ul>
+</li>
+</ul>
 <h2 id="the-main-function"><a class="header" href="#the-main-function">The Main Function</a></h2>
 <pre><code class="language-go  noplaypen">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     const tx: Tx = context.tx;
