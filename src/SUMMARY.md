@@ -5,7 +5,6 @@
 - [Basics of Helios](./chapter_1/00_Basics_of_Helios.md)
   - [Variables](./chapter_1/01_Variables.md)
   - [Builtin Types](./chapter_1/02_Builtin_Types.md)
-  - [Blockchain Types](./chapter_1/03_Blockchain_Types.md)
   - [Functions](./chapter_1/04_Functions.md)
   - [Structs and Enums](./chapter_1/05_Structs_and_Enums.md)
   - [Methods and Associated Functions](./chapter_1/06_Methods_and_Associated_Functions.md)
@@ -19,3 +18,4 @@
   - [Project 1: Vesting Contract](./chapter_2/04_vesting_contract.md)
 
 - [Helios Builtins](./helios_builtins/Helios_Builtins.md)
+  - [Blockchain Types](./chapter_1/03_Blockchain_Types.md)
