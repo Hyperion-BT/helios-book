@@ -354,7 +354,7 @@ const is_even = (n: Int) -&gt; Bool { (n % 2) == 0 };
 <pre><code class="language-ts  noplaypen">const evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
 </code></pre>
 <h3 id="2-functions-can-be-returned-from-functions"><a class="header" href="#2-functions-can-be-returned-from-functions">2. Functions can be returned from functions</a></h3>
-<pre><code class="language-rust  noplaypen">const add = (a: Int) -&gt; (Int) -&gt; Int { (b: Int) -&gt; Inr { a + b } };
+<pre><code class="language-rust  noplaypen">const add = (a: Int) -&gt; (Int) -&gt; Int { (b: Int) -&gt; Int { a + b } };
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong> Ok I <em>kind of</em> lied when I told you that Helios has first-class functions,
@@ -399,12 +399,12 @@ struct Rational {
 }
 
 // Instantiating a struct
-x: Rational = Rational { top: 1, bottom: 3 }
+const x: Rational = Rational { top: 1, bottom: 3 }
 
 // OR
 
 // Type is inferred for struct literals
-x = Rational { top: 1, bottom: 3 }
+const x = Rational { top: 1, bottom: 3 }
 </code></pre>
 <h2 id="enums"><a class="header" href="#enums">Enums</a></h2>
 <p>Enums are used to represent types that have multiple variants.
@@ -416,10 +416,10 @@ They're useful for datums and redeemers with differing content.</p>
 }
 
 // Instantiating an Enum
-current_setting: FanSetting = FanSetting::On { speed: 5 };
+const current_setting: FanSetting = FanSetting::On { speed: 5 };
 
 // Enums also have type inference for literals
-current_setting = FanSetting::On { speed: 5 };
+const current_setting = FanSetting::On { speed: 5 };
 
 </code></pre>
 <h3 id="the-switch-expression"><a class="header" href="#the-switch-expression">The <code>'switch'</code> expression</a></h3>
@@ -532,13 +532,13 @@ impl Rational {
 
 }
 
-rational_1: Rational = Rational::new(1, 5); // 1/5 or 0.2
-rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
+const rational_1: Rational = Rational::new(1, 5); // 1/5 or 0.2
+const rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
 
-res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
+const res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
 
 // Using Associated functions
-fifty_fifty: Rational = Rational::new(1, 2) // 1/2 or 0.5
+const fifty_fifty: Rational = Rational::new(1, 2) // 1/2 or 0.5
 
 <span class="boring">}
 </span></code></pre></pre>
@@ -584,7 +584,7 @@ This is valid syntax:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>x: Int = if (true) {
+</span>const x: Int = if (true) {
             42
         } else {
             24
@@ -893,8 +893,8 @@ For a Cancel to suceed the following have to be checked</p>
 <p>A 'Claim' occurs when the 'beneficiary'</p>
 <h2 id="the-main-function-1"><a class="header" href="#the-main-function-1">The Main Function</a></h2>
 <pre><code class="language-go  noplaypen">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
-    tx: Tx = context.tx;
-    tx_valid_range: TimeRange = tx.time_range;
+    const tx: Tx = context.tx;
+    const tx_valid_range: TimeRange = tx.time_range;
 
     match (redeemer) {
         case Redeemer::Cancel {
@@ -933,8 +933,8 @@ enum Redeemer {
 }
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
-    tx: Tx = context.tx;
-    tx_valid_range: TimeRange = tx.time_range;
+    const tx: Tx = context.tx;
+    const tx_valid_range: TimeRange = tx.time_range;
 
     match (redeemer) {
         case Redeemer::Cancel {
