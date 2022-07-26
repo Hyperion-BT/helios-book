@@ -18,4 +18,4 @@
   - [Project 1: Vesting Contract](./chapter_2/04_vesting_contract.md)
 
 - [Helios Builtins](./helios_builtins/Helios_Builtins.md)
-  - [Blockchain Types](./chapter_1/03_Blockchain_Types.md)
+  - [Blockchain Types](./helios_builtins/Blockchain_Types.md)
