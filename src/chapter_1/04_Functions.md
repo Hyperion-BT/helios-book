@@ -11,11 +11,7 @@ func add(a: Int, b: Int) -> Int {
 }
 ```
 
->**Note**: Functions can only reference themselves.
->There is no global hoisting of func and other statements like in javascript.
->So there is no mutual recursion using func statements directly.
-
-Helios has recursion recursion as you'd expect.
+Helios has recursion as you'd expect.
 
 ```go, noplaypen
 func fib(n: Int) -> Int {
@@ -28,15 +24,36 @@ func fib(n: Int) -> Int {
 }
 ```
 
->**Note**: Func
+>**Note**:Functions can only reference themselves.
+>There is no global hoisting of `func` and other statements like in javascript.
+>So there is no mutual recursion using func statements directly as a function can only reference
+> other functions defined before it.
+>
+> ```go, noplaypen
+> 01 func a(n: Int) -> Int {
+> 02    ...
+> 03     b(n)                    // This won't work
+> 04 }
+> 05
+> 06 func b(n: Int) -> Int {
+> 07     ...
+> 08     a(n)                   // This will work
+> 09 }
+>```
 
 ## Lambda/Anonymous Functions
 
 Helios also has support for anonymous functions without needing the `func` keyword.
 This is for convenience when using higher order functions.
+Lambdas also have some type inference as on they don't need type annotations on
+the *left* side of their declaration.
 
 ```rust, noplaypen
-// Anonymous functions with typing
+// Lambda with full typing
+const is_even: (Int) -> Bool = (n: Int) -> Bool { (n % 2) == 0 };
+
+// Lambda without type inference
+// Note: Return type must still be specified
 const is_even = (n: Int) -> Bool { (n % 2) == 0 };
 ```
 
@@ -63,26 +80,31 @@ functions can't be stored in lists or structs so they aren't **technically** fir
 
 ## Example: Collatz Sequence function :)
 
-A Collatz' sequence starts with a random number, n and follows very simple rules to decide the next number in the sequence.
+One of my favourite things in maths is the Collatz sequence.
+A Collatz sequence starts with a random number, n
+and follows **three** very simple rules to decide the next number in the sequence.
 
 - If n is 1 the sequence is over.
 - If n is even the next number is n / 2.
 - If n is odd the next number is (n * 3) + 1.
 
+It is an open question in math whether there is a Collatz sequence that doesn't end with the number 1.
+We can write a simple function to generate the Collatz sequence (as a list of `Int`s) from a given starting number.
+
 ```go, noplaypen
-func collatz(current: Int, accumulator: []Int) -> []Int {
+func collatz(initial: Int, previous_numbers: []Int) -> []Int {
 
     // Rule (1)
-    if (current == 1) {
-        accumulator.prepend(current) 
+    if (intial == 1) {
+        previous_numbers.prepend(current) 
 
     // Rule (2)
-    } else if (current % 2 == 0) {
-        collatz(current / 2, accumulator.prepend(current))
+    } else if (initial % 2 == 0) {
+        collatz(current / 2, previous_numbers.prepend(current))
 
     // Rule (3)
     } else {
-        collatz(current * 3 + 1, accumulator.prepend(current))      
+        collatz(intial * 3 + 1, previous_numbers.prepend(intial))      
     }
 }
 ```

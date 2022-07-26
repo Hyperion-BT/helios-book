@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html" class="active"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project 1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">4.1.</strong> Blockchain Types</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html" class="active"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../helios_builtins/Blockchain_Types.html"><strong aria-hidden="true">4.1.</strong> Blockchain Types</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -156,41 +156,60 @@
 </span><span class="boring">fn main() {
 </span>validator always_true;       // -------- (1)
 
-enum Redeemer {..}          // --------- (2)
-                            
-struct Datum {..}           // --------- (3)
+struct Datum {..}           // --------- (2)
 
-func main(
-    datum: Datum, 
-    redeemer: Redeemer, 
-    ctx: ScriptContext
-) -&gt; Bool {                // --------- (4)  
+enum Redeemer {..}          // --------- (3)
+                            
+// ------------- (4)
+func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
     ...
     true                     
 }
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="script-purpose"><a class="header" href="#script-purpose">Script Purpose</a></h2>
-<p>(1) In Helios all scripts start with a  <strong>script purpose</strong> followed by the name of the script. There are three(3) script purposes currently:</p>
+<p>In Helios all scripts start with a  <strong>script purpose</strong>, followed by the name of the script. There are three (3) script purposes currently:</p>
 <ul>
 <li><strong>validator</strong></li>
 <li><strong>minting_policy</strong></li>
 <li><strong>test</strong></li>
 </ul>
 <p>We will cover the latter two in later chapters.</p>
+<pre><code class="language-rust  noplaypen">validator always_true;
+</code></pre>
 <h2 id="the-main-function"><a class="header" href="#the-main-function">The Main Function</a></h2>
-<p>The main function of a validator accepts three arguments:
-- <strong>The Datum</strong> (3)
-- <strong>The Redeemer</strong> (2)
-= <strong>The ScriptContext</strong></p>
+<p>The main function of a validator accepts three arguments and returns a <code>Bool</code>:</p>
+<ul>
+<li><strong>The Datum</strong> (2)</li>
+<li><strong>The Redeemer</strong> (3)</li>
+<li><strong>The ScriptContext</strong></li>
+</ul>
+<pre><code class="language-go  noplaypen">struct Datum {..}
+
+struct Redeemer {..}
+
+func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
+    ...
+    true
+}
+</code></pre>
 <blockquote>
-<p><strong>Note</strong>: The Datum and the Redeemer are user-defined types with the names <code>Datum</code> and <code>Redeemer</code>.</p>
+<p><strong>Note</strong>: The Datum and the Redeemer are user-defined types (structs or enums) that <strong>must</strong> be named <code>Datum</code> and <code>Redeemer</code>.</p>
 </blockquote>
+<h2 id="alwaystrue-validator"><a class="header" href="#alwaystrue-validator">AlwaysTrue Validator</a></h2>
+<pre><code class="language-go  noplaypen">validator always_true;
+
+struct Datum {..}
+
+struct Redeemer {..}
+
+func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
+    ...
+    true
+}
+</code></pre>
 <h2 id="omitting-the-datum-and-the-redeemer"><a class="header" href="#omitting-the-datum-and-the-redeemer">Omitting The Datum and The Redeemer</a></h2>
 <p>The above validator could be rewritten as:</p>
-<blockquote>
-<p><strong>Note</strong>: The Helios compiler is smart enough to fill in a blank redeemer and datum when they are omitted(2).</p>
-</blockquote>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -202,7 +221,11 @@ func main(ctx: ScriptContext) -&gt; Bool {        // -------- (2)
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>The next page will cover the ScriptContext.</p>
+<blockquote>
+<p><strong>Note</strong>: The Helios compiler is smart enough to fill in a blank redeemer and datum when they are omitted.</p>
+</blockquote>
+<p>Most of the data needed for writing usefull validators is contained in the <code>ScriptContext</code>.
+We will cover the <code>ScriptContext</code> in the next page.</p>
 
                     </main>
 
@@ -233,6 +256,22 @@ func main(ctx: ScriptContext) -&gt; Bool {        // -------- (2)
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

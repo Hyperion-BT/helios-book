@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html" class="active"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project 1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">4.1.</strong> Blockchain Types</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html" class="active"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../helios_builtins/Blockchain_Types.html"><strong aria-hidden="true">4.1.</strong> Blockchain Types</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,6 +143,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="understanding-the-eutxo-model"><a class="header" href="#understanding-the-eutxo-model">Understanding The eUTXO Model</a></h1>
+<p>Before we get into any coding we need to first understand how smart contracts work on Cardano
+and how it differs from the dominant Accounts-based model.</p>
 <p>This section wouldn't be possible without <a href="https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e">this</a> great blog post by the awesome <a href="https://github.com/dav009">David Pryzbilla</a> and a lot of helpful feedback from <a href="">Christian Smitz</a>.</p>
 <h2 id="accounts-model-vs-eutxo-model"><a class="header" href="#accounts-model-vs-eutxo-model">Accounts Model vs eUTXO Model</a></h2>
 <p>Smart contracts on Cardano are quite different from those on Ethereum.</p>
@@ -197,37 +199,56 @@ For a transaction to be valid it must satisfy some things:</p>
 </blockquote>
 <h2 id="pros-and-cons-of-the-eutxo-model"><a class="header" href="#pros-and-cons-of-the-eutxo-model">Pros and Cons of the eUTXO Model</a></h2>
 <h3 id="pros"><a class="header" href="#pros">Pros</a></h3>
+<ul>
+<li>
 <h4 id="fixed-transaction-fees"><a class="header" href="#fixed-transaction-fees">Fixed Transaction Fees</a></h4>
 <p>eUTXO contracts are deterministic this means that you can verify if a transaction will suceed and it's resource usage before posting it to the blockchain.
 This is means the transaction fees for a transaction are fixed  and can be deterministically calculated offchain.
 On Account-based blockchains transaction fees can vary <strong>a lot</strong>.</p>
+</li>
+<li>
 <h4 id="easier-to-audit"><a class="header" href="#easier-to-audit">Easier to Audit</a></h4>
 <p>The <strong>locally-scoped</strong> nature of eUTXO contracts reduces the potential attack surface by a lot.
 This makes auditing way easier because you're auditing a <strong>the validation</strong> function and the space of possible outcomes is greatly reduced.</p>
+</li>
+<li>
 <h4 id="concurrency"><a class="header" href="#concurrency">Concurrency</a></h4>
 <p>If designed properly eUTXO smart contracts can be very parallel.</p>
+</li>
+<li>
 <h4 id="better-for-layer-2s"><a class="header" href="#better-for-layer-2s">Better for Layer 2s</a></h4>
 <p>The local nature of UTXOs lends itself well to building Layer 2 scaling solutions
 such as sidechains(Milkomeda), state channels</p>
+</li>
+<li>
 <h4 id="simpler"><a class="header" href="#simpler">Simpler</a></h4>
 <p>Though not immediately obvious eUTXO smart contracts are often simpler than an equivalent Solidity smart contract.</p>
+</li>
+<li>
 <h4 id="no-reentrancy-attacks"><a class="header" href="#no-reentrancy-attacks">No Reentrancy Attacks</a></h4>
 <p>Reentrancy attacks such as the <a href="https://en.wikipedia.org/wiki/The_DAO_(organization)">DAO hack</a>.</p>
+</li>
+</ul>
 <h3 id="cons"><a class="header" href="#cons">Cons</a></h3>
 <ul>
 <li>
-<p><strong>Concurrency Issues</strong>: If eUTXO contracts aren't designed properly they can encounter <strong>contention</strong>. <strong>Contention</strong> occurs when two transaction try
-to spend the same UTXO, this isn't possible and leads to UX issues.
+<h4 id="contention"><a class="header" href="#contention">Contention</a></h4>
+<p>If eUTXO contracts aren't designed properly they can encounter <em>contention</em>.
+Contention occurs when two transaction try to spend the same UTXO,
+this isn't possible and leads to UX issues like in the case of <a href="">Minswap in the past</a>.
 This is not usually an issue on Ethereum as the EVM usually handles ordering smart contract calls.</p>
-<p>It's best to keep this in mind when designing smart contracts.</p>
+<blockquote>
+<p><strong>Note</strong>: There are ways to take advantage of the avoid contention and take advantage of
+the parallel nature of UTXOs instead of struggling with the such as SundaeSwap's <a href="">scooper model</a>.</p>
+<p>These approaches usually use <em>offchain batching</em> to execute 'batches' of UTXOs in a single efficient transaction.
+This can be done trustlessy as a UTXO can't be spent in a transaction unless it's validator is satisfied.</p>
+</blockquote>
 </li>
 </ul>
 <h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
 <p>It's totally normal if you're still confused about eUTXO it's not immediately intuitive.
-In eUTXO smart contracts are more about specifying the requirements for tokens to be spent.
-It is worth the extra effort as it often leads to contracts that are simpler overall.</p>
-<p>I advise your read the article linked at the top even if you understand eUTXO, it's
-written for the Ergo blockchain but a lot of the concepts carry over into cardano.</p>
+It is worth the extra effort in rewiring you're thinking as it often leads to contracts that are simpler and safer overall.</p>
+<p>I advise you to read <a href="https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e">this article</a> top even if you understand eUTXO, it's written for the Ergo blockchain but a lot of the concepts carry over into cardano.</p>
 
                     </main>
 
@@ -258,6 +279,22 @@ written for the Ergo blockchain but a lot of the concepts carry over into cardan
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

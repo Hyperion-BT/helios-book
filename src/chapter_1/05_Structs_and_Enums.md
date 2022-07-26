@@ -28,14 +28,21 @@ Enums are used to represent types that have multiple variants.
 Enums are also known as `sum types`.
 They're useful for datums and redeemers with differing content.
 
-```go, noplaypen
+```rust, noplaypen
 enum FanSetting {
     On{ speed: Int },
     Off{}
 }
+
+// Instantiating an Enum
+current_setting: FanSetting = FanSetting::On { speed: 5 };
+
+// Enums also have type inference for literals
+current_setting = FanSetting::On { speed: 5 };
+
 ```
 
-### The `switch` expression 
+### The `'switch'` expression
 
 The `switch` expression is used to pattern-match on enum variants. It's more like a C `switch` than a Rust `match`.
 

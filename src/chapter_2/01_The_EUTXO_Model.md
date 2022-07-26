@@ -1,5 +1,8 @@
 # Understanding The eUTXO Model
 
+Before we get into any coding we need to first understand how smart contracts work on Cardano
+and how it differs from the dominant Accounts-based model.
+
 This section wouldn't be possible without [this](https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e) great blog post by the awesome [David Pryzbilla](https://github.com/dav009) and a lot of helpful feedback from [Christian Smitz]().
 
 ## Accounts Model vs eUTXO Model
@@ -72,47 +75,52 @@ For example for a simple vesting contract one could lock up some tokens in a UTX
 
 ### Pros
 
-#### Fixed Transaction Fees
+- #### Fixed Transaction Fees
 
-eUTXO contracts are deterministic this means that you can verify if a transaction will suceed and it's resource usage before posting it to the blockchain.
-This is means the transaction fees for a transaction are fixed  and can be deterministically calculated offchain.
-On Account-based blockchains transaction fees can vary **a lot**.
+  eUTXO contracts are deterministic this means that you can verify if a transaction will suceed and it's resource usage before posting it to the blockchain.
+  This is means the transaction fees for a transaction are fixed  and can be deterministically calculated offchain.
+  On Account-based blockchains transaction fees can vary **a lot**.
 
-#### Easier to Audit
+- #### Easier to Audit
 
-The **locally-scoped** nature of eUTXO contracts reduces the potential attack surface by a lot.
-This makes auditing way easier because you're auditing a **the validation** function and the space of possible outcomes is greatly reduced.
+  The **locally-scoped** nature of eUTXO contracts reduces the potential attack surface by a lot.
+  This makes auditing way easier because you're auditing a **the validation** function and the space of possible outcomes is greatly reduced.
 
-#### Concurrency
+- #### Concurrency
 
-If designed properly eUTXO smart contracts can be very parallel.
+  If designed properly eUTXO smart contracts can be very parallel.
 
-#### Better for Layer 2s
+- #### Better for Layer 2s
 
-The local nature of UTXOs lends itself well to building Layer 2 scaling solutions
-such as sidechains(Milkomeda), state channels
+  The local nature of UTXOs lends itself well to building Layer 2 scaling solutions
+  such as sidechains(Milkomeda), state channels
 
-#### Simpler
+- #### Simpler
 
-Though not immediately obvious eUTXO smart contracts are often simpler than an equivalent Solidity smart contract.
+  Though not immediately obvious eUTXO smart contracts are often simpler than an equivalent Solidity smart contract.
 
-#### No Reentrancy Attacks
+- #### No Reentrancy Attacks
 
-Reentrancy attacks such as the [DAO hack](https://en.wikipedia.org/wiki/The_DAO_(organization)).
+  Reentrancy attacks such as the [DAO hack](https://en.wikipedia.org/wiki/The_DAO_(organization)).
 
 ### Cons
 
-- **Concurrency Issues**: If eUTXO contracts aren't designed properly they can encounter **contention**. **Contention** occurs when two transaction try
-to spend the same UTXO, this isn't possible and leads to UX issues.
-This is not usually an issue on Ethereum as the EVM usually handles ordering smart contract calls.
+- #### Contention
 
-    It's best to keep this in mind when designing smart contracts.
+  If eUTXO contracts aren't designed properly they can encounter *contention*.
+  Contention occurs when two transaction try to spend the same UTXO,
+  this isn't possible and leads to UX issues like in the case of [Minswap in the past]().
+  This is not usually an issue on Ethereum as the EVM usually handles ordering smart contract calls.
+
+  >**Note**: There are ways to take advantage of the avoid contention and take advantage of
+  > the parallel nature of UTXOs instead of struggling with the such as SundaeSwap's [scooper model]().
+  >
+  > These approaches usually use *offchain batching* to execute 'batches' of UTXOs in a single efficient transaction.
+  > This can be done trustlessy as a UTXO can't be spent in a transaction unless it's validator is satisfied.
 
 ## Summary
 
 It's totally normal if you're still confused about eUTXO it's not immediately intuitive.
-In eUTXO smart contracts are more about specifying the requirements for tokens to be spent.
-It is worth the extra effort as it often leads to contracts that are simpler overall.
+It is worth the extra effort in rewiring you're thinking as it often leads to contracts that are simpler and safer overall.
 
-I advise your read the article linked at the top even if you understand eUTXO, it's
-written for the Ergo blockchain but a lot of the concepts carry over into cardano.
+I advise you to read [this article](https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e) top even if you understand eUTXO, it's written for the Ergo blockchain but a lot of the concepts carry over into cardano.
