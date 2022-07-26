@@ -72,7 +72,7 @@ const evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6];
 ### 2. Functions can be returned from functions
 
 ```rust, noplaypen
-const add = (a: Int) -> (Int) -> Int { (b: Int) -> Inr { a + b } };
+const add = (a: Int) -> (Int) -> Int { (b: Int) -> Int { a + b } };
 ```
 
 > **Note:** Ok I *kind of* lied when I told you that Helios has first-class functions,

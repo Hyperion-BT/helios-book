@@ -14,12 +14,12 @@ struct Rational {
 }
 
 // Instantiating a struct
-x: Rational = Rational { top: 1, bottom: 3 }
+const x: Rational = Rational { top: 1, bottom: 3 }
 
 // OR
 
 // Type is inferred for struct literals
-x = Rational { top: 1, bottom: 3 }
+const x = Rational { top: 1, bottom: 3 }
 ```
 
 ## Enums
@@ -35,10 +35,10 @@ enum FanSetting {
 }
 
 // Instantiating an Enum
-current_setting: FanSetting = FanSetting::On { speed: 5 };
+const current_setting: FanSetting = FanSetting::On { speed: 5 };
 
 // Enums also have type inference for literals
-current_setting = FanSetting::On { speed: 5 };
+const current_setting = FanSetting::On { speed: 5 };
 
 ```
 

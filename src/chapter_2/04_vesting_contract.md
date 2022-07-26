@@ -47,8 +47,8 @@ A 'Claim' occurs when the 'beneficiary'
 
 ```go, noplaypen
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
-    tx: Tx = context.tx;
-    tx_valid_range: TimeRange = tx.time_range;
+    const tx: Tx = context.tx;
+    const tx_valid_range: TimeRange = tx.time_range;
 
     match (redeemer) {
         case Redeemer::Cancel {
@@ -88,8 +88,8 @@ enum Redeemer {
 }
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
-    tx: Tx = context.tx;
-    tx_valid_range: TimeRange = tx.time_range;
+    const tx: Tx = context.tx;
+    const tx_valid_range: TimeRange = tx.time_range;
 
     match (redeemer) {
         case Redeemer::Cancel {
