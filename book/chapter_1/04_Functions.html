@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">2.3.</strong> Blockchain Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html" class="active"><strong aria-hidden="true">2.4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.5.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.6.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.8.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html" class="active"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../helios_builtins/Blockchain_Types.html"><strong aria-hidden="true">4.1.</strong> Blockchain Types</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -150,7 +150,7 @@ Helios has no <code>return</code> statement, the last expression in a function i
     a + b 
 }
 </code></pre>
-<p>Helios has recursion recursion as you'd expect.</p>
+<p>Helios has recursion as you'd expect.</p>
 <pre><code class="language-go  noplaypen">func fib(n: Int) -&gt; Int {
     // Helios is expression based so the branches of an if/else loop return expressions.
     if (n &lt; 1) {
@@ -160,11 +160,33 @@ Helios has no <code>return</code> statement, the last expression in a function i
     }
 }
 </code></pre>
+<blockquote>
+<p><strong>Note</strong>:Functions can only reference themselves.
+There is no global hoisting of <code>func</code> and other statements like in javascript.
+So there is no mutual recursion using func statements directly as a function can only reference
+other functions defined before it.</p>
+<pre><code class="language-go  noplaypen">01 func a(n: Int) -&gt; Int {
+02    ...
+03     b(n)                    // This won't work
+04 }
+05
+06 func b(n: Int) -&gt; Int {
+07     ...
+08     a(n)                   // This will work
+09 }
+</code></pre>
+</blockquote>
 <h2 id="lambdaanonymous-functions"><a class="header" href="#lambdaanonymous-functions">Lambda/Anonymous Functions</a></h2>
 <p>Helios also has support for anonymous functions without needing the <code>func</code> keyword.
-This is for convenience when using higher order functions.</p>
-<pre><code class="language-rust  noplaypen">// Anonymous functions with typing
-is_even: (Int) -&gt; Bool = (n: Int) { (n % 2) == 0 };
+This is for convenience when using higher order functions.
+Lambdas also have some type inference as on they don't need type annotations on
+the <em>left</em> side of their declaration.</p>
+<pre><code class="language-rust  noplaypen">// Lambda with full typing
+const is_even: (Int) -&gt; Bool = (n: Int) -&gt; Bool { (n % 2) == 0 };
+
+// Lambda without type inference
+// Note: Return type must still be specified
+const is_even = (n: Int) -&gt; Bool { (n % 2) == 0 };
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong> Normal Functions should be chosen when possible for better clarity.</p>
@@ -172,35 +194,39 @@ is_even: (Int) -&gt; Bool = (n: Int) { (n % 2) == 0 };
 <h2 id="first-class-functions"><a class="header" href="#first-class-functions">First-Class Functions</a></h2>
 <p>Functions are first-class citizens in Helios that means:</p>
 <h3 id="1-functions-can-be-passed-as-arguments"><a class="header" href="#1-functions-can-be-passed-as-arguments">1. Functions can be passed as arguments</a></h3>
-<pre><code class="language-ts  noplaypen">evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
+<pre><code class="language-ts  noplaypen">const evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
 </code></pre>
 <h3 id="2-functions-can-be-returned-from-functions"><a class="header" href="#2-functions-can-be-returned-from-functions">2. Functions can be returned from functions</a></h3>
-<pre><code class="language-rust  noplaypen">add: (Int) -&gt; (Int) -&gt; Int = (a: Int) { (b: Int) { a + b } };
+<pre><code class="language-rust  noplaypen">const add = (a: Int) -&gt; (Int) -&gt; Int { (b: Int) -&gt; Int { a + b } };
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong> Ok I <em>kind of</em> lied when I told you that Helios has first-class functions,
 functions can't be stored in lists or structs so they aren't <strong>technically</strong> first-class.</p>
 </blockquote>
 <h2 id="example-collatz-sequence-function-"><a class="header" href="#example-collatz-sequence-function-">Example: Collatz Sequence function :)</a></h2>
-<p>A Collatz' sequence starts with a random number, n and follows very simple rules to decide the next number in the sequence.</p>
+<p>One of my favourite things in maths is the Collatz sequence.
+A Collatz sequence starts with a random number, n
+and follows <strong>three</strong> very simple rules to decide the next number in the sequence.</p>
 <ul>
 <li>If n is 1 the sequence is over.</li>
 <li>If n is even the next number is n / 2.</li>
 <li>If n is odd the next number is (n * 3) + 1.</li>
 </ul>
-<pre><code class="language-go  noplaypen">func collatz(current: Int, accumulator: []Int) -&gt; []Int {
+<p>It is an open question in math whether there is a Collatz sequence that doesn't end with the number 1.
+We can write a simple function to generate the Collatz sequence (as a list of <code>Int</code>s) from a given starting number.</p>
+<pre><code class="language-go  noplaypen">func collatz(initial: Int, previous_numbers: []Int) -&gt; []Int {
 
     // Rule (1)
-    if (current == 1) {
-        accumulator.prepend(current) 
+    if (intial == 1) {
+        previous_numbers.prepend(current) 
 
     // Rule (2)
-    } else if (current % 2 == even) {
-        collatz((current / 2), accumulator.prepend(current))
+    } else if (initial % 2 == 0) {
+        collatz(current / 2, previous_numbers.prepend(current))
 
     // Rule (3)
     } else {
-        collatz(((current * 3) + 1), accumulator.prepend(current))      
+        collatz(intial * 3 + 1, previous_numbers.prepend(intial))      
     }
 }
 </code></pre>
@@ -209,7 +235,7 @@ functions can't be stored in lists or structs so they aren't <strong>technically
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../chapter_1/03_Blockchain_Types.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../chapter_1/02_Builtin_Types.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
@@ -223,7 +249,7 @@ functions can't be stored in lists or structs so they aren't <strong>technically
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../chapter_1/03_Blockchain_Types.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../chapter_1/02_Builtin_Types.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
@@ -234,22 +260,6 @@ functions can't be stored in lists or structs so they aren't <strong>technically
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

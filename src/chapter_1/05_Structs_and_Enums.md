@@ -14,7 +14,12 @@ struct Rational {
 }
 
 // Instantiating a struct
-x: Rational = Rational { top: 1, bottom: 3 }
+const x: Rational = Rational { top: 1, bottom: 3 }
+
+// OR
+
+// Type is inferred for struct literals
+const x = Rational { top: 1, bottom: 3 }
 ```
 
 ## Enums
@@ -23,16 +28,23 @@ Enums are used to represent types that have multiple variants.
 Enums are also known as `sum types`.
 They're useful for datums and redeemers with differing content.
 
-```go, noplaypen
+```rust, noplaypen
 enum FanSetting {
     On{ speed: Int },
     Off{}
 }
+
+// Instantiating an Enum
+const current_setting: FanSetting = FanSetting::On { speed: 5 };
+
+// Enums also have type inference for literals
+const current_setting = FanSetting::On { speed: 5 };
+
 ```
 
-### The `switch` expression 
+### The `'switch'` expression
 
-The `switch` expression is used to pattern-match on enum variants.
+The `switch` expression is used to pattern-match on enum variants. It's more like a C `switch` than a Rust `match`.
 
 ```rust, noplaypen
 enum Datum {
@@ -44,10 +56,10 @@ enum Datum {
 switch (expr) {
     case (x: Datum::Submission) { // double-colon to reference the sub-type
         ... // expression must use x
-    },
+    }
     case Datum::Queue {
         ... // x not used, so can't be declared
-    },
+    }
     default { // default must come last if all sub-types of Datum aren't handled explicitely
         true
     }

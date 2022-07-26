@@ -17,12 +17,15 @@ From the variable declaration above we can tell about `num`:
 
 ## Type Annotations
 
-A variable declaration must contain a *type annotation.*.
+A variable declaration must contain a *type annotation.*, unless it's right hand side is a literal.
 This is done not just for helping the compiler but also to make Helios code more readable. A few more example of type annotations.
 
 ```rust, noplaypen
-a_string: String = "something cool";
-a_list_of_fib_ints: []Int = []Int{1, 1, 2, 3, 5};
+list_of_ints = []Int{1, 1, 2, 3, 5};
+
+// Instead of
+
+list_of_ints: []Int = []Int{1, 1, 2, 3, 5};
 ```
 
 ## Constants
@@ -30,7 +33,9 @@ a_list_of_fib_ints: []Int = []Int{1, 1, 2, 3, 5};
 Helios has support for compile time constansts, constants are declared using the `const` keyword and must be named in all caps:
 
 ```rust, noplaypen
-const AGE: Int = 2132;
+const AGE = 2132;
 ```
 
-> **Note**: Constants can't be set to the result of an `if`/`else` expression because the value needs to be known at compile time.
+It's best practice to use `const` for all top-level assignments and all variables known at compile-time.
+
+> **Note**: Constants are statements can only be set to the result of an `if`/`else` expression if the `if`/`else` expression evaluates to something constant.

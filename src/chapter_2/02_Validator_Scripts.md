@@ -13,23 +13,68 @@ A simple validator
 ```rust
 validator always_true;       // -------- (1)
 
-struct DummyRedeemer {..}
+struct Datum {..}           // --------- (2)
 
-struct DummyDatum {..}
-
-func main(redeemer: DummyRedeemer, datum: DummyDatum, ctx: ScriptContext) -> Bool {       
+enum Redeemer {..}          // --------- (3)
+                            
+// ------------- (4)
+func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {
     ...
     true                     
 }
 ```
 
-(1) In Helios all scripts start with a  **script purpose** followed by the name of the script. There are three(3) script purposes currently:
+## Script Purpose
+
+In Helios all scripts start with a  **script purpose**, followed by the name of the script. There are three (3) script purposes currently:
 
 - **validator**
 - **minting_policy**
 - **test**
 
 We will cover the latter two in later chapters.
+
+```rust, noplaypen
+validator always_true;
+```
+
+## The Main Function
+
+The main function of a validator accepts three arguments and returns a `Bool`:
+
+- **The Datum** (2)
+- **The Redeemer** (3)
+- **The ScriptContext**
+
+```go, noplaypen
+struct Datum {..}
+
+struct Redeemer {..}
+
+func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
+    ...
+    true
+}
+```
+
+>**Note**: The Datum and the Redeemer are user-defined types (structs or enums) that **must** be named `Datum` and `Redeemer`.
+
+## AlwaysTrue Validator
+
+```go, noplaypen
+validator always_true;
+
+struct Datum {..}
+
+struct Redeemer {..}
+
+func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
+    ...
+    true
+}
+```
+
+## Omitting The Datum and The Redeemer
 
 The above validator could be rewritten as:
 
@@ -42,6 +87,7 @@ func main(ctx: ScriptContext) -> Bool {        // -------- (2)
 }
 ```
 
-**Note**: The Helios compiler is smart enough to fill in a blank redeemer and datum when they are omitted(2).
+>**Note**: The Helios compiler is smart enough to fill in a blank redeemer and datum when they are omitted.
 
-The next page cover the ScriptContext.
+Most of the data needed for writing usefull validators is contained in the `ScriptContext`.
+We will cover the `ScriptContext` in the next page.

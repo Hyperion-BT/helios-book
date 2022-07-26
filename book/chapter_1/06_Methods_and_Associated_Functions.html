@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">2.3.</strong> Blockchain Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.5.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html" class="active"><strong aria-hidden="true">2.6.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.8.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html" class="active"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../helios_builtins/Blockchain_Types.html"><strong aria-hidden="true">4.1.</strong> Blockchain Types</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,57 +142,70 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="methods-and-associated-functions"><a class="header" href="#methods-and-associated-functions">Methods and Associated Functions</a></h2>
+                        <h1 id="methods-and-associated-functions"><a class="header" href="#methods-and-associated-functions">Methods and Associated Functions</a></h1>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
-<p>Structs and Enums in Helios have methods with syntax much like OOP languages. Methods are declared within <code>impl</code> blocks.</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>struct Rational {
+<p>Structs and Enums in Helios have methods with syntax much like OOP languages. Methods are declared inside<code>impl</code> blocks like Rust.</p>
+<pre><code class="language-rust  noplaypen">struct Rational {
     top: Int,
     bottom: Int
 }
 
 impl Rational {
     // Methods take an argument 'self' of the same type of the Struct
-
     func add(self: Rational, rhs: Rational) -&gt; Rational {
         top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
         bottom: Int = self.bottom * rhs.bottom;
+
+        Rational { top: top, bottom: bottom }
     }
 }
 
-// Methods can be accessed using regular dot notation.
 example_rational: Rational = Rational { top: 7, bottom: 21};
-example-rational.add(example_rational)
-<span class="boring">}
-</span></code></pre></pre>
-<p><strong>Note:</strong> Methods cannot modify the struct as all <code>Helios</code> values are immutable. Methods are just syntactic sugar for regular functions, they are desugared into regular function calls:</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>rational_1.add(rational_2); // Becomes __user__Rational_add(rational_1, rational_2)
-<span class="boring">}
-</span></code></pre></pre>
+
+// Methods can be accessed using regular dot notation.
+example_rational.add(example_rational)
+</code></pre>
+<p>Methods cannot modify the struct as all <code>Helios</code> values are immutable.</p>
+<p>Methods are just syntactic sugar.
+They desugar to a <strong>curried function</strong> (a function that returns a function) that takes the <code>self</code> type as it's first argument:</p>
+<pre><code class="language-rust  noplaypen">// This:
+rational_1.add(rational_2); 
+// Becomes __user__Rational_add(rational_1)(rational_2)
+// of type (Rational) -&gt; (Rational) -&gt; Rational
+
+
+// 'rational.add' returns a function of type ((Rational) -&gt; Rational) 
+// the first '(Rational) -&gt;' in 'add' is set to rational_1
+// that can be used immediately or stored like any other value.
+const add_to_rational_1: (Rational) -&gt; Rational = rational_1.add;
+
+// Note: add_to_rational_1(rational_2) == rational_1.add(rational_2)
+</code></pre>
 <h2 id="associated-functions-and-constants"><a class="header" href="#associated-functions-and-constants">Associated Functions and Constants</a></h2>
-<p>Associated functions and constants are just like regular constants or functions but they're are namespaced by the Type. E.g Car::new(a, b, c).</p>
-<pre><pre class="playground"><code class="language-rust">
+<p>Associated functions and constants are just like regular constants or functions but they're are namespaced by a Type. E.g Car::new(a, b, c).</p>
+<h3 id="defining-associated-functions"><a class="header" href="#defining-associated-functions">Defining Associated Functions</a></h3>
+<p>Associated functions are defined just like methods but without the <code>self</code> argument.</p>
+<pre><pre class="playground"><code class="language-rust  playpen">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>impl Rational {
 
-    const RANDOM_CONSTANTS: Int = 1231;
+    const PI = Rational{355, 113};
 
     func new(top: Int, bottom: Int) -&gt; Rational {
         Rational { top: top, bottom: bottom }
     }
 
 }
-
-test_car: Car = Car::new(&quot;Model 3&quot;,  0, 0);
-trace(Car::RANDOM_CONSTANTS == 1232, &quot;Never log&quot;);
 <span class="boring">}
 </span></code></pre></pre>
+<h3 id="using-associated-functions-and-constants"><a class="header" href="#using-associated-functions-and-constants">Using Associated Functions and Constants</a></h3>
+<p>Associated Functions and Constants are <em>namespaced</em> by the type they are associated with
+and can be accessed using two colons <code>::</code> just like in Rust.
+For example:</p>
+<pre><code class="language-rust  noplaypen">// Using Associated functions
+fifty_fifty: Rational = Rational::new(1, 2)
+</code></pre>
 <h2 id="finished-code"><a class="header" href="#finished-code">Finished Code</a></h2>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -212,14 +225,20 @@ impl Rational {
     func add(self: Rational, rhs: Rational) -&gt; Rational {
         top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
         bottom: Int = self.bottom * rhs.bottom;
+
+        Rational { top: top, bottom: bottom }
     }
 
 }
 
-rational_1: Rational = Rational::new(1, 5); // 1/5 or 0.2
-rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
+const rational_1: Rational = Rational::new(1, 5); // 1/5 or 0.2
+const rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
 
-res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
+const res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
+
+// Using Associated functions
+const fifty_fifty: Rational = Rational::new(1, 2) // 1/2 or 0.5
+
 <span class="boring">}
 </span></code></pre></pre>
 
@@ -252,22 +271,6 @@ res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

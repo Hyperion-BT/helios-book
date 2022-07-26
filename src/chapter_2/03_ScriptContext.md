@@ -1,13 +1,16 @@
 # The ScriptContext
 
-The ScriptContext is a wrapper around a `Tx` struct that holds some useful metadata.
+The `ScriptContext` contains all the data about the transaction and is usually the most important argument in determining whether a `validator` should suceed or fail.
+Because of how important it is we are going to try to go fairly deep into it's internals in this chapter.
+
+This is roughly the internal implementation of the `ScriptContext` struct.
 
 ```rust
 struct ScriptContext {
     tx: Tx
 }
 
-// Useful Methods
+// Some useful methods
 impl ScriptContext {
     // Serializes the ScriptContext to a ByteArray.
     func serialize(self) -> ByteArray;
@@ -20,11 +23,13 @@ impl ScriptContext {
 }
 ```
 
-## The `Tx` Struct
+Internally `ScriptContext` is a wrapper around the `Tx` struct, the `Tx` holds the metadata of a signed onchain transaction.
+
+## Tx
 
 The `Tx` struct stores the data on the current transaction.
 
-```rust
+```rust, noplaypen
 struct Tx {
     id: TxId,
     inputs: []TxInput,          // Transaction inputs
@@ -34,6 +39,7 @@ struct Tx {
     signatories: []PubKeyHash,  // Signatories of the transaction
 }
 
+// Some useful methods
 impl Tx {
     func serialize(self) -> ByteArray;
 
@@ -48,17 +54,28 @@ impl Tx {
 
 ```
 
-```rust
+## TxInput
+
+The `TxInput` struct as you've probably guessed represents a **Transaction Input**.
+As you can see a **Transaction Input** is a just a wrapper around UTXO created by a previous transaction on the blockchain.
+
+```rust, noplaypen
 struct txInput {
-    output_id: Int,
-    output: TxOutput
+    output_id: Int,       // ID of the UTXO
+    output: TxOutput      // UTXO being use
 }
 ```
 
-```rust
+## TxOutput
+
+The `TxOutput` represents a **Transaction Output** this is a **UTXO(Unspent Transaction Output)** that will be created by this transaction.
+
+```rust, noplaypen
 struct TxOutput {
-    address: PubKeyHash,
-    value: Value,
-    datum_hash:  ByteArray
+    address: Address,             // Address of the UTXO
+    value: Value,                 // Value in the UTXO
+    datum_hash:  ByteArray        // Hash of the UTXO's datum
 }
 ```
+
+>**Note**: For more info on the `Address` and `Value` types check out [Helios Builtins](../helios_builtins/Helios_Builtins.md) 🙂.

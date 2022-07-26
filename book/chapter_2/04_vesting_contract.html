@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Project #1: Vesting Contract - The Helios Programming Language</title>
+        <title>Example 1: Vesting Contract - The Helios Programming Language</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Blockchain_Types.html"><strong aria-hidden="true">2.3.</strong> Blockchain Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.4.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.5.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.6.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.8.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html" class="active"><strong aria-hidden="true">3.4.</strong> Project #1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html" class="active"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../helios_builtins/Blockchain_Types.html"><strong aria-hidden="true">4.1.</strong> Blockchain Types</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -144,23 +144,107 @@
                     <main>
                         <h1 id="vesting-contract"><a class="header" href="#vesting-contract">Vesting Contract</a></h1>
 <p>To put what we've done so far to use we're going to build a simple 'vesting' contract.
-This contract will lock up some tokens for</p>
-<pre><pre class="playground"><code class="language-rust">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>enum VestingRedeemer {
-    Cancel{},
-    Collect{}
+This contract will lock up some tokens owned by an <strong>owner</strong>
+for a <strong>beneficiary</strong> that can't be claimed until after a <strong>deadline</strong>.
+The <strong>owner</strong> can get their funds back if the <strong>deadline</strong> has not passed yet</p>
+<h2 id="the-datum"><a class="header" href="#the-datum">The Datum</a></h2>
+<p>The Datum stores the <code>PubKeyHash</code> of the <strong>beneficiary</strong> and <strong>creator</strong>'s wallets and the vesting deadline, represented as a <code>Time</code>.</p>
+<pre><code class="language-rust  noplaypen">struct Datum {
+    creator: PubKeyHash,
+    beneficiary: PubKeyHash,
+    deadline: Time
 }
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: The <code>Time</code> type represents a POSIX time and 
+for more info <a href="../helios_builtins/Helios_Builtins.html">Helios Builtins</a>.</p>
+</blockquote>
+<h2 id="the-redeemer"><a class="header" href="#the-redeemer">The Redeemer</a></h2>
+<pre><code class="language-rust  noplaypen">enum Redeemer {
+    Cancel {},
+    Claim {}
+}
+</code></pre>
+<p>There are two cases when the validator should return <code>true</code>:</p>
+<ul>
+<li>
+<p><strong>Cancel</strong></p>
+<p>In this case the 'owner' wishes to cancel to the contract and get back their funds.
+For a Cancel to suceed the following have to be checked</p>
+<ul>
+<li>The owner signed the transaction.</li>
+<li>The deadline hasn't passed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Vesting Claim</strong></p>
+<p>A 'Claim' occurs when the 'beneficiary' wishes to claim the tokens vested for them.
+For it to be valid the following have to be checked:</p>
+<ul>
+<li>The beneficiary signed the transaction.</li>
+<li>The deadline has passed.</li>
+</ul>
+</li>
+</ul>
+<h2 id="the-main-function"><a class="header" href="#the-main-function">The Main Function</a></h2>
+<pre><code class="language-go  noplaypen">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
+    const tx: Tx = context.tx;
+    const tx_valid_range: TimeRange = tx.time_range;
 
-struct VestingDatum {
+    match (redeemer) {
+        case Redeemer::Cancel {
+            tx_valid_range.is_before(datum.deadline) &amp;&amp; // Check that deadline hasn't passed
+            tx.is_signed_by(datum.owner)
+        },
+        case Redeemer::Claim {
+           // Check that deadline has passed.
+           tx_valid_range.is_after(datum.deadline) &amp;&amp;
+           // Check that the beneficiary signed the transaction.
+           tx.is_signed_by(datum.beneficiary)
+        }
+    }
+}
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: A <code>TimeRange</code> represents a <em>range</em> of time using a pair of <code>Time</code> values.
+for more info <a href="../helios_builtins/Helios_Builtins.html">Helios Builtins</a>.</p>
+</blockquote>
+<blockquote>
+<p><strong>PS</strong>: There is a <em>possible</em> security vulnerability in this contract that we will examine in a later chapter.
+See if  you can find it 🙂.</p>
+</blockquote>
+<h2 id="finished-code"><a class="header" href="#finished-code">Finished Code</a></h2>
+<pre><code class="language-go  noplaypen">validator vesting;
+
+struct Datum {
     creator: PubKeyHash,
     beneficiary: PubKeyHash,
     deadline: Time
 }
 
-<span class="boring">}
-</span></code></pre></pre>
+enum Redeemer {
+    Cancel {},
+    Claim {}
+}
+
+func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
+    const tx: Tx = context.tx;
+    const tx_valid_range: TimeRange = tx.time_range;
+
+    match (redeemer) {
+        case Redeemer::Cancel {
+
+            tx_valid_range.is_before(datum.deadline) &amp;&amp;
+            tx.is_signed_by(datum.owner)
+        },
+        case Redeemer::Claim {
+
+           tx_valid_range.is_after(datum.deadline) &amp;&amp;
+           tx.is_signed_by(datum.beneficiary)
+        }
+    }
+}
+</code></pre>
 
                     </main>
 
@@ -191,22 +275,6 @@ struct VestingDatum {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
