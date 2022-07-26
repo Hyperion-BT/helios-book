@@ -11,6 +11,10 @@ func add(a: Int, b: Int) -> Int {
 }
 ```
 
+>**Note**: Functions can only reference themselves.
+>There is no global hoisting of func and other statements like in javascript.
+>So there is no mutual recursion using func statements directly.
+
 Helios has recursion recursion as you'd expect.
 
 ```go, noplaypen
@@ -24,6 +28,8 @@ func fib(n: Int) -> Int {
 }
 ```
 
+>**Note**: Func
+
 ## Lambda/Anonymous Functions
 
 Helios also has support for anonymous functions without needing the `func` keyword.
@@ -31,7 +37,7 @@ This is for convenience when using higher order functions.
 
 ```rust, noplaypen
 // Anonymous functions with typing
-is_even: (Int) -> Bool = (n: Int) { (n % 2) == 0 };
+const is_even = (n: Int) -> Bool { (n % 2) == 0 };
 ```
 
 > **Note:** Normal Functions should be chosen when possible for better clarity.
@@ -43,19 +49,20 @@ Functions are first-class citizens in Helios that means:
 ### 1. Functions can be passed as arguments
 
 ```ts, noplaypen
-evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
+const evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
 ```
 
 ### 2. Functions can be returned from functions
 
 ```rust, noplaypen
-add: (Int) -> (Int) -> Int = (a: Int) { (b: Int) { a + b } };
+const add = (a: Int) -> (Int) -> Int { (b: Int) -> Inr { a + b } };
 ```
 
 > **Note:** Ok I *kind of* lied when I told you that Helios has first-class functions,
 functions can't be stored in lists or structs so they aren't **technically** first-class.
 
 ## Example: Collatz Sequence function :)
+
 A Collatz' sequence starts with a random number, n and follows very simple rules to decide the next number in the sequence.
 
 - If n is 1 the sequence is over.
@@ -70,12 +77,12 @@ func collatz(current: Int, accumulator: []Int) -> []Int {
         accumulator.prepend(current) 
 
     // Rule (2)
-    } else if (current % 2 == even) {
-        collatz((current / 2), accumulator.prepend(current))
+    } else if (current % 2 == 0) {
+        collatz(current / 2, accumulator.prepend(current))
 
     // Rule (3)
     } else {
-        collatz(((current * 3) + 1), accumulator.prepend(current))      
+        collatz(current * 3 + 1, accumulator.prepend(current))      
     }
 }
 ```

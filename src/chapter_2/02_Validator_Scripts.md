@@ -13,15 +13,21 @@ A simple validator
 ```rust
 validator always_true;       // -------- (1)
 
-struct DummyRedeemer {..}
+enum Redeemer {..}          // --------- (2)
+                            
+struct Datum {..}           // --------- (3)
 
-struct DummyDatum {..}
-
-func main(redeemer: DummyRedeemer, datum: DummyDatum, ctx: ScriptContext) -> Bool {       
+func main(
+    datum: Datum, 
+    redeemer: Redeemer, 
+    ctx: ScriptContext
+) -> Bool {                // --------- (4)  
     ...
     true                     
 }
 ```
+
+## Script Purpose
 
 (1) In Helios all scripts start with a  **script purpose** followed by the name of the script. There are three(3) script purposes currently:
 
@@ -31,7 +37,20 @@ func main(redeemer: DummyRedeemer, datum: DummyDatum, ctx: ScriptContext) -> Boo
 
 We will cover the latter two in later chapters.
 
+## The Main Function
+
+The main function of a validator accepts three arguments:
+    - **The Datum** (3)
+    - **The Redeemer** (2)
+    = **The ScriptContext**
+
+>**Note**: The Datum and the Redeemer are user-defined types with the names `Datum` and `Redeemer`.
+
+## Omitting The Datum and The Redeemer
+
 The above validator could be rewritten as:
+
+>**Note**: The Helios compiler is smart enough to fill in a blank redeemer and datum when they are omitted(2).
 
 ```rust
 validator always_true;     
@@ -42,6 +61,4 @@ func main(ctx: ScriptContext) -> Bool {        // -------- (2)
 }
 ```
 
-**Note**: The Helios compiler is smart enough to fill in a blank redeemer and datum when they are omitted(2).
-
-The next page cover the ScriptContext.
+The next page will cover the ScriptContext.

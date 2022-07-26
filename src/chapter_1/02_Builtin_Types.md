@@ -3,14 +3,17 @@
 ## Primitive Types
 
 Helios has 6 primitive types:
+
 - `Int` (an unbounded integer)
 - `Bool` (Boolean `true` or `false`)
 - `ByteArray` (array of bytes)
 - `String` (fixed-length string)
 - `List` (linked list)
+- `Option`
 - `Map` (A hashmap) [WIP]
 
 ## Int
+
 ---
 
 Helios' `Int` type represents an unbounded integer like Haskell's `Integer` type.
@@ -24,6 +27,7 @@ idk_literal: Int = 0o121;
 ```
 
 ## Bool
+
 ---
 
 The `Bool` type has two possible values: `true` or `false`. Boolean values are typically used for conditional logic or validation, for example in `if` expressions. Booleans can be negated using the negation operator (`!`),
@@ -42,6 +46,7 @@ y: Int = (false).to_int(); // y == 0
 ```
 
 ## ByteArray
+
 ---
 
 The `ByteArray` type as you've likely guessed represents an array of bytes.
@@ -57,12 +62,12 @@ result: ByteArray = (1231).serialize();
 ```
 
 ## String
+
 ---
 
-Helios strings can be declared using single (`'`) or double (`"`) quotes.
+Helios strings can be declared using double (`"`) quotes.
 
 ```ts,noplaypen
-single_quotes: String = 'Oh wow';
 double_quotes: String = "Wow I did it again";
 ```
 
@@ -77,6 +82,7 @@ result: String = string_1 + string_2; // "Helios"
 ```
 
 ## List (\[\]a)
+
 ---
 
 Helios has a list type list just like a the Haskell `List` type.
@@ -116,7 +122,38 @@ trace(fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5},
 trace(!([]Int{}).is_empty(), "Checks if a list is empty.")
 ```
 
+## Option[a]
+
+---
+
+The Helios `Option[a]` is a builtin `enum` used to represent an optional value of type `a`.
+It defined as:
+
+```rust, noplaypen
+enum Option[a] {
+    Some { a },
+    None
+}
+```
+
+### Instantiating an Option
+
+```rust, noplaypen
+some_int: Option[Int] = Option[Int]::Some::new(42);
+none_int: Option[Int] = Option[Int]::None::new();
+```
+
+### Casting an Option
+
+```go, noplaypen
+
+x: Option[Int] = Option[Int]::None::new(); // implicit upcasting
+
+y: Option[Int]::Some = Option[Int]::Some::cast(x); // will throw error internally
+```
+
 ## Map? \[WIP\]
+
 ---
 
 In future Helios might have a fleshed out `Map` data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.

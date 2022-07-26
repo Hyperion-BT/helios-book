@@ -15,6 +15,11 @@ struct Rational {
 
 // Instantiating a struct
 x: Rational = Rational { top: 1, bottom: 3 }
+
+// OR
+
+// Type is inferred for struct literals
+x = Rational { top: 1, bottom: 3 }
 ```
 
 ## Enums
@@ -32,7 +37,7 @@ enum FanSetting {
 
 ### The `switch` expression 
 
-The `switch` expression is used to pattern-match on enum variants.
+The `switch` expression is used to pattern-match on enum variants. It's more like a C `switch` than a Rust `match`.
 
 ```rust, noplaypen
 enum Datum {
@@ -44,10 +49,10 @@ enum Datum {
 switch (expr) {
     case (x: Datum::Submission) { // double-colon to reference the sub-type
         ... // expression must use x
-    },
+    }
     case Datum::Queue {
         ... // x not used, so can't be declared
-    },
+    }
     default { // default must come last if all sub-types of Datum aren't handled explicitely
         true
     }

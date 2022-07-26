@@ -16,6 +16,6 @@
   - [The EUTXO Model](./chapter_2/01_The_EUTXO_Model.md)
   - [Validator Scripts](./chapter_2/02_Validator_Scripts.md)
   - [The ScriptContext](./chapter_2/03_ScriptContext.md)
-  - [Project #1: Vesting Contract](./chapter_2/04_vesting_contract.md)
+  - [Project 1: Vesting Contract](./chapter_2/04_vesting_contract.md)
 
 - [Helios Builtins](./helios_builtins/Helios_Builtins.md)
