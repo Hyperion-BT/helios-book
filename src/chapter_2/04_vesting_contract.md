@@ -56,12 +56,16 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
 
     match (redeemer) {
         case Redeemer::Cancel {
-            tx_valid_range.is_before(datum.deadline) && // Check that deadline hasn't passed
+            // Check that deadline hasn't passed
+            tx_valid_range.is_before(datum.deadline) && 
+
+            // Check that the owner signed the transaction
             tx.is_signed_by(datum.owner)
         },
         case Redeemer::Claim {
            // Check that deadline has passed.
            tx_valid_range.is_after(datum.deadline) &&
+
            // Check that the beneficiary signed the transaction.
            tx.is_signed_by(datum.beneficiary)
         }
@@ -72,7 +76,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
 >**Note**: A `TimeRange` represents a *range* of time using a pair of `Time` values.
 >for more info [Helios Builtins](../helios_builtins/Helios_Builtins.md).
 
->**PS**: There is a *possible* security vulnerability in this contract that we will examine in a later chapter.
+>**P.S.**: There is a *possible* security vulnerability in this contract that we will examine in a later chapter.
 >See if  you can find it 🙂.
 
 ## Finished Code

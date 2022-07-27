@@ -26,7 +26,7 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {
 
 ## Script Purpose
 
-In Helios all scripts start with a  **script purpose**, followed by the name of the script. There are three (3) script purposes currently:
+In Helios all scripts start with a  **script purpose**(1), followed by the name of the script. There are three (3) script purposes currently:
 
 - **validator**
 - **minting_policy**

@@ -23,7 +23,8 @@ impl ScriptContext {
 }
 ```
 
-Internally `ScriptContext` is a wrapper around the `Tx` struct, the `Tx` holds the metadata of a signed onchain transaction.
+>**Note**: Internally `ScriptContext` is a wrapper around the `Tx` struct,
+>the `Tx` holds the metadata of a signed onchain transaction.
 
 ## Tx
 

@@ -3,7 +3,7 @@
 Before we get into any coding we need to first understand how smart contracts work on Cardano
 and how it differs from the dominant Accounts-based model.
 
-This section wouldn't be possible without [this](https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e) great blog post by the awesome [David Pryzbilla](https://github.com/dav009) and a lot of helpful feedback from [Christian Smitz]().
+This section wouldn't be possible without [this](https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e) great blog post by the awesome [David Pryzbilla](https://github.com/dav009) and a lot of helpful feedback from [Christian Schmitz](https://github.com/christianschmitz).
 
 ## Accounts Model vs eUTXO Model
 
@@ -49,12 +49,12 @@ An address can be either be derived from the hash of a user's public key (`PubKe
 
 #### Datums
 
-These are data stored onChain associated with a particular UTXO.
+These are data stored onchain associated with a particular UTXO.
 The Datum is used to store state in Smart Contracts.
 The 'e' in eUTXO comes from the Datum, this is because the addition of a datum makes the eUTXO model Turing-Complete (like Ethereum smart contracts and unlike Bitcoin Script).
 With this state anything that an account-based model can do also be done with a eUTXO-based model.
 
->**Note**: To be exact on Cardano previously the Datum couldn't be stored onChain but as of PlutusV2 we now have actual onChain(inline) datums.
+>**Note**: To be exact on Cardano previously the Datum couldn't be stored onchain but as of Plutus V2 we now have actual *onchain/inline* datums.
 
 #### Validators
 
@@ -65,7 +65,7 @@ Validators contain the 'business logic' of a smart contract.
 For example for a simple vesting contract one could lock up some tokens in a UTXO with a validator which returns `true` if the transaction is signed by the beneficiary.
 
 >**Note**: A UTXO can only be spent once. In every transaction some UTXOs are destroyed,
->**Transaction Inputs (TxInputs)** and new UTXOs are created, **Transaction Inputs**.
+>**Transaction Inputs (TxInputs)** and new UTXOs are created, **Transaction Inputs (TxOutputs)**.
 >For a transaction to be valid it must satisfy some things:
 >
 > - The total amount of tokens in the **Transaction Inputs** must be equal to those in the **Transaction Ouputs**.
