@@ -7,7 +7,7 @@ The **owner** can get their funds back if the **deadline** has not passed yet
 
 ## The Datum
 
-The Datum stores the `PubKeyHash` of the **beneficiary** and **creator**'s wallets and the vesting deadline, represented as a `Time`.
+The Datum stores the `PubKeyHash` of the **beneficiary** and **creator**'s wallets and the vesting deadline is represented as a `Time`.
 
 ```rust, noplaypen
 struct Datum {
@@ -33,8 +33,8 @@ There are two cases when the validator should return `true`:
 
 - **Cancel**
 
-  In this case the 'owner' wishes to cancel to the contract and get back their funds.
-  For a Cancel to suceed the following have to be checked
+  In this case, the 'owner' wishes to cancel the contract and get back their funds.
+  For a 'Cancel' to succeed the following have to be checked
 
   - The owner signed the transaction.
   - The deadline hasn't passed.

@@ -1,7 +1,7 @@
 # The ScriptContext
 
-The `ScriptContext` contains all the data about the transaction and is usually the most important argument in determining whether a `validator` should suceed or fail.
-Because of how important it is we are going to try to go fairly deep into it's internals in this chapter.
+The `ScriptContext` contains all the data about the transaction and is usually the most important argument in determining whether a `validator` should succeed or fail.
+Because of how important it is we are going to try to go fairly deep into the internals in this chapter.
 
 This is roughly the internal implementation of the `ScriptContext` struct.
 
@@ -58,7 +58,7 @@ impl Tx {
 ## TxInput
 
 The `TxInput` struct as you've probably guessed represents a **Transaction Input**.
-As you can see a **Transaction Input** is a just a wrapper around UTXO created by a previous transaction on the blockchain.
+As you can see a **Transaction Input** is just a wrapper around UTXO created by a previous transaction on the blockchain.
 
 ```rust, noplaypen
 struct txInput {

@@ -2,7 +2,8 @@
 
 ## Methods
 
-Structs and Enums in Helios have methods with syntax much like OOP languages. Methods are declared inside`impl` blocks like Rust.
+Structs and Enums in Helios have methods with syntax a lot like OOP languages.
+Methods are declared just like regular functions but namespaced by the type.
 
 ```rust, noplaypen
 struct Rational {
@@ -10,14 +11,12 @@ struct Rational {
     bottom: Int
 }
 
-impl Rational {
-    // Methods take an argument 'self' of the same type of the Struct
-    func add(self: Rational, rhs: Rational) -> Rational {
-        top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
-        bottom: Int = self.bottom * rhs.bottom;
+// Methods take an argument 'self' of the same type of the Struct
+func Rational::add(self: Rational, rhs: Rational) -> Rational {
+    top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
+    bottom: Int = self.bottom * rhs.bottom;
 
-        Rational { top: top, bottom: bottom }
-    }
+    Rational { top: top, bottom: bottom }
 }
 
 example_rational: Rational = Rational { top: 7, bottom: 21};
@@ -48,21 +47,18 @@ add_to_rational_1: (Rational) -> Rational = rational_1.add;
 
 ## Associated Functions and Constants
 
-Associated functions and constants are just like regular constants or functions but they're are namespaced by a Type. E.g Car::new(a, b, c).
+Associated functions and constants are just like regular constants or functions but they are namespaced by a Type.
+E.g Car::new(a, b, c).
 
 ### Defining Associated Functions
 
 Associated functions are defined just like methods but without the `self` argument.
 
 ```rust, playpen
-impl Rational {
+const Rational::PI = Rational{355, 113};
 
-    const PI = Rational{355, 113};
-
-    func new(top: Int, bottom: Int) -> Rational {
-        Rational { top: top, bottom: bottom }
-    }
-
+func Rational::new(top: Int, bottom: Int) -> Rational {
+    Rational { top: top, bottom: bottom }
 }
 ```
 
@@ -85,21 +81,19 @@ struct Rational {
     bottom: Int
 }
 
-impl Rational {
-    const RANDOM_CONSTANTS: Int = 1231;
+const Rational::RANDOM_CONSTANTS: Int = 1231;
 
-    func new(top: Int, bottom: Int) -> Rational {
-        Rational { top: top, bottom: bottom }
-    }
-
-    func add(self: Rational, rhs: Rational) -> Rational {
-        top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
-        bottom: Int = self.bottom * rhs.bottom;
-
-        Rational { top: top, bottom: bottom }
-    }
-
+func Rational::new(top: Int, bottom: Int) -> Rational {
+    Rational { top: top, bottom: bottom }
 }
+
+func Rational::add(self: Rational, rhs: Rational) -> Rational {
+    top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
+    bottom: Int = self.bottom * rhs.bottom;
+
+    Rational { top: top, bottom: bottom }
+}
+
 
 rational_1: Rational = Rational::new(1, 5); // 1/5 or 0.2
 rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
