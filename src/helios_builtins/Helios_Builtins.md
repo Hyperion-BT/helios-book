@@ -320,7 +320,7 @@ func get_spending_purpose_output_id(self: ScriptContext) -> Int;
 
 func get_current_validator_hash(self: ScriptContext) -> ByteArray;
 
-func get_current_minting_policy_hash(self: ScriptContext) -> ByteArray;)
+func get_current_minting_policy_hash(self: ScriptContext) -> ByteArray;
 
 func get_current_input(self: ScriptContext) -> TxInput;
 ```
@@ -671,9 +671,11 @@ serialize
 ### Associated Functions
  
 // TODO
-```go, noplaypen
+```rust, noplaypen
+const ADA: AssetClass;
+
+func new(policy_hash: ByteArray, token_name: ByteArray) -> AssetClass;
 ```
-ada, new
 
 ### Operators:
 
@@ -681,7 +683,7 @@ ada, new
 
 ### Methods
 
-serialize
+`serialize`
 
 ### Internal Namespace 
 
@@ -701,7 +703,8 @@ zero, lovelace, new
 
 ### Methods
 
-serialize, is_zero, get
+serialize, is_zero, get, contains
+
 hidden:      get_map_keys, merge_map_keys, get_inner_map, get_inner_map_int, add_or_subtract_inner, add_or_subtract, compare_inner, compare
 
 ### Internal Namespace 

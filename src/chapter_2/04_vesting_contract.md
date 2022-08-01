@@ -54,15 +54,15 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
     tx: Tx = context.tx;
     tx_valid_range: TimeRange = tx.time_range;
 
-    match (redeemer) {
-        case Redeemer::Cancel {
+    switch (redeemer) {
+        Redeemer::Cancel => {
             // Check that deadline hasn't passed
             tx_valid_range.is_before(datum.deadline) && 
 
             // Check that the owner signed the transaction
             tx.is_signed_by(datum.owner)
         },
-        case Redeemer::Claim {
+        Redeemer::Claim => {
            // Check that deadline has passed.
            tx_valid_range.is_after(datum.deadline) &&
 
@@ -97,17 +97,15 @@ enum Redeemer {
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
     tx: Tx = context.tx;
-    tx_valid_range: TimeRange = tx.time_range;
+    now: Time = tx.now();
 
-    match (redeemer) {
-        case Redeemer::Cancel {
-
-            tx_valid_range.is_before(datum.deadline) &&
+    switch (redeemer) {
+        Redeemer::Cancel => {
+            now.is_before(datum.deadline) &&
             tx.is_signed_by(datum.owner)
         },
-        case Redeemer::Claim {
-
-           tx_valid_range.is_after(datum.deadline) &&
+        Redeemer::Claim => {
+           now.is_after(datum.deadline) &&
            tx.is_signed_by(datum.beneficiary)
         }
     }

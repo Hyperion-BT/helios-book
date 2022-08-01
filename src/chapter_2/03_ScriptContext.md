@@ -20,6 +20,9 @@ impl ScriptContext {
 
     // Get the TxInput locked by the validator.
     func get_current_input(self) -> TxInput;
+
+    // Get the ValidatorHash of the current Validator
+    func get_current_validator_hash(self) -> ByteArray;
 }
 ```
 
@@ -50,7 +53,12 @@ impl Tx {
 
     func value_sent_to(self, addr: PubKeyHash) -> Value;
 
+    func value_locked_by(self, val_hash: ValidatorHash) -> Value
+
+    func value_locked_by_datum(self, )
+
     func is_signed_by(self, addr: PubKeyHash) -> Bool;
+
 }
 
 ```
@@ -65,6 +73,8 @@ struct txInput {
     output_id: Int,       // ID of the UTXO
     output: TxOutput      // UTXO being use
 }
+
+
 ```
 
 ## TxOutput

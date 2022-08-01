@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Blockchain Development with Helios - The Helios Programming Language</title>
+        <title>Example 2: English Auction - The Helios Programming Language</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html" class="active"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li><li class="chapter-item expanded "><a href="../chapter_2/05_english_auction.html"><strong aria-hidden="true">3.5.</strong> Example 2: English Auction</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/Native_Assets.html"><strong aria-hidden="true">4.</strong> Native Assets</a></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">5.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../helios_builtins/Blockchain_Types.html"><strong aria-hidden="true">5.1.</strong> Blockchain Types</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li><li class="chapter-item expanded "><a href="../chapter_2/05_english_auction.html" class="active"><strong aria-hidden="true">3.5.</strong> Example 2: English Auction</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/Native_Assets.html"><strong aria-hidden="true">4.</strong> Native Assets</a></li><li class="chapter-item expanded "><a href="../helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">5.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../helios_builtins/Blockchain_Types.html"><strong aria-hidden="true">5.1.</strong> Blockchain Types</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,19 +142,100 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="blockchain-programming-in-helios"><a class="header" href="#blockchain-programming-in-helios">Blockchain Programming in Helios</a></h1>
-<p>Helios is a DSL(Domain Specific Language) made for <strong>blockchain development</strong> on the Cardano blockchain.
-In the following chapters we will learn how to use Helios to write smart contracts.</p>
+                        <h1 id="english-auction"><a class="header" href="#english-auction">English Auction</a></h1>
+<p>In this example, we will rewrite the <a href="https://plutus-pioneer-program.readthedocs.io/en/latest/pioneer/week1.html">English Auction contract</a>
+from the Plutus Pioneer's program in Helios.</p>
+<p>This validator is can be used to lock assets that are to be auctioned in a UTXO.</p>
+<h2 id="the-datum"><a class="header" href="#the-datum">The Datum</a></h2>
+<pre><code class="language-go">validator english_auction;
+
+struct Datum {
+    seller:         PubKeyHash,
+    bid_asset:      AssetClass, // allow alternative assets (not just lovelace)
+    min_bid:        Int,
+    deadline:       Time,
+    for_sale:       Value,      // the asset that is being auctioned
+    highest_bid:    Int,        // initialized at 0, which signifies the auction doesn't yet have valid bids
+    highest_bidder: PubKeyHash
+}
+
+enum Redeemer {
+    Close {},
+    Bid {
+        bidder: PubKeyHash,
+        bid:    Int
+    }
+}
+
+func Datum::update_datum(self, highest_bid: Int, highest_bidder: PubKeyHash) -&gt; Datum {
+    Datum{
+        seller:         self.seller,
+        bid_asset:      self.bid_asset,
+        min_bid:        self.min_bid,
+        deadline:       self.deadline,
+        for_sale:       self.for_sale,
+        highest_bid:    highest_bid,
+        highest_bidder: highest_bidder
+    }
+}
+
+func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
+    tx: Tx = ctx.tx;
+
+    now: Time = tx.now();
+
+    validator_hash: ValidatorHash = ctx.current_validator_hash();
+
+    if (now.is_before(datum.deadline)) {
+        switch (redeemer) {
+            Redeemer::Close =&gt; false,
+            (b: Redeemer::Bid) =&gt; {
+                if (b.bid &lt; datum.min_bid) {
+                    false
+                } else if (datum.highest_bid == 0) {
+                    // first bid
+                    expected_datum: Datum = datum.update_datum(b.bid, b.bidder);
+
+                    tx.value_locked_by_datum(validator_hash, expected_datum).contains(datum.for_sale + Value::new(datum.bid_asset, b.bid))
+                } else if (b.bid &lt;= datum.highest_bid) {
+                    false
+                } else {
+                    expected_datum: Datum = update_datum(datum, b.bid, b.bidder);
+
+                    tx.value_locked_by_datum(validator_hash, expected_datum)
+                        .contains(datum.for_sale + Value::new(datum.bid_asset, b.bid)) &amp;&amp;
+                    tx.value_sent_to(datum.highest_bidder)
+                        .contains(Value::new(datum.bid_asset, datum.highest_bid))
+                }
+            }
+        }
+    } else {
+        // after deadline -&gt; must close
+        switch (redeemer) {
+            Redeemer::Close =&gt; {
+                if (datum.highest_bid &lt; datum.min_bid) {
+                    // the forSale asset must return to the seller, what happens to any erroneous bid value is irrelevant
+                    tx.value_sent_to(datum.seller).contains(datum.for_sale)
+                } else {
+                    tx.value_sent_to(datum.seller).contains(Value::new(datum.bid_asset, datum.highest_bid)) &amp;&amp;
+                    tx.value_sent_to(datum.highest_bidder).contains(datum.for_sale)
+                }
+            }
+            default =&gt; false
+        }
+    }
+}
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../chapter_1/08_Control_Flow_and_Printing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../chapter_2/04_vesting_contract.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../chapter_2/01_The_EUTXO_Model.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../chapter_3/Native_Assets.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -164,11 +245,11 @@ In the following chapters we will learn how to use Helios to write smart contrac
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../chapter_1/08_Control_Flow_and_Printing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../chapter_2/04_vesting_contract.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../chapter_2/01_The_EUTXO_Model.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../chapter_3/Native_Assets.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

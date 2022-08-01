@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li></ol></li><li class="chapter-item expanded "><a href="helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">4.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="helios_builtins/Blockchain_Types.html"><strong aria-hidden="true">4.1.</strong> Blockchain Types</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="chapter_1/06_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li><li class="chapter-item expanded "><a href="chapter_2/05_english_auction.html"><strong aria-hidden="true">3.5.</strong> Example 2: English Auction</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_3/Native_Assets.html"><strong aria-hidden="true">4.</strong> Native Assets</a></li><li class="chapter-item expanded "><a href="helios_builtins/Helios_Builtins.html"><strong aria-hidden="true">5.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="helios_builtins/Blockchain_Types.html"><strong aria-hidden="true">5.1.</strong> Blockchain Types</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -339,11 +339,11 @@ This is for convenience when using higher order functions.
 Lambdas also have some type inference as on they don't need type annotations on
 the <em>left</em> side of their declaration.</p>
 <pre><code class="language-rust  noplaypen">// Lambda with full typing
-const is_even: (Int) -&gt; Bool = (n: Int) -&gt; Bool { (n % 2) == 0 };
+is_even: (Int) -&gt; Bool = (n: Int) -&gt; Bool { (n % 2) == 0 };
 
 // Lambda without type inference
 // Note: Return type must still be specified
-const is_even = (n: Int) -&gt; Bool { (n % 2) == 0 };
+is_even = (n: Int) -&gt; Bool { (n % 2) == 0 };
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong> Normal Functions should be chosen when possible for better clarity.</p>
@@ -351,10 +351,10 @@ const is_even = (n: Int) -&gt; Bool { (n % 2) == 0 };
 <h2 id="first-class-functions"><a class="header" href="#first-class-functions">First-Class Functions</a></h2>
 <p>Functions are first-class citizens in Helios that means:</p>
 <h3 id="1-functions-can-be-passed-as-arguments"><a class="header" href="#1-functions-can-be-passed-as-arguments">1. Functions can be passed as arguments</a></h3>
-<pre><code class="language-ts  noplaypen">const evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
+<pre><code class="language-ts  noplaypen">evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); // [2, 4. 6]; 
 </code></pre>
 <h3 id="2-functions-can-be-returned-from-functions"><a class="header" href="#2-functions-can-be-returned-from-functions">2. Functions can be returned from functions</a></h3>
-<pre><code class="language-rust  noplaypen">const add = (a: Int) -&gt; (Int) -&gt; Int { (b: Int) -&gt; Int { a + b } };
+<pre><code class="language-rust  noplaypen">add = (a: Int) -&gt; (Int) -&gt; Int { (b: Int) -&gt; Int { a + b } };
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong> Ok I <em>kind of</em> lied when I told you that Helios has first-class functions,
@@ -399,12 +399,12 @@ struct Rational {
 }
 
 // Instantiating a struct
-const x: Rational = Rational { top: 1, bottom: 3 }
+x: Rational = Rational { top: 1, bottom: 3 }
 
 // OR
 
 // Type is inferred for struct literals
-const x = Rational { top: 1, bottom: 3 }
+x = Rational { top: 1, bottom: 3 }
 </code></pre>
 <h2 id="enums"><a class="header" href="#enums">Enums</a></h2>
 <p>Enums are used to represent types that have multiple variants.
@@ -416,10 +416,10 @@ They're useful for datums and redeemers with differing content.</p>
 }
 
 // Instantiating an Enum
-const current_setting: FanSetting = FanSetting::On { speed: 5 };
+current_setting: FanSetting = FanSetting::On { speed: 5 };
 
 // Enums also have type inference for literals
-const current_setting = FanSetting::On { speed: 5 };
+current_setting = FanSetting::On { speed: 5 };
 
 </code></pre>
 <h3 id="the-switch-expression"><a class="header" href="#the-switch-expression">The <code>'switch'</code> expression</a></h3>
@@ -445,20 +445,19 @@ switch (expr) {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="methods-and-associated-functions"><a class="header" href="#methods-and-associated-functions">Methods and Associated Functions</a></h1>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
-<p>Structs and Enums in Helios have methods with syntax much like OOP languages. Methods are declared inside<code>impl</code> blocks like Rust.</p>
+<p>Structs and Enums in Helios have methods with syntax a lot like OOP languages.
+Methods are declared just like regular functions but namespaced by the type.</p>
 <pre><code class="language-rust  noplaypen">struct Rational {
     top: Int,
     bottom: Int
 }
 
-impl Rational {
-    // Methods take an argument 'self' of the same type of the Struct
-    func add(self: Rational, rhs: Rational) -&gt; Rational {
-        top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
-        bottom: Int = self.bottom * rhs.bottom;
+// Methods take an argument 'self' of the same type of the Struct
+func Rational::add(self: Rational, rhs: Rational) -&gt; Rational {
+    top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
+    bottom: Int = self.bottom * rhs.bottom;
 
-        Rational { top: top, bottom: bottom }
-    }
+    Rational { top: top, bottom: bottom }
 }
 
 example_rational: Rational = Rational { top: 7, bottom: 21};
@@ -478,25 +477,22 @@ rational_1.add(rational_2);
 // 'rational.add' returns a function of type ((Rational) -&gt; Rational) 
 // the first '(Rational) -&gt;' in 'add' is set to rational_1
 // that can be used immediately or stored like any other value.
-const add_to_rational_1: (Rational) -&gt; Rational = rational_1.add;
+add_to_rational_1: (Rational) -&gt; Rational = rational_1.add;
 
 // Note: add_to_rational_1(rational_2) == rational_1.add(rational_2)
 </code></pre>
 <h2 id="associated-functions-and-constants"><a class="header" href="#associated-functions-and-constants">Associated Functions and Constants</a></h2>
-<p>Associated functions and constants are just like regular constants or functions but they're are namespaced by a Type. E.g Car::new(a, b, c).</p>
+<p>Associated functions and constants are just like regular constants or functions but they are namespaced by a Type.
+E.g Car::new(a, b, c).</p>
 <h3 id="defining-associated-functions"><a class="header" href="#defining-associated-functions">Defining Associated Functions</a></h3>
 <p>Associated functions are defined just like methods but without the <code>self</code> argument.</p>
 <pre><pre class="playground"><code class="language-rust  playpen">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>impl Rational {
+</span>const Rational::PI = Rational{355, 113};
 
-    const PI = Rational{355, 113};
-
-    func new(top: Int, bottom: Int) -&gt; Rational {
-        Rational { top: top, bottom: bottom }
-    }
-
+func Rational::new(top: Int, bottom: Int) -&gt; Rational {
+    Rational { top: top, bottom: bottom }
 }
 <span class="boring">}
 </span></code></pre></pre>
@@ -516,29 +512,27 @@ fifty_fifty: Rational = Rational::new(1, 2)
     bottom: Int
 }
 
-impl Rational {
-    const RANDOM_CONSTANTS: Int = 1231;
+const Rational::RANDOM_CONSTANTS: Int = 1231;
 
-    func new(top: Int, bottom: Int) -&gt; Rational {
-        Rational { top: top, bottom: bottom }
-    }
-
-    func add(self: Rational, rhs: Rational) -&gt; Rational {
-        top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
-        bottom: Int = self.bottom * rhs.bottom;
-
-        Rational { top: top, bottom: bottom }
-    }
-
+func Rational::new(top: Int, bottom: Int) -&gt; Rational {
+    Rational { top: top, bottom: bottom }
 }
 
-const rational_1: Rational = Rational::new(1, 5); // 1/5 or 0.2
-const rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
+func Rational::add(self: Rational, rhs: Rational) -&gt; Rational {
+    top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
+    bottom: Int = self.bottom * rhs.bottom;
 
-const res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
+    Rational { top: top, bottom: bottom }
+}
+
+
+rational_1: Rational = Rational::new(1, 5); // 1/5 or 0.2
+rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
+
+res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
 
 // Using Associated functions
-const fifty_fifty: Rational = Rational::new(1, 2) // 1/2 or 0.5
+fifty_fifty: Rational = Rational::new(1, 2) // 1/2 or 0.5
 
 <span class="boring">}
 </span></code></pre></pre>
@@ -584,7 +578,7 @@ This is valid syntax:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>const x: Int = if (true) {
+</span>x: Int = if (true) {
             42
         } else {
             24
@@ -601,7 +595,7 @@ In the following chapters we will learn how to use Helios to write smart contrac
 <div style="break-before: page; page-break-before: always;"></div><h1 id="understanding-the-eutxo-model"><a class="header" href="#understanding-the-eutxo-model">Understanding The eUTXO Model</a></h1>
 <p>Before we get into any coding we need to first understand how smart contracts work on Cardano
 and how it differs from the dominant Accounts-based model.</p>
-<p>This section wouldn't be possible without <a href="https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e">this</a> great blog post by the awesome <a href="https://github.com/dav009">David Pryzbilla</a> and a lot of helpful feedback from <a href="chapter_2/">Christian Smitz</a>.</p>
+<p>This section wouldn't be possible without <a href="https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e">this</a> great blog post by the awesome <a href="https://github.com/dav009">David Pryzbilla</a> and a lot of helpful feedback from <a href="https://github.com/christianschmitz">Christian Schmitz</a>.</p>
 <h2 id="accounts-model-vs-eutxo-model"><a class="header" href="#accounts-model-vs-eutxo-model">Accounts Model vs eUTXO Model</a></h2>
 <p>Smart contracts on Cardano are quite different from those on Ethereum.</p>
 <h3 id="ethereum-style-smart-contracts-accounts-based-model"><a class="header" href="#ethereum-style-smart-contracts-accounts-based-model">Ethereum-style Smart Contracts (Accounts-based Model)</a></h3>
@@ -632,12 +626,12 @@ In the UTXO model only the &quot;bills&quot; that participate in a given transac
 To know the balance of a user wallets searches the ledger for all UTXOs <em>owned</em> by the user's address and their total value is the user's balance.</p>
 <p>An address can be either be derived from the hash of a user's public key (<code>PubKeyHash</code> in Helios) or the hash of a validator script (<code>ValidatorHash</code>).</p>
 <h4 id="datums"><a class="header" href="#datums">Datums</a></h4>
-<p>These are data stored onChain associated with a particular UTXO.
+<p>These are data stored onchain associated with a particular UTXO.
 The Datum is used to store state in Smart Contracts.
 The 'e' in eUTXO comes from the Datum, this is because the addition of a datum makes the eUTXO model Turing-Complete (like Ethereum smart contracts and unlike Bitcoin Script).
 With this state anything that an account-based model can do also be done with a eUTXO-based model.</p>
 <blockquote>
-<p><strong>Note</strong>: To be exact on Cardano previously the Datum couldn't be stored onChain but as of PlutusV2 we now have actual onChain(inline) datums.</p>
+<p><strong>Note</strong>: To be exact on Cardano previously the Datum couldn't be stored onchain but as of Plutus V2 we now have actual <em>onchain/inline</em> datums.</p>
 </blockquote>
 <h4 id="validators"><a class="header" href="#validators">Validators</a></h4>
 <p>A validators is a function that runs when a transaction attempts to spend a UTXO.
@@ -646,7 +640,7 @@ Validators contain the 'business logic' of a smart contract.</p>
 <p>For example for a simple vesting contract one could lock up some tokens in a UTXO with a validator which returns <code>true</code> if the transaction is signed by the beneficiary.</p>
 <blockquote>
 <p><strong>Note</strong>: A UTXO can only be spent once. In every transaction some UTXOs are destroyed,
-<strong>Transaction Inputs (TxInputs)</strong> and new UTXOs are created, <strong>Transaction Inputs</strong>.
+<strong>Transaction Inputs (TxInputs)</strong> and new UTXOs are created, <strong>Transaction Inputs (TxOutputs)</strong>.
 For a transaction to be valid it must satisfy some things:</p>
 <ul>
 <li>The total amount of tokens in the <strong>Transaction Inputs</strong> must be equal to those in the <strong>Transaction Ouputs</strong>.</li>
@@ -731,7 +725,7 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="script-purpose"><a class="header" href="#script-purpose">Script Purpose</a></h2>
-<p>In Helios all scripts start with a  <strong>script purpose</strong>, followed by the name of the script. There are three (3) script purposes currently:</p>
+<p>In Helios all scripts start with a  <strong>script purpose</strong>(1), followed by the name of the script. There are three (3) script purposes currently:</p>
 <ul>
 <li><strong>validator</strong></li>
 <li><strong>minting_policy</strong></li>
@@ -790,8 +784,8 @@ func main(ctx: ScriptContext) -&gt; Bool {        // -------- (2)
 <p>Most of the data needed for writing usefull validators is contained in the <code>ScriptContext</code>.
 We will cover the <code>ScriptContext</code> in the next page.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-scriptcontext"><a class="header" href="#the-scriptcontext">The ScriptContext</a></h1>
-<p>The <code>ScriptContext</code> contains all the data about the transaction and is usually the most important argument in determining whether a <code>validator</code> should suceed or fail.
-Because of how important it is we are going to try to go fairly deep into it's internals in this chapter.</p>
+<p>The <code>ScriptContext</code> contains all the data about the transaction and is usually the most important argument in determining whether a <code>validator</code> should succeed or fail.
+Because of how important it is we are going to try to go fairly deep into the internals in this chapter.</p>
 <p>This is roughly the internal implementation of the <code>ScriptContext</code> struct.</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
@@ -810,10 +804,16 @@ impl ScriptContext {
 
     // Get the TxInput locked by the validator.
     func get_current_input(self) -&gt; TxInput;
+
+    // Get the ValidatorHash of the current Validator
+    func get_current_validator_hash(self) -&gt; ByteArray;
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Internally <code>ScriptContext</code> is a wrapper around the <code>Tx</code> struct, the <code>Tx</code> holds the metadata of a signed onchain transaction.</p>
+<blockquote>
+<p><strong>Note</strong>: Internally <code>ScriptContext</code> is a wrapper around the <code>Tx</code> struct,
+the <code>Tx</code> holds the metadata of a signed onchain transaction.</p>
+</blockquote>
 <h2 id="tx"><a class="header" href="#tx">Tx</a></h2>
 <p>The <code>Tx</code> struct stores the data on the current transaction.</p>
 <pre><code class="language-rust  noplaypen">struct Tx {
@@ -835,17 +835,24 @@ impl Tx {
 
     func value_sent_to(self, addr: PubKeyHash) -&gt; Value;
 
+    func value_locked_by(self, val_hash: ValidatorHash) -&gt; Value
+
+    func value_locked_by_datum(self, )
+
     func is_signed_by(self, addr: PubKeyHash) -&gt; Bool;
+
 }
 
 </code></pre>
 <h2 id="txinput"><a class="header" href="#txinput">TxInput</a></h2>
 <p>The <code>TxInput</code> struct as you've probably guessed represents a <strong>Transaction Input</strong>.
-As you can see a <strong>Transaction Input</strong> is a just a wrapper around UTXO created by a previous transaction on the blockchain.</p>
+As you can see a <strong>Transaction Input</strong> is just a wrapper around UTXO created by a previous transaction on the blockchain.</p>
 <pre><code class="language-rust  noplaypen">struct txInput {
     output_id: Int,       // ID of the UTXO
     output: TxOutput      // UTXO being use
 }
+
+
 </code></pre>
 <h2 id="txoutput"><a class="header" href="#txoutput">TxOutput</a></h2>
 <p>The <code>TxOutput</code> represents a <strong>Transaction Output</strong> this is a <strong>UTXO(Unspent Transaction Output)</strong> that will be created by this transaction.</p>
@@ -864,7 +871,7 @@ This contract will lock up some tokens owned by an <strong>owner</strong>
 for a <strong>beneficiary</strong> that can't be claimed until after a <strong>deadline</strong>.
 The <strong>owner</strong> can get their funds back if the <strong>deadline</strong> has not passed yet</p>
 <h2 id="the-datum"><a class="header" href="#the-datum">The Datum</a></h2>
-<p>The Datum stores the <code>PubKeyHash</code> of the <strong>beneficiary</strong> and <strong>creator</strong>'s wallets and the vesting deadline, represented as a <code>Time</code>.</p>
+<p>The Datum stores the <code>PubKeyHash</code> of the <strong>beneficiary</strong> and <strong>creator</strong>'s wallets and the vesting deadline is represented as a <code>Time</code>.</p>
 <pre><code class="language-rust  noplaypen">struct Datum {
     creator: PubKeyHash,
     beneficiary: PubKeyHash,
@@ -885,8 +892,8 @@ for more info <a href="chapter_2/../helios_builtins/Helios_Builtins.html">Helios
 <ul>
 <li>
 <p><strong>Cancel</strong></p>
-<p>In this case the 'owner' wishes to cancel to the contract and get back their funds.
-For a Cancel to suceed the following have to be checked</p>
+<p>In this case, the 'owner' wishes to cancel the contract and get back their funds.
+For a 'Cancel' to succeed the following have to be checked</p>
 <ul>
 <li>The owner signed the transaction.</li>
 <li>The deadline hasn't passed.</li>
@@ -904,17 +911,21 @@ For it to be valid the following have to be checked:</p>
 </ul>
 <h2 id="the-main-function-1"><a class="header" href="#the-main-function-1">The Main Function</a></h2>
 <pre><code class="language-go  noplaypen">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
-    const tx: Tx = context.tx;
-    const tx_valid_range: TimeRange = tx.time_range;
+    tx: Tx = context.tx;
+    tx_valid_range: TimeRange = tx.time_range;
 
-    match (redeemer) {
-        case Redeemer::Cancel {
-            tx_valid_range.is_before(datum.deadline) &amp;&amp; // Check that deadline hasn't passed
+    switch (redeemer) {
+        Redeemer::Cancel =&gt; {
+            // Check that deadline hasn't passed
+            tx_valid_range.is_before(datum.deadline) &amp;&amp; 
+
+            // Check that the owner signed the transaction
             tx.is_signed_by(datum.owner)
         },
-        case Redeemer::Claim {
+        Redeemer::Claim =&gt; {
            // Check that deadline has passed.
            tx_valid_range.is_after(datum.deadline) &amp;&amp;
+
            // Check that the beneficiary signed the transaction.
            tx.is_signed_by(datum.beneficiary)
         }
@@ -926,7 +937,7 @@ For it to be valid the following have to be checked:</p>
 for more info <a href="chapter_2/../helios_builtins/Helios_Builtins.html">Helios Builtins</a>.</p>
 </blockquote>
 <blockquote>
-<p><strong>PS</strong>: There is a <em>possible</em> security vulnerability in this contract that we will examine in a later chapter.
+<p><strong>P.S.</strong>: There is a <em>possible</em> security vulnerability in this contract that we will examine in a later chapter.
 See if  you can find it 🙂.</p>
 </blockquote>
 <h2 id="finished-code-1"><a class="header" href="#finished-code-1">Finished Code</a></h2>
@@ -944,23 +955,162 @@ enum Redeemer {
 }
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
-    const tx: Tx = context.tx;
-    const tx_valid_range: TimeRange = tx.time_range;
+    tx: Tx = context.tx;
+    now: Time = tx.now();
 
-    match (redeemer) {
-        case Redeemer::Cancel {
-
-            tx_valid_range.is_before(datum.deadline) &amp;&amp;
+    switch (redeemer) {
+        Redeemer::Cancel =&gt; {
+            now.is_before(datum.deadline) &amp;&amp;
             tx.is_signed_by(datum.owner)
         },
-        case Redeemer::Claim {
-
-           tx_valid_range.is_after(datum.deadline) &amp;&amp;
+        Redeemer::Claim =&gt; {
+           now.is_after(datum.deadline) &amp;&amp;
            tx.is_signed_by(datum.beneficiary)
         }
     }
 }
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="english-auction"><a class="header" href="#english-auction">English Auction</a></h1>
+<p>In this example, we will rewrite the <a href="https://plutus-pioneer-program.readthedocs.io/en/latest/pioneer/week1.html">English Auction contract</a>
+from the Plutus Pioneer's program in Helios.</p>
+<p>This validator is can be used to lock assets that are to be auctioned in a UTXO.</p>
+<h2 id="the-datum-1"><a class="header" href="#the-datum-1">The Datum</a></h2>
+<pre><code class="language-go">validator english_auction;
+
+struct Datum {
+    seller:         PubKeyHash,
+    bid_asset:      AssetClass, // allow alternative assets (not just lovelace)
+    min_bid:        Int,
+    deadline:       Time,
+    for_sale:       Value,      // the asset that is being auctioned
+    highest_bid:    Int,        // initialized at 0, which signifies the auction doesn't yet have valid bids
+    highest_bidder: PubKeyHash
+}
+
+enum Redeemer {
+    Close {},
+    Bid {
+        bidder: PubKeyHash,
+        bid:    Int
+    }
+}
+
+func Datum::update_datum(self, highest_bid: Int, highest_bidder: PubKeyHash) -&gt; Datum {
+    Datum{
+        seller:         self.seller,
+        bid_asset:      self.bid_asset,
+        min_bid:        self.min_bid,
+        deadline:       self.deadline,
+        for_sale:       self.for_sale,
+        highest_bid:    highest_bid,
+        highest_bidder: highest_bidder
+    }
+}
+
+func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
+    tx: Tx = ctx.tx;
+
+    now: Time = tx.now();
+
+    validator_hash: ValidatorHash = ctx.current_validator_hash();
+
+    if (now.is_before(datum.deadline)) {
+        switch (redeemer) {
+            Redeemer::Close =&gt; false,
+            (b: Redeemer::Bid) =&gt; {
+                if (b.bid &lt; datum.min_bid) {
+                    false
+                } else if (datum.highest_bid == 0) {
+                    // first bid
+                    expected_datum: Datum = datum.update_datum(b.bid, b.bidder);
+
+                    tx.value_locked_by_datum(validator_hash, expected_datum).contains(datum.for_sale + Value::new(datum.bid_asset, b.bid))
+                } else if (b.bid &lt;= datum.highest_bid) {
+                    false
+                } else {
+                    expected_datum: Datum = update_datum(datum, b.bid, b.bidder);
+
+                    tx.value_locked_by_datum(validator_hash, expected_datum)
+                        .contains(datum.for_sale + Value::new(datum.bid_asset, b.bid)) &amp;&amp;
+                    tx.value_sent_to(datum.highest_bidder)
+                        .contains(Value::new(datum.bid_asset, datum.highest_bid))
+                }
+            }
+        }
+    } else {
+        // after deadline -&gt; must close
+        switch (redeemer) {
+            Redeemer::Close =&gt; {
+                if (datum.highest_bid &lt; datum.min_bid) {
+                    // the forSale asset must return to the seller, what happens to any erroneous bid value is irrelevant
+                    tx.value_sent_to(datum.seller).contains(datum.for_sale)
+                } else {
+                    tx.value_sent_to(datum.seller).contains(Value::new(datum.bid_asset, datum.highest_bid)) &amp;&amp;
+                    tx.value_sent_to(datum.highest_bidder).contains(datum.for_sale)
+                }
+            }
+            default =&gt; false
+        }
+    }
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="native-assets"><a class="header" href="#native-assets">Native Assets</a></h1>
+<p>One of Cardano's best features is <strong>Native Multi-Asset(NMA)</strong>.
+It's a bit of a mouthful but what this means is that on Cardano
+user-defined tokens have the same treatment as the native coin (ADA).</p>
+<p>This might not seem like a big deal but this offers serious advantages
+over Ethereum tokens (ERC-20 and ERC-721). But to understand the benefits
+you have to understand how user-defined tokens work on non-UTXO blockchains.</p>
+<h2 id="erc-20-standard"><a class="header" href="#erc-20-standard">ERC-20 Standard</a></h2>
+<p>On Ethereum, tokens are defined using the <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-20/">ERC-20 standard</a>.
+In this standard tokens are managed by a contract that stores all of the token's metadata
+and all user balances in a <code>mapping</code> (hashmap) called <code>_balances</code>.
+All transfers of an ERC-20 token are function calls to the contract to modify the <code>_balances</code>.</p>
+<p>Any error in the implementation of the ERC-20 standard can lead to the loss of user funds.</p>
+<h2 id="utxo-native-assets"><a class="header" href="#utxo-native-assets">UTXO Native Assets</a></h2>
+<p>On Cardano and other eUTXO blockchains user-defined tokens are <em>first-class</em>.
+Tokens on Cardano are stored in <strong>Token Bundles</strong> which can contain
+ADA and any native asset.
+This allows Cardano to do in one transaction what would normally take multiple
+contract calls on Ethereum.</p>
+<blockquote>
+<p><strong>Note</strong>: A <strong>Token Bundle</strong> must contain a minimum amount of ADA
+at the time of this writing this is 1 ADA.</p>
+</blockquote>
+<h3 id="minting-policies"><a class="header" href="#minting-policies">Minting Policies</a></h3>
+<p>Minting policies are a lot like validator scripts, they run when a transaction
+attempts to mint a token and return a boolean that determines whether the minting is valid.</p>
+<p>There are a few key differences:</p>
+<ul>
+<li>Minting policies are not directly linked to any UTXO
+they are included in the minting transaction directly.</li>
+<li>Minting policies take two arguments (the <code>ScriptContext</code> and the <code>Redeemer</code>)
+they have no UTXO and therefore no Datum and don't need
+a Redeemer.</li>
+</ul>
+<h3 id="assetclass"><a class="header" href="#assetclass">AssetClass</a></h3>
+<p>Native assets are identified by their <code>AssetClass</code> this is a combination of:</p>
+<ul>
+<li>
+<p><strong>It's <code>MintingPolicyHash</code></strong>
+This is simply the hash of the minting policy of the token.
+It is sometimes called the CurrencySymbol or Policy ID.</p>
+</li>
+<li>
+<p><strong>It's <code>TokenName</code></strong>
+This is an (immutable) property of an asset that is used to distinguish different assets within the same policy.</p>
+</li>
+</ul>
+<pre><code class="language-rust  noplaypen">// ADA's assetclass
+AssetClass::ADA;
+
+// Instantiating an AssetClass 
+AssetClass::new(policy_hash: ByteArray, token_name: ByteArray);
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> The MintingPolicyHash of ADA is an empty string (<code>&quot;&quot;</code>) since nothing can hash
+to an empty string ADA is the only token that can't be minted using a minting policy.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="helios-builtins"><a class="header" href="#helios-builtins">Helios Builtins</a></h1>
 <h2 id="helios-operators"><a class="header" href="#helios-operators">Helios Operators</a></h2>
 <table><thead><tr><th style="text-align: left">Operator</th><th style="text-align: left">Name</th></tr></thead><tbody>
@@ -1172,7 +1322,7 @@ func get_spending_purpose_output_id(self: ScriptContext) -&gt; Int;
 
 func get_current_validator_hash(self: ScriptContext) -&gt; ByteArray;
 
-func get_current_minting_policy_hash(self: ScriptContext) -&gt; ByteArray;)
+func get_current_minting_policy_hash(self: ScriptContext) -&gt; ByteArray;
 
 func get_current_input(self: ScriptContext) -&gt; TxInput;
 </code></pre>
@@ -1385,16 +1535,18 @@ func get_start(self: TimeRange) -&gt; Time;
 <p>serialize</p>
 <h3 id="internal-namespace-23"><a class="header" href="#internal-namespace-23">Internal Namespace</a></h3>
 <p><code>__helios__timerange</code></p>
-<h2 id="assetclass"><a class="header" href="#assetclass">AssetClass</a></h2>
+<h2 id="assetclass-1"><a class="header" href="#assetclass-1">AssetClass</a></h2>
 <hr />
 <h3 id="associated-functions-10"><a class="header" href="#associated-functions-10">Associated Functions</a></h3>
 <p>// TODO</p>
-<pre><code class="language-go  noplaypen"></code></pre>
-<p>ada, new</p>
+<pre><code class="language-rust  noplaypen">const ADA: AssetClass;
+
+func new(policy_hash: ByteArray, token_name: ByteArray) -&gt; AssetClass;
+</code></pre>
 <h3 id="operators-24"><a class="header" href="#operators-24">Operators:</a></h3>
 <p><code>__eq</code>,<code>__neq</code></p>
 <h3 id="methods-25"><a class="header" href="#methods-25">Methods</a></h3>
-<p>serialize</p>
+<p><code>serialize</code></p>
 <h3 id="internal-namespace-24"><a class="header" href="#internal-namespace-24">Internal Namespace</a></h3>
 <p><code>__helios__assetclass</code></p>
 <h2 id="value"><a class="header" href="#value">Value</a></h2>
@@ -1405,8 +1557,8 @@ zero, lovelace, new</p>
 <h3 id="operators-25"><a class="header" href="#operators-25">Operators</a></h3>
 <p><code>__eq</code>, <code>__neq</code>, <code>__add</code>, <code>__sub</code>, <code>__geq</code>, <code>__gt</code>, <code>__leq</code>, <code>__lt</code></p>
 <h3 id="methods-26"><a class="header" href="#methods-26">Methods</a></h3>
-<p>serialize, is_zero, get
-hidden:      get_map_keys, merge_map_keys, get_inner_map, get_inner_map_int, add_or_subtract_inner, add_or_subtract, compare_inner, compare</p>
+<p>serialize, is_zero, get, contains</p>
+<p>hidden:      get_map_keys, merge_map_keys, get_inner_map, get_inner_map_int, add_or_subtract_inner, add_or_subtract, compare_inner, compare</p>
 <h3 id="internal-namespace-25"><a class="header" href="#internal-namespace-25">Internal Namespace</a></h3>
 <p><code>__helios__value</code></p>
 <h2 id="common-hidden-from-user"><a class="header" href="#common-hidden-from-user">common (hidden from user)</a></h2>
@@ -1468,6 +1620,22 @@ It is defined as:</p>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

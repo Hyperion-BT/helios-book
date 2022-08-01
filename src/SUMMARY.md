@@ -16,6 +16,9 @@
   - [Validator Scripts](./chapter_2/02_Validator_Scripts.md)
   - [The ScriptContext](./chapter_2/03_ScriptContext.md)
   - [Example 1: Vesting Contract](./chapter_2/04_vesting_contract.md)
+  - [Example 2: English Auction](./chapter_2/05_english_auction.md)
+
+- [Native Assets](./chapter_3/Native_Assets.md)
 
 - [Helios Builtins](./helios_builtins/Helios_Builtins.md)
   - [Blockchain Types](./helios_builtins/Blockchain_Types.md)
