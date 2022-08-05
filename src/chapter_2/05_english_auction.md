@@ -45,7 +45,7 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {
     validator_hash: ValidatorHash = ctx.current_validator_hash();
 
     redeemer.switch {
-        Close => false,
+        Close => {
             if (datum.highest_bid < datum.min_bid) {
                 // the forSale asset must return to the seller, what happens to any erroneous bid value is irrelevant
                 tx.value_sent_to(datum.seller).contains(datum.for_sale + datum.highest_bid) &&
@@ -58,6 +58,7 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {
                 tx.value_sent_to(datum.highest_bidder).contains(datum.for_sale)                         &&
                 // Check that the deadline has passed
                 now > datum.deadline                                    
+            }
         },
         b: Bid => {
             if (b.bid < datum.min_bid) {
