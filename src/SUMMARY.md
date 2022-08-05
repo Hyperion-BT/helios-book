@@ -19,6 +19,9 @@
   - [Example 2: English Auction](./chapter_2/05_english_auction.md)
 
 - [Native Assets](./chapter_3/Native_Assets.md)
+  - [Value](./chapter_3/Value.md)
+  - [Signed Policy](./chapter_3/Signed.md)
+  - [NFT](./chapter_3/NFT.md)
 
 - [Helios Builtins](./helios_builtins/Helios_Builtins.md)
   - [Blockchain Types](./helios_builtins/Blockchain_Types.md)

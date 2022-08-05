@@ -85,9 +85,9 @@ result: String = string_1 + string_2; // "Helios"
 
 ---
 
-Helios has a list type list just like a the Haskell `List` type.
-It's type signature is `[]a` where a is the type of items in the list.
-Notably Helios list items aren't accessed using square brackets, `[]` for indexing instead the `get` method is used method is used, check out [Helios Builtins](../helios_builtins/Helios_Builtins.md/#list-a).
+Helios has a list type list just like the Haskell `List` type.
+The type signature of the list type is `[]a` where a is the type of items in the list.
+Notably, Helios list items aren't accessed using square brackets, `[]` for indexing instead the `get` method is used, check out [Helios Builtins](../helios_builtins/Helios_Builtins.md/#list-a).
 
 ```rust,noplaypen
 // A list of Integers
@@ -105,21 +105,24 @@ Helios lists have a lot of useful methods you'd normally find in other languages
 // List Methods.
 fib_list: []Int = []Int{1, 1, 2, 3, 5};
 
-trace(fib_list.len() != 5, "This will print if the length of fib_list is 8.");
+//  '.len()' returns the length of the list.
+fib_list.len() != 5;
 
-// Note: Throws error if index is out of range. 
-trace(fib_list.get(4) != 5, "This will print if the element at index 4 is 3.")
+//  '.get()' is used instead of square brackets for indexing an element in a list.
+//! Note: Throws error if index is out of range. 
+fib_list.get(4) != 5;
 
+// Returns the element at the first element in a list.
 // Note: Throws an error if list is empty.
-trace(fib_list.head() != 1, "Gets the element at the front of the list.")
+fib_list.head() != 1;
 
+// Returns the last element in a list
 // Note: Throws an error if the list is empty.
-trace(fib_list.tail() != 5, "Returns the element at the end of the list.");
+fib_list.tail() != 5;
 
-trace(fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5}, 
-    "Prepends item to the front of a list.")
+fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5};
 
-trace(!([]Int{}).is_empty(), "Checks if a list is empty.")
+[]Int{}.is_empty() == true;
 ```
 
 ## Option[a]
@@ -127,7 +130,7 @@ trace(!([]Int{}).is_empty(), "Checks if a list is empty.")
 ---
 
 The Helios `Option[a]` is a builtin `enum` used to represent an optional value of type `a`.
-It defined as:
+It's defined as:
 
 ```rust, noplaypen
 enum Option[a] {
@@ -139,8 +142,8 @@ enum Option[a] {
 ### Instantiating an Option
 
 ```rust, noplaypen
-some_int: Option[Int] = Option[Int]::Some::new(42);
-none_int: Option[Int] = Option[Int]::None::new();
+some_int: Option[Int] = Option[Int]::Some{42};
+none_int: Option[Int] = Option[Int]::None;
 ```
 
 ### Casting an Option
@@ -156,8 +159,8 @@ y: Option[Int]::Some = Option[Int]::Some::cast(x); // will throw error internall
 
 ---
 
-In future Helios might have a fleshed out `Map` data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.
+In the near future, Helios might have a fleshed-out `Map` data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.
 
 ## More Information
 
-For more information on the Builtin type check out [Builtin Types](../helios_builtins/Helios_Builtins.md).
+For more information on the Builtin type, check out [Builtin Types](../helios_builtins/Helios_Builtins.md).

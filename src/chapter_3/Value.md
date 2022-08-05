@@ -1,27 +1,32 @@
 # Value
 
-The `Value` type represents a *token bundle*.
+The `Value` type represents a *token bundle* using pairs of asset classes (`AssetClass`)  and amounts (`Int`).
 
 ```go, noplaypen
-// Associated constant that represents an empty token bundle.
-Value::ZERO;
+// The Value type is opaque (it's internals are abstracted away for developers)
+struct Value {
+    ...
 
-// Associated Functions
+    // A constant representing an empty Value.
+    const ZERO: Value
 
-Value::lovelace(amount: Int);
+    // Instantiates a Value of a given AssetClass and Amount.
+    func new(asset_class: AssetClass, amount: Int) -> Value;
 
-Value::new(asset_class: AssetClass, amount: Int);
+    // Constructs a Value containing 'amount' number of lovelaces.
+    func lovelace(amount: Int) -> Value;
 
-// Useful Methods
+    // Checks if a Value is empty.
+    func is_zero(self) -> Bool;
 
-// Checks if the Value is zero.
-func is_zero(self) -> Bool;
+    // Gets the amount of a specific AssetClass contained in a Value.
+    func get(self, asset_class: AssetClass) -> Int;
 
-// Gets the amount of an AssetClass contained in a Value.
-func get(self, asset_class: AssetClass) -> Int;
-
-// Returns 'true' if self contains other_value.
-func contains(self, other_value: Value) -> Bool;
+    // Returns 'true' if self contains other_value.
+    func contains(self, other_value: Value) -> Bool;
+}
 ```
 
 >**Note**: 1 ADA is equal to 1,000,000,000 Lovelace
+
+```go, noplaypen

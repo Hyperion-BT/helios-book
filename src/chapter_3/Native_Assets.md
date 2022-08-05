@@ -53,11 +53,15 @@ Native assets are identified by their `AssetClass` this is a combination of:
   This is an (immutable) property of an asset that is used to distinguish different assets within the same policy.
 
 ```rust, noplaypen
-// ADA's assetclass
-AssetClass::ADA;
+struct AssetClass {
+    ...
 
-// Instantiating an AssetClass 
-AssetClass::new(policy_hash: ByteArray, token_name: ByteArray);
+    // ADA's assetclass
+    const ADA: AssetClass
+
+    // Constructor
+    func new(policy_hash: ByteArray, token_name: String) -> AssetClass;
+}
 ```
 
 >**Note:** The MintingPolicyHash of ADA is an empty string (`""`) since nothing can hash

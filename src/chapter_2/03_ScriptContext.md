@@ -8,10 +8,9 @@ This is roughly the internal implementation of the `ScriptContext` struct.
 ```rust
 struct ScriptContext {
     tx: Tx
-}
 
-// Some useful methods
-impl ScriptContext {
+    // Some useful methods
+
     // Serializes the ScriptContext to a ByteArray.
     func serialize(self) -> ByteArray;
 
@@ -35,16 +34,16 @@ The `Tx` struct stores the data on the current transaction.
 
 ```rust, noplaypen
 struct Tx {
-    id: TxId,
-    inputs: []TxInput,          // Transaction inputs
-    outputs: []TxOutput,        // Transaction outputs
-    fee: Value,                 // Fee paid for this transaction
-    time_range: TimeRange,      // Valid range for this transaction
-    signatories: []PubKeyHash,  // Signatories of the transaction
-}
+    id: TxId
+    inputs: []TxInput          // Transaction inputs
+    outputs: []TxOutput        // Transaction outputs
+    fee: Value                 // Fee paid for this transaction
+    minted: Value              // Value minted by this transaction
+    time_range: TimeRange      // Valid range for this transaction
+    signatories: []PubKeyHash  // Signatories of the transaction
 
-// Some useful methods
-impl Tx {
+    // Some useful methods
+
     func serialize(self) -> ByteArray;
 
     func now(self) -> Time;
@@ -57,7 +56,8 @@ impl Tx {
 
     func value_locked_by_datum(self, )
 
-    func is_signed_by(self, addr: PubKeyHash) -> Bool;
+    // Checks if a given PubKey
+    func is_signed_by(self, pk: PubKeyHash) -> Bool;
 
 }
 
@@ -70,7 +70,7 @@ As you can see a **Transaction Input** is just a wrapper around UTXO created by 
 
 ```rust, noplaypen
 struct txInput {
-    output_id: Int,       // ID of the UTXO
+    output_id: Int       // ID of the UTXO
     output: TxOutput      // UTXO being use
 }
 
@@ -83,9 +83,9 @@ The `TxOutput` represents a **Transaction Output** this is a **UTXO(Unspent Tran
 
 ```rust, noplaypen
 struct TxOutput {
-    address: Address,             // Address of the UTXO
-    value: Value,                 // Value in the UTXO
-    datum_hash:  ByteArray        // Hash of the UTXO's datum
+    address: Address             // Address of the UTXO
+    value: Value                 // Value in the UTXO
+    datum_hash:  ByteArray       // Hash of the UTXO's datum
 }
 ```
 

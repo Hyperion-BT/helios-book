@@ -24,5 +24,5 @@ x: Int = if (true) {
         };
 ```
 
-> **Note**: Compile-time constants can only be set to the result of an `if`/`else` expression 
+> **Note**: Compile-time constants can only be set to the result of an `if`/`else` expression
 >that results in a constant value.

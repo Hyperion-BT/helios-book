@@ -18,7 +18,7 @@ Multi-line comments are declared using `/* ... */`.
 
 ## Printing
 
-For debugging purposes Helios has a `print` function.
+For debugging purposes, Helios has a `print` function.
 `print(...)` must be followed by a semicolon and another expression.
 
 ```rust

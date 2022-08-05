@@ -1,6 +1,6 @@
 # Functions
 
-Functions are at the core of Helios. All Helios functions are *pure*, this means they have no side-effects and always return the same result when given the same arguments.
+Functions are at the core of Helios. All Helios functions are *pure*, this means they have no side effects and always return the same result when given the same arguments.
 
 Functions are declared using the `func` keyword.
 Helios has no `return` statement, the last expression in a function is *implicitly returned* like in Rust.
@@ -44,8 +44,8 @@ func fib(n: Int) -> Int {
 ## Lambda/Anonymous Functions
 
 Helios also has support for anonymous functions without needing the `func` keyword.
-This is for convenience when using higher order functions.
-Lambdas also have some type inference as on they don't need type annotations on
+This is for convenience when using higher-order functions.
+Lambdas also have some type-inference as on they don't need type annotations on
 the *left* side of their declaration.
 
 ```rust, noplaypen
@@ -61,7 +61,7 @@ is_even = (n: Int) -> Bool { (n % 2) == 0 };
 
 ## First-Class Functions
 
-Functions are first-class citizens in Helios that means:
+Functions are first-class citizens in Helios this means:
 
 ### 1. Functions can be passed as arguments
 
@@ -80,7 +80,7 @@ functions can't be stored in lists or structs so they aren't **technically** fir
 
 ## Example: Collatz Sequence function :)
 
-One of my favourite things in maths is the Collatz sequence.
+One of my favorite things in maths is the Collatz sequence.
 A Collatz sequence starts with a random number, n
 and follows **three** very simple rules to decide the next number in the sequence.
 

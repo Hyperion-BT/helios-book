@@ -11,21 +11,21 @@ The Datum stores the `PubKeyHash` of the **beneficiary** and **creator**'s walle
 
 ```rust, noplaypen
 struct Datum {
-    creator: PubKeyHash,
-    beneficiary: PubKeyHash,
+    creator: PubKeyHash
+    beneficiary: PubKeyHash
     deadline: Time
 }
 ```
 
->**Note**: The `Time` type represents a POSIX time and 
+>**Note**: The `Time` type represents a POSIX time and
 >for more info [Helios Builtins](../helios_builtins/Helios_Builtins.md).
 
 ## The Redeemer
 
 ```rust, noplaypen
 enum Redeemer {
-    Cancel {},
-    Claim {}
+    Cancel
+    Claim
 }
 ```
 
@@ -54,15 +54,15 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
     tx: Tx = context.tx;
     tx_valid_range: TimeRange = tx.time_range;
 
-    switch (redeemer) {
-        Redeemer::Cancel => {
+    redeemer.switch {
+        Cancel => {
             // Check that deadline hasn't passed
             tx_valid_range.is_before(datum.deadline) && 
 
             // Check that the owner signed the transaction
             tx.is_signed_by(datum.owner)
         },
-        Redeemer::Claim => {
+        Claim => {
            // Check that deadline has passed.
            tx_valid_range.is_after(datum.deadline) &&
 
@@ -85,14 +85,14 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
 validator vesting;
 
 struct Datum {
-    creator: PubKeyHash,
-    beneficiary: PubKeyHash,
+    creator: PubKeyHash
+    beneficiary: PubKeyHash
     deadline: Time
 }
 
 enum Redeemer {
-    Cancel {},
-    Claim {}
+    Cancel
+    Claim
 }
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
