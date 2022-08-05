@@ -5,7 +5,7 @@
 Structs and Enums in Helios have methods with syntax a lot like OOP languages.
 Methods are declared just like regular functions but within the type declaration.
 
-```rust, noplaypen
+```go, noplaypen
 struct Rational {
     top: Int
     bottom: Int
@@ -75,7 +75,7 @@ fifty_fifty: Rational = Rational::new(1, 2)
 
 ## Finished Code
 
-```rust
+```ts
 struct Rational {
     top: Int,
     bottom: Int

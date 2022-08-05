@@ -23,5 +23,9 @@
   - [Signed Policy](./chapter_3/Signed.md)
   - [NFT](./chapter_3/NFT.md)
 
-- [Helios Builtins](./helios_builtins/Helios_Builtins.md)
-  - [Blockchain Types](./helios_builtins/Blockchain_Types.md)
+- [Helios Builtins](./helios_builtins/helios_builtins.md)
+  - [Primitive Types](./helios_builtins/primitive_types.md)
+  - [Time Types](./helios_builtins/time_types.md)
+  - [Cryptography Types](./helios_builtins/cryptography_types.md)
+  - [Native-Assets Types](./helios_builtins/native-asset_types.md)
+  - [Transaction Types](./helios_builtins/transaction_types.md)
