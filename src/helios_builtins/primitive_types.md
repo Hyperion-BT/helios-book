@@ -110,19 +110,22 @@ example: ByteArray = #213212;
 ### Methods:
 
 ```go, noplaypen
-func serialize(self: String) -> ByteArray;
+func serialize(self: ByteArray) -> ByteArray;
 
 func length(self: String) -> Int;
 
-func sha2(self: String) -> ByteArray;
+// @returns The SHA2-256 hash of the ByteArray
+func sha2(self: ByteArray) -> ByteArray;
 
-func sha3(self: String) -> ByteArray;
+// @returns The SHA3-256 hash of the ByteArray
+func sha3(self: ByteArray) -> ByteArray;
 
-func blake2b(self: String) -> ByteArray;
+// @returns The Blake2b256 hash of the ByteArray
+func blake2b(self: ByteArray) -> ByteArray;
 
-func decode_utf8(self: String) -> String;
+func decode_utf8(self: ByteArray) -> String;
 
-func show(self: String) -> String;
+func show(self: ByteArray) -> String;
 ```
 
 ### Internal Namespace
