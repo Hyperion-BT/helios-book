@@ -60,7 +60,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
             tx_valid_range.is_before(datum.deadline) && 
 
             // Check that the owner signed the transaction
-            tx.is_signed_by(datum.owner)
+            tx.is_signed_by(datum.creator)
         },
         Claim => {
            // Check that deadline has passed.
@@ -102,7 +102,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
     switch (redeemer) {
         Redeemer::Cancel => {
             now.is_before(datum.deadline) &&
-            tx.is_signed_by(datum.owner)
+            tx.is_signed_by(datum.creator)
         },
         Redeemer::Claim => {
            now.is_after(datum.deadline) &&
