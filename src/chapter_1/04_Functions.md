@@ -24,7 +24,7 @@ func fib(n: Int) -> Int {
 }
 ```
 
->**Note**:Functions can only reference themselves.
+>**Note**: Functions can only reference themselves.
 >There is no global hoisting of `func` and other statements like in javascript.
 >So there is no mutual recursion using func statements directly as a function can only reference
 > other functions defined before it.

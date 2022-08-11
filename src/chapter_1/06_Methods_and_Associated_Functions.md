@@ -77,7 +77,7 @@ fifty_fifty: Rational = Rational::new(1, 2)
 
 ```ts
 struct Rational {
-    top: Int,
+    top: Int
     bottom: Int
 
     const Rational::PI = Rational{ top: 355, bottom: 113}
