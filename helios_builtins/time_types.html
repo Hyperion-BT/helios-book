@@ -149,7 +149,8 @@
 <p><code>__helios__time</code></p>
 <h2 id="duration"><a class="header" href="#duration">Duration</a></h2>
 <hr />
-<p><code>Time</code> can be thought of as a vector quantity with direction, while <code>Duration</code> is a scalar quantity only having magnitude.</p>
+<p>The <code>Duration</code> type represents as you've probably guessed a duration of time.
+<code>Time</code> can be thought of as a vector quantity with direction, while <code>Duration</code> is a scalar quantity only having magnitude.</p>
 <h3 id="associated-functions-1"><a class="header" href="#associated-functions-1">Associated Functions</a></h3>
 <pre><code class="language-go  noplaypen">func new(raw: Int) -&gt; Duration;
 </code></pre>
@@ -163,11 +164,29 @@
 <h2 id="timerange"><a class="header" href="#timerange">TimeRange</a></h2>
 <hr />
 <p>This represents a range of time using a pair of <code>Time</code> values.</p>
+<h3 id="associated-functions-2"><a class="header" href="#associated-functions-2">Associated Functions</a></h3>
+<pre><code class="language-go  noplaypen">// Represents TimeRange starting from positive to negative infinity.
+// It contains all possible Time values.
+const ALWAYS: TimeRange
+
+// Represents TimeRange starting from negative to positive infinity.
+// It contains nothing as it's impossible.
+const NEVER: TimeRange
+
+// @returns A TimeRange that contains all Time values from 'start' onwards.
+func from(start: Time) -&gt; TimeRange;
+
+// @returns A TimeRange that contains all Time values before 'start' up to 'start'.
+func to(end: Time) -&gt; TimeRange;
+</code></pre>
 <h3 id="operators-2"><a class="header" href="#operators-2">Operators</a></h3>
 <p><code>==</code>,<code>!=</code></p>
 <h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
 <pre><code class="language-go  noplaypen">// @returns The start of TimeRange.
 func get_start(self: TimeRange) -&gt; Time;
+
+// @returns 'true' if self contains the 'other' TimeRange
+func contains(self: TimeRange, other: TimeRange) -&gt; Bool;
 
 func serialize(self: TimeRange) -&gt; Time;
 </code></pre>
