@@ -52,19 +52,19 @@ There are two cases when the validator should return `true`:
 ```go, noplaypen
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
     tx: Tx = context.tx;
-    tx_valid_range: TimeRange = tx.time_range;
+    now: TimeRange = tx.now();
 
     redeemer.switch {
         Cancel => {
             // Check that deadline hasn't passed
-            tx_valid_range.is_before(datum.deadline) && 
+            now < datum.deadline && 
 
             // Check that the owner signed the transaction
             tx.is_signed_by(datum.creator)
         },
         Claim => {
            // Check that deadline has passed.
-           tx_valid_range.is_after(datum.deadline) &&
+           now > datum.deadline &&
 
            // Check that the beneficiary signed the transaction.
            tx.is_signed_by(datum.beneficiary)
@@ -99,13 +99,13 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
     tx: Tx = context.tx;
     now: Time = tx.now();
 
-    switch (redeemer) {
-        Redeemer::Cancel => {
-            now.is_before(datum.deadline) &&
+    redeemer.switch {
+        Cancel => {
+            now > datum.deadline &&
             tx.is_signed_by(datum.creator)
         },
-        Redeemer::Claim => {
-           now.is_after(datum.deadline) &&
+        Claim => {
+           now > datum.deadline &&
            tx.is_signed_by(datum.beneficiary)
         }
     }

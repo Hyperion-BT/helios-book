@@ -323,7 +323,7 @@ Helios has no <code>return</code> statement, the last expression in a function i
 }
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>:Functions can only reference themselves.
+<p><strong>Note</strong>: Functions can only reference themselves.
 There is no global hoisting of <code>func</code> and other statements like in javascript.
 So there is no mutual recursion using func statements directly as a function can only reference
 other functions defined before it.</p>
@@ -514,7 +514,7 @@ fifty_fifty: Rational = Rational::new(1, 2)
 </code></pre>
 <h2 id="finished-code"><a class="header" href="#finished-code">Finished Code</a></h2>
 <pre><code class="language-ts">struct Rational {
-    top: Int,
+    top: Int
     bottom: Int
 
     const Rational::PI = Rational{ top: 355, bottom: 113}
@@ -919,19 +919,19 @@ For it to be valid the following have to be checked:</p>
 <h2 id="the-main-function-1"><a class="header" href="#the-main-function-1">The Main Function</a></h2>
 <pre><code class="language-go  noplaypen">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
-    tx_valid_range: TimeRange = tx.time_range;
+    now: TimeRange = tx.now();
 
     redeemer.switch {
         Cancel =&gt; {
             // Check that deadline hasn't passed
-            tx_valid_range.is_before(datum.deadline) &amp;&amp; 
+            now &lt; datum.deadline &amp;&amp; 
 
             // Check that the owner signed the transaction
-            tx.is_signed_by(datum.owner)
+            tx.is_signed_by(datum.creator)
         },
         Claim =&gt; {
            // Check that deadline has passed.
-           tx_valid_range.is_after(datum.deadline) &amp;&amp;
+           now &gt; datum.deadline &amp;&amp;
 
            // Check that the beneficiary signed the transaction.
            tx.is_signed_by(datum.beneficiary)
@@ -965,13 +965,13 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
     now: Time = tx.now();
 
-    switch (redeemer) {
-        Redeemer::Cancel =&gt; {
-            now.is_before(datum.deadline) &amp;&amp;
-            tx.is_signed_by(datum.owner)
+    redeemer.switch {
+        Cancel =&gt; {
+            now &gt; datum.deadline &amp;&amp;
+            tx.is_signed_by(datum.creator)
         },
-        Redeemer::Claim =&gt; {
-           now.is_after(datum.deadline) &amp;&amp;
+        Claim =&gt; {
+           now &gt; datum.deadline &amp;&amp;
            tx.is_signed_by(datum.beneficiary)
         }
     }
@@ -993,7 +993,7 @@ struct Datum {
     highest_bid: Int            // initialized at 0, which signifies the auction doesn't yet have valid bids
     highest_bidder: PubKeyHash
 
-    func update_datum(self, highest_bid: Int, highest_bidder: PubKeyHash) -&gt; Datum {
+    func update(self, highest_bid: Int, highest_bidder: PubKeyHash) -&gt; Datum {
         Datum {
             seller: self.seller,
             bid_asset: self.bid_asset,
@@ -1019,19 +1019,26 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
     validator_hash: ValidatorHash = ctx.current_validator_hash();
 
     redeemer.switch {
-        Close =&gt; false,
+        Close =&gt; {
             if (datum.highest_bid &lt; datum.min_bid) {
                 // the forSale asset must return to the seller, what happens to any erroneous bid value is irrelevant
-                tx.value_sent_to(datum.seller).contains(datum.for_sale + datum.highest_bid) &amp;&amp;
+                tx
+                  .value_sent_to(datum.seller)
+                  .contains(datum.for_sale + datum.highest_bid) &amp;&amp;
                 // Check that the deadline has passed
                 now &gt; datum.deadline                                    
             } else {
                 // Check that the seller receives the highest bid
-                tx.value_sent_to(datum.seller).contains(Value::new(datum.bid_asset, datum.highest_bid)) &amp;&amp;
+                tx
+                  .value_sent_to(datum.seller)
+                  .contains(Value::new(datum.bid_asset, datum.highest_bid))    &amp;&amp;
                 // Check that highest bidder is given the token being auctioned
-                tx.value_sent_to(datum.highest_bidder).contains(datum.for_sale)                         &amp;&amp;
+                tx
+                  .value_sent_to(datum.highest_bidder)
+                  .contains(datum.for_sale)                                    &amp;&amp;
                 // Check that the deadline has passed
                 now &gt; datum.deadline                                    
+            }
         },
         b: Bid =&gt; {
             if (b.bid &lt; datum.min_bid) {
@@ -1040,14 +1047,16 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
                 false
             } else {
                 // first bid is placed by the auction creator
-                expected_datum: Datum = datum.update_datum(b.bid, b.bidder);
+                expected_datum: Datum = datum.update(b.bid, b.bidder);
 
                 // Check that new Auction UTXO contains the token for sale and the new bid
-                tx.value_locked_by_datum(validator_hash, expected_datum)
-                    .contains(datum.for_sale + Value::new(datum.bid_asset, b.bid)) &amp;&amp;
+                tx
+                  .value_locked_by_datum(validator_hash, expected_datum)
+                  .contains(datum.for_sale + Value::new(datum.bid_asset, b.bid)) &amp;&amp;
                 // Check that the old highest bidder is repayed
-                tx.value_sent_to(datum.highest_bidder)
-                    .contains(Value::new(datum.bid_asset, datum.highest_bid))      &amp;&amp;
+                tx
+                  .value_sent_to(datum.highest_bidder)
+                  .contains(Value::new(datum.bid_asset, datum.highest_bid))      &amp;&amp;
                 // Check that the deadline hasn't passed
                 now &lt; datum.deadline
             }
@@ -1296,19 +1305,22 @@ func encode_utf8(self: Bool) -&gt; String;
 <h3 id="getters"><a class="header" href="#getters">Getters</a></h3>
 <p><code>.length</code>, returns the length of the <code>ByteArray</code>.</p>
 <h3 id="methods-4"><a class="header" href="#methods-4">Methods:</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self: String) -&gt; ByteArray;
+<pre><code class="language-go  noplaypen">func serialize(self: ByteArray) -&gt; ByteArray;
 
 func length(self: String) -&gt; Int;
 
-func sha2(self: String) -&gt; ByteArray;
+// @returns The SHA2-256 hash of the ByteArray
+func sha2(self: ByteArray) -&gt; ByteArray;
 
-func sha3(self: String) -&gt; ByteArray;
+// @returns The SHA3-256 hash of the ByteArray
+func sha3(self: ByteArray) -&gt; ByteArray;
 
-func blake2b(self: String) -&gt; ByteArray;
+// @returns The Blake2b256 hash of the ByteArray
+func blake2b(self: ByteArray) -&gt; ByteArray;
 
-func decode_utf8(self: String) -&gt; String;
+func decode_utf8(self: ByteArray) -&gt; String;
 
-func show(self: String) -&gt; String;
+func show(self: ByteArray) -&gt; String;
 </code></pre>
 <h3 id="internal-namespace-3"><a class="header" href="#internal-namespace-3">Internal Namespace</a></h3>
 <p><code>__helios__bytearray</code></p>
@@ -1412,7 +1424,8 @@ example_2: Option[Int] = Option::None;
 <p><code>__helios__time</code></p>
 <h2 id="duration"><a class="header" href="#duration">Duration</a></h2>
 <hr />
-<p><code>Time</code> can be thought of as a vector quantity with direction, while <code>Duration</code> is a scalar quantity only having magnitude.</p>
+<p>The <code>Duration</code> type represents as you've probably guessed a duration of time.
+<code>Time</code> can be thought of as a vector quantity with direction, while <code>Duration</code> is a scalar quantity only having magnitude.</p>
 <h3 id="associated-functions-3"><a class="header" href="#associated-functions-3">Associated Functions</a></h3>
 <pre><code class="language-go  noplaypen">func new(raw: Int) -&gt; Duration;
 </code></pre>
@@ -1426,11 +1439,31 @@ example_2: Option[Int] = Option::None;
 <h2 id="timerange"><a class="header" href="#timerange">TimeRange</a></h2>
 <hr />
 <p>This represents a range of time using a pair of <code>Time</code> values.</p>
+<h3 id="associated-functions-4"><a class="header" href="#associated-functions-4">Associated Functions</a></h3>
+<pre><code class="language-go  noplaypen">// Represents TimeRange starting from positive to negative infinity.
+// It contains all possible Time values.
+const ALWAYS: TimeRange
+
+// Represents TimeRange starting from negative to positive infinity.
+// It contains nothing as it's impossible.
+const NEVER: TimeRange
+
+// @returns A TimeRange that contains all Time values from 'start' onwards.
+func from(start: Time) -&gt; TimeRange;
+
+// @returns A TimeRange that contains all Time values before 'start' up to 'start'.
+func to(end: Time) -&gt; TimeRange;
+</code></pre>
 <h3 id="operators-9"><a class="header" href="#operators-9">Operators</a></h3>
 <p><code>==</code>,<code>!=</code></p>
 <h3 id="methods-10"><a class="header" href="#methods-10">Methods</a></h3>
 <pre><code class="language-go  noplaypen">// @returns The start of TimeRange.
 func get_start(self: TimeRange) -&gt; Time;
+
+// @returns 'true' if self contains the 'other' TimeRange
+func contains(self: TimeRange, other: TimeRange) -&gt; Bool;
+
+// @returns 'true' if 'other' TimeRange is after 
 
 func serialize(self: TimeRange) -&gt; Time;
 </code></pre>
@@ -1447,7 +1480,7 @@ func serialize(self: TimeRange) -&gt; Time;
     token_name: String
 }
 </code></pre>
-<h3 id="associated-functions-4"><a class="header" href="#associated-functions-4">Associated Functions</a></h3>
+<h3 id="associated-functions-5"><a class="header" href="#associated-functions-5">Associated Functions</a></h3>
 <pre><code class="language-rust  noplaypen">const ADA: AssetClass;
 
 // @returns a 
@@ -1464,7 +1497,7 @@ func new(policy_hash: ByteArray, token_name: ByteArray) -&gt; AssetClass;
 <p>The <code>Value</code> type represents a <strong>token bundle</strong> using a map of <code>AssetClass</code>es to amounts <code>Int</code>,</p>
 <pre><code class="language-rust  noplaypen">struct Value {..}
 </code></pre>
-<h3 id="associated-functions-5"><a class="header" href="#associated-functions-5">Associated Functions</a></h3>
+<h3 id="associated-functions-6"><a class="header" href="#associated-functions-6">Associated Functions</a></h3>
 <pre><code class="language-go  noplaypen">// An empty Value
 const ZERO: Value;
 
@@ -1503,7 +1536,7 @@ func compare()
 <hr />
 <p>These are type-safe wrappers around the <code>ByteArray</code> type that represent the hash of
 a public key, validator script, minting policy or datum.</p>
-<h3 id="associated-functions-6"><a class="header" href="#associated-functions-6">Associated Functions</a></h3>
+<h3 id="associated-functions-7"><a class="header" href="#associated-functions-7">Associated Functions</a></h3>
 <pre><code class="language-go  playpen">func new(bytes: ByteArray) -&gt; PubKeyHash
 </code></pre>
 <h3 id="operators-12"><a class="header" href="#operators-12">Operators</a></h3>
@@ -1652,7 +1685,7 @@ It's composed of the <strong>Transaction ID</strong> (<code>TxId</code>) of the 
     index: Int
 }
 </code></pre>
-<h3 id="associated-functions-7"><a class="header" href="#associated-functions-7">Associated Functions</a></h3>
+<h3 id="associated-functions-8"><a class="header" href="#associated-functions-8">Associated Functions</a></h3>
 <pre><code class="language-go  noplaypen">func new(tx_id: TxId, index: Int) -&gt; TxOutputId
 </code></pre>
 <h3 id="operators-18"><a class="header" href="#operators-18">Operators</a></h3>
@@ -1717,7 +1750,7 @@ func is_validator(self: Credential) -&gt; Bool
 <h3 id="internal-namespace-21"><a class="header" href="#internal-namespace-21">Internal Namespace</a></h3>
 <p><code>__helios__stakingcredential</code></p>
 <h2 id="common-hidden-from-user"><a class="header" href="#common-hidden-from-user">Common (hidden from user)</a></h2>
-<h3 id="associated-functions-8"><a class="header" href="#associated-functions-8">Associated Functions</a></h3>
+<h3 id="associated-functions-9"><a class="header" href="#associated-functions-9">Associated Functions</a></h3>
 <pre><code class="language-go  noplaypen">// TODO Add documentation
 
 func verbose_error()

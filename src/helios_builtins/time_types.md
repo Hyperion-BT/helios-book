@@ -88,6 +88,8 @@ func get_start(self: TimeRange) -> Time;
 // @returns 'true' if self contains the 'other' TimeRange
 func contains(self: TimeRange, other: TimeRange) -> Bool;
 
+// @returns 'true' if 'other' TimeRange is after 
+
 func serialize(self: TimeRange) -> Time;
 ```
 

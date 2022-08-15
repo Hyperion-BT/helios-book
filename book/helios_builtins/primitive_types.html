@@ -204,19 +204,22 @@ func encode_utf8(self: Bool) -&gt; String;
 <h3 id="getters"><a class="header" href="#getters">Getters</a></h3>
 <p><code>.length</code>, returns the length of the <code>ByteArray</code>.</p>
 <h3 id="methods-3"><a class="header" href="#methods-3">Methods:</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self: String) -&gt; ByteArray;
+<pre><code class="language-go  noplaypen">func serialize(self: ByteArray) -&gt; ByteArray;
 
 func length(self: String) -&gt; Int;
 
-func sha2(self: String) -&gt; ByteArray;
+// @returns The SHA2-256 hash of the ByteArray
+func sha2(self: ByteArray) -&gt; ByteArray;
 
-func sha3(self: String) -&gt; ByteArray;
+// @returns The SHA3-256 hash of the ByteArray
+func sha3(self: ByteArray) -&gt; ByteArray;
 
-func blake2b(self: String) -&gt; ByteArray;
+// @returns The Blake2b256 hash of the ByteArray
+func blake2b(self: ByteArray) -&gt; ByteArray;
 
-func decode_utf8(self: String) -&gt; String;
+func decode_utf8(self: ByteArray) -&gt; String;
 
-func show(self: String) -&gt; String;
+func show(self: ByteArray) -&gt; String;
 </code></pre>
 <h3 id="internal-namespace-3"><a class="header" href="#internal-namespace-3">Internal Namespace</a></h3>
 <p><code>__helios__bytearray</code></p>
