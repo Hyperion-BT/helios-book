@@ -904,19 +904,19 @@ For it to be valid the following have to be checked:</p>
 <h2 id="the-main-function-1"><a class="header" href="#the-main-function-1">The Main Function</a></h2>
 <pre><code class="language-go  noplaypen">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
-    tx_valid_range: TimeRange = tx.time_range;
+    now: TimeRange = tx.now();
 
     redeemer.switch {
         Cancel =&gt; {
             // Check that deadline hasn't passed
-            tx_valid_range.is_before(datum.deadline) &amp;&amp; 
+            now &lt; datum.deadline &amp;&amp; 
 
             // Check that the owner signed the transaction
             tx.is_signed_by(datum.creator)
         },
         Claim =&gt; {
            // Check that deadline has passed.
-           tx_valid_range.is_after(datum.deadline) &amp;&amp;
+           now &gt; datum.deadline &amp;&amp;
 
            // Check that the beneficiary signed the transaction.
            tx.is_signed_by(datum.beneficiary)
@@ -950,13 +950,13 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
     now: Time = tx.now();
 
-    switch (redeemer) {
-        Redeemer::Cancel =&gt; {
-            now.is_before(datum.deadline) &amp;&amp;
+    redeemer.switch {
+        Cancel =&gt; {
+            now &gt; datum.deadline &amp;&amp;
             tx.is_signed_by(datum.creator)
         },
-        Redeemer::Claim =&gt; {
-           now.is_after(datum.deadline) &amp;&amp;
+        Claim =&gt; {
+           now &gt; datum.deadline &amp;&amp;
            tx.is_signed_by(datum.beneficiary)
         }
     }
@@ -978,7 +978,7 @@ struct Datum {
     highest_bid: Int            // initialized at 0, which signifies the auction doesn't yet have valid bids
     highest_bidder: PubKeyHash
 
-    func update_datum(self, highest_bid: Int, highest_bidder: PubKeyHash) -&gt; Datum {
+    func update(self, highest_bid: Int, highest_bidder: PubKeyHash) -&gt; Datum {
         Datum {
             seller: self.seller,
             bid_asset: self.bid_asset,
@@ -1007,14 +1007,20 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
         Close =&gt; {
             if (datum.highest_bid &lt; datum.min_bid) {
                 // the forSale asset must return to the seller, what happens to any erroneous bid value is irrelevant
-                tx.value_sent_to(datum.seller).contains(datum.for_sale + datum.highest_bid) &amp;&amp;
+                tx
+                  .value_sent_to(datum.seller)
+                  .contains(datum.for_sale + datum.highest_bid) &amp;&amp;
                 // Check that the deadline has passed
                 now &gt; datum.deadline                                    
             } else {
                 // Check that the seller receives the highest bid
-                tx.value_sent_to(datum.seller).contains(Value::new(datum.bid_asset, datum.highest_bid)) &amp;&amp;
+                tx
+                  .value_sent_to(datum.seller)
+                  .contains(Value::new(datum.bid_asset, datum.highest_bid))    &amp;&amp;
                 // Check that highest bidder is given the token being auctioned
-                tx.value_sent_to(datum.highest_bidder).contains(datum.for_sale)                         &amp;&amp;
+                tx
+                  .value_sent_to(datum.highest_bidder)
+                  .contains(datum.for_sale)                                    &amp;&amp;
                 // Check that the deadline has passed
                 now &gt; datum.deadline                                    
             }
@@ -1026,14 +1032,16 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
                 false
             } else {
                 // first bid is placed by the auction creator
-                expected_datum: Datum = datum.update_datum(b.bid, b.bidder);
+                expected_datum: Datum = datum.update(b.bid, b.bidder);
 
                 // Check that new Auction UTXO contains the token for sale and the new bid
-                tx.value_locked_by_datum(validator_hash, expected_datum)
-                    .contains(datum.for_sale + Value::new(datum.bid_asset, b.bid)) &amp;&amp;
+                tx
+                  .value_locked_by_datum(validator_hash, expected_datum)
+                  .contains(datum.for_sale + Value::new(datum.bid_asset, b.bid)) &amp;&amp;
                 // Check that the old highest bidder is repayed
-                tx.value_sent_to(datum.highest_bidder)
-                    .contains(Value::new(datum.bid_asset, datum.highest_bid))      &amp;&amp;
+                tx
+                  .value_sent_to(datum.highest_bidder)
+                  .contains(Value::new(datum.bid_asset, datum.highest_bid))      &amp;&amp;
                 // Check that the deadline hasn't passed
                 now &lt; datum.deadline
             }
@@ -1439,6 +1447,8 @@ func get_start(self: TimeRange) -&gt; Time;
 
 // @returns 'true' if self contains the 'other' TimeRange
 func contains(self: TimeRange, other: TimeRange) -&gt; Bool;
+
+// @returns 'true' if 'other' TimeRange is after 
 
 func serialize(self: TimeRange) -&gt; Time;
 </code></pre>

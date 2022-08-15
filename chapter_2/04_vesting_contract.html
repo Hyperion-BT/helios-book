@@ -181,19 +181,19 @@ For it to be valid the following have to be checked:</p>
 <h2 id="the-main-function"><a class="header" href="#the-main-function">The Main Function</a></h2>
 <pre><code class="language-go  noplaypen">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
-    tx_valid_range: TimeRange = tx.time_range;
+    now: TimeRange = tx.now();
 
     redeemer.switch {
         Cancel =&gt; {
             // Check that deadline hasn't passed
-            tx_valid_range.is_before(datum.deadline) &amp;&amp; 
+            now &lt; datum.deadline &amp;&amp; 
 
             // Check that the owner signed the transaction
             tx.is_signed_by(datum.creator)
         },
         Claim =&gt; {
            // Check that deadline has passed.
-           tx_valid_range.is_after(datum.deadline) &amp;&amp;
+           now &gt; datum.deadline &amp;&amp;
 
            // Check that the beneficiary signed the transaction.
            tx.is_signed_by(datum.beneficiary)
@@ -227,13 +227,13 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
     now: Time = tx.now();
 
-    switch (redeemer) {
-        Redeemer::Cancel =&gt; {
-            now.is_before(datum.deadline) &amp;&amp;
+    redeemer.switch {
+        Cancel =&gt; {
+            now &gt; datum.deadline &amp;&amp;
             tx.is_signed_by(datum.creator)
         },
-        Redeemer::Claim =&gt; {
-           now.is_after(datum.deadline) &amp;&amp;
+        Claim =&gt; {
+           now &gt; datum.deadline &amp;&amp;
            tx.is_signed_by(datum.beneficiary)
         }
     }
