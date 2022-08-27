@@ -268,10 +268,10 @@ func all[a](self: []a, predicate: (a) -&gt; Bool) -&gt; Bool;
 // @notice Throws an error is no element satisfies the predicate.
 func find[a](self: []a, predicate: (a) -&gt; Bool) -&gt; a;
 
-//@returns A list of all the elements in the list that satisfy the predicate.
+// @returns A list of all the elements in the list that satisfy the predicate.
 func filter[a](self: []a, predicate: (a) -&gt; Bool) -&gt; []a;
 
-//@returns Folds a list into a single value by continuosly applying the binary
+// @returns Folds a list into a single value by continuosly applying the binary
 //         function to the elements of the list.
 func fold[a, b](self: []a, binary: (b, a) -&gt; b) -&gt; b;
 
@@ -281,12 +281,27 @@ func map[a, b](self: []a, transformation: (a) -&gt; b) -&gt; []b;
 </code></pre>
 <h3 id="internal-namespace-4"><a class="header" href="#internal-namespace-4">Internal Namespace</a></h3>
 <p><code>__helios__list</code></p>
-<h2 id="map"><a class="header" href="#map">Map</a></h2>
+<h2 id="mapab"><a class="header" href="#mapab">Map[a,b]</a></h2>
 <hr />
-<p>TODO</p>
+<p>This is type is a Hashmap like <code>Map</code> in Haskell or Dictionaries in Python. It's used to store key-value pairs.</p>
+<pre><code class="language-go  noplaypen">my_map = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2};
+print(my_map.get(&quot;zero&quot;).show()); // prints '0'
+</code></pre>
 <h3 id="operators-5"><a class="header" href="#operators-5">Operators</a></h3>
 <p><code>==</code>,<code>!=</code></p>
 <h3 id="methods-5"><a class="header" href="#methods-5">Methods</a></h3>
+<pre><code class="language-go  noplaypen">// @returns The Value in the map for the given key.
+// @notice  Throws an error if the value isn't in the map.
+func get[a, b](self: Map[a, b], key: a) -&gt; b;
+
+// @returns 'true' if all the pairs satisfy the predicate.
+func all[a, b](self: Map[a, b], predicate: (a, b) -&gt; Bool) -&gt; Bool
+
+// @returns 'true' if all the pairs satisfy the predicate.
+func any[a, b](self: Map[a, b], predicate: (a, b) -&gt; Bool) -&gt; Bool
+
+func serialize(self: Map[a, b]) -&gt; ByteArray
+</code></pre>
 <p><code>serialize</code></p>
 <h3 id="internal-namespace-5"><a class="header" href="#internal-namespace-5">Internal Namespace</a></h3>
 <p><code>__helios__map</code></p>
@@ -294,7 +309,7 @@ func map[a, b](self: []a, transformation: (a) -&gt; b) -&gt; []b;
 <hr />
 <p><code>Option[a]</code> is an enum used to represent an optional value.</p>
 <pre><code class="language-rust  noplaypen">enum Option[a] {
-    Some { value: a }
+    Some { some: a }
     None
 }
 

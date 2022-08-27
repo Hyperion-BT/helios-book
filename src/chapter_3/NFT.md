@@ -17,6 +17,8 @@ This ensures no new tokens will ever be minted.
 This is very easy to implement:
 
 ```go, noplaypen
+minting deadline_nft
+
 const DEADLINE: Time = Time::new(1212)
 
 
@@ -50,7 +52,7 @@ So with this approach, we specify in the minting policy that the transaction min
 Since a UTXO can only be spent once this means the token can only be minted once.
 
 ```go, noplaypen
-minting_policy utxo_nft
+minting utxo_nft
 
 const OUTPUT_ID: TxOutputId = TxOutputId::new(TxId::new(#1213), 1)
 

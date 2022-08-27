@@ -8,7 +8,7 @@ This validator is can be used to lock assets that are to be auctioned in a UTXO.
 ## The Datum
 
 ```go
-validator english_auction
+spending english_auction
 
 struct Datum {
     seller: PubKeyHash

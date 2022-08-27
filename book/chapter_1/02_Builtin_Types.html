@@ -151,10 +151,10 @@
 <li><code>ByteArray</code> (array of bytes)</li>
 <li><code>String</code> (fixed-length string)</li>
 <li><code>List</code> (linked list)</li>
+<li><code>Map</code> (A hashmap)</li>
 <li><code>Option</code></li>
-<li><code>Map</code> (A hashmap) [WIP]</li>
 </ul>
-<h2 id="int"><a class="header" href="#int">Int</a></h2>
+<h2 id="int"><a class="header" href="#int"><code>Int</code></a></h2>
 <hr />
 <p>Helios' <code>Int</code> type represents an unbounded integer like Haskell's <code>Integer</code> type.</p>
 <pre><code class="language-rust noplaypen">// Helios has support for multiple Integer literal formats
@@ -163,7 +163,7 @@ bits_literal: Int = 0b10001;
 hex_literal: Int = 0x11;
 idk_literal: Int = 0o121;
 </code></pre>
-<h2 id="bool"><a class="header" href="#bool">Bool</a></h2>
+<h2 id="bool"><a class="header" href="#bool"><code>Bool</code></a></h2>
 <hr />
 <p>The <code>Bool</code> type has two possible values: <code>true</code> or <code>false</code>. Boolean values are typically used for conditional logic or validation, for example in <code>if</code> expressions. Booleans can be negated using the negation operator (<code>!</code>),</p>
 <pre><code class="language-rust noplaypen">func returns_false() -&gt; Bool {
@@ -174,7 +174,7 @@ idk_literal: Int = 0o121;
 <pre><code class="language-rust noplaypen">x: Int = (true).to_int();  // x == 1
 y: Int = (false).to_int(); // y == 0
 </code></pre>
-<h2 id="bytearray"><a class="header" href="#bytearray">ByteArray</a></h2>
+<h2 id="bytearray"><a class="header" href="#bytearray"><code>ByteArray</code></a></h2>
 <hr />
 <p>The <code>ByteArray</code> type as you've likely guessed represents an array of bytes.</p>
 <pre><code class="language-rust noplaypen">simple_bytearray: ByteArray = #af2r221ad;
@@ -182,7 +182,7 @@ y: Int = (false).to_int(); // y == 0
 <p>All most core Helios types including all other primitve types can be converted to a <code>ByteArray</code> using the <code>serialize</code> method.</p>
 <pre><code class="language-rust noplaypen">result: ByteArray = (1231).serialize();
 </code></pre>
-<h2 id="string"><a class="header" href="#string">String</a></h2>
+<h2 id="string"><a class="header" href="#string"><code>String</code></a></h2>
 <hr />
 <p>Helios strings can be declared using double (<code>&quot;</code>) quotes.</p>
 <pre><code class="language-ts noplaypen">double_quotes: String = &quot;Wow I did it again&quot;;
@@ -194,7 +194,7 @@ When concatenating strings in Helios a new string is created.</p>
 string_2: String = &quot;ios&quot;;
 result: String = string_1 + string_2; // &quot;Helios&quot;
 </code></pre>
-<h2 id="list-a"><a class="header" href="#list-a">List ([]a)</a></h2>
+<h2 id="list-a"><a class="header" href="#list-a"><code>List ([]a)</code></a></h2>
 <hr />
 <p>Helios has a list type list just like the Haskell <code>List</code> type.
 The type signature of the list type is <code>[]a</code> where a is the type of items in the list.
@@ -229,28 +229,28 @@ fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5};
 
 []Int{}.is_empty() == true;
 </code></pre>
-<h2 id="optiona"><a class="header" href="#optiona">Option[a]</a></h2>
+<h2 id="mapa-b"><a class="header" href="#mapa-b"><code>Map[a, b]</code></a></h2>
+<hr />
+<p>This is type is a Hashmap like <code>Map</code> in Haskell or Dictionaries in Python.
+It's used to store key-value pairs.</p>
+<pre><code class="language-go  noplaypen">my_map: Map[String, Int] = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2};
+
+print(my_map.get(&quot;zero&quot;).show()); // prints '0'
+</code></pre>
+<h2 id="optiona"><a class="header" href="#optiona"><code>Option[a]</code></a></h2>
 <hr />
 <p>The Helios <code>Option[a]</code> is a builtin <code>enum</code> used to represent an optional value of type <code>a</code>.
 It's defined as:</p>
 <pre><code class="language-rust  noplaypen">enum Option[a] {
-    Some { a },
+    Some { some: a },
     None
 }
 </code></pre>
-<h3 id="instantiating-an-option"><a class="header" href="#instantiating-an-option">Instantiating an Option</a></h3>
+<h3 id="instantiating-an-option"><a class="header" href="#instantiating-an-option">Instantiating an <code>Option</code></a></h3>
 <pre><code class="language-rust  noplaypen">some_int: Option[Int] = Option[Int]::Some{42};
+
 none_int: Option[Int] = Option[Int]::None;
 </code></pre>
-<h3 id="casting-an-option"><a class="header" href="#casting-an-option">Casting an Option</a></h3>
-<pre><code class="language-go  noplaypen">
-x: Option[Int] = Option[Int]::None::new(); // implicit upcasting
-
-y: Option[Int]::Some = Option[Int]::Some::cast(x); // will throw error internally
-</code></pre>
-<h2 id="map-wip"><a class="header" href="#map-wip">Map? [WIP]</a></h2>
-<hr />
-<p>In the near future, Helios might have a fleshed-out <code>Map</code> data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.</p>
 <h2 id="more-information"><a class="header" href="#more-information">More Information</a></h2>
 <p>For more information on the Builtin type, check out <a href="../helios_builtins/Helios_Builtins.html">Builtin Types</a>.</p>
 

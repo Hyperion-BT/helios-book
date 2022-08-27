@@ -28,5 +28,3 @@ struct Value {
 ```
 
 >**Note**: 1 ADA is equal to 1,000,000,000 Lovelace
-
-```go, noplaypen

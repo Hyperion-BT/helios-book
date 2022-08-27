@@ -70,11 +70,9 @@ As you can see a **Transaction Input** is just a wrapper around UTXO created by 
 
 ```rust, noplaypen
 struct txInput {
-    output_id: Int       // ID of the UTXO
+    output_id: Int        // ID of the UTXO
     output: TxOutput      // UTXO being use
 }
-
-
 ```
 
 ## TxOutput

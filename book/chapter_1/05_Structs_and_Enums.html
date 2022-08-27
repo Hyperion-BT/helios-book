@@ -175,7 +175,10 @@ current_setting: FanSetting = FanSetting::On { speed: 5 };
 
 // Enums also have type inference for literals
 current_setting = FanSetting::On { speed: 5 };
-
+</code></pre>
+<p><strong>Note:</strong> Enum variants with one field can be constructed without the field's name.
+The example above could be rewritten as:</p>
+<pre><code class="language-go  noplaypen">current_setting = FanSetting::On { 5 };
 </code></pre>
 <h3 id="the-switch-expression"><a class="header" href="#the-switch-expression">The <code>'switch'</code> expression</a></h3>
 <p>The <code>switch</code> expression is used to pattern-match on enum variants. It's more like a C <code>switch</code> than a Rust <code>match</code>.</p>
@@ -201,7 +204,10 @@ example.switch {
 }
 
 </code></pre>
-<p><strong>Note:</strong> In Helios, <strong>all</strong> fields in a struct and variants in an enum <strong>must</strong> be used, or else the compiler will throw an error.</p>
+<blockquote>
+<p><strong>Note:</strong> In Helios, <strong>all</strong> fields in a struct and variants in an enum <strong>must</strong> be used,
+or else the compiler will throw an error.</p>
+</blockquote>
 
                     </main>
 

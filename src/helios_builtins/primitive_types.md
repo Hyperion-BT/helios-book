@@ -193,10 +193,10 @@ func all[a](self: []a, predicate: (a) -> Bool) -> Bool;
 // @notice Throws an error is no element satisfies the predicate.
 func find[a](self: []a, predicate: (a) -> Bool) -> a;
 
-//@returns A list of all the elements in the list that satisfy the predicate.
+// @returns A list of all the elements in the list that satisfy the predicate.
 func filter[a](self: []a, predicate: (a) -> Bool) -> []a;
 
-//@returns Folds a list into a single value by continuosly applying the binary
+// @returns Folds a list into a single value by continuosly applying the binary
 //         function to the elements of the list.
 func fold[a, b](self: []a, binary: (b, a) -> b) -> b;
 
@@ -209,11 +209,16 @@ func map[a, b](self: []a, transformation: (a) -> b) -> []b;
 
 `__helios__list`
 
-## Map
+## Map[a,b]
 
 ---
 
-TODO
+This is type is a Hashmap like `Map` in Haskell or Dictionaries in Python. It's used to store key-value pairs.
+
+```go, noplaypen
+my_map = Map[String]Int{"zero": 0, "one": 1, "two": 2};
+print(my_map.get("zero").show()); // prints '0'
+```
 
 ### Operators
 
@@ -221,6 +226,19 @@ TODO
 
 ### Methods
 
+```go, noplaypen
+// @returns The Value in the map for the given key.
+// @notice  Throws an error if the value isn't in the map.
+func get[a, b](self: Map[a, b], key: a) -> b;
+
+// @returns 'true' if all the pairs satisfy the predicate.
+func all[a, b](self: Map[a, b], predicate: (a, b) -> Bool) -> Bool
+
+// @returns 'true' if all the pairs satisfy the predicate.
+func any[a, b](self: Map[a, b], predicate: (a, b) -> Bool) -> Bool
+
+func serialize(self: Map[a, b]) -> ByteArray
+```
 `serialize`
 
 ### Internal Namespace
@@ -235,7 +253,7 @@ TODO
 
 ```rust, noplaypen
 enum Option[a] {
-    Some { value: a }
+    Some { some: a }
     None
 }
 

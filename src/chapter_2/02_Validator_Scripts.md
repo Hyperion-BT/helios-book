@@ -11,7 +11,7 @@ The Redeemer and the Datum are user-defined but the `ScriptContext` struct is th
 A simple validator
 
 ```rust
-validator always_true;       // -------- (1)
+spending always_true;       // -------- (1)
 
 struct Datum {..}           // --------- (2)
 
@@ -28,14 +28,14 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {
 
 In Helios all scripts start with a  **script purpose**(1), followed by the name of the script. There are three (3) script purposes currently:
 
-- **validator**
-- **minting_policy**
-- **test**
+- **spending**
+- **minting**
+- **testing**
 
 We will cover the latter two in later chapters.
 
 ```rust, noplaypen
-validator always_true
+spending always_true
 ```
 
 ## The Main Function
@@ -47,7 +47,7 @@ The main function of a validator accepts three arguments and returns a `Bool`:
 - **The ScriptContext**
 
 ```go, noplaypen
-validator always_true
+spending always_true
 
 struct Datum {..}
 
@@ -64,7 +64,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
 ## AlwaysTrue Validator
 
 ```go, noplaypen
-validator always_true
+spending always_true
 
 struct Datum {..}
 
@@ -76,12 +76,12 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
 }
 ```
 
-## Omitting The Datum and The Redeemer
+## Omitting Validator Arguments
 
 The above validator could be rewritten as:
 
 ```rust
-validator always_true     
+spending always_true     
 
 func main(ctx: ScriptContext) -> Bool {        // -------- (2)
     ...

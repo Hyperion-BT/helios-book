@@ -82,7 +82,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
 ## Finished Code
 
 ```go, noplaypen
-validator vesting;
+spending vesting;
 
 struct Datum {
     creator: PubKeyHash

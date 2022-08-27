@@ -12,11 +12,10 @@ It's heavily inspired by Rust, Go and Sway.
 
 ```go, noplaypen
 // All Helios programs begin with a script purpose.
-validator always_true; 
+spending always_true 
 
 // The 'main' function contains the core validator logic.
-func main(ctx: ScriptContext) -> Bool {
-
+func main() -> Bool {
     // Helios is an expression based language
     true
 }

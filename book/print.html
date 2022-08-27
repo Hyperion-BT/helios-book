@@ -153,11 +153,10 @@ It's heavily inspired by Rust, Go and Sway.</p>
 </ul>
 <br/>
 <pre><code class="language-go  noplaypen">// All Helios programs begin with a script purpose.
-validator always_true; 
+spending always_true 
 
 // The 'main' function contains the core validator logic.
-func main(ctx: ScriptContext) -&gt; Bool {
-
+func main() -&gt; Bool {
     // Helios is an expression based language
     true
 }
@@ -202,10 +201,10 @@ in Helios top-level statements are not followed by a semicolon (<code>;</code>).
 <li><code>ByteArray</code> (array of bytes)</li>
 <li><code>String</code> (fixed-length string)</li>
 <li><code>List</code> (linked list)</li>
+<li><code>Map</code> (A hashmap)</li>
 <li><code>Option</code></li>
-<li><code>Map</code> (A hashmap) [WIP]</li>
 </ul>
-<h2 id="int"><a class="header" href="#int">Int</a></h2>
+<h2 id="int"><a class="header" href="#int"><code>Int</code></a></h2>
 <hr />
 <p>Helios' <code>Int</code> type represents an unbounded integer like Haskell's <code>Integer</code> type.</p>
 <pre><code class="language-rust noplaypen">// Helios has support for multiple Integer literal formats
@@ -214,7 +213,7 @@ bits_literal: Int = 0b10001;
 hex_literal: Int = 0x11;
 idk_literal: Int = 0o121;
 </code></pre>
-<h2 id="bool"><a class="header" href="#bool">Bool</a></h2>
+<h2 id="bool"><a class="header" href="#bool"><code>Bool</code></a></h2>
 <hr />
 <p>The <code>Bool</code> type has two possible values: <code>true</code> or <code>false</code>. Boolean values are typically used for conditional logic or validation, for example in <code>if</code> expressions. Booleans can be negated using the negation operator (<code>!</code>),</p>
 <pre><code class="language-rust noplaypen">func returns_false() -&gt; Bool {
@@ -225,7 +224,7 @@ idk_literal: Int = 0o121;
 <pre><code class="language-rust noplaypen">x: Int = (true).to_int();  // x == 1
 y: Int = (false).to_int(); // y == 0
 </code></pre>
-<h2 id="bytearray"><a class="header" href="#bytearray">ByteArray</a></h2>
+<h2 id="bytearray"><a class="header" href="#bytearray"><code>ByteArray</code></a></h2>
 <hr />
 <p>The <code>ByteArray</code> type as you've likely guessed represents an array of bytes.</p>
 <pre><code class="language-rust noplaypen">simple_bytearray: ByteArray = #af2r221ad;
@@ -233,7 +232,7 @@ y: Int = (false).to_int(); // y == 0
 <p>All most core Helios types including all other primitve types can be converted to a <code>ByteArray</code> using the <code>serialize</code> method.</p>
 <pre><code class="language-rust noplaypen">result: ByteArray = (1231).serialize();
 </code></pre>
-<h2 id="string"><a class="header" href="#string">String</a></h2>
+<h2 id="string"><a class="header" href="#string"><code>String</code></a></h2>
 <hr />
 <p>Helios strings can be declared using double (<code>&quot;</code>) quotes.</p>
 <pre><code class="language-ts noplaypen">double_quotes: String = &quot;Wow I did it again&quot;;
@@ -245,7 +244,7 @@ When concatenating strings in Helios a new string is created.</p>
 string_2: String = &quot;ios&quot;;
 result: String = string_1 + string_2; // &quot;Helios&quot;
 </code></pre>
-<h2 id="list-a"><a class="header" href="#list-a">List ([]a)</a></h2>
+<h2 id="list-a"><a class="header" href="#list-a"><code>List ([]a)</code></a></h2>
 <hr />
 <p>Helios has a list type list just like the Haskell <code>List</code> type.
 The type signature of the list type is <code>[]a</code> where a is the type of items in the list.
@@ -280,28 +279,28 @@ fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5};
 
 []Int{}.is_empty() == true;
 </code></pre>
-<h2 id="optiona"><a class="header" href="#optiona">Option[a]</a></h2>
+<h2 id="mapa-b"><a class="header" href="#mapa-b"><code>Map[a, b]</code></a></h2>
+<hr />
+<p>This is type is a Hashmap like <code>Map</code> in Haskell or Dictionaries in Python.
+It's used to store key-value pairs.</p>
+<pre><code class="language-go  noplaypen">my_map: Map[String, Int] = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2};
+
+print(my_map.get(&quot;zero&quot;).show()); // prints '0'
+</code></pre>
+<h2 id="optiona"><a class="header" href="#optiona"><code>Option[a]</code></a></h2>
 <hr />
 <p>The Helios <code>Option[a]</code> is a builtin <code>enum</code> used to represent an optional value of type <code>a</code>.
 It's defined as:</p>
 <pre><code class="language-rust  noplaypen">enum Option[a] {
-    Some { a },
+    Some { some: a },
     None
 }
 </code></pre>
-<h3 id="instantiating-an-option"><a class="header" href="#instantiating-an-option">Instantiating an Option</a></h3>
+<h3 id="instantiating-an-option"><a class="header" href="#instantiating-an-option">Instantiating an <code>Option</code></a></h3>
 <pre><code class="language-rust  noplaypen">some_int: Option[Int] = Option[Int]::Some{42};
+
 none_int: Option[Int] = Option[Int]::None;
 </code></pre>
-<h3 id="casting-an-option"><a class="header" href="#casting-an-option">Casting an Option</a></h3>
-<pre><code class="language-go  noplaypen">
-x: Option[Int] = Option[Int]::None::new(); // implicit upcasting
-
-y: Option[Int]::Some = Option[Int]::Some::cast(x); // will throw error internally
-</code></pre>
-<h2 id="map-wip"><a class="header" href="#map-wip">Map? [WIP]</a></h2>
-<hr />
-<p>In the near future, Helios might have a fleshed-out <code>Map</code> data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.</p>
 <h2 id="more-information"><a class="header" href="#more-information">More Information</a></h2>
 <p>For more information on the Builtin type, check out <a href="chapter_1/../helios_builtins/Helios_Builtins.html">Builtin Types</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
@@ -425,7 +424,10 @@ current_setting: FanSetting = FanSetting::On { speed: 5 };
 
 // Enums also have type inference for literals
 current_setting = FanSetting::On { speed: 5 };
-
+</code></pre>
+<p><strong>Note:</strong> Enum variants with one field can be constructed without the field's name.
+The example above could be rewritten as:</p>
+<pre><code class="language-go  noplaypen">current_setting = FanSetting::On { 5 };
 </code></pre>
 <h3 id="the-switch-expression"><a class="header" href="#the-switch-expression">The <code>'switch'</code> expression</a></h3>
 <p>The <code>switch</code> expression is used to pattern-match on enum variants. It's more like a C <code>switch</code> than a Rust <code>match</code>.</p>
@@ -451,7 +453,10 @@ example.switch {
 }
 
 </code></pre>
-<p><strong>Note:</strong> In Helios, <strong>all</strong> fields in a struct and variants in an enum <strong>must</strong> be used, or else the compiler will throw an error.</p>
+<blockquote>
+<p><strong>Note:</strong> In Helios, <strong>all</strong> fields in a struct and variants in an enum <strong>must</strong> be used,
+or else the compiler will throw an error.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="methods-and-associated-functions"><a class="header" href="#methods-and-associated-functions">Methods and Associated Functions</a></h1>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <p>Structs and Enums in Helios have methods with syntax a lot like OOP languages.
@@ -599,7 +604,7 @@ that results in a constant value.</p>
 In the following chapters we will learn how to use Helios to write smart contracts.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="understanding-the-eutxo-model"><a class="header" href="#understanding-the-eutxo-model">Understanding The eUTXO Model</a></h1>
 <p>Before we get into any coding we need to first understand how smart contracts work on Cardano
-and how it differs from the dominant Accounts-based model.</p>
+and how it differs from the currently more popular Accounts-based model.</p>
 <p>This section wouldn't be possible without <a href="https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e">this</a> great blog post by the awesome <a href="https://github.com/dav009">David Pryzbilla</a> and a lot of helpful feedback from <a href="https://github.com/christianschmitz">Christian Schmitz</a>.</p>
 <h2 id="accounts-model-vs-eutxo-model"><a class="header" href="#accounts-model-vs-eutxo-model">Accounts Model vs eUTXO Model</a></h2>
 <p>Smart contracts on Cardano are quite different from those on Ethereum.</p>
@@ -608,7 +613,7 @@ and how it differs from the dominant Accounts-based model.</p>
 <p>Contracts on Ethereum run via the EVM(Ethereum Virtual Machine),
 the EVM can be thought of as a sort global onchain computer that smart contracts take turns to run on before being accepted onchain.</p>
 <blockquote>
-<p><strong>Note</strong>: The data of all accounts on Ethereum are stored in a <strong>Merkle-Patricia Trie</strong>.
+<p><strong>Note</strong>: The data of all accounts on Ethereum are stored in a <a href="https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/"><strong>Merkle-Patricia Trie</strong></a>, which is kind of like a fancy hashmap.
 After all the transaction in a block are run the <strong>root hash</strong> of the new Trie is included in the block.</p>
 </blockquote>
 <h2 id="the-eutxo-model"><a class="header" href="#the-eutxo-model">The eUTXO Model</a></h2>
@@ -634,7 +639,7 @@ To know the balance of a user wallets searches the ledger for all UTXOs <em>owne
 <p>These are data stored onchain associated with a particular UTXO.
 The Datum is used to store state in Smart Contracts.
 The 'e' in eUTXO comes from the Datum, this is because the addition of a datum makes the eUTXO model Turing-Complete (like Ethereum smart contracts and unlike Bitcoin Script).
-With this state anything that an account-based model can do also be done with a eUTXO-based model.</p>
+With this state anything that an account-based model can do also be done with a eUTXO-based model.@hyperionbt/helios&quot;</p>
 <blockquote>
 <p><strong>Note</strong>: To be exact on Cardano previously the Datum couldn't be stored onchain but as of Plutus V2 we now have actual <em>onchain/inline</em> datums.</p>
 </blockquote>
@@ -716,7 +721,7 @@ It is worth the extra effort in rewiring you're thinking as it often leads to co
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>validator always_true;       // -------- (1)
+</span>spending always_true;       // -------- (1)
 
 struct Datum {..}           // --------- (2)
 
@@ -732,12 +737,12 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
 <h2 id="script-purpose"><a class="header" href="#script-purpose">Script Purpose</a></h2>
 <p>In Helios all scripts start with a  <strong>script purpose</strong>(1), followed by the name of the script. There are three (3) script purposes currently:</p>
 <ul>
-<li><strong>validator</strong></li>
-<li><strong>minting_policy</strong></li>
-<li><strong>test</strong></li>
+<li><strong>spending</strong></li>
+<li><strong>minting</strong></li>
+<li><strong>testing</strong></li>
 </ul>
 <p>We will cover the latter two in later chapters.</p>
-<pre><code class="language-rust  noplaypen">validator always_true
+<pre><code class="language-rust  noplaypen">spending always_true
 </code></pre>
 <h2 id="the-main-function"><a class="header" href="#the-main-function">The Main Function</a></h2>
 <p>The main function of a validator accepts three arguments and returns a <code>Bool</code>:</p>
@@ -746,7 +751,7 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
 <li><strong>The Redeemer</strong> (3)</li>
 <li><strong>The ScriptContext</strong></li>
 </ul>
-<pre><code class="language-go  noplaypen">validator always_true
+<pre><code class="language-go  noplaypen">spending always_true
 
 struct Datum {..}
 
@@ -761,7 +766,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
 <p><strong>Note</strong>: The Datum and the Redeemer are user-defined types (structs or enums) that <strong>must</strong> be named <code>Datum</code> and <code>Redeemer</code>.</p>
 </blockquote>
 <h2 id="alwaystrue-validator"><a class="header" href="#alwaystrue-validator">AlwaysTrue Validator</a></h2>
-<pre><code class="language-go  noplaypen">validator always_true
+<pre><code class="language-go  noplaypen">spending always_true
 
 struct Datum {..}
 
@@ -772,12 +777,12 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     true
 }
 </code></pre>
-<h2 id="omitting-the-datum-and-the-redeemer"><a class="header" href="#omitting-the-datum-and-the-redeemer">Omitting The Datum and The Redeemer</a></h2>
+<h2 id="omitting-validator-arguments"><a class="header" href="#omitting-validator-arguments">Omitting Validator Arguments</a></h2>
 <p>The above validator could be rewritten as:</p>
 <pre><pre class="playground"><code class="language-rust">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>validator always_true     
+</span>spending always_true     
 
 func main(ctx: ScriptContext) -&gt; Bool {        // -------- (2)
     ...
@@ -855,11 +860,9 @@ the <code>Tx</code> holds the metadata of a signed onchain transaction.</p>
 <p>The <code>TxInput</code> struct as you've probably guessed represents a <strong>Transaction Input</strong>.
 As you can see a <strong>Transaction Input</strong> is just a wrapper around UTXO created by a previous transaction on the blockchain.</p>
 <pre><code class="language-rust  noplaypen">struct txInput {
-    output_id: Int       // ID of the UTXO
+    output_id: Int        // ID of the UTXO
     output: TxOutput      // UTXO being use
 }
-
-
 </code></pre>
 <h2 id="txoutput"><a class="header" href="#txoutput">TxOutput</a></h2>
 <p>The <code>TxOutput</code> represents a <strong>Transaction Output</strong> this is a <strong>UTXO(Unspent Transaction Output)</strong> that will be created by this transaction.</p>
@@ -948,7 +951,7 @@ for more info <a href="chapter_2/../helios_builtins/Helios_Builtins.html">Helios
 See if  you can find it 🙂.</p>
 </blockquote>
 <h2 id="finished-code-1"><a class="header" href="#finished-code-1">Finished Code</a></h2>
-<pre><code class="language-go  noplaypen">validator vesting;
+<pre><code class="language-go  noplaypen">spending vesting;
 
 struct Datum {
     creator: PubKeyHash
@@ -982,7 +985,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
 from the Plutus Pioneer's program in Helios.</p>
 <p>This validator is can be used to lock assets that are to be auctioned in a UTXO.</p>
 <h2 id="the-datum-1"><a class="header" href="#the-datum-1">The Datum</a></h2>
-<pre><code class="language-go">validator english_auction
+<pre><code class="language-go">spending english_auction
 
 struct Datum {
     seller: PubKeyHash
@@ -1153,11 +1156,10 @@ struct Value {
 <blockquote>
 <p><strong>Note</strong>: 1 ADA is equal to 1,000,000,000 Lovelace</p>
 </blockquote>
-<pre><code class="language-go  noplaypen"></code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="signed-policy"><a class="header" href="#signed-policy">Signed Policy</a></h1>
 <p>This example will be a simple minting policy that allows minting as long as
 the transaction is signed by an <strong>owner</strong> which will just be a <strong>PubKeyHash</strong>.</p>
-<pre><code class="language-go  noplaypen">minting_policy signed
+<pre><code class="language-go  noplaypen">minting signed
 
 const OWNER: PubKeyHash = #26372...
 
@@ -1179,7 +1181,9 @@ The <strong>Token Name</strong> for the NFT in this example will be called <code
 The main idea is that the token can only be minted before a deadline which already passed.
 This ensures no new tokens will ever be minted.
 This is very easy to implement:</p>
-<pre><code class="language-go  noplaypen">const DEADLINE: Time = Time::new(1212)
+<pre><code class="language-go  noplaypen">minting deadline_nft
+
+const DEADLINE: Time = Time::new(1212)
 
 
 func main(context: ScriptContext) -&gt; Bool {
@@ -1206,7 +1210,7 @@ It's a builtin type that is defined as:</p>
 </code></pre>
 <p>So with this approach, we specify in the minting policy that the transaction minting the NFT must spend a UTXO with a specific <strong>Output ID</strong>.
 Since a UTXO can only be spent once this means the token can only be minted once.</p>
-<pre><code class="language-go  noplaypen">minting_policy utxo_nft
+<pre><code class="language-go  noplaypen">minting utxo_nft
 
 const OUTPUT_ID: TxOutputId = TxOutputId::new(TxId::new(#1213), 1)
 
@@ -1369,10 +1373,10 @@ func all[a](self: []a, predicate: (a) -&gt; Bool) -&gt; Bool;
 // @notice Throws an error is no element satisfies the predicate.
 func find[a](self: []a, predicate: (a) -&gt; Bool) -&gt; a;
 
-//@returns A list of all the elements in the list that satisfy the predicate.
+// @returns A list of all the elements in the list that satisfy the predicate.
 func filter[a](self: []a, predicate: (a) -&gt; Bool) -&gt; []a;
 
-//@returns Folds a list into a single value by continuosly applying the binary
+// @returns Folds a list into a single value by continuosly applying the binary
 //         function to the elements of the list.
 func fold[a, b](self: []a, binary: (b, a) -&gt; b) -&gt; b;
 
@@ -1382,12 +1386,27 @@ func map[a, b](self: []a, transformation: (a) -&gt; b) -&gt; []b;
 </code></pre>
 <h3 id="internal-namespace-4"><a class="header" href="#internal-namespace-4">Internal Namespace</a></h3>
 <p><code>__helios__list</code></p>
-<h2 id="map"><a class="header" href="#map">Map</a></h2>
+<h2 id="mapab"><a class="header" href="#mapab">Map[a,b]</a></h2>
 <hr />
-<p>TODO</p>
+<p>This is type is a Hashmap like <code>Map</code> in Haskell or Dictionaries in Python. It's used to store key-value pairs.</p>
+<pre><code class="language-go  noplaypen">my_map = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2};
+print(my_map.get(&quot;zero&quot;).show()); // prints '0'
+</code></pre>
 <h3 id="operators-5"><a class="header" href="#operators-5">Operators</a></h3>
 <p><code>==</code>,<code>!=</code></p>
 <h3 id="methods-6"><a class="header" href="#methods-6">Methods</a></h3>
+<pre><code class="language-go  noplaypen">// @returns The Value in the map for the given key.
+// @notice  Throws an error if the value isn't in the map.
+func get[a, b](self: Map[a, b], key: a) -&gt; b;
+
+// @returns 'true' if all the pairs satisfy the predicate.
+func all[a, b](self: Map[a, b], predicate: (a, b) -&gt; Bool) -&gt; Bool
+
+// @returns 'true' if all the pairs satisfy the predicate.
+func any[a, b](self: Map[a, b], predicate: (a, b) -&gt; Bool) -&gt; Bool
+
+func serialize(self: Map[a, b]) -&gt; ByteArray
+</code></pre>
 <p><code>serialize</code></p>
 <h3 id="internal-namespace-5"><a class="header" href="#internal-namespace-5">Internal Namespace</a></h3>
 <p><code>__helios__map</code></p>
@@ -1395,7 +1414,7 @@ func map[a, b](self: []a, transformation: (a) -&gt; b) -&gt; []b;
 <hr />
 <p><code>Option[a]</code> is an enum used to represent an optional value.</p>
 <pre><code class="language-rust  noplaypen">enum Option[a] {
-    Some { value: a }
+    Some { some: a }
     None
 }
 

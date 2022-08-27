@@ -144,7 +144,7 @@
                     <main>
                         <h1 id="understanding-the-eutxo-model"><a class="header" href="#understanding-the-eutxo-model">Understanding The eUTXO Model</a></h1>
 <p>Before we get into any coding we need to first understand how smart contracts work on Cardano
-and how it differs from the dominant Accounts-based model.</p>
+and how it differs from the currently more popular Accounts-based model.</p>
 <p>This section wouldn't be possible without <a href="https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e">this</a> great blog post by the awesome <a href="https://github.com/dav009">David Pryzbilla</a> and a lot of helpful feedback from <a href="https://github.com/christianschmitz">Christian Schmitz</a>.</p>
 <h2 id="accounts-model-vs-eutxo-model"><a class="header" href="#accounts-model-vs-eutxo-model">Accounts Model vs eUTXO Model</a></h2>
 <p>Smart contracts on Cardano are quite different from those on Ethereum.</p>
@@ -153,7 +153,7 @@ and how it differs from the dominant Accounts-based model.</p>
 <p>Contracts on Ethereum run via the EVM(Ethereum Virtual Machine),
 the EVM can be thought of as a sort global onchain computer that smart contracts take turns to run on before being accepted onchain.</p>
 <blockquote>
-<p><strong>Note</strong>: The data of all accounts on Ethereum are stored in a <strong>Merkle-Patricia Trie</strong>.
+<p><strong>Note</strong>: The data of all accounts on Ethereum are stored in a <a href="https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/"><strong>Merkle-Patricia Trie</strong></a>, which is kind of like a fancy hashmap.
 After all the transaction in a block are run the <strong>root hash</strong> of the new Trie is included in the block.</p>
 </blockquote>
 <h2 id="the-eutxo-model"><a class="header" href="#the-eutxo-model">The eUTXO Model</a></h2>
@@ -179,7 +179,7 @@ To know the balance of a user wallets searches the ledger for all UTXOs <em>owne
 <p>These are data stored onchain associated with a particular UTXO.
 The Datum is used to store state in Smart Contracts.
 The 'e' in eUTXO comes from the Datum, this is because the addition of a datum makes the eUTXO model Turing-Complete (like Ethereum smart contracts and unlike Bitcoin Script).
-With this state anything that an account-based model can do also be done with a eUTXO-based model.</p>
+With this state anything that an account-based model can do also be done with a eUTXO-based model.@hyperionbt/helios&quot;</p>
 <blockquote>
 <p><strong>Note</strong>: To be exact on Cardano previously the Datum couldn't be stored onchain but as of Plutus V2 we now have actual <em>onchain/inline</em> datums.</p>
 </blockquote>

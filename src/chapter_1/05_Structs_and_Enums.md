@@ -39,7 +39,13 @@ current_setting: FanSetting = FanSetting::On { speed: 5 };
 
 // Enums also have type inference for literals
 current_setting = FanSetting::On { speed: 5 };
+```
 
+**Note:** Enum variants with one field can be constructed without the field's name.
+The example above could be rewritten as:
+
+```go, noplaypen
+current_setting = FanSetting::On { 5 };
 ```
 
 ### The `'switch'` expression
@@ -70,4 +76,5 @@ example.switch {
 
 ```
 
-**Note:** In Helios, **all** fields in a struct and variants in an enum **must** be used, or else the compiler will throw an error.
+>**Note:** In Helios, **all** fields in a struct and variants in an enum **must** be used,
+>or else the compiler will throw an error.

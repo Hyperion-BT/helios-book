@@ -9,10 +9,10 @@ Helios has 6 primitive types:
 - `ByteArray` (array of bytes)
 - `String` (fixed-length string)
 - `List` (linked list)
+- `Map` (A hashmap)
 - `Option`
-- `Map` (A hashmap) [WIP]
 
-## Int
+## `Int`
 
 ---
 
@@ -26,7 +26,7 @@ hex_literal: Int = 0x11;
 idk_literal: Int = 0o121;
 ```
 
-## Bool
+## `Bool`
 
 ---
 
@@ -45,7 +45,7 @@ x: Int = (true).to_int();  // x == 1
 y: Int = (false).to_int(); // y == 0
 ```
 
-## ByteArray
+## `ByteArray`
 
 ---
 
@@ -61,7 +61,7 @@ All most core Helios types including all other primitve types can be converted t
 result: ByteArray = (1231).serialize();
 ```
 
-## String
+## `String`
 
 ---
 
@@ -81,7 +81,7 @@ string_2: String = "ios";
 result: String = string_1 + string_2; // "Helios"
 ```
 
-## List (\[\]a)
+## `List ([]a)`
 
 ---
 
@@ -125,7 +125,20 @@ fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5};
 []Int{}.is_empty() == true;
 ```
 
-## Option[a]
+## `Map[a, b]`
+
+---
+
+This is type is a Hashmap like `Map` in Haskell or Dictionaries in Python.
+It's used to store key-value pairs.
+
+```go, noplaypen
+my_map: Map[String, Int] = Map[String]Int{"zero": 0, "one": 1, "two": 2};
+
+print(my_map.get("zero").show()); // prints '0'
+```
+
+## `Option[a]`
 
 ---
 
@@ -134,32 +147,18 @@ It's defined as:
 
 ```rust, noplaypen
 enum Option[a] {
-    Some { a },
+    Some { some: a },
     None
 }
 ```
 
-### Instantiating an Option
+### Instantiating an `Option`
 
 ```rust, noplaypen
 some_int: Option[Int] = Option[Int]::Some{42};
+
 none_int: Option[Int] = Option[Int]::None;
 ```
-
-### Casting an Option
-
-```go, noplaypen
-
-x: Option[Int] = Option[Int]::None::new(); // implicit upcasting
-
-y: Option[Int]::Some = Option[Int]::Some::cast(x); // will throw error internally
-```
-
-## Map? \[WIP\]
-
----
-
-In the near future, Helios might have a fleshed-out `Map` data structure just like in Haskell which would be a constant-time lookup, key-value pairs store.
 
 ## More Information
 

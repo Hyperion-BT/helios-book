@@ -1,7 +1,7 @@
 # Understanding The eUTXO Model
 
 Before we get into any coding we need to first understand how smart contracts work on Cardano
-and how it differs from the dominant Accounts-based model.
+and how it differs from the currently more popular Accounts-based model.
 
 This section wouldn't be possible without [this](https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e) great blog post by the awesome [David Pryzbilla](https://github.com/dav009) and a lot of helpful feedback from [Christian Schmitz](https://github.com/christianschmitz).
 
@@ -16,8 +16,8 @@ When a transaction occurs, the balance of one the sender's account is directly d
 Contracts on Ethereum run via the EVM(Ethereum Virtual Machine),
 the EVM can be thought of as a sort global onchain computer that smart contracts take turns to run on before being accepted onchain.
 
->**Note**: The data of all accounts on Ethereum are stored in a **Merkle-Patricia Trie**.
->After all the transaction in a block are run the **root hash** of the new Trie is included in the block.
+>**Note**: The data of all accounts on Ethereum are stored in a [**Merkle-Patricia Trie**](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/), which is kind of like a fancy hashmap.
+> After all the transaction in a block are run the **root hash** of the new Trie is included in the block.
 
 ## The eUTXO Model
 
@@ -52,7 +52,7 @@ An address can be either be derived from the hash of a user's public key (`PubKe
 These are data stored onchain associated with a particular UTXO.
 The Datum is used to store state in Smart Contracts.
 The 'e' in eUTXO comes from the Datum, this is because the addition of a datum makes the eUTXO model Turing-Complete (like Ethereum smart contracts and unlike Bitcoin Script).
-With this state anything that an account-based model can do also be done with a eUTXO-based model.
+With this state anything that an account-based model can do also be done with a eUTXO-based model.@hyperionbt/helios"
 
 >**Note**: To be exact on Cardano previously the Datum couldn't be stored onchain but as of Plutus V2 we now have actual *onchain/inline* datums.
 

@@ -156,7 +156,9 @@ The <strong>Token Name</strong> for the NFT in this example will be called <code
 The main idea is that the token can only be minted before a deadline which already passed.
 This ensures no new tokens will ever be minted.
 This is very easy to implement:</p>
-<pre><code class="language-go  noplaypen">const DEADLINE: Time = Time::new(1212)
+<pre><code class="language-go  noplaypen">minting deadline_nft
+
+const DEADLINE: Time = Time::new(1212)
 
 
 func main(context: ScriptContext) -&gt; Bool {
@@ -183,7 +185,7 @@ It's a builtin type that is defined as:</p>
 </code></pre>
 <p>So with this approach, we specify in the minting policy that the transaction minting the NFT must spend a UTXO with a specific <strong>Output ID</strong>.
 Since a UTXO can only be spent once this means the token can only be minted once.</p>
-<pre><code class="language-go  noplaypen">minting_policy utxo_nft
+<pre><code class="language-go  noplaypen">minting utxo_nft
 
 const OUTPUT_ID: TxOutputId = TxOutputId::new(TxId::new(#1213), 1)
 
