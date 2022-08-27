@@ -198,11 +198,9 @@ the <code>Tx</code> holds the metadata of a signed onchain transaction.</p>
 <p>The <code>TxInput</code> struct as you've probably guessed represents a <strong>Transaction Input</strong>.
 As you can see a <strong>Transaction Input</strong> is just a wrapper around UTXO created by a previous transaction on the blockchain.</p>
 <pre><code class="language-rust  noplaypen">struct txInput {
-    output_id: Int       // ID of the UTXO
+    output_id: Int        // ID of the UTXO
     output: TxOutput      // UTXO being use
 }
-
-
 </code></pre>
 <h2 id="txoutput"><a class="header" href="#txoutput">TxOutput</a></h2>
 <p>The <code>TxOutput</code> represents a <strong>Transaction Output</strong> this is a <strong>UTXO(Unspent Transaction Output)</strong> that will be created by this transaction.</p>
