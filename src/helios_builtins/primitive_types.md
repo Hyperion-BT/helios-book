@@ -29,10 +29,6 @@ func to_hex(self) -> String
 func show(self) -> String
 ```
 
-### Internal Namespace
-
-`__helios__int`
-
 ## Bool
 
 ---
@@ -68,10 +64,6 @@ func to_int(self) -> Int
 func show(self) -> String
 ```
 
-### Internal Namespace
-
-`__helios__bool`
-
 ## String
 
 ---
@@ -102,10 +94,6 @@ func starts_with(self, prefix: String) -> Bool
 
 func ends_with(self, suffix: String) -> Bool
 ```
-
-### Internal Namespace
-
-`__helios__string`
 
 ## ByteArray
 
@@ -155,15 +143,11 @@ func ends_with(self, suffix: ByteArray) -> Bool
 func slice(self, start: Int, end: Int) -> ByteArray
 ```
 
-### Internal Namespace
-
-`__helios__bytearray`
-
-## List ([]a)
+## List (`[]a`)
 
 ---
 
-This is type a linked-list.
+Helios linked-list type.
 
 ```go, playpen
 example: []Int = []Int{1, 2, 3, 4, 5}; ...
@@ -236,72 +220,107 @@ func fold(self, reducer: (b, a) -> b, init: b) -> b
 func map(self, transformation: (a) -> b) -> []b
 ```
 
-### Internal Namespace
-
-`__helios__list`
-
-## Map[a,b]
+## Map (`Map[a]b`)
 
 ---
 
-This is type is a Hashmap like `Map` in Haskell or Dictionaries in Python. It's used to store key-value pairs.
+List of key-value pairs.
 
 ```go, noplaypen
 my_map = Map[String]Int{"zero": 0, "one": 1, "two": 2};
-print(my_map.get("zero").show()); // prints '0'
+print(my_map.get("zero").show()); ... // prints '0'
+```
+
+### Associated Functions
+
+```go, noplaypen
+func from_data(data: Data) -> Map[a]b
 ```
 
 ### Operators
 
-`==`,`!=`
+`==`,`!=`, `+`
+
+### Getters
+```go, noplaypen
+// @returns the number of items in a map.
+length: Int
+```
 
 ### Methods
 
 ```go, noplaypen
 // @returns The Value in the map for the given key.
 // @notice  Throws an error if the value isn't in the map.
-func get[a, b](self: Map[a, b], key: a) -> b;
+func get(self, key: a) -> b
+
+func get_safe(self, key: a) -> Option[b]
 
 // @returns 'true' if all the pairs satisfy the predicate.
-func all[a, b](self: Map[a, b], predicate: (a, b) -> Bool) -> Bool
+func all(self, predicate: (a, b) -> Bool) -> Bool
+
+func all_keys(self, predicate: (a) -> Bool) -> Bool
+
+func all_values(self, predicate: (b) -> Bool) -> Bool
 
 // @returns 'true' if all the pairs satisfy the predicate.
-func any[a, b](self: Map[a, b], predicate: (a, b) -> Bool) -> Bool
+func any(self, predicate: (a, b) -> Bool) -> Bool
+
+func any_key(self, predicate: (a) -> Bool) -> Bool
+
+func any_value(self, predicate: (b) -> Bool) -> Bool
+
+func filter(self, predicate: (a, b) -> Bool) -> Map[a]b
+
+func filter_by_key(self, predicate: (a) -> Bool) -> Map[a]b
+
+func filter_by_value(self, predicate: (b) -> Bool) -> Map[a]b
+
+func fold(self, reducer: (c, a, b) -> c, init: c) -> c
+
+func fold_keys(self, reducer: (c, a) -> c, init: c) -> c
+
+func fold_values(self, reducer: (c, b) -> c, init: c) -> c
 
 func serialize(self: Map[a, b]) -> ByteArray
 ```
-`serialize`
 
-### Internal Namespace
-
-`__helios__map`
-
-## Option[a]
+## Option (`Option[a]`)
 
 ---
 
 `Option[a]` is an enum used to represent an optional value.
 
 ```rust, noplaypen
+// internal representation
 enum Option[a] {
     Some { some: a }
     None
 }
 
-example_1: Option[Int] = Option::Some{42};
-example_2: Option[Int] = Option::None;
+example_1: Option[Int] = Option[Int]::Some{42};
+example_2: Option[Int] = Option[Int]::None; ...
+```
+
+### Associated Functions
+
+```go, noplaypen
+func from_data(data: Data) -> Option[a]
 ```
 
 ### Operators
 
 `==`, `!=`
 
-### Methods:
+### Getters
 
 ```go, noplaypen
-func serialize(self: Option[a]) -> ByteArray;
+// @returns content of Option[a]::Some
+Option[a]::Some.some: a
 ```
 
-### Internal Namespace
+### Methods
 
-`__helios__option`
+```go, noplaypen
+func serialize(self) -> ByteArray
+```

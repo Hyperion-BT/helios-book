@@ -20,7 +20,7 @@ const x = Rational { top: 1, bottom: 3 }
 
 ## Enums
 
-Enums are used to represent types that have multiple variants (sometimes called *sum types* in CS). They are useful for datums and redeemers.
+Enums are used to represent types that have multiple variants (sometimes called *sum types* in CS). These are useful for datums and redeemers.
 
 Example of an enum:
 
@@ -34,7 +34,7 @@ enum FanSetting {
 const current_setting: FanSetting = FanSetting::On { 5 }
 
 // type can be inferred for enum literals:
-current_setting = FanSetting::On { 5 };
+const current_setting = FanSetting::On { 5 }
 ```
 
 > **Note:** Structs and enum variants with one field are constructed without that field's name as a key.

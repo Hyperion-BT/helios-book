@@ -12,7 +12,7 @@ my_number: Int = 42; ...
 
 In this example `my_number` has value `42` and has type `Int`. `my_number` cannot be mutated after its definition.
 
-Assignment expressions must be followed another expression, separated by a `;`. The assignment expression above should be seen as syntactic sugar for `((my_number: Int) -> {...})(42)`.
+Assignment expressions must be followed by another expression, separated by a semicolon (`;`). The assignment expression above should be seen as syntactic sugar for `((my_number: Int) -> {...})(42)`.
 
 > **Note**: `Int` is Helios' only number type, and represents an unbounded integer. See [Builtin Types](./02_Builtin_Types.md) for more details.
 

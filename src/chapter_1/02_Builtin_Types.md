@@ -162,4 +162,4 @@ none_int: Option[Int] = Option[Int]::None; ...
 
 ## More Information
 
-For more information on the Builtin type, check out [Builtin Types](../helios_builtins/Helios_Builtins.md).
+For more information on the Builtin type, check out [Builtin Types](../helios_builtins/helios_builtins.md).

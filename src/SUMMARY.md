@@ -8,7 +8,7 @@
   - [Functions](./chapter_1/03_Functions.md)
   - [Structs and Enums](./chapter_1/04_Structs_and_Enums.md)
   - [Methods and Associated Functions](./chapter_1/05_Methods_and_Associated_Functions.md)
-  - [Comments and Printing](./chapter_1/06_Comments_Printing_and_Branching.md)
+  - [Comments, Printing, and Branching](./chapter_1/06_Comments_Printing_and_Branching.md)
 
 - [Blockchain Development with Helios](./chapter_2/00_Blockchain_Programming_in_Helios.md)
   - [The EUTXO Model](./chapter_2/01_The_EUTXO_Model.md)

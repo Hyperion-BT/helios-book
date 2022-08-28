@@ -62,7 +62,7 @@ evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); ... // [2, 4. 6];
 add = (a: Int) -> (Int) -> Int { (b: Int) -> Int { a + b } }; ...
 ```
 
-> **Note:** So I *kind of* lied when I told you that functions are first-class. Functions can't be stored in containers or structs.
+> **Note:** So I *kind of* lied when I told you that functions are first-class: functions can't be stored in containers or structs.
 
 ## Example: Collatz sequence :)
 
