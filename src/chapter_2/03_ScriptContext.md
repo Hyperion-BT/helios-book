@@ -11,22 +11,16 @@ struct ScriptContext {
 
     // Some useful methods
 
-    // Serializes the ScriptContext to a ByteArray.
-    func serialize(self) -> ByteArray;
-
-    // Get the hash of the Validator being evaluated.
-    func get_current_validator_hash(self) -> ByteArray;
+    // Get the ValidatorHash of the current script
+    func get_current_validator_hash(self) -> ByteArray
 
     // Get the TxInput locked by the validator.
-    func get_current_input(self) -> TxInput;
-
-    // Get the ValidatorHash of the current Validator
-    func get_current_validator_hash(self) -> ByteArray;
+    func get_current_input(self) -> TxInput
 }
 ```
 
 >**Note**: Internally `ScriptContext` is a wrapper around the `Tx` struct,
->the `Tx` holds the metadata of a signed onchain transaction.
+>the `Tx` holds the metadata of a signed on-chain transaction.
 
 ## Tx
 
@@ -34,31 +28,32 @@ The `Tx` struct stores the data on the current transaction.
 
 ```rust, noplaypen
 struct Tx {
-    id: TxId
     inputs: []TxInput          // Transaction inputs
+	ref_inputs: []TxInput      // Reference inputs that aren't spent
     outputs: []TxOutput        // Transaction outputs
     fee: Value                 // Fee paid for this transaction
     minted: Value              // Value minted by this transaction
     time_range: TimeRange      // Valid range for this transaction
     signatories: []PubKeyHash  // Signatories of the transaction
+    id: TxId
 
     // Some useful methods
 
-    func serialize(self) -> ByteArray;
+    func now(self) -> Time
 
-    func now(self) -> Time;
+    func outputs_sent_to(self, addr: PubKeyHash) -> []TxOutput
 
-    func outputs_sent_to(self, addr: PubKeyHash) -> []TxOutput;
+    func value_sent_to(self, addr: PubKeyHash) -> Value
 
-    func value_sent_to(self, addr: PubKeyHash) -> Value;
+	// Use datum tagging to prevent double satisfaction exploits
+    func value_sent_to_datum(self, addr: PubKeyHash, datum: Any) -> Value
 
     func value_locked_by(self, val_hash: ValidatorHash) -> Value
 
-    func value_locked_by_datum(self, )
+    func value_locked_by_datum(self, val_hash: ValidatorHash, datum: Any) -> Value
 
-    // Checks if a given PubKey
+    // Checks if a given PubKeyHash is in tx.signatories
     func is_signed_by(self, pk: PubKeyHash) -> Bool;
-
 }
 
 ```
@@ -69,21 +64,21 @@ The `TxInput` struct as you've probably guessed represents a **Transaction Input
 As you can see a **Transaction Input** is just a wrapper around UTXO created by a previous transaction on the blockchain.
 
 ```rust, noplaypen
-struct txInput {
-    output_id: Int        // ID of the UTXO
-    output: TxOutput      // UTXO being use
+struct TxInput {
+    output_id: TxOutputId // ID of the UTXO
+    output: TxOutput      // UTXO being spent
 }
 ```
 
 ## TxOutput
 
-The `TxOutput` represents a **Transaction Output** this is a **UTXO(Unspent Transaction Output)** that will be created by this transaction.
+The `TxOutput` represents a **Transaction Output**. This is a **UTXO** that will be created by this transaction.
 
 ```rust, noplaypen
 struct TxOutput {
-    address: Address             // Address of the UTXO
-    value: Value                 // Value in the UTXO
-    datum_hash:  ByteArray       // Hash of the UTXO's datum
+    address: Address          // Address of the UTXO
+    value: Value              // Value in the UTXO
+    datum:  OutputDatum       // UTXO's datum (none, hash, or inline)
 }
 ```
 

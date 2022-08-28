@@ -1,43 +1,40 @@
 # Variables
 
-Variables in Helios are *immutable*. This means that once a variable is declared, it's value cannot change.
+As a functional programming language, Helios doesn't support mutable variables. Helios does however support binding values to names.
 
-## Declaring a Variable
+## Binding inside a function
+
+Inside a function body, values can be bound to names using assignment expressions:
 
 ```rust, noplaypen
-num: Int = 42;
+my_number: Int = 42; ...
 ```
 
-From the variable declaration above we can tell about `num`:
-    1. It is immutable.
-    2. It's value is `42`.
-    3. It's type is `Int`.
+In this example `my_number` has value `42` and has type `Int`. `my_number` cannot be mutated after its definition.
 
-`Int` is the only builtin numeric type in Helios it represents an unbounded integer. See [Builtin Types](./02_Builtin_Types.md) for more details.
+Assignment expressions must be followed by another expression, separated by a semicolon (`;`). The assignment expression above should be seen as syntactic sugar for `((my_number: Int) -> {...})(42)`.
+
+> **Note**: `Int` is Helios' only number type, and represents an unbounded integer. See [Builtin Types](./02_Builtin_Types.md) for more details.
+
+> **Note**: an assignment expression can alternatively be seen as a ternary operator: `... = ... ; ...`
+
+## `const` statements
+
+Values can also be bound to names at the *top-level* of a script, or inside `struct` or `enum` blocks. This is done with the `const` keyword:
+
+```rust, noplaypen
+const AGE: Int = 123
+```
+
+> **Note**: The right-hand side of a constant can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.
 
 ## Type Annotations
 
-A variable declaration must contain a *type annotation.*, unless it's right-hand side is a literal.
-This is done not just for helping the compiler, but also to make Helios code more readable. A few more example of type annotations.
-
+Assignment expressions and `const` statements usually include  a *type annotation*. For literal right-hand sides *type annotations* are optional:
 ```rust, noplaypen
-list_of_ints = []Int{1, 1, 2, 3, 5};
+list_of_ints = []Int{1, 1, 2, 3, 5}; ...
 
-// Instead of
+// instead of the more verbose:
 
-list_of_ints: []Int = []Int{1, 1, 2, 3, 5};
+list_of_ints: []Int = []Int{1, 1, 2, 3, 5}; ...
 ```
-
-## Constants
-
-Helios has support for compile-time constants, constants are declared using the `const` keyword and must be named in all caps.
-Constants in Helios are *top-level* statements, this means they are declared outside functions like `struct` definitions,
-in Helios top-level statements are not followed by a semicolon (`;`).
-
-```rust, noplaypen
-const AGE: Int = 2132
-```
-
-It's best practice to use `const` for all top-level assignments and all variables known at compile-time.
-
-> **Note**: Constants are statements can only be set to the result of an `if`/`else` expression if the `if`/`else` expression evaluates to something constant.

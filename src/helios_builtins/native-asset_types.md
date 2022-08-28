@@ -9,19 +9,22 @@ Helios uses the `AssetClass` and `Value` types to represent Cardano Native-Asset
 Represents a unique token on the blockchain using the hash of it's minting policy and it's token name.
 
 ```rust, noplaypen
+// internal representation
 struct AssetClass {
-    policy_hash: MintingPolicyHash
-    token_name: String
+    MintingPolicyHash // not directly accessible
+    ByteArray // not directly accessible
 }
 ```
 
-### Associated Functions
+### Associated functions and constants
 
 ```rust, noplaypen
-const ADA: AssetClass;
+const ADA: AssetClass
 
-// @returns a 
-func new(policy_hash: ByteArray, token_name: ByteArray) -> AssetClass;
+// @returns a new AssetClass
+func new(policy_hash: MintingPolicyHash, token_name: ByteArray) -> AssetClass
+
+func from_data(data: Data) -> AssetClass
 ```
 
 ### Operators
@@ -30,27 +33,25 @@ func new(policy_hash: ByteArray, token_name: ByteArray) -> AssetClass;
 
 ### Methods
 
-`serialize`
-
-### Internal Namespace
-
-`__helios__assetclass`
+```rust, noplaypen
+func serialize(self) -> ByteArray
+```
 
 ## Value
 
 ---
 
-The `Value` type represents a **token bundle** using a map of `AssetClass`es to amounts `Int`,
+The `Value` type represents a **token bundle** using a map of `AssetClass`es to `Int` quantities,
 
 ```rust, noplaypen
 struct Value {..}
 ```
 
-### Associated Functions
+### Associated functions and constants
 
 ```go, noplaypen
 // An empty Value
-const ZERO: Value;
+const ZERO: Value
 
 // @returns A Value containing 'amount' number of lovelaces.
 func lovelace(amount: Int) -> Value
@@ -61,31 +62,18 @@ func new(asset_class: AssetClass, amount: Int) -> Value
 
 ### Operators
 
-`==`, `!=`, `+`, `-`, `>=`, `>`, `<=`, `<`
+`==`, `!=`, `+`, `-`, `*`, `/`, `>=`, `>`, `<=`, `<`
 
 ### Methods
 
 ```go, noplaypen
-func serialize(self: Value) -> ByteArray
+func serialize(self) -> ByteArray
 
-func is_zero(self: Value) -> Bool
+func is_zero(self) -> Bool
 
-func get(self: Value, asset_class) -> Int
+func get(self, asset_class) -> Int
 
-func contains(self: Value, other_value: Value) -> Bool
+func get_policy(self, mph: MintingPolicyHash) -> Map[ByteArray]Int
 
-// Hidden
-// TODO
-func get_map_keys()
-func merge_map_key()
-func get_inner_map()
-func get_inner_map_int() 
-func add_or_subtract_inner() 
-func add_or_subtract() 
-func compare_inner()
-func compare()
+func contains(self, other_value: Value) -> Bool
 ```
-
-### Internal Namespace 
-
-`__helios__value`

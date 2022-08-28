@@ -10,7 +10,9 @@ a public key, validator script, minting policy or datum.
 ### Associated Functions
 
 ```go, playpen
-func new(bytes: ByteArray) -> PubKeyHash
+func new(bytes: ByteArray) -> *Hash
+
+func from_data(data: Data) -> *Hash
 ```
 
 ### Operators
@@ -25,21 +27,25 @@ func serialize(self) -> ByteArray
 func show(self) -> String
 ```
 
-### Internal Namespace
-
-`__helios__hash`
-
 ## ScriptContext
 
 ---
 
-The `ScriptContext` type represents contains all the metadata related to a signed Cardano transaction.
+The `ScriptContext` type contains all the metadata related to a signed Cardano transaction.
 It's just a wrapper around the `Tx` type with some extra methods.
 
 ```go, noplaypen
+// internal representation
 struct ScriptContext {
-    tx: Tx,
+    tx: Tx
+	ScriptPurpose // not directly accessible
 }
+```
+
+### Associated functions
+
+```rust, noplaypen
+func from_data(data: Data) -> ScriptContext
 ```
 
 ### Operators
@@ -50,25 +56,28 @@ struct ScriptContext {
 
 ```go, noplaypen
 // @returns The ScriptContext serialized into bytes.
-func serialize(self: ScriptContext) -> ByteArray;
+func serialize(self) -> ByteArray
 
-// ! UNSURE
-// @returns The TxOutputId of t
-func get_spending_purpose_output_id(self: ScriptContext) -> TxOutputId;
+// @notice only available in spending scripts
+// @returns The TxOutputId of the current UTXO being spent
+func get_spending_purpose_output_id(self) -> TxOutputId
 
-// @returns The ValidatorHash of the validator script being evaluated.
-func get_current_validator_hash(self: ScriptContext) -> ValidatorHash;
+// @notice only available in spending scripts
+// @returns the current UTXO being spent as TxInput
+func get_current_input(self) -> TxInput
 
+// @notice only availabe in spending scripts
+// @returns The ValidatorHash of the current script
+func get_current_validator_hash(self) -> ValidatorHash
+
+// @notice only available in minting scripts
 // @returns The MintingPolicyHash of the minting policy being evaluated.
-func get_current_minting_policy_hash(self: ScriptContext) -> MintingPolicyHash;
+func get_current_minting_policy_hash(self) -> MintingPolicyHash
 
-// @returns the TxInput locked by the validator script being evaluated.
-func get_current_input(self: ScriptContext) -> TxInput;
+// @notice only available in staking scripts
+// @returns the current staking sub-purpose (Rewarding or Certifying)
+func get_staking_purpose(self) -> StakingPurpose
 ```
-
-### Internal Namespace
-
-`__helios__scriptcontext`
 
 ## Tx
 
@@ -78,14 +87,22 @@ This type stores the data related to a signed transaction.
 
 ```rust, noplaypen
 struct Tx {
-    id: TxId                     // Transaction ID
-    inputs: []TxInputs           // Transactin Inputs
-    outputs: []TxOutputs         // Transaction Outputs
+    inputs: []TxInput            // Transactin Inputs
+	ref_inputs: []TxInput        // Reference inputs (not spent)
+    outputs: []TxOutput          // Transaction Outputs
     fee: Value                   // Fee paid for this transaction
     minted: Value                // Value minted by this transaction
+	dcerts: []DCert              // Digests involved in this transaction
+	withdrawals: Map[StakingCredential]Int // Staking withdrawals in this transaction
     time_range: TimeRange        // Valid Time Range of a transaction
     signatories: []PubKeyHash    // signatories of the transaction
+    id: TxId                     // Transaction ID
 }
+```
+
+### Associated functions
+```rust, noplaypen
+func from_data(data: Data) -> Tx
 ```
 
 ### Operators
@@ -95,41 +112,38 @@ struct Tx {
 ### Methods
 
 ```go, noplaypen
-func serialize(self: Tx) -> ByteArray;
+func serialize(self) -> ByteArray
 
 // @returns The current POSIX time.
-func now(self: Tx) -> Time; 
+func now(self) -> Time; 
 
 // @returns true if the transaction was signed by pubkeyhash.
-func is_signed_by(self: Tx, pubkeyhash: PubKeyHash) -> Bool;
+func is_signed_by(self, pubkeyhash: PubKeyHash) -> Bool
 
 // @returns The Datum Hash of the UTXO guarded by the script.
-func find_datum_hash(self: Tx) -> ByteArray;
+func find_datum_hash(self) -> ByteArray
 
-// ! UNSURE
-// @returns The TxOutputs sent to an address.
-func outputs_sent_to(self: Tx, addr: PubKeyHash) -> []TxOutput;
+// @returns The TxOutputs sent to a regular payment address.
+func outputs_sent_to(self, pkh: PubKeyHash) -> []TxOutput
 
-// ! UNSURE
+func outputs_sent_to_datum(self, pkh: PubKeyHash, datum: Any) -> []TxOutput
+
 // @returns The TxOutputs locked by a script.
-func outputs_locked_by(self: Tx, script_hash: ScriptHash) -> []TxOutput;
+func outputs_locked_by(self, script_hash: ValidatorHash) -> []TxOutput
 
-// ! UNSURE
-// @returns The Value sent to an address.
-func value_sent_to(self: Tx, addr: PubKeyHash) -> Value;
+func outputs_locked_by_datum(self, script_hash: ValidatorHash, datum: Any) -> []TxOutput
 
-// ! UNSURE
-// @returns The Value locked by a script_hash.
-func value_locked_by(self: Tx, script_hash: ScriptHash) -> Value;
+// @returns The output Value sent to a regular payment address.
+func value_sent_to(self, addr: PubKeyHash) -> Value
 
-// ! UNSURE
-// @returns The Value locked by datum_hash.
-func value_locked_by_datum(self: Tx, datum_hash: DatumHash) -> Value
+func value_sent_to_datum(self, addr: PubKeyHash, datum: Any) -> Value
+
+// @returns The output Value locked by a script
+func value_locked_by(self, script_hash: ValidatorHash) -> Value
+
+// @returns The output Value locked by a script with a certain datum.
+func value_locked_by_datum(self, script_hash: ValidatorHash, datum: Any) -> Value
 ```
-
-### Internal Namespace
-
-`__helios__tx`
 
 ## TxId
 
@@ -141,17 +155,22 @@ This is a type-safe wrapper around the `ByteArray`
 struct TxId {...}
 ```
 
+### Associated functions
+```rust, noplaypen
+func new(bytes: ByteArray) -> TxId
+
+func from_data(data: Data) -> TxId
+```
+
 ### Operators
 
 `==`, `!=`
 
 ### Methods
 
-`serialize`
-
-### Internal Namespace
-
-`__helios__txid`
+```rust, noplaypen
+func serialize(self) -> ByteArray
+```
 
 ## TxInput
 
@@ -161,9 +180,14 @@ This type represents a **Transaction Input**.
 
 ```rust, noplaypen
 struct TxInput {
-    output_id: TxOutputId,
+    output_id: TxOutputId
     output: TxOutput
 }
+```
+
+### Associated functions
+```rust, noplaypen
+func from_data(data: Data) -> TxInput
 ```
 
 ### Operators
@@ -173,12 +197,8 @@ struct TxInput {
 ### Methods
 
 ```go, noplaypen
-func serialize(self: TxInput) -> ByteArray
+func serialize(self) -> ByteArray
 ```
-
-### Internal Namespace 
-
-`__helios__txinput`
 
 ## TxOutput
 
@@ -188,11 +208,15 @@ This type represents a **Transaction Output**.
 
 ```go, noplaypen
 struct TxOutput {
-    //! UNSURE
     address: Address
     value: Value
-    datum_hash: ByteArray
+    datum: OutputDatum
 }
+```
+
+### Associated functions
+```rust, noplaypen
+func from_data(data: Data) -> TxOutput
 ```
 
 ### Operators
@@ -202,27 +226,45 @@ struct TxOutput {
 ### Methods
 
 ```go, noplaypen
-func serialize(self: TxOutput) -> ByteArray
-
-// Hidden
-func get_datum_hash(self: TxOutput) -> DatumHash
+func serialize(self) -> ByteArray
 ```
 
-### Internal Namespace 
+## OutputDatum
 
-`__helios__txoutput`
+```rust, noplaypen
+enum OutputDatum {
+	None
+	Hash{hash: DatumHash}
+	Inline{data: Data}
+}
+```
+
+### Associated functions
+
+```rust, noplaypen
+func from_data(data: Data) -> OutputDatum
+```
+
+### Operators
+
+`==`, `!=`
+
+### Methods
+```rust, noplaypen
+func serialize(self) -> ByteArray
+```
 
 ## TxOutputId
 
 ---
 
 This type is a unique ID for a UTXO (Unspent Transaction Output).
-It's composed of the **Transaction ID** (`TxId`) of the transaction that created the UTXO and the index (`Int`) of the UTXO in the outputs of the transaction.
+It's composed of the **Transaction ID** (`TxId`) of the transaction that created the UTXO and the index (`Int`) of the UTXO in the outputs of that transaction.
 
 ```go, noplaypen
 struct TxOutputId {
-    tx_id: TxId
-    index: Int
+    TxId // not directly accessible
+    Int // not directly accessible
 }
 ```
 
@@ -230,6 +272,8 @@ struct TxOutputId {
 
 ```go, noplaypen
 func new(tx_id: TxId, index: Int) -> TxOutputId
+
+func from_data(data: Data) -> TxOutputId
 ```
 
 ### Operators
@@ -239,12 +283,8 @@ func new(tx_id: TxId, index: Int) -> TxOutputId
 ### Methods
 
 ```go, noplaypen
-func serialize(self: TxOutputId) -> ByteArray
+func serialize(self) -> ByteArray
 ```
-
-### Internal Namespace 
-
-`__helios__txoutputid`
 
 ## Address
 
@@ -255,10 +295,16 @@ The `Address` type represents a cardano address.
 ```rust, noplaypen
 struct Address {
     credential: Credential
-    staking_credential: StakingCredential
+    staking_credential: Option[StakingCredential]
 }
 ```
 
+### Associated functions
+```rust, noplaypen
+func new(credential: Credential, staking_credential: Option[StakingCredential]) -> Address
+
+func from_data(data: Data) -> Address
+```
 ### Operators
 
 `==`, `!=`
@@ -267,15 +313,7 @@ struct Address {
 
 ```go, noplaypen
 func serialize(self: Address) -> ByteArray
-
-// Hidden      
-// @returns 'true' if the Address is staked.
-func is_staked(self: Address) -> Bool
 ```
-
-### Internal Namespace 
-
-`__helios__address`
 
 ## Credential
 
@@ -290,6 +328,15 @@ enum Credential {
 }
 ```
 
+### Associated functions
+```rust, noplaypen
+func new_pubkey(pkh: PubKeyHash) -> Credential::PubKeyHash
+
+func new_validator(vh: ValidatorHash) -> Credential::ValidatorHash
+
+func from_data(data: Data) -> Credential
+```
+
 ### Operators
 
 `==`, `!=`
@@ -297,20 +344,8 @@ enum Credential {
 ### Methods
 
 ```go, noplaypen
-func serialize(self: Credential) -> ByteArray
-
-// Hidden
-// @returns 'true' if the Credential is a PubKeyHash
-func is_pubkey(self: Credential) -> Bool
-
-// Hidden
-// @returns 'true' if the Credential is a ValidatorHash
-func is_validator(self: Credential) -> Bool
+func serialize(self) -> ByteArray
 ```
-
-### Internal Namespace
-
-`__helios__credential`
 
 ### Operators
 
@@ -319,40 +354,20 @@ func is_validator(self: Credential) -> Bool
 ## StakingCredential
 
 ---
-
-// TODO Add internal of the `StakingCredential` type.
-
-### Operators
-
-`==`, `!=`
-
-### Methods
-
-```go, noplaypen
-func serialize(self: StakingCredential) -> ByteArray
+```rust, noplaypen
+enum StakingCredential {
+	Hash{Credential}
+	Ptr{Int, Int, Int}
+}
 ```
 
-### Internal Namespace
+### Associated functions
+```rust, noplaypen
+func new_hash(credential: Credential) -> StakingCredential::Hash
 
-`__helios__stakingcredential`
+func new_ptr(a: Int, b: Int, c: Int) -> StakingCredential::Ptr
 
-## Common (hidden from user)
-
-### Associated Functions
-
-```go, noplaypen
-// TODO Add documentation
-
-func verbose_error()
-func assert_constr_index()
-func not()
-func identity()
-func serialize()
-func is_in_bytearray_list()
-func unbooldata()
-func booldata()
-func unstringdata()
-func stringdata()
+func from_data(data: Data) -> StakingCredential
 ```
 
 ### Operators
@@ -360,9 +375,63 @@ func stringdata()
 `==`, `!=`
 
 ### Methods
+```go, noplaypen
+func serialize(self) -> ByteArray
+```
 
-`__identity`
+## StakingPurpose
 
-### Internal Namespace
+```rust, noplaypen
+enum StakingPurpose {
+	Rewarding{credential: StakingCredential}
+	Certifying{dcert: DCert}
+}
+```
 
-`__helios__common`
+### Associated functions
+```rust, noplaypen
+func from_data(data: Data) -> StakingPurpose
+```
+
+### Operators
+`==`, `!=`
+
+### Methods
+```go, noplaypen
+func serialize(self) -> ByteArray
+```
+
+## DCert
+
+```rust, noplaypen
+enum DCert {
+	Register{credential: StakingCredential}
+	Deregister{credential: StakingCredential}
+	Delegate{delegator: StakingCredential, pool_id: PubKeyHash}
+	RegisterPool{pool_id: PubKeyHash, pool_vfr: PubKeyHash}
+	RetirePool{pool_id: PubKeyHash, epoch: Int}
+}
+```
+
+### Associated functions
+```rust, noplaypen
+func from_data(data: Data) -> DCert
+
+func new_register(credential: StakingCredential) -> DCert::Register
+
+func new_deregister(credential: StakingCredential) -> DCert::Deregister
+
+func new_delegate(delegator: StakingCredential, pool_id: PubKeyHash) -> DCert::Delegate
+
+func new_register_pool(pool_id: PubKeyHash, pool_vfr: PubKeyHash) -> DCert::RegisterPool
+
+func new_retire_pool(pool_id: PubKeyHash, epoch: Int) -> DCert::RetirePool
+```
+
+### Operators
+`==`, `!=`
+
+### Methods
+```rust, noplaypen
+func serialize(self) -> ByteArray
+```

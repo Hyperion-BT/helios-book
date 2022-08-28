@@ -1,6 +1,6 @@
 # Validator Scripts
 
-In the last chapter we learnt that validators are functions that return a boolean (`true`  or `false`) when validating a transaction. In Helios validators are functions that take three arguments:
+In the previous chapter we learned that validators are functions that return a boolean (`true`  or `false`) when validating a transaction. In Helios validators are functions that take three arguments:
 
 - The Redeemer: A piece of data attached to the transaction.
 - The Datum: Data stored onchain linked to the UTXO.
@@ -11,7 +11,7 @@ The Redeemer and the Datum are user-defined but the `ScriptContext` struct is th
 A simple validator
 
 ```rust
-spending always_true;       // -------- (1)
+spending always_true        // -------- (1)
 
 struct Datum {..}           // --------- (2)
 
@@ -26,13 +26,14 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {
 
 ## Script Purpose
 
-In Helios all scripts start with a  **script purpose**(1), followed by the name of the script. There are three (3) script purposes currently:
+In Helios all scripts start with a  **script purpose**(1), followed by the name of the script. There are four script purposes currently:
 
 - **spending**
 - **minting**
+  **staking**
 - **testing**
 
-We will cover the latter two in later chapters.
+In this chapter we are only concerned with the `spending` script purpose. We will cover the remaining three in later chapters.
 
 ```rust, noplaypen
 spending always_true
@@ -47,49 +48,29 @@ The main function of a validator accepts three arguments and returns a `Bool`:
 - **The ScriptContext**
 
 ```go, noplaypen
-spending always_true
-
-struct Datum {..}
-
-struct Redeemer {..}
+spending my_validator
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
     ...
-    true
 }
 ```
 
+Most of the data needed for writing useful validators is contained in the `ScriptContext`.
+We will cover the `ScriptContext` in the next page.
+
 >**Note**: The Datum and the Redeemer are user-defined types (structs or enums) that **must** be named `Datum` and `Redeemer`.
 
+
 ## AlwaysTrue Validator
+
+This basic script allows UTXOs to be spent any way the user wants:
 
 ```go, noplaypen
 spending always_true
 
-struct Datum {..}
-
-struct Redeemer {..}
-
-func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
-    ...
+func main() -> Bool {
     true
 }
 ```
 
-## Omitting Validator Arguments
-
-The above validator could be rewritten as:
-
-```rust
-spending always_true     
-
-func main(ctx: ScriptContext) -> Bool {        // -------- (2)
-    ...
-    true                     
-}
-```
-
->**Note**: The Helios compiler is smart enough to fill in a blank redeemer and datum when they are omitted.
-
-Most of the data needed for writing useful validators is contained in the `ScriptContext`.
-We will cover the `ScriptContext` in the next page.
+Unused arguments must be eliminated. In this case all three arguments of `main` function must be omitted (the compiler is smart enough to add them internally).

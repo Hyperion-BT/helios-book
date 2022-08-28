@@ -12,14 +12,19 @@ This book is also meant to be a guide to the internals of Helios for Helios deve
 
 ## Helios Operators
 
-| Operator | Internal Name |
-| :---     | :---          |
-| `==`     | `__eq`        |
-| `!=`     | `__neq`       |
-| `>`      | `__gt`        |
-| `>=`     | `__geq`       |
-| `<`      | `__lt`        |
-| `<=`     | `__leq`       |
-| `!`      | `__not`       |
-| `and`    |  `__and`      |
-| `or`     |  `__or`       |
+| Operator |
+| :---     |
+| `==`     |
+| `!=`     |
+| `>`      |
+| `>=`     |
+| `<`      |
+| `<=`     |
+| `!`      |
+| `&&`     |
+| `||`     |
+| `+`      |
+| `-`      |
+| `*`      |
+| `/`      |
+| `%`      |

@@ -4,12 +4,14 @@
 
 ---
 
-Represents time in POSIX format.
+Represents POSIX time in milliseconds (time since 1970/01/01 00:00:00 UTC).
 
 ### Associated Functions
 
 ```go, noplaypen
-func new(raw: Int) -> Time;
+func new(millis: Int) -> Time
+
+func from_data(data: Data) -> Time
 ```
 
 ### Operators
@@ -18,28 +20,29 @@ func new(raw: Int) -> Time;
 
 ### Methods
 
-serialize, show
+```rust, noplaypen
+func show(self) -> String
 
-### Internal Namespace
-
-`__helios__time`
+func serialize(self) -> ByteArray
+```
 
 ## Duration
 
 ---
 
-The `Duration` type represents as you've probably guessed a duration of time.
-`Time` can be thought of as a vector quantity with direction, while `Duration` is a scalar quantity only having magnitude.
+The difference of two `Time` values is a `Duration` value. Only a `Duration` can be added to a `Time` (two `Time` values can't be added).
 
 ### Associated Functions
 
 ```go, noplaypen
-func new(raw: Int) -> Duration;
+func new(raw: Int) -> Duration
+
+func from_data(data: Int) -> Duration
 ```
 
 ### Operators
 
-`==`, `!=`, `+`, `-`, `__mul`, `__div`, ``, `>=`, `>`, `<=`, `<`
+`==`, `!=`, `+`, `-`, `*`, `/`, `%`, `>=`, `>`, `<=`, `<`
 
 ### Methods
 
@@ -47,17 +50,13 @@ func new(raw: Int) -> Duration;
 func serialize(self: Time) -> ByteArray
 ```
 
-### Internal Namespace
-
-`__helios__duration`
-
 ## TimeRange
 
 ---
 
-This represents a range of time using a pair of `Time` values.
+This represents a range of time using a pair of `Time` values, or open ends.
 
-### Associated Functions
+### Associated functions and constants
 
 ```go, noplaypen
 // Represents TimeRange starting from positive to negative infinity.
@@ -69,10 +68,14 @@ const ALWAYS: TimeRange
 const NEVER: TimeRange
 
 // @returns A TimeRange that contains all Time values from 'start' onwards.
-func from(start: Time) -> TimeRange;
+func from(start: Time) -> TimeRange
 
 // @returns A TimeRange that contains all Time values before 'start' up to 'start'.
-func to(end: Time) -> TimeRange;
+func to(end: Time) -> TimeRange
+
+func new(start: Time, end: Time) -> TimeRange
+
+func from_data(data: Data) -> TimeRange
 ```
 
 ### Operators
@@ -83,16 +86,17 @@ func to(end: Time) -> TimeRange;
 
 ```go, noplaypen
 // @returns The start of TimeRange.
-func get_start(self: TimeRange) -> Time;
+// @notice throws an error if start is negative infinity
+func get_start(self) -> Time
 
-// @returns 'true' if self contains the 'other' TimeRange
-func contains(self: TimeRange, other: TimeRange) -> Bool;
+// @returns 'true' if self contains the 'time'
+func contains(self, time: Time) -> Bool
 
-// @returns 'true' if 'other' TimeRange is after 
+// @returns 'true' if 'time' is before start of 'self'
+func is_before(self, time: Time) -> Bool
 
-func serialize(self: TimeRange) -> Time;
+// @returns 'true' if 'time' is after end of 'self'
+func is_after(self, time: Time) -> Bool
+
+func serialize(self) -> Time
 ```
-
-### Internal Namespace
-
-`__helios__timerange`
