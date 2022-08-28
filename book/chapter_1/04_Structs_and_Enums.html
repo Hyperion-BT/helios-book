@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Methods and Associated Functions - The Helios Programming Language</title>
+        <title>Structs and Enums - The Helios Programming Language</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Structs_and_Enums.html"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Methods_and_Associated_Functions.html" class="active"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/07_Comments_and_Printing.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li><li class="chapter-item expanded "><a href="../chapter_1/08_Control_Flow_and_Printing.html"><strong aria-hidden="true">2.7.</strong> Control Flow and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li><li class="chapter-item expanded "><a href="../chapter_2/05_english_auction.html"><strong aria-hidden="true">3.5.</strong> Example 2: English Auction</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/Native_Assets.html"><strong aria-hidden="true">4.</strong> Native Assets</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_3/Value.html"><strong aria-hidden="true">4.1.</strong> Value</a></li><li class="chapter-item expanded "><a href="../chapter_3/Signed.html"><strong aria-hidden="true">4.2.</strong> Signed Policy</a></li><li class="chapter-item expanded "><a href="../chapter_3/NFT.html"><strong aria-hidden="true">4.3.</strong> NFT</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/helios_builtins.html"><strong aria-hidden="true">5.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../helios_builtins/primitive_types.html"><strong aria-hidden="true">5.1.</strong> Primitive Types</a></li><li class="chapter-item expanded "><a href="../helios_builtins/time_types.html"><strong aria-hidden="true">5.2.</strong> Time Types</a></li><li class="chapter-item expanded "><a href="../helios_builtins/cryptography_types.html"><strong aria-hidden="true">5.3.</strong> Cryptography Types</a></li><li class="chapter-item expanded "><a href="../helios_builtins/native-asset_types.html"><strong aria-hidden="true">5.4.</strong> Native-Assets Types</a></li><li class="chapter-item expanded "><a href="../helios_builtins/transaction_types.html"><strong aria-hidden="true">5.5.</strong> Transaction Types</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../The_Helios_Programming_Language.html"><strong aria-hidden="true">1.</strong> The Helios Programming Language</a></li><li class="chapter-item expanded "><a href="../chapter_1/00_Basics_of_Helios.html"><strong aria-hidden="true">2.</strong> Basics of Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/01_Variables.html"><strong aria-hidden="true">2.1.</strong> Variables</a></li><li class="chapter-item expanded "><a href="../chapter_1/02_Builtin_Types.html"><strong aria-hidden="true">2.2.</strong> Builtin Types</a></li><li class="chapter-item expanded "><a href="../chapter_1/03_Functions.html"><strong aria-hidden="true">2.3.</strong> Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/04_Structs_and_Enums.html" class="active"><strong aria-hidden="true">2.4.</strong> Structs and Enums</a></li><li class="chapter-item expanded "><a href="../chapter_1/05_Methods_and_Associated_Functions.html"><strong aria-hidden="true">2.5.</strong> Methods and Associated Functions</a></li><li class="chapter-item expanded "><a href="../chapter_1/06_Comments_Printing_and_Branching.html"><strong aria-hidden="true">2.6.</strong> Comments and Printing</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/00_Blockchain_Programming_in_Helios.html"><strong aria-hidden="true">3.</strong> Blockchain Development with Helios</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/01_The_EUTXO_Model.html"><strong aria-hidden="true">3.1.</strong> The EUTXO Model</a></li><li class="chapter-item expanded "><a href="../chapter_2/02_Validator_Scripts.html"><strong aria-hidden="true">3.2.</strong> Validator Scripts</a></li><li class="chapter-item expanded "><a href="../chapter_2/03_ScriptContext.html"><strong aria-hidden="true">3.3.</strong> The ScriptContext</a></li><li class="chapter-item expanded "><a href="../chapter_2/04_vesting_contract.html"><strong aria-hidden="true">3.4.</strong> Example 1: Vesting Contract</a></li><li class="chapter-item expanded "><a href="../chapter_2/05_english_auction.html"><strong aria-hidden="true">3.5.</strong> Example 2: English Auction</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/Native_Assets.html"><strong aria-hidden="true">4.</strong> Native Assets</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_3/Value.html"><strong aria-hidden="true">4.1.</strong> Value</a></li><li class="chapter-item expanded "><a href="../chapter_3/Signed.html"><strong aria-hidden="true">4.2.</strong> Signed Policy</a></li><li class="chapter-item expanded "><a href="../chapter_3/NFT.html"><strong aria-hidden="true">4.3.</strong> NFT</a></li></ol></li><li class="chapter-item expanded "><a href="../helios_builtins/helios_builtins.html"><strong aria-hidden="true">5.</strong> Helios Builtins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../helios_builtins/primitive_types.html"><strong aria-hidden="true">5.1.</strong> Primitive Types</a></li><li class="chapter-item expanded "><a href="../helios_builtins/time_types.html"><strong aria-hidden="true">5.2.</strong> Time Types</a></li><li class="chapter-item expanded "><a href="../helios_builtins/cryptography_types.html"><strong aria-hidden="true">5.3.</strong> Cryptography Types</a></li><li class="chapter-item expanded "><a href="../helios_builtins/native-asset_types.html"><strong aria-hidden="true">5.4.</strong> Native-Assets Types</a></li><li class="chapter-item expanded "><a href="../helios_builtins/transaction_types.html"><strong aria-hidden="true">5.5.</strong> Transaction Types</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,105 +142,75 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="methods-and-associated-functions"><a class="header" href="#methods-and-associated-functions">Methods and Associated Functions</a></h1>
-<h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
-<p>Structs and Enums in Helios have methods with syntax a lot like OOP languages.
-Methods are declared just like regular functions but within the type declaration.</p>
-<pre><code class="language-go  noplaypen">struct Rational {
+                        <h1 id="structs-and-enums"><a class="header" href="#structs-and-enums">Structs and Enums</a></h1>
+<h2 id="structs"><a class="header" href="#structs">Structs</a></h2>
+<p>A struct in Helios is a named grouping of types (sometimes called <em>product types</em> in CS). They are similar to structs in other languages (e.g. C, Go and Rust):</p>
+<pre><code class="language-rust  noplaypen">// example of a Rational (fractional type)
+struct Rational {
     top: Int
     bottom: Int
-
-    // Methods take an argument 'self' of the same type of the Struct
-    func add(self: Rational, rhs: Rational) -&gt; Rational {
-        top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
-        bottom: Int = self.bottom * rhs.bottom;
-
-        Rational { top: top, bottom: bottom }
-    }
-}
-example_rational: Rational = Rational { top: 7, bottom: 21};
-
-// Methods can be accessed using regular dot notation.
-example_rational.add(example_rational)
-</code></pre>
-<p>Methods cannot modify the struct as all <code>Helios</code> values are immutable.</p>
-<p>Methods are just syntactic sugar.
-They are desugared to a <strong>curried function</strong> (a function that returns a function) that takes the <code>self</code> type as it's first argument:</p>
-<pre><code class="language-rust  noplaypen">// This:
-rational_1.add(rational_2); 
-// Becomes __user__Rational_add(rational_1)(rational_2)
-// of type (Rational) -&gt; (Rational) -&gt; Rational
-
-
-// 'rational.add' returns a function of type ((Rational) -&gt; Rational) 
-// the first '(Rational) -&gt;' in 'add' is set to rational_1
-// that can be used immediately or stored like any other value.
-add_to_rational_1: (Rational) -&gt; Rational = rational_1.add;
-
-// Note: add_to_rational_1(rational_2) == rational_1.add(rational_2)
-</code></pre>
-<h2 id="associated-functions-and-constants"><a class="header" href="#associated-functions-and-constants">Associated Functions and Constants</a></h2>
-<p>Associated functions and constants are just like regular constants or functions but they are namespaced by a Type.
-E.g Car::new(a, b, c).
-Associated functions are just like <em>static methods</em> in most OOP languages.</p>
-<h3 id="defining-associated-functions"><a class="header" href="#defining-associated-functions">Defining Associated Functions</a></h3>
-<p>Associated functions are defined just like methods but without the <code>self</code> argument.</p>
-<pre><pre class="playground"><code class="language-rust  playpen">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>const Rational::PI = Rational{355, 113}
-
-func Rational::new(top: Int, bottom: Int) -&gt; Rational {
-    Rational { top: top, bottom: bottom }
-}
-<span class="boring">}
-</span></code></pre></pre>
-<h3 id="using-associated-functions-and-constants"><a class="header" href="#using-associated-functions-and-constants">Using Associated Functions and Constants</a></h3>
-<p>Associated Functions and Constants are <em>namespaced</em> by the type they are associated with
-and can be accessed using two colons (<code>::</code>) just like in Rust.
-For example:</p>
-<pre><code class="language-rust  noplaypen">// Using Associated functions
-fifty_fifty: Rational = Rational::new(1, 2)
-</code></pre>
-<h2 id="finished-code"><a class="header" href="#finished-code">Finished Code</a></h2>
-<pre><code class="language-ts">struct Rational {
-    top: Int
-    bottom: Int
-
-    const Rational::PI = Rational{ top: 355, bottom: 113}
-
-    func new(top: Int, bottom: Int) -&gt; Rational {
-        Rational { top: top, bottom: bottom }
-    }
-
-    func add(self: Rational, rhs: Rational) -&gt; Rational {
-        top: Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
-        bottom: Int = self.bottom * rhs.bottom;
-
-        Rational { top: top, bottom: bottom }
-    }
-
 }
 
-rational_1: Rational = Rational::new(1, 5); // 1/5 or 0.2
-rational_2: Rational = Rational::new(2, 5); // 2/5 or 0.4
+// instantiating a struct:
+const x: Rational = Rational { top: 1, bottom: 3 }
 
-res: Rational = rational_1.add(rational_2); // 3/5 or 0.6
+// type can be inferred for struct literals:
+const x = Rational { top: 1, bottom: 3 }
+</code></pre>
+<h2 id="enums"><a class="header" href="#enums">Enums</a></h2>
+<p>Enums are used to represent types that have multiple variants (sometimes called <em>sum types</em> in CS). They are useful for datums and redeemers.</p>
+<p>Example of an enum:</p>
+<pre><code class="language-rust  noplaypen">enum FanSetting {
+    On{ speed: Int }
+    Off
+}
 
-// Using Associated functions
-fifty_fifty: Rational = Rational::new(1, 2); // 1/2 or 0.5
+// instantiating an enum:
+const current_setting: FanSetting = FanSetting::On { 5 }
+
+// type can be inferred for enum literals:
+current_setting = FanSetting::On { 5 };
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> Structs and enum variants with one field are constructed without that field's name as a key.</p>
+</blockquote>
+<h3 id="switch"><a class="header" href="#switch"><code>switch</code></a></h3>
+<p>A <code>switch</code> expression is used to perform different actions depending on the enum variant. It is similar to a <code>switch</code> statement in C or Go (and dissimilar to a <code>match</code> expression in Rust, as Helios doesn't support pattern-matching/destructuring):</p>
+<pre><code class="language-rust  noplaypen">enum Datum {
+	// content of each variant has the same syntax as a regular struct-type
+    Submission{...} 
+    Queue{...}
+    Post{...}
+}
+
+func main(datum: Datum) -&gt; Bool {
+	datum.switch {
+		x: Submission =&gt; { 
+			... // expression must use x
+		},
+		Queue =&gt; {
+			... // x not used, so can't be declared
+		},
+		else =&gt; true // default must come last if all sub-types of Datum aren't handled explicitely
+		// braces surrounding the cases are optional
+	}
+}
 
 </code></pre>
+<blockquote>
+<p><strong>Note:</strong> In Helios, <strong>all</strong> fields in a struct and <strong>all</strong> variants in an enum <strong>must be used</strong>,
+or else the compiler will throw an error.</p>
+</blockquote>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../chapter_1/05_Structs_and_Enums.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../chapter_1/03_Functions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../chapter_1/07_Comments_and_Printing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../chapter_1/05_Methods_and_Associated_Functions.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -250,11 +220,11 @@ fifty_fifty: Rational = Rational::new(1, 2); // 1/2 or 0.5
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../chapter_1/05_Structs_and_Enums.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../chapter_1/03_Functions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../chapter_1/07_Comments_and_Printing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../chapter_1/05_Methods_and_Associated_Functions.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

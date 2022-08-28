@@ -11,13 +11,12 @@ Smart contracts on Cardano are quite different from those on Ethereum.
 
 ### Ethereum-style Smart Contracts (Accounts-based Model)
 
-When a transaction occurs, the balance of one the sender's account is directly decremented and that of the recipient is incremented, like with a bank account.
+When a transaction occurs, the balance of one the sender's account is directly decremented and that of the recipient is incremented, similar to how conventional bank accounts work.
 
-Contracts on Ethereum run via the EVM(Ethereum Virtual Machine),
-the EVM can be thought of as a sort global onchain computer that smart contracts take turns to run on before being accepted onchain.
+Contracts on Ethereum run via the EVM (Ethereum Virtual Machine), the EVM can be thought of as a global on-chain computer which smart contracts take turns running on, before their results are accepted on-chain.
 
 >**Note**: The data of all accounts on Ethereum are stored in a [**Merkle-Patricia Trie**](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/), which is kind of like a fancy hashmap.
-> After all the transaction in a block are run the **root hash** of the new Trie is included in the block.
+> After all the transactions in a block are run the **root hash** of the new Trie is included in the block.
 
 ## The eUTXO Model
 
@@ -26,14 +25,14 @@ A UTXO is like (electronic)-cash where an individual bundle of bills (Ada and na
 
 In a transaction in the UTXO model, one or more UTXOs are used as inputs to the transaction and destroyed, **Transaction Inputs** and one or more UTXOs are created as the result/output of a transaction, **Transaction Outputs**.
 
-Transactions in the accounts-based model mutate the data-points storing the total amounts (this is ***very, very* dangerous** regular banks have special insurances and paper backups in case of mistakes, blockchains have no such systems).
-In the UTXO model only the "bills" that participate in a given transaction can potentially be lost (bad, but nothing catastrophic).
+Transactions in the accounts-based model mutate the data-points storing the total amounts (this is **very risky**; regular banks have special insurances and paper backups in case of mistakes, blockchains have no such fallbacks).
+In the UTXO model only the "bills" that participate in a given transaction can potentially be lost (bad, but not catastrophic).
 
-A UTXO chain can emulate account-based models (for example the [Fuel Rollup](https://fuel.network) uses UTXOs under the hood for parallel execution) and vice versa.
+Of course a UTXO chain can emulate account-based models (for example the [Fuel Rollup](https://fuel.network) uses UTXOs under the hood for parallel execution) and vice versa.
 
 ### Components of a UTXO on Cardano
 
-On eUTXO blockchain the ledger is made up of many UTXOs(Unspent Transcation Outputs). A UTXO has four main components:
+On eUTXO blockchain the ledger is made up of many UTXOs (Unspent Transaction Outputs). A UTXO has four main components:
 
 - An Address
 - Tokens (Native Assets)

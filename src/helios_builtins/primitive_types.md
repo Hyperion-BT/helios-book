@@ -12,14 +12,21 @@ This is an unbounded integer like Haskell's `Integer` type.
 
 `==`, `!=`, `+`, `-`, `*`, `/`, `%`, `>=`, `>`, `<=`, `<`
 
+### Associated functions
+```go, noplaypen
+func from_data(data: Data) -> Int
+```
+
 ### Methods
 
 ```go, noplaypen
-func serialize(self: Int) -> ByteArray;
+func serialize(self) -> ByteArray
 
-func to_bool(self: Int) -> Bool;
+func to_bool(self) -> Bool
 
-func show(self: Int) -> String;
+func to_hex(self) -> String
+
+func show(self) -> String
 ```
 
 ### Internal Namespace
@@ -34,29 +41,31 @@ Represents a boolean value (`true`/`false`).
 
 ```go, noplaypen
 true_val: Bool = true;
-false_val: Bool = false;
+false_val: Bool = false; ...
 ```
 
 ### Associated Functions
 
 ```go, noplaypen
-func and(bool_1: Bool, bool_2: Bool) -> Bool
+func and(fn_bool_1: () -> Bool, fn_bool_2: () -> Bool) -> Bool
 
-func or(bool_1: Bool, bool_2: Bool) -> Bool
+func or(fn_bool_1: () -> Bool, fn_bool_2: () -> Bool) -> Bool
+
+func from_data(data: Data) -> Bool
 ```
 
 ### Operators
 
-`==`, `!=`, `not`, `and`, `or`
+`==`, `!=`, `!`, `&&`, `||`
 
 ### Methods
 
 ```go, noplaypen
-func serialize(self: Bool) -> ByteArray;
+func serialize(self) -> ByteArray
 
-func to_int(self: Bool) -> Int;
+func to_int(self) -> Int
 
-func show(self: Bool) -> String;
+func show(self) -> String
 ```
 
 ### Internal Namespace
@@ -70,19 +79,28 @@ func show(self: Bool) -> String;
 This is a fixed-size string.
 
 ```rust, noplaypen
-example: String = "Woah!";
+example: String = "Woah!"; ...
 ```
 
 ### Operators
 
 `==`, `!=`,`+`
 
+### Associated functions
+```go, noplaypen
+func from_data(data: Data) -> String
+```
+
 ### Methods
 
 ```go, noplaypen
-func serialize(self: Bool) -> ByteArray;
+func serialize(self) -> ByteArray
 
-func encode_utf8(self: Bool) -> String;
+func encode_utf8(self) -> String
+
+func starts_with(self, prefix: String) -> Bool
+
+func ends_with(self, suffix: String) -> Bool
 ```
 
 ### Internal Namespace
@@ -96,36 +114,45 @@ func encode_utf8(self: Bool) -> String;
 This represents an array of bytes.
 
 ```rust, noplaypen
-example: ByteArray = #213212;
+example: ByteArray = #213212; ...
 ```
 
 ### Operators
 
 `==`, `!=`, `+`
 
+### Associated functions
+```go, noplaypen
+func from_data(data: Data) -> ByteArray
+```
+
 ### Getters
 
-`.length`, returns the length of the `ByteArray`.
+`length: Int`, returns the length of the `ByteArray`.
 
 ### Methods:
 
 ```go, noplaypen
-func serialize(self: ByteArray) -> ByteArray;
-
-func length(self: String) -> Int;
+func serialize(self) -> ByteArray
 
 // @returns The SHA2-256 hash of the ByteArray
-func sha2(self: ByteArray) -> ByteArray;
+func sha2(self) -> ByteArray
 
 // @returns The SHA3-256 hash of the ByteArray
-func sha3(self: ByteArray) -> ByteArray;
+func sha3(self) -> ByteArray
 
 // @returns The Blake2b256 hash of the ByteArray
-func blake2b(self: ByteArray) -> ByteArray;
+func blake2b(self) -> ByteArray
 
-func decode_utf8(self: ByteArray) -> String;
+func decode_utf8(self) -> String
 
-func show(self: ByteArray) -> String;
+func show(self) -> String
+
+func starts_with(self, prefix: ByteArray) -> Bool
+
+func ends_with(self, suffix: ByteArray) -> Bool
+
+func slice(self, start: Int, end: Int) -> ByteArray
 ```
 
 ### Internal Namespace
@@ -139,70 +166,74 @@ func show(self: ByteArray) -> String;
 This is type a linked-list.
 
 ```go, playpen
-example: []Int = []Int{1, 2, 3, 4, 5};
+example: []Int = []Int{1, 2, 3, 4, 5}; ...
 ```
 
 
 ### Associated Functions
 
 ```go, noplaypen
-func new[a]() -> []a;
+func from_data(data: Data) -> []a
+
+func new(n: Int, fn: (Int) -> a) -> []a
+
+func new_const(n: Int, item: a) -> []a
 ```
 
 ### Operators
 
-`==`, `!=`,`__add`
+`==`, `!=`, `+`
 
 ### Getters
 
 ```go, noplaypen
 // @returns The length of the list.
-func length(self: []a) -> Int;
+length: Int
 
 // @returns The element at the front of the list
 // @notice Throws an error if the list is empty.
-func head[a](self: []a) -> a;
+head: a
 
 // @returns The element at the end of the list.
 // @notice Throws an error if the list is empty.
-func tail[a](self: []a) -> a;
+tail: []a
 ```
 
 ### Methods
 
 ```go, noplaypen
-func serialize(self: []a) -> ByteArray;
+func serialize(self) -> ByteArray
 
 // @returns 'true' if the list is empty.
-func is_empty(self: []a) -> Bool;
+func is_empty(self) -> Bool
 
 // @returns The element the index in the list.
 // @notice Throws an error if the list is too short.
-func get[a](self: []a, index: Int) -> a;
+func get(self, index: Int) -> a
 
 // @returns A new list with the item prepended at the front of the list.
-func prepend[a](self: []a, item: a) -> []a;
+func prepend(self, item: a) -> []a
 
 // @return 'true' if any of the items in the list satisfy the predicate.
-func any[a](self: []a, predicate: (a) -> Bool) -> Bool;
+func any(self, predicate: (a) -> Bool) -> Bool
 
 // @return 'true' if all of the items in the list satisfy the predicate.
-func all[a](self: []a, predicate: (a) -> Bool) -> Bool;
+func all(self, predicate: (a) -> Bool) -> Bool
 
 // @return The first element in the list that satisfies the predicate.
 // @notice Throws an error is no element satisfies the predicate.
-func find[a](self: []a, predicate: (a) -> Bool) -> a;
+func find(self, predicate: (a) -> Bool) -> a
 
 // @returns A list of all the elements in the list that satisfy the predicate.
-func filter[a](self: []a, predicate: (a) -> Bool) -> []a;
+func filter(self, predicate: (a) -> Bool) -> []a
 
 // @returns Folds a list into a single value by continuosly applying the binary
 //         function to the elements of the list.
-func fold[a, b](self: []a, binary: (b, a) -> b) -> b;
+func fold(self, reducer: (b, a) -> b, init: b) -> b
 
 // @returns The original list list with the transformation function called on
 //          all it's elements.
-func map[a, b](self: []a, transformation: (a) -> b) -> []b;
+func map(self, transformation: (a) -> b) -> []b
 ```
 
 ### Internal Namespace

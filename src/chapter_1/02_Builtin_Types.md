@@ -1,16 +1,14 @@
 # Builtin Types
 
-## Primitive Types
-
-Helios has 6 primitive types:
+Helios has 4 **primitive** types and 3 **container** types:
 
 - `Int` (an unbounded integer)
-- `Bool` (Boolean `true` or `false`)
-- `ByteArray` (array of bytes)
-- `String` (fixed-length string)
+- `Bool` (`true` or `false`)
+- `ByteArray` (array of uint8)
+- `String` (utf-8 text)
 - `List` (linked list)
-- `Map` (A hashmap)
-- `Option`
+- `Map` (association list of key-value pairs)
+- `Option` (aka `Maybe` in Haskell)
 
 ## `Int`
 
@@ -19,135 +17,137 @@ Helios has 6 primitive types:
 Helios' `Int` type represents an unbounded integer like Haskell's `Integer` type.
 
 ```rust,noplaypen
-// Helios has support for multiple Integer literal formats
-normal_literal: Int = 17;
-bits_literal: Int = 0b10001;
-hex_literal: Int = 0x11;
-idk_literal: Int = 0o121;
+// Helios supports typical integer literals:
+my_decimal: Int = 17;
+my_binary: Int = 0b10001;
+my_hex: Int = 0x11;
+my_octal: Int = 0o121; ...
 ```
 
 ## `Bool`
 
 ---
 
-The `Bool` type has two possible values: `true` or `false`. Boolean values are typically used for conditional logic or validation, for example in `if` expressions. Booleans can be negated using the negation operator (`!`),
+The `Bool` type has two possible values: `true` or `false`. Booleans are used throughout validator scripts, and validator scripts must always return a boolean. The simplest validator script is just a literal boolean expression:
 
 ```rust,noplaypen
-func returns_false() -> Bool {
-    !true
+func main() -> Bool {
+    true
 }
 ```
 
-Booleans can also be converted into `Int`s using the `to_int` method.
-
+Booleans can be converted into integers using the builtin `to_int` method:
 ```rust,noplaypen
-x: Int = (true).to_int();  // x == 1
-y: Int = (false).to_int(); // y == 0
+x: Int = (true).to_int(); // x == 1
+y: Int = (false).to_int(); ... // y == 0
 ```
 
 ## `ByteArray`
 
 ---
 
-The `ByteArray` type as you've likely guessed represents an array of bytes.
+The `ByteArray` type, as you've likely guessed, represents an array of bytes. A literal `ByteArray` is a hexadecimal sequence with `#` as a prefix:
 
 ```rust,noplaypen
-simple_bytearray: ByteArray = #af2r221ad;
+my_bytes: ByteArray = #af2e221a; ... // 
 ```
 
-All most core Helios types including all other primitve types can be converted to a `ByteArray` using the `serialize` method.
+All builtin and user types can be converted into a `ByteArray` using the builtin `serialize` method:
 
 ```rust,noplaypen
-result: ByteArray = (1231).serialize();
+cbor_bytes: ByteArray = (123).serialize(); ... // cbor encoding of 123
 ```
 
 ## `String`
 
 ---
 
-Helios strings can be declared using double (`"`) quotes.
+A literal Helios string uses double quotes (`"..."`):
 
 ```ts,noplaypen
-double_quotes: String = "Wow I did it again";
+my_message: String = "hello world"; ...
 ```
 
-Strings in Helios are of static-length and immutable.
-This means a string cannot 'grow' to accomodate more characters after it is declared.
-When concatenating strings in Helios a new string is created.
+Similar to all other values in Helios, strings are immutable and have a fixed length. Strings cannot *grow* after definition. Concatenating two strings creates a new string:
 
 ```rust,noplaypen
 string_1: String = "Hel";
 string_2: String = "ios";
-result: String = string_1 + string_2; // "Helios"
+result: String = string_1 + string_2; ... // "Helios"
 ```
 
-## `List ([]a)`
+## List
 
 ---
 
-Helios has a list type list just like the Haskell `List` type.
-The type signature of the list type is `[]a` where a is the type of items in the list.
-Notably, Helios list items aren't accessed using square brackets, `[]` for indexing instead the `get` method is used, check out [Helios Builtins](../helios_builtins/Helios_Builtins.md/#list-a).
+Helios has a builtin linked list type, similar to Haskell's `List`. The type signature for a list is `[]a` where `a` is the item type. The item type can be any type except a function type.
 
+List literals have a syntax similar to Go:
 ```rust,noplaypen
-// A list of Integers
-some_ints: []Int = []Int{1, 2, 3, 4, 5};
+my_ints = []Int{1, 2, 3, 4, 5};
 
-// Getting an element in a list
-x: Int = some_ints.get(2)    // x == 3
+x: Int = some_ints.get(2); ...   // x == 3
 ```
 
-### Useful Methods
+> **Note**: lists aren't indexed with `[]`. Instead the `get` method must used, check out [Helios Builtins](../helios_builtins/Helios_Builtins.md/#list-a).
 
-Helios lists have a lot of useful methods you'd normally find in other languages
+### Useful methods
+
+Helios lists have typical builtin getters and methods:
 
 ```rust,noplaypen
-// List Methods.
 fib_list: []Int = []Int{1, 1, 2, 3, 5};
 
-//  '.len()' returns the length of the list.
-fib_list.len() != 5;
+//  '.length' returns the length of the list.
+fib_list.length == 5;
 
-//  '.get()' is used instead of square brackets for indexing an element in a list.
-//! Note: Throws error if index is out of range. 
-fib_list.get(4) != 5;
+//  '.get()' is used instead of square brackets for getting a list item by index.
+// throws error if index is out of range. 
+fib_list.get(4) == 5; 
 
-// Returns the element at the first element in a list.
-// Note: Throws an error if list is empty.
-fib_list.head() != 1;
+// '.head' returns the first element of a list.
+// throws error if list is empty.
+fib_list.head == 1;
 
-// Returns the last element in a list
-// Note: Throws an error if the list is empty.
-fib_list.tail() != 5;
+// '.tail' returns the list items following the first item
+// throws error if list is empty.
+fib_list.tail == []Int{1, 2, 3, 5};
 
-fib_list.prepend(0) != []Int{0, 1, 1, 2, 3, 4, 5};
+// '.prepend()' extends a list (creating a new list)
+fib_list.prepend(0) == []Int{0, 1, 1, 2, 3, 5};
 
-[]Int{}.is_empty() == true;
+// '.is_empty()' returns true if list is empty
+[]Int{}.is_empty() == true; 
+
+// '.map()' creates a new list of equal length
+fib_list.map((x: Int) -> Int {x*2}) == []Int{2, 2, 4, 6, 10}; 
+
+// '.fold()' is be used to reduce the over the whole list
+fib_list.fold((sum: Int, x: Int) -> Int {sum + x}, 0) == 12; ...
 ```
 
-## `Map[a, b]`
+## Map
 
 ---
 
-This is type is a Hashmap like `Map` in Haskell or Dictionaries in Python.
-It's used to store key-value pairs.
+A Map in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.
 
+A Map has a type signature and a literal syntax similar to Go:
 ```go, noplaypen
-my_map: Map[String, Int] = Map[String]Int{"zero": 0, "one": 1, "two": 2};
+my_map: Map[String]Int = Map[String]Int{"zero": 0, "one": 1, "two": 2}; // either side of the colon can be an arbitrary expression that evaluates to the correct type
 
-print(my_map.get("zero").show()); // prints '0'
+print(my_map.get("zero").show()); ... // prints '0'
 ```
 
-## `Option[a]`
+## Option
 
 ---
 
-The Helios `Option[a]` is a builtin `enum` used to represent an optional value of type `a`.
-It's defined as:
+The Option type is a builtin enum with type signature `Option[a]`. It is internally defined as:
 
 ```rust, noplaypen
 enum Option[a] {
-    Some { some: a },
+    Some { some: a }
     None
 }
 ```
@@ -157,7 +157,7 @@ enum Option[a] {
 ```rust, noplaypen
 some_int: Option[Int] = Option[Int]::Some{42};
 
-none_int: Option[Int] = Option[Int]::None;
+none_int: Option[Int] = Option[Int]::None; ...
 ```
 
 ## More Information

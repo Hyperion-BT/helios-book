@@ -19,12 +19,14 @@ This is very easy to implement:
 ```go, noplaypen
 minting deadline_nft
 
-const DEADLINE: Time = Time::new(1212)
+const DEADLINE: Time = Time::new(1661665196132) // milliseconds since 1970
 
 
 func main(context: ScriptContext) -> Bool {
-    nft_assetclass: AssetClass = 
-        AssetClass::new(context.get_current_minting_policy, "example-nft");
+    nft_assetclass: AssetClass = AssetClass::new(
+		context.get_current_minting_policy, 
+		"example-nft".encode_utf8()
+	);
     value_minted: Value = context.minted;
 
     value_minted == Value::new(nft_assetclass, 1) && 
@@ -32,7 +34,7 @@ func main(context: ScriptContext) -> Bool {
 }
 ```
 
-> **Note**: Nearly all types in Helios have a `serialize` method which can be used to convert them to a `ByteArray`.
+> **Note**: all types in Helios have a `serialize` method which can be used to convert them to a `ByteArray`.
 
 ## UTXO-Based Approach
 
@@ -57,8 +59,10 @@ minting utxo_nft
 const OUTPUT_ID: TxOutputId = TxOutputId::new(TxId::new(#1213), 1)
 
 func main(context: ScriptContext) -> Bool {
-    nft_assetclass: AssetClass = 
-        AssetClass::new(context.get_current_minting_policy(), "example-nft");
+    nft_assetclass: AssetClass = AssetClass::new(
+		context.get_current_minting_policy(), 
+		"example-nft".encode_utf8()
+	);
     value_minted: Value = context.minted;
 
     value_minted == Value::new(nft_assetclass, 1) && 

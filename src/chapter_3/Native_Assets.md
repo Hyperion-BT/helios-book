@@ -45,12 +45,9 @@ There are a few key differences:
 
 Native assets are identified by their `AssetClass` this is a combination of:
 
-- **It's `MintingPolicyHash`**
-  This is simply the hash of the minting policy of the token.
-  It is sometimes called the CurrencySymbol or Policy ID.
+- a **`MintingPolicyHash`**: the hash of the minting policy of the token. Sometimes referred to as the CurrencySymbol or the PolicyID.
 
-- **It's `TokenName`**
-  This is an (immutable) property of an asset that is used to distinguish different assets within the same policy.
+- a **`TokenName`**: this is an (immutable) property of an asset that is used to distinguish different assets within the same policy (e.g. minting multiple NFTs using the same minting policy)
 
 ```rust, noplaypen
 struct AssetClass {
@@ -60,9 +57,9 @@ struct AssetClass {
     const ADA: AssetClass
 
     // Constructor
-    func new(policy_hash: ByteArray, token_name: String) -> AssetClass;
+    func new(policy_hash: ByteArray, token_name: ByteArray) -> AssetClass;
 }
 ```
 
->**Note:** The MintingPolicyHash of ADA is an empty string (`""`) since nothing can hash
+>**Note:** The MintingPolicyHash of ADA is an `ByteArray` (`#`) since nothing can hash
 >to an empty string ADA is the only token that can't be minted using a minting policy.
