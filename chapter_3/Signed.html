@@ -135,14 +135,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="signed-policy"><a class="header" href="#signed-policy">Signed Policy</a></h1>
-<p>This example will be a simple minting policy that allows minting as long as
-the transaction is signed by an <strong>owner</strong> which will just be a <strong>PubKeyHash</strong>.</p>
+<p>This example shows a simple minting policy that allows minting tokens as long as
+the transaction is signed by an <strong>owner</strong>. The <strong>owner</strong> has a given <code>PubKeyHash</code>.</p>
 <pre><code class="language-go  noplaypen">minting signed
 
-const OWNER: PubKeyHash = #26372...
+const OWNER: PubKeyHash = PubKeyHash::new(#26372...)
 
-func main(context: ScriptContext) -&gt; Bool {
-    context.tx.is_signed_by(OWNER)
+func main(ctx: ScriptContext) -&gt; Bool {
+    ctx.tx.is_signed_by(OWNER)
 }
 </code></pre>
 
