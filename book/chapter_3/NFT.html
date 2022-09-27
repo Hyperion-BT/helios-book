@@ -161,20 +161,19 @@ This is very easy to implement:</p>
 const DEADLINE: Time = Time::new(1661665196132) // milliseconds since 1970
 
 
-func main(context: ScriptContext) -&gt; Bool {
+func main(ctx: ScriptContext) -&gt; Bool {
+	tx: Tx = ctx.tx;
+
     nft_assetclass: AssetClass = AssetClass::new(
-		context.get_current_minting_policy, 
+		ctx.get_current_minting_policy(), 
 		&quot;example-nft&quot;.encode_utf8()
 	);
-    value_minted: Value = context.minted;
 
-    value_minted == Value::new(nft_assetclass, 1) &amp;&amp; 
-    context.now() &lt; DEADLINE
+    value_minted: Value = tx.minted;
+
+    value_minted == Value::new(nft_assetclass, 1) &amp;&amp; tx.now() &lt; DEADLINE
 }
 </code></pre>
-<blockquote>
-<p><strong>Note</strong>: all types in Helios have a <code>serialize</code> method which can be used to convert them to a <code>ByteArray</code>.</p>
-</blockquote>
 <h2 id="utxo-based-approach"><a class="header" href="#utxo-based-approach">UTXO-Based Approach</a></h2>
 <p>This method is based on an <a href="https://plutus-pioneer-program.readthedocs.io/en/latest/pioneer/week5.html">example</a> in the Plutus Pioneer Program.
 This approach takes advantage of the fact that all UTXOs have a unique <code>TxOutputId</code>.
@@ -191,15 +190,18 @@ Since a UTXO can only be spent once this means the token can only be minted once
 
 const OUTPUT_ID: TxOutputId = TxOutputId::new(TxId::new(#1213), 1)
 
-func main(context: ScriptContext) -&gt; Bool {
+func main(ctx: ScriptContext) -&gt; Bool {
+	tx: Tx = ctx.tx;
+
     nft_assetclass: AssetClass = AssetClass::new(
-		context.get_current_minting_policy(), 
+		ctx.get_current_minting_policy(), 
 		&quot;example-nft&quot;.encode_utf8()
 	);
-    value_minted: Value = context.minted;
+
+    value_minted: Value = tx.minted;
 
     value_minted == Value::new(nft_assetclass, 1) &amp;&amp; 
-    context.inputs
+    tx.inputs
         .any((input: TxInput) -&gt; Bool {input.output_id == OUTPUT_ID})
 
 }

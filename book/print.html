@@ -1053,12 +1053,12 @@ a Redeemer.</li>
 }
 </code></pre>
 <blockquote>
-<p><strong>Note:</strong> The MintingPolicyHash of ADA is an <code>ByteArray</code> (<code>#</code>) since nothing can hash
+<p><strong>Note:</strong> The MintingPolicyHash of ADA is an empty <code>ByteArray</code> (<code>#</code>) since nothing can hash
 to an empty string ADA is the only token that can't be minted using a minting policy.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="value"><a class="header" href="#value">Value</a></h1>
-<p>The <code>Value</code> type represents a <em>token bundle</em> using pairs of asset classes (<code>AssetClass</code>)  and amounts (<code>Int</code>).</p>
-<pre><code class="language-go  noplaypen">// The Value type is opaque (it's internals aren't visible to Helios developers)
+<p><code>Value</code> represents a <em>token bundle</em>, where each entry is represented by an <code>AssetClass</code> and an integer amount. <code>AssetClass</code> is turn represents a pair of <code>MintingPolicyHash</code> (a.k.a. PolicyID) and token name.</p>
+<pre><code class="language-go  noplaypen">// Value is opaque (it's internals aren't directly accessible from Helios)
 struct Value {
     ...
 
@@ -1085,14 +1085,14 @@ struct Value {
 <p><strong>Note</strong>: 1 ADA is equal to 1 million Lovelace</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="signed-policy"><a class="header" href="#signed-policy">Signed Policy</a></h1>
-<p>This example will be a simple minting policy that allows minting as long as
-the transaction is signed by an <strong>owner</strong> which will just be a <strong>PubKeyHash</strong>.</p>
+<p>This example shows a simple minting policy that allows minting tokens as long as
+the transaction is signed by an <strong>owner</strong>. The <strong>owner</strong> has a given <code>PubKeyHash</code>.</p>
 <pre><code class="language-go  noplaypen">minting signed
 
-const OWNER: PubKeyHash = #26372...
+const OWNER: PubKeyHash = PubKeyHash::new(#26372...)
 
-func main(context: ScriptContext) -&gt; Bool {
-    context.tx.is_signed_by(OWNER)
+func main(ctx: ScriptContext) -&gt; Bool {
+    ctx.tx.is_signed_by(OWNER)
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="simple-nft"><a class="header" href="#simple-nft">Simple NFT</a></h1>
@@ -1114,20 +1114,19 @@ This is very easy to implement:</p>
 const DEADLINE: Time = Time::new(1661665196132) // milliseconds since 1970
 
 
-func main(context: ScriptContext) -&gt; Bool {
+func main(ctx: ScriptContext) -&gt; Bool {
+	tx: Tx = ctx.tx;
+
     nft_assetclass: AssetClass = AssetClass::new(
-		context.get_current_minting_policy, 
+		ctx.get_current_minting_policy(), 
 		&quot;example-nft&quot;.encode_utf8()
 	);
-    value_minted: Value = context.minted;
 
-    value_minted == Value::new(nft_assetclass, 1) &amp;&amp; 
-    context.now() &lt; DEADLINE
+    value_minted: Value = tx.minted;
+
+    value_minted == Value::new(nft_assetclass, 1) &amp;&amp; tx.now() &lt; DEADLINE
 }
 </code></pre>
-<blockquote>
-<p><strong>Note</strong>: all types in Helios have a <code>serialize</code> method which can be used to convert them to a <code>ByteArray</code>.</p>
-</blockquote>
 <h2 id="utxo-based-approach"><a class="header" href="#utxo-based-approach">UTXO-Based Approach</a></h2>
 <p>This method is based on an <a href="https://plutus-pioneer-program.readthedocs.io/en/latest/pioneer/week5.html">example</a> in the Plutus Pioneer Program.
 This approach takes advantage of the fact that all UTXOs have a unique <code>TxOutputId</code>.
@@ -1144,15 +1143,18 @@ Since a UTXO can only be spent once this means the token can only be minted once
 
 const OUTPUT_ID: TxOutputId = TxOutputId::new(TxId::new(#1213), 1)
 
-func main(context: ScriptContext) -&gt; Bool {
+func main(ctx: ScriptContext) -&gt; Bool {
+	tx: Tx = ctx.tx;
+
     nft_assetclass: AssetClass = AssetClass::new(
-		context.get_current_minting_policy(), 
+		ctx.get_current_minting_policy(), 
 		&quot;example-nft&quot;.encode_utf8()
 	);
-    value_minted: Value = context.minted;
+
+    value_minted: Value = tx.minted;
 
     value_minted == Value::new(nft_assetclass, 1) &amp;&amp; 
-    context.inputs
+    tx.inputs
         .any((input: TxInput) -&gt; Bool {input.output_id == OUTPUT_ID})
 
 }

@@ -61,5 +61,5 @@ struct AssetClass {
 }
 ```
 
->**Note:** The MintingPolicyHash of ADA is an `ByteArray` (`#`) since nothing can hash
+>**Note:** The MintingPolicyHash of ADA is an empty `ByteArray` (`#`) since nothing can hash
 >to an empty string ADA is the only token that can't be minted using a minting policy.

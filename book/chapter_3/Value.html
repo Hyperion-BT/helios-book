@@ -143,8 +143,8 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="value"><a class="header" href="#value">Value</a></h1>
-<p>The <code>Value</code> type represents a <em>token bundle</em> using pairs of asset classes (<code>AssetClass</code>)  and amounts (<code>Int</code>).</p>
-<pre><code class="language-go  noplaypen">// The Value type is opaque (it's internals aren't visible to Helios developers)
+<p><code>Value</code> represents a <em>token bundle</em>, where each entry is represented by an <code>AssetClass</code> and an integer amount. <code>AssetClass</code> is turn represents a pair of <code>MintingPolicyHash</code> (a.k.a. PolicyID) and token name.</p>
+<pre><code class="language-go  noplaypen">// Value is opaque (it's internals aren't directly accessible from Helios)
 struct Value {
     ...
 

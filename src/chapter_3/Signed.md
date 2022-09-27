@@ -1,14 +1,14 @@
 # Signed Policy
 
-This example will be a simple minting policy that allows minting as long as
-the transaction is signed by an **owner** which will just be a **PubKeyHash**.
+This example shows a simple minting policy that allows minting tokens as long as
+the transaction is signed by an **owner**. The **owner** has a given `PubKeyHash`.
 
 ```go, noplaypen
 minting signed
 
-const OWNER: PubKeyHash = #26372...
+const OWNER: PubKeyHash = PubKeyHash::new(#26372...)
 
-func main(context: ScriptContext) -> Bool {
-    context.tx.is_signed_by(OWNER)
+func main(ctx: ScriptContext) -> Bool {
+    ctx.tx.is_signed_by(OWNER)
 }
 ```

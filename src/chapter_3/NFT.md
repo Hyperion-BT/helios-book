@@ -22,19 +22,19 @@ minting deadline_nft
 const DEADLINE: Time = Time::new(1661665196132) // milliseconds since 1970
 
 
-func main(context: ScriptContext) -> Bool {
+func main(ctx: ScriptContext) -> Bool {
+	tx: Tx = ctx.tx;
+
     nft_assetclass: AssetClass = AssetClass::new(
-		context.get_current_minting_policy, 
+		ctx.get_current_minting_policy(), 
 		"example-nft".encode_utf8()
 	);
-    value_minted: Value = context.minted;
 
-    value_minted == Value::new(nft_assetclass, 1) && 
-    context.now() < DEADLINE
+    value_minted: Value = tx.minted;
+
+    value_minted == Value::new(nft_assetclass, 1) && tx.now() < DEADLINE
 }
 ```
-
-> **Note**: all types in Helios have a `serialize` method which can be used to convert them to a `ByteArray`.
 
 ## UTXO-Based Approach
 
@@ -58,15 +58,18 @@ minting utxo_nft
 
 const OUTPUT_ID: TxOutputId = TxOutputId::new(TxId::new(#1213), 1)
 
-func main(context: ScriptContext) -> Bool {
+func main(ctx: ScriptContext) -> Bool {
+	tx: Tx = ctx.tx;
+
     nft_assetclass: AssetClass = AssetClass::new(
-		context.get_current_minting_policy(), 
+		ctx.get_current_minting_policy(), 
 		"example-nft".encode_utf8()
 	);
-    value_minted: Value = context.minted;
+
+    value_minted: Value = tx.minted;
 
     value_minted == Value::new(nft_assetclass, 1) && 
-    context.inputs
+    tx.inputs
         .any((input: TxInput) -> Bool {input.output_id == OUTPUT_ID})
 
 }

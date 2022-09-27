@@ -1,9 +1,9 @@
 # Value
 
-The `Value` type represents a *token bundle* using pairs of asset classes (`AssetClass`)  and amounts (`Int`).
+`Value` represents a *token bundle*, where each entry is represented by an `AssetClass` and an integer amount. `AssetClass` is turn represents a pair of `MintingPolicyHash` (a.k.a. PolicyID) and token name.
 
 ```go, noplaypen
-// The Value type is opaque (it's internals aren't visible to Helios developers)
+// Value is opaque (it's internals aren't directly accessible from Helios)
 struct Value {
     ...
 
