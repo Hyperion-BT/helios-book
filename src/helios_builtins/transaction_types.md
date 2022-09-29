@@ -115,6 +115,8 @@ func from_data(data: Data) -> Tx
 func serialize(self) -> ByteArray
 
 // @returns The current POSIX time.
+// @notice Uses the start of 'self.time_range'. Throws an error if that start is negative or positive infinity.
+// @notice Use cardano-cli's --invalid-before option to set the start time of the valid 'time_range' to something finite. 
 func now(self) -> Time; 
 
 // @returns true if the transaction was signed by pubkeyhash.

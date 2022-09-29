@@ -59,11 +59,11 @@ This represents a range of time using a pair of `Time` values, or open ends.
 ### Associated functions and constants
 
 ```go, noplaypen
-// Represents TimeRange starting from positive to negative infinity.
+// Represents TimeRange starting from negative to positive infinity.
 // It contains all possible Time values.
 const ALWAYS: TimeRange
 
-// Represents TimeRange starting from negative to positive infinity.
+// Represents TimeRange starting from positive to negative infinity.
 // It contains nothing as it's impossible.
 const NEVER: TimeRange
 
@@ -86,17 +86,19 @@ func from_data(data: Data) -> TimeRange
 
 ```go, noplaypen
 // @returns The start of TimeRange.
-// @notice throws an error if start is negative infinity
+// @notice Throws an error if start is negative or positive infinity
 func get_start(self) -> Time
 
 // @returns 'true' if self contains the 'time'
 func contains(self, time: Time) -> Bool
 
-// @returns 'true' if 'time' is before start of 'self'
+// @returns 'true' if the end of 'self' is before 'time'
+// @notice Always returns 'false' if end of 'self' is positive infinity
 func is_before(self, time: Time) -> Bool
 
-// @returns 'true' if 'time' is after end of 'self'
+// @returns 'true' if the start of 'self' is after 'time'
+// @notice Always returns 'false' if start of 'self' is negative infinity
 func is_after(self, time: Time) -> Bool
 
-func serialize(self) -> Time
+func serialize(self) -> ByteArray
 ```
