@@ -167,11 +167,11 @@ func from_data(data: Int) -&gt; Duration
 <hr />
 <p>This represents a range of time using a pair of <code>Time</code> values, or open ends.</p>
 <h3 id="associated-functions-and-constants"><a class="header" href="#associated-functions-and-constants">Associated functions and constants</a></h3>
-<pre><code class="language-go  noplaypen">// Represents TimeRange starting from positive to negative infinity.
+<pre><code class="language-go  noplaypen">// Represents TimeRange starting from negative to positive infinity.
 // It contains all possible Time values.
 const ALWAYS: TimeRange
 
-// Represents TimeRange starting from negative to positive infinity.
+// Represents TimeRange starting from positive to negative infinity.
 // It contains nothing as it's impossible.
 const NEVER: TimeRange
 
@@ -189,19 +189,21 @@ func from_data(data: Data) -&gt; TimeRange
 <p><code>==</code>,<code>!=</code></p>
 <h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
 <pre><code class="language-go  noplaypen">// @returns The start of TimeRange.
-// @notice throws an error if start is negative infinity
+// @notice Throws an error if start is negative or positive infinity
 func get_start(self) -&gt; Time
 
 // @returns 'true' if self contains the 'time'
 func contains(self, time: Time) -&gt; Bool
 
-// @returns 'true' if 'time' is before start of 'self'
+// @returns 'true' if the end of 'self' is before 'time'
+// @notice Always returns 'false' if end of 'self' is positive infinity
 func is_before(self, time: Time) -&gt; Bool
 
-// @returns 'true' if 'time' is after end of 'self'
+// @returns 'true' if the start of 'self' is after 'time'
+// @notice Always returns 'false' if start of 'self' is negative infinity
 func is_after(self, time: Time) -&gt; Bool
 
-func serialize(self) -&gt; Time
+func serialize(self) -&gt; ByteArray
 </code></pre>
 
                     </main>

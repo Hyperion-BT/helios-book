@@ -1439,11 +1439,11 @@ func from_data(data: Int) -&gt; Duration
 <hr />
 <p>This represents a range of time using a pair of <code>Time</code> values, or open ends.</p>
 <h3 id="associated-functions-and-constants-1"><a class="header" href="#associated-functions-and-constants-1">Associated functions and constants</a></h3>
-<pre><code class="language-go  noplaypen">// Represents TimeRange starting from positive to negative infinity.
+<pre><code class="language-go  noplaypen">// Represents TimeRange starting from negative to positive infinity.
 // It contains all possible Time values.
 const ALWAYS: TimeRange
 
-// Represents TimeRange starting from negative to positive infinity.
+// Represents TimeRange starting from positive to negative infinity.
 // It contains nothing as it's impossible.
 const NEVER: TimeRange
 
@@ -1461,19 +1461,21 @@ func from_data(data: Data) -&gt; TimeRange
 <p><code>==</code>,<code>!=</code></p>
 <h3 id="methods-10"><a class="header" href="#methods-10">Methods</a></h3>
 <pre><code class="language-go  noplaypen">// @returns The start of TimeRange.
-// @notice throws an error if start is negative infinity
+// @notice Throws an error if start is negative or positive infinity
 func get_start(self) -&gt; Time
 
 // @returns 'true' if self contains the 'time'
 func contains(self, time: Time) -&gt; Bool
 
-// @returns 'true' if 'time' is before start of 'self'
+// @returns 'true' if the end of 'self' is before 'time'
+// @notice Always returns 'false' if end of 'self' is positive infinity
 func is_before(self, time: Time) -&gt; Bool
 
-// @returns 'true' if 'time' is after end of 'self'
+// @returns 'true' if the start of 'self' is after 'time'
+// @notice Always returns 'false' if start of 'self' is negative infinity
 func is_after(self, time: Time) -&gt; Bool
 
-func serialize(self) -&gt; Time
+func serialize(self) -&gt; ByteArray
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cryptography-types"><a class="header" href="#cryptography-types">Cryptography Types</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="native-asset-types"><a class="header" href="#native-asset-types">Native-Asset Types</a></h1>
@@ -1609,6 +1611,8 @@ func get_staking_purpose(self) -&gt; StakingPurpose
 <pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
 
 // @returns The current POSIX time.
+// @notice Uses the start of 'self.time_range'. Throws an error if that start is negative or positive infinity.
+// @notice Use cardano-cli's --invalid-before option to set the start time of the valid 'time_range' to something finite. 
 func now(self) -&gt; Time; 
 
 // @returns true if the transaction was signed by pubkeyhash.
