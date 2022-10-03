@@ -20,6 +20,7 @@ struct Value {
     func is_zero(self) -> Bool
 
     // Gets the amount of a specific AssetClass contained in a Value.
+	// @notice Throws an error if asset_class isn't found
     func get(self, asset_class: AssetClass) -> Int
 
     // Returns 'true' if self contains other_value.
@@ -28,3 +29,5 @@ struct Value {
 ```
 
 >**Note**: 1 ADA is equal to 1 million Lovelace
+
+>**Note**: You might find yourself comparing the output of `value.get()` to a number in order to check if `value` contains something, but in that case it usually better to use the `value.contains()` method instead.

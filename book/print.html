@@ -1075,6 +1075,7 @@ struct Value {
     func is_zero(self) -&gt; Bool
 
     // Gets the amount of a specific AssetClass contained in a Value.
+	// @notice Throws an error if asset_class isn't found
     func get(self, asset_class: AssetClass) -&gt; Int
 
     // Returns 'true' if self contains other_value.
@@ -1083,6 +1084,9 @@ struct Value {
 </code></pre>
 <blockquote>
 <p><strong>Note</strong>: 1 ADA is equal to 1 million Lovelace</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: You might find yourself comparing the output of <code>value.get()</code> to a number in order to check if <code>value</code> contains something, but in that case it usually better to use the <code>value.contains()</code> method instead.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="signed-policy"><a class="header" href="#signed-policy">Signed Policy</a></h1>
 <p>This example shows a simple minting policy that allows minting tokens as long as
@@ -1532,8 +1536,10 @@ func new(asset_class: AssetClass, amount: Int) -&gt; Value
 
 func is_zero(self) -&gt; Bool
 
-func get(self, asset_class) -&gt; Int
+// @notice Throws error if asset_class isn't found
+func get(self, asset_class: AssetClass) -&gt; Int
 
+// @returns A map of tokenName -&gt; quantity
 func get_policy(self, mph: MintingPolicyHash) -&gt; Map[ByteArray]Int
 
 func contains(self, other_value: Value) -&gt; Bool

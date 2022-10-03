@@ -188,8 +188,10 @@ func new(asset_class: AssetClass, amount: Int) -&gt; Value
 
 func is_zero(self) -&gt; Bool
 
-func get(self, asset_class) -&gt; Int
+// @notice Throws error if asset_class isn't found
+func get(self, asset_class: AssetClass) -&gt; Int
 
+// @returns A map of tokenName -&gt; quantity
 func get_policy(self, mph: MintingPolicyHash) -&gt; Map[ByteArray]Int
 
 func contains(self, other_value: Value) -&gt; Bool

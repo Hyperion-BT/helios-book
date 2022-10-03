@@ -71,8 +71,10 @@ func serialize(self) -> ByteArray
 
 func is_zero(self) -> Bool
 
-func get(self, asset_class) -> Int
+// @notice Throws error if asset_class isn't found
+func get(self, asset_class: AssetClass) -> Int
 
+// @returns A map of tokenName -> quantity
 func get_policy(self, mph: MintingPolicyHash) -> Map[ByteArray]Int
 
 func contains(self, other_value: Value) -> Bool
