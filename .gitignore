@@ -1,2 +1,4 @@
 /suggestions
+book/*
+book/**
 *.swp
