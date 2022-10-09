@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/custom.css">
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -143,9 +144,7 @@
 </ul>
 <p>The Redeemer and the Datum are user-defined but the <code>ScriptContext</code> struct is the same across all validators.</p>
 <p>A simple validator</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>spending always_true        // -------- (1)
+<pre><code class="language-helios">spending always_true        // -------- (1)
 
 struct Datum {..}           // --------- (2)
 
@@ -156,27 +155,27 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
     ...
     true                     
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="script-purpose"><a class="header" href="#script-purpose">Script Purpose</a></h2>
-<p>In Helios all scripts start with a  <strong>script purpose</strong>(1), followed by the name of the script. There are four script purposes currently:</p>
+<p>In Helios all scripts start with a  <strong>script purpose</strong> (1), followed by the name of the script. There are four script purposes currently:</p>
 <ul>
 <li><strong>spending</strong></li>
-<li><strong>minting</strong>
-<strong>staking</strong></li>
+<li><strong>minting</strong></li>
+<li><strong>staking</strong></li>
 <li><strong>testing</strong></li>
 </ul>
 <p>In this chapter we are only concerned with the <code>spending</code> script purpose. We will cover the remaining three in later chapters.</p>
-<pre><code class="language-rust  noplaypen">spending always_true
+<pre><code class="language-helios">spending always_true
 </code></pre>
-<h2 id="the-main-function"><a class="header" href="#the-main-function">The Main Function</a></h2>
-<p>The main function of a validator accepts three arguments and returns a <code>Bool</code>:</p>
+<h2 id="the-main-function"><a class="header" href="#the-main-function">The <code>main</code> Function</a></h2>
+<p>The <code>main</code> function of a validator accepts three arguments and returns a <code>Bool</code>:</p>
 <ul>
-<li><strong>The Datum</strong> (2)</li>
-<li><strong>The Redeemer</strong> (3)</li>
-<li><strong>The ScriptContext</strong></li>
+<li><strong>Datum</strong> (2)</li>
+<li><strong>Redeemer</strong> (3)</li>
+<li><strong>ScriptContext</strong></li>
 </ul>
-<pre><code class="language-go  noplaypen">spending my_validator
+<p>Each <code>main</code> argument is optional, but must appear in that order.</p>
+<pre><code class="language-helios">spending my_validator
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     ...
@@ -189,7 +188,7 @@ We will cover the <code>ScriptContext</code> in the next page.</p>
 </blockquote>
 <h2 id="alwaystrue-validator"><a class="header" href="#alwaystrue-validator">AlwaysTrue Validator</a></h2>
 <p>This basic script allows UTXOs to be spent any way the user wants:</p>
-<pre><code class="language-go  noplaypen">spending always_true
+<pre><code class="language-helios">spending always_true
 
 func main() -&gt; Bool {
     true
@@ -234,5 +233,6 @@ func main() -&gt; Bool {
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../src/custom.js"></script>
     </body>
 </html>

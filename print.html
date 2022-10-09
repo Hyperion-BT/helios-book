@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="src/custom.css">
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -144,7 +145,7 @@ It's heavily inspired by Rust, Go and Sway.</p>
 <li>There should be one and preferrably only one way to do everything (For example, no trailing commas).</li>
 </ul>
 <br/>
-<pre><code class="language-go  noplaypen">// All Helios programs begin with a script purpose.
+<pre><code class="language-helios  noplaypen">// All Helios programs begin with a script purpose.
 spending always_true 
 
 // The 'main' function contains the core validator logic.
@@ -159,7 +160,7 @@ func main() -&gt; Bool {
 <p>As a functional programming language, Helios doesn't support mutable variables. Helios does however support binding values to names.</p>
 <h2 id="binding-inside-a-function"><a class="header" href="#binding-inside-a-function">Binding inside a function</a></h2>
 <p>Inside a function body, values can be bound to names using assignment expressions:</p>
-<pre><code class="language-rust  noplaypen">my_number: Int = 42; ...
+<pre><code class="language-helios">my_number: Int = 42; ...
 </code></pre>
 <p>In this example <code>my_number</code> has value <code>42</code> and has type <code>Int</code>. <code>my_number</code> cannot be mutated after its definition.</p>
 <p>Assignment expressions must be followed by another expression, separated by a semicolon (<code>;</code>). The assignment expression above should be seen as syntactic sugar for <code>((my_number: Int) -&gt; {...})(42)</code>.</p>
@@ -171,14 +172,14 @@ func main() -&gt; Bool {
 </blockquote>
 <h2 id="const-statements"><a class="header" href="#const-statements"><code>const</code> statements</a></h2>
 <p>Values can also be bound to names at the <em>top-level</em> of a script, or inside <code>struct</code> or <code>enum</code> blocks. This is done with the <code>const</code> keyword:</p>
-<pre><code class="language-rust  noplaypen">const AGE: Int = 123
+<pre><code class="language-helios">const AGE: Int = 123
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: The right-hand side of a constant can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.</p>
+<p><strong>Note</strong>: The right-hand side of <code>const</code> can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.</p>
 </blockquote>
 <h2 id="type-annotations"><a class="header" href="#type-annotations">Type Annotations</a></h2>
 <p>Assignment expressions and <code>const</code> statements usually include  a <em>type annotation</em>. For literal right-hand sides <em>type annotations</em> are optional:</p>
-<pre><code class="language-rust  noplaypen">list_of_ints = []Int{1, 1, 2, 3, 5}; ...
+<pre><code class="language-helios">list_of_ints = []Int{1, 1, 2, 3, 5}; ...
 
 // instead of the more verbose:
 
@@ -198,7 +199,7 @@ list_of_ints: []Int = []Int{1, 1, 2, 3, 5}; ...
 <h2 id="int"><a class="header" href="#int"><code>Int</code></a></h2>
 <hr />
 <p>Helios' <code>Int</code> type represents an unbounded integer like Haskell's <code>Integer</code> type.</p>
-<pre><code class="language-rust noplaypen">// Helios supports typical integer literals:
+<pre><code class="language-helios">// Helios supports typical integer literals:
 my_decimal: Int = 17;
 my_binary: Int = 0b10001;
 my_hex: Int = 0x11;
@@ -207,29 +208,29 @@ my_octal: Int = 0o121; ...
 <h2 id="bool"><a class="header" href="#bool"><code>Bool</code></a></h2>
 <hr />
 <p>The <code>Bool</code> type has two possible values: <code>true</code> or <code>false</code>. Booleans are used throughout validator scripts, and validator scripts must always return a boolean. The simplest validator script is just a literal boolean expression:</p>
-<pre><code class="language-rust noplaypen">func main() -&gt; Bool {
+<pre><code class="language-helios">func main() -&gt; Bool {
     true
 }
 </code></pre>
 <p>Booleans can be converted into integers using the builtin <code>to_int</code> method:</p>
-<pre><code class="language-rust noplaypen">x: Int = (true).to_int(); // x == 1
+<pre><code class="language-helios">x: Int = (true).to_int(); // x == 1
 y: Int = (false).to_int(); ... // y == 0
 </code></pre>
 <h2 id="bytearray"><a class="header" href="#bytearray"><code>ByteArray</code></a></h2>
 <hr />
 <p>The <code>ByteArray</code> type, as you've likely guessed, represents an array of bytes. A literal <code>ByteArray</code> is a hexadecimal sequence with <code>#</code> as a prefix:</p>
-<pre><code class="language-rust noplaypen">my_bytes: ByteArray = #af2e221a; ... // 
+<pre><code class="language-helios">my_bytes: ByteArray = #af2e221a; ... // 
 </code></pre>
 <p>All builtin and user types can be converted into a <code>ByteArray</code> using the builtin <code>serialize</code> method:</p>
-<pre><code class="language-rust noplaypen">cbor_bytes: ByteArray = (123).serialize(); ... // cbor encoding of 123
+<pre><code class="language-helios">cbor_bytes: ByteArray = (123).serialize(); ... // cbor encoding of 123
 </code></pre>
 <h2 id="string"><a class="header" href="#string"><code>String</code></a></h2>
 <hr />
 <p>A literal Helios string uses double quotes (<code>&quot;...&quot;</code>):</p>
-<pre><code class="language-ts noplaypen">my_message: String = &quot;hello world&quot;; ...
+<pre><code class="language-helios">my_message: String = &quot;hello world&quot;; ...
 </code></pre>
 <p>Similar to all other values in Helios, strings are immutable and have a fixed length. Strings cannot <em>grow</em> after definition. Concatenating two strings creates a new string:</p>
-<pre><code class="language-rust noplaypen">string_1: String = &quot;Hel&quot;;
+<pre><code class="language-helios">string_1: String = &quot;Hel&quot;;
 string_2: String = &quot;ios&quot;;
 result: String = string_1 + string_2; ... // &quot;Helios&quot;
 </code></pre>
@@ -237,7 +238,7 @@ result: String = string_1 + string_2; ... // &quot;Helios&quot;
 <hr />
 <p>Helios has a builtin linked list type, similar to Haskell's <code>List</code>. The type signature for a list is <code>[]a</code> where <code>a</code> is the item type. The item type can be any type except a function type.</p>
 <p>List literals have a syntax similar to Go:</p>
-<pre><code class="language-rust noplaypen">my_ints = []Int{1, 2, 3, 4, 5};
+<pre><code class="language-helios">my_ints = []Int{1, 2, 3, 4, 5};
 
 x: Int = some_ints.get(2); ...   // x == 3
 </code></pre>
@@ -246,7 +247,7 @@ x: Int = some_ints.get(2); ...   // x == 3
 </blockquote>
 <h3 id="useful-methods"><a class="header" href="#useful-methods">Useful methods</a></h3>
 <p>Helios lists have typical builtin getters and methods:</p>
-<pre><code class="language-rust noplaypen">fib_list: []Int = []Int{1, 1, 2, 3, 5};
+<pre><code class="language-helios">fib_list: []Int = []Int{1, 1, 2, 3, 5};
 
 //  '.length' returns the length of the list.
 fib_list.length == 5;
@@ -279,20 +280,20 @@ fib_list.fold((sum: Int, x: Int) -&gt; Int {sum + x}, 0) == 12; ...
 <hr />
 <p>A Map in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.</p>
 <p>A Map has a type signature and a literal syntax similar to Go:</p>
-<pre><code class="language-go  noplaypen">my_map: Map[String]Int = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2}; // either side of the colon can be an arbitrary expression that evaluates to the correct type
+<pre><code class="language-helios">my_map: Map[String]Int = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2}; // either side of the colon can be an arbitrary expression that evaluates to the correct type
 
 print(my_map.get(&quot;zero&quot;).show()); ... // prints '0'
 </code></pre>
 <h2 id="option"><a class="header" href="#option">Option</a></h2>
 <hr />
 <p>The Option type is a builtin enum with type signature <code>Option[a]</code>. It is internally defined as:</p>
-<pre><code class="language-rust  noplaypen">enum Option[a] {
+<pre><code class="language-helios">enum Option[a] {
     Some { some: a }
     None
 }
 </code></pre>
 <h3 id="instantiating-an-option"><a class="header" href="#instantiating-an-option">Instantiating an <code>Option</code></a></h3>
-<pre><code class="language-rust  noplaypen">some_int: Option[Int] = Option[Int]::Some{42};
+<pre><code class="language-helios">some_int: Option[Int] = Option[Int]::Some{42};
 
 none_int: Option[Int] = Option[Int]::None; ...
 </code></pre>
@@ -301,23 +302,23 @@ none_int: Option[Int] = Option[Int]::None; ...
 <div style="break-before: page; page-break-before: always;"></div><h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
 <p>Functions are a core feature of Helios. All Helios functions are <em>pure</em>, which means they have no side effects and always return the same result when given the same arguments.</p>
 <p>Function statements are defined using the <code>func</code> keyword. Helios has no <code>return</code> statement, the last expression in a function is <em>implicitly returned</em> (like in Rust):</p>
-<pre><code class="language-go  noplaypen">func add(a: Int, b: Int) -&gt; Int {
+<pre><code class="language-helios">func add(a: Int, b: Int) -&gt; Int {
     a + b 
 }
 </code></pre>
 <p>Helios also supports recursion:</p>
-<pre><code class="language-go  noplaypen">func fib(n: Int) -&gt; Int {
+<pre><code class="language-helios">func fib(n: Int) -&gt; Int {
     // the branches of an if/else expresion return values
     if (n &lt; 1) {
         1
     } else {
-        fib(n-1) + fib(n-2)
+        fib(n - 1) + fib(n - 2)
     }
 }
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong>: A function can only reference itself when recursing. Helios doesn't support hoisting, so mutual recursion by referring to functions defined after the current one isn't possible:</p>
-<pre><code class="language-go  noplaypen">01 func a(n: Int) -&gt; Int {
+<pre><code class="language-helios">01 func a(n: Int) -&gt; Int {
 02     b(n)                   // ReferenceError: 'b' undefined
 03 }
 04
@@ -328,7 +329,7 @@ none_int: Option[Int] = Option[Int]::None; ...
 </blockquote>
 <h2 id="anonymous-functions"><a class="header" href="#anonymous-functions">Anonymous functions</a></h2>
 <p>Helios also supports anonymous functions. Anonymous functions have a syntax similar to closures in Javascript: </p>
-<pre><code class="language-rust  noplaypen">is_even = (n: Int) -&gt; Bool { (n % 2) == 0 }; ...
+<pre><code class="language-helios">is_even = (n: Int) -&gt; Bool { (n % 2) == 0 }; ...
 // type of 'is_even' can be infered, 
 //  but return type of the anonymous function must be specified
 </code></pre>
@@ -338,10 +339,10 @@ none_int: Option[Int] = Option[Int]::None; ...
 <h2 id="function-values"><a class="header" href="#function-values">Function values</a></h2>
 <p>Functions are first-class citizens in Helios and can be used as values. This means:</p>
 <h3 id="1-functions-can-be-passed-as-arguments"><a class="header" href="#1-functions-can-be-passed-as-arguments">1. Functions can be passed as arguments</a></h3>
-<pre><code class="language-ts  noplaypen">evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); ... // [2, 4. 6]; 
+<pre><code class="language-helios">even_numbers: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); ... // [2, 4, 6]; 
 </code></pre>
 <h3 id="2-functions-can-be-returned"><a class="header" href="#2-functions-can-be-returned">2. Functions can be returned</a></h3>
-<pre><code class="language-rust  noplaypen">add = (a: Int) -&gt; (Int) -&gt; Int { (b: Int) -&gt; Int { a + b } }; ...
+<pre><code class="language-helios">add = (a: Int) -&gt; (Int) -&gt; Int { (b: Int) -&gt; Int { a + b } }; ...
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong> So I <em>kind of</em> lied when I told you that functions are first-class: functions can't be stored in containers or structs.</p>
@@ -355,7 +356,7 @@ none_int: Option[Int] = Option[Int]::None; ...
 </ol>
 <p>Curiously the Collatz sequence always converges to <code>1</code>, regardless the starting number.</p>
 <p>The following function generates the Collatz sequence as a (reversed) list of integers:</p>
-<pre><code class="language-go  noplaypen">// eg. collatz(10, []Int{}) == []Int{10, 5, 16, 8, 4, 2, 1}
+<pre><code class="language-helios">// eg. collatz(10, []Int{}) == []Int{10, 5, 16, 8, 4, 2, 1}
 func collatz(n: Int, sequence: []Int) -&gt; []Int {
 	updated_sequence: []Int = sequence.prepend(n);
 
@@ -376,7 +377,7 @@ func collatz(n: Int, sequence: []Int) -&gt; []Int {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="structs-and-enums"><a class="header" href="#structs-and-enums">Structs and Enums</a></h1>
 <h2 id="structs"><a class="header" href="#structs">Structs</a></h2>
 <p>A struct in Helios is a named grouping of types (sometimes called <em>product types</em> in CS). They are similar to structs in other languages (e.g. C, Go and Rust):</p>
-<pre><code class="language-rust  noplaypen">// example of a Rational (fractional type)
+<pre><code class="language-helios">// example of a Rational (fractional type)
 struct Rational {
     top: Int
     bottom: Int
@@ -391,7 +392,7 @@ const x = Rational { top: 1, bottom: 3 }
 <h2 id="enums"><a class="header" href="#enums">Enums</a></h2>
 <p>Enums are used to represent types that have multiple variants (sometimes called <em>sum types</em> in CS). These are useful for datums and redeemers.</p>
 <p>Example of an enum:</p>
-<pre><code class="language-rust  noplaypen">enum FanSetting {
+<pre><code class="language-helios">enum FanSetting {
     On{ speed: Int }
     Off
 }
@@ -407,7 +408,7 @@ const current_setting = FanSetting::On { 5 }
 </blockquote>
 <h3 id="switch"><a class="header" href="#switch"><code>switch</code></a></h3>
 <p>A <code>switch</code> expression is used to perform different actions depending on the enum variant. It is similar to a <code>switch</code> statement in C or Go (and dissimilar to a <code>match</code> expression in Rust, as Helios doesn't support pattern-matching/destructuring):</p>
-<pre><code class="language-rust  noplaypen">enum Datum {
+<pre><code class="language-helios">enum Datum {
 	// content of each variant has the same syntax as a regular struct-type
     Submission{...} 
     Queue{...}
@@ -426,7 +427,6 @@ func main(datum: Datum) -&gt; Bool {
 		// braces surrounding the cases are optional
 	}
 }
-
 </code></pre>
 <blockquote>
 <p><strong>Note:</strong> In Helios, <strong>all</strong> fields in a struct and <strong>all</strong> variants in an enum <strong>must be used</strong>,
@@ -435,7 +435,7 @@ or else the compiler will throw an error.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="methods-and-associated-functions"><a class="header" href="#methods-and-associated-functions">Methods and Associated Functions</a></h1>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <p>You can define methods for structs and enums. The syntax for this is similar to many OOP languages: methods are defined by placing <code>func</code> statements inside a <code>struct</code> or <code>enum</code> blocks.</p>
-<pre><code class="language-go  noplaypen">struct Rational {
+<pre><code class="language-helios">struct Rational {
     top: Int
     bottom: Int
 
@@ -458,13 +458,13 @@ const result: Rational = example_rational.add(example_rational)
 </blockquote>
 <h3 id="methods-can-be-used-as-values"><a class="header" href="#methods-can-be-used-as-values">Methods can be used as values</a></h3>
 <p>A method is syntactic sugar for a <strong>curried function</strong> (a function that returns a function) that takes <code>self</code> as it's first argument:</p>
-<pre><code class="language-rust  noplaypen">// the following:
+<pre><code class="language-helios">// the following:
 rational_1.add(rational_2); ...
 // desugars into: __user__Rational_add(rational_1)(rational_2)
 //  of type (Rational) -&gt; (Rational) -&gt; Rational
 </code></pre>
 <p>A method value is a function, and can be seen as a closure over <code>self</code>:</p>
-<pre><code class="language-rust  noplaypen">// 'rational_1.add' returns a function of type ((Rational) -&gt; Rational) 
+<pre><code class="language-helios">// 'rational_1.add' returns a function of type ((Rational) -&gt; Rational) 
 //   which can be used just like any other function value
 add_to_rational_1: (Rational) -&gt; Rational = rational_1.add; ...
 
@@ -474,7 +474,7 @@ add_to_rational_1: (Rational) -&gt; Rational = rational_1.add; ...
 <p>Associated functions (aka <em>static methods</em>) and constants are just like regular functions or constants but are also namespaced by a type, for example <code>Rational::new(top, bottom)</code>.</p>
 <h3 id="defining-associated-functions-and-constants"><a class="header" href="#defining-associated-functions-and-constants">Defining Associated functions and constants</a></h3>
 <p>Associated functions are defined just like methods but without the <code>self</code> argument. Associated constants are simply <code>const</code> statements inside a <code>struct</code> or <code>enum</code> block:</p>
-<pre><code class="language-rust  noplaypen">struct Rational {
+<pre><code class="language-helios">struct Rational {
     top: Int
     bottom: Int
 
@@ -489,10 +489,10 @@ add_to_rational_1: (Rational) -&gt; Rational = rational_1.add; ...
 <p>Associated functions and constants are <em>namespaced</em> by the type they are associated with
 and can be referenced using a double colon (<code>::</code>) just like in Rust.
 For example:</p>
-<pre><code class="language-rust  noplaypen">half: Rational = Rational::new(1, 2); ...
+<pre><code class="language-helios">half: Rational = Rational::new(1, 2); ...
 </code></pre>
 <h2 id="example-rational"><a class="header" href="#example-rational">Example: Rational</a></h2>
-<pre><code class="language-ts">struct Rational {
+<pre><code class="language-helios">struct Rational {
     top: Int
     bottom: Int
 
@@ -519,16 +519,16 @@ const rational_3: Rational = rational_1.add(rational_2) // 15/25 or 3/5 or 0.6
 <h2 id="comments"><a class="header" href="#comments">Comments</a></h2>
 <p>Helios comments are C-like. </p>
 <p>Single-line comments use two forward slashes (<code>//</code>):</p>
-<pre><code class="language-rust  noplaypen">// This is a comment.
+<pre><code class="language-helios">// This is a comment.
 </code></pre>
 <p>Multi-line comments use <code>/* ... */</code>:</p>
-<pre><code class="language-rust  noplaypen">/*
+<pre><code class="language-helios">/*
     This is a multi-line comment.
 */
 </code></pre>
 <h2 id="printing"><a class="header" href="#printing">Printing</a></h2>
 <p>For debugging purposes, Helios has a special <code>print</code> expression. <code>print(...)</code> takes an expression that evaluates to a <code>String</code> as an argument, and must be followed by a semicolon and another expression:</p>
-<pre><code class="language-rust  noplaypen">print(&quot;Imagine something cool.&quot;);
+<pre><code class="language-helios">print(&quot;Imagine something cool.&quot;);
 ...
 </code></pre>
 <blockquote>
@@ -536,7 +536,7 @@ const rational_3: Rational = rational_1.add(rational_2) // 15/25 or 3/5 or 0.6
 </blockquote>
 <h2 id="branching"><a class="header" href="#branching">Branching</a></h2>
 <p>Helios has conventional <code>if/else</code> syntax for branching:</p>
-<pre><code class="language-rust  noplaypen">if (tag == 0) {
+<pre><code class="language-helios">if (tag == 0) {
     23
 } else if (tag == 1) {
     42
@@ -546,7 +546,7 @@ const rational_3: Rational = rational_1.add(rational_2) // 15/25 or 3/5 or 0.6
 </code></pre>
 <p>The last expression is each branch block is implicitly returned (much like Rust and Ruby). </p>
 <p>The following is valid syntax:</p>
-<pre><code class="language-rust  noplaypen">x: Int = 
+<pre><code class="language-helios">x: Int = 
 	if (true) {
 		42
 	} else {
@@ -671,9 +671,7 @@ It is worth the extra effort in rewiring you're thinking as it often leads to co
 </ul>
 <p>The Redeemer and the Datum are user-defined but the <code>ScriptContext</code> struct is the same across all validators.</p>
 <p>A simple validator</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>spending always_true        // -------- (1)
+<pre><code class="language-helios">spending always_true        // -------- (1)
 
 struct Datum {..}           // --------- (2)
 
@@ -684,27 +682,27 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
     ...
     true                     
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2 id="script-purpose"><a class="header" href="#script-purpose">Script Purpose</a></h2>
-<p>In Helios all scripts start with a  <strong>script purpose</strong>(1), followed by the name of the script. There are four script purposes currently:</p>
+<p>In Helios all scripts start with a  <strong>script purpose</strong> (1), followed by the name of the script. There are four script purposes currently:</p>
 <ul>
 <li><strong>spending</strong></li>
-<li><strong>minting</strong>
-<strong>staking</strong></li>
+<li><strong>minting</strong></li>
+<li><strong>staking</strong></li>
 <li><strong>testing</strong></li>
 </ul>
 <p>In this chapter we are only concerned with the <code>spending</code> script purpose. We will cover the remaining three in later chapters.</p>
-<pre><code class="language-rust  noplaypen">spending always_true
+<pre><code class="language-helios">spending always_true
 </code></pre>
-<h2 id="the-main-function"><a class="header" href="#the-main-function">The Main Function</a></h2>
-<p>The main function of a validator accepts three arguments and returns a <code>Bool</code>:</p>
+<h2 id="the-main-function"><a class="header" href="#the-main-function">The <code>main</code> Function</a></h2>
+<p>The <code>main</code> function of a validator accepts three arguments and returns a <code>Bool</code>:</p>
 <ul>
-<li><strong>The Datum</strong> (2)</li>
-<li><strong>The Redeemer</strong> (3)</li>
-<li><strong>The ScriptContext</strong></li>
+<li><strong>Datum</strong> (2)</li>
+<li><strong>Redeemer</strong> (3)</li>
+<li><strong>ScriptContext</strong></li>
 </ul>
-<pre><code class="language-go  noplaypen">spending my_validator
+<p>Each <code>main</code> argument is optional, but must appear in that order.</p>
+<pre><code class="language-helios">spending my_validator
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     ...
@@ -717,7 +715,7 @@ We will cover the <code>ScriptContext</code> in the next page.</p>
 </blockquote>
 <h2 id="alwaystrue-validator"><a class="header" href="#alwaystrue-validator">AlwaysTrue Validator</a></h2>
 <p>This basic script allows UTXOs to be spent any way the user wants:</p>
-<pre><code class="language-go  noplaypen">spending always_true
+<pre><code class="language-helios">spending always_true
 
 func main() -&gt; Bool {
     true
@@ -728,9 +726,7 @@ func main() -&gt; Bool {
 <p>The <code>ScriptContext</code> contains all the data about the transaction and is usually the most important argument in determining whether a <code>validator</code> should succeed or fail.
 Because of how important it is we are going to try to go fairly deep into the internals in this chapter.</p>
 <p>This is roughly the internal implementation of the <code>ScriptContext</code> struct.</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>struct ScriptContext {
+<pre><code class="language-helios">struct ScriptContext {
     tx: Tx
 
     // Some useful methods
@@ -741,15 +737,14 @@ Because of how important it is we are going to try to go fairly deep into the in
     // Get the TxInput locked by the validator.
     func get_current_input(self) -&gt; TxInput
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <blockquote>
 <p><strong>Note</strong>: Internally <code>ScriptContext</code> is a wrapper around the <code>Tx</code> struct,
 the <code>Tx</code> holds the metadata of a signed on-chain transaction.</p>
 </blockquote>
 <h2 id="tx"><a class="header" href="#tx">Tx</a></h2>
 <p>The <code>Tx</code> struct stores the data on the current transaction.</p>
-<pre><code class="language-rust  noplaypen">struct Tx {
+<pre><code class="language-helios">struct Tx {
     inputs: []TxInput          // Transaction inputs
 	ref_inputs: []TxInput      // Reference inputs that aren't spent
     outputs: []TxOutput        // Transaction outputs
@@ -782,17 +777,17 @@ the <code>Tx</code> holds the metadata of a signed on-chain transaction.</p>
 <h2 id="txinput"><a class="header" href="#txinput">TxInput</a></h2>
 <p>The <code>TxInput</code> struct as you've probably guessed represents a <strong>Transaction Input</strong>.
 As you can see a <strong>Transaction Input</strong> is just a wrapper around UTXO created by a previous transaction on the blockchain.</p>
-<pre><code class="language-rust  noplaypen">struct TxInput {
+<pre><code class="language-helios">struct TxInput {
     output_id: TxOutputId // ID of the UTXO
     output: TxOutput      // UTXO being spent
 }
 </code></pre>
 <h2 id="txoutput"><a class="header" href="#txoutput">TxOutput</a></h2>
 <p>The <code>TxOutput</code> represents a <strong>Transaction Output</strong>. This is a <strong>UTXO</strong> that will be created by this transaction.</p>
-<pre><code class="language-rust  noplaypen">struct TxOutput {
+<pre><code class="language-helios">struct TxOutput {
     address: Address          // Address of the UTXO
-    value: Value              // Value in the UTXO
-    datum:  OutputDatum       // UTXO's datum (none, hash, or inline)
+    value:   Value            // Value in the UTXO
+    datum:   OutputDatum      // UTXO's datum (none, hash, or inline)
 }
 </code></pre>
 <blockquote>
@@ -805,7 +800,7 @@ for a <strong>beneficiary</strong> that can't be claimed until after a <strong>d
 The <strong>owner</strong> can get their funds back if the <strong>deadline</strong> has not passed yet</p>
 <h2 id="the-datum"><a class="header" href="#the-datum">The Datum</a></h2>
 <p>The Datum stores the <code>PubKeyHash</code> of the <strong>beneficiary</strong> and <strong>creator</strong>'s wallets and the vesting deadline is represented as a <code>Time</code>.</p>
-<pre><code class="language-rust  noplaypen">struct Datum {
+<pre><code class="language-helios">struct Datum {
     creator: PubKeyHash
     beneficiary: PubKeyHash
     deadline: Time
@@ -816,7 +811,7 @@ The <strong>owner</strong> can get their funds back if the <strong>deadline</str
 for more info <a href="chapter_2/../helios_builtins/Helios_Builtins.html">Helios Builtins</a>.</p>
 </blockquote>
 <h2 id="the-redeemer"><a class="header" href="#the-redeemer">The Redeemer</a></h2>
-<pre><code class="language-rust  noplaypen">enum Redeemer {
+<pre><code class="language-helios">enum Redeemer {
     Cancel
     Claim
 }
@@ -842,10 +837,10 @@ For it to be valid the following have to be checked:</p>
 </ul>
 </li>
 </ul>
-<h2 id="the-main-function-1"><a class="header" href="#the-main-function-1">The Main Function</a></h2>
-<pre><code class="language-go  noplaypen">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
+<h2 id="the-main-function-1"><a class="header" href="#the-main-function-1">The <code>main</code> function</a></h2>
+<pre><code class="language-helios">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
-    now: TimeRange = tx.now();
+    now: Time = tx.now();
 
     redeemer.switch {
         Cancel =&gt; {
@@ -874,7 +869,7 @@ for more info <a href="chapter_2/../helios_builtins/Helios_Builtins.html">Helios
 See if  you can find it 🙂.</p>
 </blockquote>
 <h2 id="finished-code"><a class="header" href="#finished-code">Finished Code</a></h2>
-<pre><code class="language-go  noplaypen">spending vesting
+<pre><code class="language-helios">spending vesting
 
 struct Datum {
     creator: PubKeyHash
@@ -907,8 +902,8 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
 <p>In this example, we will rewrite the <a href="https://plutus-pioneer-program.readthedocs.io/en/latest/pioneer/week1.html">English Auction contract</a>
 from the Plutus Pioneer's program in Helios.</p>
 <p>This validator is can be used to lock assets that are to be auctioned in a UTXO.</p>
-<h2 id="the-datum-1"><a class="header" href="#the-datum-1">The Datum</a></h2>
-<pre><code class="language-go">spending english_auction
+<h2 id="the-main-function-2"><a class="header" href="#the-main-function-2">The <code>main</code> function</a></h2>
+<pre><code class="language-helios">spending english_auction
 
 struct Datum {
     seller: PubKeyHash
@@ -1050,7 +1045,7 @@ to an empty string ADA is the only token that can't be minted using a minting po
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="value"><a class="header" href="#value">Value</a></h1>
 <p><code>Value</code> represents a <em>token bundle</em>, where each entry is represented by an <code>AssetClass</code> and an integer amount. <code>AssetClass</code> is turn represents a pair of <code>MintingPolicyHash</code> (a.k.a. PolicyID) and token name.</p>
-<pre><code class="language-go  noplaypen">// Value is opaque (it's internals aren't directly accessible from Helios)
+<pre><code class="language-helios">// Value is opaque (it's internals aren't directly accessible from Helios)
 struct Value {
     ...
 
@@ -1083,7 +1078,7 @@ struct Value {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="signed-policy"><a class="header" href="#signed-policy">Signed Policy</a></h1>
 <p>This example shows a simple minting policy that allows minting tokens as long as
 the transaction is signed by an <strong>owner</strong>. The <strong>owner</strong> has a given <code>PubKeyHash</code>.</p>
-<pre><code class="language-go  noplaypen">minting signed
+<pre><code class="language-helios">minting signed
 
 const OWNER: PubKeyHash = PubKeyHash::new(#26372...)
 
@@ -1105,7 +1100,7 @@ The <strong>Token Name</strong> for the NFT in this example will be called <code
 The main idea is that the token can only be minted before a deadline which already passed.
 This ensures no new tokens will ever be minted.
 This is very easy to implement:</p>
-<pre><code class="language-go  noplaypen">minting deadline_nft
+<pre><code class="language-helios">minting deadline_nft
 
 const DEADLINE: Time = Time::new(1661665196132) // milliseconds since 1970
 
@@ -1128,14 +1123,14 @@ func main(ctx: ScriptContext) -&gt; Bool {
 This approach takes advantage of the fact that all UTXOs have a unique <code>TxOutputId</code>.
 A UTXO's <code>TxOutputId</code> is made up of the transaction hash of the transaction that made the UTXO and the index of the UTXO in the outputs of that transaction.
 It's a builtin type that is defined as:</p>
-<pre><code class="language-go  noplaypen">struct TxOutputId {
+<pre><code class="language-helios">struct TxOutputId {
     tx_id: TxId
     index: Int
 }
 </code></pre>
 <p>So with this approach, we specify in the minting policy that the transaction minting the NFT must spend a UTXO with a specific <strong>Output ID</strong>.
 Since a UTXO can only be spent once this means the token can only be minted once.</p>
-<pre><code class="language-go  noplaypen">minting utxo_nft
+<pre><code class="language-helios">minting utxo_nft
 
 const OUTPUT_ID: TxOutputId = TxOutputId::new(TxId::new(#1213), 1)
 
@@ -1190,10 +1185,10 @@ func main(ctx: ScriptContext) -&gt; Bool {
 <h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
 <h3 id="associated-functions"><a class="header" href="#associated-functions">Associated functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; Int
+<pre><code class="language-helios">func from_data(data: Data) -&gt; Int
 </code></pre>
 <h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 func to_bool(self) -&gt; Bool
 
@@ -1204,11 +1199,11 @@ func show(self) -&gt; String
 <h2 id="bool-1"><a class="header" href="#bool-1">Bool</a></h2>
 <hr />
 <p>Represents a boolean value (<code>true</code>/<code>false</code>).</p>
-<pre><code class="language-go  noplaypen">true_val: Bool = true;
+<pre><code class="language-helios">true_val: Bool = true;
 false_val: Bool = false; ...
 </code></pre>
 <h3 id="associated-functions-1"><a class="header" href="#associated-functions-1">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func and(fn_bool_1: () -&gt; Bool, fn_bool_2: () -&gt; Bool) -&gt; Bool
+<pre><code class="language-helios">func and(fn_bool_1: () -&gt; Bool, fn_bool_2: () -&gt; Bool) -&gt; Bool
 
 func or(fn_bool_1: () -&gt; Bool, fn_bool_2: () -&gt; Bool) -&gt; Bool
 
@@ -1217,7 +1212,7 @@ func from_data(data: Data) -&gt; Bool
 <h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>!</code>, <code>&amp;&amp;</code>, <code>||</code></p>
 <h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 func to_int(self) -&gt; Int
 
@@ -1226,15 +1221,15 @@ func show(self) -&gt; String
 <h2 id="string-1"><a class="header" href="#string-1">String</a></h2>
 <hr />
 <p>This is a fixed-size string.</p>
-<pre><code class="language-rust  noplaypen">example: String = &quot;Woah!&quot;; ...
+<pre><code class="language-helios">example: String = &quot;Woah!&quot;; ...
 </code></pre>
 <h3 id="operators-2"><a class="header" href="#operators-2">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>,<code>+</code></p>
 <h3 id="associated-functions-2"><a class="header" href="#associated-functions-2">Associated functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; String
+<pre><code class="language-helios">func from_data(data: Data) -&gt; String
 </code></pre>
 <h3 id="methods-3"><a class="header" href="#methods-3">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 func encode_utf8(self) -&gt; String
 
@@ -1245,17 +1240,17 @@ func ends_with(self, suffix: String) -&gt; Bool
 <h2 id="bytearray-1"><a class="header" href="#bytearray-1">ByteArray</a></h2>
 <hr />
 <p>This represents an array of bytes.</p>
-<pre><code class="language-rust  noplaypen">example: ByteArray = #213212; ...
+<pre><code class="language-helios">example: ByteArray = #213212; ...
 </code></pre>
 <h3 id="operators-3"><a class="header" href="#operators-3">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>+</code></p>
 <h3 id="associated-functions-3"><a class="header" href="#associated-functions-3">Associated functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; ByteArray
+<pre><code class="language-helios">func from_data(data: Data) -&gt; ByteArray
 </code></pre>
 <h3 id="getters"><a class="header" href="#getters">Getters</a></h3>
 <p><code>length: Int</code>, returns the length of the <code>ByteArray</code>.</p>
 <h3 id="methods-4"><a class="header" href="#methods-4">Methods:</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 // @returns The SHA2-256 hash of the ByteArray
 func sha2(self) -&gt; ByteArray
@@ -1279,10 +1274,10 @@ func slice(self, start: Int, end: Int) -&gt; ByteArray
 <h2 id="list-a"><a class="header" href="#list-a">List (<code>[]a</code>)</a></h2>
 <hr />
 <p>Helios linked-list type.</p>
-<pre><code class="language-go  playpen">example: []Int = []Int{1, 2, 3, 4, 5}; ...
+<pre><code class="language-helios">example: []Int = []Int{1, 2, 3, 4, 5}; ...
 </code></pre>
 <h3 id="associated-functions-4"><a class="header" href="#associated-functions-4">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; []a
+<pre><code class="language-helios">func from_data(data: Data) -&gt; []a
 
 func new(n: Int, fn: (Int) -&gt; a) -&gt; []a
 
@@ -1291,7 +1286,7 @@ func new_const(n: Int, item: a) -&gt; []a
 <h3 id="operators-4"><a class="header" href="#operators-4">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>+</code></p>
 <h3 id="getters-1"><a class="header" href="#getters-1">Getters</a></h3>
-<pre><code class="language-go  noplaypen">// @returns The length of the list.
+<pre><code class="language-helios">// @returns The length of the list.
 length: Int
 
 // @returns The element at the front of the list
@@ -1303,7 +1298,7 @@ head: a
 tail: []a
 </code></pre>
 <h3 id="methods-5"><a class="header" href="#methods-5">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 // @returns 'true' if the list is empty.
 func is_empty(self) -&gt; Bool
@@ -1339,20 +1334,20 @@ func map(self, transformation: (a) -&gt; b) -&gt; []b
 <h2 id="map-mapab"><a class="header" href="#map-mapab">Map (<code>Map[a]b</code>)</a></h2>
 <hr />
 <p>List of key-value pairs.</p>
-<pre><code class="language-go  noplaypen">my_map = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2};
+<pre><code class="language-helios">my_map = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2};
 print(my_map.get(&quot;zero&quot;).show()); ... // prints '0'
 </code></pre>
 <h3 id="associated-functions-5"><a class="header" href="#associated-functions-5">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; Map[a]b
+<pre><code class="language-helios">func from_data(data: Data) -&gt; Map[a]b
 </code></pre>
 <h3 id="operators-5"><a class="header" href="#operators-5">Operators</a></h3>
 <p><code>==</code>,<code>!=</code>, <code>+</code></p>
 <h3 id="getters-2"><a class="header" href="#getters-2">Getters</a></h3>
-<pre><code class="language-go  noplaypen">// @returns the number of items in a map.
+<pre><code class="language-helios">// @returns the number of items in a map.
 length: Int
 </code></pre>
 <h3 id="methods-6"><a class="header" href="#methods-6">Methods</a></h3>
-<pre><code class="language-go  noplaypen">// @returns The Value in the map for the given key.
+<pre><code class="language-helios">// @returns The Value in the map for the given key.
 // @notice  Throws an error if the value isn't in the map.
 func get(self, key: a) -&gt; b
 
@@ -1389,7 +1384,7 @@ func serialize(self: Map[a, b]) -&gt; ByteArray
 <h2 id="option-optiona"><a class="header" href="#option-optiona">Option (<code>Option[a]</code>)</a></h2>
 <hr />
 <p><code>Option[a]</code> is an enum used to represent an optional value.</p>
-<pre><code class="language-rust  noplaypen">// internal representation
+<pre><code class="language-helios">// internal representation
 enum Option[a] {
     Some { some: a }
     None
@@ -1399,30 +1394,30 @@ example_1: Option[Int] = Option[Int]::Some{42};
 example_2: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="associated-functions-6"><a class="header" href="#associated-functions-6">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; Option[a]
+<pre><code class="language-helios">func from_data(data: Data) -&gt; Option[a]
 </code></pre>
 <h3 id="operators-6"><a class="header" href="#operators-6">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="getters-3"><a class="header" href="#getters-3">Getters</a></h3>
-<pre><code class="language-go  noplaypen">// @returns content of Option[a]::Some
+<pre><code class="language-helios">// @returns content of Option[a]::Some
 Option[a]::Some.some: a
 </code></pre>
 <h3 id="methods-7"><a class="header" href="#methods-7">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="time-types"><a class="header" href="#time-types">Time Types</a></h1>
 <h2 id="time"><a class="header" href="#time">Time</a></h2>
 <hr />
 <p>Represents POSIX time in milliseconds (time since 1970/01/01 00:00:00 UTC).</p>
 <h3 id="associated-functions-7"><a class="header" href="#associated-functions-7">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func new(millis: Int) -&gt; Time
+<pre><code class="language-helios">func new(millis: Int) -&gt; Time
 
 func from_data(data: Data) -&gt; Time
 </code></pre>
 <h3 id="operators-7"><a class="header" href="#operators-7">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
 <h3 id="methods-8"><a class="header" href="#methods-8">Methods</a></h3>
-<pre><code class="language-rust  noplaypen">func show(self) -&gt; String
+<pre><code class="language-helios">func show(self) -&gt; String
 
 func serialize(self) -&gt; ByteArray
 </code></pre>
@@ -1430,20 +1425,20 @@ func serialize(self) -&gt; ByteArray
 <hr />
 <p>The difference of two <code>Time</code> values is a <code>Duration</code> value. Only a <code>Duration</code> can be added to a <code>Time</code> (two <code>Time</code> values can't be added).</p>
 <h3 id="associated-functions-8"><a class="header" href="#associated-functions-8">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func new(raw: Int) -&gt; Duration
+<pre><code class="language-helios">func new(raw: Int) -&gt; Duration
 
 func from_data(data: Int) -&gt; Duration
 </code></pre>
 <h3 id="operators-8"><a class="header" href="#operators-8">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
 <h3 id="methods-9"><a class="header" href="#methods-9">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self: Time) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self: Time) -&gt; ByteArray
 </code></pre>
 <h2 id="timerange"><a class="header" href="#timerange">TimeRange</a></h2>
 <hr />
 <p>This represents a range of time using a pair of <code>Time</code> values, or open ends.</p>
 <h3 id="associated-functions-and-constants-1"><a class="header" href="#associated-functions-and-constants-1">Associated functions and constants</a></h3>
-<pre><code class="language-go  noplaypen">// Represents TimeRange starting from negative to positive infinity.
+<pre><code class="language-helios">// Represents TimeRange starting from negative to positive infinity.
 // It contains all possible Time values.
 const ALWAYS: TimeRange
 
@@ -1464,7 +1459,7 @@ func from_data(data: Data) -&gt; TimeRange
 <h3 id="operators-9"><a class="header" href="#operators-9">Operators</a></h3>
 <p><code>==</code>,<code>!=</code></p>
 <h3 id="methods-10"><a class="header" href="#methods-10">Methods</a></h3>
-<pre><code class="language-go  noplaypen">// @returns The start of TimeRange.
+<pre><code class="language-helios">// @returns The start of TimeRange.
 // @notice Throws an error if start is negative or positive infinity
 func get_start(self) -&gt; Time
 
@@ -1487,14 +1482,14 @@ func serialize(self) -&gt; ByteArray
 <h2 id="assetclass-1"><a class="header" href="#assetclass-1">AssetClass</a></h2>
 <hr />
 <p>Represents a unique token on the blockchain using the hash of it's minting policy and it's token name.</p>
-<pre><code class="language-rust  noplaypen">// internal representation
+<pre><code class="language-helios">// internal representation
 struct AssetClass {
     MintingPolicyHash // not directly accessible
     ByteArray // not directly accessible
 }
 </code></pre>
 <h3 id="associated-functions-and-constants-2"><a class="header" href="#associated-functions-and-constants-2">Associated functions and constants</a></h3>
-<pre><code class="language-rust  noplaypen">const ADA: AssetClass
+<pre><code class="language-helios">const ADA: AssetClass
 
 // @returns a new AssetClass
 func new(policy_hash: MintingPolicyHash, token_name: ByteArray) -&gt; AssetClass
@@ -1504,15 +1499,15 @@ func from_data(data: Data) -&gt; AssetClass
 <h3 id="operators-10"><a class="header" href="#operators-10">Operators</a></h3>
 <p><code>==</code>,<code>!=</code></p>
 <h3 id="methods-11"><a class="header" href="#methods-11">Methods</a></h3>
-<pre><code class="language-rust  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="value-1"><a class="header" href="#value-1">Value</a></h2>
 <hr />
 <p>The <code>Value</code> type represents a <strong>token bundle</strong> using a map of <code>AssetClass</code>es to <code>Int</code> quantities,</p>
-<pre><code class="language-rust  noplaypen">struct Value {..}
+<pre><code class="language-helios">struct Value {..}
 </code></pre>
 <h3 id="associated-functions-and-constants-3"><a class="header" href="#associated-functions-and-constants-3">Associated functions and constants</a></h3>
-<pre><code class="language-go  noplaypen">// An empty Value
+<pre><code class="language-helios">// An empty Value
 const ZERO: Value
 
 // @returns A Value containing 'amount' number of lovelaces.
@@ -1524,7 +1519,7 @@ func new(asset_class: AssetClass, amount: Int) -&gt; Value
 <h3 id="operators-11"><a class="header" href="#operators-11">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
 <h3 id="methods-12"><a class="header" href="#methods-12">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 func is_zero(self) -&gt; Bool
 
@@ -1542,14 +1537,14 @@ func contains(self, other_value: Value) -&gt; Bool
 <p>These are type-safe wrappers around the <code>ByteArray</code> type that represent the hash of
 a public key, validator script, minting policy or datum.</p>
 <h3 id="associated-functions-9"><a class="header" href="#associated-functions-9">Associated Functions</a></h3>
-<pre><code class="language-go  playpen">func new(bytes: ByteArray) -&gt; *Hash
+<pre><code class="language-helios">func new(bytes: ByteArray) -&gt; *Hash
 
 func from_data(data: Data) -&gt; *Hash
 </code></pre>
 <h3 id="operators-12"><a class="header" href="#operators-12">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-13"><a class="header" href="#methods-13">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 func show(self) -&gt; String
 </code></pre>
@@ -1557,19 +1552,19 @@ func show(self) -&gt; String
 <hr />
 <p>The <code>ScriptContext</code> type contains all the metadata related to a signed Cardano transaction.
 It's just a wrapper around the <code>Tx</code> type with some extra methods.</p>
-<pre><code class="language-go  noplaypen">// internal representation
+<pre><code class="language-helios">// internal representation
 struct ScriptContext {
     tx: Tx
 	ScriptPurpose // not directly accessible
 }
 </code></pre>
 <h3 id="associated-functions-10"><a class="header" href="#associated-functions-10">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func from_data(data: Data) -&gt; ScriptContext
+<pre><code class="language-helios">func from_data(data: Data) -&gt; ScriptContext
 </code></pre>
 <h3 id="operators-13"><a class="header" href="#operators-13">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-14"><a class="header" href="#methods-14">Methods</a></h3>
-<pre><code class="language-go  noplaypen">// @returns The ScriptContext serialized into bytes.
+<pre><code class="language-helios">// @returns The ScriptContext serialized into bytes.
 func serialize(self) -&gt; ByteArray
 
 // @notice only available in spending scripts
@@ -1595,7 +1590,7 @@ func get_staking_purpose(self) -&gt; StakingPurpose
 <h2 id="tx-1"><a class="header" href="#tx-1">Tx</a></h2>
 <hr />
 <p>This type stores the data related to a signed transaction.</p>
-<pre><code class="language-rust  noplaypen">struct Tx {
+<pre><code class="language-helios">struct Tx {
     inputs: []TxInput            // Transactin Inputs
 	ref_inputs: []TxInput        // Reference inputs (not spent)
     outputs: []TxOutput          // Transaction Outputs
@@ -1609,12 +1604,12 @@ func get_staking_purpose(self) -&gt; StakingPurpose
 }
 </code></pre>
 <h3 id="associated-functions-11"><a class="header" href="#associated-functions-11">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func from_data(data: Data) -&gt; Tx
+<pre><code class="language-helios">func from_data(data: Data) -&gt; Tx
 </code></pre>
 <h3 id="operators-14"><a class="header" href="#operators-14">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-15"><a class="header" href="#methods-15">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 // @returns The current POSIX time.
 // @notice Uses the start of 'self.time_range'. Throws an error if that start is negative or positive infinity.
@@ -1651,116 +1646,113 @@ func value_locked_by_datum(self, script_hash: ValidatorHash, datum: Any) -&gt; V
 <h2 id="txid"><a class="header" href="#txid">TxId</a></h2>
 <hr />
 <p>This is a type-safe wrapper around the <code>ByteArray</code></p>
-<pre><pre class="playground"><code class="language-rust  playpen"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>struct TxId {...}
-<span class="boring">}
-</span></code></pre></pre>
+<pre><code class="language-helios">struct TxId {...}
+</code></pre>
 <h3 id="associated-functions-12"><a class="header" href="#associated-functions-12">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func new(bytes: ByteArray) -&gt; TxId
+<pre><code class="language-helios">func new(bytes: ByteArray) -&gt; TxId
 
 func from_data(data: Data) -&gt; TxId
 </code></pre>
 <h3 id="operators-15"><a class="header" href="#operators-15">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-16"><a class="header" href="#methods-16">Methods</a></h3>
-<pre><code class="language-rust  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="txinput-1"><a class="header" href="#txinput-1">TxInput</a></h2>
 <hr />
 <p>This type represents a <strong>Transaction Input</strong>.</p>
-<pre><code class="language-rust  noplaypen">struct TxInput {
+<pre><code class="language-helios">struct TxInput {
     output_id: TxOutputId
     output: TxOutput
 }
 </code></pre>
 <h3 id="associated-functions-13"><a class="header" href="#associated-functions-13">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func from_data(data: Data) -&gt; TxInput
+<pre><code class="language-helios">func from_data(data: Data) -&gt; TxInput
 </code></pre>
 <h3 id="operators-16"><a class="header" href="#operators-16">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-17"><a class="header" href="#methods-17">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="txoutput-1"><a class="header" href="#txoutput-1">TxOutput</a></h2>
 <hr />
 <p>This type represents a <strong>Transaction Output</strong>.</p>
-<pre><code class="language-go  noplaypen">struct TxOutput {
+<pre><code class="language-helios">struct TxOutput {
     address: Address
     value: Value
     datum: OutputDatum
 }
 </code></pre>
 <h3 id="associated-functions-14"><a class="header" href="#associated-functions-14">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func from_data(data: Data) -&gt; TxOutput
+<pre><code class="language-helios">func from_data(data: Data) -&gt; TxOutput
 </code></pre>
 <h3 id="operators-17"><a class="header" href="#operators-17">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-18"><a class="header" href="#methods-18">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="outputdatum"><a class="header" href="#outputdatum">OutputDatum</a></h2>
-<pre><code class="language-rust  noplaypen">enum OutputDatum {
+<pre><code class="language-helios">enum OutputDatum {
 	None
 	Hash{hash: DatumHash}
 	Inline{data: Data}
 }
 </code></pre>
 <h3 id="associated-functions-15"><a class="header" href="#associated-functions-15">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func from_data(data: Data) -&gt; OutputDatum
+<pre><code class="language-helios">func from_data(data: Data) -&gt; OutputDatum
 </code></pre>
 <h3 id="operators-18"><a class="header" href="#operators-18">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-19"><a class="header" href="#methods-19">Methods</a></h3>
-<pre><code class="language-rust  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="txoutputid"><a class="header" href="#txoutputid">TxOutputId</a></h2>
 <hr />
 <p>This type is a unique ID for a UTXO (Unspent Transaction Output).
 It's composed of the <strong>Transaction ID</strong> (<code>TxId</code>) of the transaction that created the UTXO and the index (<code>Int</code>) of the UTXO in the outputs of that transaction.</p>
-<pre><code class="language-go  noplaypen">struct TxOutputId {
+<pre><code class="language-helios">struct TxOutputId {
     TxId // not directly accessible
     Int // not directly accessible
 }
 </code></pre>
 <h3 id="associated-functions-16"><a class="header" href="#associated-functions-16">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func new(tx_id: TxId, index: Int) -&gt; TxOutputId
+<pre><code class="language-helios">func new(tx_id: TxId, index: Int) -&gt; TxOutputId
 
 func from_data(data: Data) -&gt; TxOutputId
 </code></pre>
 <h3 id="operators-19"><a class="header" href="#operators-19">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-20"><a class="header" href="#methods-20">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="address"><a class="header" href="#address">Address</a></h2>
 <hr />
 <p>The <code>Address</code> type represents a cardano address.</p>
-<pre><code class="language-rust  noplaypen">struct Address {
+<pre><code class="language-helios">struct Address {
     credential: Credential
     staking_credential: Option[StakingCredential]
 }
 </code></pre>
 <h3 id="associated-functions-17"><a class="header" href="#associated-functions-17">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func new(credential: Credential, staking_credential: Option[StakingCredential]) -&gt; Address
+<pre><code class="language-helios">func new(credential: Credential, staking_credential: Option[StakingCredential]) -&gt; Address
 
 func from_data(data: Data) -&gt; Address
 </code></pre>
 <h3 id="operators-20"><a class="header" href="#operators-20">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-21"><a class="header" href="#methods-21">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self: Address) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self: Address) -&gt; ByteArray
 </code></pre>
 <h2 id="credential"><a class="header" href="#credential">Credential</a></h2>
 <hr />
 <p>The <code>Credential</code> type represents the an onchain credential which can be a <code>PubKeyHash</code> or a <code>ValidatorHash</code></p>
-<pre><code class="language-rust  noplaypen">enum Credential {
+<pre><code class="language-helios">enum Credential {
     Pubkey { hash: PubKeyHash }
     Validator { hash: ValidatorHash }
 }
 </code></pre>
 <h3 id="associated-functions-18"><a class="header" href="#associated-functions-18">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func new_pubkey(pkh: PubKeyHash) -&gt; Credential::PubKeyHash
+<pre><code class="language-helios">func new_pubkey(pkh: PubKeyHash) -&gt; Credential::PubKeyHash
 
 func new_validator(vh: ValidatorHash) -&gt; Credential::ValidatorHash
 
@@ -1769,19 +1761,19 @@ func from_data(data: Data) -&gt; Credential
 <h3 id="operators-21"><a class="header" href="#operators-21">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-22"><a class="header" href="#methods-22">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h3 id="operators-22"><a class="header" href="#operators-22">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h2 id="stakingcredential"><a class="header" href="#stakingcredential">StakingCredential</a></h2>
 <hr />
-<pre><code class="language-rust  noplaypen">enum StakingCredential {
+<pre><code class="language-helios">enum StakingCredential {
 	Hash{Credential}
 	Ptr{Int, Int, Int}
 }
 </code></pre>
 <h3 id="associated-functions-19"><a class="header" href="#associated-functions-19">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func new_hash(credential: Credential) -&gt; StakingCredential::Hash
+<pre><code class="language-helios">func new_hash(credential: Credential) -&gt; StakingCredential::Hash
 
 func new_ptr(a: Int, b: Int, c: Int) -&gt; StakingCredential::Ptr
 
@@ -1790,24 +1782,24 @@ func from_data(data: Data) -&gt; StakingCredential
 <h3 id="operators-23"><a class="header" href="#operators-23">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-23"><a class="header" href="#methods-23">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="stakingpurpose"><a class="header" href="#stakingpurpose">StakingPurpose</a></h2>
-<pre><code class="language-rust  noplaypen">enum StakingPurpose {
+<pre><code class="language-helios">enum StakingPurpose {
 	Rewarding{credential: StakingCredential}
 	Certifying{dcert: DCert}
 }
 </code></pre>
 <h3 id="associated-functions-20"><a class="header" href="#associated-functions-20">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func from_data(data: Data) -&gt; StakingPurpose
+<pre><code class="language-helios">func from_data(data: Data) -&gt; StakingPurpose
 </code></pre>
 <h3 id="operators-24"><a class="header" href="#operators-24">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-24"><a class="header" href="#methods-24">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="dcert"><a class="header" href="#dcert">DCert</a></h2>
-<pre><code class="language-rust  noplaypen">enum DCert {
+<pre><code class="language-helios">enum DCert {
 	Register{credential: StakingCredential}
 	Deregister{credential: StakingCredential}
 	Delegate{delegator: StakingCredential, pool_id: PubKeyHash}
@@ -1816,7 +1808,7 @@ func from_data(data: Data) -&gt; StakingCredential
 }
 </code></pre>
 <h3 id="associated-functions-21"><a class="header" href="#associated-functions-21">Associated functions</a></h3>
-<pre><code class="language-rust  noplaypen">func from_data(data: Data) -&gt; DCert
+<pre><code class="language-helios">func from_data(data: Data) -&gt; DCert
 
 func new_register(credential: StakingCredential) -&gt; DCert::Register
 
@@ -1831,7 +1823,7 @@ func new_retire_pool(pool_id: PubKeyHash, epoch: Int) -&gt; DCert::RetirePool
 <h3 id="operators-25"><a class="header" href="#operators-25">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="methods-25"><a class="header" href="#methods-25">Methods</a></h3>
-<pre><code class="language-rust  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 
                     </main>
@@ -1859,6 +1851,7 @@ func new_retire_pool(pool_id: PubKeyHash, epoch: Int) -&gt; DCert::RetirePool
         <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        <script type="text/javascript" src="src/custom.js"></script>
         <script type="text/javascript">
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);

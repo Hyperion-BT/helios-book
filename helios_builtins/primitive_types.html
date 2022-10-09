@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/custom.css">
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -142,10 +143,10 @@
 <h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
 <h3 id="associated-functions"><a class="header" href="#associated-functions">Associated functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; Int
+<pre><code class="language-helios">func from_data(data: Data) -&gt; Int
 </code></pre>
 <h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 func to_bool(self) -&gt; Bool
 
@@ -156,11 +157,11 @@ func show(self) -&gt; String
 <h2 id="bool"><a class="header" href="#bool">Bool</a></h2>
 <hr />
 <p>Represents a boolean value (<code>true</code>/<code>false</code>).</p>
-<pre><code class="language-go  noplaypen">true_val: Bool = true;
+<pre><code class="language-helios">true_val: Bool = true;
 false_val: Bool = false; ...
 </code></pre>
 <h3 id="associated-functions-1"><a class="header" href="#associated-functions-1">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func and(fn_bool_1: () -&gt; Bool, fn_bool_2: () -&gt; Bool) -&gt; Bool
+<pre><code class="language-helios">func and(fn_bool_1: () -&gt; Bool, fn_bool_2: () -&gt; Bool) -&gt; Bool
 
 func or(fn_bool_1: () -&gt; Bool, fn_bool_2: () -&gt; Bool) -&gt; Bool
 
@@ -169,7 +170,7 @@ func from_data(data: Data) -&gt; Bool
 <h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>!</code>, <code>&amp;&amp;</code>, <code>||</code></p>
 <h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 func to_int(self) -&gt; Int
 
@@ -178,15 +179,15 @@ func show(self) -&gt; String
 <h2 id="string"><a class="header" href="#string">String</a></h2>
 <hr />
 <p>This is a fixed-size string.</p>
-<pre><code class="language-rust  noplaypen">example: String = &quot;Woah!&quot;; ...
+<pre><code class="language-helios">example: String = &quot;Woah!&quot;; ...
 </code></pre>
 <h3 id="operators-2"><a class="header" href="#operators-2">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>,<code>+</code></p>
 <h3 id="associated-functions-2"><a class="header" href="#associated-functions-2">Associated functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; String
+<pre><code class="language-helios">func from_data(data: Data) -&gt; String
 </code></pre>
 <h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 func encode_utf8(self) -&gt; String
 
@@ -197,17 +198,17 @@ func ends_with(self, suffix: String) -&gt; Bool
 <h2 id="bytearray"><a class="header" href="#bytearray">ByteArray</a></h2>
 <hr />
 <p>This represents an array of bytes.</p>
-<pre><code class="language-rust  noplaypen">example: ByteArray = #213212; ...
+<pre><code class="language-helios">example: ByteArray = #213212; ...
 </code></pre>
 <h3 id="operators-3"><a class="header" href="#operators-3">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>+</code></p>
 <h3 id="associated-functions-3"><a class="header" href="#associated-functions-3">Associated functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; ByteArray
+<pre><code class="language-helios">func from_data(data: Data) -&gt; ByteArray
 </code></pre>
 <h3 id="getters"><a class="header" href="#getters">Getters</a></h3>
 <p><code>length: Int</code>, returns the length of the <code>ByteArray</code>.</p>
 <h3 id="methods-3"><a class="header" href="#methods-3">Methods:</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 // @returns The SHA2-256 hash of the ByteArray
 func sha2(self) -&gt; ByteArray
@@ -231,10 +232,10 @@ func slice(self, start: Int, end: Int) -&gt; ByteArray
 <h2 id="list-a"><a class="header" href="#list-a">List (<code>[]a</code>)</a></h2>
 <hr />
 <p>Helios linked-list type.</p>
-<pre><code class="language-go  playpen">example: []Int = []Int{1, 2, 3, 4, 5}; ...
+<pre><code class="language-helios">example: []Int = []Int{1, 2, 3, 4, 5}; ...
 </code></pre>
 <h3 id="associated-functions-4"><a class="header" href="#associated-functions-4">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; []a
+<pre><code class="language-helios">func from_data(data: Data) -&gt; []a
 
 func new(n: Int, fn: (Int) -&gt; a) -&gt; []a
 
@@ -243,7 +244,7 @@ func new_const(n: Int, item: a) -&gt; []a
 <h3 id="operators-4"><a class="header" href="#operators-4">Operators</a></h3>
 <p><code>==</code>, <code>!=</code>, <code>+</code></p>
 <h3 id="getters-1"><a class="header" href="#getters-1">Getters</a></h3>
-<pre><code class="language-go  noplaypen">// @returns The length of the list.
+<pre><code class="language-helios">// @returns The length of the list.
 length: Int
 
 // @returns The element at the front of the list
@@ -255,7 +256,7 @@ head: a
 tail: []a
 </code></pre>
 <h3 id="methods-4"><a class="header" href="#methods-4">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 // @returns 'true' if the list is empty.
 func is_empty(self) -&gt; Bool
@@ -291,20 +292,20 @@ func map(self, transformation: (a) -&gt; b) -&gt; []b
 <h2 id="map-mapab"><a class="header" href="#map-mapab">Map (<code>Map[a]b</code>)</a></h2>
 <hr />
 <p>List of key-value pairs.</p>
-<pre><code class="language-go  noplaypen">my_map = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2};
+<pre><code class="language-helios">my_map = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2};
 print(my_map.get(&quot;zero&quot;).show()); ... // prints '0'
 </code></pre>
 <h3 id="associated-functions-5"><a class="header" href="#associated-functions-5">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; Map[a]b
+<pre><code class="language-helios">func from_data(data: Data) -&gt; Map[a]b
 </code></pre>
 <h3 id="operators-5"><a class="header" href="#operators-5">Operators</a></h3>
 <p><code>==</code>,<code>!=</code>, <code>+</code></p>
 <h3 id="getters-2"><a class="header" href="#getters-2">Getters</a></h3>
-<pre><code class="language-go  noplaypen">// @returns the number of items in a map.
+<pre><code class="language-helios">// @returns the number of items in a map.
 length: Int
 </code></pre>
 <h3 id="methods-5"><a class="header" href="#methods-5">Methods</a></h3>
-<pre><code class="language-go  noplaypen">// @returns The Value in the map for the given key.
+<pre><code class="language-helios">// @returns The Value in the map for the given key.
 // @notice  Throws an error if the value isn't in the map.
 func get(self, key: a) -&gt; b
 
@@ -341,7 +342,7 @@ func serialize(self: Map[a, b]) -&gt; ByteArray
 <h2 id="option-optiona"><a class="header" href="#option-optiona">Option (<code>Option[a]</code>)</a></h2>
 <hr />
 <p><code>Option[a]</code> is an enum used to represent an optional value.</p>
-<pre><code class="language-rust  noplaypen">// internal representation
+<pre><code class="language-helios">// internal representation
 enum Option[a] {
     Some { some: a }
     None
@@ -351,16 +352,16 @@ example_1: Option[Int] = Option[Int]::Some{42};
 example_2: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="associated-functions-6"><a class="header" href="#associated-functions-6">Associated Functions</a></h3>
-<pre><code class="language-go  noplaypen">func from_data(data: Data) -&gt; Option[a]
+<pre><code class="language-helios">func from_data(data: Data) -&gt; Option[a]
 </code></pre>
 <h3 id="operators-6"><a class="header" href="#operators-6">Operators</a></h3>
 <p><code>==</code>, <code>!=</code></p>
 <h3 id="getters-3"><a class="header" href="#getters-3">Getters</a></h3>
-<pre><code class="language-go  noplaypen">// @returns content of Option[a]::Some
+<pre><code class="language-helios">// @returns content of Option[a]::Some
 Option[a]::Some.some: a
 </code></pre>
 <h3 id="methods-6"><a class="header" href="#methods-6">Methods</a></h3>
-<pre><code class="language-go  noplaypen">func serialize(self) -&gt; ByteArray
+<pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 
                     </main>
@@ -400,5 +401,6 @@ Option[a]::Some.some: a
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../src/custom.js"></script>
     </body>
 </html>

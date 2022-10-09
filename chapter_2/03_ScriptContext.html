@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/custom.css">
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -138,9 +139,7 @@
 <p>The <code>ScriptContext</code> contains all the data about the transaction and is usually the most important argument in determining whether a <code>validator</code> should succeed or fail.
 Because of how important it is we are going to try to go fairly deep into the internals in this chapter.</p>
 <p>This is roughly the internal implementation of the <code>ScriptContext</code> struct.</p>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>struct ScriptContext {
+<pre><code class="language-helios">struct ScriptContext {
     tx: Tx
 
     // Some useful methods
@@ -151,15 +150,14 @@ Because of how important it is we are going to try to go fairly deep into the in
     // Get the TxInput locked by the validator.
     func get_current_input(self) -&gt; TxInput
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <blockquote>
 <p><strong>Note</strong>: Internally <code>ScriptContext</code> is a wrapper around the <code>Tx</code> struct,
 the <code>Tx</code> holds the metadata of a signed on-chain transaction.</p>
 </blockquote>
 <h2 id="tx"><a class="header" href="#tx">Tx</a></h2>
 <p>The <code>Tx</code> struct stores the data on the current transaction.</p>
-<pre><code class="language-rust  noplaypen">struct Tx {
+<pre><code class="language-helios">struct Tx {
     inputs: []TxInput          // Transaction inputs
 	ref_inputs: []TxInput      // Reference inputs that aren't spent
     outputs: []TxOutput        // Transaction outputs
@@ -192,17 +190,17 @@ the <code>Tx</code> holds the metadata of a signed on-chain transaction.</p>
 <h2 id="txinput"><a class="header" href="#txinput">TxInput</a></h2>
 <p>The <code>TxInput</code> struct as you've probably guessed represents a <strong>Transaction Input</strong>.
 As you can see a <strong>Transaction Input</strong> is just a wrapper around UTXO created by a previous transaction on the blockchain.</p>
-<pre><code class="language-rust  noplaypen">struct TxInput {
+<pre><code class="language-helios">struct TxInput {
     output_id: TxOutputId // ID of the UTXO
     output: TxOutput      // UTXO being spent
 }
 </code></pre>
 <h2 id="txoutput"><a class="header" href="#txoutput">TxOutput</a></h2>
 <p>The <code>TxOutput</code> represents a <strong>Transaction Output</strong>. This is a <strong>UTXO</strong> that will be created by this transaction.</p>
-<pre><code class="language-rust  noplaypen">struct TxOutput {
+<pre><code class="language-helios">struct TxOutput {
     address: Address          // Address of the UTXO
-    value: Value              // Value in the UTXO
-    datum:  OutputDatum       // UTXO's datum (none, hash, or inline)
+    value:   Value            // Value in the UTXO
+    datum:   OutputDatum      // UTXO's datum (none, hash, or inline)
 }
 </code></pre>
 <blockquote>
@@ -246,5 +244,6 @@ As you can see a <strong>Transaction Input</strong> is just a wrapper around UTX
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../src/custom.js"></script>
     </body>
 </html>

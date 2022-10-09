@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/custom.css">
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -138,7 +139,7 @@
 <p>As a functional programming language, Helios doesn't support mutable variables. Helios does however support binding values to names.</p>
 <h2 id="binding-inside-a-function"><a class="header" href="#binding-inside-a-function">Binding inside a function</a></h2>
 <p>Inside a function body, values can be bound to names using assignment expressions:</p>
-<pre><code class="language-rust  noplaypen">my_number: Int = 42; ...
+<pre><code class="language-helios">my_number: Int = 42; ...
 </code></pre>
 <p>In this example <code>my_number</code> has value <code>42</code> and has type <code>Int</code>. <code>my_number</code> cannot be mutated after its definition.</p>
 <p>Assignment expressions must be followed by another expression, separated by a semicolon (<code>;</code>). The assignment expression above should be seen as syntactic sugar for <code>((my_number: Int) -&gt; {...})(42)</code>.</p>
@@ -150,14 +151,14 @@
 </blockquote>
 <h2 id="const-statements"><a class="header" href="#const-statements"><code>const</code> statements</a></h2>
 <p>Values can also be bound to names at the <em>top-level</em> of a script, or inside <code>struct</code> or <code>enum</code> blocks. This is done with the <code>const</code> keyword:</p>
-<pre><code class="language-rust  noplaypen">const AGE: Int = 123
+<pre><code class="language-helios">const AGE: Int = 123
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: The right-hand side of a constant can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.</p>
+<p><strong>Note</strong>: The right-hand side of <code>const</code> can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.</p>
 </blockquote>
 <h2 id="type-annotations"><a class="header" href="#type-annotations">Type Annotations</a></h2>
 <p>Assignment expressions and <code>const</code> statements usually include  a <em>type annotation</em>. For literal right-hand sides <em>type annotations</em> are optional:</p>
-<pre><code class="language-rust  noplaypen">list_of_ints = []Int{1, 1, 2, 3, 5}; ...
+<pre><code class="language-helios">list_of_ints = []Int{1, 1, 2, 3, 5}; ...
 
 // instead of the more verbose:
 
@@ -201,5 +202,6 @@ list_of_ints: []Int = []Int{1, 1, 2, 3, 5}; ...
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../src/custom.js"></script>
     </body>
 </html>

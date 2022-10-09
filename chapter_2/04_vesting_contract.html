@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/custom.css">
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -141,7 +142,7 @@ for a <strong>beneficiary</strong> that can't be claimed until after a <strong>d
 The <strong>owner</strong> can get their funds back if the <strong>deadline</strong> has not passed yet</p>
 <h2 id="the-datum"><a class="header" href="#the-datum">The Datum</a></h2>
 <p>The Datum stores the <code>PubKeyHash</code> of the <strong>beneficiary</strong> and <strong>creator</strong>'s wallets and the vesting deadline is represented as a <code>Time</code>.</p>
-<pre><code class="language-rust  noplaypen">struct Datum {
+<pre><code class="language-helios">struct Datum {
     creator: PubKeyHash
     beneficiary: PubKeyHash
     deadline: Time
@@ -152,7 +153,7 @@ The <strong>owner</strong> can get their funds back if the <strong>deadline</str
 for more info <a href="../helios_builtins/Helios_Builtins.html">Helios Builtins</a>.</p>
 </blockquote>
 <h2 id="the-redeemer"><a class="header" href="#the-redeemer">The Redeemer</a></h2>
-<pre><code class="language-rust  noplaypen">enum Redeemer {
+<pre><code class="language-helios">enum Redeemer {
     Cancel
     Claim
 }
@@ -178,10 +179,10 @@ For it to be valid the following have to be checked:</p>
 </ul>
 </li>
 </ul>
-<h2 id="the-main-function"><a class="header" href="#the-main-function">The Main Function</a></h2>
-<pre><code class="language-go  noplaypen">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
+<h2 id="the-main-function"><a class="header" href="#the-main-function">The <code>main</code> function</a></h2>
+<pre><code class="language-helios">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
-    now: TimeRange = tx.now();
+    now: Time = tx.now();
 
     redeemer.switch {
         Cancel =&gt; {
@@ -210,7 +211,7 @@ for more info <a href="../helios_builtins/Helios_Builtins.html">Helios Builtins<
 See if  you can find it 🙂.</p>
 </blockquote>
 <h2 id="finished-code"><a class="header" href="#finished-code">Finished Code</a></h2>
-<pre><code class="language-go  noplaypen">spending vesting
+<pre><code class="language-helios">spending vesting
 
 struct Datum {
     creator: PubKeyHash
@@ -277,5 +278,6 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../src/custom.js"></script>
     </body>
 </html>

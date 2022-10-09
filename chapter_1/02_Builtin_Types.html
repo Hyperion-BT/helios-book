@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/custom.css">
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -148,7 +149,7 @@
 <h2 id="int"><a class="header" href="#int"><code>Int</code></a></h2>
 <hr />
 <p>Helios' <code>Int</code> type represents an unbounded integer like Haskell's <code>Integer</code> type.</p>
-<pre><code class="language-rust noplaypen">// Helios supports typical integer literals:
+<pre><code class="language-helios">// Helios supports typical integer literals:
 my_decimal: Int = 17;
 my_binary: Int = 0b10001;
 my_hex: Int = 0x11;
@@ -157,29 +158,29 @@ my_octal: Int = 0o121; ...
 <h2 id="bool"><a class="header" href="#bool"><code>Bool</code></a></h2>
 <hr />
 <p>The <code>Bool</code> type has two possible values: <code>true</code> or <code>false</code>. Booleans are used throughout validator scripts, and validator scripts must always return a boolean. The simplest validator script is just a literal boolean expression:</p>
-<pre><code class="language-rust noplaypen">func main() -&gt; Bool {
+<pre><code class="language-helios">func main() -&gt; Bool {
     true
 }
 </code></pre>
 <p>Booleans can be converted into integers using the builtin <code>to_int</code> method:</p>
-<pre><code class="language-rust noplaypen">x: Int = (true).to_int(); // x == 1
+<pre><code class="language-helios">x: Int = (true).to_int(); // x == 1
 y: Int = (false).to_int(); ... // y == 0
 </code></pre>
 <h2 id="bytearray"><a class="header" href="#bytearray"><code>ByteArray</code></a></h2>
 <hr />
 <p>The <code>ByteArray</code> type, as you've likely guessed, represents an array of bytes. A literal <code>ByteArray</code> is a hexadecimal sequence with <code>#</code> as a prefix:</p>
-<pre><code class="language-rust noplaypen">my_bytes: ByteArray = #af2e221a; ... // 
+<pre><code class="language-helios">my_bytes: ByteArray = #af2e221a; ... // 
 </code></pre>
 <p>All builtin and user types can be converted into a <code>ByteArray</code> using the builtin <code>serialize</code> method:</p>
-<pre><code class="language-rust noplaypen">cbor_bytes: ByteArray = (123).serialize(); ... // cbor encoding of 123
+<pre><code class="language-helios">cbor_bytes: ByteArray = (123).serialize(); ... // cbor encoding of 123
 </code></pre>
 <h2 id="string"><a class="header" href="#string"><code>String</code></a></h2>
 <hr />
 <p>A literal Helios string uses double quotes (<code>&quot;...&quot;</code>):</p>
-<pre><code class="language-ts noplaypen">my_message: String = &quot;hello world&quot;; ...
+<pre><code class="language-helios">my_message: String = &quot;hello world&quot;; ...
 </code></pre>
 <p>Similar to all other values in Helios, strings are immutable and have a fixed length. Strings cannot <em>grow</em> after definition. Concatenating two strings creates a new string:</p>
-<pre><code class="language-rust noplaypen">string_1: String = &quot;Hel&quot;;
+<pre><code class="language-helios">string_1: String = &quot;Hel&quot;;
 string_2: String = &quot;ios&quot;;
 result: String = string_1 + string_2; ... // &quot;Helios&quot;
 </code></pre>
@@ -187,7 +188,7 @@ result: String = string_1 + string_2; ... // &quot;Helios&quot;
 <hr />
 <p>Helios has a builtin linked list type, similar to Haskell's <code>List</code>. The type signature for a list is <code>[]a</code> where <code>a</code> is the item type. The item type can be any type except a function type.</p>
 <p>List literals have a syntax similar to Go:</p>
-<pre><code class="language-rust noplaypen">my_ints = []Int{1, 2, 3, 4, 5};
+<pre><code class="language-helios">my_ints = []Int{1, 2, 3, 4, 5};
 
 x: Int = some_ints.get(2); ...   // x == 3
 </code></pre>
@@ -196,7 +197,7 @@ x: Int = some_ints.get(2); ...   // x == 3
 </blockquote>
 <h3 id="useful-methods"><a class="header" href="#useful-methods">Useful methods</a></h3>
 <p>Helios lists have typical builtin getters and methods:</p>
-<pre><code class="language-rust noplaypen">fib_list: []Int = []Int{1, 1, 2, 3, 5};
+<pre><code class="language-helios">fib_list: []Int = []Int{1, 1, 2, 3, 5};
 
 //  '.length' returns the length of the list.
 fib_list.length == 5;
@@ -229,20 +230,20 @@ fib_list.fold((sum: Int, x: Int) -&gt; Int {sum + x}, 0) == 12; ...
 <hr />
 <p>A Map in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.</p>
 <p>A Map has a type signature and a literal syntax similar to Go:</p>
-<pre><code class="language-go  noplaypen">my_map: Map[String]Int = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2}; // either side of the colon can be an arbitrary expression that evaluates to the correct type
+<pre><code class="language-helios">my_map: Map[String]Int = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2}; // either side of the colon can be an arbitrary expression that evaluates to the correct type
 
 print(my_map.get(&quot;zero&quot;).show()); ... // prints '0'
 </code></pre>
 <h2 id="option"><a class="header" href="#option">Option</a></h2>
 <hr />
 <p>The Option type is a builtin enum with type signature <code>Option[a]</code>. It is internally defined as:</p>
-<pre><code class="language-rust  noplaypen">enum Option[a] {
+<pre><code class="language-helios">enum Option[a] {
     Some { some: a }
     None
 }
 </code></pre>
 <h3 id="instantiating-an-option"><a class="header" href="#instantiating-an-option">Instantiating an <code>Option</code></a></h3>
-<pre><code class="language-rust  noplaypen">some_int: Option[Int] = Option[Int]::Some{42};
+<pre><code class="language-helios">some_int: Option[Int] = Option[Int]::Some{42};
 
 none_int: Option[Int] = Option[Int]::None; ...
 </code></pre>
@@ -286,5 +287,6 @@ none_int: Option[Int] = Option[Int]::None; ...
         <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../src/custom.js"></script>
     </body>
 </html>
