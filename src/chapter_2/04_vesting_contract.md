@@ -9,7 +9,7 @@ The **owner** can get their funds back if the **deadline** has not passed yet
 
 The Datum stores the `PubKeyHash` of the **beneficiary** and **creator**'s wallets and the vesting deadline is represented as a `Time`.
 
-```rust, noplaypen
+```helios
 struct Datum {
     creator: PubKeyHash
     beneficiary: PubKeyHash
@@ -22,7 +22,7 @@ struct Datum {
 
 ## The Redeemer
 
-```rust, noplaypen
+```helios
 enum Redeemer {
     Cancel
     Claim
@@ -47,12 +47,12 @@ There are two cases when the validator should return `true`:
   - The beneficiary signed the transaction.
   - The deadline has passed.
 
-## The Main Function
+## The `main` function
 
-```go, noplaypen
+```helios
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
     tx: Tx = context.tx;
-    now: TimeRange = tx.now();
+    now: Time = tx.now();
 
     redeemer.switch {
         Cancel => {
@@ -81,7 +81,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
 
 ## Finished Code
 
-```go, noplaypen
+```helios
 spending vesting
 
 struct Datum {

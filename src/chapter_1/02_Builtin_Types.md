@@ -16,7 +16,7 @@ Helios has 4 **primitive** types and 3 **container** types:
 
 Helios' `Int` type represents an unbounded integer like Haskell's `Integer` type.
 
-```rust,noplaypen
+```helios
 // Helios supports typical integer literals:
 my_decimal: Int = 17;
 my_binary: Int = 0b10001;
@@ -30,14 +30,14 @@ my_octal: Int = 0o121; ...
 
 The `Bool` type has two possible values: `true` or `false`. Booleans are used throughout validator scripts, and validator scripts must always return a boolean. The simplest validator script is just a literal boolean expression:
 
-```rust,noplaypen
+```helios
 func main() -> Bool {
     true
 }
 ```
 
 Booleans can be converted into integers using the builtin `to_int` method:
-```rust,noplaypen
+```helios
 x: Int = (true).to_int(); // x == 1
 y: Int = (false).to_int(); ... // y == 0
 ```
@@ -48,13 +48,13 @@ y: Int = (false).to_int(); ... // y == 0
 
 The `ByteArray` type, as you've likely guessed, represents an array of bytes. A literal `ByteArray` is a hexadecimal sequence with `#` as a prefix:
 
-```rust,noplaypen
+```helios
 my_bytes: ByteArray = #af2e221a; ... // 
 ```
 
 All builtin and user types can be converted into a `ByteArray` using the builtin `serialize` method:
 
-```rust,noplaypen
+```helios
 cbor_bytes: ByteArray = (123).serialize(); ... // cbor encoding of 123
 ```
 
@@ -64,13 +64,13 @@ cbor_bytes: ByteArray = (123).serialize(); ... // cbor encoding of 123
 
 A literal Helios string uses double quotes (`"..."`):
 
-```ts,noplaypen
+```helios
 my_message: String = "hello world"; ...
 ```
 
 Similar to all other values in Helios, strings are immutable and have a fixed length. Strings cannot *grow* after definition. Concatenating two strings creates a new string:
 
-```rust,noplaypen
+```helios
 string_1: String = "Hel";
 string_2: String = "ios";
 result: String = string_1 + string_2; ... // "Helios"
@@ -83,7 +83,7 @@ result: String = string_1 + string_2; ... // "Helios"
 Helios has a builtin linked list type, similar to Haskell's `List`. The type signature for a list is `[]a` where `a` is the item type. The item type can be any type except a function type.
 
 List literals have a syntax similar to Go:
-```rust,noplaypen
+```helios
 my_ints = []Int{1, 2, 3, 4, 5};
 
 x: Int = some_ints.get(2); ...   // x == 3
@@ -95,7 +95,7 @@ x: Int = some_ints.get(2); ...   // x == 3
 
 Helios lists have typical builtin getters and methods:
 
-```rust,noplaypen
+```helios
 fib_list: []Int = []Int{1, 1, 2, 3, 5};
 
 //  '.length' returns the length of the list.
@@ -133,7 +133,7 @@ fib_list.fold((sum: Int, x: Int) -> Int {sum + x}, 0) == 12; ...
 A Map in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.
 
 A Map has a type signature and a literal syntax similar to Go:
-```go, noplaypen
+```helios
 my_map: Map[String]Int = Map[String]Int{"zero": 0, "one": 1, "two": 2}; // either side of the colon can be an arbitrary expression that evaluates to the correct type
 
 print(my_map.get("zero").show()); ... // prints '0'
@@ -145,7 +145,7 @@ print(my_map.get("zero").show()); ... // prints '0'
 
 The Option type is a builtin enum with type signature `Option[a]`. It is internally defined as:
 
-```rust, noplaypen
+```helios
 enum Option[a] {
     Some { some: a }
     None
@@ -154,7 +154,7 @@ enum Option[a] {
 
 ### Instantiating an `Option`
 
-```rust, noplaypen
+```helios
 some_int: Option[Int] = Option[Int]::Some{42};
 
 none_int: Option[Int] = Option[Int]::None; ...

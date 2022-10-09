@@ -10,7 +10,7 @@ The Redeemer and the Datum are user-defined but the `ScriptContext` struct is th
 
 A simple validator
 
-```rust
+```helios
 spending always_true        // -------- (1)
 
 struct Datum {..}           // --------- (2)
@@ -26,28 +26,30 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {
 
 ## Script Purpose
 
-In Helios all scripts start with a  **script purpose**(1), followed by the name of the script. There are four script purposes currently:
+In Helios all scripts start with a  **script purpose** (1), followed by the name of the script. There are four script purposes currently:
 
 - **spending**
 - **minting**
-  **staking**
+- **staking**
 - **testing**
 
 In this chapter we are only concerned with the `spending` script purpose. We will cover the remaining three in later chapters.
 
-```rust, noplaypen
+```helios
 spending always_true
 ```
 
-## The Main Function
+## The `main` Function
 
-The main function of a validator accepts three arguments and returns a `Bool`:
+The `main` function of a validator accepts three arguments and returns a `Bool`:
 
-- **The Datum** (2)
-- **The Redeemer** (3)
-- **The ScriptContext**
+- **Datum** (2)
+- **Redeemer** (3)
+- **ScriptContext**
 
-```go, noplaypen
+Each `main` argument is optional, but must appear in that order.
+
+```helios
 spending my_validator
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
@@ -65,7 +67,7 @@ We will cover the `ScriptContext` in the next page.
 
 This basic script allows UTXOs to be spent any way the user wants:
 
-```go, noplaypen
+```helios
 spending always_true
 
 func main() -> Bool {

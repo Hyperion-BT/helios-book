@@ -4,7 +4,7 @@
 
 A struct in Helios is a named grouping of types (sometimes called *product types* in CS). They are similar to structs in other languages (e.g. C, Go and Rust):
 
-```rust, noplaypen
+```helios
 // example of a Rational (fractional type)
 struct Rational {
     top: Int
@@ -24,7 +24,7 @@ Enums are used to represent types that have multiple variants (sometimes called 
 
 Example of an enum:
 
-```rust, noplaypen
+```helios
 enum FanSetting {
     On{ speed: Int }
     Off
@@ -43,7 +43,7 @@ const current_setting = FanSetting::On { 5 }
 
 A `switch` expression is used to perform different actions depending on the enum variant. It is similar to a `switch` statement in C or Go (and dissimilar to a `match` expression in Rust, as Helios doesn't support pattern-matching/destructuring):
 
-```rust, noplaypen
+```helios
 enum Datum {
 	// content of each variant has the same syntax as a regular struct-type
     Submission{...} 
@@ -63,7 +63,6 @@ func main(datum: Datum) -> Bool {
 		// braces surrounding the cases are optional
 	}
 }
-
 ```
 
 > **Note:** In Helios, **all** fields in a struct and **all** variants in an enum **must be used**,

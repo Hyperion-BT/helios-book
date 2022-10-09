@@ -4,7 +4,7 @@
 
 You can define methods for structs and enums. The syntax for this is similar to many OOP languages: methods are defined by placing `func` statements inside a `struct` or `enum` blocks.
 
-```go, noplaypen
+```helios
 struct Rational {
     top: Int
     bottom: Int
@@ -30,7 +30,7 @@ Methods are accessed using a `.` (i.e. a dot). Methods cannot modify `self` as a
 ### Methods can be used as values
 A method is syntactic sugar for a **curried function** (a function that returns a function) that takes `self` as it's first argument:
 
-```rust, noplaypen
+```helios
 // the following:
 rational_1.add(rational_2); ...
 // desugars into: __user__Rational_add(rational_1)(rational_2)
@@ -38,7 +38,7 @@ rational_1.add(rational_2); ...
 ```
 
 A method value is a function, and can be seen as a closure over `self`:
-```rust, noplaypen
+```helios
 // 'rational_1.add' returns a function of type ((Rational) -> Rational) 
 //   which can be used just like any other function value
 add_to_rational_1: (Rational) -> Rational = rational_1.add; ...
@@ -54,7 +54,7 @@ Associated functions (aka *static methods*) and constants are just like regular 
 
 Associated functions are defined just like methods but without the `self` argument. Associated constants are simply `const` statements inside a `struct` or `enum` block:
 
-```rust, noplaypen
+```helios
 struct Rational {
     top: Int
     bottom: Int
@@ -73,13 +73,13 @@ Associated functions and constants are *namespaced* by the type they are associa
 and can be referenced using a double colon (`::`) just like in Rust.
 For example:
 
-```rust, noplaypen
+```helios
 half: Rational = Rational::new(1, 2); ...
 ```
 
 ## Example: Rational
 
-```ts
+```helios
 struct Rational {
     top: Int
     bottom: Int

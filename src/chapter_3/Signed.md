@@ -3,7 +3,7 @@
 This example shows a simple minting policy that allows minting tokens as long as
 the transaction is signed by an **owner**. The **owner** has a given `PubKeyHash`.
 
-```go, noplaypen
+```helios
 minting signed
 
 const OWNER: PubKeyHash = PubKeyHash::new(#26372...)

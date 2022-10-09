@@ -4,7 +4,7 @@ Functions are a core feature of Helios. All Helios functions are *pure*, which m
 
 Function statements are defined using the `func` keyword. Helios has no `return` statement, the last expression in a function is *implicitly returned* (like in Rust):
 
-```go, noplaypen
+```helios
 func add(a: Int, b: Int) -> Int {
     a + b 
 }
@@ -12,20 +12,20 @@ func add(a: Int, b: Int) -> Int {
 
 Helios also supports recursion:
 
-```go, noplaypen
+```helios
 func fib(n: Int) -> Int {
     // the branches of an if/else expresion return values
     if (n < 1) {
         1
     } else {
-        fib(n-1) + fib(n-2)
+        fib(n - 1) + fib(n - 2)
     }
 }
 ```
 
 > **Note:**: A function can only reference itself when recursing. Helios doesn't support hoisting, so mutual recursion by referring to functions defined after the current one isn't possible:
 >
-> ```go, noplaypen
+> ```helios
 > 01 func a(n: Int) -> Int {
 > 02     b(n)                   // ReferenceError: 'b' undefined
 > 03 }
@@ -38,7 +38,7 @@ func fib(n: Int) -> Int {
 ## Anonymous functions
 
 Helios also supports anonymous functions. Anonymous functions have a syntax similar to closures in Javascript: 
-```rust, noplaypen
+```helios
 is_even = (n: Int) -> Bool { (n % 2) == 0 }; ...
 // type of 'is_even' can be infered, 
 //  but return type of the anonymous function must be specified
@@ -52,13 +52,13 @@ Functions are first-class citizens in Helios and can be used as values. This mea
 
 ### 1. Functions can be passed as arguments
 
-```ts, noplaypen
-evens: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); ... // [2, 4. 6]; 
+```helios
+even_numbers: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); ... // [2, 4, 6]; 
 ```
 
 ### 2. Functions can be returned
 
-```rust, noplaypen
+```helios
 add = (a: Int) -> (Int) -> Int { (b: Int) -> Int { a + b } }; ...
 ```
 
@@ -76,7 +76,7 @@ Curiously the Collatz sequence always converges to `1`, regardless the starting 
 
 The following function generates the Collatz sequence as a (reversed) list of integers:
 
-```go, noplaypen
+```helios
 // eg. collatz(10, []Int{}) == []Int{10, 5, 16, 8, 4, 2, 1}
 func collatz(n: Int, sequence: []Int) -> []Int {
 	updated_sequence: []Int = sequence.prepend(n);

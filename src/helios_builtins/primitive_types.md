@@ -13,13 +13,13 @@ This is an unbounded integer like Haskell's `Integer` type.
 `==`, `!=`, `+`, `-`, `*`, `/`, `%`, `>=`, `>`, `<=`, `<`
 
 ### Associated functions
-```go, noplaypen
+```helios
 func from_data(data: Data) -> Int
 ```
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 
 func to_bool(self) -> Bool
@@ -35,14 +35,14 @@ func show(self) -> String
 
 Represents a boolean value (`true`/`false`).
 
-```go, noplaypen
+```helios
 true_val: Bool = true;
 false_val: Bool = false; ...
 ```
 
 ### Associated Functions
 
-```go, noplaypen
+```helios
 func and(fn_bool_1: () -> Bool, fn_bool_2: () -> Bool) -> Bool
 
 func or(fn_bool_1: () -> Bool, fn_bool_2: () -> Bool) -> Bool
@@ -56,7 +56,7 @@ func from_data(data: Data) -> Bool
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 
 func to_int(self) -> Int
@@ -70,7 +70,7 @@ func show(self) -> String
 
 This is a fixed-size string.
 
-```rust, noplaypen
+```helios
 example: String = "Woah!"; ...
 ```
 
@@ -79,13 +79,13 @@ example: String = "Woah!"; ...
 `==`, `!=`,`+`
 
 ### Associated functions
-```go, noplaypen
+```helios
 func from_data(data: Data) -> String
 ```
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 
 func encode_utf8(self) -> String
@@ -101,7 +101,7 @@ func ends_with(self, suffix: String) -> Bool
 
 This represents an array of bytes.
 
-```rust, noplaypen
+```helios
 example: ByteArray = #213212; ...
 ```
 
@@ -110,7 +110,7 @@ example: ByteArray = #213212; ...
 `==`, `!=`, `+`
 
 ### Associated functions
-```go, noplaypen
+```helios
 func from_data(data: Data) -> ByteArray
 ```
 
@@ -120,7 +120,7 @@ func from_data(data: Data) -> ByteArray
 
 ### Methods:
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 
 // @returns The SHA2-256 hash of the ByteArray
@@ -149,14 +149,14 @@ func slice(self, start: Int, end: Int) -> ByteArray
 
 Helios linked-list type.
 
-```go, playpen
+```helios
 example: []Int = []Int{1, 2, 3, 4, 5}; ...
 ```
 
 
 ### Associated Functions
 
-```go, noplaypen
+```helios
 func from_data(data: Data) -> []a
 
 func new(n: Int, fn: (Int) -> a) -> []a
@@ -170,7 +170,7 @@ func new_const(n: Int, item: a) -> []a
 
 ### Getters
 
-```go, noplaypen
+```helios
 // @returns The length of the list.
 length: Int
 
@@ -185,7 +185,7 @@ tail: []a
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 
 // @returns 'true' if the list is empty.
@@ -226,14 +226,14 @@ func map(self, transformation: (a) -> b) -> []b
 
 List of key-value pairs.
 
-```go, noplaypen
+```helios
 my_map = Map[String]Int{"zero": 0, "one": 1, "two": 2};
 print(my_map.get("zero").show()); ... // prints '0'
 ```
 
 ### Associated Functions
 
-```go, noplaypen
+```helios
 func from_data(data: Data) -> Map[a]b
 ```
 
@@ -242,14 +242,14 @@ func from_data(data: Data) -> Map[a]b
 `==`,`!=`, `+`
 
 ### Getters
-```go, noplaypen
+```helios
 // @returns the number of items in a map.
 length: Int
 ```
 
 ### Methods
 
-```go, noplaypen
+```helios
 // @returns The Value in the map for the given key.
 // @notice  Throws an error if the value isn't in the map.
 func get(self, key: a) -> b
@@ -291,7 +291,7 @@ func serialize(self: Map[a, b]) -> ByteArray
 
 `Option[a]` is an enum used to represent an optional value.
 
-```rust, noplaypen
+```helios
 // internal representation
 enum Option[a] {
     Some { some: a }
@@ -304,7 +304,7 @@ example_2: Option[Int] = Option[Int]::None; ...
 
 ### Associated Functions
 
-```go, noplaypen
+```helios
 func from_data(data: Data) -> Option[a]
 ```
 
@@ -314,13 +314,13 @@ func from_data(data: Data) -> Option[a]
 
 ### Getters
 
-```go, noplaypen
+```helios
 // @returns content of Option[a]::Some
 Option[a]::Some.some: a
 ```
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 ```

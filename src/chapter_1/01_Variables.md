@@ -6,7 +6,7 @@ As a functional programming language, Helios doesn't support mutable variables. 
 
 Inside a function body, values can be bound to names using assignment expressions:
 
-```rust, noplaypen
+```helios
 my_number: Int = 42; ...
 ```
 
@@ -22,16 +22,16 @@ Assignment expressions must be followed by another expression, separated by a se
 
 Values can also be bound to names at the *top-level* of a script, or inside `struct` or `enum` blocks. This is done with the `const` keyword:
 
-```rust, noplaypen
+```helios
 const AGE: Int = 123
 ```
 
-> **Note**: The right-hand side of a constant can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.
+> **Note**: The right-hand side of `const` can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.
 
 ## Type Annotations
 
 Assignment expressions and `const` statements usually include  a *type annotation*. For literal right-hand sides *type annotations* are optional:
-```rust, noplaypen
+```helios
 list_of_ints = []Int{1, 1, 2, 3, 5}; ...
 
 // instead of the more verbose:

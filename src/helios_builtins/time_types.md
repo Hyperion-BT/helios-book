@@ -8,7 +8,7 @@ Represents POSIX time in milliseconds (time since 1970/01/01 00:00:00 UTC).
 
 ### Associated Functions
 
-```go, noplaypen
+```helios
 func new(millis: Int) -> Time
 
 func from_data(data: Data) -> Time
@@ -20,7 +20,7 @@ func from_data(data: Data) -> Time
 
 ### Methods
 
-```rust, noplaypen
+```helios
 func show(self) -> String
 
 func serialize(self) -> ByteArray
@@ -34,7 +34,7 @@ The difference of two `Time` values is a `Duration` value. Only a `Duration` can
 
 ### Associated Functions
 
-```go, noplaypen
+```helios
 func new(raw: Int) -> Duration
 
 func from_data(data: Int) -> Duration
@@ -46,7 +46,7 @@ func from_data(data: Int) -> Duration
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self: Time) -> ByteArray
 ```
 
@@ -58,7 +58,7 @@ This represents a range of time using a pair of `Time` values, or open ends.
 
 ### Associated functions and constants
 
-```go, noplaypen
+```helios
 // Represents TimeRange starting from negative to positive infinity.
 // It contains all possible Time values.
 const ALWAYS: TimeRange
@@ -84,7 +84,7 @@ func from_data(data: Data) -> TimeRange
 
 ### Methods
 
-```go, noplaypen
+```helios
 // @returns The start of TimeRange.
 // @notice Throws an error if start is negative or positive infinity
 func get_start(self) -> Time

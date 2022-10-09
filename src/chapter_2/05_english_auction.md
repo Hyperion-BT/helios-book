@@ -5,9 +5,9 @@ from the Plutus Pioneer's program in Helios.
 
 This validator is can be used to lock assets that are to be auctioned in a UTXO.
 
-## The Datum
+## The `main` function
 
-```go
+```helios
 spending english_auction
 
 struct Datum {

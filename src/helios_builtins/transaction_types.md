@@ -9,7 +9,7 @@ a public key, validator script, minting policy or datum.
 
 ### Associated Functions
 
-```go, playpen
+```helios
 func new(bytes: ByteArray) -> *Hash
 
 func from_data(data: Data) -> *Hash
@@ -21,7 +21,7 @@ func from_data(data: Data) -> *Hash
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 
 func show(self) -> String
@@ -34,7 +34,7 @@ func show(self) -> String
 The `ScriptContext` type contains all the metadata related to a signed Cardano transaction.
 It's just a wrapper around the `Tx` type with some extra methods.
 
-```go, noplaypen
+```helios
 // internal representation
 struct ScriptContext {
     tx: Tx
@@ -44,7 +44,7 @@ struct ScriptContext {
 
 ### Associated functions
 
-```rust, noplaypen
+```helios
 func from_data(data: Data) -> ScriptContext
 ```
 
@@ -54,7 +54,7 @@ func from_data(data: Data) -> ScriptContext
 
 ### Methods
 
-```go, noplaypen
+```helios
 // @returns The ScriptContext serialized into bytes.
 func serialize(self) -> ByteArray
 
@@ -85,7 +85,7 @@ func get_staking_purpose(self) -> StakingPurpose
 
 This type stores the data related to a signed transaction.
 
-```rust, noplaypen
+```helios
 struct Tx {
     inputs: []TxInput            // Transactin Inputs
 	ref_inputs: []TxInput        // Reference inputs (not spent)
@@ -101,7 +101,7 @@ struct Tx {
 ```
 
 ### Associated functions
-```rust, noplaypen
+```helios
 func from_data(data: Data) -> Tx
 ```
 
@@ -111,7 +111,7 @@ func from_data(data: Data) -> Tx
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 
 // @returns The current POSIX time.
@@ -153,12 +153,12 @@ func value_locked_by_datum(self, script_hash: ValidatorHash, datum: Any) -> Valu
 
 This is a type-safe wrapper around the `ByteArray`
 
-```rust, playpen
+```helios
 struct TxId {...}
 ```
 
 ### Associated functions
-```rust, noplaypen
+```helios
 func new(bytes: ByteArray) -> TxId
 
 func from_data(data: Data) -> TxId
@@ -170,7 +170,7 @@ func from_data(data: Data) -> TxId
 
 ### Methods
 
-```rust, noplaypen
+```helios
 func serialize(self) -> ByteArray
 ```
 
@@ -180,7 +180,7 @@ func serialize(self) -> ByteArray
 
 This type represents a **Transaction Input**.
 
-```rust, noplaypen
+```helios
 struct TxInput {
     output_id: TxOutputId
     output: TxOutput
@@ -188,7 +188,7 @@ struct TxInput {
 ```
 
 ### Associated functions
-```rust, noplaypen
+```helios
 func from_data(data: Data) -> TxInput
 ```
 
@@ -198,7 +198,7 @@ func from_data(data: Data) -> TxInput
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 ```
 
@@ -208,7 +208,7 @@ func serialize(self) -> ByteArray
 
 This type represents a **Transaction Output**.
 
-```go, noplaypen
+```helios
 struct TxOutput {
     address: Address
     value: Value
@@ -217,7 +217,7 @@ struct TxOutput {
 ```
 
 ### Associated functions
-```rust, noplaypen
+```helios
 func from_data(data: Data) -> TxOutput
 ```
 
@@ -227,13 +227,13 @@ func from_data(data: Data) -> TxOutput
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 ```
 
 ## OutputDatum
 
-```rust, noplaypen
+```helios
 enum OutputDatum {
 	None
 	Hash{hash: DatumHash}
@@ -243,7 +243,7 @@ enum OutputDatum {
 
 ### Associated functions
 
-```rust, noplaypen
+```helios
 func from_data(data: Data) -> OutputDatum
 ```
 
@@ -252,7 +252,7 @@ func from_data(data: Data) -> OutputDatum
 `==`, `!=`
 
 ### Methods
-```rust, noplaypen
+```helios
 func serialize(self) -> ByteArray
 ```
 
@@ -263,7 +263,7 @@ func serialize(self) -> ByteArray
 This type is a unique ID for a UTXO (Unspent Transaction Output).
 It's composed of the **Transaction ID** (`TxId`) of the transaction that created the UTXO and the index (`Int`) of the UTXO in the outputs of that transaction.
 
-```go, noplaypen
+```helios
 struct TxOutputId {
     TxId // not directly accessible
     Int // not directly accessible
@@ -272,7 +272,7 @@ struct TxOutputId {
 
 ### Associated Functions
 
-```go, noplaypen
+```helios
 func new(tx_id: TxId, index: Int) -> TxOutputId
 
 func from_data(data: Data) -> TxOutputId
@@ -284,7 +284,7 @@ func from_data(data: Data) -> TxOutputId
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 ```
 
@@ -294,7 +294,7 @@ func serialize(self) -> ByteArray
 
 The `Address` type represents a cardano address.
 
-```rust, noplaypen
+```helios
 struct Address {
     credential: Credential
     staking_credential: Option[StakingCredential]
@@ -302,7 +302,7 @@ struct Address {
 ```
 
 ### Associated functions
-```rust, noplaypen
+```helios
 func new(credential: Credential, staking_credential: Option[StakingCredential]) -> Address
 
 func from_data(data: Data) -> Address
@@ -313,7 +313,7 @@ func from_data(data: Data) -> Address
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self: Address) -> ByteArray
 ```
 
@@ -323,7 +323,7 @@ func serialize(self: Address) -> ByteArray
 
 The `Credential` type represents the an onchain credential which can be a `PubKeyHash` or a `ValidatorHash`
 
-```rust, noplaypen
+```helios
 enum Credential {
     Pubkey { hash: PubKeyHash }
     Validator { hash: ValidatorHash }
@@ -331,7 +331,7 @@ enum Credential {
 ```
 
 ### Associated functions
-```rust, noplaypen
+```helios
 func new_pubkey(pkh: PubKeyHash) -> Credential::PubKeyHash
 
 func new_validator(vh: ValidatorHash) -> Credential::ValidatorHash
@@ -345,7 +345,7 @@ func from_data(data: Data) -> Credential
 
 ### Methods
 
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 ```
 
@@ -356,7 +356,7 @@ func serialize(self) -> ByteArray
 ## StakingCredential
 
 ---
-```rust, noplaypen
+```helios
 enum StakingCredential {
 	Hash{Credential}
 	Ptr{Int, Int, Int}
@@ -364,7 +364,7 @@ enum StakingCredential {
 ```
 
 ### Associated functions
-```rust, noplaypen
+```helios
 func new_hash(credential: Credential) -> StakingCredential::Hash
 
 func new_ptr(a: Int, b: Int, c: Int) -> StakingCredential::Ptr
@@ -377,13 +377,13 @@ func from_data(data: Data) -> StakingCredential
 `==`, `!=`
 
 ### Methods
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 ```
 
 ## StakingPurpose
 
-```rust, noplaypen
+```helios
 enum StakingPurpose {
 	Rewarding{credential: StakingCredential}
 	Certifying{dcert: DCert}
@@ -391,7 +391,7 @@ enum StakingPurpose {
 ```
 
 ### Associated functions
-```rust, noplaypen
+```helios
 func from_data(data: Data) -> StakingPurpose
 ```
 
@@ -399,13 +399,13 @@ func from_data(data: Data) -> StakingPurpose
 `==`, `!=`
 
 ### Methods
-```go, noplaypen
+```helios
 func serialize(self) -> ByteArray
 ```
 
 ## DCert
 
-```rust, noplaypen
+```helios
 enum DCert {
 	Register{credential: StakingCredential}
 	Deregister{credential: StakingCredential}
@@ -416,7 +416,7 @@ enum DCert {
 ```
 
 ### Associated functions
-```rust, noplaypen
+```helios
 func from_data(data: Data) -> DCert
 
 func new_register(credential: StakingCredential) -> DCert::Register
@@ -434,6 +434,6 @@ func new_retire_pool(pool_id: PubKeyHash, epoch: Int) -> DCert::RetirePool
 `==`, `!=`
 
 ### Methods
-```rust, noplaypen
+```helios
 func serialize(self) -> ByteArray
 ```

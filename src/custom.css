@@ -1,0 +1,20 @@
+span.hljs-type {
+	color: #cc771d;
+}
+
+/*h1.menu-title {
+	color: #6021a6;
+	position: relative;
+}
+
+h1.menu-title::before {
+	position: absolute;
+	display: block;
+	background-image: url("../logo.png");
+	content: " ";
+	width: 50px;
+	height: 50px;
+	background-size: 40px 40px;
+	background-repeat: no-repeat;
+	background-position: 5px 5px;
+}*/

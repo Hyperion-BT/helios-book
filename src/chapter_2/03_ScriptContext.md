@@ -5,7 +5,7 @@ Because of how important it is we are going to try to go fairly deep into the in
 
 This is roughly the internal implementation of the `ScriptContext` struct.
 
-```rust
+```helios
 struct ScriptContext {
     tx: Tx
 
@@ -26,7 +26,7 @@ struct ScriptContext {
 
 The `Tx` struct stores the data on the current transaction.
 
-```rust, noplaypen
+```helios
 struct Tx {
     inputs: []TxInput          // Transaction inputs
 	ref_inputs: []TxInput      // Reference inputs that aren't spent
@@ -63,7 +63,7 @@ struct Tx {
 The `TxInput` struct as you've probably guessed represents a **Transaction Input**.
 As you can see a **Transaction Input** is just a wrapper around UTXO created by a previous transaction on the blockchain.
 
-```rust, noplaypen
+```helios
 struct TxInput {
     output_id: TxOutputId // ID of the UTXO
     output: TxOutput      // UTXO being spent
@@ -74,11 +74,11 @@ struct TxInput {
 
 The `TxOutput` represents a **Transaction Output**. This is a **UTXO** that will be created by this transaction.
 
-```rust, noplaypen
+```helios
 struct TxOutput {
     address: Address          // Address of the UTXO
-    value: Value              // Value in the UTXO
-    datum:  OutputDatum       // UTXO's datum (none, hash, or inline)
+    value:   Value            // Value in the UTXO
+    datum:   OutputDatum      // UTXO's datum (none, hash, or inline)
 }
 ```
 

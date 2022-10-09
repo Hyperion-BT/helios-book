@@ -2,7 +2,7 @@
 
 `Value` represents a *token bundle*, where each entry is represented by an `AssetClass` and an integer amount. `AssetClass` is turn represents a pair of `MintingPolicyHash` (a.k.a. PolicyID) and token name.
 
-```go, noplaypen
+```helios
 // Value is opaque (it's internals aren't directly accessible from Helios)
 struct Value {
     ...

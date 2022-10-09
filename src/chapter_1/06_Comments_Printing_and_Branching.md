@@ -6,13 +6,13 @@ Helios comments are C-like.
 
 Single-line comments use two forward slashes (`//`):
 
-```rust, noplaypen
+```helios
 // This is a comment.
 ```
 
 Multi-line comments use `/* ... */`:
 
-```rust, noplaypen
+```helios
 /*
     This is a multi-line comment.
 */
@@ -22,7 +22,7 @@ Multi-line comments use `/* ... */`:
 
 For debugging purposes, Helios has a special `print` expression. `print(...)` takes an expression that evaluates to a `String` as an argument, and must be followed by a semicolon and another expression:
 
-```rust, noplaypen
+```helios
 print("Imagine something cool.");
 ...
 ```
@@ -33,7 +33,7 @@ print("Imagine something cool.");
 
 Helios has conventional `if/else` syntax for branching:
 
-```rust, noplaypen
+```helios
 if (tag == 0) {
     23
 } else if (tag == 1) {
@@ -47,7 +47,7 @@ The last expression is each branch block is implicitly returned (much like Rust 
 
 The following is valid syntax:
 
-```rust, noplaypen
+```helios
 x: Int = 
 	if (true) {
 		42

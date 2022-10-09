@@ -4,3 +4,7 @@ language = "en"
 multilingual = false
 src = "src"
 title = "The Helios Programming Language"
+
+[output.html]
+additional-js = ["src/custom.js"]
+additional-css = ["src/custom.css"]

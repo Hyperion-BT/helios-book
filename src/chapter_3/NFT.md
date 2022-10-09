@@ -16,7 +16,7 @@ The main idea is that the token can only be minted before a deadline which alrea
 This ensures no new tokens will ever be minted.
 This is very easy to implement:
 
-```go, noplaypen
+```helios
 minting deadline_nft
 
 const DEADLINE: Time = Time::new(1661665196132) // milliseconds since 1970
@@ -43,7 +43,7 @@ This approach takes advantage of the fact that all UTXOs have a unique `TxOutput
 A UTXO's `TxOutputId` is made up of the transaction hash of the transaction that made the UTXO and the index of the UTXO in the outputs of that transaction.
 It's a builtin type that is defined as:
 
-```go, noplaypen
+```helios
 struct TxOutputId {
     tx_id: TxId
     index: Int
@@ -53,7 +53,7 @@ struct TxOutputId {
 So with this approach, we specify in the minting policy that the transaction minting the NFT must spend a UTXO with a specific **Output ID**.
 Since a UTXO can only be spent once this means the token can only be minted once.
 
-```go, noplaypen
+```helios
 minting utxo_nft
 
 const OUTPUT_ID: TxOutputId = TxOutputId::new(TxId::new(#1213), 1)

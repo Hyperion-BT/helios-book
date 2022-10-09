@@ -10,7 +10,7 @@ It's heavily inspired by Rust, Go and Sway.
 
 <br/>
 
-```go, noplaypen
+```helios, noplaypen
 // All Helios programs begin with a script purpose.
 spending always_true 
 
