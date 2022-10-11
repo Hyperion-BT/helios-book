@@ -5,6 +5,10 @@ multilingual = false
 src = "src"
 title = "The Helios Programming Language"
 
+[build]
+build-dir = "book"
+create-missing = false
+
 [output.html]
 additional-js = ["src/custom.js"]
 additional-css = ["src/custom.css"]

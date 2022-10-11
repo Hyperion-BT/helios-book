@@ -1,45 +1,4 @@
-# Native-Asset Types
-
-Helios uses the `AssetClass` and `Value` types to represent Cardano Native-Assets.
-
-## AssetClass
-
----
-
-Represents a unique token on the blockchain using the hash of it's minting policy and it's token name.
-
-```helios
-// internal representation
-struct AssetClass {
-    MintingPolicyHash // not directly accessible
-    ByteArray // not directly accessible
-}
-```
-
-### Associated functions and constants
-
-```helios
-const ADA: AssetClass
-
-// @returns a new AssetClass
-func new(policy_hash: MintingPolicyHash, token_name: ByteArray) -> AssetClass
-
-func from_data(data: Data) -> AssetClass
-```
-
-### Operators
-
-`==`,`!=`
-
-### Methods
-
-```helios
-func serialize(self) -> ByteArray
-```
-
-## Value
-
----
+# Value
 
 The `Value` type represents a **token bundle** using a map of `AssetClass`es to `Int` quantities,
 
@@ -47,7 +6,7 @@ The `Value` type represents a **token bundle** using a map of `AssetClass`es to 
 struct Value {..}
 ```
 
-### Associated functions and constants
+## Associated functions and constants
 
 ```helios
 // An empty Value
@@ -60,7 +19,7 @@ func lovelace(amount: Int) -> Value
 func new(asset_class: AssetClass, amount: Int) -> Value
 ```
 
-### Operators
+## Operators
 
 ```helios
 // @notice Assets must also be in same order for '==' to return true
@@ -86,7 +45,7 @@ Value * Int    -> Value
 Value / Int    -> Value
 ```
 
-### Methods
+## Methods
 
 ```helios
 func serialize(self) -> ByteArray
