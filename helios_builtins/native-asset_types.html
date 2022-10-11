@@ -175,7 +175,28 @@ func lovelace(amount: Int) -&gt; Value
 func new(asset_class: AssetClass, amount: Int) -&gt; Value
 </code></pre>
 <h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
+<pre><code class="language-helios">// @notice Assets must also be in same order for '==' to return true
+Value == Value -&gt; Bool
+
+Value != Value -&gt; Bool
+
+// @notice Strict greater-equals comparison, if any rhs token is less this returns false
+Value &gt;= Value -&gt; Bool
+
+// @notice Strict greater-than comparison, if any rhs token is less-or-equals this returns false
+Value &gt;  Value -&gt; Bool
+
+// @notice Strict less-equals comparison, if any rhs token is greater, or doesn't exist in lhs, this returns false
+Value &lt;= Value -&gt; Bool
+
+// @notice Strict less-than comparison, if any rhs token is greater-or-equals, or doesn't exist in lhs, this returns false
+Value &lt;  Value -&gt; Bool
+
+Value +  Value -&gt; Value
+Value -  Value -&gt; Value
+Value * Int    -&gt; Value
+Value / Int    -&gt; Value
+</code></pre>
 <h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
@@ -187,6 +208,7 @@ func get(self, asset_class: AssetClass) -&gt; Int
 // @returns A map of tokenName -&gt; quantity
 func get_policy(self, mph: MintingPolicyHash) -&gt; Map[ByteArray]Int
 
+// @notice Alias for 'self &gt;= other'
 func contains(self, other_value: Value) -&gt; Bool
 </code></pre>
 

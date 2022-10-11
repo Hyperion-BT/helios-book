@@ -164,7 +164,7 @@ func main(ctx: ScriptContext) -&gt; Bool {
 
     value_minted: Value = tx.minted;
 
-    value_minted == Value::new(nft_assetclass, 1) &amp;&amp; tx.now() &lt; DEADLINE
+    value_minted == Value::new(nft_assetclass, 1) &amp;&amp; tx.time_range.start &lt; DEADLINE
 }
 </code></pre>
 <h2 id="utxo-based-approach"><a class="header" href="#utxo-based-approach">UTXO-Based Approach</a></h2>

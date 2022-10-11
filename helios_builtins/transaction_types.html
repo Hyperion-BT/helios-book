@@ -137,7 +137,6 @@
                     <main>
                         <h1 id="helios-builtins"><a class="header" href="#helios-builtins">Helios Builtins</a></h1>
 <h2 id="pubkeyhash-validatorhash-mintingpolicyhash-datumhash"><a class="header" href="#pubkeyhash-validatorhash-mintingpolicyhash-datumhash">PubKeyHash, ValidatorHash, MintingPolicyHash, DatumHash</a></h2>
-<hr />
 <p>These are type-safe wrappers around the <code>ByteArray</code> type that represent the hash of
 a public key, validator script, minting policy or datum.</p>
 <h3 id="associated-functions"><a class="header" href="#associated-functions">Associated Functions</a></h3>
@@ -146,14 +145,15 @@ a public key, validator script, minting policy or datum.</p>
 func from_data(data: Data) -&gt; *Hash
 </code></pre>
 <h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">Hash == Hash -&gt; Bool
+Hash != Hash -&gt; Bool
+</code></pre>
 <h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 func show(self) -&gt; String
 </code></pre>
 <h2 id="scriptcontext"><a class="header" href="#scriptcontext">ScriptContext</a></h2>
-<hr />
 <p>The <code>ScriptContext</code> type contains all the metadata related to a signed Cardano transaction.
 It's just a wrapper around the <code>Tx</code> type with some extra methods.</p>
 <pre><code class="language-helios">// internal representation
@@ -166,7 +166,9 @@ struct ScriptContext {
 <pre><code class="language-helios">func from_data(data: Data) -&gt; ScriptContext
 </code></pre>
 <h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">ScriptContext == ScriptContext -&gt; Bool
+ScriptContext != ScriptContext -&gt; Bool
+</code></pre>
 <h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
 <pre><code class="language-helios">// @returns The ScriptContext serialized into bytes.
 func serialize(self) -&gt; ByteArray
@@ -192,7 +194,6 @@ func get_current_minting_policy_hash(self) -&gt; MintingPolicyHash
 func get_staking_purpose(self) -&gt; StakingPurpose
 </code></pre>
 <h2 id="tx"><a class="header" href="#tx">Tx</a></h2>
-<hr />
 <p>This type stores the data related to a signed transaction.</p>
 <pre><code class="language-helios">struct Tx {
     inputs: []TxInput            // Transactin Inputs
@@ -202,6 +203,8 @@ func get_staking_purpose(self) -&gt; StakingPurpose
     minted: Value                // Value minted by this transaction
 	dcerts: []DCert              // Digests involved in this transaction
 	withdrawals: Map[StakingCredential]Int // Staking withdrawals in this transaction
+	
+	// @notice Use cardano-cli's --invalid-before option to set the start time of the valid 'time_range' to something finite. 
     time_range: TimeRange        // Valid Time Range of a transaction
     signatories: []PubKeyHash    // signatories of the transaction
     id: TxId                     // Transaction ID
@@ -211,14 +214,11 @@ func get_staking_purpose(self) -&gt; StakingPurpose
 <pre><code class="language-helios">func from_data(data: Data) -&gt; Tx
 </code></pre>
 <h3 id="operators-2"><a class="header" href="#operators-2">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">Tx == Tx -&gt; Bool
+Tx != Tx -&gt; Bool
+</code></pre>
 <h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
-
-// @returns The current POSIX time.
-// @notice Uses the start of 'self.time_range'. Throws an error if that start is negative or positive infinity.
-// @notice Use cardano-cli's --invalid-before option to set the start time of the valid 'time_range' to something finite. 
-func now(self) -&gt; Time; 
 
 // @returns true if the transaction was signed by pubkeyhash.
 func is_signed_by(self, pubkeyhash: PubKeyHash) -&gt; Bool
@@ -248,7 +248,6 @@ func value_locked_by(self, script_hash: ValidatorHash) -&gt; Value
 func value_locked_by_datum(self, script_hash: ValidatorHash, datum: Any) -&gt; Value
 </code></pre>
 <h2 id="txid"><a class="header" href="#txid">TxId</a></h2>
-<hr />
 <p>This is a type-safe wrapper around the <code>ByteArray</code></p>
 <pre><code class="language-helios">struct TxId {...}
 </code></pre>
@@ -258,12 +257,13 @@ func value_locked_by_datum(self, script_hash: ValidatorHash, datum: Any) -&gt; V
 func from_data(data: Data) -&gt; TxId
 </code></pre>
 <h3 id="operators-3"><a class="header" href="#operators-3">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">TxId == TxId -&gt; Bool
+TxId != TxId -&gt; Bool
+</code></pre>
 <h3 id="methods-3"><a class="header" href="#methods-3">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="txinput"><a class="header" href="#txinput">TxInput</a></h2>
-<hr />
 <p>This type represents a <strong>Transaction Input</strong>.</p>
 <pre><code class="language-helios">struct TxInput {
     output_id: TxOutputId
@@ -274,12 +274,13 @@ func from_data(data: Data) -&gt; TxId
 <pre><code class="language-helios">func from_data(data: Data) -&gt; TxInput
 </code></pre>
 <h3 id="operators-4"><a class="header" href="#operators-4">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">TxInput == TxInput -&gt; Bool
+TxInput != TxInput -&gt; Bool
+</code></pre>
 <h3 id="methods-4"><a class="header" href="#methods-4">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="txoutput"><a class="header" href="#txoutput">TxOutput</a></h2>
-<hr />
 <p>This type represents a <strong>Transaction Output</strong>.</p>
 <pre><code class="language-helios">struct TxOutput {
     address: Address
@@ -291,7 +292,9 @@ func from_data(data: Data) -&gt; TxId
 <pre><code class="language-helios">func from_data(data: Data) -&gt; TxOutput
 </code></pre>
 <h3 id="operators-5"><a class="header" href="#operators-5">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">TxOutput == TxOutput -&gt; Bool
+TxOutput != TxOutput -&gt; Bool
+</code></pre>
 <h3 id="methods-5"><a class="header" href="#methods-5">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
@@ -306,12 +309,13 @@ func from_data(data: Data) -&gt; TxId
 <pre><code class="language-helios">func from_data(data: Data) -&gt; OutputDatum
 </code></pre>
 <h3 id="operators-6"><a class="header" href="#operators-6">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">OutputDatum == OutputDatum -&gt; Bool
+OutputDatum != OutputDatum -&gt; Bool
+</code></pre>
 <h3 id="methods-6"><a class="header" href="#methods-6">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="txoutputid"><a class="header" href="#txoutputid">TxOutputId</a></h2>
-<hr />
 <p>This type is a unique ID for a UTXO (Unspent Transaction Output).
 It's composed of the <strong>Transaction ID</strong> (<code>TxId</code>) of the transaction that created the UTXO and the index (<code>Int</code>) of the UTXO in the outputs of that transaction.</p>
 <pre><code class="language-helios">struct TxOutputId {
@@ -325,12 +329,13 @@ It's composed of the <strong>Transaction ID</strong> (<code>TxId</code>) of the 
 func from_data(data: Data) -&gt; TxOutputId
 </code></pre>
 <h3 id="operators-7"><a class="header" href="#operators-7">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">TxOutputId == TxOutputId -&gt; Bool
+TxOutputId != TxOutputId -&gt; Bool
+</code></pre>
 <h3 id="methods-7"><a class="header" href="#methods-7">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="address"><a class="header" href="#address">Address</a></h2>
-<hr />
 <p>The <code>Address</code> type represents a cardano address.</p>
 <pre><code class="language-helios">struct Address {
     credential: Credential
@@ -343,13 +348,15 @@ func from_data(data: Data) -&gt; TxOutputId
 func from_data(data: Data) -&gt; Address
 </code></pre>
 <h3 id="operators-8"><a class="header" href="#operators-8">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">Address == Address -&gt; Bool
+Address != Address -&gt; Bool
+</code></pre>
 <h3 id="methods-8"><a class="header" href="#methods-8">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self: Address) -&gt; ByteArray
 </code></pre>
 <h2 id="credential"><a class="header" href="#credential">Credential</a></h2>
 <hr />
-<p>The <code>Credential</code> type represents the an onchain credential which can be a <code>PubKeyHash</code> or a <code>ValidatorHash</code></p>
+<p>The <code>Credential</code> type represents the non-staking part of an <code>Address</code>, and can be a <code>PubKeyHash</code> or a <code>ValidatorHash</code>.</p>
 <pre><code class="language-helios">enum Credential {
     Pubkey { hash: PubKeyHash }
     Validator { hash: ValidatorHash }
@@ -363,14 +370,13 @@ func new_validator(vh: ValidatorHash) -&gt; Credential::ValidatorHash
 func from_data(data: Data) -&gt; Credential
 </code></pre>
 <h3 id="operators-9"><a class="header" href="#operators-9">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">Credential == Credential -&gt; Bool
+Credential != Credential -&gt; Bool
+</code></pre>
 <h3 id="methods-9"><a class="header" href="#methods-9">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
-<h3 id="operators-10"><a class="header" href="#operators-10">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
 <h2 id="stakingcredential"><a class="header" href="#stakingcredential">StakingCredential</a></h2>
-<hr />
 <pre><code class="language-helios">enum StakingCredential {
 	Hash{Credential}
 	Ptr{Int, Int, Int}
@@ -383,8 +389,10 @@ func new_ptr(a: Int, b: Int, c: Int) -&gt; StakingCredential::Ptr
 
 func from_data(data: Data) -&gt; StakingCredential
 </code></pre>
-<h3 id="operators-11"><a class="header" href="#operators-11">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<h3 id="operators-10"><a class="header" href="#operators-10">Operators</a></h3>
+<pre><code class="language-helios">StakingCredential == StakingCredential -&gt; Bool
+StakingCredential != StakingCredential -&gt; Bool
+</code></pre>
 <h3 id="methods-10"><a class="header" href="#methods-10">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
@@ -397,8 +405,10 @@ func from_data(data: Data) -&gt; StakingCredential
 <h3 id="associated-functions-11"><a class="header" href="#associated-functions-11">Associated functions</a></h3>
 <pre><code class="language-helios">func from_data(data: Data) -&gt; StakingPurpose
 </code></pre>
-<h3 id="operators-12"><a class="header" href="#operators-12">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<h3 id="operators-11"><a class="header" href="#operators-11">Operators</a></h3>
+<pre><code class="language-helios">StakingPurpose == StakingPurpose -&gt; Bool
+StakingPurpose != StakingPurpose -&gt; Bool
+</code></pre>
 <h3 id="methods-11"><a class="header" href="#methods-11">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
@@ -424,8 +434,10 @@ func new_register_pool(pool_id: PubKeyHash, pool_vfr: PubKeyHash) -&gt; DCert::R
 
 func new_retire_pool(pool_id: PubKeyHash, epoch: Int) -&gt; DCert::RetirePool
 </code></pre>
-<h3 id="operators-13"><a class="header" href="#operators-13">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<h3 id="operators-12"><a class="header" href="#operators-12">Operators</a></h3>
+<pre><code class="language-helios">DCert == DCert -&gt; Bool
+DCert != DCert -&gt; Bool
+</code></pre>
 <h3 id="methods-12"><a class="header" href="#methods-12">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>

@@ -141,7 +141,18 @@
 <hr />
 <p>This is an unbounded integer like Haskell's <code>Integer</code> type.</p>
 <h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
+<pre><code class="language-helios">Int == Int -&gt; Bool
+Int != Int -&gt; Bool
+Int &gt;= Int -&gt; Bool
+Int &gt;  Int -&gt; Bool
+Int &lt;= Int -&gt; Bool
+Int &lt;  Int -&gt; Bool
+Int +  Int -&gt; Int
+Int -  Int -&gt; Int
+Int *  Int -&gt; Int
+Int /  Int -&gt; Int
+Int %  Int -&gt; Int
+</code></pre>
 <h3 id="associated-functions"><a class="header" href="#associated-functions">Associated functions</a></h3>
 <pre><code class="language-helios">func from_data(data: Data) -&gt; Int
 </code></pre>
@@ -168,7 +179,16 @@ func or(fn_bool_1: () -&gt; Bool, fn_bool_2: () -&gt; Bool) -&gt; Bool
 func from_data(data: Data) -&gt; Bool
 </code></pre>
 <h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>!</code>, <code>&amp;&amp;</code>, <code>||</code></p>
+<pre><code class="language-helios">!Bool -&gt; Bool
+Bool == Bool -&gt; Bool
+Bool != Bool -&gt; Bool
+
+// @notice Right arg is only evaluated if left arg is true
+Bool &amp;&amp; Bool -&gt; Bool
+
+// @notice Right arg is only evaluated if left arg is false
+Bool || Bool -&gt; Bool
+</code></pre>
 <h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
@@ -182,7 +202,12 @@ func show(self) -&gt; String
 <pre><code class="language-helios">example: String = &quot;Woah!&quot;; ...
 </code></pre>
 <h3 id="operators-2"><a class="header" href="#operators-2">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>,<code>+</code></p>
+<pre><code class="language-helios">String == String -&gt; Bool
+String != String -&gt; Bool
+
+// @notice String concatenation
+String +  String -&gt; String
+</code></pre>
 <h3 id="associated-functions-2"><a class="header" href="#associated-functions-2">Associated functions</a></h3>
 <pre><code class="language-helios">func from_data(data: Data) -&gt; String
 </code></pre>
@@ -201,12 +226,19 @@ func ends_with(self, suffix: String) -&gt; Bool
 <pre><code class="language-helios">example: ByteArray = #213212; ...
 </code></pre>
 <h3 id="operators-3"><a class="header" href="#operators-3">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code></p>
+<pre><code class="language-helios">ByteArray == ByteArray -&gt; Bool
+ByteArray != ByteArray -&gt; Bool
+
+// @notice ByteArray concatenation
+ByteArray +  ByteArray -&gt; ByteArray
+</code></pre>
 <h3 id="associated-functions-3"><a class="header" href="#associated-functions-3">Associated functions</a></h3>
 <pre><code class="language-helios">func from_data(data: Data) -&gt; ByteArray
 </code></pre>
 <h3 id="getters"><a class="header" href="#getters">Getters</a></h3>
-<p><code>length: Int</code>, returns the length of the <code>ByteArray</code>.</p>
+<pre><code class="language-helios">// @returns the length of the ByteArray
+length: Int 
+</code></pre>
 <h3 id="methods-3"><a class="header" href="#methods-3">Methods:</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
@@ -242,7 +274,13 @@ func new(n: Int, fn: (Int) -&gt; a) -&gt; []a
 func new_const(n: Int, item: a) -&gt; []a
 </code></pre>
 <h3 id="operators-4"><a class="header" href="#operators-4">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code></p>
+<pre><code class="language-helios">[]a == []a -&gt; Bool
+[]a != []a -&gt; Bool
+
+// @notice List concatenation
+[]a +  []a -&gt; []a
+
+</code></pre>
 <h3 id="getters-1"><a class="header" href="#getters-1">Getters</a></h3>
 <pre><code class="language-helios">// @returns The length of the list.
 length: Int
@@ -287,11 +325,12 @@ func fold(self, reducer: (b, a) -&gt; b, init: b) -&gt; b
 
 // @returns The original list list with the transformation function called on
 //          all it's elements.
-func map(self, transformation: (a) -&gt; b) -&gt; []b
+func map(self, mapper: (a) -&gt; b) -&gt; []b
 </code></pre>
 <h2 id="map-mapab"><a class="header" href="#map-mapab">Map (<code>Map[a]b</code>)</a></h2>
 <hr />
-<p>List of key-value pairs.</p>
+<p>List of key-value pairs 
+Note that a <code>Map</code> is internally not implemented as a hash-table, so entries can be duplicate.</p>
 <pre><code class="language-helios">my_map = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2};
 print(my_map.get(&quot;zero&quot;).show()); ... // prints '0'
 </code></pre>
@@ -299,7 +338,12 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints '0'
 <pre><code class="language-helios">func from_data(data: Data) -&gt; Map[a]b
 </code></pre>
 <h3 id="operators-5"><a class="header" href="#operators-5">Operators</a></h3>
-<p><code>==</code>,<code>!=</code>, <code>+</code></p>
+<pre><code class="language-helios">Map[a]b == Map[a]b -&gt; Bool
+Map[a]b != Map[a]b -&gt; Bool
+
+// Map concatenation
+Map[a]b +  Map[a]b -&gt; Map[a]b
+</code></pre>
 <h3 id="getters-2"><a class="header" href="#getters-2">Getters</a></h3>
 <pre><code class="language-helios">// @returns the number of items in a map.
 length: Int
@@ -337,6 +381,12 @@ func fold_keys(self, reducer: (c, a) -&gt; c, init: c) -&gt; c
 
 func fold_values(self, reducer: (c, b) -&gt; c, init: c) -&gt; c
 
+// @notice map values remain unchanged
+func map_keys(self, mapper: (a) -&gt; c) -&gt; Map[c]b
+
+// @notice map keys remain unchanged
+func map_values(self, mapper: (b) -&gt; c) -&gt; Map[a]c
+
 func serialize(self: Map[a, b]) -&gt; ByteArray
 </code></pre>
 <h2 id="option-optiona"><a class="header" href="#option-optiona">Option (<code>Option[a]</code>)</a></h2>
@@ -355,9 +405,12 @@ example_2: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">func from_data(data: Data) -&gt; Option[a]
 </code></pre>
 <h3 id="operators-6"><a class="header" href="#operators-6">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">Option[a] == Option[a] -&gt; Bool
+Option[a] != Option[a] -&gt; Bool
+</code></pre>
 <h3 id="getters-3"><a class="header" href="#getters-3">Getters</a></h3>
 <pre><code class="language-helios">// @returns content of Option[a]::Some
+// @notice this getter doesn't exist on Option[a]::None
 Option[a]::Some.some: a
 </code></pre>
 <h3 id="methods-6"><a class="header" href="#methods-6">Methods</a></h3>

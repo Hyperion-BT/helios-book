@@ -145,7 +145,16 @@
 func from_data(data: Data) -&gt; Time
 </code></pre>
 <h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
+<pre><code class="language-helios">Time == Time     -&gt; Bool
+Time != Time     -&gt; Bool
+Time &gt;= Time     -&gt; Bool
+Time &gt;  Time     -&gt; Bool
+Time &lt;= Time     -&gt; Bool
+Time &lt;  Time     -&gt; Bool
+Time +  Duration -&gt; Time
+Time -  Duration -&gt; Time
+Time -  Time     -&gt; Duration
+</code></pre>
 <h3 id="methods"><a class="header" href="#methods">Methods</a></h3>
 <pre><code class="language-helios">func show(self) -&gt; String
 
@@ -160,7 +169,19 @@ func serialize(self) -&gt; ByteArray
 func from_data(data: Int) -&gt; Duration
 </code></pre>
 <h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
+<pre><code class="language-helios">Duration == Duration -&gt; Bool
+Duration != Duration -&gt; Bool
+Duration &gt;= Duration -&gt; Bool
+Duration &gt;  Duration -&gt; Bool
+Duration &lt;= Duration -&gt; Bool
+Duration &lt;  Duration -&gt; Bool
+Duration +  Duration -&gt; Duration
+Duration -  Duration -&gt; Duration
+Duration *  Int      -&gt; Duration
+Duration /  Int      -&gt; Duration
+Duration /  Duration -&gt; Int
+Duration %  Duration -&gt; Duration
+</code></pre>
 <h3 id="methods-1"><a class="header" href="#methods-1">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self: Time) -&gt; ByteArray
 </code></pre>
@@ -187,13 +208,18 @@ func new(start: Time, end: Time) -&gt; TimeRange
 func from_data(data: Data) -&gt; TimeRange
 </code></pre>
 <h3 id="operators-2"><a class="header" href="#operators-2">Operators</a></h3>
-<p><code>==</code>,<code>!=</code></p>
-<h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
-<pre><code class="language-helios">// @returns The start of TimeRange.
-// @notice Throws an error if start is negative or positive infinity
-func get_start(self) -&gt; Time
+<pre><code class="language-helios">TimeRange == TimeRange -&gt; Bool
+TimeRange != TimeRange -&gt; Bool
+</code></pre>
+<h3 id="getters"><a class="header" href="#getters">Getters</a></h3>
+<pre><code class="language-helios">// @notice Throws an error if start of TimeRange is non-finite
+start: Time
 
-// @returns 'true' if self contains the 'time'
+// @notice Throws an error if end of TimeRange is non-finite
+end: Time
+</code></pre>
+<h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
+<pre><code class="language-helios">// @returns 'true' if self contains the 'time'
 func contains(self, time: Time) -&gt; Bool
 
 // @returns 'true' if the end of 'self' is before 'time'

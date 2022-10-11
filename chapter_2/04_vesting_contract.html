@@ -182,7 +182,7 @@ For it to be valid the following have to be checked:</p>
 <h2 id="the-main-function"><a class="header" href="#the-main-function">The <code>main</code> function</a></h2>
 <pre><code class="language-helios">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
-    now: Time = tx.now();
+    now: Time = tx.time_range.start;
 
     redeemer.switch {
         Cancel =&gt; {
@@ -226,7 +226,7 @@ enum Redeemer {
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
-    now: Time = tx.now();
+    now: Time = tx.time_range.start;
 
     redeemer.switch {
         Cancel =&gt; {

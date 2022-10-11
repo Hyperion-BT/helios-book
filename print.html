@@ -756,8 +756,6 @@ the <code>Tx</code> holds the metadata of a signed on-chain transaction.</p>
 
     // Some useful methods
 
-    func now(self) -&gt; Time
-
     func outputs_sent_to(self, addr: PubKeyHash) -&gt; []TxOutput
 
     func value_sent_to(self, addr: PubKeyHash) -&gt; Value
@@ -840,7 +838,7 @@ For it to be valid the following have to be checked:</p>
 <h2 id="the-main-function-1"><a class="header" href="#the-main-function-1">The <code>main</code> function</a></h2>
 <pre><code class="language-helios">func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
-    now: Time = tx.now();
+    now: Time = tx.time_range.start;
 
     redeemer.switch {
         Cancel =&gt; {
@@ -884,7 +882,7 @@ enum Redeemer {
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
     tx: Tx = context.tx;
-    now: Time = tx.now();
+    now: Time = tx.time_range.start;
 
     redeemer.switch {
         Cancel =&gt; {
@@ -935,7 +933,7 @@ enum Redeemer {
 func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
     tx: Tx = ctx.tx;
 
-    now: Time = tx.now();
+    now: Time = tx.time_range.start;
 
     validator_hash: ValidatorHash = ctx.current_validator_hash();
 
@@ -1115,7 +1113,7 @@ func main(ctx: ScriptContext) -&gt; Bool {
 
     value_minted: Value = tx.minted;
 
-    value_minted == Value::new(nft_assetclass, 1) &amp;&amp; tx.now() &lt; DEADLINE
+    value_minted == Value::new(nft_assetclass, 1) &amp;&amp; tx.time_range.start &lt; DEADLINE
 }
 </code></pre>
 <h2 id="utxo-based-approach"><a class="header" href="#utxo-based-approach">UTXO-Based Approach</a></h2>
@@ -1183,7 +1181,18 @@ func main(ctx: ScriptContext) -&gt; Bool {
 <hr />
 <p>This is an unbounded integer like Haskell's <code>Integer</code> type.</p>
 <h3 id="operators"><a class="header" href="#operators">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
+<pre><code class="language-helios">Int == Int -&gt; Bool
+Int != Int -&gt; Bool
+Int &gt;= Int -&gt; Bool
+Int &gt;  Int -&gt; Bool
+Int &lt;= Int -&gt; Bool
+Int &lt;  Int -&gt; Bool
+Int +  Int -&gt; Int
+Int -  Int -&gt; Int
+Int *  Int -&gt; Int
+Int /  Int -&gt; Int
+Int %  Int -&gt; Int
+</code></pre>
 <h3 id="associated-functions"><a class="header" href="#associated-functions">Associated functions</a></h3>
 <pre><code class="language-helios">func from_data(data: Data) -&gt; Int
 </code></pre>
@@ -1210,7 +1219,16 @@ func or(fn_bool_1: () -&gt; Bool, fn_bool_2: () -&gt; Bool) -&gt; Bool
 func from_data(data: Data) -&gt; Bool
 </code></pre>
 <h3 id="operators-1"><a class="header" href="#operators-1">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>!</code>, <code>&amp;&amp;</code>, <code>||</code></p>
+<pre><code class="language-helios">!Bool -&gt; Bool
+Bool == Bool -&gt; Bool
+Bool != Bool -&gt; Bool
+
+// @notice Right arg is only evaluated if left arg is true
+Bool &amp;&amp; Bool -&gt; Bool
+
+// @notice Right arg is only evaluated if left arg is false
+Bool || Bool -&gt; Bool
+</code></pre>
 <h3 id="methods-2"><a class="header" href="#methods-2">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
@@ -1224,7 +1242,12 @@ func show(self) -&gt; String
 <pre><code class="language-helios">example: String = &quot;Woah!&quot;; ...
 </code></pre>
 <h3 id="operators-2"><a class="header" href="#operators-2">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>,<code>+</code></p>
+<pre><code class="language-helios">String == String -&gt; Bool
+String != String -&gt; Bool
+
+// @notice String concatenation
+String +  String -&gt; String
+</code></pre>
 <h3 id="associated-functions-2"><a class="header" href="#associated-functions-2">Associated functions</a></h3>
 <pre><code class="language-helios">func from_data(data: Data) -&gt; String
 </code></pre>
@@ -1243,12 +1266,19 @@ func ends_with(self, suffix: String) -&gt; Bool
 <pre><code class="language-helios">example: ByteArray = #213212; ...
 </code></pre>
 <h3 id="operators-3"><a class="header" href="#operators-3">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code></p>
+<pre><code class="language-helios">ByteArray == ByteArray -&gt; Bool
+ByteArray != ByteArray -&gt; Bool
+
+// @notice ByteArray concatenation
+ByteArray +  ByteArray -&gt; ByteArray
+</code></pre>
 <h3 id="associated-functions-3"><a class="header" href="#associated-functions-3">Associated functions</a></h3>
 <pre><code class="language-helios">func from_data(data: Data) -&gt; ByteArray
 </code></pre>
 <h3 id="getters"><a class="header" href="#getters">Getters</a></h3>
-<p><code>length: Int</code>, returns the length of the <code>ByteArray</code>.</p>
+<pre><code class="language-helios">// @returns the length of the ByteArray
+length: Int 
+</code></pre>
 <h3 id="methods-4"><a class="header" href="#methods-4">Methods:</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
@@ -1284,7 +1314,13 @@ func new(n: Int, fn: (Int) -&gt; a) -&gt; []a
 func new_const(n: Int, item: a) -&gt; []a
 </code></pre>
 <h3 id="operators-4"><a class="header" href="#operators-4">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code></p>
+<pre><code class="language-helios">[]a == []a -&gt; Bool
+[]a != []a -&gt; Bool
+
+// @notice List concatenation
+[]a +  []a -&gt; []a
+
+</code></pre>
 <h3 id="getters-1"><a class="header" href="#getters-1">Getters</a></h3>
 <pre><code class="language-helios">// @returns The length of the list.
 length: Int
@@ -1329,11 +1365,12 @@ func fold(self, reducer: (b, a) -&gt; b, init: b) -&gt; b
 
 // @returns The original list list with the transformation function called on
 //          all it's elements.
-func map(self, transformation: (a) -&gt; b) -&gt; []b
+func map(self, mapper: (a) -&gt; b) -&gt; []b
 </code></pre>
 <h2 id="map-mapab"><a class="header" href="#map-mapab">Map (<code>Map[a]b</code>)</a></h2>
 <hr />
-<p>List of key-value pairs.</p>
+<p>List of key-value pairs 
+Note that a <code>Map</code> is internally not implemented as a hash-table, so entries can be duplicate.</p>
 <pre><code class="language-helios">my_map = Map[String]Int{&quot;zero&quot;: 0, &quot;one&quot;: 1, &quot;two&quot;: 2};
 print(my_map.get(&quot;zero&quot;).show()); ... // prints '0'
 </code></pre>
@@ -1341,7 +1378,12 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints '0'
 <pre><code class="language-helios">func from_data(data: Data) -&gt; Map[a]b
 </code></pre>
 <h3 id="operators-5"><a class="header" href="#operators-5">Operators</a></h3>
-<p><code>==</code>,<code>!=</code>, <code>+</code></p>
+<pre><code class="language-helios">Map[a]b == Map[a]b -&gt; Bool
+Map[a]b != Map[a]b -&gt; Bool
+
+// Map concatenation
+Map[a]b +  Map[a]b -&gt; Map[a]b
+</code></pre>
 <h3 id="getters-2"><a class="header" href="#getters-2">Getters</a></h3>
 <pre><code class="language-helios">// @returns the number of items in a map.
 length: Int
@@ -1379,6 +1421,12 @@ func fold_keys(self, reducer: (c, a) -&gt; c, init: c) -&gt; c
 
 func fold_values(self, reducer: (c, b) -&gt; c, init: c) -&gt; c
 
+// @notice map values remain unchanged
+func map_keys(self, mapper: (a) -&gt; c) -&gt; Map[c]b
+
+// @notice map keys remain unchanged
+func map_values(self, mapper: (b) -&gt; c) -&gt; Map[a]c
+
 func serialize(self: Map[a, b]) -&gt; ByteArray
 </code></pre>
 <h2 id="option-optiona"><a class="header" href="#option-optiona">Option (<code>Option[a]</code>)</a></h2>
@@ -1397,9 +1445,12 @@ example_2: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">func from_data(data: Data) -&gt; Option[a]
 </code></pre>
 <h3 id="operators-6"><a class="header" href="#operators-6">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">Option[a] == Option[a] -&gt; Bool
+Option[a] != Option[a] -&gt; Bool
+</code></pre>
 <h3 id="getters-3"><a class="header" href="#getters-3">Getters</a></h3>
 <pre><code class="language-helios">// @returns content of Option[a]::Some
+// @notice this getter doesn't exist on Option[a]::None
 Option[a]::Some.some: a
 </code></pre>
 <h3 id="methods-7"><a class="header" href="#methods-7">Methods</a></h3>
@@ -1415,7 +1466,16 @@ Option[a]::Some.some: a
 func from_data(data: Data) -&gt; Time
 </code></pre>
 <h3 id="operators-7"><a class="header" href="#operators-7">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
+<pre><code class="language-helios">Time == Time     -&gt; Bool
+Time != Time     -&gt; Bool
+Time &gt;= Time     -&gt; Bool
+Time &gt;  Time     -&gt; Bool
+Time &lt;= Time     -&gt; Bool
+Time &lt;  Time     -&gt; Bool
+Time +  Duration -&gt; Time
+Time -  Duration -&gt; Time
+Time -  Time     -&gt; Duration
+</code></pre>
 <h3 id="methods-8"><a class="header" href="#methods-8">Methods</a></h3>
 <pre><code class="language-helios">func show(self) -&gt; String
 
@@ -1430,7 +1490,19 @@ func serialize(self) -&gt; ByteArray
 func from_data(data: Int) -&gt; Duration
 </code></pre>
 <h3 id="operators-8"><a class="header" href="#operators-8">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
+<pre><code class="language-helios">Duration == Duration -&gt; Bool
+Duration != Duration -&gt; Bool
+Duration &gt;= Duration -&gt; Bool
+Duration &gt;  Duration -&gt; Bool
+Duration &lt;= Duration -&gt; Bool
+Duration &lt;  Duration -&gt; Bool
+Duration +  Duration -&gt; Duration
+Duration -  Duration -&gt; Duration
+Duration *  Int      -&gt; Duration
+Duration /  Int      -&gt; Duration
+Duration /  Duration -&gt; Int
+Duration %  Duration -&gt; Duration
+</code></pre>
 <h3 id="methods-9"><a class="header" href="#methods-9">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self: Time) -&gt; ByteArray
 </code></pre>
@@ -1457,13 +1529,18 @@ func new(start: Time, end: Time) -&gt; TimeRange
 func from_data(data: Data) -&gt; TimeRange
 </code></pre>
 <h3 id="operators-9"><a class="header" href="#operators-9">Operators</a></h3>
-<p><code>==</code>,<code>!=</code></p>
-<h3 id="methods-10"><a class="header" href="#methods-10">Methods</a></h3>
-<pre><code class="language-helios">// @returns The start of TimeRange.
-// @notice Throws an error if start is negative or positive infinity
-func get_start(self) -&gt; Time
+<pre><code class="language-helios">TimeRange == TimeRange -&gt; Bool
+TimeRange != TimeRange -&gt; Bool
+</code></pre>
+<h3 id="getters-4"><a class="header" href="#getters-4">Getters</a></h3>
+<pre><code class="language-helios">// @notice Throws an error if start of TimeRange is non-finite
+start: Time
 
-// @returns 'true' if self contains the 'time'
+// @notice Throws an error if end of TimeRange is non-finite
+end: Time
+</code></pre>
+<h3 id="methods-10"><a class="header" href="#methods-10">Methods</a></h3>
+<pre><code class="language-helios">// @returns 'true' if self contains the 'time'
 func contains(self, time: Time) -&gt; Bool
 
 // @returns 'true' if the end of 'self' is before 'time'
@@ -1517,7 +1594,28 @@ func lovelace(amount: Int) -&gt; Value
 func new(asset_class: AssetClass, amount: Int) -&gt; Value
 </code></pre>
 <h3 id="operators-11"><a class="header" href="#operators-11">Operators</a></h3>
-<p><code>==</code>, <code>!=</code>, <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>&gt;=</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&lt;</code></p>
+<pre><code class="language-helios">// @notice Assets must also be in same order for '==' to return true
+Value == Value -&gt; Bool
+
+Value != Value -&gt; Bool
+
+// @notice Strict greater-equals comparison, if any rhs token is less this returns false
+Value &gt;= Value -&gt; Bool
+
+// @notice Strict greater-than comparison, if any rhs token is less-or-equals this returns false
+Value &gt;  Value -&gt; Bool
+
+// @notice Strict less-equals comparison, if any rhs token is greater, or doesn't exist in lhs, this returns false
+Value &lt;= Value -&gt; Bool
+
+// @notice Strict less-than comparison, if any rhs token is greater-or-equals, or doesn't exist in lhs, this returns false
+Value &lt;  Value -&gt; Bool
+
+Value +  Value -&gt; Value
+Value -  Value -&gt; Value
+Value * Int    -&gt; Value
+Value / Int    -&gt; Value
+</code></pre>
 <h3 id="methods-12"><a class="header" href="#methods-12">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
@@ -1529,11 +1627,11 @@ func get(self, asset_class: AssetClass) -&gt; Int
 // @returns A map of tokenName -&gt; quantity
 func get_policy(self, mph: MintingPolicyHash) -&gt; Map[ByteArray]Int
 
+// @notice Alias for 'self &gt;= other'
 func contains(self, other_value: Value) -&gt; Bool
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="helios-builtins-1"><a class="header" href="#helios-builtins-1">Helios Builtins</a></h1>
 <h2 id="pubkeyhash-validatorhash-mintingpolicyhash-datumhash"><a class="header" href="#pubkeyhash-validatorhash-mintingpolicyhash-datumhash">PubKeyHash, ValidatorHash, MintingPolicyHash, DatumHash</a></h2>
-<hr />
 <p>These are type-safe wrappers around the <code>ByteArray</code> type that represent the hash of
 a public key, validator script, minting policy or datum.</p>
 <h3 id="associated-functions-9"><a class="header" href="#associated-functions-9">Associated Functions</a></h3>
@@ -1542,14 +1640,15 @@ a public key, validator script, minting policy or datum.</p>
 func from_data(data: Data) -&gt; *Hash
 </code></pre>
 <h3 id="operators-12"><a class="header" href="#operators-12">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">Hash == Hash -&gt; Bool
+Hash != Hash -&gt; Bool
+</code></pre>
 <h3 id="methods-13"><a class="header" href="#methods-13">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 
 func show(self) -&gt; String
 </code></pre>
 <h2 id="scriptcontext"><a class="header" href="#scriptcontext">ScriptContext</a></h2>
-<hr />
 <p>The <code>ScriptContext</code> type contains all the metadata related to a signed Cardano transaction.
 It's just a wrapper around the <code>Tx</code> type with some extra methods.</p>
 <pre><code class="language-helios">// internal representation
@@ -1562,7 +1661,9 @@ struct ScriptContext {
 <pre><code class="language-helios">func from_data(data: Data) -&gt; ScriptContext
 </code></pre>
 <h3 id="operators-13"><a class="header" href="#operators-13">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">ScriptContext == ScriptContext -&gt; Bool
+ScriptContext != ScriptContext -&gt; Bool
+</code></pre>
 <h3 id="methods-14"><a class="header" href="#methods-14">Methods</a></h3>
 <pre><code class="language-helios">// @returns The ScriptContext serialized into bytes.
 func serialize(self) -&gt; ByteArray
@@ -1588,7 +1689,6 @@ func get_current_minting_policy_hash(self) -&gt; MintingPolicyHash
 func get_staking_purpose(self) -&gt; StakingPurpose
 </code></pre>
 <h2 id="tx-1"><a class="header" href="#tx-1">Tx</a></h2>
-<hr />
 <p>This type stores the data related to a signed transaction.</p>
 <pre><code class="language-helios">struct Tx {
     inputs: []TxInput            // Transactin Inputs
@@ -1598,6 +1698,8 @@ func get_staking_purpose(self) -&gt; StakingPurpose
     minted: Value                // Value minted by this transaction
 	dcerts: []DCert              // Digests involved in this transaction
 	withdrawals: Map[StakingCredential]Int // Staking withdrawals in this transaction
+	
+	// @notice Use cardano-cli's --invalid-before option to set the start time of the valid 'time_range' to something finite. 
     time_range: TimeRange        // Valid Time Range of a transaction
     signatories: []PubKeyHash    // signatories of the transaction
     id: TxId                     // Transaction ID
@@ -1607,14 +1709,11 @@ func get_staking_purpose(self) -&gt; StakingPurpose
 <pre><code class="language-helios">func from_data(data: Data) -&gt; Tx
 </code></pre>
 <h3 id="operators-14"><a class="header" href="#operators-14">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">Tx == Tx -&gt; Bool
+Tx != Tx -&gt; Bool
+</code></pre>
 <h3 id="methods-15"><a class="header" href="#methods-15">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
-
-// @returns The current POSIX time.
-// @notice Uses the start of 'self.time_range'. Throws an error if that start is negative or positive infinity.
-// @notice Use cardano-cli's --invalid-before option to set the start time of the valid 'time_range' to something finite. 
-func now(self) -&gt; Time; 
 
 // @returns true if the transaction was signed by pubkeyhash.
 func is_signed_by(self, pubkeyhash: PubKeyHash) -&gt; Bool
@@ -1644,7 +1743,6 @@ func value_locked_by(self, script_hash: ValidatorHash) -&gt; Value
 func value_locked_by_datum(self, script_hash: ValidatorHash, datum: Any) -&gt; Value
 </code></pre>
 <h2 id="txid"><a class="header" href="#txid">TxId</a></h2>
-<hr />
 <p>This is a type-safe wrapper around the <code>ByteArray</code></p>
 <pre><code class="language-helios">struct TxId {...}
 </code></pre>
@@ -1654,12 +1752,13 @@ func value_locked_by_datum(self, script_hash: ValidatorHash, datum: Any) -&gt; V
 func from_data(data: Data) -&gt; TxId
 </code></pre>
 <h3 id="operators-15"><a class="header" href="#operators-15">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">TxId == TxId -&gt; Bool
+TxId != TxId -&gt; Bool
+</code></pre>
 <h3 id="methods-16"><a class="header" href="#methods-16">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="txinput-1"><a class="header" href="#txinput-1">TxInput</a></h2>
-<hr />
 <p>This type represents a <strong>Transaction Input</strong>.</p>
 <pre><code class="language-helios">struct TxInput {
     output_id: TxOutputId
@@ -1670,12 +1769,13 @@ func from_data(data: Data) -&gt; TxId
 <pre><code class="language-helios">func from_data(data: Data) -&gt; TxInput
 </code></pre>
 <h3 id="operators-16"><a class="header" href="#operators-16">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">TxInput == TxInput -&gt; Bool
+TxInput != TxInput -&gt; Bool
+</code></pre>
 <h3 id="methods-17"><a class="header" href="#methods-17">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="txoutput-1"><a class="header" href="#txoutput-1">TxOutput</a></h2>
-<hr />
 <p>This type represents a <strong>Transaction Output</strong>.</p>
 <pre><code class="language-helios">struct TxOutput {
     address: Address
@@ -1687,7 +1787,9 @@ func from_data(data: Data) -&gt; TxId
 <pre><code class="language-helios">func from_data(data: Data) -&gt; TxOutput
 </code></pre>
 <h3 id="operators-17"><a class="header" href="#operators-17">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">TxOutput == TxOutput -&gt; Bool
+TxOutput != TxOutput -&gt; Bool
+</code></pre>
 <h3 id="methods-18"><a class="header" href="#methods-18">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
@@ -1702,12 +1804,13 @@ func from_data(data: Data) -&gt; TxId
 <pre><code class="language-helios">func from_data(data: Data) -&gt; OutputDatum
 </code></pre>
 <h3 id="operators-18"><a class="header" href="#operators-18">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">OutputDatum == OutputDatum -&gt; Bool
+OutputDatum != OutputDatum -&gt; Bool
+</code></pre>
 <h3 id="methods-19"><a class="header" href="#methods-19">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="txoutputid"><a class="header" href="#txoutputid">TxOutputId</a></h2>
-<hr />
 <p>This type is a unique ID for a UTXO (Unspent Transaction Output).
 It's composed of the <strong>Transaction ID</strong> (<code>TxId</code>) of the transaction that created the UTXO and the index (<code>Int</code>) of the UTXO in the outputs of that transaction.</p>
 <pre><code class="language-helios">struct TxOutputId {
@@ -1721,12 +1824,13 @@ It's composed of the <strong>Transaction ID</strong> (<code>TxId</code>) of the 
 func from_data(data: Data) -&gt; TxOutputId
 </code></pre>
 <h3 id="operators-19"><a class="header" href="#operators-19">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">TxOutputId == TxOutputId -&gt; Bool
+TxOutputId != TxOutputId -&gt; Bool
+</code></pre>
 <h3 id="methods-20"><a class="header" href="#methods-20">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
 <h2 id="address"><a class="header" href="#address">Address</a></h2>
-<hr />
 <p>The <code>Address</code> type represents a cardano address.</p>
 <pre><code class="language-helios">struct Address {
     credential: Credential
@@ -1739,13 +1843,15 @@ func from_data(data: Data) -&gt; TxOutputId
 func from_data(data: Data) -&gt; Address
 </code></pre>
 <h3 id="operators-20"><a class="header" href="#operators-20">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">Address == Address -&gt; Bool
+Address != Address -&gt; Bool
+</code></pre>
 <h3 id="methods-21"><a class="header" href="#methods-21">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self: Address) -&gt; ByteArray
 </code></pre>
 <h2 id="credential"><a class="header" href="#credential">Credential</a></h2>
 <hr />
-<p>The <code>Credential</code> type represents the an onchain credential which can be a <code>PubKeyHash</code> or a <code>ValidatorHash</code></p>
+<p>The <code>Credential</code> type represents the non-staking part of an <code>Address</code>, and can be a <code>PubKeyHash</code> or a <code>ValidatorHash</code>.</p>
 <pre><code class="language-helios">enum Credential {
     Pubkey { hash: PubKeyHash }
     Validator { hash: ValidatorHash }
@@ -1759,14 +1865,13 @@ func new_validator(vh: ValidatorHash) -&gt; Credential::ValidatorHash
 func from_data(data: Data) -&gt; Credential
 </code></pre>
 <h3 id="operators-21"><a class="header" href="#operators-21">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<pre><code class="language-helios">Credential == Credential -&gt; Bool
+Credential != Credential -&gt; Bool
+</code></pre>
 <h3 id="methods-22"><a class="header" href="#methods-22">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
-<h3 id="operators-22"><a class="header" href="#operators-22">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
 <h2 id="stakingcredential"><a class="header" href="#stakingcredential">StakingCredential</a></h2>
-<hr />
 <pre><code class="language-helios">enum StakingCredential {
 	Hash{Credential}
 	Ptr{Int, Int, Int}
@@ -1779,8 +1884,10 @@ func new_ptr(a: Int, b: Int, c: Int) -&gt; StakingCredential::Ptr
 
 func from_data(data: Data) -&gt; StakingCredential
 </code></pre>
-<h3 id="operators-23"><a class="header" href="#operators-23">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<h3 id="operators-22"><a class="header" href="#operators-22">Operators</a></h3>
+<pre><code class="language-helios">StakingCredential == StakingCredential -&gt; Bool
+StakingCredential != StakingCredential -&gt; Bool
+</code></pre>
 <h3 id="methods-23"><a class="header" href="#methods-23">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
@@ -1793,8 +1900,10 @@ func from_data(data: Data) -&gt; StakingCredential
 <h3 id="associated-functions-20"><a class="header" href="#associated-functions-20">Associated functions</a></h3>
 <pre><code class="language-helios">func from_data(data: Data) -&gt; StakingPurpose
 </code></pre>
-<h3 id="operators-24"><a class="header" href="#operators-24">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<h3 id="operators-23"><a class="header" href="#operators-23">Operators</a></h3>
+<pre><code class="language-helios">StakingPurpose == StakingPurpose -&gt; Bool
+StakingPurpose != StakingPurpose -&gt; Bool
+</code></pre>
 <h3 id="methods-24"><a class="header" href="#methods-24">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
@@ -1820,8 +1929,10 @@ func new_register_pool(pool_id: PubKeyHash, pool_vfr: PubKeyHash) -&gt; DCert::R
 
 func new_retire_pool(pool_id: PubKeyHash, epoch: Int) -&gt; DCert::RetirePool
 </code></pre>
-<h3 id="operators-25"><a class="header" href="#operators-25">Operators</a></h3>
-<p><code>==</code>, <code>!=</code></p>
+<h3 id="operators-24"><a class="header" href="#operators-24">Operators</a></h3>
+<pre><code class="language-helios">DCert == DCert -&gt; Bool
+DCert != DCert -&gt; Bool
+</code></pre>
 <h3 id="methods-25"><a class="header" href="#methods-25">Methods</a></h3>
 <pre><code class="language-helios">func serialize(self) -&gt; ByteArray
 </code></pre>
