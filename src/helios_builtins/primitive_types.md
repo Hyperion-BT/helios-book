@@ -10,9 +10,22 @@ This is an unbounded integer like Haskell's `Integer` type.
 
 ### Operators
 
-`==`, `!=`, `+`, `-`, `*`, `/`, `%`, `>=`, `>`, `<=`, `<`
+```helios
+Int == Int -> Bool
+Int != Int -> Bool
+Int >= Int -> Bool
+Int >  Int -> Bool
+Int <= Int -> Bool
+Int <  Int -> Bool
+Int +  Int -> Int
+Int -  Int -> Int
+Int *  Int -> Int
+Int /  Int -> Int
+Int %  Int -> Int
+```
 
 ### Associated functions
+
 ```helios
 func from_data(data: Data) -> Int
 ```
@@ -52,7 +65,17 @@ func from_data(data: Data) -> Bool
 
 ### Operators
 
-`==`, `!=`, `!`, `&&`, `||`
+```helios
+!Bool -> Bool
+Bool == Bool -> Bool
+Bool != Bool -> Bool
+
+// @notice Right arg is only evaluated if left arg is true
+Bool && Bool -> Bool
+
+// @notice Right arg is only evaluated if left arg is false
+Bool || Bool -> Bool
+```
 
 ### Methods
 
@@ -76,7 +99,13 @@ example: String = "Woah!"; ...
 
 ### Operators
 
-`==`, `!=`,`+`
+```helios
+String == String -> Bool
+String != String -> Bool
+
+// @notice String concatenation
+String +  String -> String
+```
 
 ### Associated functions
 ```helios
@@ -107,7 +136,13 @@ example: ByteArray = #213212; ...
 
 ### Operators
 
-`==`, `!=`, `+`
+```helios
+ByteArray == ByteArray -> Bool
+ByteArray != ByteArray -> Bool
+
+// @notice ByteArray concatenation
+ByteArray +  ByteArray -> ByteArray
+```
 
 ### Associated functions
 ```helios
@@ -116,7 +151,10 @@ func from_data(data: Data) -> ByteArray
 
 ### Getters
 
-`length: Int`, returns the length of the `ByteArray`.
+```helios
+// @returns the length of the ByteArray
+length: Int 
+```
 
 ### Methods:
 
@@ -166,7 +204,14 @@ func new_const(n: Int, item: a) -> []a
 
 ### Operators
 
-`==`, `!=`, `+`
+```helios
+[]a == []a -> Bool
+[]a != []a -> Bool
+
+// @notice List concatenation
+[]a +  []a -> []a
+
+```
 
 ### Getters
 
@@ -217,14 +262,15 @@ func fold(self, reducer: (b, a) -> b, init: b) -> b
 
 // @returns The original list list with the transformation function called on
 //          all it's elements.
-func map(self, transformation: (a) -> b) -> []b
+func map(self, mapper: (a) -> b) -> []b
 ```
 
 ## Map (`Map[a]b`)
 
 ---
 
-List of key-value pairs.
+List of key-value pairs 
+Note that a `Map` is internally not implemented as a hash-table, so entries can be duplicate.
 
 ```helios
 my_map = Map[String]Int{"zero": 0, "one": 1, "two": 2};
@@ -239,7 +285,13 @@ func from_data(data: Data) -> Map[a]b
 
 ### Operators
 
-`==`,`!=`, `+`
+```helios
+Map[a]b == Map[a]b -> Bool
+Map[a]b != Map[a]b -> Bool
+
+// Map concatenation
+Map[a]b +  Map[a]b -> Map[a]b
+```
 
 ### Getters
 ```helios
@@ -282,6 +334,12 @@ func fold_keys(self, reducer: (c, a) -> c, init: c) -> c
 
 func fold_values(self, reducer: (c, b) -> c, init: c) -> c
 
+// @notice map values remain unchanged
+func map_keys(self, mapper: (a) -> c) -> Map[c]b
+
+// @notice map keys remain unchanged
+func map_values(self, mapper: (b) -> c) -> Map[a]c
+
 func serialize(self: Map[a, b]) -> ByteArray
 ```
 
@@ -310,12 +368,16 @@ func from_data(data: Data) -> Option[a]
 
 ### Operators
 
-`==`, `!=`
+```helios
+Option[a] == Option[a] -> Bool
+Option[a] != Option[a] -> Bool
+```
 
 ### Getters
 
 ```helios
 // @returns content of Option[a]::Some
+// @notice this getter doesn't exist on Option[a]::None
 Option[a]::Some.some: a
 ```
 

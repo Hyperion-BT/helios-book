@@ -2,8 +2,6 @@
 
 ## PubKeyHash, ValidatorHash, MintingPolicyHash, DatumHash
 
----
-
 These are type-safe wrappers around the `ByteArray` type that represent the hash of
 a public key, validator script, minting policy or datum.
 
@@ -17,7 +15,10 @@ func from_data(data: Data) -> *Hash
 
 ### Operators
 
-`==`, `!=`
+```helios
+Hash == Hash -> Bool
+Hash != Hash -> Bool
+```
 
 ### Methods
 
@@ -28,8 +29,6 @@ func show(self) -> String
 ```
 
 ## ScriptContext
-
----
 
 The `ScriptContext` type contains all the metadata related to a signed Cardano transaction.
 It's just a wrapper around the `Tx` type with some extra methods.
@@ -50,7 +49,10 @@ func from_data(data: Data) -> ScriptContext
 
 ### Operators
 
-`==`, `!=`
+```helios
+ScriptContext == ScriptContext -> Bool
+ScriptContext != ScriptContext -> Bool
+```
 
 ### Methods
 
@@ -81,8 +83,6 @@ func get_staking_purpose(self) -> StakingPurpose
 
 ## Tx
 
----
-
 This type stores the data related to a signed transaction.
 
 ```helios
@@ -94,6 +94,8 @@ struct Tx {
     minted: Value                // Value minted by this transaction
 	dcerts: []DCert              // Digests involved in this transaction
 	withdrawals: Map[StakingCredential]Int // Staking withdrawals in this transaction
+	
+	// @notice Use cardano-cli's --invalid-before option to set the start time of the valid 'time_range' to something finite. 
     time_range: TimeRange        // Valid Time Range of a transaction
     signatories: []PubKeyHash    // signatories of the transaction
     id: TxId                     // Transaction ID
@@ -101,23 +103,22 @@ struct Tx {
 ```
 
 ### Associated functions
+
 ```helios
 func from_data(data: Data) -> Tx
 ```
 
 ### Operators
 
-`==`, `!=`
+```helios
+Tx == Tx -> Bool
+Tx != Tx -> Bool
+```
 
 ### Methods
 
 ```helios
 func serialize(self) -> ByteArray
-
-// @returns The current POSIX time.
-// @notice Uses the start of 'self.time_range'. Throws an error if that start is negative or positive infinity.
-// @notice Use cardano-cli's --invalid-before option to set the start time of the valid 'time_range' to something finite. 
-func now(self) -> Time; 
 
 // @returns true if the transaction was signed by pubkeyhash.
 func is_signed_by(self, pubkeyhash: PubKeyHash) -> Bool
@@ -149,8 +150,6 @@ func value_locked_by_datum(self, script_hash: ValidatorHash, datum: Any) -> Valu
 
 ## TxId
 
----
-
 This is a type-safe wrapper around the `ByteArray`
 
 ```helios
@@ -166,7 +165,10 @@ func from_data(data: Data) -> TxId
 
 ### Operators
 
-`==`, `!=`
+```helios
+TxId == TxId -> Bool
+TxId != TxId -> Bool
+```
 
 ### Methods
 
@@ -175,8 +177,6 @@ func serialize(self) -> ByteArray
 ```
 
 ## TxInput
-
----
 
 This type represents a **Transaction Input**.
 
@@ -194,7 +194,10 @@ func from_data(data: Data) -> TxInput
 
 ### Operators
 
-`==`, `!=`
+```helios
+TxInput == TxInput -> Bool
+TxInput != TxInput -> Bool
+```
 
 ### Methods
 
@@ -203,8 +206,6 @@ func serialize(self) -> ByteArray
 ```
 
 ## TxOutput
-
----
 
 This type represents a **Transaction Output**.
 
@@ -223,7 +224,10 @@ func from_data(data: Data) -> TxOutput
 
 ### Operators
 
-`==`, `!=`
+```helios
+TxOutput == TxOutput -> Bool
+TxOutput != TxOutput -> Bool
+```
 
 ### Methods
 
@@ -249,7 +253,10 @@ func from_data(data: Data) -> OutputDatum
 
 ### Operators
 
-`==`, `!=`
+```helios
+OutputDatum == OutputDatum -> Bool
+OutputDatum != OutputDatum -> Bool
+```
 
 ### Methods
 ```helios
@@ -257,8 +264,6 @@ func serialize(self) -> ByteArray
 ```
 
 ## TxOutputId
-
----
 
 This type is a unique ID for a UTXO (Unspent Transaction Output).
 It's composed of the **Transaction ID** (`TxId`) of the transaction that created the UTXO and the index (`Int`) of the UTXO in the outputs of that transaction.
@@ -280,7 +285,10 @@ func from_data(data: Data) -> TxOutputId
 
 ### Operators
 
-`==`, `!=`
+```helios
+TxOutputId == TxOutputId -> Bool
+TxOutputId != TxOutputId -> Bool
+```
 
 ### Methods
 
@@ -289,8 +297,6 @@ func serialize(self) -> ByteArray
 ```
 
 ## Address
-
----
 
 The `Address` type represents a cardano address.
 
@@ -302,6 +308,7 @@ struct Address {
 ```
 
 ### Associated functions
+
 ```helios
 func new(credential: Credential, staking_credential: Option[StakingCredential]) -> Address
 
@@ -309,7 +316,10 @@ func from_data(data: Data) -> Address
 ```
 ### Operators
 
-`==`, `!=`
+```helios
+Address == Address -> Bool
+Address != Address -> Bool
+```
 
 ### Methods
 
@@ -321,7 +331,7 @@ func serialize(self: Address) -> ByteArray
 
 ---
 
-The `Credential` type represents the an onchain credential which can be a `PubKeyHash` or a `ValidatorHash`
+The `Credential` type represents the non-staking part of an `Address`, and can be a `PubKeyHash` or a `ValidatorHash`.
 
 ```helios
 enum Credential {
@@ -341,7 +351,10 @@ func from_data(data: Data) -> Credential
 
 ### Operators
 
-`==`, `!=`
+```helios
+Credential == Credential -> Bool
+Credential != Credential -> Bool
+```
 
 ### Methods
 
@@ -349,13 +362,8 @@ func from_data(data: Data) -> Credential
 func serialize(self) -> ByteArray
 ```
 
-### Operators
-
-`==`, `!=`
-
 ## StakingCredential
 
----
 ```helios
 enum StakingCredential {
 	Hash{Credential}
@@ -364,6 +372,7 @@ enum StakingCredential {
 ```
 
 ### Associated functions
+
 ```helios
 func new_hash(credential: Credential) -> StakingCredential::Hash
 
@@ -374,9 +383,13 @@ func from_data(data: Data) -> StakingCredential
 
 ### Operators
 
-`==`, `!=`
+```helios
+StakingCredential == StakingCredential -> Bool
+StakingCredential != StakingCredential -> Bool
+```
 
 ### Methods
+
 ```helios
 func serialize(self) -> ByteArray
 ```
@@ -391,14 +404,20 @@ enum StakingPurpose {
 ```
 
 ### Associated functions
+
 ```helios
 func from_data(data: Data) -> StakingPurpose
 ```
 
 ### Operators
-`==`, `!=`
+
+```helios
+StakingPurpose == StakingPurpose -> Bool
+StakingPurpose != StakingPurpose -> Bool
+```
 
 ### Methods
+
 ```helios
 func serialize(self) -> ByteArray
 ```
@@ -416,6 +435,7 @@ enum DCert {
 ```
 
 ### Associated functions
+
 ```helios
 func from_data(data: Data) -> DCert
 
@@ -431,9 +451,14 @@ func new_retire_pool(pool_id: PubKeyHash, epoch: Int) -> DCert::RetirePool
 ```
 
 ### Operators
-`==`, `!=`
+
+```helios
+DCert == DCert -> Bool
+DCert != DCert -> Bool
+```
 
 ### Methods
+
 ```helios
 func serialize(self) -> ByteArray
 ```

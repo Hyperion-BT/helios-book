@@ -40,7 +40,7 @@ enum Redeemer {
 func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {
     tx: Tx = ctx.tx;
 
-    now: Time = tx.now();
+    now: Time = tx.time_range.start;
 
     validator_hash: ValidatorHash = ctx.current_validator_hash();
 

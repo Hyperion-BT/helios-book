@@ -16,7 +16,17 @@ func from_data(data: Data) -> Time
 
 ### Operators
 
-`==`, `!=`, `+`, `-`, `>=`, `>`, `<=`, `<`
+```helios
+Time == Time     -> Bool
+Time != Time     -> Bool
+Time >= Time     -> Bool
+Time >  Time     -> Bool
+Time <= Time     -> Bool
+Time <  Time     -> Bool
+Time +  Duration -> Time
+Time -  Duration -> Time
+Time -  Time     -> Duration
+```
 
 ### Methods
 
@@ -42,7 +52,20 @@ func from_data(data: Int) -> Duration
 
 ### Operators
 
-`==`, `!=`, `+`, `-`, `*`, `/`, `%`, `>=`, `>`, `<=`, `<`
+```helios
+Duration == Duration -> Bool
+Duration != Duration -> Bool
+Duration >= Duration -> Bool
+Duration >  Duration -> Bool
+Duration <= Duration -> Bool
+Duration <  Duration -> Bool
+Duration +  Duration -> Duration
+Duration -  Duration -> Duration
+Duration *  Int      -> Duration
+Duration /  Int      -> Duration
+Duration /  Duration -> Int
+Duration %  Duration -> Duration
+```
 
 ### Methods
 
@@ -80,15 +103,24 @@ func from_data(data: Data) -> TimeRange
 
 ### Operators
 
-`==`,`!=`
+```helios
+TimeRange == TimeRange -> Bool
+TimeRange != TimeRange -> Bool
+```
+
+### Getters
+
+```helios
+// @notice Throws an error if start of TimeRange is non-finite
+start: Time
+
+// @notice Throws an error if end of TimeRange is non-finite
+end: Time
+```
 
 ### Methods
 
 ```helios
-// @returns The start of TimeRange.
-// @notice Throws an error if start is negative or positive infinity
-func get_start(self) -> Time
-
 // @returns 'true' if self contains the 'time'
 func contains(self, time: Time) -> Bool
 

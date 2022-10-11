@@ -39,8 +39,6 @@ struct Tx {
 
     // Some useful methods
 
-    func now(self) -> Time
-
     func outputs_sent_to(self, addr: PubKeyHash) -> []TxOutput
 
     func value_sent_to(self, addr: PubKeyHash) -> Value

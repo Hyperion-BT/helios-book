@@ -32,7 +32,7 @@ func main(ctx: ScriptContext) -> Bool {
 
     value_minted: Value = tx.minted;
 
-    value_minted == Value::new(nft_assetclass, 1) && tx.now() < DEADLINE
+    value_minted == Value::new(nft_assetclass, 1) && tx.time_range.start < DEADLINE
 }
 ```
 

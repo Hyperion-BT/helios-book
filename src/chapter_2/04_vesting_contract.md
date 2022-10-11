@@ -52,7 +52,7 @@ There are two cases when the validator should return `true`:
 ```helios
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
     tx: Tx = context.tx;
-    now: Time = tx.now();
+    now: Time = tx.time_range.start;
 
     redeemer.switch {
         Cancel => {
@@ -97,7 +97,7 @@ enum Redeemer {
 
 func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
     tx: Tx = context.tx;
-    now: Time = tx.now();
+    now: Time = tx.time_range.start;
 
     redeemer.switch {
         Cancel => {
