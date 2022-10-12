@@ -17,6 +17,10 @@ func lovelace(amount: Int) -> Value
 
 // @returns A Value containing 'amount' number of the given 'asset_class'
 func new(asset_class: AssetClass, amount: Int) -> Value
+
+func from_data(data: Data) -> Value
+
+func from_map(raw_value: Map[MintingPolicyHash]Map[ByteArray]Int) -> Value
 ```
 
 ## Operators
