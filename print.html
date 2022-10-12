@@ -1681,6 +1681,10 @@ func lovelace(amount: Int) -&gt; Value
 
 // @returns A Value containing 'amount' number of the given 'asset_class'
 func new(asset_class: AssetClass, amount: Int) -&gt; Value
+
+func from_data(data: Data) -&gt; Value
+
+func from_map(raw_value: Map[MintingPolicyHash]Map[ByteArray]Int) -&gt; Value
 </code></pre>
 <h2 id="operators-15"><a class="header" href="#operators-15">Operators</a></h2>
 <pre><code class="language-helios">// @notice Assets must also be in same order for '==' to return true
