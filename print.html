@@ -1107,7 +1107,7 @@ func main(ctx: ScriptContext) -&gt; Bool {
 	tx: Tx = ctx.tx;
 
     nft_assetclass: AssetClass = AssetClass::new(
-		ctx.get_current_minting_policy(), 
+		ctx.get_current_minting_policy_hash(), 
 		&quot;example-nft&quot;.encode_utf8()
 	);
 
