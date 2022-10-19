@@ -14,7 +14,7 @@ struct Datum {
 
 func main(datum: Datum, ctx: ScriptContext) -> Bool {
     tx: Tx = ctx.tx;
-    now: Time = tx.now();
+    now: Time = tx.time_range.start;
     returnToOwner: Bool = tx.is_signed_by(datum.owner);
 
     print("now: " + now.show() + ", lock: " + datum.lockUntil.show()); now > datum.lockUntil || 
@@ -30,8 +30,6 @@ Once we have written the script, we generate its JSON representation, and then c
 $ nodejs
 
 > var helios; import("./helios.js").then(m=>{helios=m});
-
-> helios.setDebug(true);
 
 > const src = "spending time_lock  struct Datum {lockUntil...";
 
