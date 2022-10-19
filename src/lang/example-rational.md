@@ -1,0 +1,31 @@
+The following is a complete example of a struct with both associated and regular methods.
+
+# Example: `Rational`
+
+```helios
+struct Rational {
+    top:    Int
+    bottom: Int
+
+    // associated const
+    const PI = Rational{ top: 355, bottom: 113}
+
+    // associated method
+    func new(top: Int, bottom: Int) -> Rational {
+        Rational { top: top, bottom: bottom }
+    }
+
+    // regular method
+    func add(self, rhs: Rational) -> Rational {
+        top:    Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
+        bottom: Int = self.bottom * rhs.bottom;
+
+        Rational { top: top, bottom: bottom }
+    }
+
+}
+
+const rational_1: Rational = Rational::PI // 355/113 or 3.14159...
+const rational_2: Rational = Rational::new(1, 2) // 1/2 or 0.5
+const rational_3: Rational = rational_1.add(rational_2) // 823/226 or 3.64159...
+```
