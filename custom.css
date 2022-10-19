@@ -2,6 +2,10 @@ span.hljs-type {
 	color: #cc771d;
 }
 
+span.hljs-param-type {
+	font-style: italic;
+}
+
 /*h1.menu-title {
 	color: #6021a6;
 	position: relative;

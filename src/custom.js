@@ -22,13 +22,18 @@ hljs.registerLanguage('helios', function(hljs) {
 
 	let BYTE_ARRAYS = {
 		className: 'literal',
-		begin: '#[a-fA-F0-9]*\\b',
-	}
+		begin: '#[a-fA-F0-9.]*',
+	};
+
+	let PARAM_TYPE = {
+		className: 'param-type',
+		begin: '\\b[A-Za-z]*Type\\b',
+	};
 
 	let VARIABLE = {
 		className: 'variable',
 		begin: '\\b(self)',
-	}
+	};
 
 	let STRINGS = {
 		className: 'string',
@@ -54,6 +59,7 @@ hljs.registerLanguage('helios', function(hljs) {
 			BUILTIN_TYPES,
 			BYTE_ARRAYS,
 			VARIABLE,
+			PARAM_TYPE,
 		]
 	};
 

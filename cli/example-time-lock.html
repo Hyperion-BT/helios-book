@@ -1,0 +1,375 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Example: Time lock - The Helios Smart Contract Language</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/custom.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../intro.html">Introduction</a></li><li class="chapter-item affix "><a href="../understanding-eutxos.html">Understanding eUTxOs</a></li><li class="chapter-item "><a href="../lang/index.html"><strong aria-hidden="true">1.</strong> Helios language</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../lang/comments.html"><strong aria-hidden="true">1.1.</strong> Comments</a></li><li class="chapter-item "><a href="../lang/variables.html"><strong aria-hidden="true">1.2.</strong> Variables</a></li><li class="chapter-item "><a href="../lang/primitive-types.html"><strong aria-hidden="true">1.3.</strong> Primitive types</a></li><li class="chapter-item "><a href="../lang/container-types.html"><strong aria-hidden="true">1.4.</strong> Container types</a></li><li class="chapter-item "><a href="../lang/branching.html"><strong aria-hidden="true">1.5.</strong> Branching</a></li><li class="chapter-item "><a href="../lang/print.html"><strong aria-hidden="true">1.6.</strong> Print</a></li><li class="chapter-item "><a href="../lang/functions.html"><strong aria-hidden="true">1.7.</strong> Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../lang/example-function.html"><strong aria-hidden="true">1.7.1.</strong> Example: Collatz sequence</a></li></ol></li><li class="chapter-item "><a href="../lang/operators.html"><strong aria-hidden="true">1.8.</strong> Operators</a></li><li class="chapter-item "><a href="../lang/structs.html"><strong aria-hidden="true">1.9.</strong> Structs</a></li><li class="chapter-item "><a href="../lang/enums.html"><strong aria-hidden="true">1.10.</strong> Enums</a></li><li class="chapter-item "><a href="../lang/methods.html"><strong aria-hidden="true">1.11.</strong> Methods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../lang/associated-functions-and-constants.html"><strong aria-hidden="true">1.11.1.</strong> Associated functions and constants</a></li><li class="chapter-item "><a href="../lang/automatic-methods.html"><strong aria-hidden="true">1.11.2.</strong> Automatic methods</a></li><li class="chapter-item "><a href="../lang/example-rational.html"><strong aria-hidden="true">1.11.3.</strong> Example: Rational</a></li></ol></li><li class="chapter-item "><a href="../lang/script-structure.html"><strong aria-hidden="true">1.12.</strong> Structure of a script</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../lang/example-script.html"><strong aria-hidden="true">1.12.1.</strong> Example: always_succeeds</a></li></ol></li><li class="chapter-item "><a href="../lang/builtins/index.html"><strong aria-hidden="true">1.13.</strong> Builtins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../lang/builtins/address.html"><strong aria-hidden="true">1.13.1.</strong> Address</a></li><li class="chapter-item "><a href="../lang/builtins/assetclass.html"><strong aria-hidden="true">1.13.2.</strong> AssetClass</a></li><li class="chapter-item "><a href="../lang/builtins/bool.html"><strong aria-hidden="true">1.13.3.</strong> Bool</a></li><li class="chapter-item "><a href="../lang/builtins/bytearray.html"><strong aria-hidden="true">1.13.4.</strong> ByteArray</a></li><li class="chapter-item "><a href="../lang/builtins/credential.html"><strong aria-hidden="true">1.13.5.</strong> Credential</a></li><li class="chapter-item "><a href="../lang/builtins/data.html"><strong aria-hidden="true">1.13.6.</strong> Data</a></li><li class="chapter-item "><a href="../lang/builtins/datumhash.html"><strong aria-hidden="true">1.13.7.</strong> DatumHash</a></li><li class="chapter-item "><a href="../lang/builtins/dcert.html"><strong aria-hidden="true">1.13.8.</strong> DCert</a></li><li class="chapter-item "><a href="../lang/builtins/duration.html"><strong aria-hidden="true">1.13.9.</strong> Duration</a></li><li class="chapter-item "><a href="../lang/builtins/int.html"><strong aria-hidden="true">1.13.10.</strong> Int</a></li><li class="chapter-item "><a href="../lang/builtins/list.html"><strong aria-hidden="true">1.13.11.</strong> List</a></li><li class="chapter-item "><a href="../lang/builtins/map.html"><strong aria-hidden="true">1.13.12.</strong> Map</a></li><li class="chapter-item "><a href="../lang/builtins/mintingpolicyhash.html"><strong aria-hidden="true">1.13.13.</strong> MintingPolicyHash</a></li><li class="chapter-item "><a href="../lang/builtins/option.html"><strong aria-hidden="true">1.13.14.</strong> Option</a></li><li class="chapter-item "><a href="../lang/builtins/outputdatum.html"><strong aria-hidden="true">1.13.15.</strong> OutputDatum</a></li><li class="chapter-item "><a href="../lang/builtins/pubkeyhash.html"><strong aria-hidden="true">1.13.16.</strong> PubKeyHash</a></li><li class="chapter-item "><a href="../lang/builtins/scriptcontext.html"><strong aria-hidden="true">1.13.17.</strong> ScriptContext</a></li><li class="chapter-item "><a href="../lang/builtins/stakingcredential.html"><strong aria-hidden="true">1.13.18.</strong> StakingCredential</a></li><li class="chapter-item "><a href="../lang/builtins/stakingpurpose.html"><strong aria-hidden="true">1.13.19.</strong> StakingPurpose</a></li><li class="chapter-item "><a href="../lang/builtins/string.html"><strong aria-hidden="true">1.13.20.</strong> String</a></li><li class="chapter-item "><a href="../lang/builtins/time.html"><strong aria-hidden="true">1.13.21.</strong> Time</a></li><li class="chapter-item "><a href="../lang/builtins/timerange.html"><strong aria-hidden="true">1.13.22.</strong> TimeRange</a></li><li class="chapter-item "><a href="../lang/builtins/tx.html"><strong aria-hidden="true">1.13.23.</strong> Tx</a></li><li class="chapter-item "><a href="../lang/builtins/txid.html"><strong aria-hidden="true">1.13.24.</strong> TxId</a></li><li class="chapter-item "><a href="../lang/builtins/txinput.html"><strong aria-hidden="true">1.13.25.</strong> TxInput</a></li><li class="chapter-item "><a href="../lang/builtins/txoutput.html"><strong aria-hidden="true">1.13.26.</strong> TxOutput</a></li><li class="chapter-item "><a href="../lang/builtins/txoutputid.html"><strong aria-hidden="true">1.13.27.</strong> TxOutputId</a></li><li class="chapter-item "><a href="../lang/builtins/validatorhash.html"><strong aria-hidden="true">1.13.28.</strong> ValidatorHash</a></li><li class="chapter-item "><a href="../lang/builtins/value.html"><strong aria-hidden="true">1.13.29.</strong> Value</a></li></ol></li></ol></li><li class="chapter-item "><a href="../api/index.html"><strong aria-hidden="true">2.</strong> Helios API</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../api/setup.html"><strong aria-hidden="true">2.1.</strong> Setup</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../api/deno.html"><strong aria-hidden="true">2.1.1.</strong> Deno</a></li></ol></li><li class="chapter-item "><a href="../api/compiling.html"><strong aria-hidden="true">2.2.</strong> Compiling Helios sources</a></li><li class="chapter-item "><a href="../api/generating.html"><strong aria-hidden="true">2.3.</strong> Generating datums and redeemers</a></li><li class="chapter-item "><a href="../api/building/index.html"><strong aria-hidden="true">2.4.</strong> Building transactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../api/building/inputs.html"><strong aria-hidden="true">2.4.1.</strong> Transaction inputs</a></li><li class="chapter-item "><a href="../api/building/outputs.html"><strong aria-hidden="true">2.4.2.</strong> Transaction outputs</a></li><li class="chapter-item "><a href="../api/building/collateral.html"><strong aria-hidden="true">2.4.3.</strong> Collateral</a></li><li class="chapter-item "><a href="../api/building/signers.html"><strong aria-hidden="true">2.4.4.</strong> Explicit signers</a></li><li class="chapter-item "><a href="../api/building/minting.html"><strong aria-hidden="true">2.4.5.</strong> Minting</a></li><li class="chapter-item "><a href="../api/building/finalizing.html"><strong aria-hidden="true">2.4.6.</strong> Finalizing</a></li><li class="chapter-item "><a href="../api/building/signing-and-submitting.html"><strong aria-hidden="true">2.4.7.</strong> Signing and submitting</a></li></ol></li><li class="chapter-item "><a href="../api/picoswap/index.html"><strong aria-hidden="true">2.5.</strong> Example: PicoSwap</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../api/picoswap/script.html"><strong aria-hidden="true">2.5.1.</strong> Main script</a></li><li class="chapter-item "><a href="../api/picoswap/datums.html"><strong aria-hidden="true">2.5.2.</strong> Generating datums</a></li><li class="chapter-item "><a href="../api/picoswap/contract-class.html"><strong aria-hidden="true">2.5.3.</strong> Contract helper class</a></li><li class="chapter-item "><a href="../api/picoswap/new-sale.html"><strong aria-hidden="true">2.5.4.</strong> Creating a new sale</a></li><li class="chapter-item "><a href="../api/picoswap/cancel-sale.html"><strong aria-hidden="true">2.5.5.</strong> Canceling a sale</a></li><li class="chapter-item "><a href="../api/picoswap/buying.html"><strong aria-hidden="true">2.5.6.</strong> Buying for-sale assets</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../cli/index.html"><strong aria-hidden="true">3.</strong> Helios CLI</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../cli/setup.html"><strong aria-hidden="true">3.1.</strong> Setup</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../cli/wallet.html"><strong aria-hidden="true">3.1.1.</strong> Wallet setup</a></li></ol></li><li class="chapter-item "><a href="../cli/example-always-succeeds.html"><strong aria-hidden="true">3.2.</strong> Example: Always succeeds</a></li><li class="chapter-item expanded "><a href="../cli/example-time-lock.html" class="active"><strong aria-hidden="true">3.3.</strong> Example: Time lock</a></li></ol></li><li class="chapter-item "><a href="../advanced-concepts/index.html"><strong aria-hidden="true">4.</strong> Advanced concepts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../advanced-concepts/exploits.html"><strong aria-hidden="true">4.1.</strong> Exploits</a></li><li class="chapter-item "><a href="../advanced-concepts/minting/index.html"><strong aria-hidden="true">4.2.</strong> Minting native assets</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../advanced-concepts/minting/signature.html"><strong aria-hidden="true">4.2.1.</strong> Signature based minting</a></li><li class="chapter-item "><a href="../advanced-concepts/minting/unique.html"><strong aria-hidden="true">4.2.2.</strong> Unique minting</a></li></ol></li><li class="chapter-item "><a href="../advanced-concepts/vesting-contract.html"><strong aria-hidden="true">4.3.</strong> Vesting contract</a></li><li class="chapter-item "><a href="../advanced-concepts/english-auction.html"><strong aria-hidden="true">4.4.</strong> English auction</a></li><li class="chapter-item "><a href="../advanced-concepts/oracle-pools.html"><strong aria-hidden="true">4.5.</strong> Oracle pools</a></li><li class="chapter-item "><a href="../advanced-concepts/dapps.html"><strong aria-hidden="true">4.6.</strong> DApp recommendations</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Helios Smart Contract Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/hyperion-bt/Helios-Book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="example-time-lock"><a class="header" href="#example-time-lock">Example: Time lock</a></h1>
+<p>The <em>always-succeeds</em> contract in the <a href="./example-always-succeeds.html">previous section</a> isn't very useful. Something that is still simple, but has real-world applications, is a <em>time-lock</em> contract. Actors send UTxOs to the <em>time-lock</em> address with a datum that contains a <em>lock-until</em> time. An optional nonce can be included in the datum to allow only the actors who know the nonce value to retrieve the UTxOs. The wallet from which the original UTxOs were sent is also able to retrieve the UTxOs at any time.</p>
+<p>The Helios script:</p>
+<pre><code class="language-golang">spending time_lock
+
+struct Datum {
+    lockUntil: Time
+    owner:     PubKeyHash // can't get this info from the ScriptContext
+    nonce:     Int // doesn't actually need be checked here
+}
+
+func main(datum: Datum, ctx: ScriptContext) -&gt; Bool {
+    tx: Tx = ctx.tx;
+    now: Time = tx.now();
+    returnToOwner: Bool = tx.is_signed_by(datum.owner);
+
+    print(&quot;now: &quot; + now.show() + &quot;, lock: &quot; + datum.lockUntil.show()); now &gt; datum.lockUntil || 
+    (print(&quot;returning? &quot; + show(returnToOwner)); returnToOwner)
+}
+</code></pre>
+<p>UTxOs can be sent into the time-lock script arbitrarily as long as the datum has the correct format. UTxOs can be retrieved any time by the wallet that initiated the time-lock. UTxOs can be retrieved after the time-lock by anyone who knows the datum.</p>
+<p>Once we have written the script, we generate its JSON representation, and then calculate the script address using cardano-cli:</p>
+<pre><code class="language-bash">$ nodejs
+
+&gt; var helios; import(&quot;./helios.js&quot;).then(m=&gt;{helios=m});
+
+&gt; helios.setDebug(true);
+
+&gt; const src = &quot;spending time_lock  struct Datum {lockUntil...&quot;;
+
+&gt; console.log(helios.Program.new(src).compile().serialize())
+
+{&quot;type&quot;: &quot;PlutusScriptV1&quot;, &quot;description&quot;: &quot;&quot;, &quot;cborHex&quot;: &quot;5...&quot;}
+</code></pre>
+<pre><code class="language-bash">$ docker exec -it &lt;container-id&gt; bash
+
+&gt; echo '{
+  &quot;type&quot;: &quot;PlutusScriptV1&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;cborHex&quot;: &quot;5...&quot;,
+}' &gt; /data/scripts/time-lock.json
+
+&gt; cardano-cli address build \
+  --payment-script-file /data/scripts/time-lock.json \
+  --out-file /data/scripts/time-lock.addr \
+  --testnet-magic $TESTNET_MAGIC_NUM
+
+&gt; cat time-lock.addr
+
+addr_test1...
+</code></pre>
+<p>For the datum we need the <code>PubKeyHash</code> of the initiating wallet (i.e. the owner):</p>
+<pre><code class="language-bash">$ docker exec -it &lt;container-id&gt; bash
+
+&gt; cardano-cli address key-hash --payment-verification-key-file /data/wallets/wallet1.vkey
+
+1d22b9ff5fc...
+</code></pre>
+<p>We also need a <code>lockUntil</code> time, for example 5 minutes from now. Now we can build the datum:</p>
+<pre><code class="language-bash">$ nodejs
+
+&gt; var helios; import(&quot;./helios.js&quot;).then(m=&gt;{helios=m});
+
+&gt; const src = `spending  time_lock 
+struct Datum {lockUntil...
+
+const MY_DATUM = Datum{
+  lockUntil: Time(${(new Date()).getTime() + 1000*60*5}), 
+  owner: PubKeyHash(#1d22b9ff5fc...), 
+  nonce: 42
+}`;
+
+&gt; console.log(helios.Program.new(src).evalParam(&quot;MY_DATUM&quot;).data.toSchemaJson());
+
+{&quot;constructor&quot;: 0, &quot;fields&quot;: [{&quot;int&quot;: 16....}, {&quot;bytes&quot;: &quot;1d22b9ff5fc...&quot;}, {&quot;int&quot;: 42}]}
+</code></pre>
+<p>Now let's send 2 tAda to the script address using the datum we just generated:</p>
+<pre><code class="language-bash">$ docker exec -it &lt;container-id&gt; bash
+
+&gt; cardano-cli query utxo \
+  --address $(cat /data/wallets/wallet1.addr) \
+  --testnet-magic $TESTNET_MAGIC_NUM
+
+...
+# take note of a UTxO big enough to cover 2 tAda + fees
+
+&gt; DATUM=$(mktemp)
+&gt; echo '{&quot;constructor&quot;: 0, &quot;fields&quot;: [{&quot;int&quot;: 16....}, {&quot;int&quot;: 42}]}' &gt; $DATUM
+
+&gt; DATUM_HASH=$(cardano-cli transaction hash-script-data --script-data-file $DATUM)
+
+&gt; TX_BODY=$(mktemp)
+&gt; cardano-cli transaction build \
+  --tx-in &lt;funding-utxo&gt; \
+  --tx-out $(cat /data/scripts/time-lock.addr)+2000000 \
+  --tx-out-datum-hash $DATUM_HASH \
+  --change-address $(cat /data/wallets/wallet1.addr) \
+  --testnet-magic $TESTNET_MAGIC_NUM \
+  --out-file $TX_BODY \
+  --babbage-era
+
+Estimated transaction fee: Lovelace 167217
+
+&gt; TX_SIGNED=$(mktemp)
+&gt; cardano-cli transaction sign \
+  --tx-body-file $TX_BODY \
+  --signing-key-file /data/wallets/wallet1.skey \
+  --testnet-magic $TESTNET_MAGIC_NUM \
+  --out-file $TX_SIGNED
+
+&gt; cardano-cli transaction submit \
+  --tx-file $TX_SIGNED \
+  --testnet-magic $TESTNET_MAGIC_NUM
+
+Transaction successfully submitted
+</code></pre>
+<p>Wait for the transaction to propagate through the network, and query the script address to see the locked UTxO(s).</p>
+<p>First thing we should test is returning the UTxO(s) back to wallet 1. For that we use the following transaction:</p>
+<pre><code class="language-bash">&gt; PARAMS=$(mktemp) # most recent protocol params
+&gt; cardano-cli query protocol-parameters --testnet-magic $TESTNET_MAGIC_NUM &gt; $PARAMS
+
+&gt; TX_BODY=$(mktemp)
+&gt; cardano-cli transaction build \
+  --tx-in &lt;fee-utxo&gt; \ # used for tx fee
+  --tx-in &lt;script-utxo \
+  --tx-in-datum-file $DATUM \
+  --tx-in-redeemer-value &lt;arbitrary-redeemer-data&gt; \
+  --tx-in-script-file /data/scripts/time-lock.json \
+  --tx-in-collateral &lt;fee-utxo&gt; \ # used for script collateral
+  --invalid-before &lt;current-slot-no&gt; \
+  --required-signer /data/wallets/wallet1.skey \
+  --change-address $(cat /data/wallets/wallet1.addr) \
+  --tx-out $(cat /data/wallets/wallet1.addr)+2000000 \
+  --out-file $TX_BODY \
+  --testnet-magic $TESTNET_MAGIC_NUM \
+  --protocol-params-file $PARAMS \
+  --babbage-era
+
+Estimated transaction fee: Lovelace ...
+
+&gt; TX_SIGNED=$(mktemp)
+&gt; cardano-cli transaction sign \
+  --tx-body-file $TX_BODY \
+  --signing-key-file /data/wallets/wallet1.skey \
+  --testnet-magic $TESTNET_MAGIC_NUM \
+  --out-file $TX_SIGNED
+
+&gt; cardano-cli transaction submit \
+  --tx-file $TX_SIGNED \
+  --testnet-magic $TESTNET_MAGIC_NUM
+
+Transaction successfully submitted
+</code></pre>
+<p>Note that this transaction <em>build</em> command differs slightly from the <em>Always succeeds</em> script:</p>
+<ul>
+<li><code>--invalid-before &lt;current-slot-no&gt;</code> is needed so the transaction is aware of the current time (via the start of the valid time-range). It might seem weird to specify (an approximation of) the current time at this point, as someone might try to cheat the time-lock by specifying a time far into the future. But the slot-leader checks the time-range as well, and rejects any transaction whose time-range doesn't contain the current slot.</li>
+<li><code>--required-signer &lt;wallet-private-key-file&gt;</code> is needed so that <code>getTxSignatories(tx)</code> doesn't return an empty list.</li>
+</ul>
+<p>The second thing we must test is claiming the time-locked funds from another wallet (eg. wallet 2). Let's assume that the time-lock script still contains the 2 tAda sent by wallet 1, and that sufficient time has passed. Wallet 2 can claim the UTxO(s) using the following commands:</p>
+<pre><code class="language-bash">&gt; PARAMS=$(mktemp) # most recent protocol params
+&gt; cardano-cli query protocol-parameters --testnet-magic $TESTNET_MAGIC_NUM &gt; $PARAMS
+
+&gt; TX_BODY=$(mktemp)
+&gt; cardano-cli transaction build \
+  --tx-in &lt;fee-utxo&gt; \ # used for tx fee
+  --tx-in &lt;script-utxo&gt; \
+  --tx-in-datum-file $DATUM \
+  --tx-in-redeemer-value &lt;arbitrary-redeemer-data&gt; \
+  --tx-in-script-file /data/scripts/time-lock.json \
+  --tx-in-collateral &lt;fee-utxo&gt; \ # used for script collateral
+  --invalid-before &lt;current-slot-no&gt; \
+  --change-address $(cat /data/wallets/wallet2.addr) \
+  --tx-out $(cat /data/wallets/wallet2.addr)+2000000 \
+  --out-file $TX_BODY \
+  --testnet-magic $TESTNET_MAGIC_NUM \
+  --protocol-params-file $PARAMS \
+  --babbage-era
+
+Estimated transaction fee: Lovelace ...
+
+&gt; TX_SIGNED=$(mktemp)
+&gt; cardano-cli transaction sign \
+  --tx-body-file $TX_BODY \
+  --signing-key-file /data/wallets/wallet2.skey \
+  --testnet-magic $TESTNET_MAGIC_NUM \
+  --out-file $TX_SIGNED
+
+&gt; cardano-cli transaction submit \
+  --tx-file $TX_SIGNED \
+  --testnet-magic $TESTNET_MAGIC_NUM
+
+Transaction successfully submitted
+</code></pre>
+<p>cardano-cli should give an error if you try to submit this transaction before the <code>lockUntil</code> time. After that time it should succeed, and wallet 2 will receive the time-locked UTxO(s).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../cli/example-always-succeeds.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../advanced-concepts/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../cli/example-always-succeeds.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../advanced-concepts/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../src/custom.js"></script>
+    </body>
+</html>
