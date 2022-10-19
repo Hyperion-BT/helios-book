@@ -2879,7 +2879,7 @@ struct Datum {
 
 func main(datum: Datum, ctx: ScriptContext) -&gt; Bool {
     tx: Tx = ctx.tx;
-    now: Time = tx.now();
+    now: Time = tx.time_range.start;
     returnToOwner: Bool = tx.is_signed_by(datum.owner);
 
     print(&quot;now: &quot; + now.show() + &quot;, lock: &quot; + datum.lockUntil.show()); now &gt; datum.lockUntil || 
@@ -2891,8 +2891,6 @@ func main(datum: Datum, ctx: ScriptContext) -&gt; Bool {
 <pre><code class="language-bash">$ nodejs
 
 &gt; var helios; import(&quot;./helios.js&quot;).then(m=&gt;{helios=m});
-
-&gt; helios.setDebug(true);
 
 &gt; const src = &quot;spending time_lock  struct Datum {lockUntil...&quot;;
 
