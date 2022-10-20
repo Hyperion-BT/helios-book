@@ -564,6 +564,9 @@ struct Rational {
 <blockquote>
 <p><strong>Note</strong>: for two or more fields the field keys, in the correct order, must be specified when instantiating a struct. For one field the key <strong>can't</strong> be used.</p>
 </blockquote>
+<blockquote>
+<p><strong>Note</strong>: it's OK if some of the data fields are unused (could be data from other smart contracts).</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="enums"><a class="header" href="#enums">Enums</a></h1>
 <p>Enums are used to represent types that have multiple variants (sometimes called <em>sum types</em> in <a href="https://en.wikipedia.org/wiki/Computer_science">CS</a>). These are useful for datums and redeemers.</p>
 <p>Example of an enum:</p>
@@ -604,8 +607,7 @@ func main(datum: Datum) -&gt; Bool {
 }
 </code></pre>
 <blockquote>
-<p><strong>Note:</strong> In Helios, <strong>all</strong> fields in a struct and <strong>all</strong> variants in an enum <strong>must be used</strong>,
-or else the compiler will throw an error.</p>
+<p><strong>Note</strong>: it's OK if some of the data fields or enum variants are unused (could be data from other smart contracts).</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="methods"><a class="header" href="#methods">Methods</a></h1>
 <p>You can define methods for structs and enums. The syntax for this is similar to many OOP languages: methods are defined by placing <code>func</code> statements inside a <code>struct</code> or <code>enum</code> blocks:</p>
