@@ -2866,7 +2866,7 @@ Transaction successfully submitted
 <div style="break-before: page; page-break-before: always;"></div><h1 id="example-time-lock"><a class="header" href="#example-time-lock">Example: Time lock</a></h1>
 <p>The <em>always-succeeds</em> contract in the <a href="cli/./example-always-succeeds.html">previous section</a> isn't very useful. Something that is still simple, but has real-world applications, is a <em>time-lock</em> contract. Actors send UTxOs to the <em>time-lock</em> address with a datum that contains a <em>lock-until</em> time. An optional nonce can be included in the datum to allow only the actors who know the nonce value to retrieve the UTxOs. The wallet from which the original UTxOs were sent is also able to retrieve the UTxOs at any time.</p>
 <p>The Helios script:</p>
-<pre><code class="language-golang">spending time_lock
+<pre><code class="language-helios">spending time_lock
 
 struct Datum {
     lockUntil: Time
@@ -2880,7 +2880,7 @@ func main(datum: Datum, ctx: ScriptContext) -&gt; Bool {
     returnToOwner: Bool = tx.is_signed_by(datum.owner);
 
     print(&quot;now: &quot; + now.show() + &quot;, lock: &quot; + datum.lockUntil.show()); now &gt; datum.lockUntil || 
-    (print(&quot;returning? &quot; + show(returnToOwner)); returnToOwner)
+    (print(&quot;returning? &quot; + returnToOwner.show()); returnToOwner)
 }
 </code></pre>
 <p>UTxOs can be sent into the time-lock script arbitrarily as long as the datum has the correct format. UTxOs can be retrieved any time by the wallet that initiated the time-lock. UTxOs can be retrieved after the time-lock by anyone who knows the datum.</p>
