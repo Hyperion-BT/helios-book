@@ -3,7 +3,7 @@
 The *always-succeeds* contract in the [previous section](./example-always-succeeds.md) isn't very useful. Something that is still simple, but has real-world applications, is a *time-lock* contract. Actors send UTxOs to the *time-lock* address with a datum that contains a *lock-until* time. An optional nonce can be included in the datum to allow only the actors who know the nonce value to retrieve the UTxOs. The wallet from which the original UTxOs were sent is also able to retrieve the UTxOs at any time.
 
 The Helios script:
-```golang
+```helios
 spending time_lock
 
 struct Datum {
@@ -18,7 +18,7 @@ func main(datum: Datum, ctx: ScriptContext) -> Bool {
     returnToOwner: Bool = tx.is_signed_by(datum.owner);
 
     print("now: " + now.show() + ", lock: " + datum.lockUntil.show()); now > datum.lockUntil || 
-    (print("returning? " + show(returnToOwner)); returnToOwner)
+    (print("returning? " + returnToOwner.show()); returnToOwner)
 }
 ```
 
