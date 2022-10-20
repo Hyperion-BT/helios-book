@@ -11,7 +11,7 @@ Smart contracts on Cardano are quite different from those on Ethereum.
 
 ### Ethereum-style Smart Contracts (account-based)
 
-When a transaction occurs, the balance of one the sender's account is directly decremented and that of the recipient is incremented, similar to how conventional bank accounts work.
+When a transaction occurs, the balance of the sender's account is directly decremented and that of the recipient is incremented, similar to how conventional bank accounts work.
 
 Contracts on Ethereum run via the EVM (Ethereum Virtual Machine), the EVM can be thought of as a global on-chain computer which smart contracts take turns running on, before their results are accepted on-chain.
 
