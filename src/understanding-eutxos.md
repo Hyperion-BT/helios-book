@@ -1,125 +1,119 @@
 # Understanding the eUTxO model
 
-Before we get into any coding we need to first understand how smart contracts work on Cardano
-and how it differs from the more conventional account-based model.
+Before we get into any coding we first need to understand how smart contracts work on Cardano and how Cardano differs from the more conventional account-based model.
 
-This section wouldn't be possible without [this](https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e) great blog post by the awesome [David Pryzbilla](https://github.com/dav009) and a lot of helpful feedback from [Christian Schmitz](https://github.com/christianschmitz).
+> **Note**: eUTxO is an abbreviation of *extended Unspent Transaction Outputs*
 
-## Account-based vs eUTxO
+## Account-based model vs eUTxO model
 
 Smart contracts on Cardano are quite different from those on Ethereum.
 
-### Ethereum-style Smart Contracts (account-based)
+### Ethereum-style smart contracts (account-based)
 
-When a transaction occurs, the balance of the sender's account is directly decremented and that of the recipient is incremented, similar to how conventional bank accounts work.
+When a transaction occurs on an account-based blockchain, the balance of the sender's account is directly decremented and that of the recipient is incremented, similar to how conventional bank accounts work.
 
-Contracts on Ethereum run via the EVM (Ethereum Virtual Machine), the EVM can be thought of as a global on-chain computer which smart contracts take turns running on, before their results are accepted on-chain.
+Contracts interact with these balances and run via the EVM (Ethereum Virtual Machine). The EVM can be thought of as a global on-chain computer on which smart contracts take turns running, before their results are added to the chain.
 
->**Note**: The data of all accounts on Ethereum are stored in a [**Merkle-Patricia Trie**](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/), which is kind of like a fancy hashmap.
-> After all the transactions in a block are run the **root hash** of the new Trie is included in the block.
+>**Note**: the data of all accounts on Ethereum are stored in a [**Merkle-Patricia trie**](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/), which is like a fancy hashmap. After all the transactions in a block are run, the root hash of the block trie is added to the chain.
 
-## The eUTxO Model
+### The eUTxO model
 
-In the UTxO model tokens are stored in UTxOs (Unspent Transaction Outputs).
-A UTxO is like (electronic)-cash where an individual bundle of bills (Ada and native-tokens) is stored separately.
+In the eUTxO model tokens are stored in UTxOs. A UTxO is like (electronic)-cash where each individual bundle of bills (Ada and native-tokens) is stored separately.
 
-In a transaction in the UTxO model, one or more UTxOs are used as inputs to the transaction and destroyed, **Transaction Inputs** and one or more UTxOs are created as the result/output of a transaction, **Transaction Outputs**.
+A transaction in the UTxO model takes one or more UTxOs as **transaction inputs**, which are destroyed, and creates one or more UTxOs as **transaction outputs**.
 
-Transactions in the accounts-based model mutate the data-points storing the total amounts (this is **very risky**; regular banks have special insurances and paper backups in case of mistakes, blockchains have no such fallbacks).
-In the UTxO model only the "bills" that participate in a given transaction can potentially be lost (bad, but not catastrophic).
+Transactions in an account-based model mutate the data-points storing the total balances. This is very risky (regular banks are insured against this, and also have paper backups in case of mistakes, but blockchains have no such fallbacks). In the UTxO model only the "bills" that participate in a given transaction can potentially be affected (which is bad, but not catastrophic).
 
-Of course a UTxO chain can emulate account-based models (for example the [Fuel Rollup](https://fuel.network) uses UTxOs under the hood for parallel execution) and vice versa.
+Of course a UTxO chain can emulate account-based chains (by storing all tokens in a single UTxO) and account-based chains can emulate UTxO chains (by spreading a user's balance over many different accounts).
 
-### Components of a UTxO on Cardano
+## Components of a UTxO on Cardano
 
-On eUTxO blockchain the ledger is made up of many UTxOs (Unspent Transaction Outputs). A UTxO has four main components:
+UTxOs have 3 main components:
+- an address
+- tokens (Ada and other native assets)
+- a datum
 
-- An Address
-- Tokens (Native Assets)
-- A Validator Script
-- A Datum.
+### Address
 
-#### The Address
+The address of a UTxO determines the owner (i.e. who has the right to spend it).
 
-The address of a UTxO is used to determine who owns the UTxO (who has the right to spend it in a transaction).
-To know the balance of a user wallets searches the ledger for all UTxOs *owned* by the user's address and their total value is the user's balance.
+A user's balance is calculated by summing all UTxOs sitting at addresses *owned* by that user.
 
-An address can be either be derived from the hash of a user's public key (`PubKeyHash` in Helios) or the hash of a validator script (`ValidatorHash`).
+An address can either be derived from the hash of a user's public key ([`PubKeyHash`](./lang/builtins/pubkeyhash.md) in Helios), or the hash of a validator script ([`ValidatorHash`](./lang/builtins/validatorhash.md) in Helios). In the latter case the script effectively becomes the owner of the UTxO.
 
-#### Datums
+### Tokens
 
-These are data stored onchain associated with a particular UTxO.
-The Datum is used to store state in Smart Contracts.
-The 'e' in eUTxO comes from the Datum, this is because the addition of a datum makes the eUTxO model Turing-Complete (like Ethereum smart contracts and unlike Bitcoin Script).
-With this state anything that an account-based model can do also be done with a eUTxO-based model.@hyperionbt/helios"
+Each UTxO contains some tokens, which represent value on the blockchain. Tokens have positive value due to scarcity (tokens can't be duplicated) and utility (eg. Ada being used to pay transaction fees).
 
->**Note**: To be exact on Cardano previously the Datum couldn't be stored onchain but as of Plutus V2 we now have actual *onchain/inline* datums.
+### Datum
 
-#### Validators
+The *datum* is data that is attached to UTxOs. A datum represents the state of a smart contract, and is immutable (smart contract state can change though, by spending old UTxOs and creating new ones).
 
-A validators is a function that runs when a transaction attempts to spend a UTxO.
-It takes in the data of the transaction and returns a boolean which determines if the UTxO can be spent.
-Validators contain the 'business logic' of a smart contract.
+The 'e' (*extended*) in eUTxO comes from the datum. The Bitcoin UTxO model doesn't have datums, giving Bitcoin scripts very limited capabilities. *Extending* the UTxO model, as done by Cardano and Ergo, gives an eUTxO model the same capabilities as an account-based model, while benefitting from a much safer approach to transactions (because a global state isn't being accessed/mutated).
 
-For example for a simple vesting contract one could lock up some tokens in a UTxO with a validator which returns `true` if the transaction is signed by the beneficiary.
+## Validator scripts
 
->**Note**: A UTxO can only be spent once. In every transaction some UTxOs are destroyed,
->**Transaction Inputs (TxInputs)** and new UTxOs are created, **Transaction Inputs (TxOutputs)**.
->For a transaction to be valid it must satisfy some things:
->
-> - The total amount of tokens in the **Transaction Inputs** must be equal to those in the **Transaction Ouputs**.
-> - The validators for all the **Transaction Inputs** must evaluate to `true`.
+A validator script is a function that is evaluated when a transaction attempts to spend a UTxO locked at that script's address. This function takes 3 arguments:
+  * the datum attached to the UTxO
+  * some data provided by the user who created the transaction (the *redeemer*)
+  * details about the transaction (the *script context*)
+   
+The validator script then calculates whether or not the UTxO is allowed to be spent (essentially returning a boolean result).
 
-## Pros and Cons of the eUTxO Model
+Separating the validation logic from the transaction building/submitting logic makes it much easier to audit the trusted part of eUTxO DApps.
+
+Helios is all about writing these validator scripts.
+
+> **Note**: a UTxO can only be spent once. In every transaction all input UTxOs are destroyed, and new output UTxOs are created.
+
+> **Note**: a valid transaction must satisfy the following conditions:
+> - the transaction must be balanced: the total amount of tokens in the transaction inputs must be equal to those in the transaction outputs (minus the fees, plus the minted tokens).
+> - the validators for all the transaction inputs must evaluate to `true`.
+
+## Pros and cons of the eUTxO Model
 
 ### Pros
 
-- #### Fixed Transaction Fees
+- #### Deterministic transaction fees
 
-  eUTxO contracts are deterministic this means that you can verify if a transaction will suceed and it's resource usage before posting it to the blockchain.
-  This is means the transaction fees for a transaction are fixed  and can be deterministically calculated offchain.
-  On Account-based blockchains transaction fees can vary **a lot**.
+  eUTxO smart contract evaluation is deterministic. This means that you can calculate the resource usage of a transaction before posting it to the blockchain. The transaction fees for a transaction can thus be calculated deterministically off-chain.
+  
+  The transaction fees of account-based blockchains depend on network load, and can vary a lot.
 
-- #### Easier to Audit
+- #### Transaction fees not charged upon failure
+  The determinism of the eUTxO model means that transaction success can be determined before posting. Transaction failure is still possible due to contention, but this is a very cheap check, and no fee is charged.
+  
+  Transaction failure on account-based blockchains results in losing the fee, as significant processing power might've been used before encountering the failure condition.
 
-  The **locally-scoped** nature of eUTxO contracts reduces the potential attack surface by a lot.
-  This makes auditing way easier because you're auditing a **the validation** function and the space of possible outcomes is greatly reduced.
+
+- #### Easier to audit
+
+  Auditing of eUTxO smart contracts is much easier because only the validation function needs to be audited, which has a very **locally-scoped** nature.
 
 - #### Concurrency
 
-  If designed properly eUTxO smart contracts can be very parallel.
+  Due to monetary value being naturally spread over many UTxOs, a UTxO blockchain can be compared to an extremely sharded account-based blockchain (some smart contracts might require a centralized data-point though, and won't allow concurrent interactions, see [contention](#contention)).
 
-- #### Better for Layer 2s
+- #### Better for layer 2
 
-  The local nature of UTxOs lends itself well to building Layer 2 scaling solutions
-  such as sidechains(Milkomeda), state channels
+  The local nature of UTxOs allows reusing validation logic in layer 2 scaling solutions
+  such as state channels (see [hydra](https://iohk.io/en/blog/posts/2021/09/17/hydra-cardano-s-solution-for-ultimate-scalability/)). 
 
 - #### Simpler
 
-  Though not immediately obvious eUTxO smart contracts are often simpler than an equivalent Solidity smart contract.
-
-- #### No Reentrancy Attacks
-
-  Reentrancy attacks such as the [DAO hack](https://en.wikipedia.org/wiki/The_DAO_(organization)).
+  Though not immediately obvious, eUTxO smart contracts are often much simpler than an equivalent Solidity smart contract (this will become apparant when you start to use Helios).
 
 ### Cons
 
 - #### Contention
 
-  If eUTxO contracts aren't designed properly they can encounter *contention*.
-  Contention occurs when two transaction try to spend the same UTxO,
-  this isn't possible and leads to UX issues like in the case of [Minswap in the past]().
-  This is not usually an issue on Ethereum as the EVM usually handles ordering smart contract calls.
+  If eUTxO contracts aren't designed properly they can encounter *contention* problems. Contention occurs when two or more transactions try to spend the same UTxO. If this happens only one of the transactions will succeed, and the others will fail (resulting in an unpleasant user experience).
 
-  >**Note**: There are ways to take advantage of the avoid contention and take advantage of
-  > the parallel nature of UTxOs instead of struggling with the such as SundaeSwap's [scooper model]().
-  >
-  > These approaches usually use *offchain batching* to execute 'batches' of UTxOs in a single efficient transaction.
-  > This can be done trustlessy as a UTxO can't be spent in a transaction unless it's validator is satisfied.
+  This is usually not an issue on Ethereum because the EVM handles ordering smart contract calls.
 
-## Summary
+  > **Note**: there are ways to avoid contention, by for example taking advantage of the parallel nature of UTxOs (see SundaeSwap's [scooper model](https://sundaeswap.finance/posts/sundaeswap-scalability))
 
-It's totally normal if you're still confused about eUTxO it's not immediately intuitive.
-It is worth the extra effort in rewiring you're thinking as it often leads to contracts that are simpler and safer overall.
+## Further reading
 
-I advise you to read [this article](https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e) top even if you understand eUTxO, it's written for the Ergo blockchain but a lot of the concepts carry over into cardano.
+If you feel like you still don't fully understand the eUTxO model, we recommend you keep reading:
+  * [Learning Ergo 101 : eUTXO explained for human beings](https://dav009.medium.com/learning-ergo-101-blockchain-paradigm-eutxo-c90b0274cf5e), a great blog post by [David Pryzbilla](https://github.com/dav009)
