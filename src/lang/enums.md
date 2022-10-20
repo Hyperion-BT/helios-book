@@ -44,5 +44,4 @@ func main(datum: Datum) -> Bool {
 }
 ```
 
-> **Note:** In Helios, **all** fields in a struct and **all** variants in an enum **must be used**,
-or else the compiler will throw an error.
+> **Note**: it's OK if some of the data fields or enum variants are unused (could be data from other smart contracts).

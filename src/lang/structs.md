@@ -22,3 +22,4 @@ const x = Rational { top: 1, bottom: 3 } // type of lhs is inferred
 
 > **Note**: for two or more fields the field keys, in the correct order, must be specified when instantiating a struct. For one field the key **can't** be used.
 
+> **Note**: it's OK if some of the data fields are unused (could be data from other smart contracts).
