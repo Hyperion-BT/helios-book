@@ -39,6 +39,7 @@
     - [OutputDatum](./lang/builtins/outputdatum.md)
     - [PubKeyHash](./lang/builtins/pubkeyhash.md)
     - [ScriptContext](./lang/builtins/scriptcontext.md)
+    - [ScriptPurpose](./lang/builtins/scriptpurpose.md)
     - [StakingCredential](./lang/builtins/stakingcredential.md)
     - [StakingPurpose](./lang/builtins/stakingpurpose.md)
     - [String](./lang/builtins/string.md)

@@ -39,6 +39,7 @@ These are type-safe wrappers for `ByteArray`:
 The following types are related to `ScriptContext`:
 
   * [ScriptContext](./scriptcontext.md)
+  * [ScriptPurpose](./scriptpurpose.md)
   * [Tx](./tx.md)
   * [TxId](./txid.md)
   * [TxInput](./txinput.md)

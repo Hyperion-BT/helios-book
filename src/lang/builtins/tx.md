@@ -86,6 +86,14 @@ Returns the list of explicit transaction signers as `[]`[`PubKeyHash`](./pubkeyh
 tx.signatories -> []PubKeyHash
 ```
 
+### `redeemers`
+
+Returns all the redeemers of the transaction as a map with `ScriptPurpose` keys, and `Data` values. This allows more complex interactions between different scripts being used in the same transaction.
+
+```helios
+tx.redeemers -> Map[ScriptPurpose]Data
+```
+
 ### `id`
 
 Returns the hash of the current transaction as [`TxId`](./txid.md).
