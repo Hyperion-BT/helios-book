@@ -50,6 +50,16 @@ Option[SomeType] != Option[SomeType] -> Bool
 
 ## Methods
 
+### `serialize`
+
 ```helios
-func serialize(self) -> ByteArray
+option.serialize() -> ByteArray
+```
+
+### `unwrap`
+
+Returns the value wrapped by `Some`. Throws an error if `None`.
+
+```helios
+option.unwrap() -> SomeType
 ```
