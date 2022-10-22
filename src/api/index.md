@@ -1,3 +1,3 @@
 # Helios API
 
-The chapter covers compiling Helios sources and building Cardano transactions using the Helios Javascript library.
+This chapter covers how to compile Helios sources and how to build Cardano transactions using the Helios Javascript library.
