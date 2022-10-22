@@ -1561,6 +1561,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="from_data-14"><a class="header" href="#from_data-14"><code>from_data</code></a></h3>
 <pre><code class="language-helios">OutputDatum::from_data(data: Data) -&gt; OutputDatum
 </code></pre>
+<h3 id="new_hash"><a class="header" href="#new_hash"><code>new_hash</code></a></h3>
+<p>Construct a new <code>OutputDatum::Hash</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<pre><code class="language-helios">OutputDatum::new_hash(datum_hash: DatumHash) -&gt; OutputDatum::Hash
+</code></pre>
 <h3 id="new_inline"><a class="header" href="#new_inline"><code>new_inline</code></a></h3>
 <p>Construct a new <code>OutputDatum::Inline</code> instance from any value. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
 <pre><code class="language-helios">OutputDatum::new_inline(x: AnyType) -&gt; OutputDatum::Inline
@@ -1568,10 +1572,6 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="new_none"><a class="header" href="#new_none"><code>new_none</code></a></h3>
 <p>Construct a new <code>OutputDatum::None</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
 <pre><code class="language-helios">OutputDatum::new_none() -&gt; OutputDatum::None
-</code></pre>
-<h3 id="new_hashed"><a class="header" href="#new_hashed"><code>new_hashed</code></a></h3>
-<p>Construct a new <code>OutputDatum::Hash</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
-<pre><code class="language-helios">OutputDatum::new_hash(datum_hash: DatumHash) -&gt; OutputDatum::Hash
 </code></pre>
 <h2 id="getters-7"><a class="header" href="#getters-7">Getters</a></h2>
 <h3 id="outputdatumhash"><a class="header" href="#outputdatumhash"><code>OutputDatum::Hash</code></a></h3>
@@ -1724,7 +1724,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 <li><code>Ptr</code></li>
 </ul>
 <h2 id="associated-functions-16"><a class="header" href="#associated-functions-16">Associated functions</a></h2>
-<h3 id="new_hash"><a class="header" href="#new_hash"><code>new_hash</code></a></h3>
+<h3 id="new_hash-1"><a class="header" href="#new_hash-1"><code>new_hash</code></a></h3>
 <pre><code class="language-helios">StakingCredential::new_hash(credential: Credential) -&gt; StakingCredential::Hash
 </code></pre>
 <h3 id="new_ptr"><a class="header" href="#new_ptr"><code>new_ptr</code></a></h3>
