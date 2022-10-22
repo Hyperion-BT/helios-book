@@ -95,3 +95,5 @@ After the `main` function you can define functions and constants that can be use
 Some compiler restrictions are lifted in this part of the script:
   * not all names need to be used
   * structs can be empty
+
+Extra constructors, that aren't available in `main`, become available in this part of the script.

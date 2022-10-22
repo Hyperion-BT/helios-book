@@ -15,6 +15,30 @@ Represents that datum data of a [`TxOutput`](./txoutput.md) instance.
 OutputDatum::from_data(data: Data) -> OutputDatum
 ```
 
+### `new_inline`
+
+Construct a new `OutputDatum::Inline` instance from any value. **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+
+```helios
+OutputDatum::new_inline(x: AnyType) -> OutputDatum::Inline
+```
+
+### `new_none`
+
+Construct a new `OutputDatum::None` instance. **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+
+```helios
+OutputDatum::new_none() -> OutputDatum::None
+```
+
+### `new_hashed`
+
+Construct a new `OutputDatum::Hash` instance. **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+
+```helios
+OutputDatum::new_hash(datum_hash: DatumHash) -> OutputDatum::Hash
+```
+
 ## Getters
 
 ### `OutputDatum::Hash`
