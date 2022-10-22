@@ -28,7 +28,7 @@ OutputDatum::new_hash(datum_hash: DatumHash) -> OutputDatum::Hash
 Construct a new `OutputDatum::Inline` instance from any value. **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
 
 ```helios
-OutputDatum::new_inline(x: AnyType) -> OutputDatum::Inline
+OutputDatum::new_inline(any: AnyType) -> OutputDatum::Inline
 ```
 
 ### `new_none`
