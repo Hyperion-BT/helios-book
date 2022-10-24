@@ -2,7 +2,7 @@
 
 One of the 5 Plutus-Core builtin data classes. Parent class is `UplcData`.
 
-Represents a tag index and a list of data fields. Each field is a `UplcData` child instance,
+Represents a tag index and a list of data fields. Each field is a `UplcData` child instance.
 
 ## Constructor
 
@@ -53,7 +53,7 @@ constr_data.toCbor(): number[]
 
 ### `toSchemaJson`
 
-Returns the schame JSON needed to interact with external tools like *cardano-cli* and *Lucid*.
+Returns the schema JSON needed to interact with external tools like *cardano-cli* and *Lucid*.
 
 ```ts
 constr_data.toSchemaJson(): string

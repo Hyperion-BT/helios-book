@@ -26,24 +26,23 @@ Typescript annotations are used to document types.
   * [`CborData`](./cbordata.md)
   * [`ConstrData`](./constrdata.md)
   * [`Datum`](./datum.md)
+  * [`DatumHash`](./datumhash.md)
   * [`FuzzyTest`](./fuzzytest.md)
-  * `Hash`
-  * `HashedDatum`
-  * `InlineDatum`
-  * `IntData`
-  * `ListData`
-  * `MapData`
-  * `MintingPolicyHash`
-  * `NetworkParams`
-  * `PubKeyHash`
-  * `Program`
-  * `Signature`
-  * `Tx`
+  * [`IntData`](./intdata.md)
+  * [`ListData`](./listdata.md)
+  * [`MapData`](./mapdata.md)
+  * [`MintingPolicyHash`](./mintingpolicyhash.md)
+  * [`NetworkParams`](./networkparams.md)
+  * [`Program`](./program.md)
+  * [`PubKeyHash`](./pubkeyhash.md)
+  * [`Signature`](./signature.md)
+  * [`Tx`](./tx.md)
+  * `TxId`
   * `TxOutput`
   * `TxWitnesses`
   * `UplcDataValue`
   * `UplcProgram`
   * `UserError`
   * `UTxO`
-  * `ValidatorHash`
+  * [`ValidatorHash`](./validatorhash.md)
   * `Value`
