@@ -201,5 +201,5 @@ tx.value_locked_by(script_hash: ValidatorHash) -> Value
 Returns the output [`Value`](./value.md) being locked at the given script address with the given datum.
 
 ```helios
-tx.value_locked_by_datum(script_hash: ValidatorHash, datum: AnyType) -> Value
+tx.value_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -> Value
 ```
