@@ -153,7 +153,7 @@ tx.outputs_sent_to(pkh: PubKeyHash) -> []TxOutput
 Returns the [`TxOutput`](./txoutput.md)s sent to a regular payment address tagged with the given datum (datum tagging can be used to prevent double satisfaction exploits).
 
 ```helios
-tx.outputs_sent_to_datum(pkh: PubKeyHash, datum: AnyType) -> []TxOutput
+tx.outputs_sent_to_datum(pkh: PubKeyHash, datum: AnyType, isInline: Bool) -> []TxOutput
 ```
 
 ### `outputs_locked_by`
@@ -169,7 +169,7 @@ tx.outputs_locked_by(script_hash: ValidatorHash) -> []TxOutput
 Returns the [`TxOutput`](./txoutput.md)s being locked at the given script address with the given datum.
 
 ```helios
-tx.outputs_locked_by_datum(script_hash: ValidatorHash, datum: AnyType) -> []TxOutput
+tx.outputs_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -> []TxOutput
 ```
 
 ### `value_sent_to`
@@ -185,7 +185,7 @@ tx.value_sent_to(addr: PubKeyHash) -> Value
 Returns the output [`Value`](./value.md) sent to a regular payment address tagged with the given datum (datum tagging can be used to prevent double satisfaction exploits).
 
 ```helios
-tx.value_sent_to_datum(addr: PubKeyHash, datum: AnyType) -> Value
+tx.value_sent_to_datum(addr: PubKeyHash, datum: AnyType, isInline: Bool) -> Value
 ```
 
 ### `value_locked_by`
@@ -201,5 +201,5 @@ tx.value_locked_by(script_hash: ValidatorHash) -> Value
 Returns the output [`Value`](./value.md) being locked at the given script address with the given datum.
 
 ```helios
-tx.value_locked_by_datum(script_hash: ValidatorHash, datum: AnyType) -> Value
+tx.value_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -> Value
 ```
