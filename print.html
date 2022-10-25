@@ -1994,7 +1994,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="outputs_sent_to_datum"><a class="header" href="#outputs_sent_to_datum"><code>outputs_sent_to_datum</code></a></h3>
 <p>Returns the <a href="lang/builtins/./txoutput.html"><code>TxOutput</code></a>s sent to a regular payment address tagged with the given datum (datum tagging can be used to prevent double satisfaction exploits).</p>
-<pre><code class="language-helios">tx.outputs_sent_to_datum(pkh: PubKeyHash, datum: AnyType) -&gt; []TxOutput
+<pre><code class="language-helios">tx.outputs_sent_to_datum(pkh: PubKeyHash, datum: AnyType, isInline: Bool) -&gt; []TxOutput
 </code></pre>
 <h3 id="outputs_locked_by"><a class="header" href="#outputs_locked_by"><code>outputs_locked_by</code></a></h3>
 <p>Returns the <a href="lang/builtins/./txoutput.html"><code>TxOutput</code></a>s being locked at the given script address.</p>
@@ -2002,7 +2002,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="outputs_locked_by_datum"><a class="header" href="#outputs_locked_by_datum"><code>outputs_locked_by_datum</code></a></h3>
 <p>Returns the <a href="lang/builtins/./txoutput.html"><code>TxOutput</code></a>s being locked at the given script address with the given datum.</p>
-<pre><code class="language-helios">tx.outputs_locked_by_datum(script_hash: ValidatorHash, datum: AnyType) -&gt; []TxOutput
+<pre><code class="language-helios">tx.outputs_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -&gt; []TxOutput
 </code></pre>
 <h3 id="value_sent_to"><a class="header" href="#value_sent_to"><code>value_sent_to</code></a></h3>
 <p>Returns the output <a href="lang/builtins/./value.html"><code>Value</code></a> sent to a regular payment address.</p>
@@ -2010,7 +2010,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="value_sent_to_datum"><a class="header" href="#value_sent_to_datum"><code>value_sent_to_datum</code></a></h3>
 <p>Returns the output <a href="lang/builtins/./value.html"><code>Value</code></a> sent to a regular payment address tagged with the given datum (datum tagging can be used to prevent double satisfaction exploits).</p>
-<pre><code class="language-helios">tx.value_sent_to_datum(addr: PubKeyHash, datum: AnyType) -&gt; Value
+<pre><code class="language-helios">tx.value_sent_to_datum(addr: PubKeyHash, datum: AnyType, isInline: Bool) -&gt; Value
 </code></pre>
 <h3 id="value_locked_by"><a class="header" href="#value_locked_by"><code>value_locked_by</code></a></h3>
 <p>Returns the output <a href="lang/builtins/./value.html"><code>Value</code></a> being locked at the given script address.</p>
@@ -2018,7 +2018,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="value_locked_by_datum"><a class="header" href="#value_locked_by_datum"><code>value_locked_by_datum</code></a></h3>
 <p>Returns the output <a href="lang/builtins/./value.html"><code>Value</code></a> being locked at the given script address with the given datum.</p>
-<pre><code class="language-helios">tx.value_locked_by_datum(script_hash: ValidatorHash, datum: AnyType) -&gt; Value
+<pre><code class="language-helios">tx.value_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -&gt; Value
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="txid"><a class="header" href="#txid"><code>TxId</code></a></h1>
 <p>This is a type-safe wrapper around <code>ByteArray</code> representing the hash of a transaction.</p>
