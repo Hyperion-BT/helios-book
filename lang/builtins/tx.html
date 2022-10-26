@@ -144,6 +144,22 @@
 <h3 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h3>
 <pre><code class="language-helios">Tx::from_data(data: Data) -&gt; Tx
 </code></pre>
+<h3 id="new"><a class="header" href="#new"><code>new</code></a></h3>
+<p>Construct a <code>Tx</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<pre><code class="language-helios">Tx::new(
+    inputs:      []TxInput,
+    ref_inputs:  []TxInput,
+    outputs:     []TxOutput,
+    fee:         Value,
+    minted:      Value,
+    dcerts:      []DCert,
+    withdrawals: Map[StakingCredential]Int,
+    time_range:  TimeRange,
+    signatories: []PubKeyHash,
+    redeemers:   Map[ScriptPurpose]AnyType,
+    datums:      Map[DatumHash]AnyType
+) -&gt; Tx
+</code></pre>
 <h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
 <h3 id="inputs"><a class="header" href="#inputs"><code>inputs</code></a></h3>
 <p>Returns the list of <a href="./txinput.html"><code>TxInput</code></a>s of the transaction.</p>
@@ -217,7 +233,11 @@
 </code></pre>
 <h3 id="outputs_sent_to_datum"><a class="header" href="#outputs_sent_to_datum"><code>outputs_sent_to_datum</code></a></h3>
 <p>Returns the <a href="./txoutput.html"><code>TxOutput</code></a>s sent to a regular payment address tagged with the given datum (datum tagging can be used to prevent double satisfaction exploits).</p>
-<pre><code class="language-helios">tx.outputs_sent_to_datum(pkh: PubKeyHash, datum: AnyType, isInline: Bool) -&gt; []TxOutput
+<pre><code class="language-helios">tx.outputs_sent_to_datum(
+    pkh: PubKeyHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -&gt; []TxOutput
 </code></pre>
 <h3 id="outputs_locked_by"><a class="header" href="#outputs_locked_by"><code>outputs_locked_by</code></a></h3>
 <p>Returns the <a href="./txoutput.html"><code>TxOutput</code></a>s being locked at the given script address.</p>
@@ -225,7 +245,11 @@
 </code></pre>
 <h3 id="outputs_locked_by_datum"><a class="header" href="#outputs_locked_by_datum"><code>outputs_locked_by_datum</code></a></h3>
 <p>Returns the <a href="./txoutput.html"><code>TxOutput</code></a>s being locked at the given script address with the given datum.</p>
-<pre><code class="language-helios">tx.outputs_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -&gt; []TxOutput
+<pre><code class="language-helios">tx.outputs_locked_by_datum(
+    script_hash: ValidatorHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -&gt; []TxOutput
 </code></pre>
 <h3 id="value_sent_to"><a class="header" href="#value_sent_to"><code>value_sent_to</code></a></h3>
 <p>Returns the output <a href="./value.html"><code>Value</code></a> sent to a regular payment address.</p>
@@ -233,7 +257,11 @@
 </code></pre>
 <h3 id="value_sent_to_datum"><a class="header" href="#value_sent_to_datum"><code>value_sent_to_datum</code></a></h3>
 <p>Returns the output <a href="./value.html"><code>Value</code></a> sent to a regular payment address tagged with the given datum (datum tagging can be used to prevent double satisfaction exploits).</p>
-<pre><code class="language-helios">tx.value_sent_to_datum(addr: PubKeyHash, datum: AnyType, isInline: Bool) -&gt; Value
+<pre><code class="language-helios">tx.value_sent_to_datum(
+    addr: PubKeyHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -&gt; Value
 </code></pre>
 <h3 id="value_locked_by"><a class="header" href="#value_locked_by"><code>value_locked_by</code></a></h3>
 <p>Returns the output <a href="./value.html"><code>Value</code></a> being locked at the given script address.</p>
@@ -241,7 +269,11 @@
 </code></pre>
 <h3 id="value_locked_by_datum"><a class="header" href="#value_locked_by_datum"><code>value_locked_by_datum</code></a></h3>
 <p>Returns the output <a href="./value.html"><code>Value</code></a> being locked at the given script address with the given datum.</p>
-<pre><code class="language-helios">tx.value_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -&gt; Value
+<pre><code class="language-helios">tx.value_locked_by_datum(
+    script_hash: ValidatorHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -&gt; Value
 </code></pre>
 
                     </main>

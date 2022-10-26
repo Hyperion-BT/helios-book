@@ -145,6 +145,38 @@
 <h3 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h3>
 <pre><code class="language-helios">ScriptContext::from_data(data: Data) -&gt; ScriptContext
 </code></pre>
+<h3 id="new_certifying"><a class="header" href="#new_certifying"><code>new_certifying</code></a></h3>
+<p>Construct a <code>ScriptContext</code> instance with a <code>staking</code>/<code>certifying</code> <a href="./scriptpurpose.html"><code>ScriptPurpose</code></a>. <strong>Only available after <code>main</code></strong>, see <a href="../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Throws an error if the current script purpose isn't <code>staking</code> or <code>testing</code>.</p>
+<pre><code class="language-helios">ScriptContext::new_certifying(
+    tx:    Tx,
+    dcert: DCert
+) -&gt; ScriptContext
+</code></pre>
+<h3 id="new_minting"><a class="header" href="#new_minting"><code>new_minting</code></a></h3>
+<p>Construct a <code>ScriptContext</code> instance with a <code>minting</code> <a href="./scriptpurpose.html"><code>ScriptPurpose</code></a>. <strong>Only available after <code>main</code></strong>, see <a href="../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Throws an error if the current script purpose isn't <code>minting</code> or <code>testing</code>.</p>
+<pre><code class="language-helios">ScriptContext::new_minting(
+    tx:  Tx,
+    mph: MintingPolicyHash
+) -&gt; ScriptContext
+</code></pre>
+<h3 id="new_rewarding"><a class="header" href="#new_rewarding"><code>new_rewarding</code></a></h3>
+<p>Construct a <code>ScriptContext</code> instance with a <code>staking</code>/<code>rewarding</code> <a href="./scriptpurpose.html"><code>ScriptPurpose</code></a>. <strong>Only available after <code>main</code></strong>, see <a href="../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Throws an error if the current script purpose isn't <code>staking</code> or <code>testing</code>.</p>
+<pre><code class="language-helios">ScriptContext::new_rewarding(
+    tx: Tx,
+    sc: StakingCredential
+) -&gt; ScriptContext
+</code></pre>
+<h3 id="new_spending"><a class="header" href="#new_spending"><code>new_spending</code></a></h3>
+<p>Construct a <code>ScriptContext</code> instance with a <code>spending</code> <a href="./scriptpurpose.html"><code>ScriptPurpose</code></a>. <strong>Only available after <code>main</code></strong>, see <a href="../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Throws an error if the current script purpose isn't <code>spending</code> or <code>testing</code>.</p>
+<pre><code class="language-helios">ScriptContext::new_spending(
+    tx:        Tx,
+    output_id: TxOutputId
+) -&gt; ScriptContext
+</code></pre>
 <h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
 <h3 id="tx"><a class="header" href="#tx"><code>tx</code></a></h3>
 <p>Get the <a href="./tx.html"><code>Tx</code></a> data structure.</p>

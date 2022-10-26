@@ -141,7 +141,15 @@
                         <h1 id="txinput"><a class="header" href="#txinput"><code>TxInput</code></a></h1>
 <p>Represents a <strong>transaction input</strong>.</p>
 <h2 id="associated-functions"><a class="header" href="#associated-functions">Associated functions</a></h2>
-<pre><code class="language-helios">func from_data(data: Data) -&gt; TxInput
+<h3 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h3>
+<pre><code class="language-helios">TxInput::from_data(data: Data) -&gt; TxInput
+</code></pre>
+<h3 id="new"><a class="header" href="#new"><code>new</code></a></h3>
+<p>Construct a <code>TxInput</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<pre><code class="language-helios">TxInput::new(
+    output_id: TxOutputId,
+    output:    TxOutput
+) -&gt; TxInput
 </code></pre>
 <h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
 <h3 id="output_id"><a class="header" href="#output_id"><code>output_id</code></a></h3>

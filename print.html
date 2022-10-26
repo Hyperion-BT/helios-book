@@ -787,13 +787,34 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
 <p><strong>Note</strong>: The datum and the redeemer are user-defined types (structs or enums) that <strong>must</strong> be named <code>Datum</code> and <code>Redeemer</code>.</p>
 </blockquote>
 <h2 id="data-generators-and-test-functions-5"><a class="header" href="#data-generators-and-test-functions-5">Data generators and test functions (5)</a></h2>
-<p>After the <code>main</code> function you can define functions and constants that can be used to generate data structures (eg. datums or redeemers), or can be used to test the <code>main</code> function. The <a href="lang/../api/index.html">API</a> has special functions for working with these.</p>
+<p>After the <code>main</code> function you can define functions and constants for:</p>
+<ul>
+<li>generating data structures (eg. datums or redeemers)</li>
+<li>testing the <code>main</code> function</li>
+</ul>
+<p>The <a href="lang/../api/index.html">API</a> has special functionality for working with these:</p>
+<ul>
+<li><a href="lang/../api/reference/program.html#evalparam"><code>program.evalParam()</code></a> can evaluate any constant in a Helios source</li>
+<li><a href="lang/../api/reference/program.html#changeparam"><code>program.changeParam()</code></a> can change the rhs of any constant in a Helios source</li>
+</ul>
 <p>Some compiler restrictions are lifted in this part of the script:</p>
 <ul>
 <li>not all names need to be used</li>
 <li>structs can be empty</li>
 </ul>
-<p>Extra constructors, that aren't available in <code>main</code>, become available in this part of the script.</p>
+<p>Special constructors, that aren't available in <code>main</code>, become available in this part of the script:</p>
+<ul>
+<li><a href="lang/./builtins/outputdatum.html#new_hash"><code>OutputDatum::new_hash</code></a></li>
+<li><a href="lang/./builtins/outputdatum.html#new_inline"><code>OutputDatum::new_inline</code></a></li>
+<li><a href="lang/./builtins/outputdatum.html#new_none"><code>OutputDatum::new_none</code></a></li>
+<li><a href="lang/./builtins/scriptcontext.html#new_certifying"><code>ScriptContext::new_certifying</code></a></li>
+<li><a href="lang/./builtins/scriptcontext.html#new_minting"><code>ScriptContext::new_minting</code></a></li>
+<li><a href="lang/./builtins/scriptcontext.html#new_rewarding"><code>ScriptContext::new_rewarding</code></a></li>
+<li><a href="lang/./builtins/scriptcontext.html#new_spending"><code>ScriptContext::new_spending</code></a></li>
+<li><a href="lang/./builtins/tx.html#new"><code>Tx::new</code></a></li>
+<li><a href="lang/./builtins/txinput.html#new"><code>TxInput::new</code></a></li>
+<li><a href="lang/./builtins/txoutput.html#new"><code>TxOutput::new</code></a></li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><p>The following example is the most trivial possible script.</p>
 <h2 id="example-always_succeeds"><a class="header" href="#example-always_succeeds">Example: <code>always_succeeds</code></a></h2>
 <p>This basic script allows locked UTxOs to be spent any way the user wants:</p>
@@ -1629,6 +1650,38 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="from_data-16"><a class="header" href="#from_data-16"><code>from_data</code></a></h3>
 <pre><code class="language-helios">ScriptContext::from_data(data: Data) -&gt; ScriptContext
 </code></pre>
+<h3 id="new_certifying"><a class="header" href="#new_certifying"><code>new_certifying</code></a></h3>
+<p>Construct a <code>ScriptContext</code> instance with a <code>staking</code>/<code>certifying</code> <a href="lang/builtins/./scriptpurpose.html"><code>ScriptPurpose</code></a>. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Throws an error if the current script purpose isn't <code>staking</code> or <code>testing</code>.</p>
+<pre><code class="language-helios">ScriptContext::new_certifying(
+    tx:    Tx,
+    dcert: DCert
+) -&gt; ScriptContext
+</code></pre>
+<h3 id="new_minting"><a class="header" href="#new_minting"><code>new_minting</code></a></h3>
+<p>Construct a <code>ScriptContext</code> instance with a <code>minting</code> <a href="lang/builtins/./scriptpurpose.html"><code>ScriptPurpose</code></a>. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Throws an error if the current script purpose isn't <code>minting</code> or <code>testing</code>.</p>
+<pre><code class="language-helios">ScriptContext::new_minting(
+    tx:  Tx,
+    mph: MintingPolicyHash
+) -&gt; ScriptContext
+</code></pre>
+<h3 id="new_rewarding"><a class="header" href="#new_rewarding"><code>new_rewarding</code></a></h3>
+<p>Construct a <code>ScriptContext</code> instance with a <code>staking</code>/<code>rewarding</code> <a href="lang/builtins/./scriptpurpose.html"><code>ScriptPurpose</code></a>. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Throws an error if the current script purpose isn't <code>staking</code> or <code>testing</code>.</p>
+<pre><code class="language-helios">ScriptContext::new_rewarding(
+    tx: Tx,
+    sc: StakingCredential
+) -&gt; ScriptContext
+</code></pre>
+<h3 id="new_spending"><a class="header" href="#new_spending"><code>new_spending</code></a></h3>
+<p>Construct a <code>ScriptContext</code> instance with a <code>spending</code> <a href="lang/builtins/./scriptpurpose.html"><code>ScriptPurpose</code></a>. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Throws an error if the current script purpose isn't <code>spending</code> or <code>testing</code>.</p>
+<pre><code class="language-helios">ScriptContext::new_spending(
+    tx:        Tx,
+    output_id: TxOutputId
+) -&gt; ScriptContext
+</code></pre>
 <h2 id="getters-8"><a class="header" href="#getters-8">Getters</a></h2>
 <h3 id="tx"><a class="header" href="#tx"><code>tx</code></a></h3>
 <p>Get the <a href="lang/builtins/./tx.html"><code>Tx</code></a> data structure.</p>
@@ -1921,6 +1974,22 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="from_data-23"><a class="header" href="#from_data-23"><code>from_data</code></a></h3>
 <pre><code class="language-helios">Tx::from_data(data: Data) -&gt; Tx
 </code></pre>
+<h3 id="new-9"><a class="header" href="#new-9"><code>new</code></a></h3>
+<p>Construct a <code>Tx</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<pre><code class="language-helios">Tx::new(
+    inputs:      []TxInput,
+    ref_inputs:  []TxInput,
+    outputs:     []TxOutput,
+    fee:         Value,
+    minted:      Value,
+    dcerts:      []DCert,
+    withdrawals: Map[StakingCredential]Int,
+    time_range:  TimeRange,
+    signatories: []PubKeyHash,
+    redeemers:   Map[ScriptPurpose]AnyType,
+    datums:      Map[DatumHash]AnyType
+) -&gt; Tx
+</code></pre>
 <h2 id="getters-12"><a class="header" href="#getters-12">Getters</a></h2>
 <h3 id="inputs"><a class="header" href="#inputs"><code>inputs</code></a></h3>
 <p>Returns the list of <a href="lang/builtins/./txinput.html"><code>TxInput</code></a>s of the transaction.</p>
@@ -1994,7 +2063,11 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="outputs_sent_to_datum"><a class="header" href="#outputs_sent_to_datum"><code>outputs_sent_to_datum</code></a></h3>
 <p>Returns the <a href="lang/builtins/./txoutput.html"><code>TxOutput</code></a>s sent to a regular payment address tagged with the given datum (datum tagging can be used to prevent double satisfaction exploits).</p>
-<pre><code class="language-helios">tx.outputs_sent_to_datum(pkh: PubKeyHash, datum: AnyType, isInline: Bool) -&gt; []TxOutput
+<pre><code class="language-helios">tx.outputs_sent_to_datum(
+    pkh: PubKeyHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -&gt; []TxOutput
 </code></pre>
 <h3 id="outputs_locked_by"><a class="header" href="#outputs_locked_by"><code>outputs_locked_by</code></a></h3>
 <p>Returns the <a href="lang/builtins/./txoutput.html"><code>TxOutput</code></a>s being locked at the given script address.</p>
@@ -2002,7 +2075,11 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="outputs_locked_by_datum"><a class="header" href="#outputs_locked_by_datum"><code>outputs_locked_by_datum</code></a></h3>
 <p>Returns the <a href="lang/builtins/./txoutput.html"><code>TxOutput</code></a>s being locked at the given script address with the given datum.</p>
-<pre><code class="language-helios">tx.outputs_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -&gt; []TxOutput
+<pre><code class="language-helios">tx.outputs_locked_by_datum(
+    script_hash: ValidatorHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -&gt; []TxOutput
 </code></pre>
 <h3 id="value_sent_to"><a class="header" href="#value_sent_to"><code>value_sent_to</code></a></h3>
 <p>Returns the output <a href="lang/builtins/./value.html"><code>Value</code></a> sent to a regular payment address.</p>
@@ -2010,7 +2087,11 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="value_sent_to_datum"><a class="header" href="#value_sent_to_datum"><code>value_sent_to_datum</code></a></h3>
 <p>Returns the output <a href="lang/builtins/./value.html"><code>Value</code></a> sent to a regular payment address tagged with the given datum (datum tagging can be used to prevent double satisfaction exploits).</p>
-<pre><code class="language-helios">tx.value_sent_to_datum(addr: PubKeyHash, datum: AnyType, isInline: Bool) -&gt; Value
+<pre><code class="language-helios">tx.value_sent_to_datum(
+    addr: PubKeyHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -&gt; Value
 </code></pre>
 <h3 id="value_locked_by"><a class="header" href="#value_locked_by"><code>value_locked_by</code></a></h3>
 <p>Returns the output <a href="lang/builtins/./value.html"><code>Value</code></a> being locked at the given script address.</p>
@@ -2018,12 +2099,16 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="value_locked_by_datum"><a class="header" href="#value_locked_by_datum"><code>value_locked_by_datum</code></a></h3>
 <p>Returns the output <a href="lang/builtins/./value.html"><code>Value</code></a> being locked at the given script address with the given datum.</p>
-<pre><code class="language-helios">tx.value_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -&gt; Value
+<pre><code class="language-helios">tx.value_locked_by_datum(
+    script_hash: ValidatorHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -&gt; Value
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="txid"><a class="header" href="#txid"><code>TxId</code></a></h1>
 <p>This is a type-safe wrapper around <code>ByteArray</code> representing the hash of a transaction.</p>
 <h2 id="associated-functions-21"><a class="header" href="#associated-functions-21">Associated functions</a></h2>
-<h3 id="new-9"><a class="header" href="#new-9"><code>new</code></a></h3>
+<h3 id="new-10"><a class="header" href="#new-10"><code>new</code></a></h3>
 <pre><code class="language-helios">TxId::new(bytes: ByteArray) -&gt; TxId
 </code></pre>
 <h3 id="from_data-24"><a class="header" href="#from_data-24"><code>from_data</code></a></h3>
@@ -2043,7 +2128,15 @@ option_none: Option[Int] = Option[Int]::None; ...
 <div style="break-before: page; page-break-before: always;"></div><h1 id="txinput"><a class="header" href="#txinput"><code>TxInput</code></a></h1>
 <p>Represents a <strong>transaction input</strong>.</p>
 <h2 id="associated-functions-22"><a class="header" href="#associated-functions-22">Associated functions</a></h2>
-<pre><code class="language-helios">func from_data(data: Data) -&gt; TxInput
+<h3 id="from_data-25"><a class="header" href="#from_data-25"><code>from_data</code></a></h3>
+<pre><code class="language-helios">TxInput::from_data(data: Data) -&gt; TxInput
+</code></pre>
+<h3 id="new-11"><a class="header" href="#new-11"><code>new</code></a></h3>
+<p>Construct a <code>TxInput</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<pre><code class="language-helios">TxInput::new(
+    output_id: TxOutputId,
+    output:    TxOutput
+) -&gt; TxInput
 </code></pre>
 <h2 id="getters-13"><a class="header" href="#getters-13">Getters</a></h2>
 <h3 id="output_id-1"><a class="header" href="#output_id-1"><code>output_id</code></a></h3>
@@ -2068,8 +2161,16 @@ option_none: Option[Int] = Option[Int]::None; ...
 <div style="break-before: page; page-break-before: always;"></div><h1 id="txoutput"><a class="header" href="#txoutput"><code>TxOutput</code></a></h1>
 <p>Represents a <strong>transaction output</strong>.</p>
 <h2 id="associated-functions-23"><a class="header" href="#associated-functions-23">Associated functions</a></h2>
-<h3 id="from_data-25"><a class="header" href="#from_data-25"><code>from_data</code></a></h3>
+<h3 id="from_data-26"><a class="header" href="#from_data-26"><code>from_data</code></a></h3>
 <pre><code class="language-helios">TxOutput::from_data(data: Data) -&gt; TxOutput
+</code></pre>
+<h3 id="new-12"><a class="header" href="#new-12"><code>new</code></a></h3>
+<p>Construct a <code>TxOutput</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<pre><code class="language-helios">TxOutput::new(
+    address: Address,
+    value:   Value,
+    datum:   OutputDatum
+) -&gt; TxOutput
 </code></pre>
 <h2 id="getters-14"><a class="header" href="#getters-14">Getters</a></h2>
 <h3 id="address-2"><a class="header" href="#address-2"><code>address</code></a></h3>
@@ -2098,10 +2199,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <div style="break-before: page; page-break-before: always;"></div><h1 id="txoutputid"><a class="header" href="#txoutputid"><code>TxOutputId</code></a></h1>
 <p>Represents the unique ID of a UTxO. It's composed of the <strong>transaction ID</strong> (<a href="lang/builtins/./txid.html"><code>TxId</code></a>) of the transaction that created that UTxO, and of the index (<a href="lang/builtins/./int.html"><code>Int</code></a>) of that UTxO in the outputs of that transaction.</p>
 <h2 id="associated-functions-24"><a class="header" href="#associated-functions-24">Associated functions</a></h2>
-<h3 id="new-10"><a class="header" href="#new-10"><code>new</code></a></h3>
+<h3 id="new-13"><a class="header" href="#new-13"><code>new</code></a></h3>
 <pre><code class="language-helios">TxOutputId::new(tx_id: TxId, index: Int) -&gt; TxOutputId
 </code></pre>
-<h3 id="from_data-26"><a class="header" href="#from_data-26"><code>from_data</code></a></h3>
+<h3 id="from_data-27"><a class="header" href="#from_data-27"><code>from_data</code></a></h3>
 <pre><code class="language-helios">TxOutputId::from_data(data: Data) -&gt; TxOutputId
 </code></pre>
 <h2 id="operators-28"><a class="header" href="#operators-28">Operators</a></h2>
@@ -2119,10 +2220,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <p>This is a type-safe wrapper around <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a> that represents the hash of a validator script.</p>
 <p>The first part of a script address is formed by a <code>ValidatorHash</code>.</p>
 <h2 id="associated-functions-25"><a class="header" href="#associated-functions-25">Associated functions</a></h2>
-<h3 id="new-11"><a class="header" href="#new-11"><code>new</code></a></h3>
+<h3 id="new-14"><a class="header" href="#new-14"><code>new</code></a></h3>
 <pre><code class="language-helios">ValidatorHash::new(bytes: ByteArray) -&gt; ValidatorHash
 </code></pre>
-<h3 id="from_data-27"><a class="header" href="#from_data-27"><code>from_data</code></a></h3>
+<h3 id="from_data-28"><a class="header" href="#from_data-28"><code>from_data</code></a></h3>
 <pre><code class="language-helios">ValidatorHash::from_data(data: Data) -&gt; ValidatorHash
 </code></pre>
 <h2 id="operators-29"><a class="header" href="#operators-29">Operators</a></h2>
@@ -2157,11 +2258,11 @@ option_none: Option[Int] = Option[Int]::None; ...
 <p>Returns a <code>Value</code> containing only lovelace.</p>
 <pre><code class="language-helios">Value::lovelace(amount: Int) -&gt; Value
 </code></pre>
-<h3 id="new-12"><a class="header" href="#new-12"><code>new</code></a></h3>
+<h3 id="new-15"><a class="header" href="#new-15"><code>new</code></a></h3>
 <p>Returns a <code>Value</code> containing an amount of a given <a href="lang/builtins/./assetclass.html"><code>AssetClass</code></a>.</p>
 <pre><code class="language-helios">Value::new(asset_class: AssetClass, amount: Int) -&gt; Value
 </code></pre>
-<h3 id="from_data-28"><a class="header" href="#from_data-28"><code>from_data</code></a></h3>
+<h3 id="from_data-29"><a class="header" href="#from_data-29"><code>from_data</code></a></h3>
 <pre><code class="language-helios">Value::from_data(data: Data) -&gt; Value
 </code></pre>
 <h3 id="from_map"><a class="header" href="#from_map"><code>from_map</code></a></h3>
