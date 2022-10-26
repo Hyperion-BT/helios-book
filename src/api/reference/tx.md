@@ -22,6 +22,16 @@ helios.Tx.fromCbor(bytes: number[]): helios.Tx
 
 ## Methods
 
+### `addCollateral`
+
+Add a [`TxInput`](./txinput.md) instance that will serve as collateral. Usually adding only one collateral input is enough. The number of collateral inputs must be greater than 0 if script witnesses are used in the transaction, and must be less than the limit defined in the [`NetworkParams`](./networkparams.md).
+
+Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
+
+```ts
+tx.addCollateral(input: helios.TxInput): helios.Tx
+```
+
 ### `addInput`
 
 Add a [`TxInput`](./txinput.md) instance to the transaction being built. Throws an error if the input is locked at a script address but a redeemer isn't specified.
@@ -88,38 +98,6 @@ Mutates the transaction. Only available when building the transaction. Returns t
 tx.addRefInputs(inputs: helios.TxInput[]): helios.Tx
 ```
 
-### `addSigner`
-
-Add a signatory [`PubKeyHash`](./pubkeyhash.md) to the transaction being built. The added entry becomes available in the [`tx.signatories`](../../lang/builtins/tx.md#signatories) field in the Helios script.
-
-Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
-
-```ts
-tx.addSigner(hash: helios.PubKeyHash): helios.Tx
-```
-
-### `attachScript`
-
-Attach a script witness to the transaction being built. The script witness is a [`UplcProgram`](./uplcprogram.md) instance and can be created by compiling a Helios [`Program`](./program.md).
-
-Throws an error if script has already been added. Throws an error if the script isn't used upon finalization.
-
-Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
-
-```ts
-tx.attachScript(script: helios.UplcProgram): helios.Tx
-```
-
-### `addCollateral`
-
-Add a [`TxInput`](./txinput.md) instance that will serve as collateral. Usually adding only one collateral input is enough. The number of collateral inputs must be greater than 0 if script witnesses are used in the transaction, and must be less than the limit defined in the [`NetworkParams`](./networkparams.md).
-
-Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
-
-```ts
-tx.addCollateral(input: helios.TxInput): helios.Tx
-```
-
 ### `addSignature`
 
 Add a signature created by a wallet. Only available after the transaction has been finalized. Optionally verify that the signature is correct.
@@ -140,6 +118,28 @@ tx.addSignatures(
     signatures: helios.Signature[],
     verify: boolean = true
 ): helios.Tx
+```
+
+### `addSigner`
+
+Add a signatory [`PubKeyHash`](./pubkeyhash.md) to the transaction being built. The added entry becomes available in the [`tx.signatories`](../../lang/builtins/tx.md#signatories) field in the Helios script.
+
+Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
+
+```ts
+tx.addSigner(hash: helios.PubKeyHash): helios.Tx
+```
+
+### `attachScript`
+
+Attach a script witness to the transaction being built. The script witness is a [`UplcProgram`](./uplcprogram.md) instance and can be created by compiling a Helios [`Program`](./program.md).
+
+Throws an error if script has already been added. Throws an error if the script isn't used upon finalization.
+
+Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
+
+```ts
+tx.attachScript(script: helios.UplcProgram): helios.Tx
 ```
 
 ### `finalize`

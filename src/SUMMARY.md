@@ -92,6 +92,7 @@
     - [Program](./api/reference/program.md)
     - [PubKeyHash](./api/reference/pubkeyhash.md)
     - [Signature](./api/reference/signature.md)
+    - [Tx](./api/reference/tx.md)
     - [ValidatorHash](./api/reference/validatorhash.md)
 
 - [Helios CLI](./cli/index.md)
