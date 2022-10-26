@@ -90,10 +90,26 @@ Most of the data needed for writing useful validators is contained in the [`Scri
 
 ## Data generators and test functions (5)
 
-After the `main` function you can define functions and constants that can be used to generate data structures (eg. datums or redeemers), or can be used to test the `main` function. The [API](../api/index.md) has special functions for working with these.
+After the `main` function you can define functions and constants for:
+* generating data structures (eg. datums or redeemers)
+* testing the `main` function
+
+The [API](../api/index.md) has special functionality for working with these:
+* [`program.evalParam()`](../api/reference/program.md#evalparam) can evaluate any constant in a Helios source
+* [`program.changeParam()`](../api/reference/program.md#changeparam) can change the rhs of any constant in a Helios source
 
 Some compiler restrictions are lifted in this part of the script:
   * not all names need to be used
   * structs can be empty
 
-Extra constructors, that aren't available in `main`, become available in this part of the script.
+Special constructors, that aren't available in `main`, become available in this part of the script:
+* [`OutputDatum::new_hash`](./builtins/outputdatum.md#new_hash)
+* [`OutputDatum::new_inline`](./builtins/outputdatum.md#new_inline)
+* [`OutputDatum::new_none`](./builtins/outputdatum.md#new_none)
+* [`ScriptContext::new_certifying`](./builtins/scriptcontext.md#new_certifying)
+* [`ScriptContext::new_minting`](./builtins/scriptcontext.md#new_minting)
+* [`ScriptContext::new_rewarding`](./builtins/scriptcontext.md#new_rewarding)
+* [`ScriptContext::new_spending`](./builtins/scriptcontext.md#new_spending)
+* [`Tx::new`](./builtins/tx.md#new)
+* [`TxInput::new`](./builtins/txinput.md#new)
+* [`TxOutput::new`](./builtins/txoutput.md#new)

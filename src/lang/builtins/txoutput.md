@@ -10,6 +10,18 @@ Represents a **transaction output**.
 TxOutput::from_data(data: Data) -> TxOutput
 ```
 
+### `new`
+
+Construct a `TxOutput` instance. **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+
+```helios
+TxOutput::new(
+    address: Address,
+    value:   Value,
+    datum:   OutputDatum
+) -> TxOutput
+```
+
 ## Getters
 
 ### `address`

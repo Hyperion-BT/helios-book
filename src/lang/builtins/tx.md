@@ -10,6 +10,26 @@ Represents a balanced transaction.
 Tx::from_data(data: Data) -> Tx
 ```
 
+### `new`
+
+Construct a `Tx` instance. **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+
+```helios
+Tx::new(
+    inputs:      []TxInput,
+    ref_inputs:  []TxInput,
+    outputs:     []TxOutput,
+    fee:         Value,
+    minted:      Value,
+    dcerts:      []DCert,
+    withdrawals: Map[StakingCredential]Int,
+    time_range:  TimeRange,
+    signatories: []PubKeyHash,
+    redeemers:   Map[ScriptPurpose]AnyType,
+    datums:      Map[DatumHash]AnyType
+) -> Tx
+```
+
 ## Getters
 
 ### `inputs`
@@ -153,7 +173,11 @@ tx.outputs_sent_to(pkh: PubKeyHash) -> []TxOutput
 Returns the [`TxOutput`](./txoutput.md)s sent to a regular payment address tagged with the given datum (datum tagging can be used to prevent double satisfaction exploits).
 
 ```helios
-tx.outputs_sent_to_datum(pkh: PubKeyHash, datum: AnyType, isInline: Bool) -> []TxOutput
+tx.outputs_sent_to_datum(
+    pkh: PubKeyHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -> []TxOutput
 ```
 
 ### `outputs_locked_by`
@@ -169,7 +193,11 @@ tx.outputs_locked_by(script_hash: ValidatorHash) -> []TxOutput
 Returns the [`TxOutput`](./txoutput.md)s being locked at the given script address with the given datum.
 
 ```helios
-tx.outputs_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -> []TxOutput
+tx.outputs_locked_by_datum(
+    script_hash: ValidatorHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -> []TxOutput
 ```
 
 ### `value_sent_to`
@@ -185,7 +213,11 @@ tx.value_sent_to(addr: PubKeyHash) -> Value
 Returns the output [`Value`](./value.md) sent to a regular payment address tagged with the given datum (datum tagging can be used to prevent double satisfaction exploits).
 
 ```helios
-tx.value_sent_to_datum(addr: PubKeyHash, datum: AnyType, isInline: Bool) -> Value
+tx.value_sent_to_datum(
+    addr: PubKeyHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -> Value
 ```
 
 ### `value_locked_by`
@@ -201,5 +233,9 @@ tx.value_locked_by(script_hash: ValidatorHash) -> Value
 Returns the output [`Value`](./value.md) being locked at the given script address with the given datum.
 
 ```helios
-tx.value_locked_by_datum(script_hash: ValidatorHash, datum: AnyType, isInline: Bool) -> Value
+tx.value_locked_by_datum(
+    script_hash: ValidatorHash, 
+    datum: AnyType, 
+    is_inline: Bool
+) -> Value
 ```
