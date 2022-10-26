@@ -24,7 +24,7 @@ helios.Tx.fromCbor(bytes: number[]): helios.Tx
 
 ### `addCollateral`
 
-Add a [`TxInput`](./txinput.md) instance that will serve as collateral. Usually adding only one collateral input is enough. The number of collateral inputs must be greater than 0 if script witnesses are used in the transaction, and must be less than the limit defined in the [`NetworkParams`](./networkparams.md).
+Add a [`UTxO`](./utxo.md) instance as collateral to the transaction being built. Usually adding only one collateral input is enough. The number of collateral inputs must be greater than 0 if script witnesses are used in the transaction, and must be less than the limit defined in the [`NetworkParams`](./networkparams.md).
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
@@ -34,33 +34,33 @@ tx.addCollateral(input: helios.TxInput): helios.Tx
 
 ### `addInput`
 
-Add a [`TxInput`](./txinput.md) instance to the transaction being built. Throws an error if the input is locked at a script address but a redeemer isn't specified.
+Add a [`UTxO`](./utxo.md) instance as an input to the transaction being built. Throws an error if the UTxO is locked at a script address but a redeemer isn't specified.
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
 ```ts
 tx.addInput(
-    input: helios.TxInput,
+    input: helios.UTxO,
     redeemer: ?(helios.UplcData | helios.UplcDataValue) = null
 ): helios.Tx
 ```
 
 ### `addInputs`
 
-Add multiple [`TxInput`](./txinput.md) instances at once. Throws an error if the input are locked at a script address but a redeemer isn't specified.
+Add multiple [`UTxO`](./utxo.md) instances as inputs to the transaction being built. Throws an error if the UTxOs are locked at a script address but a redeemer isn't specified.
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
 ```ts
 tx.addInputs(
-    inputs: helios.TxInput[],
+    inputs: helios.UTxO[],
     redeemer: ?(helios.UplcData | helios.UplcDataValue) = null
 ): helios.Tx
 ```
 
 ### `addOutput`
 
-Add a [`TxOutput`](./txinput.md) instance to the transaction being built.
+Add a [`TxOutput`](./txoutput.md) instance to the transaction being built.
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
@@ -80,22 +80,22 @@ tx.addOutputs(outputs: helios.TxOutput[]): helios.Tx
 
 ### `addRefInput`
 
-Add a reference [`TxInput`](./txinput.md) instance to the transaction being built. 
+Add a [`UTxO`](./utxo.md) instance as a reference input to the transaction being built. 
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
 ```ts
-tx.addRefInput(input: helios.TxInput): helios.Tx
+tx.addRefInput(input: helios.UTxO): helios.Tx
 ```
 
 ### `addRefInputs`
 
-Add multiple reference [`TxInput`](./txinput.md) instances at once.
+Add multiple [`UTxO`](./utxo.md) instances as reference inputs to the transaction being built.
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
 ```ts
-tx.addRefInputs(inputs: helios.TxInput[]): helios.Tx
+tx.addRefInputs(inputs: helios.UTxO[]): helios.Tx
 ```
 
 ### `addSignature`
