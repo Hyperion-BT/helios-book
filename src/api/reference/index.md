@@ -40,9 +40,10 @@ Typescript annotations are used to document types.
   * `TxId`
   * `TxOutput`
   * `TxWitnesses`
+  * `UplcData`
   * `UplcDataValue`
   * `UplcProgram`
   * `UserError`
-  * `UTxO`
+  * [`UTxO`](./utxo.md)
   * [`ValidatorHash`](./validatorhash.md)
   * `Value`
