@@ -93,6 +93,7 @@
     - [PubKeyHash](./api/reference/pubkeyhash.md)
     - [Signature](./api/reference/signature.md)
     - [Tx](./api/reference/tx.md)
+    - [UTxO](./api/reference/utxo.md)
     - [ValidatorHash](./api/reference/validatorhash.md)
 
 - [Helios CLI](./cli/index.md)
