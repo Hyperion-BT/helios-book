@@ -75,8 +75,8 @@ $ nodejs
 struct Datum {lockUntil...
 
 const MY_DATUM = Datum{
-  lockUntil: Time(${(new Date()).getTime() + 1000*60*5}), 
-  owner: PubKeyHash(#1d22b9ff5fc...), 
+  lockUntil: Time::new(${(new Date()).getTime() + 1000*60*5}), 
+  owner: PubKeyHash::new(#1d22b9ff5fc...), 
   nonce: 42
 }`;
 
