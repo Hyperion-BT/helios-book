@@ -10,7 +10,7 @@ Inside a function body, values can be bound to names using assignment expression
 my_number: Int = 42; ...
 ```
 
-Here `my_number` has value `42` and has type [`Int`](./builtins/int.md). `my_number` cannot be mutated after its definition.
+Here `my_number` has value `42`, and has type [`Int`](./builtins/int.md). `my_number` cannot be mutated after its definition.
 
 Assignment expressions must be followed by another expression, separated by a semicolon (`;`). The assignment expression above should be seen as syntactic sugar for the following anonymous function call: `((my_number: Int) -> {...})(42)`.
 
