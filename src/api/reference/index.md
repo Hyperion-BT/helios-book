@@ -37,13 +37,14 @@ Typescript annotations are used to document types.
   * [`PubKeyHash`](./pubkeyhash.md)
   * [`Signature`](./signature.md)
   * [`Tx`](./tx.md)
-  * `TxId`
-  * `TxOutput`
-  * `TxWitnesses`
-  * `UplcData`
-  * `UplcDataValue`
-  * `UplcProgram`
-  * `UserError`
+  * [`TxId`](./txid.md)
+  * [`TxOutput`](./txoutput.md)
+  * [`TxWitnesses`](./txwitnesses.md)
+  * [`UplcData`](./uplcdata.md)
+  * [`UplcDataValue`](./uplcdatavalue.md)
+  * [`UplcProgram`](./uplcprogram.md)
+  * [`UplcValue`](./uplcvalue.md)
+  * [`UserError`](./usererror.md)
   * [`UTxO`](./utxo.md)
   * [`ValidatorHash`](./validatorhash.md)
-  * `Value`
+  * [`Value`](./value.md)

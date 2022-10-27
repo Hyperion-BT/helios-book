@@ -1,6 +1,6 @@
 # `ByteArrayData`
 
-One of Plutus-Core's 5 builtin data types, representing a list of bytes.
+One of Plutus-Core's 5 builtin data types, representing a list of bytes. Parent class is [`UplcData`](./uplcdata.md).
 
 ## Constructor
 

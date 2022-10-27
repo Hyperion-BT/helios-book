@@ -1,8 +1,8 @@
 # `MapData`
 
-One of the 5 Plutus-Core builtin data classes. Parent class is `UplcData`.
+One of the 5 Plutus-Core builtin data classes. Parent class is [`UplcData`](./uplcdata.md).
 
-Represents a list of pairs of other `UplcData` instances.
+Represents a list of pairs of other [`UplcData`](./uplcdata.md) instances.
 
 ## Constructor
 

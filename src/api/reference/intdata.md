@@ -1,6 +1,6 @@
 # `IntData`
 
-One of the 5 Plutus-Core builtin data classes. Parent class is `UplcData`.
+One of the 5 Plutus-Core builtin data classes. Parent class is [`UplcData`](./uplcdata.md).
 
 Represents an unbounded integer (bigint).
 

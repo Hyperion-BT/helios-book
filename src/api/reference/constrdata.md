@@ -1,8 +1,8 @@
 # `ConstrData`
 
-One of the 5 Plutus-Core builtin data classes. Parent class is `UplcData`.
+One of the 5 Plutus-Core builtin data classes. Parent class is [`UplcData`](./uplcdata.md).
 
-Represents a tag index and a list of data fields. Each field is a `UplcData` child instance.
+Represents a tag index and a list of data fields. Each field is also a [`UplcData`](./uplcdata.md) child instance.
 
 ## Constructor
 
