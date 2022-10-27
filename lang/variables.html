@@ -144,7 +144,7 @@
 <p>Inside a function body, values can be bound to names using assignment expressions:</p>
 <pre><code class="language-helios">my_number: Int = 42; ...
 </code></pre>
-<p>Here <code>my_number</code> has value <code>42</code> and has type <a href="./builtins/int.html"><code>Int</code></a>. <code>my_number</code> cannot be mutated after its definition.</p>
+<p>Here <code>my_number</code> has value <code>42</code>, and has type <a href="./builtins/int.html"><code>Int</code></a>. <code>my_number</code> cannot be mutated after its definition.</p>
 <p>Assignment expressions must be followed by another expression, separated by a semicolon (<code>;</code>). The assignment expression above should be seen as syntactic sugar for the following anonymous function call: <code>((my_number: Int) -&gt; {...})(42)</code>.</p>
 <blockquote>
 <p><strong>Note</strong>: <a href="./builtins/int.html"><code>Int</code></a> is Helios' only number type, and represents an unbounded integer.</p>
