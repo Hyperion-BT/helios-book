@@ -137,6 +137,14 @@ Returns the first item in the list that satisfies the predicate. Throws an error
 list.find(predicate: (ItemType) -> Bool) -> ItemType
 ```
 
+### `find_safe`
+
+Returns the first item in the list that satisfies the predicate, wrapped in an [`Option`](./option.md). Returns a `Option[ItemType]::None` if no items match the predicate.
+
+```helios
+list.find_safe(predicate: (ItemType) -> Bool) -> Option[ItemType]
+```
+
 ### `filter`
 
 Returns a list of all the items in the old list that satisfy the predicate.
