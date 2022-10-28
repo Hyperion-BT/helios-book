@@ -1737,6 +1737,18 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="from_data-17"><a class="header" href="#from_data-17"><code>from_data</code></a></h3>
 <pre><code class="language-helios">ScriptPurpose::from_data(data: Data) -&gt; ScriptPurpose
 </code></pre>
+<h3 id="new_minting-1"><a class="header" href="#new_minting-1"><code>new_minting</code></a></h3>
+<pre><code class="language-helios">ScriptPurpose::new_minting(mph: MintingPolicyHash) -&gt; ScriptPurpose::Minting
+</code></pre>
+<h3 id="new_spending-1"><a class="header" href="#new_spending-1"><code>new_spending</code></a></h3>
+<pre><code class="language-helios">ScriptPurpose::new_spending(output_id: TxOutputId) -&gt; ScriptPurpose::Spending
+</code></pre>
+<h3 id="new_rewarding-1"><a class="header" href="#new_rewarding-1"><code>new_rewarding</code></a></h3>
+<pre><code class="language-helios">ScriptPurpose::new_rewarding(staking_credential: StakingCredential) -&gt; ScriptPurpose::Rewarding
+</code></pre>
+<h3 id="new_certifying-1"><a class="header" href="#new_certifying-1"><code>new_certifying</code></a></h3>
+<pre><code class="language-helios">ScriptPurpose::new_certifying(dcert: DCert) -&gt; ScriptPurpose::Certifying
+</code></pre>
 <h2 id="getters-9"><a class="header" href="#getters-9">Getters</a></h2>
 <h3 id="scriptpurposeminting"><a class="header" href="#scriptpurposeminting"><code>ScriptPurpose::Minting</code></a></h3>
 <h4 id="policy_hash"><a class="header" href="#policy_hash"><code>policy_hash</code></a></h4>
