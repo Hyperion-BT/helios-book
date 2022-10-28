@@ -16,6 +16,30 @@ Each redemption in a transaction has a `ScriptPurpose` with the following 4 vari
 ScriptPurpose::from_data(data: Data) -> ScriptPurpose
 ```
 
+### `new_minting`
+
+```helios
+ScriptPurpose::new_minting(mph: MintingPolicyHash) -> ScriptPurpose::Minting
+```
+
+### `new_spending`
+
+```helios
+ScriptPurpose::new_spending(output_id: TxOutputId) -> ScriptPurpose::Spending
+```
+
+### `new_rewarding`
+
+```helios
+ScriptPurpose::new_rewarding(staking_credential: StakingCredential) -> ScriptPurpose::Rewarding
+```
+
+### `new_certifying`
+
+```helios
+ScriptPurpose::new_certifying(dcert: DCert) -> ScriptPurpose::Certifying
+```
+
 ## Getters
 
 ### `ScriptPurpose::Minting`
