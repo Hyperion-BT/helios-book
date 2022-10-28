@@ -1389,6 +1389,10 @@ validator_credential.hash -&gt; ValidatorHash
 <p>Returns the first item in the list that satisfies the predicate. Throws an error if no item satisfies the predicate.</p>
 <pre><code class="language-helios">list.find(predicate: (ItemType) -&gt; Bool) -&gt; ItemType
 </code></pre>
+<h3 id="find_safe"><a class="header" href="#find_safe"><code>find_safe</code></a></h3>
+<p>Returns the first item in the list that satisfies the predicate, wrapped in an <a href="lang/builtins/./option.html"><code>Option</code></a>. Returns a <code>Option[ItemType]::None</code> if no items match the predicate.</p>
+<pre><code class="language-helios">list.find_safe(predicate: (ItemType) -&gt; Bool) -&gt; Option[ItemType]
+</code></pre>
 <h3 id="filter"><a class="header" href="#filter"><code>filter</code></a></h3>
 <p>Returns a list of all the items in the old list that satisfy the predicate.</p>
 <pre><code class="language-helios">list.filter(predicate: (ItemType) -&gt; Bool) -&gt; []ItemType
