@@ -80,22 +80,22 @@ tx.addOutputs(outputs: helios.TxOutput[]): helios.Tx
 
 ### `addRefInput`
 
-Add a [`UTxO`](./utxo.md) instance as a reference input to the transaction being built. 
+Add a [`TxRefInput`](./txrefinput.md) instance as a reference input to the transaction being built. 
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
 ```ts
-tx.addRefInput(input: helios.UTxO): helios.Tx
+tx.addRefInput(input: helios.TxRefInput): helios.Tx
 ```
 
 ### `addRefInputs`
 
-Add multiple [`UTxO`](./utxo.md) instances as reference inputs to the transaction being built.
+Add multiple [`TxRefInput`](./txrefinput.md) instances as reference inputs to the transaction being built.
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
 ```ts
-tx.addRefInputs(inputs: helios.UTxO[]): helios.Tx
+tx.addRefInputs(inputs: helios.TxRefInput[]): helios.Tx
 ```
 
 ### `addSignature`

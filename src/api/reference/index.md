@@ -39,6 +39,7 @@ Typescript annotations are used to document types.
   * [`Tx`](./tx.md)
   * [`TxId`](./txid.md)
   * [`TxOutput`](./txoutput.md)
+  * [`TxRefInput`](./txrefinput.md)
   * [`TxWitnesses`](./txwitnesses.md)
   * [`UplcData`](./uplcdata.md)
   * [`UplcDataValue`](./uplcdatavalue.md)

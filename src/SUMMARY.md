@@ -95,6 +95,7 @@
     - [Tx](./api/reference/tx.md)
     - [TxId](./api/reference/txid.md)
     - [TxOutput](./api/reference/txoutput.md)
+    - [TxRefInput](./api/reference/txrefinput.md)
     - [TxWitnesses](./api/reference/txwitnesses.md)
     - [UplcData](./api/reference/uplcdata.md)
     - [UplcDataValue](./api/reference/uplcdatavalue.md)
