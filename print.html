@@ -3540,9 +3540,12 @@ const networkParams = new helios.NetworkParams(
 <pre><code class="language-ts">tx.addOutputs(outputs: helios.TxOutput[]): helios.Tx
 </code></pre>
 <h3 id="addrefinput"><a class="header" href="#addrefinput"><code>addRefInput</code></a></h3>
-<p>Add a <a href="api/reference/./txrefinput.html"><code>TxRefInput</code></a> instance as a reference input to the transaction being built. </p>
+<p>Add a <a href="api/reference/./txrefinput.html"><code>TxRefInput</code></a> instance as a reference input to the transaction being built. An associated reference script, as a <a href="api/reference/./uplcprogram.html"><code>UplcProgram</code></a> instance, must also be included in the transaction at this point (so the that the execution budget can be calculated correctly).</p>
 <p>Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.</p>
-<pre><code class="language-ts">tx.addRefInput(input: helios.TxRefInput): helios.Tx
+<pre><code class="language-ts">tx.addRefInput(
+    input: helios.TxRefInput
+    refScript: ?helios.UplcProgram = null
+): helios.Tx
 </code></pre>
 <h3 id="addrefinputs"><a class="header" href="#addrefinputs"><code>addRefInputs</code></a></h3>
 <p>Add multiple <a href="api/reference/./txrefinput.html"><code>TxRefInput</code></a> instances as reference inputs to the transaction being built.</p>
