@@ -3633,12 +3633,12 @@ const networkParams = new helios.NetworkParams(
 <div style="break-before: page; page-break-before: always;"></div><h1 id="txoutput-1"><a class="header" href="#txoutput-1"><code>TxOutput</code></a></h1>
 <p>Represents a transaction output that is used when <a href="api/reference/./tx.html#addoutput">building a transaction</a>.</p>
 <h2 id="constructor-12"><a class="header" href="#constructor-12">Constructor</a></h2>
-<p>Constructs a <code>TxOutput</code> instance using an <a href="api/reference/./address.html"><code>Address</code></a>, a <a href="api/reference/./value.html"><code>Value</code></a>, an optional <a href="api/reference/./datum.html"><code>Datum</code></a>, and optional reference script bytes.</p>
+<p>Constructs a <code>TxOutput</code> instance using an <a href="api/reference/./address.html"><code>Address</code></a>, a <a href="api/reference/./value.html"><code>Value</code></a>, an optional <a href="api/reference/./datum.html"><code>Datum</code></a>, and optional <a href="api/reference/./uplcprogram.html"><code>UplcProgram</code></a> reference script.</p>
 <pre><code class="language-ts">new helios.TxOutput(
     address:   helios.Address,
     value:     helios.Value,
     datum:     ?helios.Datum = null,
-    refScript: ?number[]     = null
+    refScript: ?helios.UplcProgram = null
 )
 </code></pre>
 <h2 id="static-methods-14"><a class="header" href="#static-methods-14">Static methods</a></h2>
