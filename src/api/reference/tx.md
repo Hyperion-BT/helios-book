@@ -80,12 +80,15 @@ tx.addOutputs(outputs: helios.TxOutput[]): helios.Tx
 
 ### `addRefInput`
 
-Add a [`TxRefInput`](./txrefinput.md) instance as a reference input to the transaction being built. 
+Add a [`TxRefInput`](./txrefinput.md) instance as a reference input to the transaction being built. An associated reference script, as a [`UplcProgram`](./uplcprogram.md) instance, must also be included in the transaction at this point (so the that the execution budget can be calculated correctly).
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
 ```ts
-tx.addRefInput(input: helios.TxRefInput): helios.Tx
+tx.addRefInput(
+    input: helios.TxRefInput
+    refScript: ?helios.UplcProgram = null
+): helios.Tx
 ```
 
 ### `addRefInputs`
