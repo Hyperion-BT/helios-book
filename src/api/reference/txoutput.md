@@ -4,14 +4,14 @@ Represents a transaction output that is used when [building a transaction](./tx.
 
 ## Constructor
 
-Constructs a `TxOutput` instance using an [`Address`](./address.md), a [`Value`](./value.md), an optional [`Datum`](./datum.md), and optional reference script bytes.
+Constructs a `TxOutput` instance using an [`Address`](./address.md), a [`Value`](./value.md), an optional [`Datum`](./datum.md), and optional [`UplcProgram`](./uplcprogram.md) reference script.
 
 ```ts
 new helios.TxOutput(
     address:   helios.Address,
     value:     helios.Value,
     datum:     ?helios.Datum = null,
-    refScript: ?number[]     = null
+    refScript: ?helios.UplcProgram = null
 )
 ```
 
