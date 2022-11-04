@@ -175,19 +175,19 @@
 <pre><code class="language-helios">Value != Value -&gt; Bool
 </code></pre>
 <h3 id="-2"><a class="header" href="#-2"><code>&gt;=</code></a></h3>
-<p>Strict greater-equals comparison. If any rhs token has a smaller amount than the equivalent lhs token then <code>&gt;=</code> returns <code>false</code>.</p>
+<p>Strict greater-equals comparison. If any rhs token has a greater amount than the equivalent lhs token then <code>&gt;=</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &gt;= Value -&gt; Bool
 </code></pre>
 <h3 id="-3"><a class="header" href="#-3"><code>&gt;</code></a></h3>
-<p>Strict greater-than comparison. If any rhs token has a less-or-equals amount than the equivalent lhs token then <code>&gt;</code> returns <code>false</code>.</p>
+<p>Strict greater-than comparison. If any rhs token has a greater-or-equals amount than the equivalent lhs token then <code>&gt;</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &gt; Value -&gt; Bool
 </code></pre>
 <h3 id="-4"><a class="header" href="#-4"><code>&lt;=</code></a></h3>
-<p>Strict less-equals comparison. If any rhs token has a greater amount than the equivalent lhs token, or doesn't exist in lhs, then <code>&lt;=</code> returns <code>false</code>.</p>
+<p>Strict less-equals comparison. If any rhs token has a smaller amount than the equivalent lhs token, or doesn't exist in lhs, then <code>&lt;=</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &lt;= Value -&gt; Bool
 </code></pre>
 <h3 id="-5"><a class="header" href="#-5"><code>&lt;</code></a></h3>
-<p>Strict less-than comparison. If any rhs token has a greater-or-equals amount than the equivalent lhs token, or doesn't exist in lhs, then <code>&lt;</code> returns <code>false</code>.</p>
+<p>Strict less-than comparison. If any rhs token has a smaller-or-equals amount than the equivalent lhs token, or doesn't exist in lhs, then <code>&lt;</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &lt; Value -&gt; Bool
 </code></pre>
 <h3 id="-6"><a class="header" href="#-6"><code>+</code></a></h3>
