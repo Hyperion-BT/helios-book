@@ -64,7 +64,7 @@ Value != Value -> Bool
 
 ### `>=`
 
-Strict greater-equals comparison. If any rhs token has a greater amount than the equivalent lhs token then `>=` returns `false`.
+Strict greater-equals comparison. If every lhs token has a greater-or-equals amount than the equivalent rhs token then `>=` returns `true`. If any rhs token has a greater amount than the equivalent lhs token then `>=` returns `false`.
 
 ```helios
 Value >= Value -> Bool
@@ -72,7 +72,7 @@ Value >= Value -> Bool
 
 ### `>`
 
-Strict greater-than comparison. If any rhs token has a greater-or-equals amount than the equivalent lhs token then `>` returns `false`.
+Strict greater-than comparison. If every lhs token has a greater amount than the equivalent rhs token then `>` returns `true`. If any rhs token has a greater-or-equals amount than the equivalent lhs token then `>` returns `false`.
 
 ```helios
 Value > Value -> Bool
@@ -80,7 +80,7 @@ Value > Value -> Bool
 
 ### `<=`
 
-Strict less-equals comparison. If any rhs token has a smaller amount than the equivalent lhs token, or doesn't exist in lhs, then `<=` returns `false`.
+Strict less-equals comparison. If every lhs token has a smaller-or-equals amount than the equivalent rhs token then `<=` returns `true`. If any rhs token has a smaller amount than the equivalent lhs token, or doesn't exist in lhs, then `<=` returns `false`.
 
 ```helios
 Value <= Value -> Bool
@@ -88,7 +88,7 @@ Value <= Value -> Bool
 
 ### `<`
 
-Strict less-than comparison. If any rhs token has a smaller-or-equals amount than the equivalent lhs token, or doesn't exist in lhs, then `<` returns `false`.
+Strict less-than comparison. If every lhs token has a smaller amount than the equivalent rhs token then `<` returns `true`. If any rhs token has a smaller-or-equals amount than the equivalent lhs token, or doesn't exist in lhs, then `<` returns `false`.
 
 ```helios
 Value < Value -> Bool
