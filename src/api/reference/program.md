@@ -9,8 +9,13 @@ This is the principal with which users of the Helios library interact.
 The constructor isn't intended for direct use. The `new` static method should be used instead:
 
 ```ts
-helios.Program.new(src: string): helios.Program
+helios.Program.new(
+    mainSrc: string, 
+    moduleSrcs: string[] = []
+): helios.Program
 ```
+
+The 1st argument here is the source of the entrypoint of the program. The 2nd argument here is optional, and is a list of the sources of modules that can be import by the entrypoint source.
 
 ## Getters
 

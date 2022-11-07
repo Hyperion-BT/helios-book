@@ -21,6 +21,7 @@
     - [Example: Rational](./lang/example-rational.md)
   - [Structure of a script](./lang/script-structure.md)
     - [Example: `always_succeeds`](./lang/example-script.md)
+  - [Modules](./lang/modules.md)
   - [Builtins](./lang/builtins/index.md)
     - [Address](./lang/builtins/address.md)
   	- [AssetClass](./lang/builtins/assetclass.md)

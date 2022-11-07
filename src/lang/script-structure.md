@@ -40,8 +40,9 @@ In Helios all scripts start with a  **script purpose**, followed by the name of 
   - **minting**
   - **staking**
   - **testing**
+  * **module**
 
-Here we are only concerned with the `spending` script purpose:
+On this page we are only concerned with the `spending` script purpose:
 
 ```helios
 spending my_validator
@@ -49,7 +50,11 @@ spending my_validator
 ...
 ```
 
+`module` is covered in the [next section](./modules.md).
+
 `minting`, `staking` and `testing` will be covered in the [advanced concepts](./advanced-concepts/index.md) chapter.
+
+> **Note**: the name of each Helios source is registered in the global scope, so these names can be used by statements, nor for the lhs of assignments. So eg. the entrypoint script can't be named `main` as that would conflict with the entrypoint function.
 
 ## Datum (2)
 
@@ -99,7 +104,7 @@ The [API](../api/index.md) has special functionality for working with these:
 * [`program.changeParam()`](../api/reference/program.md#changeparam) can change the rhs of any constant in a Helios source
 
 Some compiler restrictions are lifted in this part of the script:
-  * not all names need to be used
+  * not all names need to be used (relevant for function arguments and assignments)
   * structs can be empty
 
 Special constructors, that aren't available in `main`, become available in this part of the script:
