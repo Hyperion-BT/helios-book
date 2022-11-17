@@ -58,6 +58,27 @@ tx.addInputs(
 ): helios.Tx
 ```
 
+### `addMetadata`
+
+Add metadata to a transaction. Metadata can be used to store data on-chain, but can't be consumed by validator scripts. Metadata can for example be used for [CIP 25](https://cips.cardano.org/cips/cip25/). 
+
+```ts
+tx.addMetadata(
+    tag: number, // whole number
+    metadata: Metadata
+)
+```
+
+The `Metadata` type is an alias for the following JSON schema:
+```ts
+@typedef {
+  string |
+  number | // whole numbers only
+  Metadata[] | 
+  {map: [Metadata, Metadata][]} // a map is implemented as a list of pairs because order needs to be respected
+} Metadata
+```
+
 ### `addOutput`
 
 Add a [`TxOutput`](./txoutput.md) instance to the transaction being built.
