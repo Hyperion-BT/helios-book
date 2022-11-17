@@ -3550,6 +3550,21 @@ const networkParams = new helios.NetworkParams(
     redeemer: ?(helios.UplcData | helios.UplcDataValue) = null
 ): helios.Tx
 </code></pre>
+<h3 id="addmetadata"><a class="header" href="#addmetadata"><code>addMetadata</code></a></h3>
+<p>Add metadata to a transaction. Metadata can be used to store data on-chain, but can't be consumed by validator scripts. Metadata can for example be used for <a href="https://cips.cardano.org/cips/cip25/">CIP 25</a>. </p>
+<pre><code class="language-ts">tx.addMetadata(
+    tag: number, // whole number
+    metadata: Metadata
+)
+</code></pre>
+<p>The <code>Metadata</code> type is an alias for the following JSON schema:</p>
+<pre><code class="language-ts">@typedef {
+  string |
+  number | // whole numbers only
+  Metadata[] | 
+  {map: [Metadata, Metadata][]} // a map is implemented as a list of pairs because order needs to be respected
+} Metadata
+</code></pre>
 <h3 id="addoutput"><a class="header" href="#addoutput"><code>addOutput</code></a></h3>
 <p>Add a <a href="api/reference/./txoutput.html"><code>TxOutput</code></a> instance to the transaction being built.</p>
 <p>Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.</p>
