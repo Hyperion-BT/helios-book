@@ -122,18 +122,20 @@ Value / Int -> Value
 
 ## Methods
 
-### `serialize`
+### `contains`
+
+Alias for `>=` (where lhs is `self`).
 
 ```helios
-value.serialize() -> ByteArray
+value.contains(other_value: Value) -> Bool
 ```
 
-### `is_zero`
+### `contains_policy`
 
-Checks if a Value is empty.
+Returns `true` if a given [`MintingPolicyHash`](./mintingpolicyhash.md) is in a `Value`.
 
 ```helios
-value.is_zero() -> Bool
+value.contains_policy(mph: MintingPolicyHash) -> Bool
 ```
 
 ### `get`
@@ -152,10 +154,16 @@ Returns a map of tokens of the given [`MintingPolicyHash`](./mintingpolicyhash.m
 value.get_policy(mph: MintingPolicyHash) -> Map[ByteArray]Int
 ```
 
-### `contains`
+### `is_zero`
 
-Alias for `>=` (where lhs is `self`).
+Checks if a Value is empty.
 
 ```helios
-value.contains(other_value: Value) -> Bool
+value.is_zero() -> Bool
+```
+
+### `serialize`
+
+```helios
+value.serialize() -> ByteArray
 ```

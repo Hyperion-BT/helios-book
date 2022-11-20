@@ -1,3 +1,12 @@
 # `UplcValue`
 
-Parent class of every Helios value. Not (yet) exported, but documented here because it appears in the type interface of many of the Helios API functions.
+Parent class of every Helios value:
+  * [`UplcBool`](./uplcbool.md)
+  * [`UplcByteArray`](./uplcbytearray.md)
+  * [`UplcDataValue`](./uplcdatavalue.md)
+  * [`UplcInt`](./uplcint.md)
+  * [`UplcList`](./uplclist.md)
+  * [`UplcMap`](./uplcmap.md)
+  * [`UplcPair`](./uplcpair.md)
+  * [`UplcString`](./uplcstring.md)
+  * [`UplcUnit`](./uplcunit.md)
