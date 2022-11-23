@@ -18,6 +18,14 @@ Parses a string representation of an integer of the form `((-)?[1-9][0-9]*)|0` (
 Int::parse(string: String) -> Int
 ```
 
+### `from_little_endian`
+
+Converts a [`ByteArray`](./bytearray.md) into an `Int`. The first byte is multiplied by `1` before adding to the sum, the second byte is multiplied by `256` etc.
+
+```helios
+Int::from_little_endian(bytes: ByteArray) -> Int
+```
+
 ## Operators
 
 ### `==`
