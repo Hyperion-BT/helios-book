@@ -19,6 +19,7 @@
     - [Associated functions and constants](./lang/associated-functions-and-constants.md)
     - [Automatic methods](./lang/automatic-methods.md)
     - [Example: Rational](./lang/example-rational.md)
+  - [Throwing errors](./lang/errors.md)
   - [Structure of a script](./lang/script-structure.md)
     - [Example: `always_succeeds`](./lang/example-script.md)
   - [Modules](./lang/modules.md)

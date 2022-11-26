@@ -12,9 +12,7 @@ if (tag == 0) {
 }
 ```
 
-The last expression in each branch block is implicitly returned (much like Rust). 
-
-<br/>
+The last expression in each branch block is implicitly returned (much like Rust).
 
 The following is valid syntax:
 
