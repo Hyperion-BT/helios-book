@@ -42,7 +42,7 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {
 
     now: Time = tx.time_range.start;
 
-    validator_hash: ValidatorHash = ctx.current_validator_hash();
+    validator_hash: ValidatorHash = ctx.get_current_validator_hash();
 
     redeemer.switch {
         Close => {
