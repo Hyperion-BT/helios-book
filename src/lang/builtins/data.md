@@ -1,6 +1,6 @@
 # `Data`
 
-Represents type-less data, as returned by the [`OutputDatum::Inline inline`](./outputdatum.md#inline) getter.
+Represents type-less data, as returned by the [`OutputDatum::Inline inline`](./outputdatum.md#inline) getter. Can be cast directly into any other type using `from_data`, or indirectly using [`switch`](../enums.md#data).
 
 ## Operators
 

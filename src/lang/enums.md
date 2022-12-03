@@ -18,6 +18,8 @@ const my_redeemer = Redeemer::Buy { PubKeyHash::new(#...) } // type of lhs is in
 
 > **Note**: enum variants without fields don't use braces.
 
+> **Note**: it's OK if some of the data fields or enum variants are unused (could be data from other smart contracts).
+
 ## `switch`
 
 A `switch` expression is used to perform different actions depending on the enum variant. It is similar to a `switch` statement in C or Go (and dissimilar to a `match` expression in Rust, as Helios doesn't support pattern-matching/destructuring):
@@ -44,4 +46,27 @@ func main(datum: Datum) -> Bool {
 }
 ```
 
-> **Note**: it's OK if some of the data fields or enum variants are unused (could be data from other smart contracts).
+## `Data`
+
+[`Data`](./builtins/data.md) can be thought of as a special builtin enum with 5 members:
+  * [`Int`](./builtins/int.md)
+  * [`ByteArray`](./builtins/bytearray.md)
+  * [`[]Data`](./builtins/list.md)
+  * [`Map[Data]Data`](./builtins/map.md)
+  * Any user-defined enum
+
+A `switch` expression over `Data` can use `Int`, `ByteArray`, `[]Data` and `Map[Data]Data`, and any enum type, as case types:
+
+```helios
+data.switch{
+	i: Int => ...,
+	b: ByteArray => ...,
+	l: []Data => ...,
+	m: Map[Data]Data => ...,
+	e: MyEnum => ... 
+}
+```
+
+> **Note**: the default `else` case can also be used as a substitute for any of these cases.
+
+> **Note**: besides the builtin types only one enum type can be used in `Data` `switch`, and structs/enum-members **can't** be used.

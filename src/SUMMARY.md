@@ -39,6 +39,7 @@
     - [MintingPolicyHash](./lang/builtins/mintingpolicyhash.md)
     - [Option](./lang/builtins/option.md)
     - [OutputDatum](./lang/builtins/outputdatum.md)
+    - [PubKey](./lang/builtins/pubkey.md)
     - [PubKeyHash](./lang/builtins/pubkeyhash.md)
     - [ScriptContext](./lang/builtins/scriptcontext.md)
     - [ScriptPurpose](./lang/builtins/scriptpurpose.md)

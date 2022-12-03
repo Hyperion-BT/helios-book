@@ -21,9 +21,10 @@ This section contains a reference of all the Helios builtins.
   * [Duration](./duration.md) (i.e. the difference of two `Time`s)
   * [TimeRange](./timerange.md) (i.e. a period bound by two `Time`s)
 
-## Hash types
+## Hash and cryptography types
 
-These are type-safe wrappers for `ByteArray`:
+These are type-safe wrappers around `ByteArray`:
+  * [PubKey](./pubkey.md)
   * [PubKeyHash](./pubkeyhash.md)
   * [ValidatorHash](./validatorhash.md)
   * [MintingPolicyHash](./mintingpolicyhash.md)
