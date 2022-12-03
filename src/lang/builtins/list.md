@@ -59,6 +59,8 @@ Returns the list items following the first item. Throws an error if the list is 
 list.tail -> []ItemType
 ```
 
+> **Note**: `tail` doesn't return the last item in a list but returns everything after `head` as a new list.
+
 ## Operators
 
 ### `==`
@@ -104,6 +106,8 @@ Returns the item at the given position in the list (0-based index). Throws an er
 ```helios
 list.get(index: Int) -> ItemType
 ```
+
+> **Note**: `get(n)` has to iterate until it encounters the `n`-th item, so this method is **O(n)** and **not** O(1). 
 
 ### `prepend`
 

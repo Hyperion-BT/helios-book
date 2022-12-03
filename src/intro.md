@@ -30,4 +30,4 @@ Before starting to use Helios to create smart contracts and build DApps it is im
 
 [Chapter 3](./cli/index.md) covers how to use Helios smart contracts with *cardano-cli*.
 
-[Chapter 4](./advanced-concepts/index.md) covers minting policies, exploits, some more complex scripts, and some recommendations for building DApps.
+[Chapter 4](./advanced-concepts/index.md) covers minting policies, exploits to be aware of, some more complex scripts, and some recommendations for building DApps.
