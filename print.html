@@ -161,7 +161,7 @@ func main() -&gt; Bool {
 <p><a href="./lang/index.html">Chapter 1</a> covers the language itself, including a complete reference of the Helios builtins.</p>
 <p><a href="./api/index.html">Chapter 2</a> covers setting up the Helios library, compiling smart contracts, and building and submitting smart contract transactions, using only Javascript.</p>
 <p><a href="./cli/index.html">Chapter 3</a> covers how to use Helios smart contracts with <em>cardano-cli</em>.</p>
-<p><a href="./advanced-concepts/index.html">Chapter 4</a> covers minting policies, exploits, some more complex scripts, and some recommendations for building DApps.</p>
+<p><a href="./advanced-concepts/index.html">Chapter 4</a> covers minting policies, exploits to be aware of, some more complex scripts, and some recommendations for building DApps.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="understanding-the-eutxo-model"><a class="header" href="#understanding-the-eutxo-model">Understanding the eUTxO model</a></h1>
 <p>Before we get into any coding we first need to understand how smart contracts work on Cardano and how Cardano differs from the more conventional account-based model.</p>
 <blockquote>
@@ -1382,6 +1382,9 @@ validator_credential.hash -&gt; ValidatorHash
 <p>Returns the list items following the first item. Throws an error if the list is empty.</p>
 <pre><code class="language-helios">list.tail -&gt; []ItemType
 </code></pre>
+<blockquote>
+<p><strong>Note</strong>: <code>tail</code> doesn't return the last item in a list but returns everything after <code>head</code> as a new list.</p>
+</blockquote>
 <h2 id="operators-11"><a class="header" href="#operators-11">Operators</a></h2>
 <h3 id="-40"><a class="header" href="#-40"><code>==</code></a></h3>
 <pre><code class="language-helios">[]ItemType == []ItemType -&gt; Bool
@@ -1405,6 +1408,9 @@ validator_credential.hash -&gt; ValidatorHash
 <p>Returns the item at the given position in the list (0-based index). Throws an error if the index is out of range.</p>
 <pre><code class="language-helios">list.get(index: Int) -&gt; ItemType
 </code></pre>
+<blockquote>
+<p><strong>Note</strong>: <code>get(n)</code> has to iterate until it encounters the <code>n</code>-th item, so this method is <strong>O(n)</strong> and <strong>not</strong> O(1). </p>
+</blockquote>
 <h3 id="prepend"><a class="header" href="#prepend"><code>prepend</code></a></h3>
 <p>Creates a new list by prepending an item to the old list.</p>
 <pre><code class="language-helios">list.prepend(item: ItemType) -&gt; []ItemType
