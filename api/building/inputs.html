@@ -140,7 +140,7 @@
                         <h1 id="transaction-inputs"><a class="header" href="#transaction-inputs">Transaction inputs</a></h1>
 <p>Each transaction input is an instance of the <code>UTxO</code> class. A <code>UTxO</code> represents a <code>TxOutputId</code> and, when building a new transaction, also contains the underlying <code>TxOutput</code>.</p>
 <pre><code class="language-js">const utxo = new helios.UTxO(
-    helios.Hash.fromHex(&quot;...&quot;), // hash of the tx that created the utxo
+    helios.TxId.fromHex(&quot;...&quot;), // hash of the tx that created the utxo
     0n, // utxo index as bigint
     new helios.TxOutput(...) // TxOutput with address, value and datum fields
 )
