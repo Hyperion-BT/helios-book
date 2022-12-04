@@ -4,7 +4,7 @@ Each transaction input is an instance of the `UTxO` class. A `UTxO` represents a
 
 ```js
 const utxo = new helios.UTxO(
-    helios.Hash.fromHex("..."), // hash of the tx that created the utxo
+    helios.TxId.fromHex("..."), // hash of the tx that created the utxo
     0n, // utxo index as bigint
     new helios.TxOutput(...) // TxOutput with address, value and datum fields
 )
