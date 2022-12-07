@@ -12,4 +12,4 @@ import {OldName1 as NewName1, OldName2} from my_module
 
 The imported names act as if the original statements were defined in the source where they are imported.
 
-> **Note**: Currently every top-level statement is imported, including other `import` statements.
+> **Note**: Currently every top-level statement is public by default and is exported, including other `import` statements.
