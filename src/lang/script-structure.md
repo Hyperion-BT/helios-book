@@ -40,7 +40,7 @@ In Helios all scripts start with a  **script purpose**, followed by the name of 
   - **minting**
   - **staking**
   - **testing**
-  * **module**
+  - **module**
 
 On this page we are only concerned with the `spending` script purpose:
 
