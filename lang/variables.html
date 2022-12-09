@@ -155,6 +155,7 @@
 <p>Values can also be bound to names at the <em>top-level</em> of a script, or inside <code>struct</code> or <code>enum</code> blocks. This is done with the <code>const</code> keyword:</p>
 <pre><code class="language-helios">const AGE: Int = 123
 </code></pre>
+<p>These names can be <a href="../api/reference/program.html#changeparam"><code>re-bound</code></a> using the Helios API to form a new, distinct contract with a different address. This is the same as &quot;parameterized contracts&quot; in Haskell/Plutus.</p>
 <blockquote>
 <p><strong>Note</strong>: The right-hand side of <code>const</code> can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.</p>
 </blockquote>

@@ -310,6 +310,7 @@ such as state channels (see <a href="https://iohk.io/en/blog/posts/2021/09/17/hy
 <p>Values can also be bound to names at the <em>top-level</em> of a script, or inside <code>struct</code> or <code>enum</code> blocks. This is done with the <code>const</code> keyword:</p>
 <pre><code class="language-helios">const AGE: Int = 123
 </code></pre>
+<p>These names can be <a href="lang/../api/reference/program.html#changeparam"><code>re-bound</code></a> using the Helios API to form a new, distinct contract with a different address. This is the same as &quot;parameterized contracts&quot; in Haskell/Plutus.</p>
 <blockquote>
 <p><strong>Note</strong>: The right-hand side of <code>const</code> can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.</p>
 </blockquote>
@@ -3548,7 +3549,7 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <h2 id="methods-41"><a class="header" href="#methods-41">Methods</a></h2>
 <h3 id="changeparam"><a class="header" href="#changeparam"><code>changeParam</code></a></h3>
-<p>Change the value of <code>const</code> statement, using either a JSON string or a <code>UplcValue</code> instance.</p>
+<p>Change the value of a <a href="api/reference/../../lang/variables.html#const-statements"><code>const</code> statement</a>, using either a JSON string or a <code>UplcValue</code> instance.</p>
 <p><code>UplcValue</code> instances can be generated using the <code>evalParam</code> method.</p>
 <p>Mutates this program, and returns this program so that other <code>changeParam</code> calls can be chained.</p>
 <pre><code class="language-ts">program.changeParam(
