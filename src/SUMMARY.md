@@ -122,6 +122,7 @@
     - [Install helios-cli](./cli/install.md)
     - [Setup cardano-node](./cli/cardano-node.md)
     - [Wallet setup](./cli/wallet.md)
+  - [Using helios-cli](./cli/usage.md)
   - [Example: Always succeeds](./cli/example-always-succeeds.md)
   - [Example: Time lock](./cli/example-time-lock.md)
 
