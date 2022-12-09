@@ -22,6 +22,7 @@
   - [Throwing errors](./lang/errors.md)
   - [Structure of a script](./lang/script-structure.md)
     - [Example: `always_succeeds`](./lang/example-script.md)
+    - [Contract Parameters](./lang/parameterized.md)
   - [Modules](./lang/modules.md)
   - [Builtins](./lang/builtins/index.md)
     - [Address](./lang/builtins/address.md)
