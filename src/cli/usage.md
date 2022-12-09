@@ -11,7 +11,7 @@ Optimization can be switched on using the `--optimize` (or `-O`) flag:
 $ helios compile my_script.hl --optimize -o my_script.json
 ```
 
-*helios-cli* automatically searches for modules in the current directory. Other directories can be included using the `-I` option:
+*helios-cli* automatically searches for [modules](../lang/modules.md) in the current directory. Other directories can be included using the `-I` option:
 ```bash
 $ helios compile my_script.hl -I ./my_modules/ -o my_script.json
 ```
