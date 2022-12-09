@@ -1,5 +1,5 @@
-# Helios CLI (WiP)
+# Helios CLI
 
-This chapter explains how to use the Helios in combination with *cardano-cli*.
+This chapter explains how to use the [*helios-cli*](https://github.com/Hyperion-BT/helios-cli) in combination with *cardano-cli*.
 
-This approach can be useful in some debugging scenarios.
+> **Note**: *helios-cli* is work-in-progress and can only be used for simple operations (compiling, evaluating parameters, calculating script addresses).

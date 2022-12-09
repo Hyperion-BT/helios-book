@@ -156,7 +156,7 @@ value.get_policy(mph: MintingPolicyHash) -> Map[ByteArray]Int
 
 ### `is_zero`
 
-Checks if a Value is empty.
+Checks if a `Value` is empty.
 
 ```helios
 value.is_zero() -> Bool
@@ -166,4 +166,12 @@ value.is_zero() -> Bool
 
 ```helios
 value.serialize() -> ByteArray
+```
+
+### `to_map`
+
+Returning the underlying `Map`:
+
+```helios
+value.to_map() -> Map[MintingPolicyHash]Map[ByteArray]Int
 ```

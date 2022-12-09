@@ -1,32 +1,32 @@
 # Example: Always succeeds
 
-Start a nodejs repl on your development computer, and import the Helios library:
-```bash
-$ cd ./helios
-$ nodejs
-```
-```javascript
-> var helios; import("./helios.js").then(m=>{helios=m});
+Create a `always_succeeds.hl` script with the following code:
+```helios
+spending always_succeeds
+
+func main() -> Bool {
+  true
+}
 ```
 
 Compile the Always Succeeds script into its JSON representation:
-```javascript
-> console.log(helios.Program.new("spending always_succeeds func main() -> Bool {true}").compile().serialize())
+```bash
+$ helios compile always_succeeds.hl
 
-{"type": "PlutusScriptV1", "description": "", "cborHex" :" 581358110100002223333573464945262498992601"}
+{"type": "PlutusScriptV2", "description": "", "cborHex" :"52510100003222253335734a0082930b0a5101"}
 ```
 
 Start an interactive shell in the *cardano-node* container and copy the content of the JSON representing the script:
 ```bash
-$ docket exec -it <container-id> bash
+$ docker exec -it <container-id> bash
 
 > mkdir -p /data/scripts
 > cd /data/scripts
 
 > echo '{
-  "type": "PlutusScriptV1", 
+  "type": "PlutusScriptV2", 
   "description": "", 
-  "cborHex": "581358110100002223333573464945262498992601"
+  "cborHex": "52510100003222253335734a0082930b0a5101"
 }' > always-succeeds.json
 
 ```
@@ -40,7 +40,7 @@ Generate the script address:
 
 > cat /data/scripts/always-succeeds.addr
 
-addr_test1wzlmzvrx48rnk9js2z6c0gnul2063hl2ptadw9cdzvvq7vgy4qmsu
+addr_test1wpfvdtcvnd6yknhve6pc2w999n4325pck00x3c4m9750cdch6csfq
 ```
 
 We need a datum, which can be chosen arbitrarily in this case:

@@ -20,22 +20,24 @@ func main(datum: Datum, ctx: ScriptContext) -> Bool {
     print("now: " + now.show() + ", lock: " + datum.lockUntil.show()); now > datum.lockUntil || 
     (print("returning? " + returnToOwner.show()); returnToOwner)
 }
+// end-of-main, anything that comes after isn't part of the on-chain script
+
+// Helios can evaluate MY_DATUM into a data-structure that can be used to build a transaction
+const MY_DATUM = Datum{
+  lockUntil: Time::new(${(new Date()).getTime() + 1000*60*5}), 
+  owner: PubKeyHash::new(#1d22b9ff5fc...), 
+  nonce: 42
+}
 ```
 
 UTxOs can be sent into the time-lock script arbitrarily as long as the datum has the correct format. UTxOs can be retrieved any time by the wallet that initiated the time-lock. UTxOs can be retrieved after the time-lock by anyone who knows the datum.
 
 
-Once we have written the script, we generate its JSON representation, and then calculate the script address using cardano-cli:
+Once we have written the script, we generate its JSON representation using *helios-cli*, and then calculate the script address using cardano-cli:
 ```bash
-$ nodejs
+$ helios compile time_lock.hl
 
-> var helios; import("./helios.js").then(m=>{helios=m});
-
-> const src = "spending time_lock  struct Datum {lockUntil...";
-
-> console.log(helios.Program.new(src).compile().serialize())
-
-{"type": "PlutusScriptV1", "description": "", "cborHex": "5..."}
+{"type": "PlutusScriptV2", "description": "", "cborHex": "5..."}
 ```
 ```bash
 $ docker exec -it <container-id> bash
@@ -67,20 +69,7 @@ $ docker exec -it <container-id> bash
 
 We also need a `lockUntil` time, for example 5 minutes from now. Now we can build the datum:
 ```bash
-$ nodejs
-
-> var helios; import("./helios.js").then(m=>{helios=m});
-
-> const src = `spending  time_lock 
-struct Datum {lockUntil...
-
-const MY_DATUM = Datum{
-  lockUntil: Time::new(${(new Date()).getTime() + 1000*60*5}), 
-  owner: PubKeyHash::new(#1d22b9ff5fc...), 
-  nonce: 42
-}`;
-
-> console.log(helios.Program.new(src).evalParam("MY_DATUM").data.toSchemaJson());
+$ helios eval time_lock.hl MY_DATUM
 
 {"constructor": 0, "fields": [{"int": 16....}, {"bytes": "1d22b9ff5fc..."}, {"int": 42}]}
 ```
