@@ -26,6 +26,8 @@ Values can also be bound to names at the *top-level* of a script, or inside `str
 const AGE: Int = 123
 ```
 
+These names can be [`re-bound`](../api/reference/program.md#changeparam) using the Helios API to form a new, distinct contract with a different address. This is the same as "parameterized contracts" in Haskell/Plutus.
+
 > **Note**: The right-hand side of `const` can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.
 
 ## Type annotations

@@ -39,7 +39,7 @@ program.paramTypes: Object.<string, helios.Type>
 
 ### `changeParam`
 
-Change the value of `const` statement, using either a JSON string or a `UplcValue` instance.
+Change the value of a [`const` statement](../../lang/variables.html#const-statements), using either a JSON string or a `UplcValue` instance.
 
 `UplcValue` instances can be generated using the `evalParam` method.
 
