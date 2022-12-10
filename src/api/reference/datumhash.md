@@ -1,6 +1,6 @@
 # `DatumHash`
 
-Represents a Blake2-256 hash of datum data.
+Represents a blake2b-256 hash of datum data.
 
 ## Static methods
 

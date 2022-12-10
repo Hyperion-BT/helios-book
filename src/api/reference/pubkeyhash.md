@@ -1,6 +1,6 @@
 # `PubKeyHash`
 
-Represents a Blake2-228 hash of public key.
+Represents a Blake2-224 hash of public key.
 
 A `PubKeyHash` is used as the first part of a regular payment [`Address`](./address.md).
 
@@ -31,7 +31,7 @@ helios.PubKeyHash.fromHex(hex: string): helios.PubKeyHash
 Get the underlying bytes.
 
 ```ts
-pub_key_hash.bytes: number[]
+pubkey_hash.bytes: number[]
 ```
 
 ### `hex`
@@ -39,5 +39,5 @@ pub_key_hash.bytes: number[]
 Returns the hexadecimal representation.
 
 ```ts
-pub_key_hash.hex: string
+pubkey_hash.hex: string
 ```

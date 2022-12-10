@@ -5,7 +5,7 @@ The Helios library is platform agnostic and can be used in many different ways.
 ## Webpage `script` tag
 
 ```html
-<script src="https://helios.hyperion-bt.org/0.9.3/helios.js" type="module" crossorigin></script>
+<script src="https://helios.hyperion-bt.org/0.9.5/helios.js" type="module" crossorigin></script>
 ```
 
 ## Module with CDN URL
@@ -13,10 +13,10 @@ The Helios library is platform agnostic and can be used in many different ways.
 Helios can be imported as a module using our CDN. This is supported by [Deno](https://deno.land) and most modern browsers:
 
 ```js
-import * as helios from "https://helios.hyperion-bt.org/0.9.3/helios.js"
+import * as helios from "https://helios.hyperion-bt.org/0.9.5/helios.js"
 
 // or only the necessary parts (recommended as you get more acquainted with the library)
-import { Program } from "https://helios.hyperion-bt.org/0.9.3/helios.js"
+import { Program } from "https://helios.hyperion-bt.org/0.9.5/helios.js"
 ```
 
 Alternatively you can use `"helios"` as a placeholder for the URL and, if not using any builder-tools, specify the module URL in an [importmap](https://github.com/WICG/import-maps) (currently only supported by Chrome):
@@ -31,7 +31,7 @@ import * as helios from "helios"
 <script type="importmap">
     {
         "imports": {
-            "helios": "https://helios.hyperion-bt.org/0.9.3/helios.js"
+            "helios": "https://helios.hyperion-bt.org/0.9.5/helios.js"
         }
     }
 </script>
@@ -50,7 +50,7 @@ $ npm i @hyperionbt/helios
 Or install a specific version:
 
 ```bash
-$ npm i @hyperionbt/helios@0.9.3
+$ npm i @hyperionbt/helios@0.9.5
 ```
 
 In your javascript file:

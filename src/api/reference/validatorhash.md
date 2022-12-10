@@ -1,6 +1,6 @@
 # `ValidatorHash`
 
-Represents a Blake2-228 hash of a spending validator script (first encoded as a CBOR byte-array and prepended by a script version byte).
+Represents a blake2b-224 hash of a spending validator script (first encoded as a CBOR byte-array and prepended by a script version byte).
 
 ## Static methods
 

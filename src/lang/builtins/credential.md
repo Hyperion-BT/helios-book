@@ -1,8 +1,8 @@
 # `Credential`
 
 Represents the non-staking part of an [`Address`](./address.md). Internally represented as an enum with two variants: 
-  * `PubKey` (wrapper of [`PubKeyHash`](./pubkeyhash.md)) 
-  * `Validator` (wrapper of [`ValidatorHash`](./validatorhash.md))
+  * `PubKey` (wraps [`PubKeyHash`](./pubkeyhash.md)) 
+  * `Validator` (wraps [`ValidatorHash`](./validatorhash.md))
 
 <br/>
 

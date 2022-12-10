@@ -48,6 +48,14 @@ Returns the datum of the `TxOutput` as an [`OutputDatum`](./outputdatum.md).
 tx_output.datum -> OutputDatum
 ```
 
+### `ref_script_hash`
+
+Returns the [`ScriptHash`](./scripthash.md) of the optional reference script attached to the `TxOutput`.
+
+```helios
+tx_output.ref_script_hash -> Option[ScriptHash]
+```
+
 ## Operators
 
 ### `==`

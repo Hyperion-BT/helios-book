@@ -19,10 +19,10 @@ example: []Int = []Int{1, 2, 3, 4, 5}; ...
 
 ### `new`
 
-Creates a new list of length `n`, where every contained item is determined by `fn`.
+Creates a new list of length `n`, where every contained item is determined by `fn(i: Int)` (`i` is the 0-based index of the item).
 
 ```helios
-[]ItemType::new(n: Int, fn: (Int) -> ItemType) -> []ItemType
+[]ItemType::new(n: Int, fn: (i: Int) -> ItemType) -> []ItemType
 ```
 
 ### `new_const`
@@ -85,36 +85,12 @@ List concatenation
 
 ## Methods
 
-### `serialize`
+### `all`
+
+Returns `true` if all of the items in the list satisfy the predicate.
 
 ```helios
-list.serialize() -> ByteArray
-```
-
-### `is_empty`
-
-Returns `true` if the list is empty.
-
-```helios
-list.is_empty() -> Bool
-```
-
-### `get`
-
-Returns the item at the given position in the list (0-based index). Throws an error if the index is out of range.
-
-```helios
-list.get(index: Int) -> ItemType
-```
-
-> **Note**: `get(n)` has to iterate until it encounters the `n`-th item, so this method is **O(n)** and **not** O(1). 
-
-### `prepend`
-
-Creates a new list by prepending an item to the old list.
-
-```helios
-list.prepend(item: ItemType) -> []ItemType
+list.all(predicate: (ItemType) -> Bool) -> Bool
 ```
 
 ### `any`
@@ -125,12 +101,12 @@ Returns `true` if any of the items in the list satisfy the predicate.
 list.any(predicate: (ItemType) -> Bool) -> Bool
 ```
 
-### `all`
+### `filter`
 
-Returns `true` if all of the items in the list satisfy the predicate.
+Returns a list of all the items in the old list that satisfy the predicate.
 
 ```helios
-list.all(predicate: (ItemType) -> Bool) -> Bool
+list.filter(predicate: (ItemType) -> Bool) -> []ItemType
 ```
 
 ### `find`
@@ -149,14 +125,6 @@ Returns the first item in the list that satisfies the predicate, wrapped in an [
 list.find_safe(predicate: (ItemType) -> Bool) -> Option[ItemType]
 ```
 
-### `filter`
-
-Returns a list of all the items in the old list that satisfy the predicate.
-
-```helios
-list.filter(predicate: (ItemType) -> Bool) -> []ItemType
-```
-
 ### `fold`
 
 Folds a list into a single value by continuosly applying the binary function to the items of the list. The result type is a type parameter of this method: `ReducedType`.
@@ -168,10 +136,42 @@ list.fold(
 ) -> ReducedType
 ```
 
+### `get`
+
+Returns the item at the given position in the list (0-based index). Throws an error if the index is out of range.
+
+```helios
+list.get(index: Int) -> ItemType
+```
+
+> **Note**: `get(n)` has to iterate until it encounters the `n`-th item, so this method is **O(n)** and **not** O(1).
+
+### `is_empty`
+
+Returns `true` if the list is empty.
+
+```helios
+list.is_empty() -> Bool
+```
+
 ### `map`
 
 Transforms each item of a list. The resulting list item type is a type parameter of this method: `NewItemType`.
 
 ```helios
 list.map(mapper: (ItemType) -> NewItemType) -> []NewItemType
+```
+
+### `prepend`
+
+Creates a new list by prepending an item to the old list.
+
+```helios
+list.prepend(item: ItemType) -> []ItemType
+```
+
+### `serialize`
+
+```helios
+list.serialize() -> ByteArray
 ```

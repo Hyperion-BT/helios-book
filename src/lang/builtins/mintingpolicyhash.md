@@ -21,6 +21,14 @@ MintingPolicyHash::new(bytes: ByteArray) -> MintingPolicyHash
 MintingPolicyHash::from_data(data: Data) -> MintingPolicyHash
 ```
 
+### `from_script_hash`
+
+Casts the generic [`ScriptHash`](./scripthash.md) type into `MintingPolicyHash`.
+
+```helios
+MintingPolicyHash::from_script_hash(hash: ScriptHash) -> MintingPolicyHash
+```
+
 ## Operators
 
 ### `==`

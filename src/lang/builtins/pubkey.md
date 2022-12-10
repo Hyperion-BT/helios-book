@@ -2,7 +2,7 @@
 
 This is a type-safe wrapper around [`ByteArray`](./bytearray.md) that represents the a Ed25519 public key.
 
-A `PubKey` is expected to be 32 bytes long. A [`PubKeyHash`](./pubkeyhash.md) is the blake224 hash of a `PubKey`. Sadly there is no on-chain way of calculating the [`PubKeyHash`](./pubkeyhash.md) from a `PubKey`.
+A `PubKey` is expected to be 32 bytes long. A [`PubKeyHash`](./pubkeyhash.md) is the blake2b-224 hash of a `PubKey`. Sadly there is no on-chain way of calculating the [`PubKeyHash`](./pubkeyhash.md) from a `PubKey`.
 
 Example instantiation:
 

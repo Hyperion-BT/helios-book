@@ -18,6 +18,14 @@ ValidatorHash::new(bytes: ByteArray) -> ValidatorHash
 ValidatorHash::from_data(data: Data) -> ValidatorHash
 ```
 
+### `from_script_hash`
+
+Casts the generic [`ScriptHash`](./scripthash.md) type into `ValidatorHash`.
+
+```helios
+ValidatorHash::from_script_hash(hash: ScriptHash) -> ValidatorHash
+```
+
 ## Operators
 
 ### `==`

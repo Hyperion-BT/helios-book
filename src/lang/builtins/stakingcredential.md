@@ -10,8 +10,10 @@ Represents the staking part of an [`Address`](./address.md).
 
 ### `new_hash`
 
+Constructs a new `StakingCredential` from [`StakingHash`](./stakinghash.md) (which in turn is an enum that represents `StakeKeyHash`/`StakingValidatorHash`).
+
 ```helios
-StakingCredential::new_hash(credential: Credential) -> StakingCredential::Hash
+StakingCredential::new_hash(staking_hash: StakingHash) -> StakingCredential::Hash
 ```
 
 ### `new_ptr`
