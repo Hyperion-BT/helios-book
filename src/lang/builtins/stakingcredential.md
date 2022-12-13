@@ -27,6 +27,29 @@ StakingCredential::new_ptr(a: Int, b: Int, c: Int) -> StakingCredential::Ptr
 ```helios
 StakingCredential::from_data(data: Data) -> StakingCredential
 ```
+## Getters
+
+### `StakingCredential::Hash`
+
+#### `hash`
+
+Get the underlying [`StakingHash`](./stakinghash.md).
+
+```helios
+staking_credential_hash.hash -> StakingHash
+```
+
+The following example code can be used to extract the underlying [`StakingValidatorHash`](./stakingvalidatorhash.md):
+
+```helios
+staking_credential.switch{
+  h: Hash => h.hash.switch{
+    v: Validator => v.hash,
+    else => error("not a StakingHash::Validator")
+  }, 
+  else => error("not a StakingCredential::Hash")
+}
+```
 
 ## Operators
 

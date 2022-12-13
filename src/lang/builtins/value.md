@@ -146,6 +146,14 @@ Returns the amount of the given [`AssetClass`](./assetclass.md) in a `Value`. Th
 value.get(asset_class: AssetClass) -> Int
 ```
 
+### `get_safe`
+
+Like `get`, but returns `0` instead of throwing an error if the given [`AssetClass`](./assetclass.md) isn't found.
+
+```helios
+value.get_safe(asset_class: AssetClass) -> Int
+```
+
 ### `get_policy`
 
 Returns a map of tokens of the given [`MintingPolicyHash`](./mintingpolicyhash.md) in a `Value`. Throws an error if the [`MintingPolicyHash`](./mintingpolicyhash.md) isn't found.
