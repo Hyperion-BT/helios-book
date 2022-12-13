@@ -215,6 +215,10 @@
 <p>Returns the amount of the given <a href="./assetclass.html"><code>AssetClass</code></a> in a <code>Value</code>. Throws error if the <a href="./assetclass.html"><code>AssetClass</code></a> isn't found.</p>
 <pre><code class="language-helios">value.get(asset_class: AssetClass) -&gt; Int
 </code></pre>
+<h3 id="get_safe"><a class="header" href="#get_safe"><code>get_safe</code></a></h3>
+<p>Like <code>get</code>, but returns <code>0</code> instead of throwing an error if the given <a href="./assetclass.html"><code>AssetClass</code></a> isn't found.</p>
+<pre><code class="language-helios">value.get_safe(asset_class: AssetClass) -&gt; Int
+</code></pre>
 <h3 id="get_policy"><a class="header" href="#get_policy"><code>get_policy</code></a></h3>
 <p>Returns a map of tokens of the given <a href="./mintingpolicyhash.html"><code>MintingPolicyHash</code></a> in a <code>Value</code>. Throws an error if the <a href="./mintingpolicyhash.html"><code>MintingPolicyHash</code></a> isn't found.</p>
 <pre><code class="language-helios">value.get_policy(mph: MintingPolicyHash) -&gt; Map[ByteArray]Int
