@@ -175,3 +175,11 @@ list.prepend(item: ItemType) -> []ItemType
 ```helios
 list.serialize() -> ByteArray
 ```
+
+### `sort`
+
+Sorts the list using insertion sort.
+
+```helios
+list.sort((a: ItemType, b: ItemType) -> Bool) -> []ItemType
+```

@@ -138,6 +138,38 @@ map.filter_by_key(predicate: (KeyType) -> Bool) -> Map[KeyType]ValueType
 map.filter_by_value(predicate: (ValueType) -> Bool) -> Map[KeyType]ValueType
 ```
 
+### `find_key`
+
+Returns the first key that matches the condition. Throws an error if none found.
+
+```helios
+map.find_key((key: KeyType) -> Bool) -> KeyType
+```
+
+### `find_key_safe`
+
+Returns an [`Option`](./option.md) containing the first key that matches the condition, or `Option[KeyType]::None` if none found.
+
+```helios
+map.find_key_safe((key: KeyType) -> Bool) -> Option[KeyType]
+```
+
+### `find_value`
+
+Returns the first value that matches the condition. Throws an error if none found.
+
+```helios
+map.find_value((value: ValueType) -> Bool) -> ValueType
+```
+
+### `find_value_safe`
+
+Returns an [`Option`](./option.md) containing the first value that matches the condition, or `Option[ValueType]::None` if none found.
+
+```helios
+map.find_value_safe((value: ValueType) -> Bool) -> Option[ValueType]
+```
+
 ### `fold`
 
 ```helios
@@ -185,4 +217,28 @@ map.map_values(mapper: (ValueType) -> NewValueType) -> Map[KeyType]NewValueType
 
 ```helios
 map.serialize() -> ByteArray
+```
+
+### `sort`
+
+Sort the map using insertion sort.
+
+```helios
+map.sort((key_a: KeyType, value_a: ValueType, key_b: KeyType, value_b: ValueType) -> Bool) -> Map[KeyType]ValueType
+```
+
+### `sort_by_key`
+
+Sort the map by applying insertion sort to the keys.
+
+```helios
+map.sort((a: KeyType, b: KeyType) -> Bool) -> Map[KeyType]ValueType
+```
+
+### `sort_by_value`
+
+Sort the map by applying insertion sort to the values.
+
+```helios
+map.sort((a: ValueType, b: ValueType) -> Bool) -> Map[KeyType]ValueType
 ```
