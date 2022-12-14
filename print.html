@@ -1503,6 +1503,9 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id="-43"><a class="header" href="#-43"><code>==</code></a></h3>
 <pre><code class="language-helios">Map[KeyType]ValueType == Map[KeyType]ValueType -&gt; Bool
 </code></pre>
+<blockquote>
+<p><strong>Note</strong>: because Plutus-Core handles <code>Map</code> as a list, the entries must be in the same order for <code>==</code> to return <code>true</code>.</p>
+</blockquote>
 <h3 id="-44"><a class="header" href="#-44"><code>!=</code></a></h3>
 <pre><code class="language-helios">Map[KeyType]ValueType != Map[KeyType]ValueType -&gt; Bool
 </code></pre>
@@ -2533,9 +2536,12 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 </code></pre>
 <h2 id="operators-35"><a class="header" href="#operators-35">Operators</a></h2>
 <h3 id="-96"><a class="header" href="#-96"><code>==</code></a></h3>
-<p>Returns <code>true</code> if two <code>Value</code>s are the same. Note that the assets and tokens must also be in the same order for <code>==</code> to return <code>true</code>.</p>
+<p>Returns <code>true</code> if two <code>Value</code>s are the same.</p>
 <pre><code class="language-helios">Value == Value -&gt; Bool
 </code></pre>
+<blockquote>
+<p><strong>Note</strong>: the assets and tokens must also be in the same order for <code>==</code> to return <code>true</code>.</p>
+</blockquote>
 <h3 id="-97"><a class="header" href="#-97"><code>!=</code></a></h3>
 <pre><code class="language-helios">Value != Value -&gt; Bool
 </code></pre>

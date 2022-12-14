@@ -160,6 +160,9 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id=""><a class="header" href="#"><code>==</code></a></h3>
 <pre><code class="language-helios">Map[KeyType]ValueType == Map[KeyType]ValueType -&gt; Bool
 </code></pre>
+<blockquote>
+<p><strong>Note</strong>: because Plutus-Core handles <code>Map</code> as a list, the entries must be in the same order for <code>==</code> to return <code>true</code>.</p>
+</blockquote>
 <h3 id="-1"><a class="header" href="#-1"><code>!=</code></a></h3>
 <pre><code class="language-helios">Map[KeyType]ValueType != Map[KeyType]ValueType -&gt; Bool
 </code></pre>
