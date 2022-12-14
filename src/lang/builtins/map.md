@@ -221,7 +221,7 @@ map.serialize() -> ByteArray
 
 ### `sort`
 
-Sort the map using insertion sort.
+Sorts the map using insertion sort.
 
 ```helios
 map.sort((key_a: KeyType, value_a: ValueType, key_b: KeyType, value_b: ValueType) -> Bool) -> Map[KeyType]ValueType
@@ -229,7 +229,7 @@ map.sort((key_a: KeyType, value_a: ValueType, key_b: KeyType, value_b: ValueType
 
 ### `sort_by_key`
 
-Sort the map by applying insertion sort to the keys.
+Sorts the map by applying insertion sort to the keys.
 
 ```helios
 map.sort((a: KeyType, b: KeyType) -> Bool) -> Map[KeyType]ValueType
@@ -237,7 +237,7 @@ map.sort((a: KeyType, b: KeyType) -> Bool) -> Map[KeyType]ValueType
 
 ### `sort_by_value`
 
-Sort the map by applying insertion sort to the values.
+Sorts the map by applying insertion sort to the values.
 
 ```helios
 map.sort((a: ValueType, b: ValueType) -> Bool) -> Map[KeyType]ValueType
