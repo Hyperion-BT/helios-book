@@ -2247,6 +2247,9 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
     datums:      Map[DatumHash]AnyType
 ) -&gt; Tx
 </code></pre>
+<blockquote>
+<p><strong>Note</strong>: the value type of the <code>redeemers</code> and <code>datums</code> fields can be any type when instantiating a new <code>Tx</code> instance. But when getting the <code>redeemers</code> and the <code>datums</code> the value type is actually <code>Data</code> (see <a href="lang/builtins/./tx.html#redeemers"><code>redeemers</code></a> and <a href="lang/builtins/./tx.html#datums"><code>datums</code></a>).</p>
+</blockquote>
 <h2 id="getters-14"><a class="header" href="#getters-14">Getters</a></h2>
 <h3 id="inputs"><a class="header" href="#inputs"><code>inputs</code></a></h3>
 <p>Returns the list of <a href="lang/builtins/./txinput.html"><code>TxInput</code></a>s of the transaction.</p>
