@@ -50,11 +50,13 @@ Value::from_map(raw_value: Map[MintingPolicyHash]Map[ByteArray]Int) -> Value
 
 ### `==`
 
-Returns `true` if two `Value`s are the same. Note that the assets and tokens must also be in the same order for `==` to return `true`.
+Returns `true` if two `Value`s are the same.
 
 ```helios
 Value == Value -> Bool
 ```
+
+> **Note**: the assets and tokens must also be in the same order for `==` to return `true`.
 
 ### `!=`
 

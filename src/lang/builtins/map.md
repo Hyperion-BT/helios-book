@@ -38,6 +38,8 @@ map.length -> Int
 Map[KeyType]ValueType == Map[KeyType]ValueType -> Bool
 ```
 
+> **Note**: because Plutus-Core handles `Map` as a list, the entries must be in the same order for `==` to return `true`.
+
 ### `!=`
 
 ```helios
