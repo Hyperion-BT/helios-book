@@ -258,15 +258,15 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <pre><code class="language-helios">map.serialize() -&gt; ByteArray
 </code></pre>
 <h3 id="sort"><a class="header" href="#sort"><code>sort</code></a></h3>
-<p>Sort the map using insertion sort.</p>
+<p>Sorts the map using insertion sort.</p>
 <pre><code class="language-helios">map.sort((key_a: KeyType, value_a: ValueType, key_b: KeyType, value_b: ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
 </code></pre>
 <h3 id="sort_by_key"><a class="header" href="#sort_by_key"><code>sort_by_key</code></a></h3>
-<p>Sort the map by applying insertion sort to the keys.</p>
+<p>Sorts the map by applying insertion sort to the keys.</p>
 <pre><code class="language-helios">map.sort((a: KeyType, b: KeyType) -&gt; Bool) -&gt; Map[KeyType]ValueType
 </code></pre>
 <h3 id="sort_by_value"><a class="header" href="#sort_by_value"><code>sort_by_value</code></a></h3>
-<p>Sort the map by applying insertion sort to the values.</p>
+<p>Sorts the map by applying insertion sort to the values.</p>
 <pre><code class="language-helios">map.sort((a: ValueType, b: ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
 </code></pre>
 
