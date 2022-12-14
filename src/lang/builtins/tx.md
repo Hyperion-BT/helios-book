@@ -30,6 +30,8 @@ Tx::new(
 ) -> Tx
 ```
 
+> **Note**: the value type of the `redeemers` and `datums` fields can be any type when instantiating a new `Tx` instance. But when getting the `redeemers` and the `datums` the value type is actually `Data` (see [`redeemers`](./tx.md#redeemers) and [`datums`](./tx.md#datums)).
+
 ## Getters
 
 ### `inputs`
