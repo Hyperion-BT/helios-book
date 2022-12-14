@@ -140,14 +140,14 @@
                         <h1 id="setup-of-the-helios-library"><a class="header" href="#setup-of-the-helios-library">Setup of the Helios Library</a></h1>
 <p>The Helios library is platform agnostic and can be used in many different ways.</p>
 <h2 id="webpage-script-tag"><a class="header" href="#webpage-script-tag">Webpage <code>script</code> tag</a></h2>
-<pre><code class="language-html">&lt;script src=&quot;https://helios.hyperion-bt.org/0.9.5/helios.js&quot; type=&quot;module&quot; crossorigin&gt;&lt;/script&gt;
+<pre><code class="language-html">&lt;script src=&quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot; type=&quot;module&quot; crossorigin&gt;&lt;/script&gt;
 </code></pre>
 <h2 id="module-with-cdn-url"><a class="header" href="#module-with-cdn-url">Module with CDN URL</a></h2>
 <p>Helios can be imported as a module using our CDN. This is supported by <a href="https://deno.land">Deno</a> and most modern browsers:</p>
-<pre><code class="language-js">import * as helios from &quot;https://helios.hyperion-bt.org/0.9.5/helios.js&quot;
+<pre><code class="language-js">import * as helios from &quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot;
 
 // or only the necessary parts (recommended as you get more acquainted with the library)
-import { Program } from &quot;https://helios.hyperion-bt.org/0.9.5/helios.js&quot;
+import { Program } from &quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot;
 </code></pre>
 <p>Alternatively you can use <code>&quot;helios&quot;</code> as a placeholder for the URL and, if not using any builder-tools, specify the module URL in an <a href="https://github.com/WICG/import-maps">importmap</a> (currently only supported by Chrome):</p>
 <pre><code class="language-js">// in you javascript file
@@ -157,7 +157,7 @@ import * as helios from &quot;helios&quot;
 &lt;script type=&quot;importmap&quot;&gt;
     {
         &quot;imports&quot;: {
-            &quot;helios&quot;: &quot;https://helios.hyperion-bt.org/0.9.5/helios.js&quot;
+            &quot;helios&quot;: &quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot;
         }
     }
 &lt;/script&gt;
@@ -168,7 +168,7 @@ import * as helios from &quot;helios&quot;
 <pre><code class="language-bash">$ npm i @hyperionbt/helios
 </code></pre>
 <p>Or install a specific version:</p>
-<pre><code class="language-bash">$ npm i @hyperionbt/helios@0.9.5
+<pre><code class="language-bash">$ npm i @hyperionbt/helios@0.9.7
 </code></pre>
 <p>In your javascript file:</p>
 <pre><code class="language-js">import { Program } from &quot;@hyperionbt/helios&quot;

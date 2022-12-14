@@ -212,6 +212,22 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id="filter_by_value"><a class="header" href="#filter_by_value"><code>filter_by_value</code></a></h3>
 <pre><code class="language-helios">map.filter_by_value(predicate: (ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
 </code></pre>
+<h3 id="find_key"><a class="header" href="#find_key"><code>find_key</code></a></h3>
+<p>Returns the first key that matches the condition. Throws an error if none found.</p>
+<pre><code class="language-helios">map.find_key((key: KeyType) -&gt; Bool) -&gt; KeyType
+</code></pre>
+<h3 id="find_key_safe"><a class="header" href="#find_key_safe"><code>find_key_safe</code></a></h3>
+<p>Returns an <a href="./option.html"><code>Option</code></a> containing the first key that matches the condition, or <code>Option[KeyType]::None</code> if none found.</p>
+<pre><code class="language-helios">map.find_key_safe((key: KeyType) -&gt; Bool) -&gt; Option[KeyType]
+</code></pre>
+<h3 id="find_value"><a class="header" href="#find_value"><code>find_value</code></a></h3>
+<p>Returns the first value that matches the condition. Throws an error if none found.</p>
+<pre><code class="language-helios">map.find_value((value: ValueType) -&gt; Bool) -&gt; ValueType
+</code></pre>
+<h3 id="find_value_safe"><a class="header" href="#find_value_safe"><code>find_value_safe</code></a></h3>
+<p>Returns an <a href="./option.html"><code>Option</code></a> containing the first value that matches the condition, or <code>Option[ValueType]::None</code> if none found.</p>
+<pre><code class="language-helios">map.find_value_safe((value: ValueType) -&gt; Bool) -&gt; Option[ValueType]
+</code></pre>
 <h3 id="fold"><a class="header" href="#fold"><code>fold</code></a></h3>
 <pre><code class="language-helios">map.fold(
     reducer: (ReducedType, KeyType, ValueType) -&gt; ReducedType, 
@@ -240,6 +256,18 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 </code></pre>
 <h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
 <pre><code class="language-helios">map.serialize() -&gt; ByteArray
+</code></pre>
+<h3 id="sort"><a class="header" href="#sort"><code>sort</code></a></h3>
+<p>Sort the map using insertion sort.</p>
+<pre><code class="language-helios">map.sort((key_a: KeyType, value_a: ValueType, key_b: KeyType, value_b: ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
+</code></pre>
+<h3 id="sort_by_key"><a class="header" href="#sort_by_key"><code>sort_by_key</code></a></h3>
+<p>Sort the map by applying insertion sort to the keys.</p>
+<pre><code class="language-helios">map.sort((a: KeyType, b: KeyType) -&gt; Bool) -&gt; Map[KeyType]ValueType
+</code></pre>
+<h3 id="sort_by_value"><a class="header" href="#sort_by_value"><code>sort_by_value</code></a></h3>
+<p>Sort the map by applying insertion sort to the values.</p>
+<pre><code class="language-helios">map.sort((a: ValueType, b: ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
 </code></pre>
 
                     </main>

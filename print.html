@@ -1480,6 +1480,10 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="serialize-11"><a class="header" href="#serialize-11"><code>serialize</code></a></h3>
 <pre><code class="language-helios">list.serialize() -&gt; ByteArray
 </code></pre>
+<h3 id="sort"><a class="header" href="#sort"><code>sort</code></a></h3>
+<p>Sorts the list using insertion sort.</p>
+<pre><code class="language-helios">list.sort((a: ItemType, b: ItemType) -&gt; Bool) -&gt; []ItemType
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="map-2"><a class="header" href="#map-2"><code>Map</code></a></h1>
 <p>List of key-value pairs.</p>
 <blockquote>
@@ -1555,6 +1559,22 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id="filter_by_value"><a class="header" href="#filter_by_value"><code>filter_by_value</code></a></h3>
 <pre><code class="language-helios">map.filter_by_value(predicate: (ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
 </code></pre>
+<h3 id="find_key"><a class="header" href="#find_key"><code>find_key</code></a></h3>
+<p>Returns the first key that matches the condition. Throws an error if none found.</p>
+<pre><code class="language-helios">map.find_key((key: KeyType) -&gt; Bool) -&gt; KeyType
+</code></pre>
+<h3 id="find_key_safe"><a class="header" href="#find_key_safe"><code>find_key_safe</code></a></h3>
+<p>Returns an <a href="lang/builtins/./option.html"><code>Option</code></a> containing the first key that matches the condition, or <code>Option[KeyType]::None</code> if none found.</p>
+<pre><code class="language-helios">map.find_key_safe((key: KeyType) -&gt; Bool) -&gt; Option[KeyType]
+</code></pre>
+<h3 id="find_value"><a class="header" href="#find_value"><code>find_value</code></a></h3>
+<p>Returns the first value that matches the condition. Throws an error if none found.</p>
+<pre><code class="language-helios">map.find_value((value: ValueType) -&gt; Bool) -&gt; ValueType
+</code></pre>
+<h3 id="find_value_safe"><a class="header" href="#find_value_safe"><code>find_value_safe</code></a></h3>
+<p>Returns an <a href="lang/builtins/./option.html"><code>Option</code></a> containing the first value that matches the condition, or <code>Option[ValueType]::None</code> if none found.</p>
+<pre><code class="language-helios">map.find_value_safe((value: ValueType) -&gt; Bool) -&gt; Option[ValueType]
+</code></pre>
 <h3 id="fold-1"><a class="header" href="#fold-1"><code>fold</code></a></h3>
 <pre><code class="language-helios">map.fold(
     reducer: (ReducedType, KeyType, ValueType) -&gt; ReducedType, 
@@ -1583,6 +1603,18 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 </code></pre>
 <h3 id="serialize-12"><a class="header" href="#serialize-12"><code>serialize</code></a></h3>
 <pre><code class="language-helios">map.serialize() -&gt; ByteArray
+</code></pre>
+<h3 id="sort-1"><a class="header" href="#sort-1"><code>sort</code></a></h3>
+<p>Sort the map using insertion sort.</p>
+<pre><code class="language-helios">map.sort((key_a: KeyType, value_a: ValueType, key_b: KeyType, value_b: ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
+</code></pre>
+<h3 id="sort_by_key"><a class="header" href="#sort_by_key"><code>sort_by_key</code></a></h3>
+<p>Sort the map by applying insertion sort to the keys.</p>
+<pre><code class="language-helios">map.sort((a: KeyType, b: KeyType) -&gt; Bool) -&gt; Map[KeyType]ValueType
+</code></pre>
+<h3 id="sort_by_value"><a class="header" href="#sort_by_value"><code>sort_by_value</code></a></h3>
+<p>Sort the map by applying insertion sort to the values.</p>
+<pre><code class="language-helios">map.sort((a: ValueType, b: ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mintingpolicyhash"><a class="header" href="#mintingpolicyhash"><code>MintingPolicyHash</code></a></h1>
 <p>This is a type-safe wrapper around <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a> that represents the hash of minting policy script.</p>
@@ -2614,14 +2646,14 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <div style="break-before: page; page-break-before: always;"></div><h1 id="setup-of-the-helios-library"><a class="header" href="#setup-of-the-helios-library">Setup of the Helios Library</a></h1>
 <p>The Helios library is platform agnostic and can be used in many different ways.</p>
 <h2 id="webpage-script-tag"><a class="header" href="#webpage-script-tag">Webpage <code>script</code> tag</a></h2>
-<pre><code class="language-html">&lt;script src=&quot;https://helios.hyperion-bt.org/0.9.5/helios.js&quot; type=&quot;module&quot; crossorigin&gt;&lt;/script&gt;
+<pre><code class="language-html">&lt;script src=&quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot; type=&quot;module&quot; crossorigin&gt;&lt;/script&gt;
 </code></pre>
 <h2 id="module-with-cdn-url"><a class="header" href="#module-with-cdn-url">Module with CDN URL</a></h2>
 <p>Helios can be imported as a module using our CDN. This is supported by <a href="https://deno.land">Deno</a> and most modern browsers:</p>
-<pre><code class="language-js">import * as helios from &quot;https://helios.hyperion-bt.org/0.9.5/helios.js&quot;
+<pre><code class="language-js">import * as helios from &quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot;
 
 // or only the necessary parts (recommended as you get more acquainted with the library)
-import { Program } from &quot;https://helios.hyperion-bt.org/0.9.5/helios.js&quot;
+import { Program } from &quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot;
 </code></pre>
 <p>Alternatively you can use <code>&quot;helios&quot;</code> as a placeholder for the URL and, if not using any builder-tools, specify the module URL in an <a href="https://github.com/WICG/import-maps">importmap</a> (currently only supported by Chrome):</p>
 <pre><code class="language-js">// in you javascript file
@@ -2631,7 +2663,7 @@ import * as helios from &quot;helios&quot;
 &lt;script type=&quot;importmap&quot;&gt;
     {
         &quot;imports&quot;: {
-            &quot;helios&quot;: &quot;https://helios.hyperion-bt.org/0.9.5/helios.js&quot;
+            &quot;helios&quot;: &quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot;
         }
     }
 &lt;/script&gt;
@@ -2642,7 +2674,7 @@ import * as helios from &quot;helios&quot;
 <pre><code class="language-bash">$ npm i @hyperionbt/helios
 </code></pre>
 <p>Or install a specific version:</p>
-<pre><code class="language-bash">$ npm i @hyperionbt/helios@0.9.5
+<pre><code class="language-bash">$ npm i @hyperionbt/helios@0.9.7
 </code></pre>
 <p>In your javascript file:</p>
 <pre><code class="language-js">import { Program } from &quot;@hyperionbt/helios&quot;
