@@ -4,7 +4,10 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Setup - The Helios Smart Contract Language</title>
+
+
         <!-- Custom HTML head -->
+        
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -15,9 +18,11 @@
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
         <link rel="stylesheet" href="../css/print.css" media="print">
+
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
         <link rel="stylesheet" href="../fonts/fonts.css">
+
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
         <link rel="stylesheet" href="../tomorrow-night.css">
@@ -25,6 +30,7 @@
 
         <!-- Custom theme stylesheets -->
         <link rel="stylesheet" href="../src/custom.css">
+
     </head>
     <body>
         <!-- Provide site root to javascript -->
@@ -83,7 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -113,6 +119,7 @@
                         <a href="https://github.com/hyperion-bt/Helios-Book" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
+
                     </div>
                 </div>
 
@@ -126,6 +133,7 @@
                         </ul>
                     </div>
                 </div>
+
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
@@ -140,14 +148,14 @@
                         <h1 id="setup-of-the-helios-library"><a class="header" href="#setup-of-the-helios-library">Setup of the Helios Library</a></h1>
 <p>The Helios library is platform agnostic and can be used in many different ways.</p>
 <h2 id="webpage-script-tag"><a class="header" href="#webpage-script-tag">Webpage <code>script</code> tag</a></h2>
-<pre><code class="language-html">&lt;script src=&quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot; type=&quot;module&quot; crossorigin&gt;&lt;/script&gt;
+<pre><code class="language-html">&lt;script src=&quot;https://helios.hyperion-bt.org/0.9.10/helios.js&quot; type=&quot;module&quot; crossorigin&gt;&lt;/script&gt;
 </code></pre>
 <h2 id="module-with-cdn-url"><a class="header" href="#module-with-cdn-url">Module with CDN URL</a></h2>
 <p>Helios can be imported as a module using our CDN. This is supported by <a href="https://deno.land">Deno</a> and most modern browsers:</p>
-<pre><code class="language-js">import * as helios from &quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot;
+<pre><code class="language-js">import * as helios from &quot;https://helios.hyperion-bt.org/0.9.10/helios.js&quot;
 
 // or only the necessary parts (recommended as you get more acquainted with the library)
-import { Program } from &quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot;
+import { Program } from &quot;https://helios.hyperion-bt.org/0.9.10/helios.js&quot;
 </code></pre>
 <p>Alternatively you can use <code>&quot;helios&quot;</code> as a placeholder for the URL and, if not using any builder-tools, specify the module URL in an <a href="https://github.com/WICG/import-maps">importmap</a> (currently only supported by Chrome):</p>
 <pre><code class="language-js">// in you javascript file
@@ -157,7 +165,7 @@ import * as helios from &quot;helios&quot;
 &lt;script type=&quot;importmap&quot;&gt;
     {
         &quot;imports&quot;: {
-            &quot;helios&quot;: &quot;https://helios.hyperion-bt.org/0.9.7/helios.js&quot;
+            &quot;helios&quot;: &quot;https://helios.hyperion-bt.org/0.9.10/helios.js&quot;
         }
     }
 &lt;/script&gt;
@@ -168,7 +176,7 @@ import * as helios from &quot;helios&quot;
 <pre><code class="language-bash">$ npm i @hyperionbt/helios
 </code></pre>
 <p>Or install a specific version:</p>
-<pre><code class="language-bash">$ npm i @hyperionbt/helios@0.9.7
+<pre><code class="language-bash">$ npm i @hyperionbt/helios@0.9.10
 </code></pre>
 <p>In your javascript file:</p>
 <pre><code class="language-js">import { Program } from &quot;@hyperionbt/helios&quot;
@@ -182,9 +190,11 @@ import * as helios from &quot;helios&quot;
                             <a rel="prev" href="../api/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
+
                             <a rel="next" href="../api/deno.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
+
                         <div style="clear: both"></div>
                     </nav>
                 </div>
@@ -194,6 +204,7 @@ import * as helios from &quot;helios&quot;
                     <a rel="prev" href="../api/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
+
                     <a rel="next" href="../api/deno.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
@@ -201,17 +212,25 @@ import * as helios from &quot;helios&quot;
 
         </div>
 
+
+
+
         <script>
             window.playground_copyable = true;
         </script>
+
+
         <script src="../elasticlunr.min.js"></script>
         <script src="../mark.min.js"></script>
         <script src="../searcher.js"></script>
+
         <script src="../clipboard.min.js"></script>
         <script src="../highlight.js"></script>
         <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="../src/custom.js"></script>
+
+
     </body>
 </html>
