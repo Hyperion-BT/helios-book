@@ -24,11 +24,14 @@ This section contains a reference of all the Helios builtins.
 ## Hash and cryptography types
 
 These are type-safe wrappers around `ByteArray`:
+  * [DatumHash](./datumhash.md)
   * [PubKey](./pubkey.md)
   * [PubKeyHash](./pubkeyhash.md)
-  * [ValidatorHash](./validatorhash.md)
   * [MintingPolicyHash](./mintingpolicyhash.md)
-  * [DatumHash](./datumhash.md)
+  * [StakeKeyHash](./stakekeyhash.md)
+  * [StakingValidatorHash](./stakingvalidatorhash.md)
+  * [ValidatorHash](./validatorhash.md)
+  
 
 ## Money types
 
@@ -50,5 +53,6 @@ The following types are related to `ScriptContext`:
   * [Address](./address.md)
   * [Credential](./credential.md)
   * [StakingCredential](./stakingcredential.md)
+  * [StakingHash](./stakinghash.md)
   * [StakingPurpose](./stakingpurpose.md)
   * [DCert](./dcert.md)
