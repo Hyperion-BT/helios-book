@@ -9,6 +9,17 @@ Example:
 example: []Int = []Int{1, 2, 3, 4, 5}; ...
 ```
 
+Looping over multiple lists at once can be done with a recursive function call:
+```helios
+func add_element_wise(a: []Int, b[]Int) -> []Int {
+    if (a.is_empty()) {
+        []Int{}
+    } else {
+        add_element_wise(a.tail, b.tail).prepend(a.head + b.head)
+    }
+}
+```
+
 ## Associated Functions
 
 ### `from_data`

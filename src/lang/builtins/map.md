@@ -22,12 +22,36 @@ Map[KeyType]ValueType::from_data(data: Data) -> Map[KeyType]ValueType
 
 ## Getters
 
+### `head_key`
+
+Returns the key of the first entry in the `Map`. Throws an error if the `Map` is empty.
+
+```helios
+map.head_key -> KeyType
+```
+
+### `head_value`
+
+Returns the value of the first entry in the `Map`. Throws an error if the `Map` is empty.
+
+```helios
+map.head_value -> ValueType
+```
+
 ### `length`
 
 Returns the number of items in a map.
 
 ```helios
 map.length -> Int
+```
+
+### `tail`
+
+Returns the entries after the first entry as a new `Map`. Throws an error if the `Map` is empty.
+
+```helios
+map.tail -> Map[KeyType]ValueType
 ```
 
 ## Operators
@@ -55,22 +79,6 @@ Map[KeyType]ValueType + Map[KeyType]ValueType -> Map[KeyType]ValueType
 ```
 
 ## Methods
-
-### `get`
-
-Returns the value of the first entry in the map that matches the given key. Throws an error of the key isn't found.
-
-```helios
-map.get(key: KeyType) -> ValueType
-```
-
-### `get_safe`
-
-Returns the value of the first entry in the map that matches the given key (wrapped in an option). Returns `Option[ValueType]::None` if the key isn't found.
-
-```helios
-map.get_safe(key: KeyType) -> Option[ValueType]
-```
 
 ### `all`
 
@@ -120,6 +128,14 @@ Returns `true` if any map value satisfies the predicate.
 map.any_value(predicate: (ValueType) -> Bool) -> Bool
 ```
 
+### `delete`
+
+Removes all entries with the given key. Doesn't throw an error if key isn't found.
+
+```helios
+map.delete(key: KeyType) -> Map[KeyType]ValueType
+```
+
 ### `filter`
 
 ```helios
@@ -138,44 +154,79 @@ map.filter_by_key(predicate: (KeyType) -> Bool) -> Map[KeyType]ValueType
 map.filter_by_value(predicate: (ValueType) -> Bool) -> Map[KeyType]ValueType
 ```
 
-### `find_key`
+### `find`
 
-Returns the first key that matches the condition. Throws an error if none found.
+Returns a new `Map` containing the first entry that matches the predicate. Returns an empty `Map` if none found.
 
 ```helios
-map.find_key((key: KeyType) -> Bool) -> KeyType
+map.find(predicate: (key: KeyType, value: ValueType) -> Bool) -> Map[KeyType]ValueType
+```
+
+### `find_by_key`
+
+Returns a new `Map` containing the first entry whose key matches the predicate. Returns an empty `Map` if none found.
+
+```helios
+map.find_by_key(predicate: (key: KeyType) -> Bool) -> Map[KeyType]ValueType
+```
+
+### `find_by_value`
+
+Returns a new `Map` containing the first entry whose value matches the predicate. Returns an empty `Map` if none found.
+
+```helios
+map.find_by_value(predicate: (value: ValueType) -> Bool) -> Map[KeyType]ValueType
+```
+
+### `find_key`
+
+Returns the first key that matches the predicate. Throws an error if none found.
+
+```helios
+map.find_key(predicate: (key: KeyType) -> Bool) -> KeyType
 ```
 
 ### `find_key_safe`
 
-Returns an [`Option`](./option.md) containing the first key that matches the condition, or `Option[KeyType]::None` if none found.
+Returns an [`Option`](./option.md) containing the first key that matches the predicate, or `Option[KeyType]::None` if none found.
 
 ```helios
-map.find_key_safe((key: KeyType) -> Bool) -> Option[KeyType]
+map.find_key_safe(predicate: (key: KeyType) -> Bool) -> Option[KeyType]
 ```
 
 ### `find_value`
 
-Returns the first value that matches the condition. Throws an error if none found.
+Returns the first value that matches the predicate. Throws an error if none found.
 
 ```helios
-map.find_value((value: ValueType) -> Bool) -> ValueType
+map.find_value(predicate: (value: ValueType) -> Bool) -> ValueType
 ```
 
 ### `find_value_safe`
 
-Returns an [`Option`](./option.md) containing the first value that matches the condition, or `Option[ValueType]::None` if none found.
+Returns an [`Option`](./option.md) containing the first value that matches the predicate, or `Option[ValueType]::None` if none found.
 
 ```helios
-map.find_value_safe((value: ValueType) -> Bool) -> Option[ValueType]
+map.find_value_safe(predicate: (value: ValueType) -> Bool) -> Option[ValueType]
 ```
 
 ### `fold`
 
 ```helios
 map.fold(
-    reducer: (ReducedType, KeyType, ValueType) -> ReducedType, 
+    reducer: (prev: ReducedType, key: KeyType, value: ValueType) -> ReducedType, 
     init: ReducedType
+) -> ReducedType
+```
+
+### `fold_lazy`
+
+Fold that allows breaking the loop before reaching the end of the map. Can also be used to fold from the last to the first entry of the `Map` instead of the other way around.
+
+```helios
+map.fold_lazy(
+    reducer: (key: KeyType, value: ValueType, next: () -> ReducedType) -> ReducedType,
+    final: ReducedType
 ) -> ReducedType
 ```
 
@@ -183,8 +234,19 @@ map.fold(
 
 ```helios
 map.fold_keys(
-    reducer: (ReducedType, KeyType) -> ReducedType, 
+    reducer: (prev: ReducedType, key: KeyType) -> ReducedType, 
     init: ReducedType
+) -> ReducedType
+```
+
+### `fold_keys_lazy`
+
+Fold over the keys, while allowing breaking the loop before reaching the end of the `Map`. Can also be used to fold from the last to the first key of the `Map`,  instead of the other way around.
+
+```
+map.fold_keys_lazy(
+    reducer: (key: KeyType, next: () -> ReducedType) -> ReducedType,
+    final: ReducedType
 ) -> ReducedType
 ```
 
@@ -195,6 +257,33 @@ map.fold_values(
     reducer: (ReducedType, ValueType) -> ReducedType, 
     init: ReducedType
 ) -> ReducedType
+```
+
+### `fold_values_lazy`
+
+Fold over the values, while allowing breaking the loop before reaching the end of the map. Can also be used to fold from the last to the first value of the `Map`,  instead of the other way around.
+
+```
+map.fold_values_lazy(
+    reducer: (value: ValueType, next: () -> ReducedType) -> ReducedType,
+    final: ReducedType
+) -> ReducedType
+```
+
+### `get`
+
+Returns the value of the first entry in the map that matches the given key. Throws an error of the key isn't found.
+
+```helios
+map.get(key: KeyType) -> ValueType
+```
+
+### `get_safe`
+
+Returns the value of the first entry in the map that matches the given key (wrapped in an option). Returns `Option[ValueType]::None` if the key isn't found.
+
+```helios
+map.get_safe(key: KeyType) -> Option[ValueType]
 ```
 
 ### `map_keys`
@@ -219,17 +308,30 @@ map.map_values(mapper: (ValueType) -> NewValueType) -> Map[KeyType]NewValueType
 map.serialize() -> ByteArray
 ```
 
-### `sort`
+### `set`
 
-Sorts the map using insertion sort.
+Sets the first entry with given key to a new value. This entry is appended to end of the `Map` if the key isn't found.
 
 ```helios
-map.sort((key_a: KeyType, value_a: ValueType, key_b: KeyType, value_b: ValueType) -> Bool) -> Map[KeyType]ValueType
+map.set(key: KeyType, value: ValueType) -> Map[KeyType]ValueType
+```
+
+### `sort`
+
+Sorts the map using insertion sort. The comparison function should return `true` if `a` and `b` are in the correct order.
+
+```helios
+map.sort(
+    compare: (
+        key_a: KeyType, value_a: ValueType, 
+        key_b: KeyType, value_b: ValueType
+    ) -> Bool
+) -> Map[KeyType]ValueType
 ```
 
 ### `sort_by_key`
 
-Sorts the map by applying insertion sort to the keys.
+Sorts the map by applying insertion sort to the keys. The comparison function should return `true` if `a` and `b` are in the correct order.
 
 ```helios
 map.sort((a: KeyType, b: KeyType) -> Bool) -> Map[KeyType]ValueType
@@ -237,7 +339,7 @@ map.sort((a: KeyType, b: KeyType) -> Bool) -> Map[KeyType]ValueType
 
 ### `sort_by_value`
 
-Sorts the map by applying insertion sort to the values.
+Sorts the map by applying insertion sort to the values. The comparison function should return `true` if `a` and `b` are in the correct order.
 
 ```helios
 map.sort((a: ValueType, b: ValueType) -> Bool) -> Map[KeyType]ValueType
