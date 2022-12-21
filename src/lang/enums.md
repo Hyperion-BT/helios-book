@@ -14,6 +14,8 @@ enum Redeemer {
 const my_redeemer = Redeemer::Buy { PubKeyHash::new(#...) } // type of lhs is inferred
 ```
 
+> **Note**: the OOP analogy of an enum is an abstract class, and the enum variants can be thought of as concrete implementations (i.e. child classes).
+
 > **Note**: enum variants with one field are constructed without that field's name as a key (similar to structs).
 
 > **Note**: enum variants without fields don't use braces.

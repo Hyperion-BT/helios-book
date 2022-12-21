@@ -40,6 +40,35 @@ ByteArray == ByteArray -> Bool
 ByteArray != ByteArray -> Bool
 ```
 
+### `>=`
+
+```helios
+ByteArray >= ByteArray -> Bool
+```
+
+### `>`
+
+The lhs is greater-than the rhs if the first rhs byte, that isn't equal to the corresponding lhs byte, is smaller than that byte. Returns true if all common bytes are equal, but the rhs is shorter than the lhs.
+
+
+```helios
+ByteArray > ByteArray -> Bool
+```
+
+### `<=`
+
+```helios
+ByteArray <= ByteArray -> Bool
+```
+
+### `<`
+
+The lhs is less-than the rhs if the first rhs byte, that isn't equal to the corresponding lhs byte, is greater than that byte. Returns false if the rhs is empty.
+
+```helios
+ByteArray < ByteArray -> Bool
+```
+
 ### `+`
 
 Concatenation of two `ByteArray`s.

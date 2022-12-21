@@ -1,6 +1,6 @@
 # `Map`
 
-List of key-value pairs.
+List of key-value pairs. The insertion order of the key-value pairs matters.
 
 > **Note**: a `Map` is internally not implemented as a hash-table, so keys aren't guaranteed to be unique.
 
@@ -300,6 +300,14 @@ Creates a new map by transforming the map values. The map keys remain the same.
 
 ```helios
 map.map_values(mapper: (ValueType) -> NewValueType) -> Map[KeyType]NewValueType
+```
+
+### `prepend`
+
+Prepends a key-value pair to the beginning of the `Map`, creating a new `Map`.
+
+```helios
+map.prepend(key: KeyType, value: ValueType) -> Map[KeyType][ValueType]
 ```
 
 ### `serialize`
