@@ -182,6 +182,22 @@
 <blockquote>
 <p><strong>Note:</strong> Function statements can be referenced by their name, returning a function value. This should be preferred to using anonymous functions, as it is more readable.</p>
 </blockquote>
+<h2 id="multiple-return-values"><a class="header" href="#multiple-return-values">Multiple return values</a></h2>
+<p>Functions can return multiple values:</p>
+<pre><code class="language-helios">func swap(a: Int, b: Int) -&gt; (Int, Int) {
+    (b, a)
+}
+</code></pre>
+<p>Assignment expressions can assign to multiple lhs names at ones:</p>
+<pre><code class="language-helios">(a: Int, b: Int) = swap(10, 20); ... // a==20 &amp;&amp; b==10
+</code></pre>
+<h2 id="ignoring-unused-arguments"><a class="header" href="#ignoring-unused-arguments">Ignoring unused arguments</a></h2>
+<p>All function arguments must be used in its definition. This can be inconvenient when defining callbacks where you want to ignore some of the arguments. For this situation you can use an <code>_</code> (underscore):</p>
+<pre><code class="language-helios">// sort a map by only comparing the keys
+map.sort((a_key: ByteArray, _, b_key: ByteArray, _) -&gt; Bool {
+    a_key &lt; b_key
+})
+</code></pre>
 <h2 id="function-values"><a class="header" href="#function-values">Function values</a></h2>
 <p>Functions are first-class citizens in Helios and can be used as values. This means:</p>
 <h3 id="1-functions-can-be-passed-as-arguments"><a class="header" href="#1-functions-can-be-passed-as-arguments">1. Functions can be passed as arguments</a></h3>
