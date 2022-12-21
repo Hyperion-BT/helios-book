@@ -146,7 +146,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="map"><a class="header" href="#map"><code>Map</code></a></h1>
-<p>List of key-value pairs.</p>
+<p>List of key-value pairs. The insertion order of the key-value pairs matters.</p>
 <blockquote>
 <p><strong>Note</strong>: a <code>Map</code> is internally not implemented as a hash-table, so keys aren't guaranteed to be unique.</p>
 </blockquote>
@@ -310,6 +310,10 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id="map_values"><a class="header" href="#map_values"><code>map_values</code></a></h3>
 <p>Creates a new map by transforming the map values. The map keys remain the same.</p>
 <pre><code class="language-helios">map.map_values(mapper: (ValueType) -&gt; NewValueType) -&gt; Map[KeyType]NewValueType
+</code></pre>
+<h3 id="prepend"><a class="header" href="#prepend"><code>prepend</code></a></h3>
+<p>Prepends a key-value pair to the beginning of the <code>Map</code>, creating a new <code>Map</code>.</p>
+<pre><code class="language-helios">map.prepend(key: KeyType, value: ValueType) -&gt; Map[KeyType][ValueType]
 </code></pre>
 <h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
 <pre><code class="language-helios">map.serialize() -&gt; ByteArray

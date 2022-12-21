@@ -586,6 +586,9 @@ struct Rational {
 const my_redeemer = Redeemer::Buy { PubKeyHash::new(#...) } // type of lhs is inferred
 </code></pre>
 <blockquote>
+<p><strong>Note</strong>: the OOP analogy of an enum is an abstract class, and the enum variants can be thought of as concrete implementations (i.e. child classes).</p>
+</blockquote>
+<blockquote>
 <p><strong>Note</strong>: enum variants with one field are constructed without that field's name as a key (similar to structs).</p>
 </blockquote>
 <blockquote>
@@ -1084,7 +1087,21 @@ bool_false: Bool = false; ...
 <h3 id="-10"><a class="header" href="#-10"><code>!=</code></a></h3>
 <pre><code class="language-helios">ByteArray != ByteArray -&gt; Bool
 </code></pre>
-<h3 id="-11"><a class="header" href="#-11"><code>+</code></a></h3>
+<h3 id="-11"><a class="header" href="#-11"><code>&gt;=</code></a></h3>
+<pre><code class="language-helios">ByteArray &gt;= ByteArray -&gt; Bool
+</code></pre>
+<h3 id="-12"><a class="header" href="#-12"><code>&gt;</code></a></h3>
+<p>The lhs is greater-than the rhs if the first rhs byte, that isn't equal to the corresponding lhs byte, is smaller than that byte. Returns true if all common bytes are equal, but the rhs is shorter than the lhs.</p>
+<pre><code class="language-helios">ByteArray &gt; ByteArray -&gt; Bool
+</code></pre>
+<h3 id="-13"><a class="header" href="#-13"><code>&lt;=</code></a></h3>
+<pre><code class="language-helios">ByteArray &lt;= ByteArray -&gt; Bool
+</code></pre>
+<h3 id="-14"><a class="header" href="#-14"><code>&lt;</code></a></h3>
+<p>The lhs is less-than the rhs if the first rhs byte, that isn't equal to the corresponding lhs byte, is greater than that byte. Returns false if the rhs is empty.</p>
+<pre><code class="language-helios">ByteArray &lt; ByteArray -&gt; Bool
+</code></pre>
+<h3 id="-15"><a class="header" href="#-15"><code>+</code></a></h3>
 <p>Concatenation of two <code>ByteArray</code>s.</p>
 <pre><code class="language-helios">ByteArray + ByteArray -&gt; ByteArray
 </code></pre>
@@ -1153,10 +1170,10 @@ validator_credential: Credential::Validator = Credential::new_validator(Validato
 validator_credential.hash -&gt; ValidatorHash
 </code></pre>
 <h2 id="operators-5"><a class="header" href="#operators-5">Operators</a></h2>
-<h3 id="-12"><a class="header" href="#-12"><code>==</code></a></h3>
+<h3 id="-16"><a class="header" href="#-16"><code>==</code></a></h3>
 <pre><code class="language-helios">Credential == Credential -&gt; Bool
 </code></pre>
-<h3 id="-13"><a class="header" href="#-13"><code>!=</code></a></h3>
+<h3 id="-17"><a class="header" href="#-17"><code>!=</code></a></h3>
 <pre><code class="language-helios">Credential != Credential -&gt; Bool
 </code></pre>
 <h2 id="methods-5"><a class="header" href="#methods-5">Methods</a></h2>
@@ -1166,10 +1183,10 @@ validator_credential.hash -&gt; ValidatorHash
 <div style="break-before: page; page-break-before: always;"></div><h1 id="data-1"><a class="header" href="#data-1"><code>Data</code></a></h1>
 <p>Represents type-less data, as returned by the <a href="lang/builtins/./outputdatum.html#inline"><code>OutputDatum::Inline inline</code></a> getter. Can be cast directly into any other type using <code>from_data</code>, or indirectly using <a href="lang/builtins/../enums.html#data"><code>switch</code></a>.</p>
 <h2 id="operators-6"><a class="header" href="#operators-6">Operators</a></h2>
-<h3 id="-14"><a class="header" href="#-14"><code>==</code></a></h3>
+<h3 id="-18"><a class="header" href="#-18"><code>==</code></a></h3>
 <pre><code class="language-helios">Data == Data -&gt; Bool
 </code></pre>
-<h3 id="-15"><a class="header" href="#-15"><code>!=</code></a></h3>
+<h3 id="-19"><a class="header" href="#-19"><code>!=</code></a></h3>
 <pre><code class="language-helios">Data != Data -&gt; Bool
 </code></pre>
 <h2 id="methods-6"><a class="header" href="#methods-6">Methods</a></h2>
@@ -1186,10 +1203,10 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">DatumHash::from_data(data: Data) -&gt; DatumHash
 </code></pre>
 <h2 id="operators-7"><a class="header" href="#operators-7">Operators</a></h2>
-<h3 id="-16"><a class="header" href="#-16"><code>==</code></a></h3>
+<h3 id="-20"><a class="header" href="#-20"><code>==</code></a></h3>
 <pre><code class="language-helios">DatumHash == DatumHash -&gt; Bool
 </code></pre>
-<h3 id="-17"><a class="header" href="#-17"><code>!=</code></a></h3>
+<h3 id="-21"><a class="header" href="#-21"><code>!=</code></a></h3>
 <pre><code class="language-helios">DatumHash != DatumHash -&gt; Bool
 </code></pre>
 <h2 id="methods-7"><a class="header" href="#methods-7">Methods</a></h2>
@@ -1268,10 +1285,10 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">retire_pool_dcert.epoch -&gt; Int
 </code></pre>
 <h2 id="operators-8"><a class="header" href="#operators-8">Operators</a></h2>
-<h3 id="-18"><a class="header" href="#-18"><code>==</code></a></h3>
+<h3 id="-22"><a class="header" href="#-22"><code>==</code></a></h3>
 <pre><code class="language-helios">DCert == DCert -&gt; Bool
 </code></pre>
-<h3 id="-19"><a class="header" href="#-19"><code>!=</code></a></h3>
+<h3 id="-23"><a class="header" href="#-23"><code>!=</code></a></h3>
 <pre><code class="language-helios">DCert != DCert -&gt; Bool
 </code></pre>
 <h2 id="methods-8"><a class="header" href="#methods-8">Methods</a></h2>
@@ -1289,41 +1306,41 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">Duration::from_data(data: Data) -&gt; Duration
 </code></pre>
 <h2 id="operators-9"><a class="header" href="#operators-9">Operators</a></h2>
-<h3 id="-20"><a class="header" href="#-20"><code>==</code></a></h3>
+<h3 id="-24"><a class="header" href="#-24"><code>==</code></a></h3>
 <pre><code class="language-helios">Duration == Duration -&gt; Bool
 </code></pre>
-<h3 id="-21"><a class="header" href="#-21"><code>!=</code></a></h3>
+<h3 id="-25"><a class="header" href="#-25"><code>!=</code></a></h3>
 <pre><code class="language-helios">Duration != Duration -&gt; Bool
 </code></pre>
-<h3 id="-22"><a class="header" href="#-22"><code>&gt;=</code></a></h3>
+<h3 id="-26"><a class="header" href="#-26"><code>&gt;=</code></a></h3>
 <pre><code class="language-helios">Duration &gt;= Duration -&gt; Bool
 </code></pre>
-<h3 id="-23"><a class="header" href="#-23"><code>&gt;</code></a></h3>
+<h3 id="-27"><a class="header" href="#-27"><code>&gt;</code></a></h3>
 <pre><code class="language-helios">Duration &gt; Duration -&gt; Bool
 </code></pre>
-<h3 id="-24"><a class="header" href="#-24"><code>&lt;=</code></a></h3>
+<h3 id="-28"><a class="header" href="#-28"><code>&lt;=</code></a></h3>
 <pre><code class="language-helios">Duration &lt;= Duration -&gt; Bool
 </code></pre>
-<h3 id="-25"><a class="header" href="#-25"><code>&lt;</code></a></h3>
+<h3 id="-29"><a class="header" href="#-29"><code>&lt;</code></a></h3>
 <pre><code class="language-helios">Duration &lt; Duration -&gt; Bool
 </code></pre>
-<h3 id="-26"><a class="header" href="#-26"><code>+</code></a></h3>
+<h3 id="-30"><a class="header" href="#-30"><code>+</code></a></h3>
 <pre><code class="language-helios">Duration + Duration -&gt; Duration
 </code></pre>
 <h3 id="--1"><a class="header" href="#--1"><code>-</code></a></h3>
 <pre><code class="language-helios">Duration - Duration -&gt; Duration
 </code></pre>
-<h3 id="-27"><a class="header" href="#-27"><code>*</code></a></h3>
+<h3 id="-31"><a class="header" href="#-31"><code>*</code></a></h3>
 <pre><code class="language-helios">Duration * Int -&gt; Duration
 </code></pre>
-<h3 id="-28"><a class="header" href="#-28"><code>/</code></a></h3>
+<h3 id="-32"><a class="header" href="#-32"><code>/</code></a></h3>
 <p>A <code>Duration</code> divided by a <code>Duration</code> is an <a href="lang/builtins/./int.html"><code>Int</code></a>.</p>
 <pre><code class="language-helios">Duration / Duration -&gt; Int
 </code></pre>
 <p>A <code>Duration</code> divided by an <a href="lang/builtins/./int.html"><code>Int</code></a> is a <code>Duration</code>.</p>
 <pre><code class="language-helios">Duration / Int -&gt; Duration
 </code></pre>
-<h3 id="-29"><a class="header" href="#-29"><code>%</code></a></h3>
+<h3 id="-33"><a class="header" href="#-33"><code>%</code></a></h3>
 <p>Module operator that calculates remainder upon division.</p>
 <pre><code class="language-helios">Duration % Duration -&gt; Duration
 </code></pre>
@@ -1346,37 +1363,37 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">Int::from_little_endian(bytes: ByteArray) -&gt; Int
 </code></pre>
 <h2 id="operators-10"><a class="header" href="#operators-10">Operators</a></h2>
-<h3 id="-30"><a class="header" href="#-30"><code>==</code></a></h3>
+<h3 id="-34"><a class="header" href="#-34"><code>==</code></a></h3>
 <pre><code class="language-helios">Int == Int -&gt; Bool
 </code></pre>
-<h3 id="-31"><a class="header" href="#-31"><code>!=</code></a></h3>
+<h3 id="-35"><a class="header" href="#-35"><code>!=</code></a></h3>
 <pre><code class="language-helios">Int != Int -&gt; Bool
 </code></pre>
-<h3 id="-32"><a class="header" href="#-32"><code>&gt;=</code></a></h3>
+<h3 id="-36"><a class="header" href="#-36"><code>&gt;=</code></a></h3>
 <pre><code class="language-helios">Int &gt;= Int -&gt; Bool
 </code></pre>
-<h3 id="-33"><a class="header" href="#-33"><code>&gt;</code></a></h3>
+<h3 id="-37"><a class="header" href="#-37"><code>&gt;</code></a></h3>
 <pre><code class="language-helios">Int &gt; Int -&gt; Bool
 </code></pre>
-<h3 id="-34"><a class="header" href="#-34"><code>&lt;=</code></a></h3>
+<h3 id="-38"><a class="header" href="#-38"><code>&lt;=</code></a></h3>
 <pre><code class="language-helios">Int &lt;= Int -&gt; Bool
 </code></pre>
-<h3 id="-35"><a class="header" href="#-35"><code>&lt;</code></a></h3>
+<h3 id="-39"><a class="header" href="#-39"><code>&lt;</code></a></h3>
 <pre><code class="language-helios">Int &lt; Int -&gt; Bool
 </code></pre>
-<h3 id="-36"><a class="header" href="#-36"><code>+</code></a></h3>
+<h3 id="-40"><a class="header" href="#-40"><code>+</code></a></h3>
 <pre><code class="language-helios">Int + Int -&gt; Int
 </code></pre>
 <h3 id="--2"><a class="header" href="#--2"><code>-</code></a></h3>
 <pre><code class="language-helios">Int - Int -&gt; Int
 </code></pre>
-<h3 id="-37"><a class="header" href="#-37"><code>*</code></a></h3>
+<h3 id="-41"><a class="header" href="#-41"><code>*</code></a></h3>
 <pre><code class="language-helios">Int * Int -&gt; Int
 </code></pre>
-<h3 id="-38"><a class="header" href="#-38"><code>/</code></a></h3>
+<h3 id="-42"><a class="header" href="#-42"><code>/</code></a></h3>
 <pre><code class="language-helios">Int / Int -&gt; Int
 </code></pre>
-<h3 id="-39"><a class="header" href="#-39"><code>%</code></a></h3>
+<h3 id="-43"><a class="header" href="#-43"><code>%</code></a></h3>
 <p>Modulo operator that returns remained after division.</p>
 <pre><code class="language-helios">Int % Int -&gt; Int
 </code></pre>
@@ -1440,13 +1457,13 @@ validator_credential.hash -&gt; ValidatorHash
 <p><strong>Note</strong>: <code>tail</code> doesn't return the last item in a list but returns everything after <code>head</code> as a new list.</p>
 </blockquote>
 <h2 id="operators-11"><a class="header" href="#operators-11">Operators</a></h2>
-<h3 id="-40"><a class="header" href="#-40"><code>==</code></a></h3>
+<h3 id="-44"><a class="header" href="#-44"><code>==</code></a></h3>
 <pre><code class="language-helios">[]ItemType == []ItemType -&gt; Bool
 </code></pre>
-<h3 id="-41"><a class="header" href="#-41"><code>!=</code></a></h3>
+<h3 id="-45"><a class="header" href="#-45"><code>!=</code></a></h3>
 <pre><code class="language-helios">[]ItemType != []ItemType -&gt; Bool
 </code></pre>
-<h3 id="-42"><a class="header" href="#-42"><code>+</code></a></h3>
+<h3 id="-46"><a class="header" href="#-46"><code>+</code></a></h3>
 <p>List concatenation</p>
 <pre><code class="language-helios">[]ItemType + []ItemType -&gt; []ItemType
 </code></pre>
@@ -1505,7 +1522,7 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">list.sort((a: ItemType, b: ItemType) -&gt; Bool) -&gt; []ItemType
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="map-2"><a class="header" href="#map-2"><code>Map</code></a></h1>
-<p>List of key-value pairs.</p>
+<p>List of key-value pairs. The insertion order of the key-value pairs matters.</p>
 <blockquote>
 <p><strong>Note</strong>: a <code>Map</code> is internally not implemented as a hash-table, so keys aren't guaranteed to be unique.</p>
 </blockquote>
@@ -1536,16 +1553,16 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <pre><code class="language-helios">map.tail -&gt; Map[KeyType]ValueType
 </code></pre>
 <h2 id="operators-12"><a class="header" href="#operators-12">Operators</a></h2>
-<h3 id="-43"><a class="header" href="#-43"><code>==</code></a></h3>
+<h3 id="-47"><a class="header" href="#-47"><code>==</code></a></h3>
 <pre><code class="language-helios">Map[KeyType]ValueType == Map[KeyType]ValueType -&gt; Bool
 </code></pre>
 <blockquote>
 <p><strong>Note</strong>: because Plutus-Core handles <code>Map</code> as a list, the entries must be in the same order for <code>==</code> to return <code>true</code>.</p>
 </blockquote>
-<h3 id="-44"><a class="header" href="#-44"><code>!=</code></a></h3>
+<h3 id="-48"><a class="header" href="#-48"><code>!=</code></a></h3>
 <pre><code class="language-helios">Map[KeyType]ValueType != Map[KeyType]ValueType -&gt; Bool
 </code></pre>
-<h3 id="-45"><a class="header" href="#-45"><code>+</code></a></h3>
+<h3 id="-49"><a class="header" href="#-49"><code>+</code></a></h3>
 <p>Concatenation of two maps.</p>
 <pre><code class="language-helios">Map[KeyType]ValueType + Map[KeyType]ValueType -&gt; Map[KeyType]ValueType
 </code></pre>
@@ -1670,6 +1687,10 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <p>Creates a new map by transforming the map values. The map keys remain the same.</p>
 <pre><code class="language-helios">map.map_values(mapper: (ValueType) -&gt; NewValueType) -&gt; Map[KeyType]NewValueType
 </code></pre>
+<h3 id="prepend-1"><a class="header" href="#prepend-1"><code>prepend</code></a></h3>
+<p>Prepends a key-value pair to the beginning of the <code>Map</code>, creating a new <code>Map</code>.</p>
+<pre><code class="language-helios">map.prepend(key: KeyType, value: ValueType) -&gt; Map[KeyType][ValueType]
+</code></pre>
 <h3 id="serialize-12"><a class="header" href="#serialize-12"><code>serialize</code></a></h3>
 <pre><code class="language-helios">map.serialize() -&gt; ByteArray
 </code></pre>
@@ -1711,10 +1732,10 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <pre><code class="language-helios">MintingPolicyHash::from_script_hash(hash: ScriptHash) -&gt; MintingPolicyHash
 </code></pre>
 <h2 id="operators-13"><a class="header" href="#operators-13">Operators</a></h2>
-<h3 id="-46"><a class="header" href="#-46"><code>==</code></a></h3>
+<h3 id="-50"><a class="header" href="#-50"><code>==</code></a></h3>
 <pre><code class="language-helios">MintingPolicyHash == MintingPolicyHash -&gt; Bool
 </code></pre>
-<h3 id="-47"><a class="header" href="#-47"><code>!=</code></a></h3>
+<h3 id="-51"><a class="header" href="#-51"><code>!=</code></a></h3>
 <pre><code class="language-helios">MintingPolicyHash != MintingPolicyHash -&gt; Bool
 </code></pre>
 <h2 id="methods-13"><a class="header" href="#methods-13">Methods</a></h2>
@@ -1749,10 +1770,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <p><strong>Note</strong>: this getter doesn't exist on <code>Option[</code><em><code>SomeType</code></em><code>]::None</code>.</p>
 </blockquote>
 <h2 id="operators-14"><a class="header" href="#operators-14">Operators</a></h2>
-<h3 id="-48"><a class="header" href="#-48"><code>==</code></a></h3>
+<h3 id="-52"><a class="header" href="#-52"><code>==</code></a></h3>
 <pre><code class="language-helios">Option[SomeType] == Option[SomeType] -&gt; Bool
 </code></pre>
-<h3 id="-49"><a class="header" href="#-49"><code>!=</code></a></h3>
+<h3 id="-53"><a class="header" href="#-53"><code>!=</code></a></h3>
 <pre><code class="language-helios">Option[SomeType] != Option[SomeType] -&gt; Bool
 </code></pre>
 <h2 id="methods-14"><a class="header" href="#methods-14">Methods</a></h2>
@@ -1798,10 +1819,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <p>Use the <code>from_data</code> associated function, which is automatically defined on every type, to turn <code>Data</code> into another type.</p>
 <h2 id="operators-15"><a class="header" href="#operators-15">Operators</a></h2>
-<h3 id="-50"><a class="header" href="#-50"><code>==</code></a></h3>
+<h3 id="-54"><a class="header" href="#-54"><code>==</code></a></h3>
 <pre><code class="language-helios">OutputDatum == OutputDatum -&gt; Bool
 </code></pre>
-<h3 id="-51"><a class="header" href="#-51"><code>!=</code></a></h3>
+<h3 id="-55"><a class="header" href="#-55"><code>!=</code></a></h3>
 <pre><code class="language-helios">OutputDatum != OutputDatum -&gt; Bool
 </code></pre>
 <h2 id="methods-15"><a class="header" href="#methods-15">Methods</a></h2>
@@ -1822,10 +1843,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">PubKey::from_data(data: Data) -&gt; PubKey
 </code></pre>
 <h2 id="operators-16"><a class="header" href="#operators-16">Operators</a></h2>
-<h3 id="-52"><a class="header" href="#-52"><code>==</code></a></h3>
+<h3 id="-56"><a class="header" href="#-56"><code>==</code></a></h3>
 <pre><code class="language-helios">PubKey == PubKey -&gt; Bool
 </code></pre>
-<h3 id="-53"><a class="header" href="#-53"><code>!=</code></a></h3>
+<h3 id="-57"><a class="header" href="#-57"><code>!=</code></a></h3>
 <pre><code class="language-helios">PubKey != PubKey -&gt; Bool
 </code></pre>
 <h2 id="methods-16"><a class="header" href="#methods-16">Methods</a></h2>
@@ -1855,10 +1876,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">PubKeyHash::from_data(data: Data) -&gt; PubKeyHash
 </code></pre>
 <h2 id="operators-17"><a class="header" href="#operators-17">Operators</a></h2>
-<h3 id="-54"><a class="header" href="#-54"><code>==</code></a></h3>
+<h3 id="-58"><a class="header" href="#-58"><code>==</code></a></h3>
 <pre><code class="language-helios">PubKeyHash == PubKeyHash -&gt; Bool
 </code></pre>
-<h3 id="-55"><a class="header" href="#-55"><code>!=</code></a></h3>
+<h3 id="-59"><a class="header" href="#-59"><code>!=</code></a></h3>
 <pre><code class="language-helios">PubKeyHash != PubKeyHash -&gt; Bool
 </code></pre>
 <h2 id="methods-17"><a class="header" href="#methods-17">Methods</a></h2>
@@ -1914,10 +1935,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">ctx.tx -&gt; Tx
 </code></pre>
 <h2 id="operators-18"><a class="header" href="#operators-18">Operators</a></h2>
-<h3 id="-56"><a class="header" href="#-56"><code>==</code></a></h3>
+<h3 id="-60"><a class="header" href="#-60"><code>==</code></a></h3>
 <pre><code class="language-helios">ScriptContext == ScriptContext -&gt; Bool
 </code></pre>
-<h3 id="-57"><a class="header" href="#-57"><code>!=</code></a></h3>
+<h3 id="-61"><a class="header" href="#-61"><code>!=</code></a></h3>
 <pre><code class="language-helios">ScriptContext != ScriptContext -&gt; Bool
 </code></pre>
 <h2 id="methods-18"><a class="header" href="#methods-18">Methods</a></h2>
@@ -1958,10 +1979,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">ScriptHash::from_data(data: Data) -&gt; ScriptHash
 </code></pre>
 <h2 id="operators-19"><a class="header" href="#operators-19">Operators</a></h2>
-<h3 id="-58"><a class="header" href="#-58"><code>==</code></a></h3>
+<h3 id="-62"><a class="header" href="#-62"><code>==</code></a></h3>
 <pre><code class="language-helios">ScriptHash == ScriptHash -&gt; Bool
 </code></pre>
-<h3 id="-59"><a class="header" href="#-59"><code>!=</code></a></h3>
+<h3 id="-63"><a class="header" href="#-63"><code>!=</code></a></h3>
 <pre><code class="language-helios">ScriptHash != ScriptHash -&gt; Bool
 </code></pre>
 <h2 id="methods-19"><a class="header" href="#methods-19">Methods</a></h2>
@@ -2015,10 +2036,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">certifying_script_purpose.dcert -&gt; DCert
 </code></pre>
 <h2 id="operators-20"><a class="header" href="#operators-20">Operators</a></h2>
-<h3 id="-60"><a class="header" href="#-60"><code>==</code></a></h3>
+<h3 id="-64"><a class="header" href="#-64"><code>==</code></a></h3>
 <pre><code class="language-helios">ScriptPurpose == ScriptPurpose -&gt; Bool
 </code></pre>
-<h3 id="-61"><a class="header" href="#-61"><code>!=</code></a></h3>
+<h3 id="-65"><a class="header" href="#-65"><code>!=</code></a></h3>
 <pre><code class="language-helios">ScriptPurpose != ScriptPurpose -&gt; Bool
 </code></pre>
 <h2 id="methods-20"><a class="header" href="#methods-20">Methods</a></h2>
@@ -2038,10 +2059,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">StakeKeyHash::from_data(data: Data) -&gt; StakeKeyHash
 </code></pre>
 <h2 id="operators-21"><a class="header" href="#operators-21">Operators</a></h2>
-<h3 id="-62"><a class="header" href="#-62"><code>==</code></a></h3>
+<h3 id="-66"><a class="header" href="#-66"><code>==</code></a></h3>
 <pre><code class="language-helios">StakeKeyHash == StakeKeyHash -&gt; Bool
 </code></pre>
-<h3 id="-63"><a class="header" href="#-63"><code>!=</code></a></h3>
+<h3 id="-67"><a class="header" href="#-67"><code>!=</code></a></h3>
 <pre><code class="language-helios">StakeKeyHash != StakeKeyHash -&gt; Bool
 </code></pre>
 <h2 id="methods-21"><a class="header" href="#methods-21">Methods</a></h2>
@@ -2086,10 +2107,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 }
 </code></pre>
 <h2 id="operators-22"><a class="header" href="#operators-22">Operators</a></h2>
-<h3 id="-64"><a class="header" href="#-64"><code>==</code></a></h3>
+<h3 id="-68"><a class="header" href="#-68"><code>==</code></a></h3>
 <pre><code class="language-helios">StakingCredential == StakingCredential -&gt; Bool
 </code></pre>
-<h3 id="-65"><a class="header" href="#-65"><code>!=</code></a></h3>
+<h3 id="-69"><a class="header" href="#-69"><code>!=</code></a></h3>
 <pre><code class="language-helios">StakingCredential != StakingCredential -&gt; Bool
 </code></pre>
 <h2 id="methods-22"><a class="header" href="#methods-22">Methods</a></h2>
@@ -2126,10 +2147,10 @@ validator_stakinghash: StakingHash::Validator = StakingHash::new_validator(Staki
 validator_stakinghash.hash -&gt; StakingValidatorHash
 </code></pre>
 <h2 id="operators-23"><a class="header" href="#operators-23">Operators</a></h2>
-<h3 id="-66"><a class="header" href="#-66"><code>==</code></a></h3>
+<h3 id="-70"><a class="header" href="#-70"><code>==</code></a></h3>
 <pre><code class="language-helios">StakingHash == StakingHash -&gt; Bool
 </code></pre>
-<h3 id="-67"><a class="header" href="#-67"><code>!=</code></a></h3>
+<h3 id="-71"><a class="header" href="#-71"><code>!=</code></a></h3>
 <pre><code class="language-helios">StakingHash != StakingHash -&gt; Bool
 </code></pre>
 <h2 id="methods-23"><a class="header" href="#methods-23">Methods</a></h2>
@@ -2158,10 +2179,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">certifying_staking_purpose.dcert -&gt; DCert
 </code></pre>
 <h2 id="operators-24"><a class="header" href="#operators-24">Operators</a></h2>
-<h3 id="-68"><a class="header" href="#-68"><code>==</code></a></h3>
+<h3 id="-72"><a class="header" href="#-72"><code>==</code></a></h3>
 <pre><code class="language-helios">StakingPurpose == StakingPurpose -&gt; Bool
 </code></pre>
-<h3 id="-69"><a class="header" href="#-69"><code>!=</code></a></h3>
+<h3 id="-73"><a class="header" href="#-73"><code>!=</code></a></h3>
 <pre><code class="language-helios">StakingPurpose != StakingPurpose -&gt; Bool
 </code></pre>
 <h2 id="methods-24"><a class="header" href="#methods-24">Methods</a></h2>
@@ -2182,10 +2203,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">StakingValidatorHash::from_script_hash(hash: ScriptHash) -&gt; StakingValidatorHash
 </code></pre>
 <h2 id="operators-25"><a class="header" href="#operators-25">Operators</a></h2>
-<h3 id="-70"><a class="header" href="#-70"><code>==</code></a></h3>
+<h3 id="-74"><a class="header" href="#-74"><code>==</code></a></h3>
 <pre><code class="language-helios">StakingValidatorHash == StakingValidatorHash -&gt; Bool
 </code></pre>
-<h3 id="-71"><a class="header" href="#-71"><code>!=</code></a></h3>
+<h3 id="-75"><a class="header" href="#-75"><code>!=</code></a></h3>
 <pre><code class="language-helios">StakingValidatorHash != StakingValidatorHash -&gt; Bool
 </code></pre>
 <h2 id="methods-25"><a class="header" href="#methods-25">Methods</a></h2>
@@ -2205,13 +2226,13 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">String::from_data(data: Data) -&gt; String
 </code></pre>
 <h2 id="operators-26"><a class="header" href="#operators-26">Operators</a></h2>
-<h3 id="-72"><a class="header" href="#-72"><code>==</code></a></h3>
+<h3 id="-76"><a class="header" href="#-76"><code>==</code></a></h3>
 <pre><code class="language-helios">String == String -&gt; Bool
 </code></pre>
-<h3 id="-73"><a class="header" href="#-73"><code>!=</code></a></h3>
+<h3 id="-77"><a class="header" href="#-77"><code>!=</code></a></h3>
 <pre><code class="language-helios">String != String -&gt; Bool
 </code></pre>
-<h3 id="-74"><a class="header" href="#-74"><code>+</code></a></h3>
+<h3 id="-78"><a class="header" href="#-78"><code>+</code></a></h3>
 <p>String concatenation.</p>
 <pre><code class="language-helios">String + String -&gt; String
 </code></pre>
@@ -2241,25 +2262,25 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">Time::from_data(data: Data) -&gt; Time
 </code></pre>
 <h2 id="operators-27"><a class="header" href="#operators-27">Operators</a></h2>
-<h3 id="-75"><a class="header" href="#-75"><code>==</code></a></h3>
+<h3 id="-79"><a class="header" href="#-79"><code>==</code></a></h3>
 <pre><code class="language-helios">Time == Time -&gt; Bool
 </code></pre>
-<h3 id="-76"><a class="header" href="#-76"><code>!=</code></a></h3>
+<h3 id="-80"><a class="header" href="#-80"><code>!=</code></a></h3>
 <pre><code class="language-helios">Time != Time -&gt; Bool
 </code></pre>
-<h3 id="-77"><a class="header" href="#-77"><code>&gt;=</code></a></h3>
+<h3 id="-81"><a class="header" href="#-81"><code>&gt;=</code></a></h3>
 <pre><code class="language-helios">Time &gt;= Time -&gt; Bool
 </code></pre>
-<h3 id="-78"><a class="header" href="#-78"><code>&gt;</code></a></h3>
+<h3 id="-82"><a class="header" href="#-82"><code>&gt;</code></a></h3>
 <pre><code class="language-helios">Time &gt; Time -&gt; Bool
 </code></pre>
-<h3 id="-79"><a class="header" href="#-79"><code>&lt;=</code></a></h3>
+<h3 id="-83"><a class="header" href="#-83"><code>&lt;=</code></a></h3>
 <pre><code class="language-helios">Time &lt;= Time -&gt; Bool
 </code></pre>
-<h3 id="-80"><a class="header" href="#-80"><code>&lt;</code></a></h3>
+<h3 id="-84"><a class="header" href="#-84"><code>&lt;</code></a></h3>
 <pre><code class="language-helios">Time &lt; Time -&gt; Bool
 </code></pre>
-<h3 id="-81"><a class="header" href="#-81"><code>+</code></a></h3>
+<h3 id="-85"><a class="header" href="#-85"><code>+</code></a></h3>
 <pre><code class="language-helios">Time + Duration -&gt; Time
 </code></pre>
 <h3 id="--3"><a class="header" href="#--3"><code>-</code></a></h3>
@@ -2313,10 +2334,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">time_range.end -&gt; Time
 </code></pre>
 <h2 id="operators-28"><a class="header" href="#operators-28">Operators</a></h2>
-<h3 id="-82"><a class="header" href="#-82"><code>==</code></a></h3>
+<h3 id="-86"><a class="header" href="#-86"><code>==</code></a></h3>
 <pre><code class="language-helios">TimeRange == TimeRange -&gt; Bool
 </code></pre>
-<h3 id="-83"><a class="header" href="#-83"><code>!=</code></a></h3>
+<h3 id="-87"><a class="header" href="#-87"><code>!=</code></a></h3>
 <pre><code class="language-helios">TimeRange != TimeRange -&gt; Bool
 </code></pre>
 <h2 id="methods-28"><a class="header" href="#methods-28">Methods</a></h2>
@@ -2409,10 +2430,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">tx.id -&gt; TxId
 </code></pre>
 <h2 id="operators-29"><a class="header" href="#operators-29">Operators</a></h2>
-<h3 id="-84"><a class="header" href="#-84"><code>==</code></a></h3>
+<h3 id="-88"><a class="header" href="#-88"><code>==</code></a></h3>
 <pre><code class="language-helios">Tx == Tx -&gt; Bool
 </code></pre>
-<h3 id="-85"><a class="header" href="#-85"><code>!=</code></a></h3>
+<h3 id="-89"><a class="header" href="#-89"><code>!=</code></a></h3>
 <pre><code class="language-helios">Tx != Tx -&gt; Bool
 </code></pre>
 <h2 id="methods-29"><a class="header" href="#methods-29">Methods</a></h2>
@@ -2485,10 +2506,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">TxId::from_data(data: Data) -&gt; TxId
 </code></pre>
 <h2 id="operators-30"><a class="header" href="#operators-30">Operators</a></h2>
-<h3 id="-86"><a class="header" href="#-86"><code>==</code></a></h3>
+<h3 id="-90"><a class="header" href="#-90"><code>==</code></a></h3>
 <pre><code class="language-helios">TxId == TxId -&gt; Bool
 </code></pre>
-<h3 id="-87"><a class="header" href="#-87"><code>!=</code></a></h3>
+<h3 id="-91"><a class="header" href="#-91"><code>!=</code></a></h3>
 <pre><code class="language-helios">TxId != TxId -&gt; Bool
 </code></pre>
 <h2 id="methods-30"><a class="header" href="#methods-30">Methods</a></h2>
@@ -2518,10 +2539,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">tx_input.output -&gt; TxOutput
 </code></pre>
 <h2 id="operators-31"><a class="header" href="#operators-31">Operators</a></h2>
-<h3 id="-88"><a class="header" href="#-88"><code>==</code></a></h3>
+<h3 id="-92"><a class="header" href="#-92"><code>==</code></a></h3>
 <pre><code class="language-helios">TxInput == TxInput -&gt; Bool
 </code></pre>
-<h3 id="-89"><a class="header" href="#-89"><code>!=</code></a></h3>
+<h3 id="-93"><a class="header" href="#-93"><code>!=</code></a></h3>
 <pre><code class="language-helios">TxInput != TxInput -&gt; Bool
 </code></pre>
 <h2 id="methods-31"><a class="header" href="#methods-31">Methods</a></h2>
@@ -2560,10 +2581,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">tx_output.ref_script_hash -&gt; Option[ScriptHash]
 </code></pre>
 <h2 id="operators-32"><a class="header" href="#operators-32">Operators</a></h2>
-<h3 id="-90"><a class="header" href="#-90"><code>==</code></a></h3>
+<h3 id="-94"><a class="header" href="#-94"><code>==</code></a></h3>
 <pre><code class="language-helios">TxOutput == TxOutput -&gt; Bool
 </code></pre>
-<h3 id="-91"><a class="header" href="#-91"><code>!=</code></a></h3>
+<h3 id="-95"><a class="header" href="#-95"><code>!=</code></a></h3>
 <pre><code class="language-helios">TxOutput != TxOutput -&gt; Bool
 </code></pre>
 <h2 id="methods-32"><a class="header" href="#methods-32">Methods</a></h2>
@@ -2580,10 +2601,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">TxOutputId::from_data(data: Data) -&gt; TxOutputId
 </code></pre>
 <h2 id="operators-33"><a class="header" href="#operators-33">Operators</a></h2>
-<h3 id="-92"><a class="header" href="#-92"><code>==</code></a></h3>
+<h3 id="-96"><a class="header" href="#-96"><code>==</code></a></h3>
 <pre><code class="language-helios">TxOutputId == TxOutputId -&gt; Bool
 </code></pre>
-<h3 id="-93"><a class="header" href="#-93"><code>!=</code></a></h3>
+<h3 id="-97"><a class="header" href="#-97"><code>!=</code></a></h3>
 <pre><code class="language-helios">TxOutputId != TxOutputId -&gt; Bool
 </code></pre>
 <h2 id="methods-33"><a class="header" href="#methods-33">Methods</a></h2>
@@ -2605,10 +2626,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">ValidatorHash::from_script_hash(hash: ScriptHash) -&gt; ValidatorHash
 </code></pre>
 <h2 id="operators-34"><a class="header" href="#operators-34">Operators</a></h2>
-<h3 id="-94"><a class="header" href="#-94"><code>==</code></a></h3>
+<h3 id="-98"><a class="header" href="#-98"><code>==</code></a></h3>
 <pre><code class="language-helios">ValidatorHash == ValidatorHash -&gt; Bool
 </code></pre>
-<h3 id="-95"><a class="header" href="#-95"><code>!=</code></a></h3>
+<h3 id="-99"><a class="header" href="#-99"><code>!=</code></a></h3>
 <pre><code class="language-helios">ValidatorHash != ValidatorHash -&gt; Bool
 </code></pre>
 <h2 id="methods-34"><a class="header" href="#methods-34">Methods</a></h2>
@@ -2648,43 +2669,43 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">Value::from_map(raw_value: Map[MintingPolicyHash]Map[ByteArray]Int) -&gt; Value
 </code></pre>
 <h2 id="operators-35"><a class="header" href="#operators-35">Operators</a></h2>
-<h3 id="-96"><a class="header" href="#-96"><code>==</code></a></h3>
+<h3 id="-100"><a class="header" href="#-100"><code>==</code></a></h3>
 <p>Returns <code>true</code> if two <code>Value</code>s are the same.</p>
 <pre><code class="language-helios">Value == Value -&gt; Bool
 </code></pre>
 <blockquote>
 <p><strong>Note</strong>: the assets and tokens must also be in the same order for <code>==</code> to return <code>true</code>.</p>
 </blockquote>
-<h3 id="-97"><a class="header" href="#-97"><code>!=</code></a></h3>
+<h3 id="-101"><a class="header" href="#-101"><code>!=</code></a></h3>
 <pre><code class="language-helios">Value != Value -&gt; Bool
 </code></pre>
-<h3 id="-98"><a class="header" href="#-98"><code>&gt;=</code></a></h3>
+<h3 id="-102"><a class="header" href="#-102"><code>&gt;=</code></a></h3>
 <p>Strict greater-equals comparison. If every lhs token has a greater-or-equals amount than the equivalent rhs token then <code>&gt;=</code> returns <code>true</code>. If any rhs token has a greater amount than the equivalent lhs token then <code>&gt;=</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &gt;= Value -&gt; Bool
 </code></pre>
-<h3 id="-99"><a class="header" href="#-99"><code>&gt;</code></a></h3>
+<h3 id="-103"><a class="header" href="#-103"><code>&gt;</code></a></h3>
 <p>Strict greater-than comparison. If every lhs token has a greater amount than the equivalent rhs token then <code>&gt;</code> returns <code>true</code>. If any rhs token has a greater-or-equals amount than the equivalent lhs token then <code>&gt;</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &gt; Value -&gt; Bool
 </code></pre>
-<h3 id="-100"><a class="header" href="#-100"><code>&lt;=</code></a></h3>
+<h3 id="-104"><a class="header" href="#-104"><code>&lt;=</code></a></h3>
 <p>Strict less-equals comparison. If every lhs token has a smaller-or-equals amount than the equivalent rhs token then <code>&lt;=</code> returns <code>true</code>. If any rhs token has a smaller amount than the equivalent lhs token, or doesn't exist in lhs, then <code>&lt;=</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &lt;= Value -&gt; Bool
 </code></pre>
-<h3 id="-101"><a class="header" href="#-101"><code>&lt;</code></a></h3>
+<h3 id="-105"><a class="header" href="#-105"><code>&lt;</code></a></h3>
 <p>Strict less-than comparison. If every lhs token has a smaller amount than the equivalent rhs token then <code>&lt;</code> returns <code>true</code>. If any rhs token has a smaller-or-equals amount than the equivalent lhs token, or doesn't exist in lhs, then <code>&lt;</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &lt; Value -&gt; Bool
 </code></pre>
-<h3 id="-102"><a class="header" href="#-102"><code>+</code></a></h3>
+<h3 id="-106"><a class="header" href="#-106"><code>+</code></a></h3>
 <pre><code class="language-helios">Value + Value -&gt; Value
 </code></pre>
 <h3 id="--4"><a class="header" href="#--4"><code>-</code></a></h3>
 <p>Subtracts two <code>Value</code>s. Note that negative token amounts are possible.</p>
 <pre><code class="language-helios">Value - Value -&gt; Value
 </code></pre>
-<h3 id="-103"><a class="header" href="#-103"><code>*</code></a></h3>
+<h3 id="-107"><a class="header" href="#-107"><code>*</code></a></h3>
 <pre><code class="language-helios">Value * Int -&gt; Value
 </code></pre>
-<h3 id="-104"><a class="header" href="#-104"><code>/</code></a></h3>
+<h3 id="-108"><a class="header" href="#-108"><code>/</code></a></h3>
 <pre><code class="language-helios">Value / Int -&gt; Value
 </code></pre>
 <h2 id="methods-35"><a class="header" href="#methods-35">Methods</a></h2>

@@ -168,7 +168,21 @@
 <h3 id="-1"><a class="header" href="#-1"><code>!=</code></a></h3>
 <pre><code class="language-helios">ByteArray != ByteArray -&gt; Bool
 </code></pre>
-<h3 id="-2"><a class="header" href="#-2"><code>+</code></a></h3>
+<h3 id="-2"><a class="header" href="#-2"><code>&gt;=</code></a></h3>
+<pre><code class="language-helios">ByteArray &gt;= ByteArray -&gt; Bool
+</code></pre>
+<h3 id="-3"><a class="header" href="#-3"><code>&gt;</code></a></h3>
+<p>The lhs is greater-than the rhs if the first rhs byte, that isn't equal to the corresponding lhs byte, is smaller than that byte. Returns true if all common bytes are equal, but the rhs is shorter than the lhs.</p>
+<pre><code class="language-helios">ByteArray &gt; ByteArray -&gt; Bool
+</code></pre>
+<h3 id="-4"><a class="header" href="#-4"><code>&lt;=</code></a></h3>
+<pre><code class="language-helios">ByteArray &lt;= ByteArray -&gt; Bool
+</code></pre>
+<h3 id="-5"><a class="header" href="#-5"><code>&lt;</code></a></h3>
+<p>The lhs is less-than the rhs if the first rhs byte, that isn't equal to the corresponding lhs byte, is greater than that byte. Returns false if the rhs is empty.</p>
+<pre><code class="language-helios">ByteArray &lt; ByteArray -&gt; Bool
+</code></pre>
+<h3 id="-6"><a class="header" href="#-6"><code>+</code></a></h3>
 <p>Concatenation of two <code>ByteArray</code>s.</p>
 <pre><code class="language-helios">ByteArray + ByteArray -&gt; ByteArray
 </code></pre>
