@@ -46,6 +46,33 @@ is_even = (n: Int) -> Bool { (n % 2) == 0 }; ...
 
 > **Note:** Function statements can be referenced by their name, returning a function value. This should be preferred to using anonymous functions, as it is more readable.
 
+## Multiple return values
+
+Functions can return multiple values:
+
+```helios
+func swap(a: Int, b: Int) -> (Int, Int) {
+    (b, a)
+}
+```
+
+Assignment expressions can assign to multiple lhs names at ones:
+
+```helios
+(a: Int, b: Int) = swap(10, 20); ... // a==20 && b==10
+```
+
+## Ignoring unused arguments
+
+All function arguments must be used in its definition. This can be inconvenient when defining callbacks where you want to ignore some of the arguments. For this situation you can use an `_` (underscore):
+
+```helios
+// sort a map by only comparing the keys
+map.sort((a_key: ByteArray, _, b_key: ByteArray, _) -> Bool {
+    a_key < b_key
+})
+```
+
 ## Function values
 
 Functions are first-class citizens in Helios and can be used as values. This means:
