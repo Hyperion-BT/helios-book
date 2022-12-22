@@ -3,15 +3,13 @@
 The Helios library is platform agnostic and can be used in many different ways.
 
 <script>
-import("https://www.hyperion-bt.org/Helios/helios.js").then((module) => {document.getElementById("helios-latest-version").innerHTML = "Replace <pre>&lt;version&gt;</pre> in the following snippets with <pre>" + module.VERSION + "</pre>."});
+import("https://www.hyperion-bt.org/Helios/helios.js").then((module) => {document.body.innerHTML = document.body.innerHTML.replace('<version>', modules.VERSION);
 </script>
-
-<span id="helios-latest-version"></span>
 
 ## Webpage `script` tag
 
 ```html
-<script src="https://helios.hyperion-bt.org/0.9.10/helios.js" type="module" crossorigin></script>
+<script src="https://helios.hyperion-bt.org/<version>/helios.js" type="module" crossorigin></script>
 ```
 
 ## Module with CDN URL
@@ -19,10 +17,10 @@ import("https://www.hyperion-bt.org/Helios/helios.js").then((module) => {documen
 Helios can be imported as a module using our CDN. This is supported by [Deno](https://deno.land) and most modern browsers:
 
 ```js
-import * as helios from "https://helios.hyperion-bt.org/0.9.10/helios.js"
+import * as helios from "https://helios.hyperion-bt.org/<version>/helios.js"
 
 // or only the necessary parts (recommended as you get more acquainted with the library)
-import { Program } from "https://helios.hyperion-bt.org/0.9.10/helios.js"
+import { Program } from "https://helios.hyperion-bt.org/<version>/helios.js"
 ```
 
 Alternatively you can use `"helios"` as a placeholder for the URL and, if not using any builder-tools, specify the module URL in an [importmap](https://github.com/WICG/import-maps) (currently only supported by Chrome):
@@ -37,7 +35,7 @@ import * as helios from "helios"
 <script type="importmap">
     {
         "imports": {
-            "helios": "https://helios.hyperion-bt.org/0.9.10/helios.js"
+            "helios": "https://helios.hyperion-bt.org/<version>/helios.js"
         }
     }
 </script>
@@ -56,7 +54,7 @@ $ npm i @hyperionbt/helios
 Or install a specific version:
 
 ```bash
-$ npm i @hyperionbt/helios@0.9.10
+$ npm i @hyperionbt/helios@<version>
 ```
 
 In your javascript file:
