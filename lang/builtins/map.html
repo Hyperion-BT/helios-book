@@ -212,7 +212,9 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 </code></pre>
 <h3 id="find_safe"><a class="header" href="#find_safe"><code>find_safe</code></a></h3>
 <p>Returns a callback (that returns the found key-value pair) and a <code>Bool</code>. Calling the callback if the returned <code>Bool</code> is <code>false</code> throws an error.</p>
-<pre><code class="language-helios">map.find_safe(predicate: (KeyType, ValueType) -&gt; Bool) -&gt; (() -&gt; (KeyType, ValueType), Bool)
+<pre><code class="language-helios">map.find_safe(
+    predicate: (KeyType, ValueType) -&gt; Bool
+) -&gt; (() -&gt; (KeyType, ValueType), Bool)
 </code></pre>
 <h3 id="find_key"><a class="header" href="#find_key"><code>find_key</code></a></h3>
 <p>Returns the first key that matches the predicate. Throws an error if none found.</p>
@@ -250,6 +252,10 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id="get_safe"><a class="header" href="#get_safe"><code>get_safe</code></a></h3>
 <p>Returns the value of the first entry in the map that matches the given key (wrapped in an option). Returns <code>Option[ValueType]::None</code> if the key isn't found.</p>
 <pre><code class="language-helios">map.get_safe(key: KeyType) -&gt; Option[ValueType]
+</code></pre>
+<h3 id="head"><a class="header" href="#head"><code>head</code></a></h3>
+<p>Get the key and the value of the first entry.</p>
+<pre><code class="language-helios">map.head() -&gt; (KeyType, ValueType)
 </code></pre>
 <h3 id="map-1"><a class="header" href="#map-1"><code>map</code></a></h3>
 <p>Creates a new map by transforming the map keys and values.</p>
