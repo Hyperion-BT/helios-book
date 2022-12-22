@@ -38,6 +38,30 @@ StakingValidatorHash == StakingValidatorHash -> Bool
 StakingValidatorHash != StakingValidatorHash -> Bool
 ```
 
+### `>=`
+
+```helios
+StakingValidatorHash >= StakingValidatorHash -> Bool
+```
+
+### `>`
+
+```helios
+StakingValidatorHash > StakingValidatorHash -> Bool
+```
+
+### `<=`
+
+```helios
+StakingValidatorHash <= StakingValidatorHash -> Bool
+```
+
+### `<`
+
+```helios
+StakingValidatorHash < StakingValidatorHash -> Bool
+```
+
 ## Methods
 
 ### `serialize`

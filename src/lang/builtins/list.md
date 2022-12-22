@@ -147,6 +147,17 @@ list.fold(
 ) -> ReducedType
 ```
 
+### `fold_lazy`
+
+Fold that allows breaking the loop before reaching the end of the list. Can also be used to fold from the last to the first entry of the list instead of the other way around.
+
+```helios
+list.fold_lazy(
+    reducer: (item: ItemType, next: () -> ReducedType) -> ReducedType,
+    final: ReducedType
+) -> ReducedType
+```
+
 ### `get`
 
 Returns the item at the given position in the list (0-based index). Throws an error if the index is out of range.

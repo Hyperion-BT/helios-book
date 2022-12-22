@@ -40,6 +40,30 @@ ValidatorHash == ValidatorHash -> Bool
 ValidatorHash != ValidatorHash -> Bool
 ```
 
+### `>=`
+
+```helios
+ValidatorHash >= ValidatorHash -> Bool
+```
+
+### `>`
+
+```helios
+ValidatorHash > ValidatorHash -> Bool
+```
+
+### `<=`
+
+```helios
+ValidatorHash <= ValidatorHash -> Bool
+```
+
+### `<`
+
+```helios
+ValidatorHash < ValidatorHash -> Bool
+```
+
 ## Methods
 
 ### `serialize`

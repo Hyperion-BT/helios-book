@@ -38,6 +38,30 @@ PubKeyHash == PubKeyHash -> Bool
 PubKeyHash != PubKeyHash -> Bool
 ```
 
+### `>=`
+
+```helios
+PubKeyHash >= PubKeyHash -> Bool
+```
+
+### `>`
+
+```helios
+PubKeyHash > PubKeyHash -> Bool
+```
+
+### `<=`
+
+```helios
+PubKeyHash <= PubKeyHash -> Bool
+```
+
+### `<`
+
+```helios
+PubKeyHash < PubKeyHash -> Bool
+```
+
 ## Methods
 
 ### `serialize`

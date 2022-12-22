@@ -43,6 +43,30 @@ MintingPolicyHash == MintingPolicyHash -> Bool
 MintingPolicyHash != MintingPolicyHash -> Bool
 ```
 
+### `>=`
+
+```helios
+MintingPolicyHash >= MintingPolicyHash -> Bool
+```
+
+### `>`
+
+```helios
+MintingPolicyHash > MintingPolicyHash -> Bool
+```
+
+### `<=`
+
+```helios
+MintingPolicyHash <= MintingPolicyHash -> Bool
+```
+
+### `<`
+
+```helios
+MintingPolicyHash < MintingPolicyHash -> Bool
+```
+
 ## Methods
 
 ### `serialize`

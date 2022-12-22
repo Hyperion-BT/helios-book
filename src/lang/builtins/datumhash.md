@@ -30,6 +30,30 @@ DatumHash == DatumHash -> Bool
 DatumHash != DatumHash -> Bool
 ```
 
+### `>=`
+
+```helios
+DatumHash >= DatumHash -> Bool
+```
+
+### `>`
+
+```helios
+DatumHash > DatumHash -> Bool
+```
+
+### `<=`
+
+```helios
+DatumHash <= DatumHash -> Bool
+```
+
+### `<`
+
+```helios
+DatumHash < DatumHash -> Bool
+```
+
 ## Methods
 
 ### `serialize`

@@ -16,6 +16,24 @@ TxOutputId::new(tx_id: TxId, index: Int) -> TxOutputId
 TxOutputId::from_data(data: Data) -> TxOutputId
 ```
 
+## Getters
+
+### `index`
+
+Index of the UTxO in the producing transaction:
+
+```helios
+tx_output_id.index -> Int
+```
+
+### `tx_id`
+
+Id of the producting transaction:
+
+```helios
+tx_output_id.tx_id -> TxId
+```
+
 ## Operators
 
 ### `==`
@@ -28,6 +46,38 @@ TxOutputId == TxOutputId -> Bool
 
 ```helios
 TxOutputId != TxOutputId -> Bool
+```
+
+### `>=`
+
+First compares bytes of [`TxId`](./txid.md), then compares index.
+
+```helios
+TxOutputId >= TxOutputId -> Bool
+```
+
+### `>`
+
+First compares bytes of [`TxId`](./txid.md), then compares index.
+
+```helios
+TxOutputId > TxOutputId -> Bool
+```
+
+### `<=`
+
+First compares bytes of [`TxId`](./txid.md), then compares index.
+
+```helios
+TxOutputId <= TxOutputId -> Bool
+```
+
+### `<`
+
+First compares bytes of [`TxId`](./txid.md), then compares index.
+
+```helios
+TxOutputId < TxOutputId -> Bool
 ```
 
 ## Methods

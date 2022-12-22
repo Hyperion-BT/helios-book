@@ -36,6 +36,30 @@ StakeKeyHash == StakeKeyHash -> Bool
 StakeKeyHash != StakeKeyHash -> Bool
 ```
 
+### `>=`
+
+```helios
+StakeKeyHash >= StakeKeyHash -> Bool
+```
+
+### `>`
+
+```helios
+StakeKeyHash > StakeKeyHash -> Bool
+```
+
+### `<=`
+
+```helios
+StakeKeyHash <= StakeKeyHash -> Bool
+```
+
+### `<`
+
+```helios
+StakeKeyHash < StakeKeyHash -> Bool
+```
+
 ## Methods
 
 ### `serialize`
