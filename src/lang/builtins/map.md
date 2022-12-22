@@ -209,7 +209,9 @@ map.head() -> (KeyType, ValueType)
 Creates a new map by transforming the map keys and values.
 
 ```helios
-map.map_keys(mapper: (KeyType, ValueType) -> (NewKeyType, NewValueType)) -> Map[NewKeyType]NewValueType
+map.map(
+    mapper: (KeyType, ValueType) -> (NewKeyType, NewValueType)
+) -> Map[NewKeyType]NewValueType
 ```
 
 ### `prepend`
