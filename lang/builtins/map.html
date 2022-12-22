@@ -259,7 +259,9 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 </code></pre>
 <h3 id="map-1"><a class="header" href="#map-1"><code>map</code></a></h3>
 <p>Creates a new map by transforming the map keys and values.</p>
-<pre><code class="language-helios">map.map_keys(mapper: (KeyType, ValueType) -&gt; (NewKeyType, NewValueType)) -&gt; Map[NewKeyType]NewValueType
+<pre><code class="language-helios">map.map(
+    mapper: (KeyType, ValueType) -&gt; (NewKeyType, NewValueType)
+) -&gt; Map[NewKeyType]NewValueType
 </code></pre>
 <h3 id="prepend"><a class="header" href="#prepend"><code>prepend</code></a></h3>
 <p>Prepends a key-value pair to the beginning of the <code>Map</code>, creating a new <code>Map</code>.</p>
