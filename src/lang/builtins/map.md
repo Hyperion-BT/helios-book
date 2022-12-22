@@ -123,7 +123,9 @@ map.find(predicate: (KeyType, ValueType) -> Bool) -> (KeyType, ValueType)
 Returns a callback (that returns the found key-value pair) and a `Bool`. Calling the callback if the returned `Bool` is `false` throws an error.
 
 ```helios
-map.find_safe(predicate: (KeyType, ValueType) -> Bool) -> (() -> (KeyType, ValueType), Bool)
+map.find_safe(
+    predicate: (KeyType, ValueType) -> Bool
+) -> (() -> (KeyType, ValueType), Bool)
 ```
 
 ### `find_key`
