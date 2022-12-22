@@ -196,6 +196,14 @@ Returns the value of the first entry in the map that matches the given key (wrap
 map.get_safe(key: KeyType) -> Option[ValueType]
 ```
 
+### `head`
+
+Get the key and the value of the first entry.
+
+```helios
+map.head() -> (KeyType, ValueType)
+```
+
 ### `map`
 
 Creates a new map by transforming the map keys and values.
