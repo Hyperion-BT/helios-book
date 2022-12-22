@@ -208,38 +208,38 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 </code></pre>
 <h3 id="find"><a class="header" href="#find"><code>find</code></a></h3>
 <p>Returns the key and value of the first entry that matches the predicate. Throws an error if none found.</p>
-<pre><code class="language-helios">map.find(predicate: (key: KeyType, value: ValueType) -&gt; Bool) -&gt; (KeyType, ValueType)
+<pre><code class="language-helios">map.find(predicate: (KeyType, ValueType) -&gt; Bool) -&gt; (KeyType, ValueType)
 </code></pre>
 <h3 id="find_safe"><a class="header" href="#find_safe"><code>find_safe</code></a></h3>
-<p>Returns a callback (that returns the key-value pair) and a status. Calling the callback if status is <code>false</code> throws an error.</p>
-<pre><code class="language-helios">map.find_safe(predicate: (key: KeyType, value: ValueType) -&gt; Bool) -&gt; (() -&gt; (KeyType, ValueType), Bool)
+<p>Returns a callback (that returns the found key-value pair) and a <code>Bool</code>. Calling the callback if the returned <code>Bool</code> is <code>false</code> throws an error.</p>
+<pre><code class="language-helios">map.find_safe(predicate: (KeyType, ValueType) -&gt; Bool) -&gt; (() -&gt; (KeyType, ValueType), Bool)
 </code></pre>
 <h3 id="find_key"><a class="header" href="#find_key"><code>find_key</code></a></h3>
 <p>Returns the first key that matches the predicate. Throws an error if none found.</p>
-<pre><code class="language-helios">map.find_key(predicate: (key: KeyType) -&gt; Bool) -&gt; KeyType
+<pre><code class="language-helios">map.find_key(predicate: (KeyType) -&gt; Bool) -&gt; KeyType
 </code></pre>
 <h3 id="find_key_safe"><a class="header" href="#find_key_safe"><code>find_key_safe</code></a></h3>
 <p>Returns an <a href="./option.html"><code>Option</code></a> containing the first key that matches the predicate, or <code>Option[KeyType]::None</code> if none found.</p>
-<pre><code class="language-helios">map.find_key_safe(predicate: (key: KeyType) -&gt; Bool) -&gt; Option[KeyType]
+<pre><code class="language-helios">map.find_key_safe(predicate: (KeyType) -&gt; Bool) -&gt; Option[KeyType]
 </code></pre>
 <h3 id="find_value"><a class="header" href="#find_value"><code>find_value</code></a></h3>
 <p>Returns the first value that matches the predicate. Throws an error if none found.</p>
-<pre><code class="language-helios">map.find_value(predicate: (value: ValueType) -&gt; Bool) -&gt; ValueType
+<pre><code class="language-helios">map.find_value(predicate: (ValueType) -&gt; Bool) -&gt; ValueType
 </code></pre>
 <h3 id="find_value_safe"><a class="header" href="#find_value_safe"><code>find_value_safe</code></a></h3>
 <p>Returns an <a href="./option.html"><code>Option</code></a> containing the first value that matches the predicate, or <code>Option[ValueType]::None</code> if none found.</p>
-<pre><code class="language-helios">map.find_value_safe(predicate: (value: ValueType) -&gt; Bool) -&gt; Option[ValueType]
+<pre><code class="language-helios">map.find_value_safe(predicate: (ValueType) -&gt; Bool) -&gt; Option[ValueType]
 </code></pre>
 <h3 id="fold"><a class="header" href="#fold"><code>fold</code></a></h3>
 <pre><code class="language-helios">map.fold(
-    reducer: (prev: ReducedType, key: KeyType, value: ValueType) -&gt; ReducedType, 
+    reducer: (ReducedType, KeyType, ValueType) -&gt; ReducedType, 
     init: ReducedType
 ) -&gt; ReducedType
 </code></pre>
 <h3 id="fold_lazy"><a class="header" href="#fold_lazy"><code>fold_lazy</code></a></h3>
 <p>Fold that allows breaking the loop before reaching the end of the map. Can also be used to fold from the last to the first entry of the <code>Map</code> instead of the other way around.</p>
 <pre><code class="language-helios">map.fold_lazy(
-    reducer: (key: KeyType, value: ValueType, next: () -&gt; ReducedType) -&gt; ReducedType,
+    reducer: (KeyType, ValueType, next: () -&gt; ReducedType) -&gt; ReducedType,
     final: ReducedType
 ) -&gt; ReducedType
 </code></pre>
