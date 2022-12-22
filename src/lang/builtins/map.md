@@ -115,15 +115,15 @@ map.filter(predicate: (KeyType, ValueType) -> Bool) -> Map[KeyType]ValueType
 Returns the key and value of the first entry that matches the predicate. Throws an error if none found.
 
 ```helios
-map.find(predicate: (key: KeyType, value: ValueType) -> Bool) -> (KeyType, ValueType)
+map.find(predicate: (KeyType, ValueType) -> Bool) -> (KeyType, ValueType)
 ```
 
 ### `find_safe`
 
-Returns a callback (that returns the key-value pair) and a status. Calling the callback if status is `false` throws an error.
+Returns a callback (that returns the found key-value pair) and a `Bool`. Calling the callback if the returned `Bool` is `false` throws an error.
 
 ```helios
-map.find_safe(predicate: (key: KeyType, value: ValueType) -> Bool) -> (() -> (KeyType, ValueType), Bool)
+map.find_safe(predicate: (KeyType, ValueType) -> Bool) -> (() -> (KeyType, ValueType), Bool)
 ```
 
 ### `find_key`
@@ -131,7 +131,7 @@ map.find_safe(predicate: (key: KeyType, value: ValueType) -> Bool) -> (() -> (Ke
 Returns the first key that matches the predicate. Throws an error if none found.
 
 ```helios
-map.find_key(predicate: (key: KeyType) -> Bool) -> KeyType
+map.find_key(predicate: (KeyType) -> Bool) -> KeyType
 ```
 
 ### `find_key_safe`
@@ -139,7 +139,7 @@ map.find_key(predicate: (key: KeyType) -> Bool) -> KeyType
 Returns an [`Option`](./option.md) containing the first key that matches the predicate, or `Option[KeyType]::None` if none found.
 
 ```helios
-map.find_key_safe(predicate: (key: KeyType) -> Bool) -> Option[KeyType]
+map.find_key_safe(predicate: (KeyType) -> Bool) -> Option[KeyType]
 ```
 
 ### `find_value`
@@ -147,7 +147,7 @@ map.find_key_safe(predicate: (key: KeyType) -> Bool) -> Option[KeyType]
 Returns the first value that matches the predicate. Throws an error if none found.
 
 ```helios
-map.find_value(predicate: (value: ValueType) -> Bool) -> ValueType
+map.find_value(predicate: (ValueType) -> Bool) -> ValueType
 ```
 
 ### `find_value_safe`
@@ -155,14 +155,14 @@ map.find_value(predicate: (value: ValueType) -> Bool) -> ValueType
 Returns an [`Option`](./option.md) containing the first value that matches the predicate, or `Option[ValueType]::None` if none found.
 
 ```helios
-map.find_value_safe(predicate: (value: ValueType) -> Bool) -> Option[ValueType]
+map.find_value_safe(predicate: (ValueType) -> Bool) -> Option[ValueType]
 ```
 
 ### `fold`
 
 ```helios
 map.fold(
-    reducer: (prev: ReducedType, key: KeyType, value: ValueType) -> ReducedType, 
+    reducer: (ReducedType, KeyType, ValueType) -> ReducedType, 
     init: ReducedType
 ) -> ReducedType
 ```
@@ -173,7 +173,7 @@ Fold that allows breaking the loop before reaching the end of the map. Can also 
 
 ```helios
 map.fold_lazy(
-    reducer: (key: KeyType, value: ValueType, next: () -> ReducedType) -> ReducedType,
+    reducer: (KeyType, ValueType, next: () -> ReducedType) -> ReducedType,
     final: ReducedType
 ) -> ReducedType
 ```
