@@ -3,7 +3,7 @@
 The Helios library is platform agnostic and can be used in many different ways.
 
 <script>
-import("https://www.hyperion-bt.org/Helios/helios.js").then((module) => {let elem = document.querySelector("main"); console.log(elem.innerHTML); elem.innerHTML = elem.innerHTML.replaceAll('&lt;' + 'version' + '&gt;', module.VERSION);});
+import("https://www.hyperion-bt.org/Helios/helios.js").then((module) => {let elem = document.querySelector("main"); elem.innerHTML = elem.innerHTML.replaceAll('&lt;' + 'version' + '&gt;', module.VERSION);});
 </script>
 
 ## Webpage `script` tag
