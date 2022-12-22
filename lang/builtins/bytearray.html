@@ -187,6 +187,18 @@
 <pre><code class="language-helios">ByteArray + ByteArray -&gt; ByteArray
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
+<h3 id="blake2b"><a class="header" href="#blake2b"><code>blake2b</code></a></h3>
+<p>Calculates the blake2b-256 hash of a <code>ByteArray</code>. The result is 32 bytes long.</p>
+<pre><code class="language-helios">byte_array.blake2b() -&gt; ByteArray
+</code></pre>
+<h3 id="decode_utf8"><a class="header" href="#decode_utf8"><code>decode_utf8</code></a></h3>
+<p>Turns a valid sequence of utf-8 bytes into a <code>String</code>. Throws an error if the <code>ByteArray</code> isn't valid utf-8.</p>
+<pre><code class="language-helios">byte_array.decode_utf8() -&gt; String
+</code></pre>
+<h3 id="ends_with"><a class="header" href="#ends_with"><code>ends_with</code></a></h3>
+<p>Checks if a <code>ByteArray</code> ends with a given suffix.</p>
+<pre><code class="language-helios">byte_array.ends_with(suffix: ByteArray) -&gt; Bool
+</code></pre>
 <h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
 <pre><code class="language-helios">byte_array.serialize() -&gt; ByteArray
 </code></pre>
@@ -198,28 +210,16 @@
 <p>Calculates the sha3-256 hash of a <code>ByteArray</code>. The result is 32 bytes long.</p>
 <pre><code class="language-helios">byte_array.sha3() -&gt; ByteArray
 </code></pre>
-<h3 id="blake2b"><a class="header" href="#blake2b"><code>blake2b</code></a></h3>
-<p>Calculates the blake2b-256 hash of a <code>ByteArray</code>. The result is 32 bytes long.</p>
-<pre><code class="language-helios">byte_array.blake2b() -&gt; ByteArray
-</code></pre>
-<h3 id="decode_utf8"><a class="header" href="#decode_utf8"><code>decode_utf8</code></a></h3>
-<p>Turns a valid sequence of utf-8 bytes into a <code>String</code>. Throws an error if the <code>ByteArray</code> isn't valid utf-8.</p>
-<pre><code class="language-helios">byte_array.decode_utf8() -&gt; String
-</code></pre>
 <h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
 <p>Converts a <code>ByteArray</code> into its hexadecimal representation.</p>
 <pre><code class="language-helios">byte_array.show() -&gt; String
 </code></pre>
+<h3 id="slice"><a class="header" href="#slice"><code>slice</code></a></h3>
+<pre><code class="language-helios">byte_array.slice(start: Int, end: Int) -&gt; ByteArray
+</code></pre>
 <h3 id="starts_with"><a class="header" href="#starts_with"><code>starts_with</code></a></h3>
 <p>Checks if a <code>ByteArray</code> starts with a given prefix.</p>
 <pre><code class="language-helios">byte_array.starts_with(prefix: ByteArray) -&gt; Bool
-</code></pre>
-<h3 id="ends_with"><a class="header" href="#ends_with"><code>ends_with</code></a></h3>
-<p>Checks if a <code>ByteArray</code> ends with a given suffix.</p>
-<pre><code class="language-helios">byte_array.ends_with(suffix: ByteArray) -&gt; Bool
-</code></pre>
-<h3 id="slice"><a class="header" href="#slice"><code>slice</code></a></h3>
-<pre><code class="language-helios">byte_array.slice(start: Int, end: Int) -&gt; ByteArray
 </code></pre>
 
                     </main>

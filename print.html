@@ -1072,13 +1072,13 @@ bool_false: Bool = false; ...
 <h3 id="serialize-3"><a class="header" href="#serialize-3"><code>serialize</code></a></h3>
 <pre><code class="language-helios">bool.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="to_int"><a class="header" href="#to_int"><code>to_int</code></a></h3>
-<p><code>false</code> is turned into <code>0</code>, and <code>true</code> is turned into <code>1</code>.</p>
-<pre><code class="language-helios">bool.to_int() -&gt; Int
-</code></pre>
 <h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
 <p><code>false</code> is turned into <code>&quot;false&quot;</code>, and <code>true</code> is turned into <code>&quot;true&quot;</code>.</p>
 <pre><code class="language-helios">bool.show() -&gt; String
+</code></pre>
+<h3 id="to_int"><a class="header" href="#to_int"><code>to_int</code></a></h3>
+<p><code>false</code> is turned into <code>0</code>, and <code>true</code> is turned into <code>1</code>.</p>
+<pre><code class="language-helios">bool.to_int() -&gt; Int
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="bytearray-1"><a class="header" href="#bytearray-1"><code>ByteArray</code></a></h1>
 <p>Represents an array of bytes (i.e. an array of uint8 numbers).</p>
@@ -1122,6 +1122,18 @@ bool_false: Bool = false; ...
 <pre><code class="language-helios">ByteArray + ByteArray -&gt; ByteArray
 </code></pre>
 <h2 id="methods-4"><a class="header" href="#methods-4">Methods</a></h2>
+<h3 id="blake2b"><a class="header" href="#blake2b"><code>blake2b</code></a></h3>
+<p>Calculates the blake2b-256 hash of a <code>ByteArray</code>. The result is 32 bytes long.</p>
+<pre><code class="language-helios">byte_array.blake2b() -&gt; ByteArray
+</code></pre>
+<h3 id="decode_utf8"><a class="header" href="#decode_utf8"><code>decode_utf8</code></a></h3>
+<p>Turns a valid sequence of utf-8 bytes into a <code>String</code>. Throws an error if the <code>ByteArray</code> isn't valid utf-8.</p>
+<pre><code class="language-helios">byte_array.decode_utf8() -&gt; String
+</code></pre>
+<h3 id="ends_with"><a class="header" href="#ends_with"><code>ends_with</code></a></h3>
+<p>Checks if a <code>ByteArray</code> ends with a given suffix.</p>
+<pre><code class="language-helios">byte_array.ends_with(suffix: ByteArray) -&gt; Bool
+</code></pre>
 <h3 id="serialize-4"><a class="header" href="#serialize-4"><code>serialize</code></a></h3>
 <pre><code class="language-helios">byte_array.serialize() -&gt; ByteArray
 </code></pre>
@@ -1133,28 +1145,16 @@ bool_false: Bool = false; ...
 <p>Calculates the sha3-256 hash of a <code>ByteArray</code>. The result is 32 bytes long.</p>
 <pre><code class="language-helios">byte_array.sha3() -&gt; ByteArray
 </code></pre>
-<h3 id="blake2b"><a class="header" href="#blake2b"><code>blake2b</code></a></h3>
-<p>Calculates the blake2b-256 hash of a <code>ByteArray</code>. The result is 32 bytes long.</p>
-<pre><code class="language-helios">byte_array.blake2b() -&gt; ByteArray
-</code></pre>
-<h3 id="decode_utf8"><a class="header" href="#decode_utf8"><code>decode_utf8</code></a></h3>
-<p>Turns a valid sequence of utf-8 bytes into a <code>String</code>. Throws an error if the <code>ByteArray</code> isn't valid utf-8.</p>
-<pre><code class="language-helios">byte_array.decode_utf8() -&gt; String
-</code></pre>
 <h3 id="show-1"><a class="header" href="#show-1"><code>show</code></a></h3>
 <p>Converts a <code>ByteArray</code> into its hexadecimal representation.</p>
 <pre><code class="language-helios">byte_array.show() -&gt; String
 </code></pre>
+<h3 id="slice"><a class="header" href="#slice"><code>slice</code></a></h3>
+<pre><code class="language-helios">byte_array.slice(start: Int, end: Int) -&gt; ByteArray
+</code></pre>
 <h3 id="starts_with"><a class="header" href="#starts_with"><code>starts_with</code></a></h3>
 <p>Checks if a <code>ByteArray</code> starts with a given prefix.</p>
 <pre><code class="language-helios">byte_array.starts_with(prefix: ByteArray) -&gt; Bool
-</code></pre>
-<h3 id="ends_with"><a class="header" href="#ends_with"><code>ends_with</code></a></h3>
-<p>Checks if a <code>ByteArray</code> ends with a given suffix.</p>
-<pre><code class="language-helios">byte_array.ends_with(suffix: ByteArray) -&gt; Bool
-</code></pre>
-<h3 id="slice"><a class="header" href="#slice"><code>slice</code></a></h3>
-<pre><code class="language-helios">byte_array.slice(start: Int, end: Int) -&gt; ByteArray
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="credential-1"><a class="header" href="#credential-1"><code>Credential</code></a></h1>
 <p>Represents the non-staking part of an <a href="lang/builtins/./address.html"><code>Address</code></a>. Internally represented as an enum with two variants: </p>
