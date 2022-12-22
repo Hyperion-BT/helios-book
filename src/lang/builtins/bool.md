@@ -83,18 +83,18 @@ Bool || Bool -> Bool
 bool.serialize() -> ByteArray
 ```
 
-### `to_int`
-
-`false` is turned into `0`, and `true` is turned into `1`.
-
-```helios
-bool.to_int() -> Int
-```
-
 ### `show`
 
 `false` is turned into `"false"`, and `true` is turned into `"true"`.
 
 ```helios
 bool.show() -> String
+```
+
+### `to_int`
+
+`false` is turned into `0`, and `true` is turned into `1`.
+
+```helios
+bool.to_int() -> Int
 ```

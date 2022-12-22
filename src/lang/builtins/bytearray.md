@@ -79,6 +79,30 @@ ByteArray + ByteArray -> ByteArray
 
 ## Methods
 
+### `blake2b`
+
+Calculates the blake2b-256 hash of a `ByteArray`. The result is 32 bytes long.
+
+```helios
+byte_array.blake2b() -> ByteArray
+```
+
+### `decode_utf8`
+
+Turns a valid sequence of utf-8 bytes into a `String`. Throws an error if the `ByteArray` isn't valid utf-8.
+
+```helios
+byte_array.decode_utf8() -> String
+```
+
+### `ends_with`
+
+Checks if a `ByteArray` ends with a given suffix.
+
+```helios
+byte_array.ends_with(suffix: ByteArray) -> Bool
+```
+
 ### `serialize`
 
 ```helios
@@ -101,22 +125,6 @@ Calculates the sha3-256 hash of a `ByteArray`. The result is 32 bytes long.
 byte_array.sha3() -> ByteArray
 ```
 
-### `blake2b`
-
-Calculates the blake2b-256 hash of a `ByteArray`. The result is 32 bytes long.
-
-```helios
-byte_array.blake2b() -> ByteArray
-```
-
-### `decode_utf8`
-
-Turns a valid sequence of utf-8 bytes into a `String`. Throws an error if the `ByteArray` isn't valid utf-8.
-
-```helios
-byte_array.decode_utf8() -> String
-```
-
 ### `show`
 
 Converts a `ByteArray` into its hexadecimal representation.
@@ -125,24 +133,16 @@ Converts a `ByteArray` into its hexadecimal representation.
 byte_array.show() -> String
 ```
 
+### `slice`
+
+```helios
+byte_array.slice(start: Int, end: Int) -> ByteArray
+```
+
 ### `starts_with`
 
 Checks if a `ByteArray` starts with a given prefix.
 
 ```helios
 byte_array.starts_with(prefix: ByteArray) -> Bool
-```
-
-### `ends_with`
-
-Checks if a `ByteArray` ends with a given suffix.
-
-```helios
-byte_array.ends_with(suffix: ByteArray) -> Bool
-```
-
-### `slice`
-
-```helios
-byte_array.slice(start: Int, end: Int) -> ByteArray
 ```
