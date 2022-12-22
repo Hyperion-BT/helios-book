@@ -154,12 +154,37 @@
 <h3 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h3>
 <pre><code class="language-helios">TxOutputId::from_data(data: Data) -&gt; TxOutputId
 </code></pre>
+<h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
+<h3 id="index"><a class="header" href="#index"><code>index</code></a></h3>
+<p>Index of the UTxO in the producing transaction:</p>
+<pre><code class="language-helios">tx_output_id.index -&gt; Int
+</code></pre>
+<h3 id="tx_id"><a class="header" href="#tx_id"><code>tx_id</code></a></h3>
+<p>Id of the producting transaction:</p>
+<pre><code class="language-helios">tx_output_id.tx_id -&gt; TxId
+</code></pre>
 <h2 id="operators"><a class="header" href="#operators">Operators</a></h2>
 <h3 id=""><a class="header" href="#"><code>==</code></a></h3>
 <pre><code class="language-helios">TxOutputId == TxOutputId -&gt; Bool
 </code></pre>
 <h3 id="-1"><a class="header" href="#-1"><code>!=</code></a></h3>
 <pre><code class="language-helios">TxOutputId != TxOutputId -&gt; Bool
+</code></pre>
+<h3 id="-2"><a class="header" href="#-2"><code>&gt;=</code></a></h3>
+<p>First compares bytes of <a href="./txid.html"><code>TxId</code></a>, then compares index.</p>
+<pre><code class="language-helios">TxOutputId &gt;= TxOutputId -&gt; Bool
+</code></pre>
+<h3 id="-3"><a class="header" href="#-3"><code>&gt;</code></a></h3>
+<p>First compares bytes of <a href="./txid.html"><code>TxId</code></a>, then compares index.</p>
+<pre><code class="language-helios">TxOutputId &gt; TxOutputId -&gt; Bool
+</code></pre>
+<h3 id="-4"><a class="header" href="#-4"><code>&lt;=</code></a></h3>
+<p>First compares bytes of <a href="./txid.html"><code>TxId</code></a>, then compares index.</p>
+<pre><code class="language-helios">TxOutputId &lt;= TxOutputId -&gt; Bool
+</code></pre>
+<h3 id="-5"><a class="header" href="#-5"><code>&lt;</code></a></h3>
+<p>First compares bytes of <a href="./txid.html"><code>TxId</code></a>, then compares index.</p>
+<pre><code class="language-helios">TxOutputId &lt; TxOutputId -&gt; Bool
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>

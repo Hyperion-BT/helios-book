@@ -195,25 +195,9 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <p>Returns <code>true</code> if all map entries satisfy the predicate.</p>
 <pre><code class="language-helios">map.all(predicate: (KeyType, ValueType) -&gt; Bool) -&gt; Bool
 </code></pre>
-<h3 id="all_keys"><a class="header" href="#all_keys"><code>all_keys</code></a></h3>
-<p>Returns <code>true</code> if all map keys satisfy the predicate.</p>
-<pre><code class="language-helios">map.all_keys(predicate: (KeyType) -&gt; Bool) -&gt; Bool
-</code></pre>
-<h3 id="all_values"><a class="header" href="#all_values"><code>all_values</code></a></h3>
-<p>Returns <code>true</code> if all map values satisfy the predicate.</p>
-<pre><code class="language-helios">map.all_values(predicate: (ValueType) -&gt; Bool) -&gt; Bool
-</code></pre>
 <h3 id="any"><a class="header" href="#any"><code>any</code></a></h3>
 <p>Returns <code>true</code> if any map entry satisfies the predicate.</p>
 <pre><code class="language-helios">map.any(predicate: (KeyType, ValueType) -&gt; Bool) -&gt; Bool
-</code></pre>
-<h3 id="any_key"><a class="header" href="#any_key"><code>any_key</code></a></h3>
-<p>Returns <code>true</code> if any map key satisfies the predicate.</p>
-<pre><code class="language-helios">map.any_key(predicate: (KeyType) -&gt; Bool) -&gt; Bool
-</code></pre>
-<h3 id="any_value"><a class="header" href="#any_value"><code>any_value</code></a></h3>
-<p>Returns <code>true</code> if any map value satisfies the predicate.</p>
-<pre><code class="language-helios">map.any_value(predicate: (ValueType) -&gt; Bool) -&gt; Bool
 </code></pre>
 <h3 id="delete"><a class="header" href="#delete"><code>delete</code></a></h3>
 <p>Removes all entries with the given key. Doesn't throw an error if key isn't found.</p>
@@ -222,23 +206,13 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id="filter"><a class="header" href="#filter"><code>filter</code></a></h3>
 <pre><code class="language-helios">map.filter(predicate: (KeyType, ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
 </code></pre>
-<h3 id="filter_by_key"><a class="header" href="#filter_by_key"><code>filter_by_key</code></a></h3>
-<pre><code class="language-helios">map.filter_by_key(predicate: (KeyType) -&gt; Bool) -&gt; Map[KeyType]ValueType
-</code></pre>
-<h3 id="filter_by_value"><a class="header" href="#filter_by_value"><code>filter_by_value</code></a></h3>
-<pre><code class="language-helios">map.filter_by_value(predicate: (ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
-</code></pre>
 <h3 id="find"><a class="header" href="#find"><code>find</code></a></h3>
-<p>Returns a new <code>Map</code> containing the first entry that matches the predicate. Returns an empty <code>Map</code> if none found.</p>
-<pre><code class="language-helios">map.find(predicate: (key: KeyType, value: ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
+<p>Returns the key and value of the first entry that matches the predicate. Throws an error if none found.</p>
+<pre><code class="language-helios">map.find(predicate: (key: KeyType, value: ValueType) -&gt; Bool) -&gt; (KeyType, ValueType)
 </code></pre>
-<h3 id="find_by_key"><a class="header" href="#find_by_key"><code>find_by_key</code></a></h3>
-<p>Returns a new <code>Map</code> containing the first entry whose key matches the predicate. Returns an empty <code>Map</code> if none found.</p>
-<pre><code class="language-helios">map.find_by_key(predicate: (key: KeyType) -&gt; Bool) -&gt; Map[KeyType]ValueType
-</code></pre>
-<h3 id="find_by_value"><a class="header" href="#find_by_value"><code>find_by_value</code></a></h3>
-<p>Returns a new <code>Map</code> containing the first entry whose value matches the predicate. Returns an empty <code>Map</code> if none found.</p>
-<pre><code class="language-helios">map.find_by_value(predicate: (value: ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
+<h3 id="find_safe"><a class="header" href="#find_safe"><code>find_safe</code></a></h3>
+<p>Returns a callback (that returns the key-value pair) and a status. Calling the callback if status is <code>false</code> throws an error.</p>
+<pre><code class="language-helios">map.find_safe(predicate: (key: KeyType, value: ValueType) -&gt; Bool) -&gt; (() -&gt; (KeyType, ValueType), Bool)
 </code></pre>
 <h3 id="find_key"><a class="header" href="#find_key"><code>find_key</code></a></h3>
 <p>Returns the first key that matches the predicate. Throws an error if none found.</p>
@@ -269,32 +243,6 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
     final: ReducedType
 ) -&gt; ReducedType
 </code></pre>
-<h3 id="fold_keys"><a class="header" href="#fold_keys"><code>fold_keys</code></a></h3>
-<pre><code class="language-helios">map.fold_keys(
-    reducer: (prev: ReducedType, key: KeyType) -&gt; ReducedType, 
-    init: ReducedType
-) -&gt; ReducedType
-</code></pre>
-<h3 id="fold_keys_lazy"><a class="header" href="#fold_keys_lazy"><code>fold_keys_lazy</code></a></h3>
-<p>Fold over the keys, while allowing breaking the loop before reaching the end of the <code>Map</code>. Can also be used to fold from the last to the first key of the <code>Map</code>,  instead of the other way around.</p>
-<pre><code>map.fold_keys_lazy(
-    reducer: (key: KeyType, next: () -&gt; ReducedType) -&gt; ReducedType,
-    final: ReducedType
-) -&gt; ReducedType
-</code></pre>
-<h3 id="fold_values"><a class="header" href="#fold_values"><code>fold_values</code></a></h3>
-<pre><code class="language-helios">map.fold_values(
-    reducer: (ReducedType, ValueType) -&gt; ReducedType, 
-    init: ReducedType
-) -&gt; ReducedType
-</code></pre>
-<h3 id="fold_values_lazy"><a class="header" href="#fold_values_lazy"><code>fold_values_lazy</code></a></h3>
-<p>Fold over the values, while allowing breaking the loop before reaching the end of the map. Can also be used to fold from the last to the first value of the <code>Map</code>,  instead of the other way around.</p>
-<pre><code>map.fold_values_lazy(
-    reducer: (value: ValueType, next: () -&gt; ReducedType) -&gt; ReducedType,
-    final: ReducedType
-) -&gt; ReducedType
-</code></pre>
 <h3 id="get"><a class="header" href="#get"><code>get</code></a></h3>
 <p>Returns the value of the first entry in the map that matches the given key. Throws an error of the key isn't found.</p>
 <pre><code class="language-helios">map.get(key: KeyType) -&gt; ValueType
@@ -303,13 +251,9 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <p>Returns the value of the first entry in the map that matches the given key (wrapped in an option). Returns <code>Option[ValueType]::None</code> if the key isn't found.</p>
 <pre><code class="language-helios">map.get_safe(key: KeyType) -&gt; Option[ValueType]
 </code></pre>
-<h3 id="map_keys"><a class="header" href="#map_keys"><code>map_keys</code></a></h3>
-<p>Creates a new map by transforming the map keys. The map values remain the same.</p>
-<pre><code class="language-helios">map.map_keys(mapper: (KeyType) -&gt; NewKeyType) -&gt; Map[NewKeyType]ValueType
-</code></pre>
-<h3 id="map_values"><a class="header" href="#map_values"><code>map_values</code></a></h3>
-<p>Creates a new map by transforming the map values. The map keys remain the same.</p>
-<pre><code class="language-helios">map.map_values(mapper: (ValueType) -&gt; NewValueType) -&gt; Map[KeyType]NewValueType
+<h3 id="map-1"><a class="header" href="#map-1"><code>map</code></a></h3>
+<p>Creates a new map by transforming the map keys and values.</p>
+<pre><code class="language-helios">map.map_keys(mapper: (KeyType, ValueType) -&gt; (NewKeyType, NewValueType)) -&gt; Map[NewKeyType]NewValueType
 </code></pre>
 <h3 id="prepend"><a class="header" href="#prepend"><code>prepend</code></a></h3>
 <p>Prepends a key-value pair to the beginning of the <code>Map</code>, creating a new <code>Map</code>.</p>
@@ -330,14 +274,6 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
         key_b: KeyType, value_b: ValueType
     ) -&gt; Bool
 ) -&gt; Map[KeyType]ValueType
-</code></pre>
-<h3 id="sort_by_key"><a class="header" href="#sort_by_key"><code>sort_by_key</code></a></h3>
-<p>Sorts the map by applying insertion sort to the keys. The comparison function should return <code>true</code> if <code>a</code> and <code>b</code> are in the correct order.</p>
-<pre><code class="language-helios">map.sort((a: KeyType, b: KeyType) -&gt; Bool) -&gt; Map[KeyType]ValueType
-</code></pre>
-<h3 id="sort_by_value"><a class="header" href="#sort_by_value"><code>sort_by_value</code></a></h3>
-<p>Sorts the map by applying insertion sort to the values. The comparison function should return <code>true</code> if <code>a</code> and <code>b</code> are in the correct order.</p>
-<pre><code class="language-helios">map.sort((a: ValueType, b: ValueType) -&gt; Bool) -&gt; Map[KeyType]ValueType
 </code></pre>
 
                     </main>

@@ -147,6 +147,10 @@
                     <main>
                         <h1 id="setup-of-the-helios-library"><a class="header" href="#setup-of-the-helios-library">Setup of the Helios Library</a></h1>
 <p>The Helios library is platform agnostic and can be used in many different ways.</p>
+<script>
+import("https://www.hyperion-bt.com/Helios/helios.js").then((module) => {document.getElementById("helios-latest-version").innerHTML = "Replace <pre>&lt;version&gt;</pre> in the following snippets with <pre>" + module.VERSION + "</pre>."});
+</script>
+<p><span id="helios-latest-version"></span></p>
 <h2 id="webpage-script-tag"><a class="header" href="#webpage-script-tag">Webpage <code>script</code> tag</a></h2>
 <pre><code class="language-html">&lt;script src=&quot;https://helios.hyperion-bt.org/0.9.10/helios.js&quot; type=&quot;module&quot; crossorigin&gt;&lt;/script&gt;
 </code></pre>
