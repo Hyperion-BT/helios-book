@@ -642,9 +642,9 @@ func main(datum: Datum) -&gt; Bool {
 <li><a href="lang/./builtins/bytearray.html"><code>ByteArray</code></a></li>
 <li><a href="lang/./builtins/list.html"><code>[]Data</code></a></li>
 <li><a href="lang/./builtins/map.html"><code>Map[Data]Data</code></a></li>
-<li>Any user-defined enum</li>
+<li>Any user-defined enum or <code>(Int, []Data)</code></li>
 </ul>
-<p>A <code>switch</code> expression over <code>Data</code> can use <code>Int</code>, <code>ByteArray</code>, <code>[]Data</code> and <code>Map[Data]Data</code>, and any enum type, as case types:</p>
+<p>A <code>switch</code> expression over <code>Data</code> can use <code>Int</code>, <code>ByteArray</code>, <code>[]Data</code> and <code>Map[Data]Data</code>, and any enum type or <code>(Int, []Data)</code>, as case types:</p>
 <pre><code class="language-helios">data.switch{
 	i: Int =&gt; ...,
 	b: ByteArray =&gt; ...,
@@ -653,11 +653,20 @@ func main(datum: Datum) -&gt; Bool {
 	e: MyEnum =&gt; ... 
 }
 </code></pre>
+<p>or </p>
+<pre><code class="language-helios">data.switch{
+	i: Int =&gt; ...,
+	b: ByteArray =&gt; ...,
+	l: []Data =&gt; ...,
+	m: Map[Data]Data =&gt; ...,
+	(index: Int, fields: []Data) =&gt; ... 
+}
+</code></pre>
 <blockquote>
 <p><strong>Note</strong>: the default <code>else</code> case can also be used as a substitute for any of these cases.</p>
 </blockquote>
 <blockquote>
-<p><strong>Note</strong>: besides the builtin types only one enum type can be used in <code>Data</code> <code>switch</code>, and structs/enum-members <strong>can't</strong> be used.</p>
+<p><strong>Note</strong>: besides the builtin types only one enum type can be used in a <code>Data</code> <code>switch</code>, and structs/enum-members <strong>can't</strong> be used. If an enum is used then <code>(Int, []Data)</code> can't be used.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="methods"><a class="header" href="#methods">Methods</a></h1>
 <p>You can define methods for structs and enums. The syntax for this is similar to many OOP languages: methods are defined by placing <code>func</code> statements inside a <code>struct</code> or <code>enum</code> blocks:</p>
@@ -1242,7 +1251,7 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">datum_hash.serialize() -&gt; ByteArray
 </code></pre>
 <h3 id="show-2"><a class="header" href="#show-2"><code>show</code></a></h3>
-<p>Returns hexadecimcal representation of a <code>DatumHash</code>.</p>
+<p>Hexadecimal representation of a <code>DatumHash</code>.</p>
 <pre><code class="language-helios">datum_hash.show() -&gt; String
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="dcert"><a class="header" href="#dcert"><code>DCert</code></a></h1>
@@ -2555,6 +2564,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="serialize-30"><a class="header" href="#serialize-30"><code>serialize</code></a></h3>
 <pre><code class="language-helios">tx_id.serialize() -&gt; ByteArray
 </code></pre>
+<h3 id="show-10"><a class="header" href="#show-10"><code>show</code></a></h3>
+<p>Hexadecimal representation of a <code>TxId</code>.</p>
+<pre><code class="language-helios">tx_id.show() -&gt; String
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="txinput"><a class="header" href="#txinput"><code>TxInput</code></a></h1>
 <p>Represents a <strong>transaction input</strong>.</p>
 <h2 id="associated-functions-27"><a class="header" href="#associated-functions-27">Associated functions</a></h2>
@@ -2712,7 +2725,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="serialize-34"><a class="header" href="#serialize-34"><code>serialize</code></a></h3>
 <pre><code class="language-helios">validator_hash.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-10"><a class="header" href="#show-10"><code>show</code></a></h3>
+<h3 id="show-11"><a class="header" href="#show-11"><code>show</code></a></h3>
 <p>Hexadecimal representation of the <code>ValidatorHash</code>.</p>
 <pre><code class="language-helios">validator_hash.show() -&gt; String
 </code></pre>

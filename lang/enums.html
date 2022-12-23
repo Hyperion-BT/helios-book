@@ -197,9 +197,9 @@ func main(datum: Datum) -&gt; Bool {
 <li><a href="./builtins/bytearray.html"><code>ByteArray</code></a></li>
 <li><a href="./builtins/list.html"><code>[]Data</code></a></li>
 <li><a href="./builtins/map.html"><code>Map[Data]Data</code></a></li>
-<li>Any user-defined enum</li>
+<li>Any user-defined enum or <code>(Int, []Data)</code></li>
 </ul>
-<p>A <code>switch</code> expression over <code>Data</code> can use <code>Int</code>, <code>ByteArray</code>, <code>[]Data</code> and <code>Map[Data]Data</code>, and any enum type, as case types:</p>
+<p>A <code>switch</code> expression over <code>Data</code> can use <code>Int</code>, <code>ByteArray</code>, <code>[]Data</code> and <code>Map[Data]Data</code>, and any enum type or <code>(Int, []Data)</code>, as case types:</p>
 <pre><code class="language-helios">data.switch{
 	i: Int =&gt; ...,
 	b: ByteArray =&gt; ...,
@@ -208,11 +208,20 @@ func main(datum: Datum) -&gt; Bool {
 	e: MyEnum =&gt; ... 
 }
 </code></pre>
+<p>or </p>
+<pre><code class="language-helios">data.switch{
+	i: Int =&gt; ...,
+	b: ByteArray =&gt; ...,
+	l: []Data =&gt; ...,
+	m: Map[Data]Data =&gt; ...,
+	(index: Int, fields: []Data) =&gt; ... 
+}
+</code></pre>
 <blockquote>
 <p><strong>Note</strong>: the default <code>else</code> case can also be used as a substitute for any of these cases.</p>
 </blockquote>
 <blockquote>
-<p><strong>Note</strong>: besides the builtin types only one enum type can be used in <code>Data</code> <code>switch</code>, and structs/enum-members <strong>can't</strong> be used.</p>
+<p><strong>Note</strong>: besides the builtin types only one enum type can be used in a <code>Data</code> <code>switch</code>, and structs/enum-members <strong>can't</strong> be used. If an enum is used then <code>(Int, []Data)</code> can't be used.</p>
 </blockquote>
 
                     </main>
