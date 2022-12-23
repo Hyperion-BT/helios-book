@@ -2539,6 +2539,18 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="-111"><a class="header" href="#-111"><code>!=</code></a></h3>
 <pre><code class="language-helios">TxId != TxId -&gt; Bool
 </code></pre>
+<h3 id="-112"><a class="header" href="#-112"><code>&gt;=</code></a></h3>
+<pre><code class="language-helios">TxId &gt;= TxId -&gt; Bool
+</code></pre>
+<h3 id="-113"><a class="header" href="#-113"><code>&gt;</code></a></h3>
+<pre><code class="language-helios">TxId &gt; TxId -&gt; Bool
+</code></pre>
+<h3 id="-114"><a class="header" href="#-114"><code>&lt;=</code></a></h3>
+<pre><code class="language-helios">TxId &lt;= TxId -&gt; Bool
+</code></pre>
+<h3 id="-115"><a class="header" href="#-115"><code>&lt;</code></a></h3>
+<pre><code class="language-helios">TxId &lt; TxId -&gt; Bool
+</code></pre>
 <h2 id="methods-30"><a class="header" href="#methods-30">Methods</a></h2>
 <h3 id="serialize-30"><a class="header" href="#serialize-30"><code>serialize</code></a></h3>
 <pre><code class="language-helios">tx_id.serialize() -&gt; ByteArray
@@ -2566,10 +2578,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">tx_input.output -&gt; TxOutput
 </code></pre>
 <h2 id="operators-31"><a class="header" href="#operators-31">Operators</a></h2>
-<h3 id="-112"><a class="header" href="#-112"><code>==</code></a></h3>
+<h3 id="-116"><a class="header" href="#-116"><code>==</code></a></h3>
 <pre><code class="language-helios">TxInput == TxInput -&gt; Bool
 </code></pre>
-<h3 id="-113"><a class="header" href="#-113"><code>!=</code></a></h3>
+<h3 id="-117"><a class="header" href="#-117"><code>!=</code></a></h3>
 <pre><code class="language-helios">TxInput != TxInput -&gt; Bool
 </code></pre>
 <h2 id="methods-31"><a class="header" href="#methods-31">Methods</a></h2>
@@ -2608,10 +2620,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">tx_output.ref_script_hash -&gt; Option[ScriptHash]
 </code></pre>
 <h2 id="operators-32"><a class="header" href="#operators-32">Operators</a></h2>
-<h3 id="-114"><a class="header" href="#-114"><code>==</code></a></h3>
+<h3 id="-118"><a class="header" href="#-118"><code>==</code></a></h3>
 <pre><code class="language-helios">TxOutput == TxOutput -&gt; Bool
 </code></pre>
-<h3 id="-115"><a class="header" href="#-115"><code>!=</code></a></h3>
+<h3 id="-119"><a class="header" href="#-119"><code>!=</code></a></h3>
 <pre><code class="language-helios">TxOutput != TxOutput -&gt; Bool
 </code></pre>
 <h2 id="methods-32"><a class="header" href="#methods-32">Methods</a></h2>
@@ -2633,29 +2645,29 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">tx_output_id.index -&gt; Int
 </code></pre>
 <h3 id="tx_id"><a class="header" href="#tx_id"><code>tx_id</code></a></h3>
-<p>Id of the producting transaction:</p>
+<p><code>TxId</code> of the producing transaction:</p>
 <pre><code class="language-helios">tx_output_id.tx_id -&gt; TxId
 </code></pre>
 <h2 id="operators-33"><a class="header" href="#operators-33">Operators</a></h2>
-<h3 id="-116"><a class="header" href="#-116"><code>==</code></a></h3>
+<h3 id="-120"><a class="header" href="#-120"><code>==</code></a></h3>
 <pre><code class="language-helios">TxOutputId == TxOutputId -&gt; Bool
 </code></pre>
-<h3 id="-117"><a class="header" href="#-117"><code>!=</code></a></h3>
+<h3 id="-121"><a class="header" href="#-121"><code>!=</code></a></h3>
 <pre><code class="language-helios">TxOutputId != TxOutputId -&gt; Bool
 </code></pre>
-<h3 id="-118"><a class="header" href="#-118"><code>&gt;=</code></a></h3>
+<h3 id="-122"><a class="header" href="#-122"><code>&gt;=</code></a></h3>
 <p>First compares bytes of <a href="lang/builtins/./txid.html"><code>TxId</code></a>, then compares index.</p>
 <pre><code class="language-helios">TxOutputId &gt;= TxOutputId -&gt; Bool
 </code></pre>
-<h3 id="-119"><a class="header" href="#-119"><code>&gt;</code></a></h3>
+<h3 id="-123"><a class="header" href="#-123"><code>&gt;</code></a></h3>
 <p>First compares bytes of <a href="lang/builtins/./txid.html"><code>TxId</code></a>, then compares index.</p>
 <pre><code class="language-helios">TxOutputId &gt; TxOutputId -&gt; Bool
 </code></pre>
-<h3 id="-120"><a class="header" href="#-120"><code>&lt;=</code></a></h3>
+<h3 id="-124"><a class="header" href="#-124"><code>&lt;=</code></a></h3>
 <p>First compares bytes of <a href="lang/builtins/./txid.html"><code>TxId</code></a>, then compares index.</p>
 <pre><code class="language-helios">TxOutputId &lt;= TxOutputId -&gt; Bool
 </code></pre>
-<h3 id="-121"><a class="header" href="#-121"><code>&lt;</code></a></h3>
+<h3 id="-125"><a class="header" href="#-125"><code>&lt;</code></a></h3>
 <p>First compares bytes of <a href="lang/builtins/./txid.html"><code>TxId</code></a>, then compares index.</p>
 <pre><code class="language-helios">TxOutputId &lt; TxOutputId -&gt; Bool
 </code></pre>
@@ -2678,22 +2690,22 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">ValidatorHash::from_script_hash(hash: ScriptHash) -&gt; ValidatorHash
 </code></pre>
 <h2 id="operators-34"><a class="header" href="#operators-34">Operators</a></h2>
-<h3 id="-122"><a class="header" href="#-122"><code>==</code></a></h3>
+<h3 id="-126"><a class="header" href="#-126"><code>==</code></a></h3>
 <pre><code class="language-helios">ValidatorHash == ValidatorHash -&gt; Bool
 </code></pre>
-<h3 id="-123"><a class="header" href="#-123"><code>!=</code></a></h3>
+<h3 id="-127"><a class="header" href="#-127"><code>!=</code></a></h3>
 <pre><code class="language-helios">ValidatorHash != ValidatorHash -&gt; Bool
 </code></pre>
-<h3 id="-124"><a class="header" href="#-124"><code>&gt;=</code></a></h3>
+<h3 id="-128"><a class="header" href="#-128"><code>&gt;=</code></a></h3>
 <pre><code class="language-helios">ValidatorHash &gt;= ValidatorHash -&gt; Bool
 </code></pre>
-<h3 id="-125"><a class="header" href="#-125"><code>&gt;</code></a></h3>
+<h3 id="-129"><a class="header" href="#-129"><code>&gt;</code></a></h3>
 <pre><code class="language-helios">ValidatorHash &gt; ValidatorHash -&gt; Bool
 </code></pre>
-<h3 id="-126"><a class="header" href="#-126"><code>&lt;=</code></a></h3>
+<h3 id="-130"><a class="header" href="#-130"><code>&lt;=</code></a></h3>
 <pre><code class="language-helios">ValidatorHash &lt;= ValidatorHash -&gt; Bool
 </code></pre>
-<h3 id="-127"><a class="header" href="#-127"><code>&lt;</code></a></h3>
+<h3 id="-131"><a class="header" href="#-131"><code>&lt;</code></a></h3>
 <pre><code class="language-helios">ValidatorHash &lt; ValidatorHash -&gt; Bool
 </code></pre>
 <h2 id="methods-34"><a class="header" href="#methods-34">Methods</a></h2>
@@ -2733,43 +2745,43 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">Value::from_map(raw_value: Map[MintingPolicyHash]Map[ByteArray]Int) -&gt; Value
 </code></pre>
 <h2 id="operators-35"><a class="header" href="#operators-35">Operators</a></h2>
-<h3 id="-128"><a class="header" href="#-128"><code>==</code></a></h3>
+<h3 id="-132"><a class="header" href="#-132"><code>==</code></a></h3>
 <p>Returns <code>true</code> if two <code>Value</code>s are the same.</p>
 <pre><code class="language-helios">Value == Value -&gt; Bool
 </code></pre>
 <blockquote>
 <p><strong>Note</strong>: the assets and tokens must also be in the same order for <code>==</code> to return <code>true</code>.</p>
 </blockquote>
-<h3 id="-129"><a class="header" href="#-129"><code>!=</code></a></h3>
+<h3 id="-133"><a class="header" href="#-133"><code>!=</code></a></h3>
 <pre><code class="language-helios">Value != Value -&gt; Bool
 </code></pre>
-<h3 id="-130"><a class="header" href="#-130"><code>&gt;=</code></a></h3>
+<h3 id="-134"><a class="header" href="#-134"><code>&gt;=</code></a></h3>
 <p>Strict greater-equals comparison. If every lhs token has a greater-or-equals amount than the equivalent rhs token then <code>&gt;=</code> returns <code>true</code>. If any rhs token has a greater amount than the equivalent lhs token then <code>&gt;=</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &gt;= Value -&gt; Bool
 </code></pre>
-<h3 id="-131"><a class="header" href="#-131"><code>&gt;</code></a></h3>
+<h3 id="-135"><a class="header" href="#-135"><code>&gt;</code></a></h3>
 <p>Strict greater-than comparison. If every lhs token has a greater amount than the equivalent rhs token then <code>&gt;</code> returns <code>true</code>. If any rhs token has a greater-or-equals amount than the equivalent lhs token then <code>&gt;</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &gt; Value -&gt; Bool
 </code></pre>
-<h3 id="-132"><a class="header" href="#-132"><code>&lt;=</code></a></h3>
+<h3 id="-136"><a class="header" href="#-136"><code>&lt;=</code></a></h3>
 <p>Strict less-equals comparison. If every lhs token has a smaller-or-equals amount than the equivalent rhs token then <code>&lt;=</code> returns <code>true</code>. If any rhs token has a smaller amount than the equivalent lhs token, or doesn't exist in lhs, then <code>&lt;=</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &lt;= Value -&gt; Bool
 </code></pre>
-<h3 id="-133"><a class="header" href="#-133"><code>&lt;</code></a></h3>
+<h3 id="-137"><a class="header" href="#-137"><code>&lt;</code></a></h3>
 <p>Strict less-than comparison. If every lhs token has a smaller amount than the equivalent rhs token then <code>&lt;</code> returns <code>true</code>. If any rhs token has a smaller-or-equals amount than the equivalent lhs token, or doesn't exist in lhs, then <code>&lt;</code> returns <code>false</code>.</p>
 <pre><code class="language-helios">Value &lt; Value -&gt; Bool
 </code></pre>
-<h3 id="-134"><a class="header" href="#-134"><code>+</code></a></h3>
+<h3 id="-138"><a class="header" href="#-138"><code>+</code></a></h3>
 <pre><code class="language-helios">Value + Value -&gt; Value
 </code></pre>
 <h3 id="--4"><a class="header" href="#--4"><code>-</code></a></h3>
 <p>Subtracts two <code>Value</code>s. Note that negative token amounts are possible.</p>
 <pre><code class="language-helios">Value - Value -&gt; Value
 </code></pre>
-<h3 id="-135"><a class="header" href="#-135"><code>*</code></a></h3>
+<h3 id="-139"><a class="header" href="#-139"><code>*</code></a></h3>
 <pre><code class="language-helios">Value * Int -&gt; Value
 </code></pre>
-<h3 id="-136"><a class="header" href="#-136"><code>/</code></a></h3>
+<h3 id="-140"><a class="header" href="#-140"><code>/</code></a></h3>
 <pre><code class="language-helios">Value / Int -&gt; Value
 </code></pre>
 <h2 id="methods-35"><a class="header" href="#methods-35">Methods</a></h2>
