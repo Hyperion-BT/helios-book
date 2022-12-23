@@ -28,7 +28,7 @@ tx_output_id.index -> Int
 
 ### `tx_id`
 
-Id of the producting transaction:
+`TxId` of the producing transaction:
 
 ```helios
 tx_output_id.tx_id -> TxId

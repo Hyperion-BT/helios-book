@@ -31,6 +31,30 @@ TxId == TxId -> Bool
 TxId != TxId -> Bool
 ```
 
+### `>=`
+
+```helios
+TxId >= TxId -> Bool
+```
+
+### `>`
+
+```helios
+TxId > TxId -> Bool
+```
+
+### `<=`
+
+```helios
+TxId <= TxId -> Bool
+```
+
+### `<`
+
+```helios
+TxId < TxId -> Bool
+```
+
 ## Methods
 
 ### `serialize`
