@@ -55,9 +55,9 @@ func main(datum: Datum) -> Bool {
   * [`ByteArray`](./builtins/bytearray.md)
   * [`[]Data`](./builtins/list.md)
   * [`Map[Data]Data`](./builtins/map.md)
-  * Any user-defined enum
+  * Any user-defined enum or `(Int, []Data)`
 
-A `switch` expression over `Data` can use `Int`, `ByteArray`, `[]Data` and `Map[Data]Data`, and any enum type, as case types:
+A `switch` expression over `Data` can use `Int`, `ByteArray`, `[]Data` and `Map[Data]Data`, and any enum type or `(Int, []Data)`, as case types:
 
 ```helios
 data.switch{
@@ -69,6 +69,18 @@ data.switch{
 }
 ```
 
+or 
+
+```helios
+data.switch{
+	i: Int => ...,
+	b: ByteArray => ...,
+	l: []Data => ...,
+	m: Map[Data]Data => ...,
+	(index: Int, fields: []Data) => ... 
+}
+```
+
 > **Note**: the default `else` case can also be used as a substitute for any of these cases.
 
-> **Note**: besides the builtin types only one enum type can be used in `Data` `switch`, and structs/enum-members **can't** be used.
+> **Note**: besides the builtin types only one enum type can be used in a `Data` `switch`, and structs/enum-members **can't** be used. If an enum is used then `(Int, []Data)` can't be used.

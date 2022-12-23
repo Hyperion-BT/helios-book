@@ -64,7 +64,7 @@ datum_hash.serialize() -> ByteArray
 
 ### `show`
 
-Returns hexadecimcal representation of a `DatumHash`.
+Hexadecimal representation of a `DatumHash`.
 
 ```helios
 datum_hash.show() -> String

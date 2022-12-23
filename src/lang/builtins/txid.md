@@ -62,3 +62,11 @@ TxId < TxId -> Bool
 ```helios
 tx_id.serialize() -> ByteArray
 ```
+
+### `show`
+
+Hexadecimal representation of a `TxId`.
+
+```helios
+tx_id.show() -> String
+```
