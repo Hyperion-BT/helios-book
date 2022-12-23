@@ -27,7 +27,7 @@ Option[SomeType]::from_data(data: Data) -> Option[SomeType]
 Returns content of `Option[`*`SomeType`*`]::Some`.
 
 ```helios
-option_some.some -> Option[SomeType]
+option_some.some -> SomeType
 ```
 
 > **Note**: this getter doesn't exist on `Option[`*`SomeType`*`]::None`.
