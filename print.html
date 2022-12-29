@@ -3947,8 +3947,8 @@ const networkParams = new helios.NetworkParams(
 ): helios.Program
 </code></pre>
 <h3 id="compile"><a class="header" href="#compile"><code>compile</code></a></h3>
-<p>Compiles a Helios program, with optional optimization.</p>
-<pre><code class="language-ts">program.compile(simplify: boolean = false)
+<p>Compiles a Helios program, with optional optimization. Returns a <a href="api/reference/./uplcprogram.html"><code>UplcProgram</code></a> instance.</p>
+<pre><code class="language-ts">program.compile(simplify: boolean = false): helios.UplcProgram
 </code></pre>
 <h3 id="evalparam"><a class="header" href="#evalparam"><code>evalParam</code></a></h3>
 <p>Eval the rhs of a <code>const</code> statement, and return the result as a <code>UplcValue</code>.</p>
