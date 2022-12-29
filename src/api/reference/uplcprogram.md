@@ -20,6 +20,14 @@ Returns the [`MintingPolicyHash`](./mintingpolicyhash.md) of the script. Throws 
 uplc_program.mintingPolicyHash: helios.MintingPolicyHash
 ```
 
+### `stakingValidatorHash`
+
+Returns the [`StakingValidatorHash`](./stakingvalidatorhash.md) of the script. Throws an error if this isn't a staking validator script.
+
+```ts
+uplc_program.stakingValidatorHash: helios.StakingValidatorHash
+```
+
 ## Methods
 
 ### `apply`
