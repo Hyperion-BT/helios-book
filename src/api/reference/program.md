@@ -54,10 +54,10 @@ program.changeParam(
 
 ### `compile`
 
-Compiles a Helios program, with optional optimization.
+Compiles a Helios program, with optional optimization. Returns a [`UplcProgram`](./uplcprogram.md) instance.
 
 ```ts
-program.compile(simplify: boolean = false)
+program.compile(simplify: boolean = false): helios.UplcProgram
 ```
 
 ### `evalParam`
