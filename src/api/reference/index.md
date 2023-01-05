@@ -6,9 +6,10 @@ Typescript annotations are used to document types.
 
 ## Overview
 
-### Constants
+### Global constants and variables
 
-  * [`VERSION`](./constants.md#version)
+  * [`VERSION`](./globals.md#version)
+  * [`IS_TESTNET`](./globals.md#is_testnet)
 
 ### Functions
 
