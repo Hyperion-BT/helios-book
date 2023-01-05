@@ -40,7 +40,7 @@ helios.Address.fromHex(hex: string): helios.Address
 
 ### `fromHashes`
 
-Constructs a simple payment `Address` using a [`PubKeyHash`](./pubkeyhash.md) or [`ValidatorHash`](./validatorhash.md), in combination with an optional staking hash ([`StakeKeyHash`](./stakekeyhash.md) or [`StakingValidatorHash`](./stakingvalidatorhash.md)).
+Constructs an `Address` using either a [`PubKeyHash`](./pubkeyhash.md) (i.e. simple payment address) or [`ValidatorHash`](./validatorhash.md) (i.e. script address), in combination with an optional staking hash ([`StakeKeyHash`](./stakekeyhash.md) or [`StakingValidatorHash`](./stakingvalidatorhash.md)).
 
 Testnet addresses have different header bytes. [`IS_TESTNET`]() is a library-scope variable that can be set globally.
 
