@@ -4,7 +4,7 @@ The `Value` type represents monetary value as a **token bundle** (internally rep
 
 >**Note**: 1 ADA is equal to 1 million Lovelace
 
->**Note**: You might find yourself comparing the output of `value.get()` to a number in order to check if `value` contains something, but in that case it usually better to use the `value.contains()` method instead.
+>**Note**: You might find yourself comparing the output of `value.get()` to a number in order to check if `value` contains something, but in that case it is usually better to use the `value.contains()` method instead.
 
 ## Associated functions and constants
 

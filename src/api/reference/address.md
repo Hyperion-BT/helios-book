@@ -38,27 +38,17 @@ Constructs an `Address` using a hexadecimal string representation of the address
 helios.Address.fromHex(hex: string): helios.Address
 ```
 
-### `fromPubKeyHash`
+### `fromHashes`
 
-Constructs a simple payment `Address` using a [`PubKeyHash`](./pubkeyhash.md), and an optional staking hash ([`StakeKeyHash`](./stakekeyhash.md) or [`StakingValidatorHash`](./stakingvalidatorhash.md)).
+Constructs a simple payment `Address` using a [`PubKeyHash`](./pubkeyhash.md) or [`ValidatorHash`](./validatorhash.md), in combination with an optional staking hash ([`StakeKeyHash`](./stakekeyhash.md) or [`StakingValidatorHash`](./stakingvalidatorhash.md)).
+
+Testnet addresses have different header bytes. [`IS_TESTNET`]() is a library-scope variable that can be set globally.
 
 ```ts
 helios.Address.fromPubKeyHash(
-    isTestnet: boolean, 
-    pkh: helios.PubKeyHash,
-    sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null
-): helios.Address
-```
-
-### `fromValidatorHash`
-
-Constructs a script `Address` using a `ValidatorHash`, and an optional staking hash ([`StakeKeyHash`](./stakekeyhash.md) or [`StakingValidatorHash`](./stakingvalidatorhash.md)).
-
-```ts
-helios.Address.fromValidatorHash(
-    vh: helios.ValidatorHash,
+    pkh: helios.PubKeyHash | helios.ValidatorHash,
     sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null,
-    isTestnet: ?boolean = IS_TESTNET
+    isTestnet: boolean = IS_TESTNET
 ): helios.Address
 ```
 
@@ -66,7 +56,7 @@ helios.Address.fromValidatorHash(
 
 ### `pubKeyHash`
 
-Returns the underlying [`PubKeyHash`](./pubkeyhash.md) of a simple payment address, or `null` if it's a script address.
+Returns the underlying [`PubKeyHash`](./pubkeyhash.md) of a simple payment address, or `null` for a script `Address`.
 
 ```ts
 address.pubKeyHash: ?helios.PubKeyHash
@@ -74,10 +64,18 @@ address.pubKeyHash: ?helios.PubKeyHash
 
 ### `validatorHash`
 
-Returns the underlying [`ValidatorHash`](./validatorhash.md) of a script address, or `null` if it's a regular payment address.
+Returns the underlying [`ValidatorHash`](./validatorhash.md) of a script address, or `null` for a regular payment `Address`.
 
 ```ts
 address.validatorHash: ?helios.ValidatorHash
+```
+
+### `stakingHash`
+
+Returns the underlying [`StakeKeyHash](./stakekeyhash.md) or [`StakingValidatorHash`](./stakingvalidatorhash.md), or `null` for non-staked addresses.
+
+```ts
+address.stakingHash: ?(helios.StakeKeyHash | helios.StakingValidatorHash)
 ```
 
 ## Methods
