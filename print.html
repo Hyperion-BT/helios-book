@@ -3453,9 +3453,9 @@ async function buyTx(contract) {
 <h3 id="fromvalidatorhash"><a class="header" href="#fromvalidatorhash"><code>fromValidatorHash</code></a></h3>
 <p>Constructs a script <code>Address</code> using a <code>ValidatorHash</code>, and an optional staking hash (<a href="api/reference/./stakekeyhash.html"><code>StakeKeyHash</code></a> or <a href="api/reference/./stakingvalidatorhash.html"><code>StakingValidatorHash</code></a>).</p>
 <pre><code class="language-ts">helios.Address.fromValidatorHash(
-    isTestnet: boolean, 
     vh: helios.ValidatorHash,
-    sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null
+    sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null,
+    isTestnet: ?boolean = IS_TESTNET
 ): helios.Address
 </code></pre>
 <h2 id="getters-18"><a class="header" href="#getters-18">Getters</a></h2>
