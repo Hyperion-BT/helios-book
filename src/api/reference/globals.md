@@ -1,4 +1,6 @@
-# Constants
+# Global constants and variables
+
+## Constants
 
 ### `VERSION`
 
@@ -7,6 +9,8 @@ Current version of the Helios library.
 ```ts
 helios.VERSION: string
 ```
+
+## Variables
 
 ### `IS_TESTNET`
 

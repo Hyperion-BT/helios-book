@@ -82,7 +82,7 @@
     - [Canceling a sale](./api/picoswap/cancel-sale.md)
     - [Buying for-sale assets](./api/picoswap/buying.md)
   - [API Reference](./api/reference/index.md)
-    - [Constants](./api/reference/constants.md)
+    - [Globals](./api/reference/globals.md)
     - [Functions](./api/reference/functions.md)
     - [Address](./api/reference/address.md)
     - [Assets](./api/reference/assets.md)
