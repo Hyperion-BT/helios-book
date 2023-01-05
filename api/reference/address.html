@@ -169,7 +169,7 @@
 <pre><code class="language-ts">helios.Address.fromHex(hex: string): helios.Address
 </code></pre>
 <h3 id="fromhashes"><a class="header" href="#fromhashes"><code>fromHashes</code></a></h3>
-<p>Constructs a simple payment <code>Address</code> using a <a href="./pubkeyhash.html"><code>PubKeyHash</code></a> or <a href="./validatorhash.html"><code>ValidatorHash</code></a>, in combination with an optional staking hash (<a href="./stakekeyhash.html"><code>StakeKeyHash</code></a> or <a href="./stakingvalidatorhash.html"><code>StakingValidatorHash</code></a>).</p>
+<p>Constructs an <code>Address</code> using either a <a href="./pubkeyhash.html"><code>PubKeyHash</code></a> (i.e. simple payment address) or <a href="./validatorhash.html"><code>ValidatorHash</code></a> (i.e. script address), in combination with an optional staking hash (<a href="./stakekeyhash.html"><code>StakeKeyHash</code></a> or <a href="./stakingvalidatorhash.html"><code>StakingValidatorHash</code></a>).</p>
 <p>Testnet addresses have different header bytes. <a href=""><code>IS_TESTNET</code></a> is a library-scope variable that can be set globally.</p>
 <pre><code class="language-ts">helios.Address.fromPubKeyHash(
     pkh: helios.PubKeyHash | helios.ValidatorHash,
