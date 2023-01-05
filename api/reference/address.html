@@ -168,30 +168,27 @@
 <p>Constructs an <code>Address</code> using a hexadecimal string representation of the address bytes.</p>
 <pre><code class="language-ts">helios.Address.fromHex(hex: string): helios.Address
 </code></pre>
-<h3 id="frompubkeyhash"><a class="header" href="#frompubkeyhash"><code>fromPubKeyHash</code></a></h3>
-<p>Constructs a simple payment <code>Address</code> using a <a href="./pubkeyhash.html"><code>PubKeyHash</code></a>, and an optional staking hash (<a href="./stakekeyhash.html"><code>StakeKeyHash</code></a> or <a href="./stakingvalidatorhash.html"><code>StakingValidatorHash</code></a>).</p>
+<h3 id="fromhashes"><a class="header" href="#fromhashes"><code>fromHashes</code></a></h3>
+<p>Constructs a simple payment <code>Address</code> using a <a href="./pubkeyhash.html"><code>PubKeyHash</code></a> or <a href="./validatorhash.html"><code>ValidatorHash</code></a>, in combination with an optional staking hash (<a href="./stakekeyhash.html"><code>StakeKeyHash</code></a> or <a href="./stakingvalidatorhash.html"><code>StakingValidatorHash</code></a>).</p>
+<p>Testnet addresses have different header bytes. <a href=""><code>IS_TESTNET</code></a> is a library-scope variable that can be set globally.</p>
 <pre><code class="language-ts">helios.Address.fromPubKeyHash(
-    isTestnet: boolean, 
-    pkh: helios.PubKeyHash,
-    sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null
-): helios.Address
-</code></pre>
-<h3 id="fromvalidatorhash"><a class="header" href="#fromvalidatorhash"><code>fromValidatorHash</code></a></h3>
-<p>Constructs a script <code>Address</code> using a <code>ValidatorHash</code>, and an optional staking hash (<a href="./stakekeyhash.html"><code>StakeKeyHash</code></a> or <a href="./stakingvalidatorhash.html"><code>StakingValidatorHash</code></a>).</p>
-<pre><code class="language-ts">helios.Address.fromValidatorHash(
-    vh: helios.ValidatorHash,
+    pkh: helios.PubKeyHash | helios.ValidatorHash,
     sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null,
-    isTestnet: ?boolean = IS_TESTNET
+    isTestnet: boolean = IS_TESTNET
 ): helios.Address
 </code></pre>
 <h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
 <h3 id="pubkeyhash"><a class="header" href="#pubkeyhash"><code>pubKeyHash</code></a></h3>
-<p>Returns the underlying <a href="./pubkeyhash.html"><code>PubKeyHash</code></a> of a simple payment address, or <code>null</code> if it's a script address.</p>
+<p>Returns the underlying <a href="./pubkeyhash.html"><code>PubKeyHash</code></a> of a simple payment address, or <code>null</code> for a script <code>Address</code>.</p>
 <pre><code class="language-ts">address.pubKeyHash: ?helios.PubKeyHash
 </code></pre>
 <h3 id="validatorhash"><a class="header" href="#validatorhash"><code>validatorHash</code></a></h3>
-<p>Returns the underlying <a href="./validatorhash.html"><code>ValidatorHash</code></a> of a script address, or <code>null</code> if it's a regular payment address.</p>
+<p>Returns the underlying <a href="./validatorhash.html"><code>ValidatorHash</code></a> of a script address, or <code>null</code> for a regular payment <code>Address</code>.</p>
 <pre><code class="language-ts">address.validatorHash: ?helios.ValidatorHash
+</code></pre>
+<h3 id="stakinghash"><a class="header" href="#stakinghash"><code>stakingHash</code></a></h3>
+<p>Returns the underlying [<code>StakeKeyHash](./stakekeyhash.md) or [</code>StakingValidatorHash<code>](./stakingvalidatorhash.md), or </code>null` for non-staked addresses.</p>
+<pre><code class="language-ts">address.stakingHash: ?(helios.StakeKeyHash | helios.StakingValidatorHash)
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <h3 id="tobech32"><a class="header" href="#tobech32"><code>toBech32</code></a></h3>
