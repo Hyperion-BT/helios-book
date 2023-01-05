@@ -2,7 +2,7 @@
 
 Wrapper for Cardano address bytes. An `Address` consists of three parts internally:
 
-  * Header (1 byte, see CIP 8)
+  * Header (1 byte, see [CIP 19](https://cips.cardano.org/cips/cip19/))
   * Witness hash (28 bytes that represent the `PubKeyHash` or `ValidatorHash`)
   * Optional staking credential (0 or 28 bytes)
 
