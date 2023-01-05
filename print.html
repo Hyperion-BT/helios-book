@@ -3448,7 +3448,7 @@ async function buyTx(contract) {
 </code></pre>
 <h3 id="fromhashes"><a class="header" href="#fromhashes"><code>fromHashes</code></a></h3>
 <p>Constructs an <code>Address</code> using either a <a href="api/reference/./pubkeyhash.html"><code>PubKeyHash</code></a> (i.e. simple payment address) or <a href="api/reference/./validatorhash.html"><code>ValidatorHash</code></a> (i.e. script address), in combination with an optional staking hash (<a href="api/reference/./stakekeyhash.html"><code>StakeKeyHash</code></a> or <a href="api/reference/./stakingvalidatorhash.html"><code>StakingValidatorHash</code></a>).</p>
-<p>Testnet addresses have different header bytes. <a href="api/reference/"><code>IS_TESTNET</code></a> is a library-scope variable that can be set globally.</p>
+<p>Testnet addresses have different header bytes. <a href="api/reference/./constants.html"><code>IS_TESTNET</code></a> is a library-scope variable that can be set globally.</p>
 <pre><code class="language-ts">helios.Address.fromPubKeyHash(
     pkh: helios.PubKeyHash | helios.ValidatorHash,
     sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null,
