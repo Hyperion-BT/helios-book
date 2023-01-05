@@ -56,9 +56,9 @@ Constructs a script `Address` using a `ValidatorHash`, and an optional staking h
 
 ```ts
 helios.Address.fromValidatorHash(
-    isTestnet: boolean, 
     vh: helios.ValidatorHash,
-    sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null
+    sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null,
+    isTestnet: ?boolean = true
 ): helios.Address
 ```
 
