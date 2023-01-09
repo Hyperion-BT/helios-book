@@ -9,7 +9,7 @@ spending time_lock
 struct Datum {
     lockUntil: Time
     owner:     PubKeyHash // can't get this info from the ScriptContext
-    nonce:     Int // doesn't actually need be checked here
+    nonce:     Int
 }
 
 func main(datum: Datum, ctx: ScriptContext) -> Bool {
@@ -17,16 +17,20 @@ func main(datum: Datum, ctx: ScriptContext) -> Bool {
     now: Time = tx.time_range.start;
     returnToOwner: Bool = tx.is_signed_by(datum.owner);
 
-    print("now: " + now.show() + ", lock: " + datum.lockUntil.show()); now > datum.lockUntil || 
-    (print("returning? " + returnToOwner.show()); returnToOwner)
+    (now > datum.lockUntil) || returnToOwner
 }
 // end-of-main, anything that comes after isn't part of the on-chain script
 
+// MY_DATUM parameters
+const LOCK_UNTIL = 0 // seconds since 1970, set by cli
+const OWNER = PubKeyHash::new(#) // set by cli
+const NONCE = 42 // can be set by cli
+
 // Helios can evaluate MY_DATUM into a data-structure that can be used to build a transaction
 const MY_DATUM = Datum{
-  lockUntil: Time::new(${(new Date()).getTime() + 1000*60*5}), 
-  owner: PubKeyHash::new(#1d22b9ff5fc...), 
-  nonce: 42
+  lockUntil: Time::new(LOCK_UNTIL*1000),  // needs to be in milliseconds
+  owner:     OWNER, 
+  nonce:     NONCE
 }
 ```
 
@@ -34,12 +38,12 @@ UTxOs can be sent into the time-lock script arbitrarily as long as the datum has
 
 
 Once we have written the script, we generate its JSON representation using *helios-cli*, and then calculate the script address using cardano-cli:
-```bash
+```
 $ helios compile time_lock.hl
 
 {"type": "PlutusScriptV2", "description": "", "cborHex": "5..."}
 ```
-```bash
+```
 $ docker exec -it <container-id> bash
 
 > echo '{
@@ -59,7 +63,7 @@ addr_test1...
 ```
 
 For the datum we need the `PubKeyHash` of the initiating wallet (i.e. the owner):
-```bash
+```
 $ docker exec -it <container-id> bash
 
 > cardano-cli address key-hash --payment-verification-key-file /data/wallets/wallet1.vkey
@@ -68,14 +72,17 @@ $ docker exec -it <container-id> bash
 ```
 
 We also need a `lockUntil` time, for example 5 minutes from now. Now we can build the datum:
-```bash
-$ helios eval time_lock.hl MY_DATUM
+```
+$ helios eval time_lock.hl MY_DATUM \
+  -DOWNER "000102030405060708090a0b0c0d0e0f101112131415161718191a1b" \
+  -DLOCK_UNTIL $(($(date +%s) + 300)) \
+  -DNONCE 12345
 
-{"constructor": 0, "fields": [{"int": 16....}, {"bytes": "1d22b9ff5fc..."}, {"int": 42}]}
+{"constructor": 0, "fields": [{"int": 16....}, {"bytes": "0001020304..."}, {"int": 12345}]}
 ```
 
 Now let's send 2 tAda to the script address using the datum we just generated:
-```bash
+```
 $ docker exec -it <container-id> bash
 
 > cardano-cli query utxo \
@@ -119,7 +126,7 @@ Transaction successfully submitted
 Wait for the transaction to propagate through the network, and query the script address to see the locked UTxO(s).
 
 First thing we should test is returning the UTxO(s) back to wallet 1. For that we use the following transaction:
-```bash
+```
 > PARAMS=$(mktemp) # most recent protocol params
 > cardano-cli query protocol-parameters --testnet-magic $TESTNET_MAGIC_NUM > $PARAMS
 
@@ -161,7 +168,7 @@ Note that this transaction *build* command differs slightly from the *Always suc
  * `--required-signer <wallet-private-key-file>` is needed so that `getTxSignatories(tx)` doesn't return an empty list.
 
 The second thing we must test is claiming the time-locked funds from another wallet (eg. wallet 2). Let's assume that the time-lock script still contains the 2 tAda sent by wallet 1, and that sufficient time has passed. Wallet 2 can claim the UTxO(s) using the following commands:
-```bash
+```
 > PARAMS=$(mktemp) # most recent protocol params
 > cardano-cli query protocol-parameters --testnet-magic $TESTNET_MAGIC_NUM > $PARAMS
 

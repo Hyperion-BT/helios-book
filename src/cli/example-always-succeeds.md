@@ -10,14 +10,14 @@ func main() -> Bool {
 ```
 
 Compile the Always Succeeds script into its JSON representation:
-```bash
+```
 $ helios compile always_succeeds.hl
 
 {"type": "PlutusScriptV2", "description": "", "cborHex" :"52510100003222253335734a0082930b0a5101"}
 ```
 
 Start an interactive shell in the *cardano-node* container and copy the content of the JSON representing the script:
-```bash
+```
 $ docker exec -it <container-id> bash
 
 > mkdir -p /data/scripts
@@ -32,7 +32,7 @@ $ docker exec -it <container-id> bash
 ```
 
 Generate the script address:
-```bash
+```
 > cardano-cli address build \
   --payment-script-file /data/scripts/always-succeeds.json \
   --out-file /data/scripts/always-succeeds.addr \
@@ -44,7 +44,7 @@ addr_test1wpfvdtcvnd6yknhve6pc2w999n4325pck00x3c4m9750cdch6csfq
 ```
 
 We need a datum, which can be chosen arbitrarily in this case:
-```bash
+```
 > DATUM_HASH=$(cardano-cli transaction hash-script-data --script-data-value "42")
 > echo $DATUM_HASH
 
@@ -52,7 +52,7 @@ We need a datum, which can be chosen arbitrarily in this case:
 ```
 
 We also need to select some UTxOs as inputs to the transaction. At this point we should have one UTxO sitting in wallet 1. We can query this using the following command:
-```bash
+```
 > cardano-cli query utxo \
   --address $(cat /data/wallets/wallet1.addr) \
   --testnet-magic $TESTNET_MAGIC_NUM
@@ -97,7 +97,7 @@ If you check the wallet 1 payment address balance after a few minutes you will n
 
 
 You can also try to check the balance of the script address:
-```bash
+```
 > cardano-cli query utxo \
   --address $(cat /data/scripts/always-succeeds.addr) \
   --testnet-magic $TESTNET_MAGIC_NUM
@@ -107,7 +107,7 @@ You can also try to check the balance of the script address:
 The table should list at least one UTxO with your specific datum hash.
 
 We can now try and get our funds back from the script by building, signing and submitting another transaction:
-```bash
+```
 > PARAMS=$(mktemp) # most recent protocol parameters
 > cardano-cli query protocol-parameters --testnet-magic $TESTNET_MAGIC_NUM > $PARAMS
 
