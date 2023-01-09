@@ -8,6 +8,14 @@ Converts a list of bytes into its hexadecimal string representation.
 helios.bytesToHex(bytes: number[]): string
 ```
 
+### `bytesToText`
+
+Converts utf-8 encoded text from its byte representation to its string representation.
+
+```ts
+helios.bytesToText(bytes: number[]): string
+```
+
 ### `extractScriptPurposeAndName`
 
 Quickly extract the script purpose header of a script source, by parsing only the minimally necessary characters. Returns `null` if the script header is missing or syntactically incorrect.
@@ -40,4 +48,12 @@ Template string tag function that doens't do anything and just returns the templ
 
 ```ts
 helios.hl`...`: string
+```
+
+### `textToBytes`
+
+Converts a string into its utf-8 encoded byte representation.
+
+```ts
+helios.textToBytes(text: string): number[]
 ```

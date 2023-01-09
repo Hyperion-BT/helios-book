@@ -2,7 +2,7 @@
 
 Represents a Helios program containing a `main` function.
 
-This is the principal with which users of the Helios library interact.
+This is the principal API class with which users of the library interact.
 
 ## Constructor
 
@@ -35,11 +35,43 @@ Returns a mapping of top-level `const` names to `const` types.
 program.paramTypes: Object.<string, helios.Type>
 ```
 
+### `parameters`
+
+Returns an object containing all the evaluated parameters.
+
+```ts
+program.parameters: {[paramName: string]: helios.HeliosData}
+```
+
+`HeliosData` is the abstract parent class of many Helios API types that have Helios language equivalents.
+
+### `types`
+
+Returns an object containing Javascript contructors for the user-defined types in the main script (including those imported into the main script).
+
+```ts
+program.types: {[typeName: string]: {new(...any) => helios.HeliosData}}
+```
+
+Instantiating these constructors creates objects with `HeliosData` as a parent type.
+
+## Setters
+
+### `parameters`
+
+Parameters can be set using the `parameters` setter. Parameters are [`const` statements](../../lang/variables.html#const-statements) that are visible in the main Helios script. In many cases a Javascript value can be used directly (i.e. JSON-like).
+
+```ts
+program.parameters = {MY_PARAM: my_param, ...} as {[name: string]: helios.HeliosData | any}
+```
+
+Primitive Javascript values can also be used as a rhs when setting parameters like this. Helios will intelligently convert these in the necessary `HeliosData` instances.
+
 ## Methods
 
 ### `changeParam`
 
-Change the value of a [`const` statement](../../lang/variables.html#const-statements), using either a JSON string or a `UplcValue` instance.
+As an alternative for the [`parameters` setter](./program.md#parameters-1), change the value of a [`const` statement](../../lang/variables.html#const-statements) visible in the main Helios script, using either a JSON string or a `UplcValue` instance.
 
 `UplcValue` instances can be generated using the `evalParam` method.
 

@@ -92,6 +92,7 @@
     - [Datum](./api/reference/datum.md)
     - [DatumHash](./api/reference/datumhash.md)
     - [FuzzyTest](./api/reference/fuzzytest.md)
+    - [HeliosData](./api/reference/heliosdata.md)
     - [IntData](./api/reference/intdata.md)
     - [ListData](./api/reference/listdata.md)
     - [MapData](./api/reference/mapdata.md)

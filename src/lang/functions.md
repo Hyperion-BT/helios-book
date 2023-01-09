@@ -44,6 +44,11 @@ is_even = (n: Int) -> Bool { (n % 2) == 0 }; ...
 //  but return type of the anonymous function must be specified
 ```
 
+The return type of anonymous functions is optional, the compiler can figure it out from the function body:
+```helios
+is_even = (n: Int) -> { (n % 2) == 0}; ...
+```
+
 > **Note:** Function statements can be referenced by their name, returning a function value. This should be preferred to using anonymous functions, as it is more readable.
 
 ## Multiple return values

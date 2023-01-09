@@ -29,6 +29,7 @@ Typescript annotations are used to document types.
   * [`Datum`](./datum.md)
   * [`DatumHash`](./datumhash.md)
   * [`FuzzyTest`](./fuzzytest.md)
+  * [`HeliosData`](./heliosdata.md)
   * [`IntData`](./intdata.md)
   * [`ListData`](./listdata.md)
   * [`MapData`](./mapdata.md)

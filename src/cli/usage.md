@@ -16,6 +16,11 @@ $ helios compile my_script.hl --optimize -o my_script.json
 $ helios compile my_script.hl -I ./my_modules/ -o my_script.json
 ```
 
+[Parameters](../lang/parameterized.md) can be set using `-D<param-name> <param-value>` options:
+```bash
+$ helios compile my_script.hl -DMY_PARAM 100 -o my_script.json
+```
+
 ## Evaluating a parameter
 
 ```bash
