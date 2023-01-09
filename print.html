@@ -4762,7 +4762,7 @@ addr_test1vqwj9w0...
 <p><em>helios-cli</em> automatically searches for <a href="cli/../lang/modules.html">modules</a> in the current directory. Other directories can be included using the <code>-I</code> option:</p>
 <pre><code class="language-bash">$ helios compile my_script.hl -I ./my_modules/ -o my_script.json
 </code></pre>
-<p><a href="cli/../lang/parameterized.html">Parameters</a> can be set using <code>-D&lt;param-name&gt; &lt;param-value&gt;</code> options:</p>
+<p><a href="cli/../lang/parameterized.html">Parameters</a> can be set using the <code>-D&lt;param-name&gt; &lt;param-value&gt;</code> option:</p>
 <pre><code class="language-bash">$ helios compile my_script.hl -DMY_PARAM 100 -o my_script.json
 </code></pre>
 <h2 id="evaluating-a-parameter"><a class="header" href="#evaluating-a-parameter">Evaluating a parameter</a></h2>
@@ -4785,12 +4785,12 @@ func main() -&gt; Bool {
 }
 </code></pre>
 <p>Compile the Always Succeeds script into its JSON representation:</p>
-<pre><code class="language-bash">$ helios compile always_succeeds.hl
+<pre><code>$ helios compile always_succeeds.hl
 
 {&quot;type&quot;: &quot;PlutusScriptV2&quot;, &quot;description&quot;: &quot;&quot;, &quot;cborHex&quot; :&quot;52510100003222253335734a0082930b0a5101&quot;}
 </code></pre>
 <p>Start an interactive shell in the <em>cardano-node</em> container and copy the content of the JSON representing the script:</p>
-<pre><code class="language-bash">$ docker exec -it &lt;container-id&gt; bash
+<pre><code>$ docker exec -it &lt;container-id&gt; bash
 
 &gt; mkdir -p /data/scripts
 &gt; cd /data/scripts
@@ -4803,7 +4803,7 @@ func main() -&gt; Bool {
 
 </code></pre>
 <p>Generate the script address:</p>
-<pre><code class="language-bash">&gt; cardano-cli address build \
+<pre><code>&gt; cardano-cli address build \
   --payment-script-file /data/scripts/always-succeeds.json \
   --out-file /data/scripts/always-succeeds.addr \
   --testnet-magic $TESTNET_MAGIC_NUM
@@ -4813,13 +4813,13 @@ func main() -&gt; Bool {
 addr_test1wpfvdtcvnd6yknhve6pc2w999n4325pck00x3c4m9750cdch6csfq
 </code></pre>
 <p>We need a datum, which can be chosen arbitrarily in this case:</p>
-<pre><code class="language-bash">&gt; DATUM_HASH=$(cardano-cli transaction hash-script-data --script-data-value &quot;42&quot;)
+<pre><code>&gt; DATUM_HASH=$(cardano-cli transaction hash-script-data --script-data-value &quot;42&quot;)
 &gt; echo $DATUM_HASH
 
 9e1199a988ba72ffd6e9c269cadb3b53b5f360ff99f112d9b2ee30c4d74ad88b
 </code></pre>
 <p>We also need to select some UTxOs as inputs to the transaction. At this point we should have one UTxO sitting in wallet 1. We can query this using the following command:</p>
-<pre><code class="language-bash">&gt; cardano-cli query utxo \
+<pre><code>&gt; cardano-cli query utxo \
   --address $(cat /data/wallets/wallet1.addr) \
   --testnet-magic $TESTNET_MAGIC_NUM
 
@@ -4857,7 +4857,7 @@ Transaction successfully submitted
 </code></pre>
 <p>If you check the wallet 1 payment address balance after a few minutes you will noticed that it has decreased by 2 tAda + fee. Note the left-over UTxO id, we will need it to pay fees when retrieving funds.</p>
 <p>You can also try to check the balance of the script address:</p>
-<pre><code class="language-bash">&gt; cardano-cli query utxo \
+<pre><code>&gt; cardano-cli query utxo \
   --address $(cat /data/scripts/always-succeeds.addr) \
   --testnet-magic $TESTNET_MAGIC_NUM
 
@@ -4865,7 +4865,7 @@ Transaction successfully submitted
 </code></pre>
 <p>The table should list at least one UTxO with your specific datum hash.</p>
 <p>We can now try and get our funds back from the script by building, signing and submitting another transaction:</p>
-<pre><code class="language-bash">&gt; PARAMS=$(mktemp) # most recent protocol parameters
+<pre><code>&gt; PARAMS=$(mktemp) # most recent protocol parameters
 &gt; cardano-cli query protocol-parameters --testnet-magic $TESTNET_MAGIC_NUM &gt; $PARAMS
 
 &gt; TX_BODY=$(mktemp)
@@ -4908,7 +4908,7 @@ Transaction successfully submitted
 struct Datum {
     lockUntil: Time
     owner:     PubKeyHash // can't get this info from the ScriptContext
-    nonce:     Int // doesn't actually need be checked here
+    nonce:     Int
 }
 
 func main(datum: Datum, ctx: ScriptContext) -&gt; Bool {
@@ -4916,25 +4916,29 @@ func main(datum: Datum, ctx: ScriptContext) -&gt; Bool {
     now: Time = tx.time_range.start;
     returnToOwner: Bool = tx.is_signed_by(datum.owner);
 
-    print(&quot;now: &quot; + now.show() + &quot;, lock: &quot; + datum.lockUntil.show()); now &gt; datum.lockUntil || 
-    (print(&quot;returning? &quot; + returnToOwner.show()); returnToOwner)
+    (now &gt; datum.lockUntil) || returnToOwner
 }
 // end-of-main, anything that comes after isn't part of the on-chain script
 
+// MY_DATUM parameters
+const LOCK_UNTIL = 0 // seconds since 1970, set by cli
+const OWNER = PubKeyHash::new(#) // set by cli
+const NONCE = 42 // can be set by cli
+
 // Helios can evaluate MY_DATUM into a data-structure that can be used to build a transaction
 const MY_DATUM = Datum{
-  lockUntil: Time::new(${(new Date()).getTime() + 1000*60*5}), 
-  owner: PubKeyHash::new(#1d22b9ff5fc...), 
-  nonce: 42
+  lockUntil: Time::new(LOCK_UNTIL*1000),  // needs to be in milliseconds
+  owner:     OWNER, 
+  nonce:     NONCE
 }
 </code></pre>
 <p>UTxOs can be sent into the time-lock script arbitrarily as long as the datum has the correct format. UTxOs can be retrieved any time by the wallet that initiated the time-lock. UTxOs can be retrieved after the time-lock by anyone who knows the datum.</p>
 <p>Once we have written the script, we generate its JSON representation using <em>helios-cli</em>, and then calculate the script address using cardano-cli:</p>
-<pre><code class="language-bash">$ helios compile time_lock.hl
+<pre><code>$ helios compile time_lock.hl
 
 {&quot;type&quot;: &quot;PlutusScriptV2&quot;, &quot;description&quot;: &quot;&quot;, &quot;cborHex&quot;: &quot;5...&quot;}
 </code></pre>
-<pre><code class="language-bash">$ docker exec -it &lt;container-id&gt; bash
+<pre><code>$ docker exec -it &lt;container-id&gt; bash
 
 &gt; echo '{
   &quot;type&quot;: &quot;PlutusScriptV1&quot;,
@@ -4952,19 +4956,22 @@ const MY_DATUM = Datum{
 addr_test1...
 </code></pre>
 <p>For the datum we need the <code>PubKeyHash</code> of the initiating wallet (i.e. the owner):</p>
-<pre><code class="language-bash">$ docker exec -it &lt;container-id&gt; bash
+<pre><code>$ docker exec -it &lt;container-id&gt; bash
 
 &gt; cardano-cli address key-hash --payment-verification-key-file /data/wallets/wallet1.vkey
 
 1d22b9ff5fc...
 </code></pre>
 <p>We also need a <code>lockUntil</code> time, for example 5 minutes from now. Now we can build the datum:</p>
-<pre><code class="language-bash">$ helios eval time_lock.hl MY_DATUM
+<pre><code>$ helios eval time_lock.hl MY_DATUM \
+  -DOWNER &quot;000102030405060708090a0b0c0d0e0f101112131415161718191a1b&quot; \
+  -DLOCK_UNTIL $(($(date +%s) + 300)) \
+  -DNONCE 12345
 
-{&quot;constructor&quot;: 0, &quot;fields&quot;: [{&quot;int&quot;: 16....}, {&quot;bytes&quot;: &quot;1d22b9ff5fc...&quot;}, {&quot;int&quot;: 42}]}
+{&quot;constructor&quot;: 0, &quot;fields&quot;: [{&quot;int&quot;: 16....}, {&quot;bytes&quot;: &quot;0001020304...&quot;}, {&quot;int&quot;: 12345}]}
 </code></pre>
 <p>Now let's send 2 tAda to the script address using the datum we just generated:</p>
-<pre><code class="language-bash">$ docker exec -it &lt;container-id&gt; bash
+<pre><code>$ docker exec -it &lt;container-id&gt; bash
 
 &gt; cardano-cli query utxo \
   --address $(cat /data/wallets/wallet1.addr) \
@@ -5005,7 +5012,7 @@ Transaction successfully submitted
 </code></pre>
 <p>Wait for the transaction to propagate through the network, and query the script address to see the locked UTxO(s).</p>
 <p>First thing we should test is returning the UTxO(s) back to wallet 1. For that we use the following transaction:</p>
-<pre><code class="language-bash">&gt; PARAMS=$(mktemp) # most recent protocol params
+<pre><code>&gt; PARAMS=$(mktemp) # most recent protocol params
 &gt; cardano-cli query protocol-parameters --testnet-magic $TESTNET_MAGIC_NUM &gt; $PARAMS
 
 &gt; TX_BODY=$(mktemp)
@@ -5046,7 +5053,7 @@ Transaction successfully submitted
 <li><code>--required-signer &lt;wallet-private-key-file&gt;</code> is needed so that <code>getTxSignatories(tx)</code> doesn't return an empty list.</li>
 </ul>
 <p>The second thing we must test is claiming the time-locked funds from another wallet (eg. wallet 2). Let's assume that the time-lock script still contains the 2 tAda sent by wallet 1, and that sufficient time has passed. Wallet 2 can claim the UTxO(s) using the following commands:</p>
-<pre><code class="language-bash">&gt; PARAMS=$(mktemp) # most recent protocol params
+<pre><code>&gt; PARAMS=$(mktemp) # most recent protocol params
 &gt; cardano-cli query protocol-parameters --testnet-magic $TESTNET_MAGIC_NUM &gt; $PARAMS
 
 &gt; TX_BODY=$(mktemp)

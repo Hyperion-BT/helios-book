@@ -154,12 +154,12 @@ func main() -&gt; Bool {
 }
 </code></pre>
 <p>Compile the Always Succeeds script into its JSON representation:</p>
-<pre><code class="language-bash">$ helios compile always_succeeds.hl
+<pre><code>$ helios compile always_succeeds.hl
 
 {&quot;type&quot;: &quot;PlutusScriptV2&quot;, &quot;description&quot;: &quot;&quot;, &quot;cborHex&quot; :&quot;52510100003222253335734a0082930b0a5101&quot;}
 </code></pre>
 <p>Start an interactive shell in the <em>cardano-node</em> container and copy the content of the JSON representing the script:</p>
-<pre><code class="language-bash">$ docker exec -it &lt;container-id&gt; bash
+<pre><code>$ docker exec -it &lt;container-id&gt; bash
 
 &gt; mkdir -p /data/scripts
 &gt; cd /data/scripts
@@ -172,7 +172,7 @@ func main() -&gt; Bool {
 
 </code></pre>
 <p>Generate the script address:</p>
-<pre><code class="language-bash">&gt; cardano-cli address build \
+<pre><code>&gt; cardano-cli address build \
   --payment-script-file /data/scripts/always-succeeds.json \
   --out-file /data/scripts/always-succeeds.addr \
   --testnet-magic $TESTNET_MAGIC_NUM
@@ -182,13 +182,13 @@ func main() -&gt; Bool {
 addr_test1wpfvdtcvnd6yknhve6pc2w999n4325pck00x3c4m9750cdch6csfq
 </code></pre>
 <p>We need a datum, which can be chosen arbitrarily in this case:</p>
-<pre><code class="language-bash">&gt; DATUM_HASH=$(cardano-cli transaction hash-script-data --script-data-value &quot;42&quot;)
+<pre><code>&gt; DATUM_HASH=$(cardano-cli transaction hash-script-data --script-data-value &quot;42&quot;)
 &gt; echo $DATUM_HASH
 
 9e1199a988ba72ffd6e9c269cadb3b53b5f360ff99f112d9b2ee30c4d74ad88b
 </code></pre>
 <p>We also need to select some UTxOs as inputs to the transaction. At this point we should have one UTxO sitting in wallet 1. We can query this using the following command:</p>
-<pre><code class="language-bash">&gt; cardano-cli query utxo \
+<pre><code>&gt; cardano-cli query utxo \
   --address $(cat /data/wallets/wallet1.addr) \
   --testnet-magic $TESTNET_MAGIC_NUM
 
@@ -226,7 +226,7 @@ Transaction successfully submitted
 </code></pre>
 <p>If you check the wallet 1 payment address balance after a few minutes you will noticed that it has decreased by 2 tAda + fee. Note the left-over UTxO id, we will need it to pay fees when retrieving funds.</p>
 <p>You can also try to check the balance of the script address:</p>
-<pre><code class="language-bash">&gt; cardano-cli query utxo \
+<pre><code>&gt; cardano-cli query utxo \
   --address $(cat /data/scripts/always-succeeds.addr) \
   --testnet-magic $TESTNET_MAGIC_NUM
 
@@ -234,7 +234,7 @@ Transaction successfully submitted
 </code></pre>
 <p>The table should list at least one UTxO with your specific datum hash.</p>
 <p>We can now try and get our funds back from the script by building, signing and submitting another transaction:</p>
-<pre><code class="language-bash">&gt; PARAMS=$(mktemp) # most recent protocol parameters
+<pre><code>&gt; PARAMS=$(mktemp) # most recent protocol parameters
 &gt; cardano-cli query protocol-parameters --testnet-magic $TESTNET_MAGIC_NUM &gt; $PARAMS
 
 &gt; TX_BODY=$(mktemp)
