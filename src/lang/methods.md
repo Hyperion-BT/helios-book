@@ -1,6 +1,6 @@
 # Methods
 
-You can define methods for structs and enums. The syntax for this is similar to many OOP languages: methods are defined by placing `func` statements inside a `struct` or `enum` blocks:
+You can define methods for structs and enums. The syntax for this is similar to many OOP languages: methods are defined by placing `func` statements inside a `struct` or `enum` block:
 
 ```helios
 struct Rational {

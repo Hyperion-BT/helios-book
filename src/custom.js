@@ -44,7 +44,6 @@ hljs.registerLanguage('helios', function(hljs) {
 	};
 
 	let INLINE_COMMENT = hljs.COMMENT('//', '[^\\\\]$');
-	let INLINE_COMMENT_OLD = hljs.COMMENT('`', '[^\\\\]$');
 
 	var config = {
 		aliases: [ '4d' ],
