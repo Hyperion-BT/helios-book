@@ -672,7 +672,7 @@ func main(datum: Datum) -&gt; Bool {
 <p><strong>Note</strong>: besides the builtin types only one enum type can be used in a <code>Data</code> <code>switch</code>, and structs/enum-members <strong>can't</strong> be used. If an enum is used then <code>(Int, []Data)</code> can't be used.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="methods"><a class="header" href="#methods">Methods</a></h1>
-<p>You can define methods for structs and enums. The syntax for this is similar to many OOP languages: methods are defined by placing <code>func</code> statements inside a <code>struct</code> or <code>enum</code> blocks:</p>
+<p>You can define methods for structs and enums. The syntax for this is similar to many OOP languages: methods are defined by placing <code>func</code> statements inside a <code>struct</code> or <code>enum</code> block:</p>
 <pre><code class="language-helios">struct Rational {
     top:    Int
     bottom: Int
@@ -2860,7 +2860,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <div style="break-before: page; page-break-before: always;"></div><h1 id="setup-of-the-helios-library"><a class="header" href="#setup-of-the-helios-library">Setup of the Helios Library</a></h1>
 <p>The Helios library is platform agnostic and can be used in many different ways.</p>
 <script>
-import("https://www.hyperion-bt.org/Helios/helios.js").then((module) => {let elem = document.querySelector("main"); elem.innerHTML = elem.innerHTML.replaceAll('&lt;' + 'version' + '&gt;', module.VERSION);});
+import("https://www.hyperion-bt.org/helios/helios.js").then((module) => {let elem = document.querySelector("main"); elem.innerHTML = elem.innerHTML.replaceAll('&lt;' + 'version' + '&gt;', module.VERSION);});
 </script>
 <h2 id="webpage-script-tag"><a class="header" href="#webpage-script-tag">Webpage <code>script</code> tag</a></h2>
 <pre><code class="language-html">&lt;script src=&quot;https://helios.hyperion-bt.org/&lt;version&gt;/helios.js&quot; type=&quot;module&quot; crossorigin&gt;&lt;/script&gt;
