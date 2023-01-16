@@ -1840,8 +1840,8 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">hash_output_datum.hash -&gt; DatumHash
 </code></pre>
 <h3 id="outputdatuminline"><a class="header" href="#outputdatuminline"><code>OutputDatum::Inline</code></a></h3>
-<h4 id="inline"><a class="header" href="#inline"><code>inline</code></a></h4>
-<pre><code class="language-helios">inline_output_datum.inline -&gt; Data
+<h4 id="data-2"><a class="header" href="#data-2"><code>data</code></a></h4>
+<pre><code class="language-helios">inline_output_datum.data -&gt; Data
 </code></pre>
 <p>Use the <code>from_data</code> associated function, which is automatically defined on every type, to turn <code>Data</code> into another type.</p>
 <h2 id="operators-15"><a class="header" href="#operators-15">Operators</a></h2>
@@ -3700,14 +3700,14 @@ async function buyTx(contract) {
     data: helios.UplcDataValue | helios.UplcData
 ): helios.HashedDatum
 </code></pre>
-<h3 id="inline-1"><a class="header" href="#inline-1"><code>inline</code></a></h3>
+<h3 id="inline"><a class="header" href="#inline"><code>inline</code></a></h3>
 <p>Constructs an <code>InlineDatum</code>.</p>
 <pre><code class="language-ts">helios.Datum.inline(
     data: helios.UplcDataValue | helios.UplcData
 ): helios.InlineDatum
 </code></pre>
 <h2 id="getters-22"><a class="header" href="#getters-22">Getters</a></h2>
-<h3 id="data-2"><a class="header" href="#data-2"><code>data</code></a></h3>
+<h3 id="data-3"><a class="header" href="#data-3"><code>data</code></a></h3>
 <p>Return the underlying data, or <code>null</code> if not available.</p>
 <pre><code class="language-ts">datum.data: ?helios.UplcData
 </code></pre>
@@ -4430,7 +4430,7 @@ const networkParams = new helios.NetworkParams(
 <p>Represents a child instance of <a href="api/reference/./uplcvalue.html"><code>UplcValue</code></a>, wrapping a <a href="api/reference/./uplcdata.html"><code>UplcData</code></a> instance.</p>
 <p>Everything except a Helios <a href="api/reference/../../lang/builtins/bool.html"><code>Bool</code></a> value <a href="api/reference/./program.html#evalparam">evaluates</a> to a <code>UplcDataValue</code>.</p>
 <h2 id="getters-35"><a class="header" href="#getters-35">Getters</a></h2>
-<h3 id="data-3"><a class="header" href="#data-3"><code>data</code></a></h3>
+<h3 id="data-4"><a class="header" href="#data-4"><code>data</code></a></h3>
 <p>Get the underlying <a href="api/reference/./uplcdata.html"><code>UplcData</code></a>.</p>
 <pre><code class="language-ts">uplc_data_value.data: helios.UplcData
 </code></pre>
