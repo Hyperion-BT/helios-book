@@ -61,10 +61,10 @@ hash_output_datum.hash -> DatumHash
 
 ### `OutputDatum::Inline`
 
-#### `inline`
+#### `data`
 
 ```helios
-inline_output_datum.inline -> Data
+inline_output_datum.data -> Data
 ```
 
 Use the `from_data` associated function, which is automatically defined on every type, to turn `Data` into another type.
