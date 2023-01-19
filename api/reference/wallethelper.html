@@ -151,19 +151,19 @@
 <pre><code class="language-ts">const helper = new helios.WalletHelper(wallet: helios.Wallet)
 </code></pre>
 <h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
-<h2 id="alladdresses"><a class="header" href="#alladdresses"><code>allAddresses</code></a></h2>
+<h3 id="alladdresses"><a class="header" href="#alladdresses"><code>allAddresses</code></a></h3>
 <p>Concatenation of <a href="./wallet.html#usedaddresses"><code>usedAddresses</code></a> and <a href="./wallet.html#unusedaddresses"><code>unusedAddresses</code></a>.</p>
 <pre><code class="language-ts">helper.allAddresses: Promise&lt;helios.Address[]&gt;
 </code></pre>
-<h2 id="baseaddress"><a class="header" href="#baseaddress"><code>baseAddress</code></a></h2>
+<h3 id="baseaddress"><a class="header" href="#baseaddress"><code>baseAddress</code></a></h3>
 <p>First <a href="./address.html"><code>Address</code></a> in <a href="#alladdresses"><code>allAddresses</code></a>.</p>
 <pre><code class="language-ts">helper.baseAddress: Promise&lt;helios.Address&gt;
 </code></pre>
-<h2 id="changeaddress"><a class="header" href="#changeaddress"><code>changeAddress</code></a></h2>
+<h3 id="changeaddress"><a class="header" href="#changeaddress"><code>changeAddress</code></a></h3>
 <p>First <a href="./address.html"><code>Address</code></a> in <a href="./wallet.html#unusedaddresses"><code>unusedAddresses</code></a>.</p>
 <pre><code class="language-ts">helper.changeAddress: Promise&lt;helios.Address&gt;
 </code></pre>
-<h2 id="refutxo"><a class="header" href="#refutxo"><code>refUtxo</code></a></h2>
+<h3 id="refutxo"><a class="header" href="#refutxo"><code>refUtxo</code></a></h3>
 <p>First <a href="./utxo.html"><code>UTxO</code></a> in <a href="./wallet.html#utxos"><code>utxos</code></a>. Can be used to distinguish between preview and preprod networks.</p>
 <pre><code class="language-ts">helper.refUtxo: Promise&lt;helios.UTxO&gt;
 </code></pre>

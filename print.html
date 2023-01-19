@@ -4779,19 +4779,19 @@ const networkParams = new helios.NetworkParams(
 <pre><code class="language-ts">const helper = new helios.WalletHelper(wallet: helios.Wallet)
 </code></pre>
 <h2 id="getters-42"><a class="header" href="#getters-42">Getters</a></h2>
-<h2 id="alladdresses"><a class="header" href="#alladdresses"><code>allAddresses</code></a></h2>
+<h3 id="alladdresses"><a class="header" href="#alladdresses"><code>allAddresses</code></a></h3>
 <p>Concatenation of <a href="api/reference/./wallet.html#usedaddresses"><code>usedAddresses</code></a> and <a href="api/reference/./wallet.html#unusedaddresses"><code>unusedAddresses</code></a>.</p>
 <pre><code class="language-ts">helper.allAddresses: Promise&lt;helios.Address[]&gt;
 </code></pre>
-<h2 id="baseaddress"><a class="header" href="#baseaddress"><code>baseAddress</code></a></h2>
+<h3 id="baseaddress"><a class="header" href="#baseaddress"><code>baseAddress</code></a></h3>
 <p>First <a href="api/reference/./address.html"><code>Address</code></a> in <a href="api/reference/wallethelper.html#alladdresses"><code>allAddresses</code></a>.</p>
 <pre><code class="language-ts">helper.baseAddress: Promise&lt;helios.Address&gt;
 </code></pre>
-<h2 id="changeaddress"><a class="header" href="#changeaddress"><code>changeAddress</code></a></h2>
+<h3 id="changeaddress"><a class="header" href="#changeaddress"><code>changeAddress</code></a></h3>
 <p>First <a href="api/reference/./address.html"><code>Address</code></a> in <a href="api/reference/./wallet.html#unusedaddresses"><code>unusedAddresses</code></a>.</p>
 <pre><code class="language-ts">helper.changeAddress: Promise&lt;helios.Address&gt;
 </code></pre>
-<h2 id="refutxo"><a class="header" href="#refutxo"><code>refUtxo</code></a></h2>
+<h3 id="refutxo"><a class="header" href="#refutxo"><code>refUtxo</code></a></h3>
 <p>First <a href="api/reference/./utxo.html"><code>UTxO</code></a> in <a href="api/reference/./wallet.html#utxos"><code>utxos</code></a>. Can be used to distinguish between preview and preprod networks.</p>
 <pre><code class="language-ts">helper.refUtxo: Promise&lt;helios.UTxO&gt;
 </code></pre>
