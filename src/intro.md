@@ -4,7 +4,7 @@
 
 The [Helios library](https://github.com/Hyperion-BT/Helios) is written in Javascript and has an [API](./api/index.md) for:
   * compiling Helios sources into [Plutus-Core](https://github.com/input-output-hk/plutus)
-  * building transactions that can be submitted to the Cardano blockchain
+  * building and submitting transactions to the Cardano blockchain
 
 ## Code sample
 
