@@ -1,6 +1,6 @@
 # `UTxO`
 
-*Unspent Transaction Output* that can be used as an input to when builing a transaction.
+*Unspent Transaction Output* that can be used as an input to when builing a transaction. `UTxO` instances are also returned when interfacing with [`Wallet`](./wallet.md#utxos).
 
 ## Constructor
 

@@ -12,7 +12,7 @@ create-missing = false
 [output.html]
 additional-js = ["src/custom.js"]
 additional-css = ["src/custom.css"]
-git-repository-url = "https://github.com/hyperion-bt/Helios-Book"
+git-repository-url = "https://github.com/hyperion-bt/helios-book"
 git-repository-icon = "fa-github"
 site-url = "/"
 

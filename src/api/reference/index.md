@@ -23,8 +23,11 @@ Typescript annotations are used to document types.
 
   * [`Address`](./address.md)
   * [`Assets`](./assets.md)
+  * [`BlockfrostV0`](./blockfrostv0.md)
   * [`ByteArrayData`](./bytearraydata.md)
   * [`CborData`](./cbordata.md)
+  * [`Cip30Wallet`](./cip30wallet.md)
+  * [`CoinSelection`](./coinselection.md)
   * [`ConstrData`](./constrdata.md)
   * [`Datum`](./datum.md)
   * [`DatumHash`](./datumhash.md)
@@ -59,3 +62,12 @@ Typescript annotations are used to document types.
   * [`UTxO`](./utxo.md)
   * [`ValidatorHash`](./validatorhash.md)
   * [`Value`](./value.md)
+  * [`WalletHelper`](./wallethelper.md)
+
+### Interfaces
+
+Can only be imported in typescript files.
+
+* [`Cip30Handle`](./cip30handle.md)
+* [`Network`](./network.md)
+* [`Wallet`](./wallet.md)
