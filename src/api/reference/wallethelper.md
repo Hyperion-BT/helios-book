@@ -10,7 +10,7 @@ const helper = new helios.WalletHelper(wallet: helios.Wallet)
 
 ## Getters
 
-## `allAddresses`
+### `allAddresses`
 
 Concatenation of [`usedAddresses`](./wallet.md#usedaddresses) and [`unusedAddresses`](./wallet.md#unusedaddresses).
 
@@ -18,7 +18,7 @@ Concatenation of [`usedAddresses`](./wallet.md#usedaddresses) and [`unusedAddres
 helper.allAddresses: Promise<helios.Address[]>
 ```
 
-## `baseAddress`
+### `baseAddress`
 
 First [`Address`](./address.md) in [`allAddresses`](#alladdresses).
 
@@ -26,7 +26,7 @@ First [`Address`](./address.md) in [`allAddresses`](#alladdresses).
 helper.baseAddress: Promise<helios.Address>
 ```
 
-## `changeAddress`
+### `changeAddress`
 
 First [`Address`](./address.md) in [`unusedAddresses`](./wallet.md#unusedaddresses).
 
@@ -34,7 +34,7 @@ First [`Address`](./address.md) in [`unusedAddresses`](./wallet.md#unusedaddress
 helper.changeAddress: Promise<helios.Address>
 ```
 
-## `refUtxo`
+### `refUtxo`
 
 First [`UTxO`](./utxo.md) in [`utxos`](./wallet.md#utxos). Can be used to distinguish between preview and preprod networks.
 
