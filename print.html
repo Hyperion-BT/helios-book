@@ -5455,7 +5455,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
 
     redeemer.switch {
         Cancel =&gt; {
-            now &gt; datum.deadline &amp;&amp;
+            now &lt; datum.deadline &amp;&amp;
             tx.is_signed_by(datum.creator)
         },
         Claim =&gt; {
