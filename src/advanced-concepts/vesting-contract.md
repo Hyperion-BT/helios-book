@@ -95,7 +95,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
 
     redeemer.switch {
         Cancel => {
-            now > datum.deadline &&
+            now < datum.deadline &&
             tx.is_signed_by(datum.creator)
         },
         Claim => {
