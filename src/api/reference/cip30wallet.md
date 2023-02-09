@@ -39,6 +39,14 @@ wallet.utxos: Promise<helios.UTxO[]>
 
 ## Methods
 
+### `isMainnet`
+
+Returns `true` if the wallet is connected to the mainnet.
+
+```ts
+wallet.isMainnet(): Promise<boolean>
+```
+
 ### `signTx`
 
 Signs a [transaction](./tx.md), returning a list of signatures needed for submitting a valid transaction.
