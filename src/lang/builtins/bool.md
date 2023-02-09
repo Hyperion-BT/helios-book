@@ -98,3 +98,13 @@ bool.show() -> String
 ```helios
 bool.to_int() -> Int
 ```
+
+### `trace`
+
+Prints a message while returning the `Bool` value itself. This can be convenient when debugging the outcome of a script.
+
+```helios
+bool.trace(msg: String) -> Bool
+```
+
+The `msg` is prefixed to either `"true"` or `"false"`.
