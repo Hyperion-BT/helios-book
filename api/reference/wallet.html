@@ -161,6 +161,10 @@
 <pre><code class="language-ts">wallet.utxos: Promise&lt;helios.UTxO[]&gt;
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
+<h3 id="ismainnet"><a class="header" href="#ismainnet"><code>isMainnet</code></a></h3>
+<p>Returns <code>true</code> if the wallet is connected to the mainnet.</p>
+<pre><code class="language-ts">wallet.isMainnet(): Promise&lt;boolean&gt;
+</code></pre>
 <h3 id="signtx"><a class="header" href="#signtx"><code>signTx</code></a></h3>
 <p>Signs a <a href="./tx.html">transaction</a>, returning a list of signatures needed for submitting a valid transaction.</p>
 <pre><code class="language-ts">wallet.signTx(tx: helios.Tx): Promise&lt;helios.Signature[]&gt;

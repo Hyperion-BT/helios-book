@@ -3732,6 +3732,10 @@ const wallet = new helios.Cip30Wallet(handle)
 <pre><code class="language-ts">wallet.utxos: Promise&lt;helios.UTxO[]&gt;
 </code></pre>
 <h2 id="methods-39"><a class="header" href="#methods-39">Methods</a></h2>
+<h3 id="ismainnet"><a class="header" href="#ismainnet"><code>isMainnet</code></a></h3>
+<p>Returns <code>true</code> if the wallet is connected to the mainnet.</p>
+<pre><code class="language-ts">wallet.isMainnet(): Promise&lt;boolean&gt;
+</code></pre>
 <h3 id="signtx"><a class="header" href="#signtx"><code>signTx</code></a></h3>
 <p>Signs a <a href="api/reference/./tx.html">transaction</a>, returning a list of signatures needed for submitting a valid transaction.</p>
 <pre><code class="language-ts">wallet.signTx(tx: helios.Tx): Promise&lt;helios.Signature[]&gt;
@@ -4770,6 +4774,10 @@ const networkParams = new helios.NetworkParams(
 <pre><code class="language-ts">wallet.utxos: Promise&lt;helios.UTxO[]&gt;
 </code></pre>
 <h2 id="methods-56"><a class="header" href="#methods-56">Methods</a></h2>
+<h3 id="ismainnet-1"><a class="header" href="#ismainnet-1"><code>isMainnet</code></a></h3>
+<p>Returns <code>true</code> if the wallet is connected to the mainnet.</p>
+<pre><code class="language-ts">wallet.isMainnet(): Promise&lt;boolean&gt;
+</code></pre>
 <h3 id="signtx-1"><a class="header" href="#signtx-1"><code>signTx</code></a></h3>
 <p>Signs a <a href="api/reference/./tx.html">transaction</a>, returning a list of signatures needed for submitting a valid transaction.</p>
 <pre><code class="language-ts">wallet.signTx(tx: helios.Tx): Promise&lt;helios.Signature[]&gt;
