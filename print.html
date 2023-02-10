@@ -34,6 +34,7 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
@@ -3553,6 +3554,18 @@ async function buyTx(contract) {
 <p>Constructs a <code>BlockfrostV0</code> using the network name (<code>preview</code>, <code>preprod</code> or <code>mainnet</code>) and your Blockfrost project id.</p>
 <pre><code class="language-ts">const network = new helios.BlockfrostV0(networkName: string, projectId: string)
 </code></pre>
+<h2 id="static-methods-1"><a class="header" href="#static-methods-1">Static methods</a></h2>
+<h3 id="resolve"><a class="header" href="#resolve"><code>resolve</code></a></h3>
+<p>Connect the same network a <a href="api/reference/./wallet.html"><code>Wallet</code></a> is connected to (<code>preview</code>, <code>preprod</code> or <code>mainnet</code>). Throws an error if a Blockfrost project id is missing for the network.</p>
+<pre><code class="language-ts">const network = helios.BlockforstV0.resolve(
+    wallet: helios.Wallet,
+    projectIds: {
+        preview?: string,
+        preprod?: string,
+        mainnet?: string
+    }
+)
+</code></pre>
 <h2 id="methods-37"><a class="header" href="#methods-37">Methods</a></h2>
 <h3 id="submittx"><a class="header" href="#submittx"><code>submitTx</code></a></h3>
 <pre><code class="language-ts">network.submitTx(tx: helios.Tx): Promise&lt;helios.Txid&gt;
@@ -3562,7 +3575,7 @@ async function buyTx(contract) {
 <h2 id="constructor-3"><a class="header" href="#constructor-3">Constructor</a></h2>
 <pre><code class="language-ts">new helios.ByteArrayData(bytes: []number)
 </code></pre>
-<h2 id="static-methods-1"><a class="header" href="#static-methods-1">Static methods</a></h2>
+<h2 id="static-methods-2"><a class="header" href="#static-methods-2">Static methods</a></h2>
 <h3 id="fromcbor-1"><a class="header" href="#fromcbor-1"><code>fromCbor</code></a></h3>
 <p>Decodes CBOR bytes representing a <code>ByteArrayData</code> instance. Mutates the <code>bytes</code> argument.</p>
 <pre><code class="language-ts">helios.ByteArrayData.fromCbor(bytes: []number): helios.ByteArrayData
@@ -3591,7 +3604,7 @@ async function buyTx(contract) {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cbordata"><a class="header" href="#cbordata"><code>CborData</code></a></h1>
 <p>Base class of each CBOR (de)serializeable type. <code>CborData</code> also contains many static helper methods which can be used to decode/encode CBOR data.</p>
-<h2 id="static-methods-2"><a class="header" href="#static-methods-2">Static methods</a></h2>
+<h2 id="static-methods-3"><a class="header" href="#static-methods-3">Static methods</a></h2>
 <h3 id="decodebool"><a class="header" href="#decodebool"><code>decodeBool</code></a></h3>
 <p>Decodes a CBOR encoded <code>boolean</code>. Input list is mutated. Throws an error if the next element in <code>bytes</code> isn't a <code>boolean</code>.</p>
 <pre><code class="language-ts">helios.CborData.decodeBool(bytes: number[]): boolean
@@ -3746,7 +3759,7 @@ const wallet = new helios.Cip30Wallet(handle)
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="coinselection"><a class="header" href="#coinselection"><code>CoinSelection</code></a></h1>
 <p>Static class with common <a href="https://cips.cardano.org/cips/cip2/">coin selection algorithms</a>.</p>
-<h2 id="static-methods-3"><a class="header" href="#static-methods-3">Static methods</a></h2>
+<h2 id="static-methods-4"><a class="header" href="#static-methods-4">Static methods</a></h2>
 <h3 id="selectlargestfirst"><a class="header" href="#selectlargestfirst"><code>selectLargestFirst</code></a></h3>
 <p>Selects <a href="api/reference/./utxo.html">UTxOs</a> from a list by iterating through the tokens in the given <a href="api/reference/./value.html"><code>Value</code></a> and picking the <a href="api/reference/./utxo.html">UTxOs</a> containing the largest corresponding amount first.</p>
 <p>Returns two lists. The first list contains the selected <a href="api/reference/./utxo.html">UTxOs</a>, the second list contains the remaining <a href="api/reference/./utxos.html">UTxOs</a>.</p>
@@ -3772,7 +3785,7 @@ const wallet = new helios.Cip30Wallet(handle)
     fields: helios.UplcData[]
 )
 </code></pre>
-<h2 id="static-methods-4"><a class="header" href="#static-methods-4">Static methods</a></h2>
+<h2 id="static-methods-5"><a class="header" href="#static-methods-5">Static methods</a></h2>
 <h3 id="fromcbor-2"><a class="header" href="#fromcbor-2"><code>fromCbor</code></a></h3>
 <p>Decoded a CBOR encoded <code>ConstrData</code> instance. Mutates <code>bytes</code> and shifts it to the following element.</p>
 <pre><code class="language-ts">helios.ConstrData.fromCbor(bytes: number[]): helios.ConstrData
@@ -3797,7 +3810,7 @@ const wallet = new helios.Cip30Wallet(handle)
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="datum-2"><a class="header" href="#datum-2"><code>Datum</code></a></h1>
 <p>Represents either an inline datum, or a hashed datum.</p>
-<h2 id="static-methods-5"><a class="header" href="#static-methods-5">Static methods</a></h2>
+<h2 id="static-methods-6"><a class="header" href="#static-methods-6">Static methods</a></h2>
 <h3 id="fromcbor-3"><a class="header" href="#fromcbor-3"><code>fromCbor</code></a></h3>
 <p>Decodes a CBOR encoded datum. Can be inline or hashed.</p>
 <p>Mutates <code>bytes</code> and shifts it to the following element.</p>
@@ -3835,7 +3848,7 @@ const wallet = new helios.Cip30Wallet(handle)
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="datumhash-1"><a class="header" href="#datumhash-1"><code>DatumHash</code></a></h1>
 <p>Represents a blake2b-256 hash of datum data.</p>
-<h2 id="static-methods-6"><a class="header" href="#static-methods-6">Static methods</a></h2>
+<h2 id="static-methods-7"><a class="header" href="#static-methods-7">Static methods</a></h2>
 <h3 id="fromcbor-4"><a class="header" href="#fromcbor-4"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>DatumHash</code>.</p>
 <p>Mutates <code>bytes</code> and shifts it to the next CBOR element.</p>
@@ -3972,7 +3985,7 @@ const wallet = new helios.Cip30Wallet(handle)
 <h2 id="constructor-7"><a class="header" href="#constructor-7">Constructor</a></h2>
 <pre><code class="language-ts">new helios.IntData(value: bigint)
 </code></pre>
-<h2 id="static-methods-7"><a class="header" href="#static-methods-7">Static methods</a></h2>
+<h2 id="static-methods-8"><a class="header" href="#static-methods-8">Static methods</a></h2>
 <h3 id="fromcbor-5"><a class="header" href="#fromcbor-5"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>IntData</code>. Mutates <code>bytes</code> and shifts it to the following element.</p>
 <pre><code class="language-ts">helios.IntData.fromCbor(bytes: number[]): IntData
@@ -3997,7 +4010,7 @@ const wallet = new helios.Cip30Wallet(handle)
 <h2 id="constructor-8"><a class="header" href="#constructor-8">Constructor</a></h2>
 <pre><code class="language-ts">new helios.ListData(list: UplcData[])
 </code></pre>
-<h2 id="static-methods-8"><a class="header" href="#static-methods-8">Static methods</a></h2>
+<h2 id="static-methods-9"><a class="header" href="#static-methods-9">Static methods</a></h2>
 <h3 id="fromcbor-6"><a class="header" href="#fromcbor-6"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>ListData</code> instance. Mutates <code>bytes</code> and shifts it to the following element.</p>
 <pre><code class="language-ts">helios.ListData.fromCbor(bytes: number[]): ListData
@@ -4022,7 +4035,7 @@ const wallet = new helios.Cip30Wallet(handle)
 <h2 id="constructor-9"><a class="header" href="#constructor-9">Constructor</a></h2>
 <pre><code class="language-ts">new helios.MapData(pairs: [UplcData, UplcData][])
 </code></pre>
-<h2 id="static-methods-9"><a class="header" href="#static-methods-9">Static methods</a></h2>
+<h2 id="static-methods-10"><a class="header" href="#static-methods-10">Static methods</a></h2>
 <h3 id="fromcbor-7"><a class="header" href="#fromcbor-7"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>MapData</code> instance. Mutates <code>bytes</code> and shifts it to the following element.</p>
 <pre><code class="language-ts">helios.MapData.fromCbor(bytes: number[]): MapData
@@ -4043,7 +4056,7 @@ const wallet = new helios.Cip30Wallet(handle)
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mintingpolicyhash-1"><a class="header" href="#mintingpolicyhash-1"><code>MintingPolicyHash</code></a></h1>
 <p>Represents a blake2b-224 hash of a minting policy script (first encoded as a CBOR byte-array and prepended by a script version byte).</p>
-<h2 id="static-methods-10"><a class="header" href="#static-methods-10">Static methods</a></h2>
+<h2 id="static-methods-11"><a class="header" href="#static-methods-11">Static methods</a></h2>
 <h3 id="fromcbor-8"><a class="header" href="#fromcbor-8"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>MintingPolicyHash</code>.</p>
 <p>Mutates <code>bytes</code> and shifts it to the next CBOR element.</p>
@@ -4153,7 +4166,7 @@ const networkParams = new helios.NetworkParams(
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pubkeyhash-2"><a class="header" href="#pubkeyhash-2"><code>PubKeyHash</code></a></h1>
 <p>Represents a Blake2-224 hash of public key.</p>
 <p>A <code>PubKeyHash</code> is used as the first part of a regular payment <a href="api/reference/./address.html"><code>Address</code></a>.</p>
-<h2 id="static-methods-11"><a class="header" href="#static-methods-11">Static methods</a></h2>
+<h2 id="static-methods-12"><a class="header" href="#static-methods-12">Static methods</a></h2>
 <h3 id="fromcbor-9"><a class="header" href="#fromcbor-9"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>PubKeyHash</code>.</p>
 <p>Mutates <code>bytes</code> and shifts it to the next CBOR element.</p>
@@ -4181,7 +4194,7 @@ const networkParams = new helios.NetworkParams(
     signatureBytes: number[]
 )
 </code></pre>
-<h2 id="static-methods-12"><a class="header" href="#static-methods-12">Static methods</a></h2>
+<h2 id="static-methods-13"><a class="header" href="#static-methods-13">Static methods</a></h2>
 <h3 id="fromcbor-10"><a class="header" href="#fromcbor-10"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>Signature</code> instance.</p>
 <pre><code class="language-ts">helios.Signature.fromCbor(bytes: number{}): helios.Signature
@@ -4206,7 +4219,7 @@ const networkParams = new helios.NetworkParams(
 <h2 id="constructor-13"><a class="header" href="#constructor-13">Constructor</a></h2>
 <pre><code class="language-ts">new helios.StakeAddress(bytes: []number)
 </code></pre>
-<h2 id="static-methods-13"><a class="header" href="#static-methods-13">Static methods</a></h2>
+<h2 id="static-methods-14"><a class="header" href="#static-methods-14">Static methods</a></h2>
 <h3 id="fromcbor-11"><a class="header" href="#fromcbor-11"><code>fromCbor</code></a></h3>
 <p>Deserializes bytes into an <code>StakeAddress</code>.</p>
 <pre><code class="language-ts">helios.StakeAddress.fromCbor(bytes: []number): helios.Address
@@ -4248,7 +4261,7 @@ const networkParams = new helios.NetworkParams(
 <div style="break-before: page; page-break-before: always;"></div><h1 id="stakekeyhash-1"><a class="header" href="#stakekeyhash-1"><code>StakeKeyHash</code></a></h1>
 <p>Represents a blake2b-224 hash of staking key.</p>
 <p>A <code>StakeKeyHash</code> can be used as the second part of a regular payment <a href="api/reference/./address.html"><code>Address</code></a>, or to construct a <a href="api/reference/./stakeaddress.html"><code>StakeAddress</code></a>.</p>
-<h2 id="static-methods-14"><a class="header" href="#static-methods-14">Static methods</a></h2>
+<h2 id="static-methods-15"><a class="header" href="#static-methods-15">Static methods</a></h2>
 <h3 id="fromcbor-12"><a class="header" href="#fromcbor-12"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>StakeKeyHash</code>.</p>
 <p>Mutates <code>bytes</code> and shifts it to the next CBOR element.</p>
@@ -4269,7 +4282,7 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="stakingvalidatorhash-1"><a class="header" href="#stakingvalidatorhash-1"><code>StakingValidatorHash</code></a></h1>
 <p>Represents a blake2b-224 hash of a staking script (first encoded as a CBOR byte-array and prepended by a script version byte).</p>
-<h2 id="static-methods-15"><a class="header" href="#static-methods-15">Static methods</a></h2>
+<h2 id="static-methods-16"><a class="header" href="#static-methods-16">Static methods</a></h2>
 <h3 id="fromcbor-13"><a class="header" href="#fromcbor-13"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>StakingValidatorHash</code>.</p>
 <p>Mutates <code>bytes</code> and shifts it to the next CBOR element.</p>
@@ -4294,7 +4307,7 @@ const networkParams = new helios.NetworkParams(
 <p>Init a new transaction builder.</p>
 <pre><code class="language-ts">new helios.Tx()
 </code></pre>
-<h2 id="static-methods-16"><a class="header" href="#static-methods-16">Static methods</a></h2>
+<h2 id="static-methods-17"><a class="header" href="#static-methods-17">Static methods</a></h2>
 <h3 id="fromcbor-14"><a class="header" href="#fromcbor-14"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded Cardano transaction.</p>
 <pre><code class="language-ts">helios.Tx.fromCbor(bytes: number[]): helios.Tx
@@ -4418,7 +4431,7 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="txid-1"><a class="header" href="#txid-1"><code>TxId</code></a></h1>
 <p>Represents the hash of a transaction. This is used to identify an UTxO (along with the index of the UTxO in the list of UTxOs created by the transaction).</p>
-<h2 id="static-methods-17"><a class="header" href="#static-methods-17">Static methods</a></h2>
+<h2 id="static-methods-18"><a class="header" href="#static-methods-18">Static methods</a></h2>
 <h3 id="fromcbor-15"><a class="header" href="#fromcbor-15"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>TxId</code>.</p>
 <p>Shift <code>bytes</code> to the next CBOR element.</p>
@@ -4448,7 +4461,7 @@ const networkParams = new helios.NetworkParams(
     refScript: ?helios.UplcProgram = null
 )
 </code></pre>
-<h2 id="static-methods-18"><a class="header" href="#static-methods-18">Static methods</a></h2>
+<h2 id="static-methods-19"><a class="header" href="#static-methods-19">Static methods</a></h2>
 <h3 id="fromcbor-16"><a class="header" href="#fromcbor-16"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>TxOutput</code>.</p>
 <p>Shift <code>bytes</code> to the next CBOR element.</p>
@@ -4497,7 +4510,7 @@ const networkParams = new helios.NetworkParams(
 <div style="break-before: page; page-break-before: always;"></div><h1 id="txwitnesses"><a class="header" href="#txwitnesses"><code>TxWitnesses</code></a></h1>
 <p>Represents the pubkey signatures, and datums/redeemers/scripts that are witnessing a transaction.</p>
 <p>The CBOR representation of <code>TxWitnesses</code> is returned by a wallet when signing a transaction.</p>
-<h2 id="static-methods-19"><a class="header" href="#static-methods-19">Static methods</a></h2>
+<h2 id="static-methods-20"><a class="header" href="#static-methods-20">Static methods</a></h2>
 <h3 id="fromcbor-17"><a class="header" href="#fromcbor-17"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>TxWitnesses</code> instance.</p>
 <p>Shifts <code>bytes</code> to the next CBOR element.</p>
@@ -4510,14 +4523,14 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcbool"><a class="header" href="#uplcbool"><code>UplcBool</code></a></h1>
 <p>API equivalent of <a href="api/reference/../../lang/builtins/bool.html"><code>Bool</code></a>.</p>
-<h2 id="static-methods-20"><a class="header" href="#static-methods-20">Static methods</a></h2>
+<h2 id="static-methods-21"><a class="header" href="#static-methods-21">Static methods</a></h2>
 <h3 id="new-19"><a class="header" href="#new-19"><code>new</code></a></h3>
 <p>Constructs a <code>UplcBool</code> instance.</p>
 <pre><code class="language-ts">helios.UplcBool.new(value: boolean): helios.UplcBool
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcbytearray"><a class="header" href="#uplcbytearray"><code>UplcByteArray</code></a></h1>
 <p>Primitive equivalent of <a href="api/reference/./bytearraydata.html"><code>ByteArrayData</code></a>. Not needed to interact with Helios smart contracts, but can be used to interact with smart contracts written in other languages (eg. Plutarch).</p>
-<h2 id="static-methods-21"><a class="header" href="#static-methods-21">Static methods</a></h2>
+<h2 id="static-methods-22"><a class="header" href="#static-methods-22">Static methods</a></h2>
 <h3 id="new-20"><a class="header" href="#new-20"><code>new</code></a></h3>
 <p>Constructs a <code>UplcByteArray</code> instance.</p>
 <pre><code class="language-ts">helios.UplcByteArray.new(value: number[]): helios.UplcByteArray
@@ -4531,7 +4544,7 @@ const networkParams = new helios.NetworkParams(
 <li><a href="api/reference/./listdata.html"><code>ListData</code></a></li>
 <li><a href="api/reference/./mapdata.html"><code>MapData</code></a></li>
 </ul>
-<h2 id="static-methods-22"><a class="header" href="#static-methods-22">Static methods</a></h2>
+<h2 id="static-methods-23"><a class="header" href="#static-methods-23">Static methods</a></h2>
 <h3 id="fromcbor-18"><a class="header" href="#fromcbor-18"><code>fromCbor</code></a></h3>
 <p>Deserializes a CBOR encoded <code>UplcData</code> child instance.</p>
 <p>Shift <code>bytes</code> to the next CBOR element.</p>
@@ -4552,21 +4565,21 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcint"><a class="header" href="#uplcint"><code>UplcInt</code></a></h1>
 <p>Primitive equivalent of <a href="api/reference/./intdata.html"><code>IntData</code></a>. Not needed to interact with Helios smart contracts, but can be used to interact with smart contracts written in other languages (eg. Plutarch).</p>
-<h2 id="static-methods-23"><a class="header" href="#static-methods-23">Static methods</a></h2>
+<h2 id="static-methods-24"><a class="header" href="#static-methods-24">Static methods</a></h2>
 <h3 id="new-21"><a class="header" href="#new-21"><code>new</code></a></h3>
 <p>Constructs a <code>UplcInt</code> instance. <code>value</code> must be a whole number.</p>
 <pre><code class="language-ts">helios.UplcInt.new(value: number | bigint): helios.UplcInt
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplclist"><a class="header" href="#uplclist"><code>UplcList</code></a></h1>
 <p>Primitive equivalent of <a href="api/reference/./listdata.html"><code>ListData</code></a>. Not needed to interact with Helios smart contracts, but can be used to interact with smart contracts written in other languages (eg. Plutarch).</p>
-<h2 id="static-methods-24"><a class="header" href="#static-methods-24">Static methods</a></h2>
+<h2 id="static-methods-25"><a class="header" href="#static-methods-25">Static methods</a></h2>
 <h3 id="new-22"><a class="header" href="#new-22"><code>new</code></a></h3>
 <p>Constructs a <code>UplcList</code> instance. Child items must be <a href="api/reference/./uplcdata.html"><code>UplcData</code></a> instances (more generic lists are not yet supported).</p>
 <pre><code class="language-ts">helios.UplcList.new(items: helios.UplcData[]): helios.UplcList
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcmap"><a class="header" href="#uplcmap"><code>UplcMap</code></a></h1>
 <p>Primitive equivalent of <a href="api/reference/./mapdata.html"><code>MapData</code></a>. Not needed to interact with Helios smart contracts, but can be used to interact with smart contracts written in other languages (eg. Plutarch).</p>
-<h2 id="static-methods-25"><a class="header" href="#static-methods-25">Static methods</a></h2>
+<h2 id="static-methods-26"><a class="header" href="#static-methods-26">Static methods</a></h2>
 <h3 id="new-23"><a class="header" href="#new-23"><code>new</code></a></h3>
 <p>Constructs a <code>UplcMap</code> instance. Child pairs must be <a href="api/reference/./uplcdata.html"><code>UplcData</code></a> instances (more generic maps are not yet supported).</p>
 <pre><code class="language-ts">helios.UplcMap.new(
@@ -4575,7 +4588,7 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcpair"><a class="header" href="#uplcpair"><code>UplcPair</code></a></h1>
 <p>Primitive pair value. Not needed to interact with Helios smart contracts, but can be used to interact with smart contracts written in other languages (eg. Plutarch).</p>
-<h2 id="static-methods-26"><a class="header" href="#static-methods-26">Static methods</a></h2>
+<h2 id="static-methods-27"><a class="header" href="#static-methods-27">Static methods</a></h2>
 <h3 id="new-24"><a class="header" href="#new-24"><code>new</code></a></h3>
 <p>Constructs a <code>UplcPair</code> instance using two <a href="api/reference/./uplcvalue.html"><code>UplcValue</code></a> instances.</p>
 <pre><code class="language-ts">helios.UplcPair.new(
@@ -4631,14 +4644,14 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcstring"><a class="header" href="#uplcstring"><code>UplcString</code></a></h1>
 <p>Primitive string value. Not needed to interact with Helios smart contracts, but can be used to interact with smart contracts written in other languages (eg. Plutarch).</p>
-<h2 id="static-methods-27"><a class="header" href="#static-methods-27">Static methods</a></h2>
+<h2 id="static-methods-28"><a class="header" href="#static-methods-28">Static methods</a></h2>
 <h3 id="new-25"><a class="header" href="#new-25"><code>new</code></a></h3>
 <p>Constructs a <code>UplcString</code> instance.</p>
 <pre><code class="language-ts">helios.UplcString.new(value: string): helios.UplcString
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcunit"><a class="header" href="#uplcunit"><code>UplcUnit</code></a></h1>
 <p>Primitive unit value. Not needed to interact with Helios smart contracts, but can be used to interact with smart contracts written in other languages (eg. Plutarch).</p>
-<h2 id="static-methods-28"><a class="header" href="#static-methods-28">Static methods</a></h2>
+<h2 id="static-methods-29"><a class="header" href="#static-methods-29">Static methods</a></h2>
 <h3 id="new-26"><a class="header" href="#new-26"><code>new</code></a></h3>
 <p>Constructs a <code>UplcUnit</code> instance.</p>
 <pre><code class="language-ts">helios.UplcUnit.new(): helios.UplcUnit
@@ -4674,7 +4687,7 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="validatorhash-3"><a class="header" href="#validatorhash-3"><code>ValidatorHash</code></a></h1>
 <p>Represents a blake2b-224 hash of a spending validator script (first encoded as a CBOR byte-array and prepended by a script version byte).</p>
-<h2 id="static-methods-29"><a class="header" href="#static-methods-29">Static methods</a></h2>
+<h2 id="static-methods-30"><a class="header" href="#static-methods-30">Static methods</a></h2>
 <h3 id="fromcbor-19"><a class="header" href="#fromcbor-19"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>ValidatorHash</code>.</p>
 <p>Mutates <code>bytes</code> and shifts it to the next CBOR element.</p>
@@ -4702,7 +4715,7 @@ const networkParams = new helios.NetworkParams(
     assets: helios.Assets = new helios.Assets()
 )
 </code></pre>
-<h2 id="static-methods-30"><a class="header" href="#static-methods-30">Static methods</a></h2>
+<h2 id="static-methods-31"><a class="header" href="#static-methods-31">Static methods</a></h2>
 <h3 id="fromcbor-20"><a class="header" href="#fromcbor-20"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>Value</code> instance.</p>
 <p>Shifts <code>bytes</code> to the next CBOR element.</p>
@@ -5699,5 +5712,6 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
         });
         </script>
 
+    </div>
     </body>
 </html>

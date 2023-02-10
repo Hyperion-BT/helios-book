@@ -33,6 +33,7 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "../../";
@@ -152,6 +153,18 @@
 <p>Constructs a <code>BlockfrostV0</code> using the network name (<code>preview</code>, <code>preprod</code> or <code>mainnet</code>) and your Blockfrost project id.</p>
 <pre><code class="language-ts">const network = new helios.BlockfrostV0(networkName: string, projectId: string)
 </code></pre>
+<h2 id="static-methods"><a class="header" href="#static-methods">Static methods</a></h2>
+<h3 id="resolve"><a class="header" href="#resolve"><code>resolve</code></a></h3>
+<p>Connect the same network a <a href="./wallet.html"><code>Wallet</code></a> is connected to (<code>preview</code>, <code>preprod</code> or <code>mainnet</code>). Throws an error if a Blockfrost project id is missing for the network.</p>
+<pre><code class="language-ts">const network = helios.BlockforstV0.resolve(
+    wallet: helios.Wallet,
+    projectIds: {
+        preview?: string,
+        preprod?: string,
+        mainnet?: string
+    }
+)
+</code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <h3 id="submittx"><a class="header" href="#submittx"><code>submitTx</code></a></h3>
 <pre><code class="language-ts">network.submitTx(tx: helios.Tx): Promise&lt;helios.Txid&gt;
@@ -206,5 +219,6 @@
         <script src="../../src/custom.js"></script>
 
 
+    </div>
     </body>
 </html>
