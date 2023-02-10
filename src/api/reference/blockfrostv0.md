@@ -12,6 +12,23 @@ Constructs a `BlockfrostV0` using the network name (`preview`, `preprod` or `mai
 const network = new helios.BlockfrostV0(networkName: string, projectId: string)
 ```
 
+## Static methods
+
+### `resolve`
+
+Connect the same network a [`Wallet`](./wallet.md) is connected to (`preview`, `preprod` or `mainnet`). Throws an error if a Blockfrost project id is missing for the network.
+
+```ts
+const network = helios.BlockforstV0.resolve(
+    wallet: helios.Wallet,
+    projectIds: {
+        preview?: string,
+        preprod?: string,
+        mainnet?: string
+    }
+)
+```
+
 ## Methods
 
 ### `submitTx`
