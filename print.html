@@ -735,7 +735,7 @@ For example:</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="automatic-methods"><a class="header" href="#automatic-methods">Automatic methods</a></h1>
 <p>The following (associated) methods and operators are automatically defined on all user and builtin types.</p>
 <h2 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h2>
-<p>The <code>serialize</code> method is automatically defined on every user-type, and is thus <code>serialize</code> is a reserved name that can't be used for other methods.</p>
+<p>The <code>serialize</code> method is automatically defined on every user-type, and thus <code>serialize</code> is a reserved name that can't be used for other methods.</p>
 <p><code>serialize</code> serializes the underlying data using cbor encoding.</p>
 <pre><code class="language-helios">my_instance.serialize() -&gt; ByteArray
 </code></pre>
@@ -743,12 +743,12 @@ For example:</p>
 <p><strong>Note</strong>: when debugging you can inspect the output of <code>print(my_data.serialize().show())</code> using <a href="https://cbor.nemo157.com">this cbor tool</a>.</p>
 </blockquote>
 <h2 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h2>
-<p><code>from_data</code> is an <a href="lang/./associated-functions-and-constants.html">associated method</a> that is automatically defined on every user-type, and is thus <code>from_data</code> a reserved name that can't be used for other methods.</p>
+<p><code>from_data</code> is an <a href="lang/./associated-functions-and-constants.html">associated method</a> that is automatically defined on every user-type, and thus <code>from_data</code> is a reserved name that can't be used for other methods.</p>
 <p><code>from_data</code> converts a typeless <code>Data</code> into something typed.</p>
 <pre><code class="language-helios">MyType::from_data(data: Data) -&gt; MyType
 </code></pre>
 <h2 id="-"><a class="header" href="#-"><code>==</code>, <code>!=</code></a></h2>
-<p>The equality and inequality operators are automatically defined on every user-type. This doesn't represent a name restriction though because the user can't define operators anyway.</p>
+<p>The equality and inequality operators are automatically defined on every user-type.</p>
 <div style="break-before: page; page-break-before: always;"></div><p>The following is a complete example of a struct with both associated and regular methods.</p>
 <h1 id="example-rational"><a class="header" href="#example-rational">Example: <code>Rational</code></a></h1>
 <pre><code class="language-helios">struct Rational {
