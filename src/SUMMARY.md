@@ -144,6 +144,8 @@
 
 - [Advanced concepts](./advanced-concepts/index.md)
   - [Exploits](./advanced-concepts/exploits.md)
+  - [Intermediate representation](./advanced-concepts/ir/index.md)
+  -   [Simplification](./advanced-concepts/ir/simplification.md)
   - [Minting native assets](./advanced-concepts/minting/index.md)
     - [Signature based minting](./advanced-concepts/minting/signature.md)
     - [Unique minting](./advanced-concepts/minting/unique.md)
