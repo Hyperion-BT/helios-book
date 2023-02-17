@@ -102,6 +102,7 @@
     - [MapData](./api/reference/mapdata.md)
     - [MintingPolicyHash](./api/reference/mintingpolicyhash.md)
     - [Network](./api/reference/network.md)
+    - [NetworkEmulator](./api/reference/networkemulator.md)
     - [NetworkParams](./api/reference/networkparams.md)
     - [Program](./api/reference/program.md)
     - [PubKeyHash](./api/reference/pubkeyhash.md)
@@ -131,6 +132,7 @@
     - [ValidatorHash](./api/reference/validatorhash.md)
     - [Value](./api/reference/value.md)
     - [Wallet](./api/reference/wallet.md)
+    - [WalletEmulator](./api/reference/walletemulator.md)
     - [WalletHelper](./api/reference/wallethelper.md)
 
 - [Helios CLI](./cli/index.md)

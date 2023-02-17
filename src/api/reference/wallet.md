@@ -1,6 +1,6 @@
 # `Wallet`
 
-An interface type for a wallet that manages a user's UTxOs and addresses. Notably implemented by the [`Cip30Wallet`](./cip30wallet.md) class.
+An interface type for a wallet that manages a user's UTxOs and addresses. Notably implemented by [`Cip30Wallet`](./cip30wallet.md) and [`WalletEmulator`](./walletemulator.md).
 
 ## Getters
 
@@ -14,7 +14,7 @@ wallet.usedAddresses: Promise<helios.Address[]>
 
 ### `unusedAddresses`
 
-Gets a list of unique unused addresses which can be used to UTxOs to.
+Gets a list of unique unused addresses which can be used to send UTxOs to.
 
 ```ts
 wallet.unusedAddresses: Promise<helios.Address[]>

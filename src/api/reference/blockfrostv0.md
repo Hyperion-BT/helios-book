@@ -16,7 +16,7 @@ const network = new helios.BlockfrostV0(networkName: string, projectId: string)
 
 ### `resolve`
 
-Connect the same network a [`Wallet`](./wallet.md) is connected to (`preview`, `preprod` or `mainnet`). Throws an error if a Blockfrost project id is missing for the network.
+Connect the same network a [`Wallet`](./wallet.md) is connected to (`preview`, `preprod` or `mainnet`). Throws an error if a Blockfrost project id is missing for that specific network.
 
 ```ts
 const network = helios.BlockforstV0.resolve(
@@ -31,8 +31,18 @@ const network = helios.BlockforstV0.resolve(
 
 ## Methods
 
-### `submitTx`
+### `getUtxos`
+
+Gets a complete list of UTxOs at a given [address](./address.md).
 
 ```ts
-network.submitTx(tx: helios.Tx): Promise<helios.Txid>
+network.getUtxs(address: helios.Address): Promise<helios.UTxO[]>
+```
+
+### `submitTx`
+
+Submits a [transaction](./tx.md) to the blockchain. Returns the [`TxId`](./txid.md).
+
+```ts
+network.submitTx(tx: helios.Tx): Promise<helios.TxId>
 ```

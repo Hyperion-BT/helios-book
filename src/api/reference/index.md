@@ -37,6 +37,7 @@ Typescript annotations are used to document types.
   * [`ListData`](./listdata.md)
   * [`MapData`](./mapdata.md)
   * [`MintingPolicyHash`](./mintingpolicyhash.md)
+  * [`NetworkEmulator`](./networkemulator.md)
   * [`NetworkParams`](./networkparams.md)
   * [`Program`](./program.md)
   * [`PubKeyHash`](./pubkeyhash.md)
@@ -62,6 +63,7 @@ Typescript annotations are used to document types.
   * [`UTxO`](./utxo.md)
   * [`ValidatorHash`](./validatorhash.md)
   * [`Value`](./value.md)
+  * [`WalletEmulator`](./walletemulator.md)
   * [`WalletHelper`](./wallethelper.md)
 
 ### Interfaces
