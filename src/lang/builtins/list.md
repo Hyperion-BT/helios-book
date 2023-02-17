@@ -158,6 +158,14 @@ list.fold_lazy(
 ) -> ReducedType
 ```
 
+### `for_each`
+
+Print or assert each item. Returns void.
+
+```helios
+list.for_each(fn: (item: ItemType) -> ()) -> ()
+```
+
 ### `get`
 
 Returns the item at the given position in the list (0-based index). Throws an error if the index is out of range.
