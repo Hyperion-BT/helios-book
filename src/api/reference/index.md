@@ -19,6 +19,14 @@ Typescript annotations are used to document types.
   * [`highlight`](./functions.md#highlight)
   * [`hl`](./functions.md#hl)
 
+### Interfaces
+
+Can only be imported in typescript files.
+
+* [`Cip30Handle`](./cip30handle.md)
+* [`Network`](./network.md)
+* [`Wallet`](./wallet.md)
+
 ### Classes
 
   * [`Address`](./address.md)
@@ -65,11 +73,3 @@ Typescript annotations are used to document types.
   * [`Value`](./value.md)
   * [`WalletEmulator`](./walletemulator.md)
   * [`WalletHelper`](./wallethelper.md)
-
-### Interfaces
-
-Can only be imported in typescript files.
-
-* [`Cip30Handle`](./cip30handle.md)
-* [`Network`](./network.md)
-* [`Wallet`](./wallet.md)
