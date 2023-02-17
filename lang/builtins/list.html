@@ -235,6 +235,10 @@
     final: ReducedType
 ) -&gt; ReducedType
 </code></pre>
+<h3 id="for_each"><a class="header" href="#for_each"><code>for_each</code></a></h3>
+<p>Print or assert each item. Returns void.</p>
+<pre><code class="language-helios">list.for_each(fn: (item: ItemType) -&gt; ()) -&gt; ()
+</code></pre>
 <h3 id="get"><a class="header" href="#get"><code>get</code></a></h3>
 <p>Returns the item at the given position in the list (0-based index). Throws an error if the index is out of range.</p>
 <pre><code class="language-helios">list.get(index: Int) -&gt; ItemType

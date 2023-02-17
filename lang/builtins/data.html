@@ -148,6 +148,11 @@
                     <main>
                         <h1 id="data"><a class="header" href="#data"><code>Data</code></a></h1>
 <p>Represents type-less data, as returned by the <a href="./outputdatum.html#inline"><code>OutputDatum::Inline inline</code></a> getter. Can be cast directly into any other type using <code>from_data</code>, or indirectly using <a href="../enums.html#data"><code>switch</code></a>.</p>
+<h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
+<h3 id="tag"><a class="header" href="#tag"><code>tag</code></a></h3>
+<p>Gets tag index of <code>ConstrData</code>. Throws an error if not <code>ConstrData</code>.</p>
+<pre><code class="language-helios">data.tag -&gt; Int
+</code></pre>
 <h2 id="operators"><a class="header" href="#operators">Operators</a></h2>
 <h3 id=""><a class="header" href="#"><code>==</code></a></h3>
 <pre><code class="language-helios">Data == Data -&gt; Bool
