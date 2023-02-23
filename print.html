@@ -3468,6 +3468,10 @@ async function buyTx(contract) {
 <p>Converts utf-8 encoded text from its byte representation to its string representation.</p>
 <pre><code class="language-ts">helios.bytesToText(bytes: number[]): string
 </code></pre>
+<h3 id="deserializeuplcbytes"><a class="header" href="#deserializeuplcbytes"><code>deserializeUplcBytes</code></a></h3>
+<p>Deserializes a flat encoded <a href="api/reference/./uplcprogram.html"><code>UplcProgram</code></a>.</p>
+<pre><code class="language-ts">helios.deserializeUplcBytes(bytes: number[]): helios.UplcProgram
+</code></pre>
 <h3 id="extractscriptpurposeandname"><a class="header" href="#extractscriptpurposeandname"><code>extractScriptPurposeAndName</code></a></h3>
 <p>Quickly extract the script purpose header of a script source, by parsing only the minimally necessary characters. Returns <code>null</code> if the script header is missing or syntactically incorrect.</p>
 <p>The first string returned is the script purpose, the second value returned is the script name.</p>
@@ -4652,25 +4656,25 @@ const networkParams = new helios.NetworkParams(
 <h2 id="getters-38"><a class="header" href="#getters-38">Getters</a></h2>
 <h3 id="validatorhash-2"><a class="header" href="#validatorhash-2"><code>validatorHash</code></a></h3>
 <p>Returns the <a href="api/reference/./validatorhash.html"><code>ValidatorHash</code></a> of the script. Throws an error if this isn't a spending validator script.</p>
-<pre><code class="language-ts">uplc_program.validatorHash: helios.ValidatorHash
+<pre><code class="language-ts">uplcProgram.validatorHash: helios.ValidatorHash
 </code></pre>
 <h3 id="mintingpolicyhash-2"><a class="header" href="#mintingpolicyhash-2"><code>mintingPolicyHash</code></a></h3>
 <p>Returns the <a href="api/reference/./mintingpolicyhash.html"><code>MintingPolicyHash</code></a> of the script. Throws an error if this isn't a minting policy.</p>
-<pre><code class="language-ts">uplc_program.mintingPolicyHash: helios.MintingPolicyHash
+<pre><code class="language-ts">uplcProgram.mintingPolicyHash: helios.MintingPolicyHash
 </code></pre>
 <h3 id="stakingvalidatorhash-2"><a class="header" href="#stakingvalidatorhash-2"><code>stakingValidatorHash</code></a></h3>
 <p>Returns the <a href="api/reference/./stakingvalidatorhash.html"><code>StakingValidatorHash</code></a> of the script. Throws an error if this isn't a staking validator script.</p>
-<pre><code class="language-ts">uplc_program.stakingValidatorHash: helios.StakingValidatorHash
+<pre><code class="language-ts">uplcProgram.stakingValidatorHash: helios.StakingValidatorHash
 </code></pre>
 <h2 id="methods-55"><a class="header" href="#methods-55">Methods</a></h2>
 <h3 id="apply"><a class="header" href="#apply"><code>apply</code></a></h3>
 <p>Wrap the top-level term with consecutive <code>UplcCall</code> (not exported) terms.</p>
 <p>Returns a new <code>UplcProgram</code> instance, leaving the original untouched.</p>
-<pre><code class="language-ts">uplc_program.apply(args: helios.UplcValue[]): helios.UplcProgram
+<pre><code class="language-ts">uplcProgram.apply(args: helios.UplcValue[]): helios.UplcProgram
 </code></pre>
 <h3 id="profile"><a class="header" href="#profile"><code>profile</code></a></h3>
 <p>Runs and profiles a <code>UplcProgram</code>. Needs the <a href="api/reference/./networkparams.html"><code>NetworkParams</code></a> in order to calculate the execution budget.</p>
-<pre><code class="language-ts">uplc_program.profile(
+<pre><code class="language-ts">uplcProgram.profile(
     args: helios.UplcValue[],
     networkParams: helios.NetworkParams
 ): Promise&lt;{
@@ -4682,16 +4686,20 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <h3 id="runwithprint"><a class="header" href="#runwithprint"><code>runWithPrint</code></a></h3>
 <p>Run a <code>UplcProgram</code>. The printed messages are part of the return value.</p>
-<pre><code class="language-ts">uplc_program.runWithPrint(args: helios.UplcValue[]): 
+<pre><code class="language-ts">uplcProgram.runWithPrint(args: helios.UplcValue[]): 
     Promise&lt;[helios.UplcValue | helios.UserError, string[]]&gt;
 </code></pre>
 <h3 id="serialize-36"><a class="header" href="#serialize-36"><code>serialize</code></a></h3>
 <p>Serialize a <code>UplcProgram</code> using flat encoding. Returns the JSON representation of the program (needed by <em>cardano-cli</em>).</p>
-<pre><code class="language-ts">uplc_program.serialize(): string
+<pre><code class="language-ts">uplcProgram.serialize(): string
 </code></pre>
 <h3 id="serializebytes"><a class="header" href="#serializebytes"><code>serializeBytes</code></a></h3>
 <p>Serialize a <code>UplcProgram</code> using flat encoding. Returns a list of bytes.</p>
-<pre><code class="language-ts">uplc_program.serializeBytes(): number[]
+<pre><code class="language-ts">uplcProgram.serializeBytes(): number[]
+</code></pre>
+<h3 id="tocbor-8"><a class="header" href="#tocbor-8"><code>toCbor</code></a></h3>
+<p>Serialize a <code>UplcProgram</code> using CBOR (wraps the flat encoded program).</p>
+<pre><code class="language-ts">uplcProgram.toCbor(): number[]
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcstring"><a class="header" href="#uplcstring"><code>UplcString</code></a></h1>
 <p>Primitive string value. Not needed to interact with Helios smart contracts, but can be used to interact with smart contracts written in other languages (eg. Plutarch).</p>
@@ -4814,7 +4822,7 @@ const networkParams = new helios.NetworkParams(
 <p>Mutates the quantity of lovelace in a <code>Value</code>.</p>
 <pre><code class="language-ts">value.setLovelace(lovelace: bigint): void
 </code></pre>
-<h3 id="tocbor-8"><a class="header" href="#tocbor-8"><code>toCbor</code></a></h3>
+<h3 id="tocbor-9"><a class="header" href="#tocbor-9"><code>toCbor</code></a></h3>
 <p>Serialize a <code>Value</code> instance using CBOR.</p>
 <pre><code class="language-ts">value.toCbor(): number[]
 </code></pre>

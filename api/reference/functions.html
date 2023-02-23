@@ -155,6 +155,10 @@
 <p>Converts utf-8 encoded text from its byte representation to its string representation.</p>
 <pre><code class="language-ts">helios.bytesToText(bytes: number[]): string
 </code></pre>
+<h3 id="deserializeuplcbytes"><a class="header" href="#deserializeuplcbytes"><code>deserializeUplcBytes</code></a></h3>
+<p>Deserializes a flat encoded <a href="./uplcprogram.html"><code>UplcProgram</code></a>.</p>
+<pre><code class="language-ts">helios.deserializeUplcBytes(bytes: number[]): helios.UplcProgram
+</code></pre>
 <h3 id="extractscriptpurposeandname"><a class="header" href="#extractscriptpurposeandname"><code>extractScriptPurposeAndName</code></a></h3>
 <p>Quickly extract the script purpose header of a script source, by parsing only the minimally necessary characters. Returns <code>null</code> if the script header is missing or syntactically incorrect.</p>
 <p>The first string returned is the script purpose, the second value returned is the script name.</p>
