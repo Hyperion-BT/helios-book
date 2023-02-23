@@ -2,6 +2,16 @@
 
 Result of [`program.compile()`](./program.md#compile). Contains the Untyped Plutus-Core AST, along with a code-mapping to the original source.
 
+## Static methods
+
+### `fromCbor`
+
+Deserialize a `UplcProgram` from bytes.
+
+```ts
+helios.UplcProgram.fromCbor(bytes: number[]): helios.UplcProgram
+```
+
 ## Getters
 
 ### `validatorHash`
