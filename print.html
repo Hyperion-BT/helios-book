@@ -1489,7 +1489,7 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">example: []Int = []Int{1, 2, 3, 4, 5}; ...
 </code></pre>
 <p>Looping over multiple lists at once can be done with a recursive function call:</p>
-<pre><code class="language-helios">func add_element_wise(a: []Int, b[]Int) -&gt; []Int {
+<pre><code class="language-helios">func add_element_wise(a: []Int, b: []Int) -&gt; []Int {
     if (a.is_empty()) {
         []Int{}
     } else {
@@ -4644,6 +4644,11 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcprogram"><a class="header" href="#uplcprogram"><code>UplcProgram</code></a></h1>
 <p>Result of <a href="api/reference/./program.html#compile"><code>program.compile()</code></a>. Contains the Untyped Plutus-Core AST, along with a code-mapping to the original source.</p>
+<h2 id="static-methods-28"><a class="header" href="#static-methods-28">Static methods</a></h2>
+<h3 id="fromcbor-19"><a class="header" href="#fromcbor-19"><code>fromCbor</code></a></h3>
+<p>Deserialize a <code>UplcProgram</code> from bytes.</p>
+<pre><code class="language-ts">helios.UplcProgram.fromCbor(bytes: number[]): helios.UplcProgram
+</code></pre>
 <h2 id="getters-38"><a class="header" href="#getters-38">Getters</a></h2>
 <h3 id="validatorhash-2"><a class="header" href="#validatorhash-2"><code>validatorHash</code></a></h3>
 <p>Returns the <a href="api/reference/./validatorhash.html"><code>ValidatorHash</code></a> of the script. Throws an error if this isn't a spending validator script.</p>
@@ -4690,14 +4695,14 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcstring"><a class="header" href="#uplcstring"><code>UplcString</code></a></h1>
 <p>Primitive string value. Not needed to interact with Helios smart contracts, but can be used to interact with smart contracts written in other languages (eg. Plutarch).</p>
-<h2 id="static-methods-28"><a class="header" href="#static-methods-28">Static methods</a></h2>
+<h2 id="static-methods-29"><a class="header" href="#static-methods-29">Static methods</a></h2>
 <h3 id="new-25"><a class="header" href="#new-25"><code>new</code></a></h3>
 <p>Constructs a <code>UplcString</code> instance.</p>
 <pre><code class="language-ts">helios.UplcString.new(value: string): helios.UplcString
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcunit"><a class="header" href="#uplcunit"><code>UplcUnit</code></a></h1>
 <p>Primitive unit value. Not needed to interact with Helios smart contracts, but can be used to interact with smart contracts written in other languages (eg. Plutarch).</p>
-<h2 id="static-methods-29"><a class="header" href="#static-methods-29">Static methods</a></h2>
+<h2 id="static-methods-30"><a class="header" href="#static-methods-30">Static methods</a></h2>
 <h3 id="new-26"><a class="header" href="#new-26"><code>new</code></a></h3>
 <p>Constructs a <code>UplcUnit</code> instance.</p>
 <pre><code class="language-ts">helios.UplcUnit.new(): helios.UplcUnit
@@ -4733,8 +4738,8 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="validatorhash-3"><a class="header" href="#validatorhash-3"><code>ValidatorHash</code></a></h1>
 <p>Represents a blake2b-224 hash of a spending validator script (first encoded as a CBOR byte-array and prepended by a script version byte).</p>
-<h2 id="static-methods-30"><a class="header" href="#static-methods-30">Static methods</a></h2>
-<h3 id="fromcbor-19"><a class="header" href="#fromcbor-19"><code>fromCbor</code></a></h3>
+<h2 id="static-methods-31"><a class="header" href="#static-methods-31">Static methods</a></h2>
+<h3 id="fromcbor-20"><a class="header" href="#fromcbor-20"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>ValidatorHash</code>.</p>
 <p>Mutates <code>bytes</code> and shifts it to the next CBOR element.</p>
 <pre><code class="language-ts">helios.ValidatorHash.fromCbor(bytes: number[]): helios.ValidatorHash
@@ -4761,8 +4766,8 @@ const networkParams = new helios.NetworkParams(
     assets: helios.Assets = new helios.Assets()
 )
 </code></pre>
-<h2 id="static-methods-31"><a class="header" href="#static-methods-31">Static methods</a></h2>
-<h3 id="fromcbor-20"><a class="header" href="#fromcbor-20"><code>fromCbor</code></a></h3>
+<h2 id="static-methods-32"><a class="header" href="#static-methods-32">Static methods</a></h2>
+<h3 id="fromcbor-21"><a class="header" href="#fromcbor-21"><code>fromCbor</code></a></h3>
 <p>Deserialize a CBOR encoded <code>Value</code> instance.</p>
 <p>Shifts <code>bytes</code> to the next CBOR element.</p>
 <pre><code class="language-ts">helios.Value.fromCbor(bytes: number[]): helios.Value

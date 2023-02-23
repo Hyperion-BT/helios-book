@@ -148,6 +148,11 @@
                     <main>
                         <h1 id="uplcprogram"><a class="header" href="#uplcprogram"><code>UplcProgram</code></a></h1>
 <p>Result of <a href="./program.html#compile"><code>program.compile()</code></a>. Contains the Untyped Plutus-Core AST, along with a code-mapping to the original source.</p>
+<h2 id="static-methods"><a class="header" href="#static-methods">Static methods</a></h2>
+<h3 id="fromcbor"><a class="header" href="#fromcbor"><code>fromCbor</code></a></h3>
+<p>Deserialize a <code>UplcProgram</code> from bytes.</p>
+<pre><code class="language-ts">helios.UplcProgram.fromCbor(bytes: number[]): helios.UplcProgram
+</code></pre>
 <h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
 <h3 id="validatorhash"><a class="header" href="#validatorhash"><code>validatorHash</code></a></h3>
 <p>Returns the <a href="./validatorhash.html"><code>ValidatorHash</code></a> of the script. Throws an error if this isn't a spending validator script.</p>
