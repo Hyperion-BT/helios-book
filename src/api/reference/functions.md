@@ -16,6 +16,14 @@ Converts utf-8 encoded text from its byte representation to its string represent
 helios.bytesToText(bytes: number[]): string
 ```
 
+### `deserializeUplcBytes`
+
+Deserializes a flat encoded [`UplcProgram`](./uplcprogram.md).
+
+```ts
+helios.deserializeUplcBytes(bytes: number[]): helios.UplcProgram
+```
+
 ### `extractScriptPurposeAndName`
 
 Quickly extract the script purpose header of a script source, by parsing only the minimally necessary characters. Returns `null` if the script header is missing or syntactically incorrect.

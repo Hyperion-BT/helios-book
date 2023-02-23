@@ -19,7 +19,7 @@ helios.UplcProgram.fromCbor(bytes: number[]): helios.UplcProgram
 Returns the [`ValidatorHash`](./validatorhash.md) of the script. Throws an error if this isn't a spending validator script.
 
 ```ts
-uplc_program.validatorHash: helios.ValidatorHash
+uplcProgram.validatorHash: helios.ValidatorHash
 ```
 
 ### `mintingPolicyHash`
@@ -27,7 +27,7 @@ uplc_program.validatorHash: helios.ValidatorHash
 Returns the [`MintingPolicyHash`](./mintingpolicyhash.md) of the script. Throws an error if this isn't a minting policy.
 
 ```ts
-uplc_program.mintingPolicyHash: helios.MintingPolicyHash
+uplcProgram.mintingPolicyHash: helios.MintingPolicyHash
 ```
 
 ### `stakingValidatorHash`
@@ -35,7 +35,7 @@ uplc_program.mintingPolicyHash: helios.MintingPolicyHash
 Returns the [`StakingValidatorHash`](./stakingvalidatorhash.md) of the script. Throws an error if this isn't a staking validator script.
 
 ```ts
-uplc_program.stakingValidatorHash: helios.StakingValidatorHash
+uplcProgram.stakingValidatorHash: helios.StakingValidatorHash
 ```
 
 ## Methods
@@ -47,7 +47,7 @@ Wrap the top-level term with consecutive `UplcCall` (not exported) terms.
 Returns a new `UplcProgram` instance, leaving the original untouched.
 
 ```ts
-uplc_program.apply(args: helios.UplcValue[]): helios.UplcProgram
+uplcProgram.apply(args: helios.UplcValue[]): helios.UplcProgram
 ```
 
 ### `profile`
@@ -55,7 +55,7 @@ uplc_program.apply(args: helios.UplcValue[]): helios.UplcProgram
 Runs and profiles a `UplcProgram`. Needs the [`NetworkParams`](./networkparams.md) in order to calculate the execution budget.
 
 ```ts
-uplc_program.profile(
+uplcProgram.profile(
     args: helios.UplcValue[],
     networkParams: helios.NetworkParams
 ): Promise<{
@@ -70,7 +70,7 @@ uplc_program.profile(
 Run a `UplcProgram`. The printed messages are part of the return value.
 
 ```ts
-uplc_program.runWithPrint(args: helios.UplcValue[]): 
+uplcProgram.runWithPrint(args: helios.UplcValue[]): 
     Promise<[helios.UplcValue | helios.UserError, string[]]>
 ```
 
@@ -79,7 +79,7 @@ uplc_program.runWithPrint(args: helios.UplcValue[]):
 Serialize a `UplcProgram` using flat encoding. Returns the JSON representation of the program (needed by *cardano-cli*).
 
 ```ts
-uplc_program.serialize(): string
+uplcProgram.serialize(): string
 ```
 
 ### `serializeBytes`
@@ -87,5 +87,13 @@ uplc_program.serialize(): string
 Serialize a `UplcProgram` using flat encoding. Returns a list of bytes.
 
 ```ts
-uplc_program.serializeBytes(): number[]
+uplcProgram.serializeBytes(): number[]
+```
+
+### `toCbor`
+
+Serialize a `UplcProgram` using CBOR (wraps the flat encoded program).
+
+```ts
+uplcProgram.toCbor(): number[]
 ```
