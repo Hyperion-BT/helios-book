@@ -14,6 +14,7 @@ Typescript annotations are used to document types.
 ### Functions
 
   * [`bytesToHex`](./functions.md#bytestohex)
+  * [`deserializeUplcBytes`](./functions.md#deserializeuplcbytes)
   * [`extractScriptPurposeAndName`](./functions.md#extractscriptpurposeandname)
   * [`hexToBytes`](./functions.md#hextobytes)
   * [`highlight`](./functions.md#highlight)
