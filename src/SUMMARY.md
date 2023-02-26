@@ -120,8 +120,6 @@
     - [UplcData](./api/reference/uplcdata.md)
     - [UplcDataValue](./api/reference/uplcdatavalue.md)
     - [UplcInt](./api/reference/uplcint.md)
-    - [UplcList](./api/reference/uplclist.md)
-    - [UplcMap](./api/reference/uplcmap.md)
     - [UplcPair](./api/reference/uplcpair.md)
     - [UplcProgram](./api/reference/uplcprogram.md)
     - [UplcString](./api/reference/uplcstring.md)

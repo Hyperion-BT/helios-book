@@ -61,8 +61,6 @@ Can only be imported in typescript files.
   * [`UplcData`](./uplcdata.md)
   * [`UplcDataValue`](./uplcdatavalue.md)
   * [`UplcInt`](./uplcint.md)
-  * [`UplcList`](./uplclist.md)
-  * [`UplcMap`](./uplcmap.md)
   * [`UplcPair`](./uplcpair.md)
   * [`UplcProgram`](./uplcprogram.md)
   * [`UplcString`](./uplcstring.md)
