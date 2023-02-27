@@ -153,3 +153,4 @@
   - [English auction](./advanced-concepts/english-auction.md)
   - [Oracle pools](./advanced-concepts/oracle-pools.md)
   - [DApp recommendations](./advanced-concepts/dapps.md)
+  - [Tx finalization](./advanced-concepts/tx-finalization.md)
