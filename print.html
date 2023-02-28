@@ -3073,6 +3073,9 @@ tx.attachScript(uplcProgram)
 <blockquote>
 <p><strong>Note</strong>: the collateral is only lost if the transaction fails once submitted. There are however plenty of checks that happen before the transaction is submitted to the blockchain mem-pool, so such a situation is very unlikely.</p>
 </blockquote>
+<blockquote>
+<p><strong>Note</strong>: since v0.12.6 of Helios, setting the collateral is no longer necessary. If unset, the collateral (and collateral return) is set automatically inside <code>tx.finalize()</code>.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="explicit-signers"><a class="header" href="#explicit-signers">Explicit signers</a></h1>
 <p>Explicit signers are actors who approve the transaction without necessarily sending or receiving UTxOs.</p>
 <p>Only these explicit signers appear in the <a href="api/building/../../lang/builtins/tx.html#signatories"><code>tx.signatories</code></a> field.</p>

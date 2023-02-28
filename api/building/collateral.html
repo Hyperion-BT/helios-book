@@ -153,6 +153,9 @@
 <blockquote>
 <p><strong>Note</strong>: the collateral is only lost if the transaction fails once submitted. There are however plenty of checks that happen before the transaction is submitted to the blockchain mem-pool, so such a situation is very unlikely.</p>
 </blockquote>
+<blockquote>
+<p><strong>Note</strong>: since v0.12.6 of Helios, setting the collateral is no longer necessary. If unset, the collateral (and collateral return) is set automatically inside <code>tx.finalize()</code>.</p>
+</blockquote>
 
                     </main>
 
