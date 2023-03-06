@@ -71,10 +71,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -152,13 +154,21 @@
 <h3 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h3>
 <pre><code class="language-helios">Int::from_data(data: Data) -&gt; Int
 </code></pre>
+<h3 id="from_little_endian"><a class="header" href="#from_little_endian"><code>from_little_endian</code></a></h3>
+<p>Converts a <a href="./bytearray.html"><code>ByteArray</code></a> into an <code>Int</code>. The first byte is multiplied by <code>1</code> before adding to the sum, the second byte is multiplied by <code>256</code> etc.</p>
+<pre><code class="language-helios">Int::from_little_endian(bytes: ByteArray) -&gt; Int
+</code></pre>
 <h3 id="parse"><a class="header" href="#parse"><code>parse</code></a></h3>
 <p>Parses a string representation of an integer of the form <code>((-)?[1-9][0-9]*)|0</code> (i.e. a non zero-padded integer). Throws an error if the string representation of the integer doesn't respect this format. Note that <code>-0</code> isn't allowed, so zeros can only be represented by a single <code>0</code> digit.</p>
 <pre><code class="language-helios">Int::parse(string: String) -&gt; Int
 </code></pre>
-<h3 id="from_little_endian"><a class="header" href="#from_little_endian"><code>from_little_endian</code></a></h3>
-<p>Converts a <a href="./bytearray.html"><code>ByteArray</code></a> into an <code>Int</code>. The first byte is multiplied by <code>1</code> before adding to the sum, the second byte is multiplied by <code>256</code> etc.</p>
-<pre><code class="language-helios">Int::from_little_endian(bytes: ByteArray) -&gt; Int
+<h3 id="max"><a class="header" href="#max"><code>max</code></a></h3>
+<p>Returns the greater of two numbers.</p>
+<pre><code class="language-helios">Int::max(a: Int, b: Int) -&gt; Int
+</code></pre>
+<h3 id="min"><a class="header" href="#min"><code>min</code></a></h3>
+<p>Returns the lesser of two numbers.</p>
+<pre><code class="language-helios">Int::min(a: Int, b: Int) -&gt; Int
 </code></pre>
 <h2 id="operators"><a class="header" href="#operators">Operators</a></h2>
 <h3 id=""><a class="header" href="#"><code>==</code></a></h3>
@@ -196,8 +206,24 @@
 <pre><code class="language-helios">Int % Int -&gt; Int
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
+<h3 id="bound"><a class="header" href="#bound"><code>bound</code></a></h3>
+<p>Bounds an <code>Int</code> if it falls outside a range. This builtin function doesn't check of the range is valid.</p>
+<pre><code class="language-helios">int.bound(low: Int, high: Int) -&gt; Int
+</code></pre>
+<h3 id="bound_min"><a class="header" href="#bound_min"><code>bound_min</code></a></h3>
+<p>Bounds an <code>Int</code> to be greater or equals to a given minimum value.</p>
+<pre><code class="language-helios">int.bound_min(low: Int) -&gt; Int
+</code></pre>
+<h3 id="bound_max"><a class="header" href="#bound_max"><code>bound_max</code></a></h3>
+<p>Bounds an <code>Int</code> to be less or equals to a given maximum value.</p>
+<pre><code class="language-helios">int.bound_max(high: Int) -&gt; Int
+</code></pre>
 <h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
 <pre><code class="language-helios">int.serialize() -&gt; ByteArray
+</code></pre>
+<h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
+<p>Returns decimal representation of integer.</p>
+<pre><code class="language-helios">int.show() -&gt; String
 </code></pre>
 <h3 id="to_bool"><a class="header" href="#to_bool"><code>to_bool</code></a></h3>
 <p>Turns <code>0</code> into <code>false</code>, and any other integer into <code>true</code>.</p>
@@ -206,10 +232,6 @@
 <h3 id="to_hex"><a class="header" href="#to_hex"><code>to_hex</code></a></h3>
 <p>Returns hexadecimal representation of integer.</p>
 <pre><code class="language-helios">int.to_hex() -&gt; String
-</code></pre>
-<h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
-<p>Returns decimal representation of integer.</p>
-<pre><code class="language-helios">int.show() -&gt; String
 </code></pre>
 
                     </main>

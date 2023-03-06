@@ -71,10 +71,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -227,6 +229,10 @@
 <p>Returns the amount of the given <a href="./assetclass.html"><code>AssetClass</code></a> in a <code>Value</code>. Throws error if the <a href="./assetclass.html"><code>AssetClass</code></a> isn't found.</p>
 <pre><code class="language-helios">value.get(asset_class: AssetClass) -&gt; Int
 </code></pre>
+<h3 id="get_lovelace"><a class="header" href="#get_lovelace"><code>get_lovelace</code></a></h3>
+<p>Returns the amount of lovelace in a <code>Value</code>. Returns <code>0</code> if there isn't any.</p>
+<pre><code class="language-helios">value.get_lovelace() -&gt; Int
+</code></pre>
 <h3 id="get_safe"><a class="header" href="#get_safe"><code>get_safe</code></a></h3>
 <p>Like <code>get</code>, but returns <code>0</code> instead of throwing an error if the given <a href="./assetclass.html"><code>AssetClass</code></a> isn't found.</p>
 <pre><code class="language-helios">value.get_safe(asset_class: AssetClass) -&gt; Int
@@ -243,7 +249,7 @@
 <pre><code class="language-helios">value.serialize() -&gt; ByteArray
 </code></pre>
 <h3 id="to_map"><a class="header" href="#to_map"><code>to_map</code></a></h3>
-<p>Returning the underlying <code>Map</code>:</p>
+<p>Returning the underlying <a href="./map.html"><code>Map</code></a>:</p>
 <pre><code class="language-helios">value.to_map() -&gt; Map[MintingPolicyHash]Map[ByteArray]Int
 </code></pre>
 

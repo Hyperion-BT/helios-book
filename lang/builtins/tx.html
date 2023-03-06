@@ -71,10 +71,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -215,6 +217,10 @@
 <p>Returns all the redeemers of the transaction as a map with <code>ScriptPurpose</code> keys, and <code>Data</code> values. This allows more complex interactions between different scripts being used in the same transaction.</p>
 <pre><code class="language-helios">tx.redeemers -&gt; Map[ScriptPurpose]Data
 </code></pre>
+<h3 id="datums"><a class="header" href="#datums"><code>datums</code></a></h3>
+<p>Returns a <a href="./map.html"><code>Map</code></a> of <a href="./datumhash.html"><code>DatumHash</code>es</a> to raw <a href="./data.html"><code>Data</code></a>. This can be used to get the datum content of any <a href="./txinput.html"><code>TxInput</code></a> that doesn't use inline datums.</p>
+<pre><code class="language-helios">tx.datums -&gt; Map[DatumHash]Data
+</code></pre>
 <h3 id="id"><a class="header" href="#id"><code>id</code></a></h3>
 <p>Returns the hash of the current transaction as <a href="./txid.html"><code>TxId</code></a>.</p>
 <pre><code class="language-helios">tx.id -&gt; TxId
@@ -237,6 +243,10 @@
 <h3 id="find_datum_hash"><a class="header" href="#find_datum_hash"><code>find_datum_hash</code></a></h3>
 <p>Returns the <a href="./datumhash.html"><code>DatumHash</code></a> of datum data used in one the UTxO inputs.</p>
 <pre><code class="language-helios">tx.find_datum_hash(data: AnyType) -&gt; ByteArray
+</code></pre>
+<h3 id="get_datum_data"><a class="header" href="#get_datum_data"><code>get_datum_data</code></a></h3>
+<p>Returns the datum <a href="./data.html"><code>Data</code></a> of a <a href="./txoutput.html"><code>TxOutput</code></a>. Throws an error if no datum is attached to the output.</p>
+<pre><code class="language-helios">tx.get_datum_data(output: TxOutput) -&gt; Data
 </code></pre>
 <h3 id="outputs_sent_to"><a class="header" href="#outputs_sent_to"><code>outputs_sent_to</code></a></h3>
 <p>Returns the <a href="./txoutput.html"><code>TxOutput</code></a>s sent to a regular payment address.</p>

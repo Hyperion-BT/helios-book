@@ -72,10 +72,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -1423,13 +1425,21 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="from_data-9"><a class="header" href="#from_data-9"><code>from_data</code></a></h3>
 <pre><code class="language-helios">Int::from_data(data: Data) -&gt; Int
 </code></pre>
+<h3 id="from_little_endian"><a class="header" href="#from_little_endian"><code>from_little_endian</code></a></h3>
+<p>Converts a <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a> into an <code>Int</code>. The first byte is multiplied by <code>1</code> before adding to the sum, the second byte is multiplied by <code>256</code> etc.</p>
+<pre><code class="language-helios">Int::from_little_endian(bytes: ByteArray) -&gt; Int
+</code></pre>
 <h3 id="parse"><a class="header" href="#parse"><code>parse</code></a></h3>
 <p>Parses a string representation of an integer of the form <code>((-)?[1-9][0-9]*)|0</code> (i.e. a non zero-padded integer). Throws an error if the string representation of the integer doesn't respect this format. Note that <code>-0</code> isn't allowed, so zeros can only be represented by a single <code>0</code> digit.</p>
 <pre><code class="language-helios">Int::parse(string: String) -&gt; Int
 </code></pre>
-<h3 id="from_little_endian"><a class="header" href="#from_little_endian"><code>from_little_endian</code></a></h3>
-<p>Converts a <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a> into an <code>Int</code>. The first byte is multiplied by <code>1</code> before adding to the sum, the second byte is multiplied by <code>256</code> etc.</p>
-<pre><code class="language-helios">Int::from_little_endian(bytes: ByteArray) -&gt; Int
+<h3 id="max"><a class="header" href="#max"><code>max</code></a></h3>
+<p>Returns the greater of two numbers.</p>
+<pre><code class="language-helios">Int::max(a: Int, b: Int) -&gt; Int
+</code></pre>
+<h3 id="min"><a class="header" href="#min"><code>min</code></a></h3>
+<p>Returns the lesser of two numbers.</p>
+<pre><code class="language-helios">Int::min(a: Int, b: Int) -&gt; Int
 </code></pre>
 <h2 id="operators-10"><a class="header" href="#operators-10">Operators</a></h2>
 <h3 id="-38"><a class="header" href="#-38"><code>==</code></a></h3>
@@ -1467,8 +1477,24 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">Int % Int -&gt; Int
 </code></pre>
 <h2 id="methods-10"><a class="header" href="#methods-10">Methods</a></h2>
+<h3 id="bound"><a class="header" href="#bound"><code>bound</code></a></h3>
+<p>Bounds an <code>Int</code> if it falls outside a range. This builtin function doesn't check of the range is valid.</p>
+<pre><code class="language-helios">int.bound(low: Int, high: Int) -&gt; Int
+</code></pre>
+<h3 id="bound_min"><a class="header" href="#bound_min"><code>bound_min</code></a></h3>
+<p>Bounds an <code>Int</code> to be greater or equals to a given minimum value.</p>
+<pre><code class="language-helios">int.bound_min(low: Int) -&gt; Int
+</code></pre>
+<h3 id="bound_max"><a class="header" href="#bound_max"><code>bound_max</code></a></h3>
+<p>Bounds an <code>Int</code> to be less or equals to a given maximum value.</p>
+<pre><code class="language-helios">int.bound_max(high: Int) -&gt; Int
+</code></pre>
 <h3 id="serialize-10"><a class="header" href="#serialize-10"><code>serialize</code></a></h3>
 <pre><code class="language-helios">int.serialize() -&gt; ByteArray
+</code></pre>
+<h3 id="show-3"><a class="header" href="#show-3"><code>show</code></a></h3>
+<p>Returns decimal representation of integer.</p>
+<pre><code class="language-helios">int.show() -&gt; String
 </code></pre>
 <h3 id="to_bool"><a class="header" href="#to_bool"><code>to_bool</code></a></h3>
 <p>Turns <code>0</code> into <code>false</code>, and any other integer into <code>true</code>.</p>
@@ -1477,10 +1503,6 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="to_hex"><a class="header" href="#to_hex"><code>to_hex</code></a></h3>
 <p>Returns hexadecimal representation of integer.</p>
 <pre><code class="language-helios">int.to_hex() -&gt; String
-</code></pre>
-<h3 id="show-3"><a class="header" href="#show-3"><code>show</code></a></h3>
-<p>Returns decimal representation of integer.</p>
-<pre><code class="language-helios">int.show() -&gt; String
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="list-1"><a class="header" href="#list-1">List</a></h1>
 <p>Helios linked-list type.</p>
@@ -2502,6 +2524,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <p>Returns all the redeemers of the transaction as a map with <code>ScriptPurpose</code> keys, and <code>Data</code> values. This allows more complex interactions between different scripts being used in the same transaction.</p>
 <pre><code class="language-helios">tx.redeemers -&gt; Map[ScriptPurpose]Data
 </code></pre>
+<h3 id="datums"><a class="header" href="#datums"><code>datums</code></a></h3>
+<p>Returns a <a href="lang/builtins/./map.html"><code>Map</code></a> of <a href="lang/builtins/./datumhash.html"><code>DatumHash</code>es</a> to raw <a href="lang/builtins/./data.html"><code>Data</code></a>. This can be used to get the datum content of any <a href="lang/builtins/./txinput.html"><code>TxInput</code></a> that doesn't use inline datums.</p>
+<pre><code class="language-helios">tx.datums -&gt; Map[DatumHash]Data
+</code></pre>
 <h3 id="id"><a class="header" href="#id"><code>id</code></a></h3>
 <p>Returns the hash of the current transaction as <a href="lang/builtins/./txid.html"><code>TxId</code></a>.</p>
 <pre><code class="language-helios">tx.id -&gt; TxId
@@ -2524,6 +2550,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="find_datum_hash"><a class="header" href="#find_datum_hash"><code>find_datum_hash</code></a></h3>
 <p>Returns the <a href="lang/builtins/./datumhash.html"><code>DatumHash</code></a> of datum data used in one the UTxO inputs.</p>
 <pre><code class="language-helios">tx.find_datum_hash(data: AnyType) -&gt; ByteArray
+</code></pre>
+<h3 id="get_datum_data"><a class="header" href="#get_datum_data"><code>get_datum_data</code></a></h3>
+<p>Returns the datum <a href="lang/builtins/./data.html"><code>Data</code></a> of a <a href="lang/builtins/./txoutput.html"><code>TxOutput</code></a>. Throws an error if no datum is attached to the output.</p>
+<pre><code class="language-helios">tx.get_datum_data(output: TxOutput) -&gt; Data
 </code></pre>
 <h3 id="outputs_sent_to"><a class="header" href="#outputs_sent_to"><code>outputs_sent_to</code></a></h3>
 <p>Returns the <a href="lang/builtins/./txoutput.html"><code>TxOutput</code></a>s sent to a regular payment address.</p>
@@ -2851,6 +2881,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <p>Returns the amount of the given <a href="lang/builtins/./assetclass.html"><code>AssetClass</code></a> in a <code>Value</code>. Throws error if the <a href="lang/builtins/./assetclass.html"><code>AssetClass</code></a> isn't found.</p>
 <pre><code class="language-helios">value.get(asset_class: AssetClass) -&gt; Int
 </code></pre>
+<h3 id="get_lovelace"><a class="header" href="#get_lovelace"><code>get_lovelace</code></a></h3>
+<p>Returns the amount of lovelace in a <code>Value</code>. Returns <code>0</code> if there isn't any.</p>
+<pre><code class="language-helios">value.get_lovelace() -&gt; Int
+</code></pre>
 <h3 id="get_safe-1"><a class="header" href="#get_safe-1"><code>get_safe</code></a></h3>
 <p>Like <code>get</code>, but returns <code>0</code> instead of throwing an error if the given <a href="lang/builtins/./assetclass.html"><code>AssetClass</code></a> isn't found.</p>
 <pre><code class="language-helios">value.get_safe(asset_class: AssetClass) -&gt; Int
@@ -2867,7 +2901,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">value.serialize() -&gt; ByteArray
 </code></pre>
 <h3 id="to_map"><a class="header" href="#to_map"><code>to_map</code></a></h3>
-<p>Returning the underlying <code>Map</code>:</p>
+<p>Returning the underlying <a href="lang/builtins/./map.html"><code>Map</code></a>:</p>
 <pre><code class="language-helios">value.to_map() -&gt; Map[MintingPolicyHash]Map[ByteArray]Int
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="helios-api"><a class="header" href="#helios-api">Helios API</a></h1>
