@@ -116,6 +116,14 @@ Returns all the redeemers of the transaction as a map with `ScriptPurpose` keys,
 tx.redeemers -> Map[ScriptPurpose]Data
 ```
 
+### `datums`
+
+Returns a [`Map`](./map.md) of [`DatumHash`es](./datumhash.md) to raw [`Data`](./data.md). This can be used to get the datum content of any [`TxInput`](./txinput.md) that doesn't use inline datums.
+
+```helios
+tx.datums -> Map[DatumHash]Data
+```
+
 ### `id`
 
 Returns the hash of the current transaction as [`TxId`](./txid.md).
@@ -160,6 +168,14 @@ Returns the [`DatumHash`](./datumhash.md) of datum data used in one the UTxO inp
 
 ```helios
 tx.find_datum_hash(data: AnyType) -> ByteArray
+```
+
+### `get_datum_data`
+
+Returns the datum [`Data`](./data.md) of a [`TxOutput`](./txoutput.md). Throws an error if no datum is attached to the output.
+
+```helios
+tx.get_datum_data(output: TxOutput) -> Data
 ```
 
 ### `outputs_sent_to`

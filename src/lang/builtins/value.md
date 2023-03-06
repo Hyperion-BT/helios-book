@@ -148,6 +148,14 @@ Returns the amount of the given [`AssetClass`](./assetclass.md) in a `Value`. Th
 value.get(asset_class: AssetClass) -> Int
 ```
 
+### `get_lovelace`
+
+Returns the amount of lovelace in a `Value`. Returns `0` if there isn't any.
+
+```helios
+value.get_lovelace() -> Int
+```
+
 ### `get_safe`
 
 Like `get`, but returns `0` instead of throwing an error if the given [`AssetClass`](./assetclass.md) isn't found.
@@ -180,7 +188,7 @@ value.serialize() -> ByteArray
 
 ### `to_map`
 
-Returning the underlying `Map`:
+Returning the underlying [`Map`](./map.md):
 
 ```helios
 value.to_map() -> Map[MintingPolicyHash]Map[ByteArray]Int
