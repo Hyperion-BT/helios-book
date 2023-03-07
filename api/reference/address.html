@@ -159,13 +159,13 @@
 <pre><code class="language-ts">new helios.Address(bytes: []number)
 </code></pre>
 <h2 id="static-methods"><a class="header" href="#static-methods">Static methods</a></h2>
-<h3 id="fromcbor"><a class="header" href="#fromcbor"><code>fromCbor</code></a></h3>
-<p>Deserializes bytes into an <code>Address</code>.</p>
-<pre><code class="language-ts">helios.Address.fromCbor(bytes: []number): helios.Address
-</code></pre>
 <h3 id="frombech32"><a class="header" href="#frombech32"><code>fromBech32</code></a></h3>
 <p>Converts a Bech32 string into an <code>Address</code>:</p>
 <pre><code class="language-ts">helios.Address.fromBech32(str: string): helios.Address
+</code></pre>
+<h3 id="fromcbor"><a class="header" href="#fromcbor"><code>fromCbor</code></a></h3>
+<p>Deserializes bytes into an <code>Address</code>.</p>
+<pre><code class="language-ts">helios.Address.fromCbor(bytes: []number): helios.Address
 </code></pre>
 <h3 id="fromhex"><a class="header" href="#fromhex"><code>fromHex</code></a></h3>
 <p>Constructs an <code>Address</code> using a hexadecimal string representation of the address bytes.</p>
@@ -179,6 +179,12 @@
     sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null,
     isTestnet: boolean = IS_TESTNET
 ): helios.Address
+</code></pre>
+<h3 id="isfortestnet"><a class="header" href="#isfortestnet"><code>isForTestnet</code></a></h3>
+<p>Returns <code>true</code> if the given <code>Address</code> is a testnet address.</p>
+<pre><code class="language-ts">helios.Address.isForTestnet(
+    address: helios.Address
+): boolean
 </code></pre>
 <h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
 <h3 id="pubkeyhash"><a class="header" href="#pubkeyhash"><code>pubKeyHash</code></a></h3>
@@ -198,9 +204,13 @@
 <p>Turns an <code>Address</code> into its Bech32 representation.</p>
 <pre><code class="language-ts">address.toBech32(): string
 </code></pre>
-<h3 id="isfortestnet"><a class="header" href="#isfortestnet"><code>isForTestnet</code></a></h3>
-<p>Returns <code>true</code> if the given <code>Address</code> is a testnet address.</p>
-<pre><code class="language-ts">address.isForTestnet(): boolean
+<h3 id="tocbor"><a class="header" href="#tocbor"><code>toCbor</code></a></h3>
+<p>Turns an <code>Address</code> into its CBOR representation.</p>
+<pre><code class="language-ts">address.toCbor(): number[]
+</code></pre>
+<h3 id="tohex"><a class="header" href="#tohex"><code>toHex</code></a></h3>
+<p>Turns a <code>Address</code> into its hexadecimal representation.</p>
+<pre><code class="language-ts">address.toHex(): string
 </code></pre>
 
                     </main>

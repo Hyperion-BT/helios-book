@@ -159,13 +159,24 @@
 <pre><code class="language-ts">new helios.StakeAddress(bytes: []number)
 </code></pre>
 <h2 id="static-methods"><a class="header" href="#static-methods">Static methods</a></h2>
+<h3 id="fromaddress"><a class="header" href="#fromaddress"><code>fromAddress</code></a></h3>
+<p>Convert a regular <a href="./address.html"><code>Address</code></a> into a <code>StakeAddress</code>. Throws an error if the <code>Address</code> doesn't have a staking credential.</p>
+<pre><code class="language-ts">helios.StakeAddress.fromAddress(address: helios.Address): helios.StakeAddress
+</code></pre>
 <h3 id="fromcbor"><a class="header" href="#fromcbor"><code>fromCbor</code></a></h3>
 <p>Deserializes bytes into an <code>StakeAddress</code>.</p>
-<pre><code class="language-ts">helios.StakeAddress.fromCbor(bytes: []number): helios.Address
+<pre><code class="language-ts">helios.StakeAddress.fromCbor(bytes: []number): helios.StakeAddress
 </code></pre>
 <h3 id="frombech32"><a class="header" href="#frombech32"><code>fromBech32</code></a></h3>
 <p>Converts a Bech32 string into an <code>StakeAddress</code>:</p>
 <pre><code class="language-ts">helios.StakeAddress.fromBech32(str: string): helios.StakeAddress
+</code></pre>
+<h3 id="fromhash"><a class="header" href="#fromhash"><code>fromHash</code></a></h3>
+<p>Converts a <a href="./stakekeyhash.html"><code>StakeKeyHash</code></a> or <a href="./stakingvalidatorhash.html"><code>StakingValidatorHash</code></a> into <code>StakeAddress</code>.</p>
+<pre><code class="language-ts">helios.StakeAddress.fromHash(
+    isTestnet: boolean,
+    hash: helios.StakeKeyHash | helios.StakingValidatorHash
+)
 </code></pre>
 <blockquote>
 <p><strong>Note</strong>: bech32 encoded stake addresses have a &quot;stake&quot; or &quot;stake_test&quot; prefix.</p>
@@ -174,28 +185,29 @@
 <p>Constructs a <code>StakeAddress</code> using a hexadecimal string representation of the address bytes.</p>
 <pre><code class="language-ts">helios.StakeAddress.fromHex(hex: string): helios.StakeAddress
 </code></pre>
-<h3 id="fromstakekeyhash"><a class="header" href="#fromstakekeyhash"><code>fromStakeKeyHash</code></a></h3>
-<p>Constructs a <code>StakeAddress</code> using a <a href="./stakekeyhash.html"><code>StakeKeyHash</code></a>.</p>
-<pre><code class="language-ts">helios.StakeAddress.fromStakeKeyHash(
-    isTestnet: boolean, 
-    skh: helios.StakeKeyHash
-): helios.StakeAddress
+<h3 id="isfortestnet"><a class="header" href="#isfortestnet"><code>isForTestnet</code></a></h3>
+<p>Returns <code>true</code> if the given <code>StakeAddress</code> is a testnet address.</p>
+<pre><code class="language-ts">helios.StakeAddress.isForTestnet(
+    stake_address: helios.StakeAddress
+): boolean
 </code></pre>
-<h3 id="fromstakingvalidatorhash"><a class="header" href="#fromstakingvalidatorhash"><code>fromStakingValidatorHash</code></a></h3>
-<p>Constructs a script <code>StakeAddress</code> using a <a href="./stakingvalidatorhash.html"><code>StakingValidatorHash</code></a>.</p>
-<pre><code class="language-ts">helios.StakeAddress.fromStakingValidatorHash(
-    isTestnet: boolean, 
-    svh: helios.StakingValidatorHash
-): helios.StakeAddress
+<h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
+<h3 id="stakinghash"><a class="header" href="#stakinghash"><code>stakingHash</code></a></h3>
+<p>Returns the underlying <a href="./stakingvalidatorhash.html"><code>StakeKeyHash](./stakekeyhash.md) or [</code>StakingValidatorHash`</a>.</p>
+<pre><code class="language-ts">stake_address.stakingHash: (helios.StakeKeyHash | helios.StakingValidatorHash)
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <h3 id="tobech32"><a class="header" href="#tobech32"><code>toBech32</code></a></h3>
 <p>Turns a <code>StakeAddress</code> into its Bech32 representation.</p>
 <pre><code class="language-ts">stake_address.toBech32(): string
 </code></pre>
-<h3 id="isfortestnet"><a class="header" href="#isfortestnet"><code>isForTestnet</code></a></h3>
-<p>Returns <code>true</code> if the given <code>StakeAddress</code> is a testnet address.</p>
-<pre><code class="language-ts">stake_address.isForTestnet(): boolean
+<h3 id="tocbor"><a class="header" href="#tocbor"><code>toCbor</code></a></h3>
+<p>Turns a <code>StakeAddress</code> into its CBOR representation.</p>
+<pre><code class="language-ts">stake_address.toCbor(): number[]
+</code></pre>
+<h3 id="tohex"><a class="header" href="#tohex"><code>toHex</code></a></h3>
+<p>Turns a <code>StakeAddress</code> into its hexadecimal representation.</p>
+<pre><code class="language-ts">stake_address.toHex(): string
 </code></pre>
 
                     </main>

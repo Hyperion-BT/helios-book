@@ -214,6 +214,11 @@
 <p>Can only be called in <code>spending</code> purpose scripts, and throws an error otherwise.</p>
 <pre><code class="language-helios">ctx.get_current_input() -&gt; TxInput
 </code></pre>
+<h3 id="get_cont_outputs"><a class="header" href="#get_cont_outputs"><code>get_cont_outputs</code></a></h3>
+<p>Returns the <a href="./txoutput.html"><code>outputs</code></a> sent back to the current validator script.</p>
+<p>Can only be called in <code>spending</code> purpose scripts, and throws an error otherwise.</p>
+<pre><code class="language-helios">ctx.get_cont_outputs() -&gt; []TxOutput
+</code></pre>
 <h3 id="get_current_validator_hash"><a class="header" href="#get_current_validator_hash"><code>get_current_validator_hash</code></a></h3>
 <p>Returns the <a href="./validatorhash.html"><code>ValidatorHash</code></a> of the current script.</p>
 <p>Can only be called in <code>spending</code> purpose scripts, and throws an error otherwise.</p>

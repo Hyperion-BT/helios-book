@@ -229,6 +229,10 @@
 <p>Returns the amount of the given <a href="./assetclass.html"><code>AssetClass</code></a> in a <code>Value</code>. Throws error if the <a href="./assetclass.html"><code>AssetClass</code></a> isn't found.</p>
 <pre><code class="language-helios">value.get(asset_class: AssetClass) -&gt; Int
 </code></pre>
+<h3 id="get_assets"><a class="header" href="#get_assets"><code>get_assets</code></a></h3>
+<p>Returns a new <code>Value</code> with the lovelace removed.</p>
+<pre><code class="language-helios">value.get_assets() -&gt; Value
+</code></pre>
 <h3 id="get_lovelace"><a class="header" href="#get_lovelace"><code>get_lovelace</code></a></h3>
 <p>Returns the amount of lovelace in a <code>Value</code>. Returns <code>0</code> if there isn't any.</p>
 <pre><code class="language-helios">value.get_lovelace() -&gt; Int

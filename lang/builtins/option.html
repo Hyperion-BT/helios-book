@@ -165,6 +165,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
 <h3 id="optionsometypesome"><a class="header" href="#optionsometypesome"><code>Option[SomeType]::Some</code></a></h3>
+<h4 id="some"><a class="header" href="#some"><code>some</code></a></h4>
 <p>Returns content of <code>Option[</code><em><code>SomeType</code></em><code>]::Some</code>.</p>
 <pre><code class="language-helios">option_some.some -&gt; SomeType
 </code></pre>
@@ -179,6 +180,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">Option[SomeType] != Option[SomeType] -&gt; Bool
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
+<h3 id="map"><a class="header" href="#map"><code>map</code></a></h3>
+<p>Maps <code>None</code> to <code>None</code> and <code>Some</code> to <code>Some</code>.</p>
+<pre><code class="language-helios">option.map(fn: (some: OldSomeType) -&gt; NewSomeType) -&gt; Option[NewSomeType]
+</code></pre>
 <h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
 <pre><code class="language-helios">option.serialize() -&gt; ByteArray
 </code></pre>
