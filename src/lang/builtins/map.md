@@ -180,6 +180,14 @@ map.fold_lazy(
 ) -> ReducedType
 ```
 
+### `for_each`
+
+Print or assert something for each map entry. Returns void.
+
+```helios
+map.for_each(fn: (key: KeyType, value: ValueType) -> ()) -> ()
+```
+
 ### `get`
 
 Returns the value of the first entry in the map that matches the given key. Throws an error of the key isn't found.

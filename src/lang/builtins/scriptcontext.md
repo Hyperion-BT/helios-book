@@ -118,6 +118,16 @@ Can only be called in `spending` purpose scripts, and throws an error otherwise.
 ctx.get_current_input() -> TxInput
 ```
 
+### `get_cont_outputs`
+
+Returns the [`outputs`](./txoutput.md) sent back to the current validator script.
+
+Can only be called in `spending` purpose scripts, and throws an error otherwise.
+
+```helios
+ctx.get_cont_outputs() -> []TxOutput
+```
+
 ### `get_current_validator_hash`
 
 Returns the [`ValidatorHash`](./validatorhash.md) of the current script.

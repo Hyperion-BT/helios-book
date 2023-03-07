@@ -14,20 +14,20 @@ new helios.Address(bytes: []number)
 
 ## Static methods
 
-### `fromCbor`
-
-Deserializes bytes into an `Address`.
-
-```ts
-helios.Address.fromCbor(bytes: []number): helios.Address
-```
-
 ### `fromBech32`
 
 Converts a Bech32 string into an `Address`:
 
 ```ts
 helios.Address.fromBech32(str: string): helios.Address
+```
+
+### `fromCbor`
+
+Deserializes bytes into an `Address`.
+
+```ts
+helios.Address.fromCbor(bytes: []number): helios.Address
 ```
 
 ### `fromHex`
@@ -50,6 +50,16 @@ helios.Address.fromPubKeyHash(
     sh: ?(helios.StakeKeyHash | helios.StakingValidatorHash) = null,
     isTestnet: boolean = IS_TESTNET
 ): helios.Address
+```
+
+### `isForTestnet`
+
+Returns `true` if the given `Address` is a testnet address.
+
+```ts
+helios.Address.isForTestnet(
+    address: helios.Address
+): boolean
 ```
 
 ## Getters
@@ -88,10 +98,18 @@ Turns an `Address` into its Bech32 representation.
 address.toBech32(): string
 ```
 
-### `isForTestnet`
+### `toCbor`
 
-Returns `true` if the given `Address` is a testnet address.
+Turns an `Address` into its CBOR representation.
 
 ```ts
-address.isForTestnet(): boolean
+address.toCbor(): number[]
+```
+
+### `toHex`
+
+Turns a `Address` into its hexadecimal representation.
+
+```ts
+address.toHex(): string
 ```

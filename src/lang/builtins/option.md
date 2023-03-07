@@ -24,6 +24,8 @@ Option[SomeType]::from_data(data: Data) -> Option[SomeType]
 
 ### `Option[SomeType]::Some`
 
+#### `some`
+
 Returns content of `Option[`*`SomeType`*`]::Some`.
 
 ```helios
@@ -46,9 +48,15 @@ Option[SomeType] == Option[SomeType] -> Bool
 Option[SomeType] != Option[SomeType] -> Bool
 ```
 
-
-
 ## Methods
+
+### `map`
+
+Maps `None` to `None` and `Some` to `Some`.
+
+```helios
+option.map(fn: (some: OldSomeType) -> NewSomeType) -> Option[NewSomeType]
+```
 
 ### `serialize`
 

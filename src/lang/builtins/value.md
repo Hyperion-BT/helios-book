@@ -148,6 +148,14 @@ Returns the amount of the given [`AssetClass`](./assetclass.md) in a `Value`. Th
 value.get(asset_class: AssetClass) -> Int
 ```
 
+### `get_assets`
+
+Returns a new `Value` with the lovelace removed.
+
+```helios
+value.get_assets() -> Value
+```
+
 ### `get_lovelace`
 
 Returns the amount of lovelace in a `Value`. Returns `0` if there isn't any.

@@ -160,7 +160,7 @@ list.fold_lazy(
 
 ### `for_each`
 
-Print or assert each item. Returns void.
+Print or assert something for each item. Returns void.
 
 ```helios
 list.for_each(fn: (item: ItemType) -> ()) -> ()

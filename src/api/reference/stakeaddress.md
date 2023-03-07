@@ -15,12 +15,20 @@ new helios.StakeAddress(bytes: []number)
 
 ## Static methods
 
+### `fromAddress`
+
+Convert a regular [`Address`](./address.md) into a `StakeAddress`. Throws an error if the `Address` doesn't have a staking credential.
+
+```ts
+helios.StakeAddress.fromAddress(address: helios.Address): helios.StakeAddress
+```
+
 ### `fromCbor`
 
 Deserializes bytes into an `StakeAddress`.
 
 ```ts
-helios.StakeAddress.fromCbor(bytes: []number): helios.Address
+helios.StakeAddress.fromCbor(bytes: []number): helios.StakeAddress
 ```
 
 ### `fromBech32`
@@ -29,6 +37,17 @@ Converts a Bech32 string into an `StakeAddress`:
 
 ```ts
 helios.StakeAddress.fromBech32(str: string): helios.StakeAddress
+```
+
+### `fromHash`
+
+Converts a [`StakeKeyHash`](./stakekeyhash.md) or [`StakingValidatorHash`](./stakingvalidatorhash.md) into `StakeAddress`.
+
+```ts
+helios.StakeAddress.fromHash(
+    isTestnet: boolean,
+    hash: helios.StakeKeyHash | helios.StakingValidatorHash
+)
 ```
 
 > **Note**: bech32 encoded stake addresses have a "stake" or "stake_test" prefix.
@@ -41,26 +60,24 @@ Constructs a `StakeAddress` using a hexadecimal string representation of the add
 helios.StakeAddress.fromHex(hex: string): helios.StakeAddress
 ```
 
-### `fromStakeKeyHash`
+### `isForTestnet`
 
-Constructs a `StakeAddress` using a [`StakeKeyHash`](./stakekeyhash.md).
+Returns `true` if the given `StakeAddress` is a testnet address.
 
 ```ts
-helios.StakeAddress.fromStakeKeyHash(
-    isTestnet: boolean, 
-    skh: helios.StakeKeyHash
-): helios.StakeAddress
+helios.StakeAddress.isForTestnet(
+    stake_address: helios.StakeAddress
+): boolean
 ```
 
-### `fromStakingValidatorHash`
+## Getters
 
-Constructs a script `StakeAddress` using a [`StakingValidatorHash`](./stakingvalidatorhash.md).
+### `stakingHash`
+
+Returns the underlying [`StakeKeyHash](./stakekeyhash.md) or [`StakingValidatorHash`](./stakingvalidatorhash.md).
 
 ```ts
-helios.StakeAddress.fromStakingValidatorHash(
-    isTestnet: boolean, 
-    svh: helios.StakingValidatorHash
-): helios.StakeAddress
+stake_address.stakingHash: (helios.StakeKeyHash | helios.StakingValidatorHash)
 ```
 
 ## Methods
@@ -73,10 +90,18 @@ Turns a `StakeAddress` into its Bech32 representation.
 stake_address.toBech32(): string
 ```
 
-### `isForTestnet`
+### `toCbor`
 
-Returns `true` if the given `StakeAddress` is a testnet address.
+Turns a `StakeAddress` into its CBOR representation.
 
 ```ts
-stake_address.isForTestnet(): boolean
+stake_address.toCbor(): number[]
+```
+
+### `toHex`
+
+Turns a `StakeAddress` into its hexadecimal representation.
+
+```ts
+stake_address.toHex(): string
 ```
