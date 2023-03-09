@@ -1,6 +1,6 @@
 # Structs
 
-A struct in Helios is a named grouping of types (sometimes called a *product type* in [CS](https://en.wikipedia.org/wiki/Computer_science)). They are similar to structs in other languages (e.g. C, Go and Rust):
+A struct in Helios is a named grouping of types (sometimes called a [*product type*](https://en.wikipedia.org/wiki/Product_type)). They are similar to structs in other languages (e.g. C, Go and Rust):
 
 ```helios
 // example of a Rational (fractional type)
@@ -17,9 +17,11 @@ struct Rational {
 A struct can be instantiated using the following literal syntax:
 
 ```helios
-const x = Rational { top: 1, bottom: 3 } // type of lhs is inferred
+const x = Rational { 1, 3 } // type of 'x' is inferred
 ```
 
-> **Note**: for two or more fields the field keys, in the correct order, must be specified when instantiating a struct. For one field the key **can't** be used.
+The fields can also be named:
 
-> **Note**: it's OK if some of the data fields are unused (could be data from other smart contracts).
+```helios
+const x = Rational { bottom: 3, top: 1 }
+```

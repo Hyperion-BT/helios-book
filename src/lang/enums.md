@@ -1,6 +1,6 @@
 # Enums
 
-Enums are used to represent types that have multiple variants (sometimes called *sum types* in [CS](https://en.wikipedia.org/wiki/Computer_science)). These are useful for datums and redeemers.
+Enums are used to represent types that have multiple variants (sometimes called [*tagged unions* or *sum types*](https://en.wikipedia.org/wiki/Tagged_union)). These are useful for datums and redeemers.
 
 Example of an enum:
 
@@ -11,20 +11,17 @@ enum Redeemer {
 }
 
 // instantiating an enum:
-const my_redeemer = Redeemer::Buy { PubKeyHash::new(#...) } // type of lhs is inferred
+const my_redeemer = Redeemer::Buy { PubKeyHash::new(#...) } 
+// type of 'my_redeemer' is inferred
 ```
 
 > **Note**: the OOP analogy of an enum is an abstract class, and the enum variants can be thought of as concrete implementations (i.e. child classes).
 
-> **Note**: enum variants with one field are constructed without that field's name as a key (similar to structs).
-
 > **Note**: enum variants without fields don't use braces.
-
-> **Note**: it's OK if some of the data fields or enum variants are unused (could be data from other smart contracts).
 
 ## `switch`
 
-A `switch` expression is used to perform different actions depending on the enum variant. It is similar to a `switch` statement in C or Go (and dissimilar to a `match` expression in Rust, as Helios doesn't support pattern-matching/destructuring):
+A `switch` expression is used to perform different actions depending on the enum variant. It is similar to a `switch` statement in C or Go (and dissimilar to a `match` expression in Rust, as Helios doesn't support pattern-matching):
 
 ```helios
 enum Datum {
@@ -55,9 +52,9 @@ func main(datum: Datum) -> Bool {
   * [`ByteArray`](./builtins/bytearray.md)
   * [`[]Data`](./builtins/list.md)
   * [`Map[Data]Data`](./builtins/map.md)
-  * Any user-defined enum or `(Int, []Data)`
+  * any user-defined enum, or `(Int, []Data)`
 
-A `switch` expression over `Data` can use `Int`, `ByteArray`, `[]Data` and `Map[Data]Data`, and any enum type or `(Int, []Data)`, as case types:
+A `switch` expression over `Data` can use any of these as case types:
 
 ```helios
 data.switch{

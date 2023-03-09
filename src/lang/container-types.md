@@ -3,7 +3,7 @@
 Helios has 3 **container** types:
   * List (linked list)
   * `Map` (association list of key-value pairs)
-  * `Option` (aka `Maybe` in Haskell)
+  * `Option` (equivalent to `Maybe` in Haskell)
 
 
 ## List
@@ -17,7 +17,7 @@ my_ints = []Int{1, 2, 3, 4, 5};
 x: Int = some_ints.get(2); ...   // x == 3
 ```
 
-> **Note**: lists aren't indexed with `[...]`. Instead the `get` method must used, see [details](./builtins/list.md#methods). Indices are 0-based.
+> **Note**: lists aren't indexed with `[...]`. Instead the [`get`](./builtins/list.md#methods) method can be used. Indices are 0-based.
 
 More information about lists can be found [here](./builtins/list.md).
 
@@ -28,7 +28,13 @@ A Map in Helios is internally represented as a list of key-value pairs. Both key
 
 A Map has a type syntax and a literal syntax similar to Go:
 ```helios
-my_map: Map[String]Int = Map[String]Int{"zero": 0, "one": 1, "two": 2}; // either side of the colon can be an arbitrary expression that evaluates to the correct type
+// either side of the colon can be an arbitrary expression 
+//  that evaluates to the correct type
+my_map = Map[String]Int{
+    "zero": 0,
+    "one":  1,
+    "two":  2
+}; ... 
 
 print(my_map.get("zero").show()); ... // prints '0'
 ```
@@ -50,9 +56,9 @@ enum Option[SomeType] {
 An `Option` is instantiated like any other enum:
 
 ```helios
-some_int: Option[Int] = Option[Int]::Some{42};
+some_int = Option[Int]::Some{42};
 
-none_int: Option[Int] = Option[Int]::None; ...
+none_int = Option[Int]::None; ...
 ```
 
 More information about `Option` can be found [here](./builtins/option.md).

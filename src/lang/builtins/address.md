@@ -25,7 +25,7 @@ Address::from_data(data: Data) -> Address
 
 ### `credential`
 
-Get the [`Credential`](./credential.md) of an `Address`:
+Get the payment [`Credential`](./credential.md) of an `Address`:
 
 ```helios
 address.credential -> Credential

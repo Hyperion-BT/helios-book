@@ -3,7 +3,7 @@
 Represents an array of bytes (i.e. an array of uint8 numbers).
 
 ```helios
-byte_array: ByteArray = #213212; ...
+byte_array = #213212; ...
 ```
 
 > **Note**: in Haskell/Plutus `ByteArray` is called a `ByteString`, but that name was deemed too ambiguous for average programmers so `ByteArray` was chosen instead.

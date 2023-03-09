@@ -13,10 +13,10 @@ Helios' `Int` type represents an unbounded integer (like Haskell's `Integer` typ
 
 ```helios
 // Helios supports typical integer literals:
-my_decimal: Int = 17;
-my_binary: Int = 0b10001;
-my_hex: Int = 0x11;
-my_octal: Int = 0o121; ...
+my_decimal = 17;
+my_binary  = 0b10001;
+my_hex     = 0x11;
+my_octal   = 0o121; ...
 ```
 
 `Int` is the only numeric type in Helios. There is **no** float type.
@@ -26,7 +26,9 @@ More information about the `Int` type can be found [here](./builtins/int.md).
 
 ## `Bool`
 
-The `Bool` type has two possible values: `true` or `false`. Booleans are used throughout validator scripts. Also: the return type of validator scripts is a boolean. The simplest validator script body is just a literal boolean:
+The `Bool` type has two possible literal values: `true` or `false`.
+
+Booleans are used throughout validator scripts, and the return type of validator scripts is a boolean. The simplest validator script body is just a literal boolean:
 
 ```helios
 func main() -> Bool {
@@ -50,13 +52,13 @@ More information about the `Bool` type can be found [here](./builtins/bool.md).
 The `ByteArray` type, as you've likely guessed, represents an array of bytes. A literal `ByteArray` is a hexadecimal sequence prefixed by `#`:
 
 ```helios
-my_bytes: ByteArray = #af2e221a; ... // 
+my_bytes = #af2e221a; ... // 
 ```
 
-All builtin and user types can be converted into a `ByteArray` using the builtin `serialize` method:
+All builtin and user types can be converted into a `ByteArray` using the builtin [`serialize`](./automatic-methods.md#serialize) method:
 
 ```helios
-cbor_bytes: ByteArray = (123).serialize(); ... // cbor encoding of 123
+cbor_bytes: ByteArray = 123.serialize(); ... // cbor encoding of 123
 ```
 
 More information about the `ByteArray` type can be found [here](./builtins/bytearray.md).
@@ -68,7 +70,7 @@ More information about the `ByteArray` type can be found [here](./builtins/bytea
 A literal Helios string uses double quotes (`"..."`):
 
 ```helios
-my_message: String = "hello world"; ...
+my_message = "hello world"; ...
 ```
 
 Similar to all other values in Helios, strings are immutable and have a fixed length. 

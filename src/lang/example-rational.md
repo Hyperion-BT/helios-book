@@ -8,11 +8,11 @@ struct Rational {
     bottom: Int
 
     // associated const
-    const PI = Rational{ top: 355, bottom: 113}
+    const PI = Rational{ 355, 113 }
 
     // associated method
     func new(top: Int, bottom: Int) -> Rational {
-        Rational { top: top, bottom: bottom }
+        Rational { top, bottom }
     }
 
     // regular method
@@ -20,7 +20,7 @@ struct Rational {
         top:    Int = (self.top * rhs.bottom) + (rhs.top * self.bottom);
         bottom: Int = self.bottom * rhs.bottom;
 
-        Rational { top: top, bottom: bottom }
+        Rational { top, bottom }
     }
 
 }

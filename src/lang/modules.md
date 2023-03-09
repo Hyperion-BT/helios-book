@@ -4,12 +4,15 @@ Helios top-level statements can be placed in modules and can then be imported by
 
 ## `import`
 
-An `import` statement in Helios has a syntax similar to Javascript:
+`import` statements in Helios are similar to Javascript:
 
 ```helios
-import {OldName1 as NewName1, OldName2} from my_module
+import { 
+    ImportedName1 as NewName1,
+    ImportedName2
+} from my_module
 ```
 
 The imported names act as if the original statements were defined in the source where they are imported.
 
-> **Note**: Currently every top-level statement is public by default and is exported, including other `import` statements.
+> **Note**: currently every top-level statement is public and exported by default, including other `import` statements.

@@ -3,8 +3,8 @@
 Represents a boolean value (`true`/`false`).
 
 ```helios
-bool_true:  Bool = true;
-bool_false: Bool = false; ...
+bool_true  = true;
+bool_false = false; ...
 ```
 
 ## Associated functions

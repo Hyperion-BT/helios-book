@@ -8,15 +8,15 @@ Associated functions are defined just like methods but without the `self` argume
 
 ```helios
 struct Rational {
-    top: Int
+    top:    Int
     bottom: Int
 
 	// associated const
-	const PI = Rational{ 355, 113 }
+	const PI = Rational { 355, 113 }
 
 	// associated method
 	func new(top: Int, bottom: Int) -> Rational {
-		Rational { top: top, bottom: bottom }
+		Rational { top, bottom }
 	}
 }
 ```

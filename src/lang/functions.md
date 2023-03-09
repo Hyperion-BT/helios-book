@@ -23,7 +23,7 @@ func fib(n: Int) -> Int {
 }
 ```
 
-> **Note:**: A function can only reference itself when recursing. Helios doesn't support hoisting, so mutual recursion by referring to functions defined after the current function isn't possible:
+> **Note:**: a function can only reference itself when recursing. Helios doesn't support hoisting, so mutual recursion by referring to functions defined after the current function isn't possible:
 >
 > ```helios
 > 01 func a(n: Int) -> Int {
@@ -35,22 +35,6 @@ func fib(n: Int) -> Int {
 > 07 }
 >```
 
-## Anonymous functions
-
-Helios also supports anonymous function expressions. Anonymous function expressions are basically function statements without the `func` keyword: 
-```helios
-is_even = (n: Int) -> Bool { (n % 2) == 0 }; ...
-// type of 'is_even' can be infered, 
-//  but return type of the anonymous function must be specified
-```
-
-The return type of anonymous functions is optional, the compiler can figure it out from the function body:
-```helios
-is_even = (n: Int) -> { (n % 2) == 0}; ...
-```
-
-> **Note:** Function statements can be referenced by their name, returning a function value. This should be preferred to using anonymous functions, as it is more readable.
-
 ## Multiple return values
 
 Functions can return multiple values:
@@ -61,15 +45,55 @@ func swap(a: Int, b: Int) -> (Int, Int) {
 }
 ```
 
-Assignment expressions can assign to multiple lhs names at ones:
+You can assign to multiple return values at once:
 
 ```helios
 (a: Int, b: Int) = swap(10, 20); ... // a==20 && b==10
 ```
 
+Some of the multiple return values can be ignored with an underscore (`_`):
+
+```helios
+(a: Int, _) = swap(10, 20); ...
+```
+
+## Void return value
+
+Functions that are composed of only `print`, `error`, `assert`, and `if-else`/`switch` expressions there-of, return void (`()`). These kinds of functions can't be called in assignments.
+
+```helios
+func assert_even(n: Int) -> () {
+    assert(n % 2 == 0, "not even")
+}
+```
+
+The syntax for calling user-defined void functions is the same as for `print`, `error` and `assert`:
+
+```helios
+func main(ctx: ScriptContext) -> Bool {
+    assert_even(ctx.outputs.length);
+    ...
+}
+```
+
+## Anonymous functions
+
+Helios also supports anonymous function expressions. Anonymous function expressions are basically function statements without the `func` keyword: 
+```helios
+// type of 'is_even' can be inferred
+is_even = (n: Int) -> Bool { n % 2 == 0 }; ...
+```
+
+The return type of anonymous functions is optional:
+```helios
+is_even = (n: Int) -> { n % 2 == 0 }; ...
+```
+
+> **Note:** function statements can be referenced by their name, returning a function value. This should be preferred to using anonymous functions, as it is more readable.
+
 ## Ignoring unused arguments
 
-All function arguments must be used in its definition. This can be inconvenient when defining callbacks where you want to ignore some of the arguments. For this situation you can use an `_` (underscore):
+All named function arguments must be used in the function definition. This can be inconvenient when defining callbacks where you want to ignore some of the arguments. For this situation you can use an underscore (`_`):
 
 ```helios
 // sort a map by only comparing the keys
@@ -91,7 +115,7 @@ even_numbers: []Int = ([]Int{1, 2, 3, 4, 5, 6}).filter(is_even); ... // [2, 4, 6
 ### 2. Functions can be returned
 
 ```helios
-add = (a: Int) -> (Int) -> Int { (b: Int) -> Int { a + b } }; ...
+add_a = (a: Int) -> (Int) -> Int { (b: Int) -> {a + b} }; ...
 ```
 
 > **Note**: functions aren't entirely first-class to be precise. Functions can't be stored in containers, nor in structs/enums.

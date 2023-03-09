@@ -2,7 +2,7 @@
 hljs.registerLanguage('helios', function(hljs) {
 	let KEYWORDS = {
 		className: 'keyword',
-		begin: '[\\s]*\\b(import|func|const|struct|enum|spending|minting|staking|testing|if|else|switch|print|as|from|error)\\b'
+		begin: '[\\s]*\\b(import|func|const|struct|enum|spending|minting|staking|testing|if|else|switch|print|as|from|error|assert)\\b'
 	};
 
 	let LITERALS = {
