@@ -149,7 +149,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="pubkeyhash"><a class="header" href="#pubkeyhash"><code>PubKeyHash</code></a></h1>
-<p>This is a type-safe wrapper around <a href="./bytearray.html"><code>ByteArray</code></a> that represents the hash of a public key. </p>
+<p><a href="https://en.wikipedia.org/wiki/Opaque_data_type">Opaque</a> <a href="./bytearray.html"><code>ByteArray</code></a> that represents the hash of a <a href="./pubkey.html"><code>PubKey</code></a>. </p>
 <p>The first part of a regular payment address (i.e. not witnessed by a script) is a <code>PubKeyHash</code>.</p>
 <p>Example instantiation:</p>
 <pre><code class="language-helios">pkh: PubKeyHash = PubKeyHash::new(#...); ...
