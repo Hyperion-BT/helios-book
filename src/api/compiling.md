@@ -8,7 +8,7 @@ First step is to write your contract as a js literal string. For example:
 const src = `
 spending always_succeeds
 
-func main() -> Bool {
+func main(_, _, _) -> Bool {
     true
 }`
 ```

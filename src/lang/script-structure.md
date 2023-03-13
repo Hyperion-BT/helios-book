@@ -2,9 +2,9 @@
 
 Helios validator scripts have a function called `main` that returns a boolean (`true`  or `false`) when validating the spending of a UTxO. 
 
-`main` takes three optional arguments:
+For a spending validator, `main` takes three arguments:
 
-- `Datum`: data stored on-chain that is linked to the locked UTxO
+- `Datum`: data stored on-chain that is linked to the locked UTxO (not avaiable for minting/staking scripts)
 - `Redeemer`: data specified by the user attempting to spend the locked UTxO
 - [`ScriptContext`](./builtins/scriptcontext.md): information about the transaction spending the locked UTxO
 
@@ -31,8 +31,6 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {
 const MY_DATUM = Datum {...}
 ```
 
-> **Note**: there are is no `import` statement. This was done on purpose as smart contracts that fit in single source/file are easier to audit (and import functionality can be emulated at the API level).
-
 ## Script purpose (1)
 
 In Helios all scripts start with a  **script purpose**, followed by the name of the script. There are four script purposes currently:
@@ -54,7 +52,7 @@ spending my_validator
 
 `minting`, `staking` and `testing` will be covered in the [advanced concepts](./advanced-concepts/index.md) chapter.
 
-> **Note**: the name of each Helios source is registered in the global scope, so these names can be used by statements, nor for the lhs of assignments. So eg. the entrypoint script can't be named `main` as that would conflict with the entrypoint function.
+> **Note**: the name of each Helios source is registered in the global scope, so these names can't be used by statements, nor for the lhs of assignments. So eg. the entrypoint script can't be named `main` as that would conflict with the entrypoint function.
 
 ## Datum (2)
 
@@ -91,7 +89,7 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
 
 Most of the data needed for writing useful validators is contained in the [`ScriptContext`](./builtins/scriptcontext.md).
 
->**Note**: The datum and the redeemer are user-defined types (structs or enums) that **must** be named `Datum` and `Redeemer`.
+>**Note**: The datum and the redeemer are user-defined types (structs or enums) that currently **must** be named `Datum` and `Redeemer`.
 
 ## Data generators and test functions (5)
 
@@ -100,8 +98,7 @@ After the `main` function you can define functions and constants for:
 * testing the `main` function
 
 The [API](../api/index.md) has special functionality for working with these:
-* [`program.evalParam()`](../api/reference/program.md#evalparam) can evaluate any constant in a Helios source
-* [`program.changeParam()`](../api/reference/program.md#changeparam) can change the rhs of any constant in a Helios source
+* [`program.parameters`](../api/reference/program.md#parameters) an object that evaluates/sets any top-level constant in a Helios source
 
 Some compiler restrictions are lifted in this part of the script:
   * not all names need to be used (relevant for function arguments and assignments)

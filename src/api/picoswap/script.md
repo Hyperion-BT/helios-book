@@ -32,7 +32,7 @@ struct Datum {
      }
  }
  
-func main(datum: Datum, ctx: ScriptContext) -> Bool {
+func main(datum: Datum, _, ctx: ScriptContext) -> Bool {
     tx: Tx = ctx.tx;
  
     // sellers can do whatever they want with the locked UTxOs

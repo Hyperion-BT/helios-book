@@ -31,7 +31,7 @@ The `Bool` type has two possible literal values: `true` or `false`.
 Booleans are used throughout validator scripts, and the return type of validator scripts is a boolean. The simplest validator script body is just a literal boolean:
 
 ```helios
-func main() -> Bool {
+func main(_, _, _) -> Bool {
     true
 }
 ```
@@ -39,7 +39,7 @@ func main() -> Bool {
 The `==` and `!=` operators, returning boolean results, are defined on all builtin and user types:
 
 ```helios
-func main(ctx: ScriptContext) -> Bool {
+func main(_, _, ctx: ScriptContext) -> Bool {
     ctx == ctx // always true
 }
 ```

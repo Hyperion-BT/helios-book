@@ -20,7 +20,7 @@ minting deadline_nft
 const DEADLINE: Time = Time::new(1661665196132) // milliseconds since 1970
 
 
-func main(ctx: ScriptContext) -> Bool {
+func main(_, ctx: ScriptContext) -> Bool {
 	tx: Tx = ctx.tx;
 
     nft_assetclass: AssetClass = AssetClass::new(
@@ -56,7 +56,7 @@ minting utxo_nft
 
 const OUTPUT_ID: TxOutputId = TxOutputId::new(TxId::new(#1213), 1)
 
-func main(ctx: ScriptContext) -> Bool {
+func main(_, ctx: ScriptContext) -> Bool {
 	tx: Tx = ctx.tx;
 
     nft_assetclass: AssetClass = AssetClass::new(

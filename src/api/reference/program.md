@@ -69,21 +69,6 @@ Primitive Javascript values can also be used as a rhs when setting parameters li
 
 ## Methods
 
-### `changeParam`
-
-As an alternative for the [`parameters` setter](./program.md#parameters-1), change the value of a [`const` statement](../../lang/variables.html#const-statements) visible in the main Helios script, using either a JSON string or a `UplcValue` instance.
-
-`UplcValue` instances can be generated using the `evalParam` method.
-
-Mutates this program, and returns this program so that other `changeParam` calls can be chained.
-
-```ts
-program.changeParam(
-    paramName: string, 
-    value: string | helios.UplcValue
-): helios.Program
-```
-
 ### `compile`
 
 Compiles a Helios program, with optional optimization. Returns a [`UplcProgram`](./uplcprogram.md) instance.

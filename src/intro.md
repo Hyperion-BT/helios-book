@@ -14,10 +14,12 @@ spending always_true
 
 // the 'main' function contains the core validator logic
 // returns true if a given UTxO is allowed to be spent
-func main() -> Bool {
+func main(_, _, _) -> Bool {
     // Helios is an expression based language
     true
 }
+
+// Note: the datum, redeemer, and scriptcontext are ignored by the underscores
 ```
 
 ## Structure of this book

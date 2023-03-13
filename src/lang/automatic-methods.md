@@ -2,17 +2,28 @@
 
 The following (associated) methods and operators are automatically defined on all user and builtin types.
 
-## `serialize`
+## `==`, `!=`
 
-The `serialize` method is automatically defined on every user-type, and thus `serialize` is a reserved name that can't be used for other methods.
+The equality and inequality operators are automatically defined on every user-type.
 
-`serialize` serializes the underlying data using cbor encoding.
+## `copy`
+
+Instantiates a copy of the underlying value, with some of the fields changed.
+
+This method has the same number of arguments as the number of fields in the user-defined `struct` or enum-variant of which it is a member. Each argument of `copy` has the same name as the corresponding field and is optional.
 
 ```helios
-my_instance.serialize() -> ByteArray
-```
+struct Pair {
+    first:  Int
+    second: Int
+}
 
-> **Note**: when debugging you can inspect the output of `print(my_data.serialize().show())` using [this cbor tool](https://cbor.nemo157.com).
+...
+
+pair = Pair{1, 2};
+
+pair.copy(second: 3) // == Pair{1, 3}
+```
 
 ## `from_data`
 
@@ -24,6 +35,14 @@ my_instance.serialize() -> ByteArray
 MyType::from_data(data: Data) -> MyType
 ```
 
-## `==`, `!=`
+## `serialize`
 
-The equality and inequality operators are automatically defined on every user-type.
+The `serialize` method is automatically defined on every user-type, and thus `serialize` is a reserved name that can't be used for other methods.
+
+`serialize` serializes the underlying data using cbor encoding.
+
+```helios
+my_instance.serialize() -> ByteArray
+```
+
+> **Note**: when debugging you can inspect the output of `print(my_data.serialize().show())` using [this cbor tool](https://cbor.nemo157.com).

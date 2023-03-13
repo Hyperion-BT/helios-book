@@ -2,9 +2,11 @@
 
 There are three builtin void functions. These can be used to create [user-defined void functions](./functions.md#void-return-value).
 
+Void functions can't be used in assignments.
+
 ## `print`
 
-For debugging purposes, Helios has a special `print` expression. `print(...)` takes a [`String`](./builtins/string.md) argument, and must be followed by a semicolon and another expression:
+For debugging purposes, Helios has a special `print` expression. `print(...)` takes a [`String`](./builtins/string.md) argument:
 
 ```helios
 func main() -> Bool {

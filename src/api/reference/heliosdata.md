@@ -5,10 +5,10 @@ Abstract parent class of Helios API types that can be used directly when setting
   * `Bool`
   * `ByteArray`
   * [`DatumHash`](./datumhash.md)
-  * `HeliosMap`
-  * `HeliosString`
-  * `Int`
-  * `List`
+  * `HMap`
+  * `HString`
+  * `HInt`
+  * `HList`
   * `Option`
   * [`PubKeyHash`](./pubkeyhash.md)
   * [`StakeKeyHash`](./stakekeyhash.md)

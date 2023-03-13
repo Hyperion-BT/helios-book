@@ -15,7 +15,7 @@ spending my_validator
 
 const OWNER = PubKeyHash::new(#)
 
-func main(ctx: ScriptContext) -> Bool {
+func main(_, _, ctx: ScriptContext) -> Bool {
     ctx.tx.is_signed_by(OWNER)
 }
 ```

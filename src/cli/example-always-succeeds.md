@@ -4,7 +4,7 @@ Create a `always_succeeds.hl` script with the following code:
 ```helios
 spending always_succeeds
 
-func main() -> Bool {
+func main(_, _, _) -> Bool {
   true
 }
 ```

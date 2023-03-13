@@ -11,30 +11,25 @@ This validator can be used to lock assets that are to be auctioned in a UTxO.
 spending english_auction
 
 struct Datum {
-    seller: PubKeyHash
-    bid_asset: AssetClass       // allow alternative assets (not just lovelace)
-    min_bid: Int
-    deadline: Time
-    for_sale: Value             // the asset that is being auctioned
-    highest_bid: Int            // initialized at 0, which signifies the auction doesn't yet have valid bids
+    seller:         PubKeyHash
+    bid_asset:      AssetClass     // allow alternative assets (not just lovelace)
+    min_bid:        Int
+    deadline:       Time
+    for_sale:       Value          // the asset that is being auctioned
+    highest_bid:    Int            // initialized at 0, which signifies the auction doesn't yet have valid bids
     highest_bidder: PubKeyHash
 
     func update(self, highest_bid: Int, highest_bidder: PubKeyHash) -> Datum {
-        Datum {
-            seller: self.seller,
-            bid_asset: self.bid_asset,
-            min_bid: self.min_bid,
-            deadline: self.deadline,
-            for_sale: self.for_sale,
-            highest_bid: highest_bid,
-            highest_bidder: highest_bidder
-        }
+        self.copy(highest_bid: highest_bid, highest_bigger: highest_bidder)
     }
 }
 
 enum Redeemer {
     Close 
-    Bid { bidder: PubKeyHash, bid: Int }
+    Bid {
+        bidder: PubKeyHash
+        bid: Int
+    }
 }
 
 func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -> Bool {

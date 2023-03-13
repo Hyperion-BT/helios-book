@@ -7,7 +7,7 @@ Helios comments are C-like.
 Single-line comments use two forward slashes (`//`):
 
 ```helios
-func main() -> Bool {
+func main(_, _, _) -> Bool {
 	// This is a comment.
 	true
 }
@@ -18,7 +18,7 @@ func main() -> Bool {
 Multi-line comments use `/* ... */`:
 
 ```helios
-func main() -> Bool {
+func main(_, _, _) -> Bool {
 	/*
 		This is a multi-line comment.
 	*/

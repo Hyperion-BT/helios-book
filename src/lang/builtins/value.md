@@ -194,6 +194,14 @@ value.is_zero() -> Bool
 value.serialize() -> ByteArray
 ```
 
+### `show`
+
+Returns a formatted [`String`](./string.md) showing all the assets contained in a `Value`.
+
+```helios
+value.show() -> String
+```
+
 ### `to_map`
 
 Returning the underlying [`Map`](./map.md):

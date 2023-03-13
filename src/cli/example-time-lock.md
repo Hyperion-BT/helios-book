@@ -12,7 +12,7 @@ struct Datum {
     nonce:     Int
 }
 
-func main(datum: Datum, ctx: ScriptContext) -> Bool {
+func main(datum: Datum, _, ctx: ScriptContext) -> Bool {
     tx: Tx = ctx.tx;
     now: Time = tx.time_range.start;
     returnToOwner: Bool = tx.is_signed_by(datum.owner);

@@ -12,7 +12,7 @@ struct Datum {
     owner: PubKeyHash
 }
 
-func main(datum: Datum, ctx: ScriptContext) -> Bool {
+func main(datum: Datum, _, ctx: ScriptContext) -> Bool {
     ctx.tx.is_signed_by(datum.owner)
 }
 
@@ -35,7 +35,7 @@ import * as helios from "helios"
 ```js
 const program = helios.Program.new(src)
 
-const myDatum = program.evalParam("MY_DATUM")
+const myDatum = program.parameters["MY_DATUM"]
 ```
 
 Here `myDatum` is a `UplcValue` instance. `UplcValue` is the internal (unexported) base class of every Helios value. To get the underlying data we can use the `data` getter:

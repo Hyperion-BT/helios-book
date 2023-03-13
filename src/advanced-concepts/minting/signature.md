@@ -7,7 +7,7 @@ minting signed
 
 const OWNER: PubKeyHash = PubKeyHash::new(#26372...)
 
-func main(ctx: ScriptContext) -> Bool {
+func main(_, ctx: ScriptContext) -> Bool {
     ctx.tx.is_signed_by(OWNER)
 }
 ```
