@@ -1,6 +1,6 @@
 # `PubKeyHash`
 
-This is a type-safe wrapper around [`ByteArray`](./bytearray.md) that represents the hash of a public key. 
+[Opaque](https://en.wikipedia.org/wiki/Opaque_data_type) [`ByteArray`](./bytearray.md) that represents the hash of a [`PubKey`](./pubkey.md). 
 
 The first part of a regular payment address (i.e. not witnessed by a script) is a `PubKeyHash`.
 

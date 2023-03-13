@@ -1,6 +1,6 @@
 # `MintingPolicyHash`
 
-This is a type-safe wrapper around [`ByteArray`](./bytearray.md) that represents the hash of minting policy script.
+[Opaque](https://en.wikipedia.org/wiki/Opaque_data_type) [`ByteArray`](./bytearray.md) that represents the hash of a minting policy script.
 
 Example:
 

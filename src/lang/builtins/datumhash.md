@@ -1,6 +1,6 @@
 # `DatumHash`
 
-This is a type-safe wrapper around [`ByteArray`](./bytearray.md) that represents the hash of a datum.
+[Opaque](https://en.wikipedia.org/wiki/Opaque_data_type) [`ByteArray`](./bytearray.md) that represents the hash of a datum.
 
 ## Associated Functions
 

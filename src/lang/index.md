@@ -2,11 +2,11 @@
 
 The Helios language is a purely functional programming language, with a simple curly braces syntax. It is inspired by [Go](https://go.dev) and [Rust](https://www.rust-lang.org).
 
-## Design principles
+## Tenets
 
-- Helios should be readable by as many programmers as possible
-- Readability is more important than writeability
-- There should be only one obvious way of doing things
+- Helios should be readable by as many programmers as possible, readability is more important than writeability
+- Helios is opionated, there should be only one obvious way of doing things
+- Helios is safe, it should be easy to spot malicious code
 
 ## Structure of this chapter
 

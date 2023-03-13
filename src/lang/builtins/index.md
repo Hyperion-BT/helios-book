@@ -4,9 +4,9 @@ This section contains a reference of all the Helios builtins.
 
 ## Primitive types
 
-  * [Int](./int.md)
   * [Bool](./bool.md)
   * [ByteArray](./bytearray.md)
+  * [Int](./int.md)
   * [String](./string.md)
 
 ## Container types
@@ -15,44 +15,41 @@ This section contains a reference of all the Helios builtins.
   * [Map](./map.md)
   * [Option](./option.md)
 
-## Time types
-
-  * [Time](./time.md)
-  * [Duration](./duration.md) (i.e. the difference of two `Time`s)
-  * [TimeRange](./timerange.md) (i.e. a period bound by two `Time`s)
-
-## Hash and cryptography types
-
-These are type-safe wrappers around `ByteArray`:
-  * [DatumHash](./datumhash.md)
-  * [PubKey](./pubkey.md)
-  * [PubKeyHash](./pubkeyhash.md)
-  * [MintingPolicyHash](./mintingpolicyhash.md)
-  * [StakeKeyHash](./stakekeyhash.md)
-  * [StakingValidatorHash](./stakingvalidatorhash.md)
-  * [ValidatorHash](./validatorhash.md)
-  
-
 ## Money types
 
   * [AssetClass](./assetclass.md) (i.e. the kind of 'currency')
   * [Value](./value.md)
 
+## Time types
+
+  * [Duration](./duration.md) (i.e. the difference of two `Time` instances)
+  * [Time](./time.md)
+  * [TimeRange](./timerange.md) (i.e. a period bound by two `Time` instances)
+
+## Hash and cryptography types
+
+  * [DatumHash](./datumhash.md)
+  * [MintingPolicyHash](./mintingpolicyhash.md)
+  * [PubKey](./pubkey.md)
+  * [PubKeyHash](./pubkeyhash.md)
+  * [ScriptHash](./scripthash.md)
+  * [StakeKeyHash](./stakekeyhash.md)
+  * [StakingValidatorHash](./stakingvalidatorhash.md)
+  * [ValidatorHash](./validatorhash.md)
+
 ## Transaction types
 
-The following types are related to `ScriptContext`:
-
+  * [Address](./address.md)
+  * [Credential](./credential.md)
+  * [DCert](./dcert.md)
+  * [OutputDatum](./outputdatum.md)
   * [ScriptContext](./scriptcontext.md)
   * [ScriptPurpose](./scriptpurpose.md)
+  * [StakingCredential](./stakingcredential.md)
+  * [StakingHash](./stakinghash.md)
+  * [StakingPurpose](./stakingpurpose.md)
   * [Tx](./tx.md)
   * [TxId](./txid.md)
   * [TxInput](./txinput.md)
   * [TxOutput](./txoutput.md)
-  * [OutputDatum](./outputdatum.md)
   * [TxOutputId](./txoutputid.md)
-  * [Address](./address.md)
-  * [Credential](./credential.md)
-  * [StakingCredential](./stakingcredential.md)
-  * [StakingHash](./stakinghash.md)
-  * [StakingPurpose](./stakingpurpose.md)
-  * [DCert](./dcert.md)

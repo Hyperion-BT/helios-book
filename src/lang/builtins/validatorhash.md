@@ -1,6 +1,6 @@
 # `ValidatorHash`
 
-This is a type-safe wrapper around [`ByteArray`](./bytearray.md) that represents the hash of a validator script.
+[Opaque](https://en.wikipedia.org/wiki/Opaque_data_type) [`ByteArray`](./bytearray.md) that represents the hash of a validator script.
 
 The first part of a script address is formed by a `ValidatorHash`.
 
