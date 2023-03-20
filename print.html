@@ -3596,9 +3596,18 @@ async function buyTx(contract) {
 <pre><code class="language-ts">helios.VERSION: string
 </code></pre>
 <h2 id="variables-1"><a class="header" href="#variables-1">Variables</a></h2>
+<p>Modifiable through the <code>config</code> object.</p>
+<h3 id="debug"><a class="header" href="#debug"><code>DEBUG</code></a></h3>
+<p>Currently unused by the library itself. Defaults to <code>false</code>.</p>
+<pre><code class="language-ts">helios.config.DEBUG: boolean = false
+</code></pre>
 <h3 id="is_testnet"><a class="header" href="#is_testnet"><code>IS_TESTNET</code></a></h3>
-<p>If <code>true</code>, <a href="api/reference/./address.html"><code>Address</code></a>es are built for testnet by default, otherwise for mainnet.</p>
-<pre><code class="language-ts">helios.IS_TESTNET: boolean
+<p>If <code>true</code>, <a href="api/reference/./address.html"><code>Address</code></a>es are built for testnet by default, otherwise for mainnet. Defaults to <code>true</code>.</p>
+<pre><code class="language-ts">helios.config.IS_TESTNET: boolean = true
+</code></pre>
+<h3 id="strict_babbage"><a class="header" href="#strict_babbage"><code>STRICT_BABBAGE</code></a></h3>
+<p>If <code>true</code>, serializes <a href="api/reference/./txoutput.html"><code>TxOutput</code></a> using strictly the Babagge cddl format. Defaults to <code>false</code>.</p>
+<pre><code class="language-ts">helios.config.STRICT_BABBAGE: boolean = false
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="functions-2"><a class="header" href="#functions-2">Functions</a></h1>
 <h3 id="bytestohex"><a class="header" href="#bytestohex"><code>bytesToHex</code></a></h3>
