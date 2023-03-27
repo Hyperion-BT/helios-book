@@ -1947,15 +1947,15 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">OutputDatum::from_data(data: Data) -&gt; OutputDatum
 </code></pre>
 <h3 id="new_hash"><a class="header" href="#new_hash"><code>new_hash</code></a></h3>
-<p>Construct a new <code>OutputDatum::Hash</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Construct a new <code>OutputDatum::Hash</code> instance.</p>
 <pre><code class="language-helios">OutputDatum::new_hash(datum_hash: DatumHash) -&gt; OutputDatum::Hash
 </code></pre>
 <h3 id="new_inline"><a class="header" href="#new_inline"><code>new_inline</code></a></h3>
-<p>Construct a new <code>OutputDatum::Inline</code> instance from any value. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Construct a new <code>OutputDatum::Inline</code> instance from any value that is not a function.</p>
 <pre><code class="language-helios">OutputDatum::new_inline(any: AnyType) -&gt; OutputDatum::Inline
 </code></pre>
 <h3 id="new_none"><a class="header" href="#new_none"><code>new_none</code></a></h3>
-<p>Construct a new <code>OutputDatum::None</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Construct a new <code>OutputDatum::None</code> instance.</p>
 <pre><code class="language-helios">OutputDatum::new_none() -&gt; OutputDatum::None
 </code></pre>
 <h2 id="getters-8"><a class="header" href="#getters-8">Getters</a></h2>
@@ -2776,7 +2776,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">TxOutput::from_data(data: Data) -&gt; TxOutput
 </code></pre>
 <h3 id="new-15"><a class="header" href="#new-15"><code>new</code></a></h3>
-<p>Construct a <code>TxOutput</code> instance. <strong>Only available after <code>main</code></strong>, see <a href="lang/builtins/../script-structure.html#data-generators-and-test-functions-5">script structure</a>.</p>
+<p>Construct a <code>TxOutput</code> instance.</p>
 <pre><code class="language-helios">TxOutput::new(
     address: Address,
     value:   Value,
