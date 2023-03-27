@@ -2552,6 +2552,9 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <p>Returns <code>true</code> if the start of a <code>TimeRange</code> is after the given time. Always returns <code>false</code> if the start of the <code>TimeRange</code> is negative infinity.</p>
 <pre><code class="language-helios">time_range.is_after(time: Time) -&gt; Bool
 </code></pre>
+<h3 id="show-10"><a class="header" href="#show-10"><code>show</code></a></h3>
+<pre><code class="language-helios">time_range.show() -&gt; String
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tx-1"><a class="header" href="#tx-1"><code>Tx</code></a></h1>
 <p>Represents a balanced transaction.</p>
 <h2 id="associated-functions-25"><a class="header" href="#associated-functions-25">Associated functions</a></h2>
@@ -2732,7 +2735,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="serialize-30"><a class="header" href="#serialize-30"><code>serialize</code></a></h3>
 <pre><code class="language-helios">tx_id.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-10"><a class="header" href="#show-10"><code>show</code></a></h3>
+<h3 id="show-11"><a class="header" href="#show-11"><code>show</code></a></h3>
 <p>Hexadecimal representation of a <code>TxId</code>.</p>
 <pre><code class="language-helios">tx_id.show() -&gt; String
 </code></pre>
@@ -2893,7 +2896,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="serialize-34"><a class="header" href="#serialize-34"><code>serialize</code></a></h3>
 <pre><code class="language-helios">validator_hash.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-11"><a class="header" href="#show-11"><code>show</code></a></h3>
+<h3 id="show-12"><a class="header" href="#show-12"><code>show</code></a></h3>
 <p>Hexadecimal representation of the <code>ValidatorHash</code>.</p>
 <pre><code class="language-helios">validator_hash.show() -&gt; String
 </code></pre>
@@ -3001,7 +3004,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="serialize-35"><a class="header" href="#serialize-35"><code>serialize</code></a></h3>
 <pre><code class="language-helios">value.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-12"><a class="header" href="#show-12"><code>show</code></a></h3>
+<h3 id="show-13"><a class="header" href="#show-13"><code>show</code></a></h3>
 <p>Returns a formatted <a href="lang/builtins/./string.html"><code>String</code></a> showing all the assets contained in a <code>Value</code>.</p>
 <pre><code class="language-helios">value.show() -&gt; String
 </code></pre>
