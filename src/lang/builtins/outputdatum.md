@@ -17,7 +17,7 @@ OutputDatum::from_data(data: Data) -> OutputDatum
 
 ### `new_hash`
 
-Construct a new `OutputDatum::Hash` instance. **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+Construct a new `OutputDatum::Hash` instance.
 
 ```helios
 OutputDatum::new_hash(datum_hash: DatumHash) -> OutputDatum::Hash
@@ -25,7 +25,7 @@ OutputDatum::new_hash(datum_hash: DatumHash) -> OutputDatum::Hash
 
 ### `new_inline`
 
-Construct a new `OutputDatum::Inline` instance from any value. **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+Construct a new `OutputDatum::Inline` instance from any value that is not a function.
 
 ```helios
 OutputDatum::new_inline(any: AnyType) -> OutputDatum::Inline
@@ -33,7 +33,7 @@ OutputDatum::new_inline(any: AnyType) -> OutputDatum::Inline
 
 ### `new_none`
 
-Construct a new `OutputDatum::None` instance. **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+Construct a new `OutputDatum::None` instance.
 
 ```helios
 OutputDatum::new_none() -> OutputDatum::None

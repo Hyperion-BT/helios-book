@@ -12,7 +12,7 @@ TxOutput::from_data(data: Data) -> TxOutput
 
 ### `new`
 
-Construct a `TxOutput` instance. **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+Construct a `TxOutput` instance.
 
 ```helios
 TxOutput::new(
