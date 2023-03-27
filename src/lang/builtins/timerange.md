@@ -113,3 +113,9 @@ Returns `true` if the start of a `TimeRange` is after the given time. Always ret
 ```helios
 time_range.is_after(time: Time) -> Bool
 ```
+
+### `show`
+
+```helios
+time_range.show() -> String
+```
