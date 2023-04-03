@@ -18,7 +18,7 @@ Constructs a new `AssetClass` using a [`MintingPolicyHash`](./mintingpolicyhash.
 
 ```helios
 AssetClass::new(
-    policy_hash: MintingPolicyHash, 
+    mph: MintingPolicyHash, 
     token_name: ByteArray
 ) -> AssetClass
 ```
@@ -27,6 +27,20 @@ AssetClass::new(
 
 ```helios
 AssetClass::from_data(data: Data) -> AssetClass
+```
+
+## Getters
+
+### `mph`
+
+```helios
+asset_class.mph -> MintingPolicyHash
+```
+
+### `token_name`
+
+```helios
+asset_class.token_name -> ByteArray
 ```
 
 ## Operators
