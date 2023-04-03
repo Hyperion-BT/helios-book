@@ -158,12 +158,19 @@
 <h3 id="new"><a class="header" href="#new"><code>new</code></a></h3>
 <p>Constructs a new <code>AssetClass</code> using a <a href="./mintingpolicyhash.html"><code>MintingPolicyHash</code></a> and a token name <a href="./bytearray.html"><code>ByteArray</code></a>:</p>
 <pre><code class="language-helios">AssetClass::new(
-    policy_hash: MintingPolicyHash, 
+    mph: MintingPolicyHash, 
     token_name: ByteArray
 ) -&gt; AssetClass
 </code></pre>
 <h3 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h3>
 <pre><code class="language-helios">AssetClass::from_data(data: Data) -&gt; AssetClass
+</code></pre>
+<h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
+<h3 id="mph"><a class="header" href="#mph"><code>mph</code></a></h3>
+<pre><code class="language-helios">asset_class.mph -&gt; MintingPolicyHash
+</code></pre>
+<h3 id="token_name"><a class="header" href="#token_name"><code>token_name</code></a></h3>
+<pre><code class="language-helios">asset_class.token_name -&gt; ByteArray
 </code></pre>
 <h2 id="operators"><a class="header" href="#operators">Operators</a></h2>
 <h3 id=""><a class="header" href="#"><code>==</code></a></h3>

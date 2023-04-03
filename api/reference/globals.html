@@ -168,6 +168,14 @@
 <p>If <code>true</code>, serializes <a href="./txoutput.html"><code>TxOutput</code></a> using strictly the Babagge cddl format. Defaults to <code>false</code>.</p>
 <pre><code class="language-ts">helios.config.STRICT_BABBAGE: boolean = false
 </code></pre>
+<h3 id="n_dummy_inputs"><a class="header" href="#n_dummy_inputs"><code>N_DUMMY_INPUTS</code></a></h3>
+<p>Calculating the execution budget during <a href="./tx.html#finalize">Tx finalization</a> requires knowing all the inputs beforehand. This is however very difficult because balancing is done after the execution budget is calculated.</p>
+<p>Helios uses <code>1</code> or <code>2</code> dummy inputs as placeholders for the balancing input(s). This avoids the difficulty of figuring out the final balancing input(s) before knowing the transaction fee, but slightly overestimates the execution budget.</p>
+<p>The 1st dummy input has <a href="./txid.html"><code>TxId</code></a><code>=#0000...</code>, which overestimates any operation that iterates over <a href="../../lang/builtins/tx.html#inputs"><code>tx.inputs</code></a>.</p>
+<p>The 2nd optional dummy input has <a href="./txid.html"><code>TxId</code></a><code>=#ffff...</code>, which overestimates any operation that prints the <a href="../../lang/builtins/txid.html#show"><code>TxId</code></a> of the entries in <a href="../../lang/builtins/tx"><code>tx.inputs</code></a>.</p>
+<p>An error is thrown if <code>N_DUMMY_INPUTS</code> isn't <code>1</code> or <code>2</code>. <code>N_DUMMY_INPUTS</code> defaults to <code>2</code> (more robust, but more overestimation of the tx fee).</p>
+<pre><code class="language-ts">helios.config.N_DUMMY_INPUTS: number = 2
+</code></pre>
 
                     </main>
 
