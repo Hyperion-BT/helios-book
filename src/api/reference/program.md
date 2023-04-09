@@ -53,7 +53,7 @@ Returns an object containing Javascript contructors for the user-defined types i
 program.types: {[typeName: string]: {new(...any) => helios.HeliosData}}
 ```
 
-Instantiating these constructors creates objects with `HeliosData` as a parent type.
+Instantiating these constructors creates objects with [`HeliosData`](./heliosdata.md) as a parent type.
 
 ## Setters
 
@@ -65,7 +65,7 @@ Parameters can be set using the `parameters` setter. Parameters are [`const` sta
 program.parameters = {MY_PARAM: my_param, ...} as {[name: string]: helios.HeliosData | any}
 ```
 
-Primitive Javascript values can also be used as a rhs when setting parameters like this. Helios will intelligently convert these in the necessary `HeliosData` instances.
+Primitive Javascript values can also be used as a rhs when setting parameters like this. Helios will intelligently convert these in the necessary [`HeliosData`](./heliosdata.md) instances.
 
 ## Methods
 

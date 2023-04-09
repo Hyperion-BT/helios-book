@@ -92,6 +92,7 @@
     - [Globals](./api/reference/globals.md)
     - [Functions](./api/reference/functions.md)
     - [Address](./api/reference/address.md)
+    - [AssetClass](./api/reference/assetclass.md)
     - [Assets](./api/reference/assets.md)
     - [BlockfrostV0](./api/reference/blockfrostv0.md)
     - [ByteArrayData](./api/reference/bytearraydata.md)

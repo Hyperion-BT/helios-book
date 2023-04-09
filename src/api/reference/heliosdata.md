@@ -1,7 +1,8 @@
 # `HeliosData`
 
-Abstract parent class of Helios API types that can be used directly when setting parameters:
+Abstract parent class of Helios API types that can be used directly when [setting parameters](./program.md#parameters-1):
   * [`Address`](./address.md)
+  * [`AssetClass`](./assetclass.md)
   * `Bool`
   * `ByteArray`
   * [`DatumHash`](./datumhash.md)
