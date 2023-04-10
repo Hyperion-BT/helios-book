@@ -2,7 +2,7 @@
 
 [Opaque](https://en.wikipedia.org/wiki/Opaque_data_type) [`ByteArray`](./bytearray.md) that represents the hash of a datum.
 
-## Associated Functions
+## Associated functions
 
 ### `new`
 

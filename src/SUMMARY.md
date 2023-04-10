@@ -150,6 +150,10 @@
   - [Example: Always succeeds](./cli/example-always-succeeds.md)
   - [Example: Time lock](./cli/example-time-lock.md)
 
+- [Integrations](./integrations/index.md)
+  - [VSCode](./integrations/vscode.md)
+  - [Webpack](./integrations/webpack.md)
+
 - [Advanced concepts](./advanced-concepts/index.md)
   - [Exploits](./advanced-concepts/exploits.md)
   - [Intermediate representation](./advanced-concepts/ir/index.md)

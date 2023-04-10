@@ -2,7 +2,7 @@
 
 The difference of two [`Time`](./time.md) values is a `Duration` value. Only a `Duration` can be added to a [`Time`](./time.md) (two [`Time`](./time.md) values can't be added).
 
-## Associated Functions
+## Associated functions and constants
 
 ### `new`
 
@@ -16,6 +16,46 @@ Duration::new(milliseconds: Int) -> Duration
 
 ```helios
 Duration::from_data(data: Data) -> Duration
+```
+
+### `SECOND`
+
+1000 milliseconds.
+
+```helios
+Duration::SECOND -> Duration
+```
+
+### `MINUTE`
+
+60000 milliseconds.
+
+```helios
+Duration::MINUTE -> Duration
+```
+
+### `HOUR`
+
+3600000 milliseconds.
+
+```helios
+Duration::HOUR -> Duration
+```
+
+### `DAY`
+
+86400000 milliseconds.
+
+```helios
+Duration::DAY -> Duration
+```
+
+### `WEEK`
+
+604800000 milliseconds.
+
+```helios
+Duration::WEEK -> Duration
 ```
 
 ## Operators
