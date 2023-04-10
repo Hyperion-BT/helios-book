@@ -10,7 +10,7 @@ The equality and inequality operators are automatically defined on every user-ty
 
 Instantiates a copy of the underlying value, with some of the fields changed.
 
-This method has the same number of arguments as the number of fields in the user-defined `struct` or enum-variant of which it is a member. Each argument of `copy` has the same name as the corresponding field and is optional.
+This method has the same number of arguments as the number of fields in the user-defined `struct` or `enum`-variant. Each argument of `copy` has the same name as the corresponding field and is optional.
 
 ```helios
 struct Pair {

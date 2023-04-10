@@ -16,3 +16,14 @@ import {
 The imported names act as if the original statements were defined in the source where they are imported.
 
 > **Note**: currently every top-level statement is public and exported by default, including other `import` statements.
+
+### Webpack
+
+When using the [Webpack loader](../integrations/webpack.md) you must use relative paths instead of module names when importing:
+
+```helios
+import { 
+    ImportedName1 as NewName1,
+    ImportedName2
+} from "<rel-path-to-module>.hl"
+```

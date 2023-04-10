@@ -13,15 +13,16 @@ func main(_, _, _) -> Bool {
 }
 ```
 
-## Multi-line comments
+## Multi-line and inline comments
 
-Multi-line comments use `/* ... */`:
+Multi-line and inline comments use `/* ... */`:
 
 ```helios
-func main(_, _, _) -> Bool {
+func main(_, _, _ /* inline comment */) -> Bool {
 	/*
 		This is a multi-line comment.
 	*/
 	true
 }
 ```
+

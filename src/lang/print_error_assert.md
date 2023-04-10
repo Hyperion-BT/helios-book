@@ -1,6 +1,6 @@
 # `print`, `error`, `assert`
 
-There are three builtin void functions. These can be used to create [user-defined void functions](./functions.md#void-return-value).
+There are three builtin void functions. These can be used to define higher level [user-defined void functions](./functions/void.md).
 
 Void functions can't be used in assignments.
 
@@ -32,7 +32,7 @@ if (cond) {
 ```helios
 x.switch{
     Buy => true,
-    Sell => msg = "my error message"; error(msg)
+    Sell => error("my error message")
 }
 ```
 

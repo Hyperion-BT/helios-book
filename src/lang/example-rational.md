@@ -25,7 +25,7 @@ struct Rational {
 
 }
 
-const rational_1: Rational = Rational::PI // 355/113 or 3.14159...
-const rational_2: Rational = Rational::new(1, 2) // 1/2 or 0.5
+const rational_1 = Rational::PI // 355/113 or 3.14159...
+const rational_2 = Rational::new(1, 2) // 1/2 or 0.5
 const rational_3: Rational = rational_1.add(rational_2) // 823/226 or 3.64159...
 ```

@@ -8,7 +8,7 @@ func incr(x: Int, by: Int = 1) -> Int {
 }
 ```
 
-Optional arguments must come last.
+Optional arguments must come after non-optional arguments.
 
 The type signature of a function with optional arguments differs from a regular function:
 
