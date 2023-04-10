@@ -4,7 +4,7 @@ The Helios [Webpack loader](https://www.npmjs.com/package/@hyperionbt/helios-loa
 
 Features:
 * Catches Helios syntax and type errors during build time
-* Working with Helios sources directly allows using Helios IDE plugins
+* Working with Helios sources directly allows using [Helios IDE plugins](./vscode.md)
 * Automatically uses your current version of Helios (must be installed manually inside the repo where you configure webpack)
 * WiP: generates Typescript declarations for user-defined Helios types (Typescript declaration files are emitted inside the source directory)
 
@@ -100,3 +100,7 @@ module.exports = {
 	}
 }
 ```
+
+## Contributing
+
+The Helios Webpack loader repository can be found [on github](https://github.com/hyperion-bt/helios-loader).

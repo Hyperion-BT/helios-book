@@ -6,7 +6,7 @@ Currently this plugin only provides **syntax highlighting** for files ending wit
 
 ## Contributing
 
-The Helios IDE plugins repository can be found [on github](https://github.com/Hyperion-BT/helios-ide-plugins).
+The Helios IDE plugins repository can be found [on github](https://github.com/hyperion-bt/helios-ide-plugins).
 
 ## Third party language server
 
