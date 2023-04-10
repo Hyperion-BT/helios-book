@@ -161,6 +161,13 @@
 <blockquote>
 <p><strong>Note</strong>: currently every top-level statement is public and exported by default, including other <code>import</code> statements.</p>
 </blockquote>
+<h3 id="webpack"><a class="header" href="#webpack">Webpack</a></h3>
+<p>When using the <a href="../integrations/webpack.html">Webpack loader</a> you must use relative paths instead of module names when importing:</p>
+<pre><code class="language-helios">import { 
+    ImportedName1 as NewName1,
+    ImportedName2
+} from &quot;&lt;rel-path-to-module&gt;.hl&quot;
+</code></pre>
 
                     </main>
 

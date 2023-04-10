@@ -149,7 +149,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="print-error-assert"><a class="header" href="#print-error-assert"><code>print</code>, <code>error</code>, <code>assert</code></a></h1>
-<p>There are three builtin void functions. These can be used to create <a href="./functions.html#void-return-value">user-defined void functions</a>.</p>
+<p>There are three builtin void functions. These can be used to define higher level <a href="./functions/void.html">user-defined void functions</a>.</p>
 <p>Void functions can't be used in assignments.</p>
 <h2 id="print"><a class="header" href="#print"><code>print</code></a></h2>
 <p>For debugging purposes, Helios has a special <code>print</code> expression. <code>print(...)</code> takes a <a href="./builtins/string.html"><code>String</code></a> argument:</p>
@@ -171,7 +171,7 @@
 </code></pre>
 <pre><code class="language-helios">x.switch{
     Buy =&gt; true,
-    Sell =&gt; msg = &quot;my error message&quot;; error(msg)
+    Sell =&gt; error(&quot;my error message&quot;)
 }
 </code></pre>
 <h2 id="assert"><a class="header" href="#assert"><code>assert</code></a></h2>

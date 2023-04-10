@@ -314,9 +314,9 @@ such as state channels (see <a href="https://iohk.io/en/blog/posts/2021/09/17/hy
 	true
 }
 </code></pre>
-<h2 id="multi-line-comments"><a class="header" href="#multi-line-comments">Multi-line comments</a></h2>
-<p>Multi-line comments use <code>/* ... */</code>:</p>
-<pre><code class="language-helios">func main(_, _, _) -&gt; Bool {
+<h2 id="multi-line-and-inline-comments"><a class="header" href="#multi-line-and-inline-comments">Multi-line and inline comments</a></h2>
+<p>Multi-line and inline comments use <code>/* ... */</code>:</p>
+<pre><code class="language-helios">func main(_, _, _ /* inline comment */) -&gt; Bool {
 	/*
 		This is a multi-line comment.
 	*/
@@ -471,7 +471,7 @@ none_int = Option[Int]::None; ...
 	}; ...
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="print-error-assert"><a class="header" href="#print-error-assert"><code>print</code>, <code>error</code>, <code>assert</code></a></h1>
-<p>There are three builtin void functions. These can be used to create <a href="lang/./functions.html#void-return-value">user-defined void functions</a>.</p>
+<p>There are three builtin void functions. These can be used to define higher level <a href="lang/./functions/void.html">user-defined void functions</a>.</p>
 <p>Void functions can't be used in assignments.</p>
 <h2 id="print"><a class="header" href="#print"><code>print</code></a></h2>
 <p>For debugging purposes, Helios has a special <code>print</code> expression. <code>print(...)</code> takes a <a href="lang/./builtins/string.html"><code>String</code></a> argument:</p>
@@ -493,7 +493,7 @@ none_int = Option[Int]::None; ...
 </code></pre>
 <pre><code class="language-helios">x.switch{
     Buy =&gt; true,
-    Sell =&gt; msg = &quot;my error message&quot;; error(msg)
+    Sell =&gt; error(&quot;my error message&quot;)
 }
 </code></pre>
 <h2 id="assert"><a class="header" href="#assert"><code>assert</code></a></h2>
@@ -587,7 +587,7 @@ map.sort((a_key: ByteArray, _, b_key: ByteArray, _) -&gt; Bool {
     x + by
 }
 </code></pre>
-<p>Optional arguments must come last.</p>
+<p>Optional arguments must come after non-optional arguments.</p>
 <p>The type signature of a function with optional arguments differs from a regular function:</p>
 <pre><code class="language-helios">fn: (Int, ?Int) -&gt; Int = incr
 </code></pre>
@@ -600,7 +600,7 @@ map.sort((a_key: ByteArray, _, b_key: ByteArray, _) -&gt; Bool {
 sub(b: 1, a: 2) // == 1
 </code></pre>
 <p>Named arguments can't be mixed with positional arguments.</p>
-<p>Named arguments are mostly used when calling the <code>copy()</code> method.</p>
+<p>Named arguments are mostly used when calling the <a href="lang/functions/../automatic-methods.html#copy"><code>copy()</code></a> method.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="function-values"><a class="header" href="#function-values">Function values</a></h1>
 <p>Functions are first-class citizens in Helios and can be used as values. This means:</p>
 <h3 id="1-functions-can-be-passed-as-arguments"><a class="header" href="#1-functions-can-be-passed-as-arguments">1. Functions can be passed as arguments</a></h3>
@@ -824,7 +824,7 @@ For example:</p>
 <p>The equality and inequality operators are automatically defined on every user-type.</p>
 <h2 id="copy"><a class="header" href="#copy"><code>copy</code></a></h2>
 <p>Instantiates a copy of the underlying value, with some of the fields changed.</p>
-<p>This method has the same number of arguments as the number of fields in the user-defined <code>struct</code> or enum-variant of which it is a member. Each argument of <code>copy</code> has the same name as the corresponding field and is optional.</p>
+<p>This method has the same number of arguments as the number of fields in the user-defined <code>struct</code> or <code>enum</code>-variant. Each argument of <code>copy</code> has the same name as the corresponding field and is optional.</p>
 <pre><code class="language-helios">struct Pair {
     first:  Int
     second: Int
@@ -873,8 +873,8 @@ pair.copy(second: 3) // == Pair{1, 3}
 
 }
 
-const rational_1: Rational = Rational::PI // 355/113 or 3.14159...
-const rational_2: Rational = Rational::new(1, 2) // 1/2 or 0.5
+const rational_1 = Rational::PI // 355/113 or 3.14159...
+const rational_2 = Rational::new(1, 2) // 1/2 or 0.5
 const rational_3: Rational = rational_1.add(rational_2) // 823/226 or 3.64159...
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="structure-of-a-script"><a class="header" href="#structure-of-a-script">Structure of a script</a></h1>
@@ -1030,6 +1030,13 @@ const uplcProgram = program.compile();
 <blockquote>
 <p><strong>Note</strong>: currently every top-level statement is public and exported by default, including other <code>import</code> statements.</p>
 </blockquote>
+<h3 id="webpack"><a class="header" href="#webpack">Webpack</a></h3>
+<p>When using the <a href="lang/../integrations/webpack.html">Webpack loader</a> you must use relative paths instead of module names when importing:</p>
+<pre><code class="language-helios">import { 
+    ImportedName1 as NewName1,
+    ImportedName2
+} from &quot;&lt;rel-path-to-module&gt;.hl&quot;
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="builtins"><a class="header" href="#builtins">Builtins</a></h1>
 <p>This section contains a reference of all the Helios builtins.</p>
 <h2 id="primitive-types-1"><a class="header" href="#primitive-types-1">Primitive types</a></h2>
@@ -5584,13 +5591,13 @@ Transaction successfully submitted
 <li><a href="integrations/./vscode.html">VSCode plugin</a></li>
 <li><a href="integrations/./webpack.html">Webpack loader</a></li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="vscode-ide-plugin"><a class="header" href="#vscode-ide-plugin">VSCode IDE plugin</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="vscode-plugin"><a class="header" href="#vscode-plugin">VSCode plugin</a></h1>
 <p>This plugin can be installed from within VSCode by searching for 'Helios' and picking the plugin with the 'Helios language support for VS Code' caption.</p>
 <p>Currently this plugin only provides <strong>syntax highlighting</strong> for files ending with the <code>.hl</code> extension.</p>
 <h2 id="contributing"><a class="header" href="#contributing">Contributing</a></h2>
 <p>The Helios IDE plugins repository can be found <a href="https://github.com/Hyperion-BT/helios-ide-plugins">on github</a>.</p>
 <h2 id="third-party-language-server"><a class="header" href="#third-party-language-server">Third party language server</a></h2>
-<p>There is also a third party language server plugin with more advanced features like auto-complete for Helios v0.9. This plugin is called 'Helios Language Server' and requires separate installation of the <a href="https://pypi.org/project/helios-language-server">python language server</a>.</p>
+<p>There is also a third party language server plugin with more advanced features like auto-complete (Helios &lt;=v0.9 only). This plugin requires separate installation of the <a href="https://pypi.org/project/helios-language-server">python language server</a>. This plugin can be found within VSCode by searching for 'Helios Language Server'.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="webpack-loader"><a class="header" href="#webpack-loader">Webpack loader</a></h1>
 <p>The Helios <a href="https://www.npmjs.com/package/@hyperionbt/helios-loader">Webpack loader</a> allows importing Helios scripts directly into Javascript/Typescript projects.</p>
 <p>Features:</p>
