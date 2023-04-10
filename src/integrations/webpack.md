@@ -59,7 +59,7 @@ Install the loader:
 npm install --save-dev @hyperionbt/helios-loader
 ```
 
-Configure [Webpack](https://webpack.js.org/configuration/):
+Configure [Webpack](https://webpack.js.org/configuration/), for example:
 ```js
 // webpack.config.js
 module.exports = {
