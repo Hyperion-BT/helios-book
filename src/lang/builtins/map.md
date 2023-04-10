@@ -13,7 +13,7 @@ my_map = Map[String]Int{"zero": 0, "one": 1, "two": 2};
 print(my_map.get("zero").show()); ... // prints "0"
 ```
 
-## Associated Functions
+## Associated functions
 
 ### `from_data`
 ```helios

@@ -12,7 +12,7 @@ option_some: Option[Int] = Option[Int]::Some{42};
 option_none: Option[Int] = Option[Int]::None; ...
 ```
 
-## Associated Functions
+## Associated functions
 
 ### `from_data`
 

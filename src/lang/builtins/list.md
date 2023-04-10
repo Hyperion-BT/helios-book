@@ -20,7 +20,7 @@ func add_element_wise(a: []Int, b: []Int) -> []Int {
 }
 ```
 
-## Associated Functions
+## Associated functions
 
 ### `from_data`
 

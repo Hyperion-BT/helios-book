@@ -10,7 +10,7 @@ Example instantiation:
 pkh: PubKeyHash = PubKeyHash::new(#...); ...
 ```
 
-## Associated Functions
+## Associated functions
 
 ### `new`
 

@@ -8,7 +8,7 @@ Example instantiation:
 skh: StakeKeyHash = StakeKeyHash::new(#...); ...
 ```
 
-## Associated Functions
+## Associated functions
 
 ### `new`
 

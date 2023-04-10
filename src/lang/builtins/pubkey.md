@@ -10,7 +10,7 @@ Example instantiation:
 pub_key: PubKey = PubKey::new(#...); ...
 ```
 
-## Associated Functions
+## Associated functions
 
 ### `new`
 
