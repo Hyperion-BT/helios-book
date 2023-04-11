@@ -6,10 +6,10 @@ Result of [`program.compile()`](./program.md#compile). Contains the Untyped Plut
 
 ### `fromCbor`
 
-Deserialize a `UplcProgram` from bytes.
+Deserialize a `UplcProgram` from bytes or from a hexadecimal string.
 
 ```ts
-helios.UplcProgram.fromCbor(bytes: number[]): helios.UplcProgram
+helios.UplcProgram.fromCbor(bytes: number[] | string): helios.UplcProgram
 ```
 
 ## Getters
@@ -59,12 +59,18 @@ uplcProgram.profile(
     args: helios.UplcValue[],
     networkParams: helios.NetworkParams
 ): Promise<{
-    mem: bigint,
-    cpu: bigint,
-    size: number,
-    res: helios.UplcValue | helios.UserError
+    mem: bigint, 
+	cpu: bigint,
+	size: number,
+	builtins: {[name: string]: {mem: bigint, cpu: bigint}},
+	terms: {[name: string]: {mem: bigint, cpu: bigint}},
+	result: UserError | UplcValue,
+	messages: string[]
 }>
 ```
+
+The returned profile contains a breakdown of the execution cost per Uplc term type and per Uplc builtin function type.
+
 ### `runWithPrint`
 
 Run a `UplcProgram`. The printed messages are part of the return value.
