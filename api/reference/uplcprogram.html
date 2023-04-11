@@ -152,8 +152,8 @@
 <p>Result of <a href="./program.html#compile"><code>program.compile()</code></a>. Contains the Untyped Plutus-Core AST, along with a code-mapping to the original source.</p>
 <h2 id="static-methods"><a class="header" href="#static-methods">Static methods</a></h2>
 <h3 id="fromcbor"><a class="header" href="#fromcbor"><code>fromCbor</code></a></h3>
-<p>Deserialize a <code>UplcProgram</code> from bytes.</p>
-<pre><code class="language-ts">helios.UplcProgram.fromCbor(bytes: number[]): helios.UplcProgram
+<p>Deserialize a <code>UplcProgram</code> from bytes or from a hexadecimal string.</p>
+<pre><code class="language-ts">helios.UplcProgram.fromCbor(bytes: number[] | string): helios.UplcProgram
 </code></pre>
 <h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
 <h3 id="validatorhash"><a class="header" href="#validatorhash"><code>validatorHash</code></a></h3>
@@ -180,12 +180,16 @@
     args: helios.UplcValue[],
     networkParams: helios.NetworkParams
 ): Promise&lt;{
-    mem: bigint,
-    cpu: bigint,
-    size: number,
-    res: helios.UplcValue | helios.UserError
+    mem: bigint, 
+	cpu: bigint,
+	size: number,
+	builtins: {[name: string]: {mem: bigint, cpu: bigint}},
+	terms: {[name: string]: {mem: bigint, cpu: bigint}},
+	result: UserError | UplcValue,
+	messages: string[]
 }&gt;
 </code></pre>
+<p>The returned profile contains a breakdown of the execution cost per Uplc term type and per Uplc builtin function type.</p>
 <h3 id="runwithprint"><a class="header" href="#runwithprint"><code>runWithPrint</code></a></h3>
 <p>Run a <code>UplcProgram</code>. The printed messages are part of the return value.</p>
 <pre><code class="language-ts">uplcProgram.runWithPrint(args: helios.UplcValue[]): 
