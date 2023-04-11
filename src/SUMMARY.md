@@ -101,6 +101,7 @@
     - [Cip30Wallet](./api/reference/cip30wallet.md)
     - [CoinSelection](./api/reference/coinselection.md)
     - [ConstrData](./api/reference/constrdata.md)
+    - [Crypto](./api/reference/crypto.md)
     - [Datum](./api/reference/datum.md)
     - [DatumHash](./api/reference/datumhash.md)
     - [FuzzyTest](./api/reference/fuzzytest.md)

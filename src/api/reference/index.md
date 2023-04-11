@@ -38,6 +38,7 @@ Can only be imported in typescript files.
   * [`Cip30Wallet`](./cip30wallet.md)
   * [`CoinSelection`](./coinselection.md)
   * [`ConstrData`](./constrdata.md)
+  * [`Crypto`](./crypto.md)
   * [`Datum`](./datum.md)
   * [`DatumHash`](./datumhash.md)
   * [`FuzzyTest`](./fuzzytest.md)
