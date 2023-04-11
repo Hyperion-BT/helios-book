@@ -2,7 +2,7 @@
 
 ## Signing
 
-The finalized transaction can be signed by a wallet, for example using the [CIP 30 DApp connector](https://cips.cardano.org/cips/cip30/):
+The finalized transaction can be signed by a wallet, for example using the [CIP 30 dApp connector](https://cips.cardano.org/cips/cip30/):
 
 ```js
 // in an async context

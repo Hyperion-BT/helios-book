@@ -1,6 +1,6 @@
 # `Cip30Handle`
 
-Convenience type for browser plugin wallets supporting the [CIP 30 DApp connector](https://cips.cardano.org/cips/cip30/) standard (eg. Eternl, Nami). 
+Convenience type for browser plugin wallets supporting the [CIP 30 dApp connector](https://cips.cardano.org/cips/cip30/) standard (eg. Eternl, Nami). 
 
 ```ts
 interface Cip30Handle {

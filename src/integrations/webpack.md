@@ -8,7 +8,7 @@ Features:
 * Automatically uses your current version of Helios (must be installed manually inside the repo where you configure webpack)
 * WiP: generates Typescript declarations for user-defined Helios types (Typescript declaration files are emitted inside the source directory)
 
-> **Note**: the Helios import syntax must use relative paths as literal strings insteads of module names.
+> **Note**: the Helios import syntax must use literal string relative paths instead of module names.
 
 ## Example
 

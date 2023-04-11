@@ -1,6 +1,6 @@
 # `NetworkEmulator`
 
-A simple emulated [`Network`](./network.md). This can be used to do integration tests of whole DApps. Staking is not yet supported.
+A simple emulated [`Network`](./network.md). This can be used to do integration tests of whole dApps. Staking is not yet supported.
 
 ## Constructor
 

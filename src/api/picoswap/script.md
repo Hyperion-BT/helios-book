@@ -44,4 +44,4 @@ func main(datum: Datum, _, ctx: ScriptContext) -> Bool {
 }`
 ```
 
-We recommend including a *Show script* or *Show contract* button in every DApp so users can easily audit the smart contract logic they are interacting with.
+We recommend including a *Show script* or *Show contract* button in every dApp so users can easily audit the smart contract logic they are interacting with.

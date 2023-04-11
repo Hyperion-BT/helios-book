@@ -151,6 +151,7 @@
   - [Example: Time lock](./cli/example-time-lock.md)
 
 - [Integrations](./integrations/index.md)
+  - [Different versions of Helios](./integrations/different-versions.md)
   - [VSCode](./integrations/vscode.md)
   - [Webpack](./integrations/webpack.md)
 
@@ -164,5 +165,5 @@
   - [Vesting contract](./advanced-concepts/vesting-contract.md)
   - [English auction](./advanced-concepts/english-auction.md)
   - [Oracle pools](./advanced-concepts/oracle-pools.md)
-  - [DApp recommendations](./advanced-concepts/dapps.md)
+  - [dApp recommendations](./advanced-concepts/dapps.md)
   - [Tx finalization](./advanced-concepts/tx-finalization.md)

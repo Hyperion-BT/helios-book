@@ -60,7 +60,7 @@ A validator script is a function that is evaluated when a transaction attempts t
    
 The validator script then calculates whether or not the UTxO is allowed to be spent (essentially returning a boolean result).
 
-Separating the validation logic from the transaction building/submitting logic makes it much easier to audit the trusted part of eUTxO DApps.
+Separating the validation logic from the transaction building/submitting logic makes it much easier to audit the trusted part of eUTxO dApps.
 
 Helios is all about writing these validator scripts.
 

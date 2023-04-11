@@ -1,6 +1,6 @@
 # Compiling Helios sources
 
-The recommended way to compile Helios sources is to use the library directly. This approach makes it easier to maintain a [single-source-of-truth](https://en.wikipedia.org/wiki/Single_source_of_truth) version of your contract in client-side DApps.
+The recommended way to compile Helios sources is to use the library directly. This approach makes it easier to maintain a [single-source-of-truth](https://en.wikipedia.org/wiki/Single_source_of_truth) version of your contract in client-side dApps.
 
 First step is to write your contract as a js literal string. For example:
 
