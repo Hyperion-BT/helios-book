@@ -23,6 +23,7 @@
   - [Operators](./lang/operators.md)
   - [Structs](./lang/structs.md)
   - [Enums](./lang/enums.md)
+  - [Destructuring](./lang/destructuring.md)
   - [Methods](./lang/methods.md)
     - [Associated functions and constants](./lang/associated-functions-and-constants.md)
     - [Automatic methods](./lang/automatic-methods.md)
