@@ -6,7 +6,7 @@ Represents an array of bytes (i.e. an array of uint8 numbers).
 byte_array = #213212; ...
 ```
 
-> **Note**: in Haskell/Plutus `ByteArray` is called a `ByteString`, but that name was deemed too ambiguous for average programmers so `ByteArray` was chosen instead.
+> **Note**: in Haskell/Plutus this is called a `ByteString`, but we thought that that was too ambiguous, so we chose `ByteArray` instead.
 
 ## Associated functions
 
@@ -101,6 +101,16 @@ Checks if a `ByteArray` ends with a given suffix.
 
 ```helios
 byte_array.ends_with(suffix: ByteArray) -> Bool
+```
+
+### `prepend`
+
+Prepends an `Int` byte, returning a new `ByteArray`.
+
+Modulo 256 is applied internally to the byte before prepending.
+
+```helios
+byte_array.prepend(byte: Int) -> ByteArray
 ```
 
 ### `serialize`

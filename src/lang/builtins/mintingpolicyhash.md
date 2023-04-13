@@ -5,7 +5,7 @@
 Example:
 
 ```helios
-mph: MintingPolicyHash = MintingPolicyHash::new(#...); ...
+mph = MintingPolicyHash::new(#...); ...
 ```
 ## Associated functions
 

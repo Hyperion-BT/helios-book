@@ -14,7 +14,7 @@ You can assign to multiple return values:
 (a: Int, b: Int) = swap(10, 20); ... // a==20 && b==10
 ```
 
-Some of the multiple return values can be ignored with an underscore (`_`):
+Some of the multiple return values can be discarded with an underscore (`_`):
 
 ```helios
 (a: Int, _) = swap(10, 20); ...

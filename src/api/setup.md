@@ -57,7 +57,7 @@ Or install a specific version:
 $ npm i @hyperionbt/helios@<version>
 ```
 
-In your javascript file:
+In your Javascript/Typescript file:
 ```js
 import { Program } from "@hyperionbt/helios"
 ```

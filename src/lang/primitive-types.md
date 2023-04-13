@@ -78,9 +78,9 @@ Similar to all other values in Helios, strings are immutable and have a fixed le
 Strings cannot *grow* after definition. Concatenating two strings creates a new string:
 
 ```helios
-string_1: String = "Hel";
-string_2: String = "ios";
+string_1 = "Hel";
+string_2 = "ios";
 result: String = string_1 + string_2; ... // "Helios"
 ```
 
-More informationa about the `String` type can be found [here](./builtins/string.md).
+More information about the `String` type can be found [here](./builtins/string.md).

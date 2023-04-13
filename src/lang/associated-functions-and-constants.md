@@ -14,7 +14,7 @@ struct Rational {
 	// associated const
 	const PI = Rational { 355, 113 }
 
-	// associated method
+	// associated function
 	func new(top: Int, bottom: Int) -> Rational {
 		Rational { top, bottom }
 	}

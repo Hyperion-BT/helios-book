@@ -10,9 +10,21 @@ This is an unbounded integer (like Haskell's `Integer` type).
 Int::from_data(data: Data) -> Int
 ```
 
+### `from_big_endian`
+
+Converts a [`ByteArray`](./bytearray.md) into an `Int`. The last byte is multiplied by `1` before adding to the sum, the second-to-last byte is multiplied by `256` etc.
+
+The returned `Int` is always positive.
+
+```helios
+Int::from_big_endian(bytes: ByteArray) -> Int
+```
+
 ### `from_little_endian`
 
 Converts a [`ByteArray`](./bytearray.md) into an `Int`. The first byte is multiplied by `1` before adding to the sum, the second byte is multiplied by `256` etc.
+
+The returned `Int` is always positive.
 
 ```helios
 Int::from_little_endian(bytes: ByteArray) -> Int
@@ -114,9 +126,17 @@ Int % Int -> Int
 
 ## Methods
 
+### `abs`
+
+Removes the sign, returning a positive `Int`.
+
+```helios
+int.abs() -> Int
+```
+
 ### `bound`
 
-Bounds an `Int` if it falls outside a range. This builtin function doesn't check of the range is valid.
+Bounds an `Int` if it falls outside a range. This builtin function doesn't check if the range is valid.
 
 ```helios
 int.bound(low: Int, high: Int) -> Int
@@ -138,6 +158,22 @@ Bounds an `Int` to be less or equals to a given maximum value.
 int.bound_max(high: Int) -> Int
 ```
 
+### `decode_zigzag`
+
+Decodes a [zigzag encoded](https://en.wikipedia.org/wiki/Variable-length_quantity#Zigzag_encoding) `Int`. Throws an error if the `Int` is negative.
+
+```helios
+int.decode_zigzag() -> Int
+```
+
+### `encode_zigzag`
+
+Applies [zigzag encoding](https://en.wikipedia.org/wiki/Variable-length_quantity#Zigzag_encoding) to the `Int`, returning a positive `Int`.
+
+```helios
+int.encode_zigzag() -> Int
+```
+
 ### `serialize`
 
 ```helios
@@ -152,12 +188,32 @@ Returns decimal representation of integer.
 int.show() -> String
 ```
 
+### `to_big_endian`
+
+Encodes the `Int` as a [big endian](https://en.wikipedia.org/wiki/Endianness) [`ByteArray`](./bytearray.md).
+
+Throws an error if the `Int` is negative.
+
+```helios
+int.to_big_endian() -> ByteArray
+```
+
 ### `to_bool`
 
 Turns `0` into `false`, and any other integer into `true`.
 
 ```helios
 int.to_bool() -> Bool
+```
+
+### `to_little_endian`
+
+Encodes the `Int` as a [little endian](https://en.wikipedia.org/wiki/Endianness) [`ByteArray`](./bytearray.md).
+
+Throws an error if the `Int` is negative.
+
+```helios
+int.to_little_endian() -> ByteArray
 ```
 
 ### `to_hex`

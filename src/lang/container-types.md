@@ -8,7 +8,7 @@ Helios has 3 **container** types:
 
 ## List
 
-Helios has a builtin linked list type, similar to Haskell's `List`. The syntax for a list type is `[]ItemType` where `ItemType` is a parameter type that represents the type of the contained items. The item type can be any type except a function type.
+Helios has a builtin linked list type, similar to Haskell's `List`. The syntax for a list type is `[]ItemType` where `ItemType` is a parameter type that represents the type of the contained items. The `ItemType` can be any type except a function type.
 
 List literals have a syntax similar to Go:
 ```helios
@@ -24,9 +24,9 @@ More information about lists can be found [here](./builtins/list.md).
 
 ## `Map`
 
-A Map in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.
+A `Map` in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.
 
-A Map has a type syntax and a literal syntax similar to Go:
+A `Map` has a type syntax and a literal syntax similar to Go:
 ```helios
 // either side of the colon can be an arbitrary expression 
 //  that evaluates to the correct type

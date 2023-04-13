@@ -35,7 +35,7 @@ func fib(n: Int) -> Int {
 > 07 }
 >```
 
-More advanced information can be found on the following pages:
+More detailed information can be found on the following pages:
 
  * [Multiple return values](./multiple_return_values.md)
  * [Void functions](./void.md)

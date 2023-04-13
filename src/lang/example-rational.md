@@ -1,4 +1,4 @@
-The following is a complete example of a struct with both associated and regular methods.
+The following is a complete example of a struct with both associated functions and regular methods.
 
 # Example: `Rational`
 
@@ -10,7 +10,7 @@ struct Rational {
     // associated const
     const PI = Rational{ 355, 113 }
 
-    // associated method
+    // associated function
     func new(top: Int, bottom: Int) -> Rational {
         Rational { top, bottom }
     }

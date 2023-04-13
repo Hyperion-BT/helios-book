@@ -25,15 +25,15 @@ func main() -> Bool {
 }
 ```
 
-You can also assign a name to any intermediate value when destructuring.
+You can also assign a name to any intermediate value when destructuring:
 
-```
+```helios
 pair: Pair{a, _} = p; ...
 ```
 
-Optionally you can include the type when destructuring a field.
+Optionally you can include the type when destructuring a field:
 
-```
+```helios
 pair: Pair{a: Int, _} = p; ...
 ```
 

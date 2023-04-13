@@ -33,7 +33,7 @@ const MY_DATUM = Datum {...}
 
 ## Script purpose (1)
 
-In Helios all scripts start with a  **script purpose**, followed by the name of the script. There are four script purposes currently:
+In Helios all scripts start with a  **script purpose**, followed by the name of the script. There are 5 script purposes:
   - **spending**
   - **minting**
   - **staking**
@@ -73,14 +73,15 @@ The `main` function (4) of a validator script accepts up to three optional argum
   - **redeemer (3)**
   - **script context**
 
-Each `main` argument is optional, but must appear in that order.
+Each `main` argument must appear in that order, but can be ignored with an underscore (`_`).
 
 ```helios
 spending my_validator
 
 ...
 
-func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -> Bool {
+// redeemer is ignored
+func main(datum: Datum, _, context: ScriptContext) -> Bool {
     ...
 }
 
@@ -105,13 +106,9 @@ Some compiler restrictions are lifted in this part of the script:
   * structs can be empty
 
 Special constructors, that aren't available in `main`, become available in this part of the script:
-* [`OutputDatum::new_hash`](./builtins/outputdatum.md#new_hash)
-* [`OutputDatum::new_inline`](./builtins/outputdatum.md#new_inline)
-* [`OutputDatum::new_none`](./builtins/outputdatum.md#new_none)
 * [`ScriptContext::new_certifying`](./builtins/scriptcontext.md#new_certifying)
 * [`ScriptContext::new_minting`](./builtins/scriptcontext.md#new_minting)
 * [`ScriptContext::new_rewarding`](./builtins/scriptcontext.md#new_rewarding)
 * [`ScriptContext::new_spending`](./builtins/scriptcontext.md#new_spending)
 * [`Tx::new`](./builtins/tx.md#new)
 * [`TxInput::new`](./builtins/txinput.md#new)
-* [`TxOutput::new`](./builtins/txoutput.md#new)

@@ -4,7 +4,7 @@ Helios top-level statements can be placed in modules and can then be imported by
 
 ## `import`
 
-`import` statements in Helios are similar to Javascript:
+`import` statements in Helios are similar to Javascript/Typescript:
 
 ```helios
 import { 

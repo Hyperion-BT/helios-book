@@ -10,7 +10,7 @@ struct Rational {
 }
 ```
 
-> **Note**: a struct can't be empty must have at least one field.
+> **Note**: a struct can't be empty and must have at least one field.
 
 ## Instantiating a struct
 
