@@ -153,7 +153,7 @@
 <pre><code class="language-helios">byte_array = #213212; ...
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: in Haskell/Plutus <code>ByteArray</code> is called a <code>ByteString</code>, but that name was deemed too ambiguous for average programmers so <code>ByteArray</code> was chosen instead.</p>
+<p><strong>Note</strong>: in Haskell/Plutus this is called a <code>ByteString</code>, but we thought that that was too ambiguous, so we chose <code>ByteArray</code> instead.</p>
 </blockquote>
 <h2 id="associated-functions"><a class="header" href="#associated-functions">Associated functions</a></h2>
 <h3 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h3>
@@ -201,6 +201,11 @@
 <h3 id="ends_with"><a class="header" href="#ends_with"><code>ends_with</code></a></h3>
 <p>Checks if a <code>ByteArray</code> ends with a given suffix.</p>
 <pre><code class="language-helios">byte_array.ends_with(suffix: ByteArray) -&gt; Bool
+</code></pre>
+<h3 id="prepend"><a class="header" href="#prepend"><code>prepend</code></a></h3>
+<p>Prepends an <code>Int</code> byte, returning a new <code>ByteArray</code>.</p>
+<p>Modulo 256 is applied internally to the byte before prepending.</p>
+<pre><code class="language-helios">byte_array.prepend(byte: Int) -&gt; ByteArray
 </code></pre>
 <h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
 <pre><code class="language-helios">byte_array.serialize() -&gt; ByteArray

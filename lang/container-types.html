@@ -156,7 +156,7 @@
 <li><code>Option</code> (equivalent to <code>Maybe</code> in Haskell)</li>
 </ul>
 <h2 id="list"><a class="header" href="#list">List</a></h2>
-<p>Helios has a builtin linked list type, similar to Haskell's <code>List</code>. The syntax for a list type is <code>[]ItemType</code> where <code>ItemType</code> is a parameter type that represents the type of the contained items. The item type can be any type except a function type.</p>
+<p>Helios has a builtin linked list type, similar to Haskell's <code>List</code>. The syntax for a list type is <code>[]ItemType</code> where <code>ItemType</code> is a parameter type that represents the type of the contained items. The <code>ItemType</code> can be any type except a function type.</p>
 <p>List literals have a syntax similar to Go:</p>
 <pre><code class="language-helios">my_ints = []Int{1, 2, 3, 4, 5};
 
@@ -167,8 +167,8 @@ x: Int = some_ints.get(2); ...   // x == 3
 </blockquote>
 <p>More information about lists can be found <a href="./builtins/list.html">here</a>.</p>
 <h2 id="map"><a class="header" href="#map"><code>Map</code></a></h2>
-<p>A Map in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.</p>
-<p>A Map has a type syntax and a literal syntax similar to Go:</p>
+<p>A <code>Map</code> in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.</p>
+<p>A <code>Map</code> has a type syntax and a literal syntax similar to Go:</p>
 <pre><code class="language-helios">// either side of the colon can be an arbitrary expression 
 //  that evaluates to the correct type
 my_map = Map[String]Int{

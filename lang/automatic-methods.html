@@ -149,12 +149,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="automatic-methods"><a class="header" href="#automatic-methods">Automatic methods</a></h1>
-<p>The following (associated) methods and operators are automatically defined on all user and builtin types.</p>
+<p>The following (associated) methods and operators are automatically defined on all user and builtin types (except function types).</p>
 <h2 id="-"><a class="header" href="#-"><code>==</code>, <code>!=</code></a></h2>
-<p>The equality and inequality operators are automatically defined on every user-type.</p>
+<p>The equality and inequality operators are automatically defined on every type (except function types).</p>
 <h2 id="copy"><a class="header" href="#copy"><code>copy</code></a></h2>
 <p>Instantiates a copy of the underlying value, with some of the fields changed.</p>
-<p>This method has the same number of arguments as the number of fields in the user-defined <code>struct</code> or <code>enum</code>-variant. Each argument of <code>copy</code> has the same name as the corresponding field and is optional.</p>
+<p>This method has the same number of arguments as the number of fields in the user-defined <code>struct</code> or <code>enum</code>-variant. Each argument of <code>copy</code> has the same name as the corresponding field and is optional (see <a href="./functions/named_arguments.html">named arguments</a>).</p>
 <pre><code class="language-helios">struct Pair {
     first:  Int
     second: Int
@@ -167,7 +167,7 @@ pair = Pair{1, 2};
 pair.copy(second: 3) // == Pair{1, 3}
 </code></pre>
 <h2 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h2>
-<p><code>from_data</code> is an <a href="./associated-functions-and-constants.html">associated method</a> that is automatically defined on every user-type, and thus <code>from_data</code> is a reserved name that can't be used for other methods.</p>
+<p><code>from_data</code> is an <a href="./associated-functions-and-constants.html">associated function</a> that is automatically defined on every user-type, and thus <code>from_data</code> is a reserved name that can't be used for other methods.</p>
 <p><code>from_data</code> converts a typeless <code>Data</code> into something typed.</p>
 <pre><code class="language-helios">MyType::from_data(data: Data) -&gt; MyType
 </code></pre>

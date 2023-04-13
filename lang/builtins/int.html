@@ -154,8 +154,14 @@
 <h3 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h3>
 <pre><code class="language-helios">Int::from_data(data: Data) -&gt; Int
 </code></pre>
+<h3 id="from_big_endian"><a class="header" href="#from_big_endian"><code>from_big_endian</code></a></h3>
+<p>Converts a <a href="./bytearray.html"><code>ByteArray</code></a> into an <code>Int</code>. The last byte is multiplied by <code>1</code> before adding to the sum, the second-to-last byte is multiplied by <code>256</code> etc.</p>
+<p>The returned <code>Int</code> is always positive.</p>
+<pre><code class="language-helios">Int::from_big_endian(bytes: ByteArray) -&gt; Int
+</code></pre>
 <h3 id="from_little_endian"><a class="header" href="#from_little_endian"><code>from_little_endian</code></a></h3>
 <p>Converts a <a href="./bytearray.html"><code>ByteArray</code></a> into an <code>Int</code>. The first byte is multiplied by <code>1</code> before adding to the sum, the second byte is multiplied by <code>256</code> etc.</p>
+<p>The returned <code>Int</code> is always positive.</p>
 <pre><code class="language-helios">Int::from_little_endian(bytes: ByteArray) -&gt; Int
 </code></pre>
 <h3 id="parse"><a class="header" href="#parse"><code>parse</code></a></h3>
@@ -206,8 +212,12 @@
 <pre><code class="language-helios">Int % Int -&gt; Int
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
+<h3 id="abs"><a class="header" href="#abs"><code>abs</code></a></h3>
+<p>Removes the sign, returning a positive <code>Int</code>.</p>
+<pre><code class="language-helios">int.abs() -&gt; Int
+</code></pre>
 <h3 id="bound"><a class="header" href="#bound"><code>bound</code></a></h3>
-<p>Bounds an <code>Int</code> if it falls outside a range. This builtin function doesn't check of the range is valid.</p>
+<p>Bounds an <code>Int</code> if it falls outside a range. This builtin function doesn't check if the range is valid.</p>
 <pre><code class="language-helios">int.bound(low: Int, high: Int) -&gt; Int
 </code></pre>
 <h3 id="bound_min"><a class="header" href="#bound_min"><code>bound_min</code></a></h3>
@@ -218,6 +228,14 @@
 <p>Bounds an <code>Int</code> to be less or equals to a given maximum value.</p>
 <pre><code class="language-helios">int.bound_max(high: Int) -&gt; Int
 </code></pre>
+<h3 id="decode_zigzag"><a class="header" href="#decode_zigzag"><code>decode_zigzag</code></a></h3>
+<p>Decodes a <a href="https://en.wikipedia.org/wiki/Variable-length_quantity#Zigzag_encoding">zigzag encoded</a> <code>Int</code>. Throws an error if the <code>Int</code> is negative.</p>
+<pre><code class="language-helios">int.decode_zigzag() -&gt; Int
+</code></pre>
+<h3 id="encode_zigzag"><a class="header" href="#encode_zigzag"><code>encode_zigzag</code></a></h3>
+<p>Applies <a href="https://en.wikipedia.org/wiki/Variable-length_quantity#Zigzag_encoding">zigzag encoding</a> to the <code>Int</code>, returning a positive <code>Int</code>.</p>
+<pre><code class="language-helios">int.encode_zigzag() -&gt; Int
+</code></pre>
 <h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
 <pre><code class="language-helios">int.serialize() -&gt; ByteArray
 </code></pre>
@@ -225,9 +243,19 @@
 <p>Returns decimal representation of integer.</p>
 <pre><code class="language-helios">int.show() -&gt; String
 </code></pre>
+<h3 id="to_big_endian"><a class="header" href="#to_big_endian"><code>to_big_endian</code></a></h3>
+<p>Encodes the <code>Int</code> as a <a href="https://en.wikipedia.org/wiki/Endianness">big endian</a> <a href="./bytearray.html"><code>ByteArray</code></a>.</p>
+<p>Throws an error if the <code>Int</code> is negative.</p>
+<pre><code class="language-helios">int.to_big_endian() -&gt; ByteArray
+</code></pre>
 <h3 id="to_bool"><a class="header" href="#to_bool"><code>to_bool</code></a></h3>
 <p>Turns <code>0</code> into <code>false</code>, and any other integer into <code>true</code>.</p>
 <pre><code class="language-helios">int.to_bool() -&gt; Bool
+</code></pre>
+<h3 id="to_little_endian"><a class="header" href="#to_little_endian"><code>to_little_endian</code></a></h3>
+<p>Encodes the <code>Int</code> as a <a href="https://en.wikipedia.org/wiki/Endianness">little endian</a> <a href="./bytearray.html"><code>ByteArray</code></a>.</p>
+<p>Throws an error if the <code>Int</code> is negative.</p>
+<pre><code class="language-helios">int.to_little_endian() -&gt; ByteArray
 </code></pre>
 <h3 id="to_hex"><a class="header" href="#to_hex"><code>to_hex</code></a></h3>
 <p>Returns hexadecimal representation of integer.</p>

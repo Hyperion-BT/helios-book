@@ -176,7 +176,7 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
 const MY_DATUM = Datum {...}
 </code></pre>
 <h2 id="script-purpose-1"><a class="header" href="#script-purpose-1">Script purpose (1)</a></h2>
-<p>In Helios all scripts start with a  <strong>script purpose</strong>, followed by the name of the script. There are four script purposes currently:</p>
+<p>In Helios all scripts start with a  <strong>script purpose</strong>, followed by the name of the script. There are 5 script purposes:</p>
 <ul>
 <li><strong>spending</strong></li>
 <li><strong>minting</strong></li>
@@ -207,12 +207,13 @@ const MY_DATUM = Datum {...}
 <li><strong>redeemer (3)</strong></li>
 <li><strong>script context</strong></li>
 </ul>
-<p>Each <code>main</code> argument is optional, but must appear in that order.</p>
+<p>Each <code>main</code> argument must appear in that order, but can be ignored with an underscore (<code>_</code>).</p>
 <pre><code class="language-helios">spending my_validator
 
 ...
 
-func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
+// redeemer is ignored
+func main(datum: Datum, _, context: ScriptContext) -&gt; Bool {
     ...
 }
 
@@ -239,16 +240,12 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
 </ul>
 <p>Special constructors, that aren't available in <code>main</code>, become available in this part of the script:</p>
 <ul>
-<li><a href="./builtins/outputdatum.html#new_hash"><code>OutputDatum::new_hash</code></a></li>
-<li><a href="./builtins/outputdatum.html#new_inline"><code>OutputDatum::new_inline</code></a></li>
-<li><a href="./builtins/outputdatum.html#new_none"><code>OutputDatum::new_none</code></a></li>
 <li><a href="./builtins/scriptcontext.html#new_certifying"><code>ScriptContext::new_certifying</code></a></li>
 <li><a href="./builtins/scriptcontext.html#new_minting"><code>ScriptContext::new_minting</code></a></li>
 <li><a href="./builtins/scriptcontext.html#new_rewarding"><code>ScriptContext::new_rewarding</code></a></li>
 <li><a href="./builtins/scriptcontext.html#new_spending"><code>ScriptContext::new_spending</code></a></li>
 <li><a href="./builtins/tx.html#new"><code>Tx::new</code></a></li>
 <li><a href="./builtins/txinput.html#new"><code>TxInput::new</code></a></li>
-<li><a href="./builtins/txoutput.html#new"><code>TxOutput::new</code></a></li>
 </ul>
 
                     </main>

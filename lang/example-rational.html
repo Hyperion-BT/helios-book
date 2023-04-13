@@ -148,7 +148,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p>The following is a complete example of a struct with both associated and regular methods.</p>
+                        <p>The following is a complete example of a struct with both associated functions and regular methods.</p>
 <h1 id="example-rational"><a class="header" href="#example-rational">Example: <code>Rational</code></a></h1>
 <pre><code class="language-helios">struct Rational {
     top:    Int
@@ -157,7 +157,7 @@
     // associated const
     const PI = Rational{ 355, 113 }
 
-    // associated method
+    // associated function
     func new(top: Int, bottom: Int) -&gt; Rational {
         Rational { top, bottom }
     }

@@ -172,11 +172,11 @@ func main() -&gt; Bool {
     a == 1
 }
 </code></pre>
-<p>You can also assign a name to any intermediate value when destructuring.</p>
-<pre><code>pair: Pair{a, _} = p; ...
+<p>You can also assign a name to any intermediate value when destructuring:</p>
+<pre><code class="language-helios">pair: Pair{a, _} = p; ...
 </code></pre>
-<p>Optionally you can include the type when destructuring a field.</p>
-<pre><code>pair: Pair{a: Int, _} = p; ...
+<p>Optionally you can include the type when destructuring a field:</p>
+<pre><code class="language-helios">pair: Pair{a: Int, _} = p; ...
 </code></pre>
 <h2 id="destructuring-an-enum-member-in-a-switch-case"><a class="header" href="#destructuring-an-enum-member-in-a-switch-case">Destructuring an enum member in a <code>switch</code> case</a></h2>
 <p>The same syntax as above can be used in <a href="./enums.html#switch"><code>switch</code></a> cases. Destructuring some builtin enums is also possible (WiP).</p>

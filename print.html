@@ -151,7 +151,7 @@
                     <main>
                         <h1 id="introduction-to-helios"><a class="header" href="#introduction-to-helios">Introduction to Helios</a></h1>
 <p><a href="https://github.com/Hyperion-BT/Helios">Helios</a> is a <a href="./lang/index.html">DSL</a> (Domain Specific Language) for writing smart contracts for the <a href="https://www.cardano.org">Cardano</a> blockchain.</p>
-<p>The <a href="https://github.com/Hyperion-BT/Helios">Helios library</a> is written in Javascript and has an <a href="./api/index.html">API</a> for:</p>
+<p>The <a href="https://github.com/Hyperion-BT/Helios">Helios library</a> is written in Javascript/Typescript and has an <a href="./api/index.html">API</a> for:</p>
 <ul>
 <li>compiling Helios sources into <a href="https://github.com/input-output-hk/plutus">Plutus-Core</a></li>
 <li>building and submitting transactions to the Cardano blockchain</li>
@@ -172,7 +172,7 @@ func main(_, _, _) -&gt; Bool {
 <h2 id="structure-of-this-book"><a class="header" href="#structure-of-this-book">Structure of this book</a></h2>
 <p>Before starting to use Helios to create smart contracts and build dApps it is important to understand Cardano's eUTxO model very well. If you don't yet, we recommend you read the <a href="./understanding-eutxos.html">Understanding eUTxOs</a> preface first.</p>
 <p><a href="./lang/index.html">Chapter 1</a> covers the language itself, including a complete reference of the Helios builtins.</p>
-<p><a href="./api/index.html">Chapter 2</a> covers setting up the Helios library, compiling smart contracts, and building and submitting smart contract transactions, using only Javascript.</p>
+<p><a href="./api/index.html">Chapter 2</a> covers setting up the Helios library, compiling smart contracts, and building and submitting smart contract transactions, using only Javascript/Typescript.</p>
 <p><a href="./cli/index.html">Chapter 3</a> covers how to use Helios smart contracts with <em>cardano-cli</em>.</p>
 <p><a href="./advanced-concepts/index.html">Chapter 4</a> covers minting policies, exploits to be aware of, some more complex scripts, and some recommendations for building dApps.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="understanding-the-eutxo-model"><a class="header" href="#understanding-the-eutxo-model">Understanding the eUTxO model</a></h1>
@@ -401,11 +401,11 @@ my_octal   = 0o121; ...
 </code></pre>
 <p>Similar to all other values in Helios, strings are immutable and have a fixed length. </p>
 <p>Strings cannot <em>grow</em> after definition. Concatenating two strings creates a new string:</p>
-<pre><code class="language-helios">string_1: String = &quot;Hel&quot;;
-string_2: String = &quot;ios&quot;;
+<pre><code class="language-helios">string_1 = &quot;Hel&quot;;
+string_2 = &quot;ios&quot;;
 result: String = string_1 + string_2; ... // &quot;Helios&quot;
 </code></pre>
-<p>More informationa about the <code>String</code> type can be found <a href="lang/./builtins/string.html">here</a>.</p>
+<p>More information about the <code>String</code> type can be found <a href="lang/./builtins/string.html">here</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="container-types"><a class="header" href="#container-types">Container types</a></h1>
 <p>Helios has 3 <strong>container</strong> types:</p>
 <ul>
@@ -414,7 +414,7 @@ result: String = string_1 + string_2; ... // &quot;Helios&quot;
 <li><code>Option</code> (equivalent to <code>Maybe</code> in Haskell)</li>
 </ul>
 <h2 id="list"><a class="header" href="#list">List</a></h2>
-<p>Helios has a builtin linked list type, similar to Haskell's <code>List</code>. The syntax for a list type is <code>[]ItemType</code> where <code>ItemType</code> is a parameter type that represents the type of the contained items. The item type can be any type except a function type.</p>
+<p>Helios has a builtin linked list type, similar to Haskell's <code>List</code>. The syntax for a list type is <code>[]ItemType</code> where <code>ItemType</code> is a parameter type that represents the type of the contained items. The <code>ItemType</code> can be any type except a function type.</p>
 <p>List literals have a syntax similar to Go:</p>
 <pre><code class="language-helios">my_ints = []Int{1, 2, 3, 4, 5};
 
@@ -425,8 +425,8 @@ x: Int = some_ints.get(2); ...   // x == 3
 </blockquote>
 <p>More information about lists can be found <a href="lang/./builtins/list.html">here</a>.</p>
 <h2 id="map"><a class="header" href="#map"><code>Map</code></a></h2>
-<p>A Map in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.</p>
-<p>A Map has a type syntax and a literal syntax similar to Go:</p>
+<p>A <code>Map</code> in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.</p>
+<p>A <code>Map</code> has a type syntax and a literal syntax similar to Go:</p>
 <pre><code class="language-helios">// either side of the colon can be an arbitrary expression 
 //  that evaluates to the correct type
 my_map = Map[String]Int{
@@ -528,7 +528,7 @@ none_int = Option[Int]::None; ...
 07 }
 </code></pre>
 </blockquote>
-<p>More advanced information can be found on the following pages:</p>
+<p>More detailed information can be found on the following pages:</p>
 <ul>
 <li><a href="lang/functions/./multiple_return_values.html">Multiple return values</a></li>
 <li><a href="lang/functions/./void.html">Void functions</a></li>
@@ -547,7 +547,7 @@ none_int = Option[Int]::None; ...
 <p>You can assign to multiple return values:</p>
 <pre><code class="language-helios">(a: Int, b: Int) = swap(10, 20); ... // a==20 &amp;&amp; b==10
 </code></pre>
-<p>Some of the multiple return values can be ignored with an underscore (<code>_</code>):</p>
+<p>Some of the multiple return values can be discarded with an underscore (<code>_</code>):</p>
 <pre><code class="language-helios">(a: Int, _) = swap(10, 20); ...
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="void-functions"><a class="header" href="#void-functions">Void functions</a></h1>
@@ -676,7 +676,7 @@ struct Rational {
 }
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: a struct can't be empty must have at least one field.</p>
+<p><strong>Note</strong>: a struct can't be empty and must have at least one field.</p>
 </blockquote>
 <h2 id="instantiating-a-struct"><a class="header" href="#instantiating-a-struct">Instantiating a struct</a></h2>
 <p>A struct can be instantiated using the following literal syntax:</p>
@@ -782,11 +782,11 @@ func main() -&gt; Bool {
     a == 1
 }
 </code></pre>
-<p>You can also assign a name to any intermediate value when destructuring.</p>
-<pre><code>pair: Pair{a, _} = p; ...
+<p>You can also assign a name to any intermediate value when destructuring:</p>
+<pre><code class="language-helios">pair: Pair{a, _} = p; ...
 </code></pre>
-<p>Optionally you can include the type when destructuring a field.</p>
-<pre><code>pair: Pair{a: Int, _} = p; ...
+<p>Optionally you can include the type when destructuring a field:</p>
+<pre><code class="language-helios">pair: Pair{a: Int, _} = p; ...
 </code></pre>
 <h2 id="destructuring-an-enum-member-in-a-switch-case"><a class="header" href="#destructuring-an-enum-member-in-a-switch-case">Destructuring an enum member in a <code>switch</code> case</a></h2>
 <p>The same syntax as above can be used in <a href="lang/./enums.html#switch"><code>switch</code></a> cases. Destructuring some builtin enums is also possible (WiP).</p>
@@ -834,7 +834,7 @@ func main(_, r: Redeemer, _) -&gt; Bool {
     }
 }
 
-const example_rational: Rational = Rational { 7, 21 }
+const example_rational = Rational { 7, 21 }
 
 const result: Rational = example_rational.add(example_rational)
 </code></pre>
@@ -867,7 +867,7 @@ add_to_rational_1: (Rational) -&gt; Rational = rational_1.add; ...
 	// associated const
 	const PI = Rational { 355, 113 }
 
-	// associated method
+	// associated function
 	func new(top: Int, bottom: Int) -&gt; Rational {
 		Rational { top, bottom }
 	}
@@ -880,12 +880,12 @@ For example:</p>
 <pre><code class="language-helios">half: Rational = Rational::new(1, 2); ...
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="automatic-methods"><a class="header" href="#automatic-methods">Automatic methods</a></h1>
-<p>The following (associated) methods and operators are automatically defined on all user and builtin types.</p>
+<p>The following (associated) methods and operators are automatically defined on all user and builtin types (except function types).</p>
 <h2 id="-"><a class="header" href="#-"><code>==</code>, <code>!=</code></a></h2>
-<p>The equality and inequality operators are automatically defined on every user-type.</p>
+<p>The equality and inequality operators are automatically defined on every type (except function types).</p>
 <h2 id="copy"><a class="header" href="#copy"><code>copy</code></a></h2>
 <p>Instantiates a copy of the underlying value, with some of the fields changed.</p>
-<p>This method has the same number of arguments as the number of fields in the user-defined <code>struct</code> or <code>enum</code>-variant. Each argument of <code>copy</code> has the same name as the corresponding field and is optional.</p>
+<p>This method has the same number of arguments as the number of fields in the user-defined <code>struct</code> or <code>enum</code>-variant. Each argument of <code>copy</code> has the same name as the corresponding field and is optional (see <a href="lang/./functions/named_arguments.html">named arguments</a>).</p>
 <pre><code class="language-helios">struct Pair {
     first:  Int
     second: Int
@@ -898,7 +898,7 @@ pair = Pair{1, 2};
 pair.copy(second: 3) // == Pair{1, 3}
 </code></pre>
 <h2 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h2>
-<p><code>from_data</code> is an <a href="lang/./associated-functions-and-constants.html">associated method</a> that is automatically defined on every user-type, and thus <code>from_data</code> is a reserved name that can't be used for other methods.</p>
+<p><code>from_data</code> is an <a href="lang/./associated-functions-and-constants.html">associated function</a> that is automatically defined on every user-type, and thus <code>from_data</code> is a reserved name that can't be used for other methods.</p>
 <p><code>from_data</code> converts a typeless <code>Data</code> into something typed.</p>
 <pre><code class="language-helios">MyType::from_data(data: Data) -&gt; MyType
 </code></pre>
@@ -910,7 +910,7 @@ pair.copy(second: 3) // == Pair{1, 3}
 <blockquote>
 <p><strong>Note</strong>: when debugging you can inspect the output of <code>print(my_data.serialize().show())</code> using <a href="https://cbor.nemo157.com">this cbor tool</a>.</p>
 </blockquote>
-<div style="break-before: page; page-break-before: always;"></div><p>The following is a complete example of a struct with both associated and regular methods.</p>
+<div style="break-before: page; page-break-before: always;"></div><p>The following is a complete example of a struct with both associated functions and regular methods.</p>
 <h1 id="example-rational"><a class="header" href="#example-rational">Example: <code>Rational</code></a></h1>
 <pre><code class="language-helios">struct Rational {
     top:    Int
@@ -919,7 +919,7 @@ pair.copy(second: 3) // == Pair{1, 3}
     // associated const
     const PI = Rational{ 355, 113 }
 
-    // associated method
+    // associated function
     func new(top: Int, bottom: Int) -&gt; Rational {
         Rational { top, bottom }
     }
@@ -966,7 +966,7 @@ func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
 const MY_DATUM = Datum {...}
 </code></pre>
 <h2 id="script-purpose-1"><a class="header" href="#script-purpose-1">Script purpose (1)</a></h2>
-<p>In Helios all scripts start with a  <strong>script purpose</strong>, followed by the name of the script. There are four script purposes currently:</p>
+<p>In Helios all scripts start with a  <strong>script purpose</strong>, followed by the name of the script. There are 5 script purposes:</p>
 <ul>
 <li><strong>spending</strong></li>
 <li><strong>minting</strong></li>
@@ -997,12 +997,13 @@ const MY_DATUM = Datum {...}
 <li><strong>redeemer (3)</strong></li>
 <li><strong>script context</strong></li>
 </ul>
-<p>Each <code>main</code> argument is optional, but must appear in that order.</p>
+<p>Each <code>main</code> argument must appear in that order, but can be ignored with an underscore (<code>_</code>).</p>
 <pre><code class="language-helios">spending my_validator
 
 ...
 
-func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
+// redeemer is ignored
+func main(datum: Datum, _, context: ScriptContext) -&gt; Bool {
     ...
 }
 
@@ -1029,16 +1030,12 @@ func main(datum: Datum, redeemer: Redeemer, context: ScriptContext) -&gt; Bool {
 </ul>
 <p>Special constructors, that aren't available in <code>main</code>, become available in this part of the script:</p>
 <ul>
-<li><a href="lang/./builtins/outputdatum.html#new_hash"><code>OutputDatum::new_hash</code></a></li>
-<li><a href="lang/./builtins/outputdatum.html#new_inline"><code>OutputDatum::new_inline</code></a></li>
-<li><a href="lang/./builtins/outputdatum.html#new_none"><code>OutputDatum::new_none</code></a></li>
 <li><a href="lang/./builtins/scriptcontext.html#new_certifying"><code>ScriptContext::new_certifying</code></a></li>
 <li><a href="lang/./builtins/scriptcontext.html#new_minting"><code>ScriptContext::new_minting</code></a></li>
 <li><a href="lang/./builtins/scriptcontext.html#new_rewarding"><code>ScriptContext::new_rewarding</code></a></li>
 <li><a href="lang/./builtins/scriptcontext.html#new_spending"><code>ScriptContext::new_spending</code></a></li>
 <li><a href="lang/./builtins/tx.html#new"><code>Tx::new</code></a></li>
 <li><a href="lang/./builtins/txinput.html#new"><code>TxInput::new</code></a></li>
-<li><a href="lang/./builtins/txoutput.html#new"><code>TxOutput::new</code></a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><p>The following example is the most trivial possible script.</p>
 <h2 id="example-always_succeeds"><a class="header" href="#example-always_succeeds">Example: <code>always_succeeds</code></a></h2>
@@ -1052,8 +1049,8 @@ func main(_, _, _) -&gt; Bool {
 <p>You must use an underscore (<code>_</code>) for unused arguments. In this case all three arguments of <code>main</code> are ignored by using an underscore.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="parameterized-contracts"><a class="header" href="#parameterized-contracts">Parameterized Contracts</a></h1>
 <p>Parameterizing contracts allows dApp developers to create separate instances of a Helios program.</p>
-<p>In Helios, this is done by <a href="lang/../api/reference/program.html#parameters-1"><code>re-binding</code></a> one or more top-level <code>const PARAM_NAME [...]</code> declarations.</p>
-<p>After re-binding any const parameters to a different value, the resulting program will always have a <strong>different contract address</strong>.</p>
+<p>In Helios, this is done by <a href="lang/../api/reference/program.html#parameters-1"><code>re-binding</code></a> one or more top-level <code>const PARAM_NAME = ...</code> declarations.</p>
+<p>After re-binding any const parameters to a different value, the resulting program will have a <strong>different contract address</strong>.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>In this example <code>OWNER</code> is a parameter.</p>
 <pre><code class="language-helios">spending my_validator
@@ -1071,17 +1068,17 @@ program.parameters.OWNER = new helios.PubKeyHash(&quot;...&quot;);
 
 const uplcProgram = program.compile();
 </code></pre>
-<p><a href="lang/../api/reference/heliosdata.html">Many Helios API types</a> can be used when rebinding the parameters. Also the user-defined types are available through <a href="lang/../api/reference/program.html#types"><code>program.types</code></a>. Besides using Helios API types, Javascript primitive objects (i.e. JSON-like) can be used to rebind a parameter in some cases.</p>
+<p><a href="lang/../api/reference/heliosdata.html">Many Helios API types</a> can be used when rebinding the parameters. Also the user-defined types are available through <a href="lang/../api/reference/program.html#types"><code>program.types</code></a>. Besides using Helios API types, Javascript primitive objects (i.e. JSON-like) can be used to re-bind a parameter in some cases.</p>
 <h2 id="contrast-with-datum"><a class="header" href="#contrast-with-datum">Contrast with Datum</a></h2>
-<p>Attaching Datum data structures to specific UTxO's is another way that a validator or other program can have varying behavior.</p>
-<p>Using Datum causes those explicit details to be included in UTxO's (and/or in transactions consuming them).  Transactions spending the UTxO's held at the same script address can each access and use those various Datum details.  Noteably, any interested party can trivially query to discover all the various UTxO's held at a single contract address.</p>
-<p>By contrast, two different instances of a parameterized contract, otherwise identical, will have separate addresses where UTxO's can be held.  <strong>UTxO's don't need to explicitly contain the parameter values</strong>.</p>
+<p>Attaching Datum data structures to specific UTxOs is another way that a validator or other program can have varying behavior.</p>
+<p>Using Datum causes those explicit details to be included in UTxOs (and/or in transactions consuming them). Transactions spending the UTxOs held at the same script address can each access and use those various Datum details. Noteably, any interested party can trivially query to discover all the various UTxOs held at a single contract address.</p>
+<p>By contrast, two different instances of a parameterized contract, otherwise identical, will have separate addresses where UTxOs can be held.  <strong>UTxO's don't need to explicitly contain the parameter values</strong>.</p>
 <p>Querying for UTxO's in separate instances of a parameterized contract is also possible, but requires the interested party to have sufficient knowledge of those separate instance addresses, or other publicly-visible attributes of the target transactions.</p>
 <p>Note that any parameterized contract can <strong>also</strong> use per-UTxO Datum values, as needed.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="modules"><a class="header" href="#modules">Modules</a></h1>
 <p>Helios top-level statements can be placed in modules and can then be imported by other Helios sources. Modules can be made available during compile-time by including them in a list as the second argument of the <a href="lang/../api/reference/program.html"><code>Program</code> constructor</a>.</p>
 <h2 id="import"><a class="header" href="#import"><code>import</code></a></h2>
-<p><code>import</code> statements in Helios are similar to Javascript:</p>
+<p><code>import</code> statements in Helios are similar to Javascript/Typescript:</p>
 <pre><code class="language-helios">import { 
     ImportedName1 as NewName1,
     ImportedName2
@@ -1281,7 +1278,7 @@ bool_false = false; ...
 <pre><code class="language-helios">byte_array = #213212; ...
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: in Haskell/Plutus <code>ByteArray</code> is called a <code>ByteString</code>, but that name was deemed too ambiguous for average programmers so <code>ByteArray</code> was chosen instead.</p>
+<p><strong>Note</strong>: in Haskell/Plutus this is called a <code>ByteString</code>, but we thought that that was too ambiguous, so we chose <code>ByteArray</code> instead.</p>
 </blockquote>
 <h2 id="associated-functions-2"><a class="header" href="#associated-functions-2">Associated functions</a></h2>
 <h3 id="from_data-4"><a class="header" href="#from_data-4"><code>from_data</code></a></h3>
@@ -1329,6 +1326,11 @@ bool_false = false; ...
 <h3 id="ends_with"><a class="header" href="#ends_with"><code>ends_with</code></a></h3>
 <p>Checks if a <code>ByteArray</code> ends with a given suffix.</p>
 <pre><code class="language-helios">byte_array.ends_with(suffix: ByteArray) -&gt; Bool
+</code></pre>
+<h3 id="prepend"><a class="header" href="#prepend"><code>prepend</code></a></h3>
+<p>Prepends an <code>Int</code> byte, returning a new <code>ByteArray</code>.</p>
+<p>Modulo 256 is applied internally to the byte before prepending.</p>
+<pre><code class="language-helios">byte_array.prepend(byte: Int) -&gt; ByteArray
 </code></pre>
 <h3 id="serialize-4"><a class="header" href="#serialize-4"><code>serialize</code></a></h3>
 <pre><code class="language-helios">byte_array.serialize() -&gt; ByteArray
@@ -1603,8 +1605,14 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="from_data-9"><a class="header" href="#from_data-9"><code>from_data</code></a></h3>
 <pre><code class="language-helios">Int::from_data(data: Data) -&gt; Int
 </code></pre>
+<h3 id="from_big_endian"><a class="header" href="#from_big_endian"><code>from_big_endian</code></a></h3>
+<p>Converts a <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a> into an <code>Int</code>. The last byte is multiplied by <code>1</code> before adding to the sum, the second-to-last byte is multiplied by <code>256</code> etc.</p>
+<p>The returned <code>Int</code> is always positive.</p>
+<pre><code class="language-helios">Int::from_big_endian(bytes: ByteArray) -&gt; Int
+</code></pre>
 <h3 id="from_little_endian"><a class="header" href="#from_little_endian"><code>from_little_endian</code></a></h3>
 <p>Converts a <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a> into an <code>Int</code>. The first byte is multiplied by <code>1</code> before adding to the sum, the second byte is multiplied by <code>256</code> etc.</p>
+<p>The returned <code>Int</code> is always positive.</p>
 <pre><code class="language-helios">Int::from_little_endian(bytes: ByteArray) -&gt; Int
 </code></pre>
 <h3 id="parse"><a class="header" href="#parse"><code>parse</code></a></h3>
@@ -1655,8 +1663,12 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">Int % Int -&gt; Int
 </code></pre>
 <h2 id="methods-10"><a class="header" href="#methods-10">Methods</a></h2>
+<h3 id="abs"><a class="header" href="#abs"><code>abs</code></a></h3>
+<p>Removes the sign, returning a positive <code>Int</code>.</p>
+<pre><code class="language-helios">int.abs() -&gt; Int
+</code></pre>
 <h3 id="bound"><a class="header" href="#bound"><code>bound</code></a></h3>
-<p>Bounds an <code>Int</code> if it falls outside a range. This builtin function doesn't check of the range is valid.</p>
+<p>Bounds an <code>Int</code> if it falls outside a range. This builtin function doesn't check if the range is valid.</p>
 <pre><code class="language-helios">int.bound(low: Int, high: Int) -&gt; Int
 </code></pre>
 <h3 id="bound_min"><a class="header" href="#bound_min"><code>bound_min</code></a></h3>
@@ -1667,6 +1679,14 @@ validator_credential.hash -&gt; ValidatorHash
 <p>Bounds an <code>Int</code> to be less or equals to a given maximum value.</p>
 <pre><code class="language-helios">int.bound_max(high: Int) -&gt; Int
 </code></pre>
+<h3 id="decode_zigzag"><a class="header" href="#decode_zigzag"><code>decode_zigzag</code></a></h3>
+<p>Decodes a <a href="https://en.wikipedia.org/wiki/Variable-length_quantity#Zigzag_encoding">zigzag encoded</a> <code>Int</code>. Throws an error if the <code>Int</code> is negative.</p>
+<pre><code class="language-helios">int.decode_zigzag() -&gt; Int
+</code></pre>
+<h3 id="encode_zigzag"><a class="header" href="#encode_zigzag"><code>encode_zigzag</code></a></h3>
+<p>Applies <a href="https://en.wikipedia.org/wiki/Variable-length_quantity#Zigzag_encoding">zigzag encoding</a> to the <code>Int</code>, returning a positive <code>Int</code>.</p>
+<pre><code class="language-helios">int.encode_zigzag() -&gt; Int
+</code></pre>
 <h3 id="serialize-10"><a class="header" href="#serialize-10"><code>serialize</code></a></h3>
 <pre><code class="language-helios">int.serialize() -&gt; ByteArray
 </code></pre>
@@ -1674,9 +1694,19 @@ validator_credential.hash -&gt; ValidatorHash
 <p>Returns decimal representation of integer.</p>
 <pre><code class="language-helios">int.show() -&gt; String
 </code></pre>
+<h3 id="to_big_endian"><a class="header" href="#to_big_endian"><code>to_big_endian</code></a></h3>
+<p>Encodes the <code>Int</code> as a <a href="https://en.wikipedia.org/wiki/Endianness">big endian</a> <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a>.</p>
+<p>Throws an error if the <code>Int</code> is negative.</p>
+<pre><code class="language-helios">int.to_big_endian() -&gt; ByteArray
+</code></pre>
 <h3 id="to_bool"><a class="header" href="#to_bool"><code>to_bool</code></a></h3>
 <p>Turns <code>0</code> into <code>false</code>, and any other integer into <code>true</code>.</p>
 <pre><code class="language-helios">int.to_bool() -&gt; Bool
+</code></pre>
+<h3 id="to_little_endian"><a class="header" href="#to_little_endian"><code>to_little_endian</code></a></h3>
+<p>Encodes the <code>Int</code> as a <a href="https://en.wikipedia.org/wiki/Endianness">little endian</a> <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a>.</p>
+<p>Throws an error if the <code>Int</code> is negative.</p>
+<pre><code class="language-helios">int.to_little_endian() -&gt; ByteArray
 </code></pre>
 <h3 id="to_hex"><a class="header" href="#to_hex"><code>to_hex</code></a></h3>
 <p>Returns hexadecimal representation of integer.</p>
@@ -1790,7 +1820,7 @@ validator_credential.hash -&gt; ValidatorHash
 <p>Transforms each item of a list. The resulting list item type is a type parameter of this method: <code>NewItemType</code>.</p>
 <pre><code class="language-helios">list.map(mapper: (ItemType) -&gt; NewItemType) -&gt; []NewItemType
 </code></pre>
-<h3 id="prepend"><a class="header" href="#prepend"><code>prepend</code></a></h3>
+<h3 id="prepend-1"><a class="header" href="#prepend-1"><code>prepend</code></a></h3>
 <p>Creates a new list by prepending an item to the old list.</p>
 <pre><code class="language-helios">list.prepend(item: ItemType) -&gt; []ItemType
 </code></pre>
@@ -1923,7 +1953,7 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
     mapper: (KeyType, ValueType) -&gt; (NewKeyType, NewValueType)
 ) -&gt; Map[NewKeyType]NewValueType
 </code></pre>
-<h3 id="prepend-1"><a class="header" href="#prepend-1"><code>prepend</code></a></h3>
+<h3 id="prepend-2"><a class="header" href="#prepend-2"><code>prepend</code></a></h3>
 <p>Prepends a key-value pair to the beginning of the <code>Map</code>, creating a new <code>Map</code>.</p>
 <pre><code class="language-helios">map.prepend(key: KeyType, value: ValueType) -&gt; Map[KeyType][ValueType]
 </code></pre>
@@ -1946,7 +1976,7 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <div style="break-before: page; page-break-before: always;"></div><h1 id="mintingpolicyhash"><a class="header" href="#mintingpolicyhash"><code>MintingPolicyHash</code></a></h1>
 <p><a href="https://en.wikipedia.org/wiki/Opaque_data_type">Opaque</a> <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a> that represents the hash of a minting policy script.</p>
 <p>Example:</p>
-<pre><code class="language-helios">mph: MintingPolicyHash = MintingPolicyHash::new(#...); ...
+<pre><code class="language-helios">mph = MintingPolicyHash::new(#...); ...
 </code></pre>
 <h2 id="associated-functions-9"><a class="header" href="#associated-functions-9">Associated functions</a></h2>
 <h3 id="new-5"><a class="header" href="#new-5"><code>new</code></a></h3>
@@ -3108,7 +3138,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">value.to_map() -&gt; Map[MintingPolicyHash]Map[ByteArray]Int
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="helios-api"><a class="header" href="#helios-api">Helios API</a></h1>
-<p>This chapter covers how to compile Helios sources and how to build Cardano transactions using the Helios Javascript library.</p>
+<p>This chapter covers how to compile Helios sources and how to build Cardano transactions using the Helios Javascript/Typescript library.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="setup-of-the-helios-library"><a class="header" href="#setup-of-the-helios-library">Setup of the Helios Library</a></h1>
 <p>The Helios library is platform agnostic and can be used in many different ways.</p>
 <script>
@@ -3145,7 +3175,7 @@ import * as helios from &quot;helios&quot;
 <p>Or install a specific version:</p>
 <pre><code class="language-bash">$ npm i @hyperionbt/helios@&lt;version&gt;
 </code></pre>
-<p>In your javascript file:</p>
+<p>In your Javascript/Typescript file:</p>
 <pre><code class="language-js">import { Program } from &quot;@hyperionbt/helios&quot;
 </code></pre>
 <p>We don't yet recommend installing the Helios library globally, as the API is still changing frequently.</p>

@@ -150,8 +150,8 @@
                     <main>
                         <h1 id="parameterized-contracts"><a class="header" href="#parameterized-contracts">Parameterized Contracts</a></h1>
 <p>Parameterizing contracts allows dApp developers to create separate instances of a Helios program.</p>
-<p>In Helios, this is done by <a href="../api/reference/program.html#parameters-1"><code>re-binding</code></a> one or more top-level <code>const PARAM_NAME [...]</code> declarations.</p>
-<p>After re-binding any const parameters to a different value, the resulting program will always have a <strong>different contract address</strong>.</p>
+<p>In Helios, this is done by <a href="../api/reference/program.html#parameters-1"><code>re-binding</code></a> one or more top-level <code>const PARAM_NAME = ...</code> declarations.</p>
+<p>After re-binding any const parameters to a different value, the resulting program will have a <strong>different contract address</strong>.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>In this example <code>OWNER</code> is a parameter.</p>
 <pre><code class="language-helios">spending my_validator
@@ -169,11 +169,11 @@ program.parameters.OWNER = new helios.PubKeyHash(&quot;...&quot;);
 
 const uplcProgram = program.compile();
 </code></pre>
-<p><a href="../api/reference/heliosdata.html">Many Helios API types</a> can be used when rebinding the parameters. Also the user-defined types are available through <a href="../api/reference/program.html#types"><code>program.types</code></a>. Besides using Helios API types, Javascript primitive objects (i.e. JSON-like) can be used to rebind a parameter in some cases.</p>
+<p><a href="../api/reference/heliosdata.html">Many Helios API types</a> can be used when rebinding the parameters. Also the user-defined types are available through <a href="../api/reference/program.html#types"><code>program.types</code></a>. Besides using Helios API types, Javascript primitive objects (i.e. JSON-like) can be used to re-bind a parameter in some cases.</p>
 <h2 id="contrast-with-datum"><a class="header" href="#contrast-with-datum">Contrast with Datum</a></h2>
-<p>Attaching Datum data structures to specific UTxO's is another way that a validator or other program can have varying behavior.</p>
-<p>Using Datum causes those explicit details to be included in UTxO's (and/or in transactions consuming them).  Transactions spending the UTxO's held at the same script address can each access and use those various Datum details.  Noteably, any interested party can trivially query to discover all the various UTxO's held at a single contract address.</p>
-<p>By contrast, two different instances of a parameterized contract, otherwise identical, will have separate addresses where UTxO's can be held.  <strong>UTxO's don't need to explicitly contain the parameter values</strong>.</p>
+<p>Attaching Datum data structures to specific UTxOs is another way that a validator or other program can have varying behavior.</p>
+<p>Using Datum causes those explicit details to be included in UTxOs (and/or in transactions consuming them). Transactions spending the UTxOs held at the same script address can each access and use those various Datum details. Noteably, any interested party can trivially query to discover all the various UTxOs held at a single contract address.</p>
+<p>By contrast, two different instances of a parameterized contract, otherwise identical, will have separate addresses where UTxOs can be held.  <strong>UTxO's don't need to explicitly contain the parameter values</strong>.</p>
 <p>Querying for UTxO's in separate instances of a parameterized contract is also possible, but requires the interested party to have sufficient knowledge of those separate instance addresses, or other publicly-visible attributes of the target transactions.</p>
 <p>Note that any parameterized contract can <strong>also</strong> use per-UTxO Datum values, as needed.</p>
 
