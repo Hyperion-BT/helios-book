@@ -1602,22 +1602,23 @@ validator_credential.hash -&gt; ValidatorHash
 <div style="break-before: page; page-break-before: always;"></div><h1 id="int-1"><a class="header" href="#int-1"><code>Int</code></a></h1>
 <p>This is an unbounded integer (like Haskell's <code>Integer</code> type).</p>
 <h2 id="associated-functions-6"><a class="header" href="#associated-functions-6">Associated functions</a></h2>
-<h3 id="from_data-9"><a class="header" href="#from_data-9"><code>from_data</code></a></h3>
-<pre><code class="language-helios">Int::from_data(data: Data) -&gt; Int
+<h3 id="from_base58"><a class="header" href="#from_base58"><code>from_base58</code></a></h3>
+<p>Decodes a <a href="lang/builtins/./string.html"><code>String</code></a> representing a <a href="https://en.wikipedia.org/wiki/Binary-to-text_encoding#Base58">base58</a> encoded <code>Int</code>.</p>
+<p>Throws an error if the string contains an invalid character.</p>
+<pre><code class="language-helios">Int::from_base58(encoded: String) -&gt; Int
 </code></pre>
 <h3 id="from_big_endian"><a class="header" href="#from_big_endian"><code>from_big_endian</code></a></h3>
 <p>Converts a <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a> into an <code>Int</code>. The last byte is multiplied by <code>1</code> before adding to the sum, the second-to-last byte is multiplied by <code>256</code> etc.</p>
 <p>The returned <code>Int</code> is always positive.</p>
 <pre><code class="language-helios">Int::from_big_endian(bytes: ByteArray) -&gt; Int
 </code></pre>
+<h3 id="from_data-9"><a class="header" href="#from_data-9"><code>from_data</code></a></h3>
+<pre><code class="language-helios">Int::from_data(data: Data) -&gt; Int
+</code></pre>
 <h3 id="from_little_endian"><a class="header" href="#from_little_endian"><code>from_little_endian</code></a></h3>
 <p>Converts a <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a> into an <code>Int</code>. The first byte is multiplied by <code>1</code> before adding to the sum, the second byte is multiplied by <code>256</code> etc.</p>
 <p>The returned <code>Int</code> is always positive.</p>
 <pre><code class="language-helios">Int::from_little_endian(bytes: ByteArray) -&gt; Int
-</code></pre>
-<h3 id="parse"><a class="header" href="#parse"><code>parse</code></a></h3>
-<p>Parses a string representation of an integer of the form <code>((-)?[1-9][0-9]*)|0</code> (i.e. a non zero-padded integer). Throws an error if the string representation of the integer doesn't respect this format. Note that <code>-0</code> isn't allowed, so zeros can only be represented by a single <code>0</code> digit.</p>
-<pre><code class="language-helios">Int::parse(string: String) -&gt; Int
 </code></pre>
 <h3 id="max"><a class="header" href="#max"><code>max</code></a></h3>
 <p>Returns the greater of two numbers.</p>
@@ -1626,6 +1627,10 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="min"><a class="header" href="#min"><code>min</code></a></h3>
 <p>Returns the lesser of two numbers.</p>
 <pre><code class="language-helios">Int::min(a: Int, b: Int) -&gt; Int
+</code></pre>
+<h3 id="parse"><a class="header" href="#parse"><code>parse</code></a></h3>
+<p>Parses a string representation of an integer of the form <code>((-)?[1-9][0-9]*)|0</code> (i.e. a non zero-padded integer). Throws an error if the string representation of the integer doesn't respect this format. Note that <code>-0</code> isn't allowed, so zeros can only be represented by a single <code>0</code> digit.</p>
+<pre><code class="language-helios">Int::parse(string: String) -&gt; Int
 </code></pre>
 <h2 id="operators-10"><a class="header" href="#operators-10">Operators</a></h2>
 <h3 id="-38"><a class="header" href="#-38"><code>==</code></a></h3>
@@ -1681,11 +1686,11 @@ validator_credential.hash -&gt; ValidatorHash
 </code></pre>
 <h3 id="decode_zigzag"><a class="header" href="#decode_zigzag"><code>decode_zigzag</code></a></h3>
 <p>Decodes a <a href="https://en.wikipedia.org/wiki/Variable-length_quantity#Zigzag_encoding">zigzag encoded</a> <code>Int</code>. Throws an error if the <code>Int</code> is negative.</p>
-<pre><code class="language-helios">int.decode_zigzag() -&gt; Int
+<pre><code class="language-helios">unsigned_int.decode_zigzag() -&gt; Int
 </code></pre>
 <h3 id="encode_zigzag"><a class="header" href="#encode_zigzag"><code>encode_zigzag</code></a></h3>
 <p>Applies <a href="https://en.wikipedia.org/wiki/Variable-length_quantity#Zigzag_encoding">zigzag encoding</a> to the <code>Int</code>, returning a positive <code>Int</code>.</p>
-<pre><code class="language-helios">int.encode_zigzag() -&gt; Int
+<pre><code class="language-helios">signed_int.encode_zigzag() -&gt; Int
 </code></pre>
 <h3 id="serialize-10"><a class="header" href="#serialize-10"><code>serialize</code></a></h3>
 <pre><code class="language-helios">int.serialize() -&gt; ByteArray
@@ -1693,6 +1698,11 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="show-3"><a class="header" href="#show-3"><code>show</code></a></h3>
 <p>Returns decimal representation of integer.</p>
 <pre><code class="language-helios">int.show() -&gt; String
+</code></pre>
+<h3 id="to_base58"><a class="header" href="#to_base58"><code>to_base58</code></a></h3>
+<p>Encodes the <code>Int</code> as a <a href="https://en.wikipedia.org/wiki/Binary-to-text_encoding#Base58">base58</a> <a href="lang/builtins/./string.html"><code>String</code></a>.</p>
+<p>Throws an error if the <code>Int</code> is negative.</p>
+<pre><code class="language-helios">int.to_base58() -&gt; String
 </code></pre>
 <h3 id="to_big_endian"><a class="header" href="#to_big_endian"><code>to_big_endian</code></a></h3>
 <p>Encodes the <code>Int</code> as a <a href="https://en.wikipedia.org/wiki/Endianness">big endian</a> <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a>.</p>
@@ -1709,7 +1719,7 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">int.to_little_endian() -&gt; ByteArray
 </code></pre>
 <h3 id="to_hex"><a class="header" href="#to_hex"><code>to_hex</code></a></h3>
-<p>Returns hexadecimal representation of integer.</p>
+<p>Returns the hexadecimal representation of the <code>Int</code>.</p>
 <pre><code class="language-helios">int.to_hex() -&gt; String
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="list-1"><a class="header" href="#list-1">List</a></h1>
