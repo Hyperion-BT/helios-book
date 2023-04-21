@@ -104,7 +104,7 @@ Value + Value -> Value
 
 ### `-`
 
-Subtracts two `Value`s. Note that negative token amounts are possible.
+Subtracts two `Value` instances. Note that negative token amounts are possible.
 
 ```helios
 Value - Value -> Value

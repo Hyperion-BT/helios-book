@@ -62,13 +62,13 @@ Time + Duration -> Time
 
 ### `-`
 
-Subtraction a [`Duration`](./duration.md) from a `Time` is like adding a negative [`Duration`](./duration.md).
+Subtracting a [`Duration`](./duration.md) from a `Time` is like adding a negative [`Duration`](./duration.md).
 
 ```helios
 Time - Duration -> Time
 ```
 
-The difference of two `Time`s is a [`Duration`](./duration.md).
+The difference of two `Time` instances is a [`Duration`](./duration.md).
 
 ```helios
 Time - Time -> Duration

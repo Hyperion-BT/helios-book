@@ -128,7 +128,7 @@ Int / Int -> Int
 
 ### `%`
 
-Modulo operator that returns remained after division.
+Modulo operator that returns the remainder after division.
 
 ```helios
 Int % Int -> Int
@@ -146,7 +146,7 @@ int.abs() -> Int
 
 ### `bound`
 
-Bounds an `Int` if it falls outside a range. This builtin function doesn't check if the range is valid.
+Bounds an `Int` if it falls outside a range. This builtin function doesn't check if the range is sensible.
 
 ```helios
 int.bound(low: Int, high: Int) -> Int

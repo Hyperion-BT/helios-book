@@ -130,7 +130,7 @@ Duration / Int -> Duration
 
 ### `%`
 
-Module operator that calculates remainder upon division.
+Modulo operator that calculates remainder upon division.
 
 ```helios
 Duration % Duration -> Duration

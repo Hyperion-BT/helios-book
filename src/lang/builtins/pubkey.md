@@ -2,7 +2,7 @@
 
 [Opaque](https://en.wikipedia.org/wiki/Opaque_data_type) [`ByteArray`](./bytearray.md) that represents a Ed25519 public key.
 
-A `PubKey` is 32 bytes long. A [`PubKeyHash`](./pubkeyhash.md) is the blake2b-224 hash of a `PubKey`. Sadly there is no on-chain way of calculating the [`PubKeyHash`](./pubkeyhash.md) from a `PubKey` (only blake2b-256 is available).
+A `PubKey` is 32 bytes long. A [`PubKeyHash`](./pubkeyhash.md) is the blake2b-224 hash of a `PubKey`. Sadly there is no on-chain way of calculating the [`PubKeyHash`](./pubkeyhash.md) from a `PubKey` (only blake2b-256 is available on-chain).
 
 Example instantiation:
 

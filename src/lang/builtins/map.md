@@ -98,7 +98,7 @@ map.any(predicate: (KeyType, ValueType) -> Bool) -> Bool
 
 ### `delete`
 
-Removes all entries with the given key. Doesn't throw an error if key isn't found.
+Removes all entries with the given key. Doesn't throw an error if the key isn't found.
 
 ```helios
 map.delete(key: KeyType) -> Map[KeyType]ValueType
@@ -214,7 +214,7 @@ map.head() -> (KeyType, ValueType)
 
 ### `map`
 
-Creates a new map by transforming the map keys and values.
+Creates a new `Map` by transforming the `Map` keys and values.
 
 ```helios
 map.map(
