@@ -1592,7 +1592,7 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">Duration / Int -&gt; Duration
 </code></pre>
 <h3 id="-37"><a class="header" href="#-37"><code>%</code></a></h3>
-<p>Module operator that calculates remainder upon division.</p>
+<p>Modulo operator that calculates remainder upon division.</p>
 <pre><code class="language-helios">Duration % Duration -&gt; Duration
 </code></pre>
 <h2 id="methods-9"><a class="header" href="#methods-9">Methods</a></h2>
@@ -1664,7 +1664,7 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">Int / Int -&gt; Int
 </code></pre>
 <h3 id="-47"><a class="header" href="#-47"><code>%</code></a></h3>
-<p>Modulo operator that returns remained after division.</p>
+<p>Modulo operator that returns the remainder after division.</p>
 <pre><code class="language-helios">Int % Int -&gt; Int
 </code></pre>
 <h2 id="methods-10"><a class="header" href="#methods-10">Methods</a></h2>
@@ -1673,7 +1673,7 @@ validator_credential.hash -&gt; ValidatorHash
 <pre><code class="language-helios">int.abs() -&gt; Int
 </code></pre>
 <h3 id="bound"><a class="header" href="#bound"><code>bound</code></a></h3>
-<p>Bounds an <code>Int</code> if it falls outside a range. This builtin function doesn't check if the range is valid.</p>
+<p>Bounds an <code>Int</code> if it falls outside a range. This builtin function doesn't check if the range is sensible.</p>
 <pre><code class="language-helios">int.bound(low: Int, high: Int) -&gt; Int
 </code></pre>
 <h3 id="bound_min"><a class="header" href="#bound_min"><code>bound_min</code></a></h3>
@@ -1896,7 +1896,7 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <pre><code class="language-helios">map.any(predicate: (KeyType, ValueType) -&gt; Bool) -&gt; Bool
 </code></pre>
 <h3 id="delete"><a class="header" href="#delete"><code>delete</code></a></h3>
-<p>Removes all entries with the given key. Doesn't throw an error if key isn't found.</p>
+<p>Removes all entries with the given key. Doesn't throw an error if the key isn't found.</p>
 <pre><code class="language-helios">map.delete(key: KeyType) -&gt; Map[KeyType]ValueType
 </code></pre>
 <h3 id="filter-1"><a class="header" href="#filter-1"><code>filter</code></a></h3>
@@ -1958,7 +1958,7 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <pre><code class="language-helios">map.head() -&gt; (KeyType, ValueType)
 </code></pre>
 <h3 id="map-3"><a class="header" href="#map-3"><code>map</code></a></h3>
-<p>Creates a new map by transforming the map keys and values.</p>
+<p>Creates a new <code>Map</code> by transforming the <code>Map</code> keys and values.</p>
 <pre><code class="language-helios">map.map(
     mapper: (KeyType, ValueType) -&gt; (NewKeyType, NewValueType)
 ) -&gt; Map[NewKeyType]NewValueType
@@ -2121,7 +2121,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pubkey"><a class="header" href="#pubkey"><code>PubKey</code></a></h1>
 <p><a href="https://en.wikipedia.org/wiki/Opaque_data_type">Opaque</a> <a href="lang/builtins/./bytearray.html"><code>ByteArray</code></a> that represents a Ed25519 public key.</p>
-<p>A <code>PubKey</code> is 32 bytes long. A <a href="lang/builtins/./pubkeyhash.html"><code>PubKeyHash</code></a> is the blake2b-224 hash of a <code>PubKey</code>. Sadly there is no on-chain way of calculating the <a href="lang/builtins/./pubkeyhash.html"><code>PubKeyHash</code></a> from a <code>PubKey</code> (only blake2b-256 is available).</p>
+<p>A <code>PubKey</code> is 32 bytes long. A <a href="lang/builtins/./pubkeyhash.html"><code>PubKeyHash</code></a> is the blake2b-224 hash of a <code>PubKey</code>. Sadly there is no on-chain way of calculating the <a href="lang/builtins/./pubkeyhash.html"><code>PubKeyHash</code></a> from a <code>PubKey</code> (only blake2b-256 is available on-chain).</p>
 <p>Example instantiation:</p>
 <pre><code class="language-helios">pub_key: PubKey = PubKey::new(#...); ...
 </code></pre>
@@ -2615,10 +2615,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">Time + Duration -&gt; Time
 </code></pre>
 <h3 id="--3"><a class="header" href="#--3"><code>-</code></a></h3>
-<p>Subtraction a <a href="lang/builtins/./duration.html"><code>Duration</code></a> from a <code>Time</code> is like adding a negative <a href="lang/builtins/./duration.html"><code>Duration</code></a>.</p>
+<p>Subtracting a <a href="lang/builtins/./duration.html"><code>Duration</code></a> from a <code>Time</code> is like adding a negative <a href="lang/builtins/./duration.html"><code>Duration</code></a>.</p>
 <pre><code class="language-helios">Time - Duration -&gt; Time
 </code></pre>
-<p>The difference of two <code>Time</code>s is a <a href="lang/builtins/./duration.html"><code>Duration</code></a>.</p>
+<p>The difference of two <code>Time</code> instances is a <a href="lang/builtins/./duration.html"><code>Duration</code></a>.</p>
 <pre><code class="language-helios">Time - Time -&gt; Duration
 </code></pre>
 <h2 id="methods-27"><a class="header" href="#methods-27">Methods</a></h2>
@@ -3094,7 +3094,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">Value + Value -&gt; Value
 </code></pre>
 <h3 id="--4"><a class="header" href="#--4"><code>-</code></a></h3>
-<p>Subtracts two <code>Value</code>s. Note that negative token amounts are possible.</p>
+<p>Subtracts two <code>Value</code> instances. Note that negative token amounts are possible.</p>
 <pre><code class="language-helios">Value - Value -&gt; Value
 </code></pre>
 <h3 id="-139"><a class="header" href="#-139"><code>*</code></a></h3>

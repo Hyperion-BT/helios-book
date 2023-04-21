@@ -203,7 +203,7 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <pre><code class="language-helios">map.any(predicate: (KeyType, ValueType) -&gt; Bool) -&gt; Bool
 </code></pre>
 <h3 id="delete"><a class="header" href="#delete"><code>delete</code></a></h3>
-<p>Removes all entries with the given key. Doesn't throw an error if key isn't found.</p>
+<p>Removes all entries with the given key. Doesn't throw an error if the key isn't found.</p>
 <pre><code class="language-helios">map.delete(key: KeyType) -&gt; Map[KeyType]ValueType
 </code></pre>
 <h3 id="filter"><a class="header" href="#filter"><code>filter</code></a></h3>
@@ -265,7 +265,7 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <pre><code class="language-helios">map.head() -&gt; (KeyType, ValueType)
 </code></pre>
 <h3 id="map-1"><a class="header" href="#map-1"><code>map</code></a></h3>
-<p>Creates a new map by transforming the map keys and values.</p>
+<p>Creates a new <code>Map</code> by transforming the <code>Map</code> keys and values.</p>
 <pre><code class="language-helios">map.map(
     mapper: (KeyType, ValueType) -&gt; (NewKeyType, NewValueType)
 ) -&gt; Map[NewKeyType]NewValueType
