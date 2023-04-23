@@ -720,7 +720,7 @@ func main(datum: Datum) -&gt; Bool {
 		Queue =&gt; {
 			... // x not used, so can't be declared
 		},
-		else =&gt; true // default must come last if all sub-types of Datum aren't handled explicitely
+		_ =&gt; true // default must come last if all sub-types of Datum aren't handled explicitely
 		// braces surrounding the cases are optional
 	}
 }
@@ -753,7 +753,7 @@ func main(datum: Datum) -&gt; Bool {
 }
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: the default <code>else</code> case can also be used as a substitute for any of these cases.</p>
+<p><strong>Note</strong>: the default <code>_</code> case can also be used as a substitute for any of these cases.</p>
 </blockquote>
 <blockquote>
 <p><strong>Note</strong>: besides the builtin types only one enum type can be used in a <code>Data</code> <code>switch</code>, and structs/enum-members <strong>can't</strong> be used. If an enum is used then <code>(Int, []Data)</code> can't be used.</p>
@@ -2096,7 +2096,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h2 id="getters-9"><a class="header" href="#getters-9">Getters</a></h2>
 <h3 id="outputdatum-1"><a class="header" href="#outputdatum-1"><code>OutputDatum</code></a></h3>
 <h4 id="get_inline_data"><a class="header" href="#get_inline_data"><code>get_inline_data</code></a></h4>
-<p>Short-hand for <code>output_datum.switch{inline: Inline =&gt; inline.data, else =&gt; error(&quot;not an inline datum&quot;)}</code>:</p>
+<p>Short-hand for <code>output_datum.switch{inline: Inline =&gt; inline.data, _ =&gt; error(&quot;not an inline datum&quot;)}</code>:</p>
 <pre><code class="language-helios">output_datum.get_inline_data() -&gt; Data
 </code></pre>
 <h3 id="outputdatumhash"><a class="header" href="#outputdatumhash"><code>OutputDatum::Hash</code></a></h3>
@@ -2420,9 +2420,9 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">staking_credential.switch{
   h: Hash =&gt; h.hash.switch{
     v: Validator =&gt; v.hash,
-    else =&gt; error(&quot;not a StakingHash::Validator&quot;)
+    _ =&gt; error(&quot;not a StakingHash::Validator&quot;)
   }, 
-  else =&gt; error(&quot;not a StakingCredential::Hash&quot;)
+  _ =&gt; error(&quot;not a StakingCredential::Hash&quot;)
 }
 </code></pre>
 <h2 id="operators-22"><a class="header" href="#operators-22">Operators</a></h2>
