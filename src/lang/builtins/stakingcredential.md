@@ -45,9 +45,9 @@ The following example code can be used to extract the underlying [`StakingValida
 staking_credential.switch{
   h: Hash => h.hash.switch{
     v: Validator => v.hash,
-    else => error("not a StakingHash::Validator")
+    _ => error("not a StakingHash::Validator")
   }, 
-  else => error("not a StakingCredential::Hash")
+  _ => error("not a StakingCredential::Hash")
 }
 ```
 

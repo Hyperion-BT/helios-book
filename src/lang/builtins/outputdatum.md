@@ -45,7 +45,7 @@ OutputDatum::new_none() -> OutputDatum::None
 
 #### `get_inline_data`
 
-Short-hand for `output_datum.switch{inline: Inline => inline.data, else => error("not an inline datum")}`:
+Short-hand for `output_datum.switch{inline: Inline => inline.data, _ => error("not an inline datum")}`:
 
 ```helios
 output_datum.get_inline_data() -> Data

@@ -39,7 +39,7 @@ func main(datum: Datum) -> Bool {
 		Queue => {
 			... // x not used, so can't be declared
 		},
-		else => true // default must come last if all sub-types of Datum aren't handled explicitely
+		_ => true // default must come last if all sub-types of Datum aren't handled explicitely
 		// braces surrounding the cases are optional
 	}
 }
@@ -78,6 +78,6 @@ data.switch{
 }
 ```
 
-> **Note**: the default `else` case can also be used as a substitute for any of these cases.
+> **Note**: the default `_` case can also be used as a substitute for any of these cases.
 
 > **Note**: besides the builtin types only one enum type can be used in a `Data` `switch`, and structs/enum-members **can't** be used. If an enum is used then `(Int, []Data)` can't be used.
