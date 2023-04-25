@@ -192,6 +192,9 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints '0'
 
 none_int = Option[Int]::None; ...
 </code></pre>
+<p>If you expect <code>Some</code>, you can assign, and even destructure, using the correct type annotation. Helios will automatically turn the assignment into a runtime type assertion (any <a href="./enums.html"><code>enum</code></a> can take advantage of this):</p>
+<pre><code class="language-helios">Option[Int]::Some{my_int} = option; ...
+</code></pre>
 <p>More information about <code>Option</code> can be found <a href="./builtins/option.html">here</a>.</p>
 
                     </main>

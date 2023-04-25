@@ -178,6 +178,9 @@ func main() -&gt; Bool {
 <p>Optionally you can include the type when destructuring a field:</p>
 <pre><code class="language-helios">pair: Pair{a: Int, _} = p; ...
 </code></pre>
+<p>Destructuring an enum instance into an enum variant will create a runtime type assertion:</p>
+<pre><code class="language-helios">Option[Int]::Some{a} = option; ... // throws runtime error if option is None
+</code></pre>
 <h2 id="destructuring-an-enum-member-in-a-switch-case"><a class="header" href="#destructuring-an-enum-member-in-a-switch-case">Destructuring an enum member in a <code>switch</code> case</a></h2>
 <p>The same syntax as above can be used in <a href="./enums.html#switch"><code>switch</code></a> cases. Destructuring some builtin enums is also possible (WiP).</p>
 <pre><code class="language-helios">option.switch{

@@ -450,6 +450,9 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints '0'
 
 none_int = Option[Int]::None; ...
 </code></pre>
+<p>If you expect <code>Some</code>, you can assign, and even destructure, using the correct type annotation. Helios will automatically turn the assignment into a runtime type assertion (any <a href="lang/./enums.html"><code>enum</code></a> can take advantage of this):</p>
+<pre><code class="language-helios">Option[Int]::Some{my_int} = option; ...
+</code></pre>
 <p>More information about <code>Option</code> can be found <a href="lang/./builtins/option.html">here</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="branching"><a class="header" href="#branching">Branching</a></h1>
 <p>Helios has conventional <code>if-else</code> syntax for branching:</p>
@@ -787,6 +790,9 @@ func main() -&gt; Bool {
 </code></pre>
 <p>Optionally you can include the type when destructuring a field:</p>
 <pre><code class="language-helios">pair: Pair{a: Int, _} = p; ...
+</code></pre>
+<p>Destructuring an enum instance into an enum variant will create a runtime type assertion:</p>
+<pre><code class="language-helios">Option[Int]::Some{a} = option; ... // throws runtime error if option is None
 </code></pre>
 <h2 id="destructuring-an-enum-member-in-a-switch-case"><a class="header" href="#destructuring-an-enum-member-in-a-switch-case">Destructuring an enum member in a <code>switch</code> case</a></h2>
 <p>The same syntax as above can be used in <a href="lang/./enums.html#switch"><code>switch</code></a> cases. Destructuring some builtin enums is also possible (WiP).</p>
@@ -1822,6 +1828,10 @@ validator_credential.hash -&gt; ValidatorHash
 <blockquote>
 <p><strong>Note</strong>: <code>get(n)</code> has to iterate until it encounters the <code>n</code>-th item, so this method is <strong>O(n)</strong> and <strong>not</strong> O(1).</p>
 </blockquote>
+<h3 id="get_singleton"><a class="header" href="#get_singleton"><code>get_singleton</code></a></h3>
+<p>Asserts that the list contains precisely one item, and returns that item.</p>
+<pre><code class="language-helios">list.get_singleton() -&gt; ItemType
+</code></pre>
 <h3 id="is_empty"><a class="header" href="#is_empty"><code>is_empty</code></a></h3>
 <p>Returns <code>true</code> if the list is empty.</p>
 <pre><code class="language-helios">list.is_empty() -&gt; Bool
@@ -1956,6 +1966,10 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id="head-1"><a class="header" href="#head-1"><code>head</code></a></h3>
 <p>Get the key and the value of the first entry.</p>
 <pre><code class="language-helios">map.head() -&gt; (KeyType, ValueType)
+</code></pre>
+<h3 id="is_empty-1"><a class="header" href="#is_empty-1"><code>is_empty</code></a></h3>
+<p>Returns <code>true</code> if the <code>Map</code> is empty.</p>
+<pre><code class="language-helios">map.is_empty() -&gt; Bool
 </code></pre>
 <h3 id="map-3"><a class="header" href="#map-3"><code>map</code></a></h3>
 <p>Creates a new <code>Map</code> by transforming the <code>Map</code> keys and values.</p>
