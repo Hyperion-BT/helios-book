@@ -37,6 +37,12 @@ Optionally you can include the type when destructuring a field:
 pair: Pair{a: Int, _} = p; ...
 ```
 
+Destructuring an enum instance into an enum variant will create a runtime type assertion:
+
+```helios
+Option[Int]::Some{a} = option; ... // throws runtime error if option is None
+```
+
 ## Destructuring an enum member in a `switch` case
 
 The same syntax as above can be used in [`switch`](./enums.md#switch) cases. Destructuring some builtin enums is also possible (WiP).

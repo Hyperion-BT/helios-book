@@ -212,6 +212,14 @@ Get the key and the value of the first entry.
 map.head() -> (KeyType, ValueType)
 ```
 
+### `is_empty`
+
+Returns `true` if the `Map` is empty.
+
+```helios
+map.is_empty() -> Bool
+```
+
 ### `map`
 
 Creates a new `Map` by transforming the `Map` keys and values.

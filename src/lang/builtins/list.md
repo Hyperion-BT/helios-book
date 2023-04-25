@@ -176,6 +176,14 @@ list.get(index: Int) -> ItemType
 
 > **Note**: `get(n)` has to iterate until it encounters the `n`-th item, so this method is **O(n)** and **not** O(1).
 
+### `get_singleton`
+
+Asserts that the list contains precisely one item, and returns that item.
+
+```helios
+list.get_singleton() -> ItemType
+```
+
 ### `is_empty`
 
 Returns `true` if the list is empty.

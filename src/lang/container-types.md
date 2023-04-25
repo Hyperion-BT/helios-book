@@ -61,4 +61,9 @@ some_int = Option[Int]::Some{42};
 none_int = Option[Int]::None; ...
 ```
 
+If you expect `Some`, you can assign, and even destructure, using the correct type annotation. Helios will automatically turn the assignment into a runtime type assertion (any [`enum`](./enums.md) can take advantage of this):
+```helios
+Option[Int]::Some{my_int} = option; ...
+```
+
 More information about `Option` can be found [here](./builtins/option.md).
