@@ -1,11 +1,11 @@
 # Primitive types
 
-Helios has 4 **primitive** types:
+Helios has 5 **primitive** types:
   * `Int` (an unbounded integer)
+  * `Real` (a fixed point real number)
   * `Bool` (`true` or `false`)
   * `ByteArray` (array of uint8)
   * `String` (utf-8 text)
-
 
 ## `Int`
 
@@ -19,10 +19,17 @@ my_hex     = 0x11;
 my_octal   = 0o121; ...
 ```
 
-`Int` is the only numeric type in Helios. There is **no** float type.
-
 More information about the `Int` type can be found [here](./builtins/int.md).
 
+## `Real`
+
+Helios' `Real` type represents a fixed point real number with 6 decimal places. `Real` is designed for use in calculations involving relative fee calculations.
+
+```helios
+fee = 0.0001 // 0.01%
+```
+
+More information about the `Real` type can be found [here](./builtins/real.md).
 
 ## `Bool`
 

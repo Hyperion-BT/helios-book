@@ -50,6 +50,7 @@
     - [OutputDatum](./lang/builtins/outputdatum.md)
     - [PubKey](./lang/builtins/pubkey.md)
     - [PubKeyHash](./lang/builtins/pubkeyhash.md)
+    - [Real](./lang/builtins/real.md)
     - [ScriptContext](./lang/builtins/scriptcontext.md)
     - [ScriptHash](./lang/builtins/scripthash.md)
     - [ScriptPurpose](./lang/builtins/scriptpurpose.md)

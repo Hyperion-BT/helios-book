@@ -243,3 +243,11 @@ Returns the hexadecimal representation of the `Int`.
 ```helios
 int.to_hex() -> String
 ```
+
+### `to_real`
+
+Converts the `Int` to the fixed point [`Real`](./real.md) representation.
+
+```helios
+int.to_real() -> Real
+```

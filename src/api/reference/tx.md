@@ -212,6 +212,8 @@ Mutates the transaction. Only available when building the transaction. Returns t
 tx.validFrom(time: Date): helios.Tx
 ```
 
+>**Note**: since Helios v0.13.29 this is set automatically if any of the validator scripts call [`tx.time_range`](../../lang/builtins/tx.md#time_range).
+
 ### `validTo`
 
 Set the end of the valid time range. Mutates the transaction. Only available when building a transaction.
@@ -221,3 +223,5 @@ Returns the transaction instance so build methods can be chained.
 ```ts
 tx.validTo(time: Date): helios.Tx
 ```
+
+>**Note**: since Helios v0.13.29 this is set automatically if any of the validator scripts call [`tx.time_range`](../../lang/builtins/tx.md#time_range).

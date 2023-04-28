@@ -7,6 +7,7 @@ This section contains a reference of all the Helios builtins.
   * [Bool](./bool.md)
   * [ByteArray](./bytearray.md)
   * [Int](./int.md)
+  * [Real](./real.md)
   * [String](./string.md)
 
 ## Container types
