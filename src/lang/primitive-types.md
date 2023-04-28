@@ -23,7 +23,7 @@ More information about the `Int` type can be found [here](./builtins/int.md).
 
 ## `Real`
 
-Helios' `Real` type represents a fixed point real number with 6 decimal places. `Real` is designed for use in calculations involving relative fee calculations.
+Helios' `Real` type represents a fixed point real number with 6 decimal places. `Real` is designed for use in calculations involving relative fees.
 
 ```helios
 fee = 0.0001 // 0.01%

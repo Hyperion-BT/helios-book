@@ -1,6 +1,6 @@
 # `Real`
 
-This is a fixed point real number type with 6 decimal places. `Real` is designed for use in calculations involving relative fee calculations.
+This is a fixed point real number type with 6 decimal places. `Real` is designed for use in calculations involving relative fees.
 
 ```helios
 real = 0.001 // 0.1%
