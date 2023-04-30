@@ -1801,6 +1801,15 @@ validator_credential.hash -&gt; ValidatorHash
 <p>Returns <code>true</code> if any of the items in the list satisfy the predicate.</p>
 <pre><code class="language-helios">list.any(predicate: (ItemType) -&gt; Bool) -&gt; Bool
 </code></pre>
+<h3 id="drop"><a class="header" href="#drop"><code>drop</code></a></h3>
+<p>Drops list items counting from the beginning, returning the rest of the list. Throws an error if <code>n</code> is negative or larger than the length of the list.</p>
+<pre><code class="language-helios">list.drop(n: Int) -&gt; []ItemType
+</code></pre>
+<h3 id="drop_end"><a class="header" href="#drop_end"><code>drop_end</code></a></h3>
+<p>Drops list items counting from the end, returning the non-dropped part of the list. Throws an error if <code>n</code> is negative or larger than the length of the list.</p>
+<p>This method is more efficient than calling <code>list.take(list.length - n)</code>.</p>
+<pre><code class="language-helios">list.drop_end(n: Int) -&gt; []ItemType
+</code></pre>
 <h3 id="filter"><a class="header" href="#filter"><code>filter</code></a></h3>
 <p>Returns a list of all the items in the old list that satisfy the predicate.</p>
 <pre><code class="language-helios">list.filter(predicate: (ItemType) -&gt; Bool) -&gt; []ItemType
@@ -1860,6 +1869,15 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="sort"><a class="header" href="#sort"><code>sort</code></a></h3>
 <p>Sorts the list using insertion sort.</p>
 <pre><code class="language-helios">list.sort((a: ItemType, b: ItemType) -&gt; Bool) -&gt; []ItemType
+</code></pre>
+<h3 id="take"><a class="header" href="#take"><code>take</code></a></h3>
+<p>Takes the first <code>n</code> items from the list. Throws an error if <code>n</code> is negative or larger than the length of the list.</p>
+<pre><code class="language-helios">list.take(n: Int) -&gt; []ItemType
+</code></pre>
+<h3 id="take_end"><a class="header" href="#take_end"><code>take_end</code></a></h3>
+<p>Takes the last <code>n</code> items from the list. Throws an error if <code>n</code> is negative or larger than the length of the list.</p>
+<p>This method is more efficient than calling <code>list.drop(list.length - n)</code>.</p>
+<pre><code class="language-helios">list.take_end(n: Int) -&gt; []ItemType
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="map-2"><a class="header" href="#map-2"><code>Map</code></a></h1>
 <p>List of key-value pairs. The insertion order of the key-value pairs matters.</p>
