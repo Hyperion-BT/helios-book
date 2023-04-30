@@ -217,7 +217,7 @@
 </code></pre>
 <h3 id="drop_end"><a class="header" href="#drop_end"><code>drop_end</code></a></h3>
 <p>Drops list items counting from the end, returning the non-dropped part of the list. Throws an error if <code>n</code> is negative or larger than the length of the list.</p>
-<p>This method is more efficient than calling <code>list.take(list.length - n)</code>.</p>
+<p>This method is more efficient than calling <code>list.take(list.length - n)</code> (if the list length isn't already known).</p>
 <pre><code class="language-helios">list.drop_end(n: Int) -&gt; []ItemType
 </code></pre>
 <h3 id="filter"><a class="header" href="#filter"><code>filter</code></a></h3>
@@ -286,7 +286,7 @@
 </code></pre>
 <h3 id="take_end"><a class="header" href="#take_end"><code>take_end</code></a></h3>
 <p>Takes the last <code>n</code> items from the list. Throws an error if <code>n</code> is negative or larger than the length of the list.</p>
-<p>This method is more efficient than calling <code>list.drop(list.length - n)</code>.</p>
+<p>This method is more efficient than calling <code>list.drop(list.length - n)</code> (if the list length isn't already known).</p>
 <pre><code class="language-helios">list.take_end(n: Int) -&gt; []ItemType
 </code></pre>
 
