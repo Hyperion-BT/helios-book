@@ -124,7 +124,7 @@ list.drop(n: Int) -> []ItemType
 
 Drops list items counting from the end, returning the non-dropped part of the list. Throws an error if `n` is negative or larger than the length of the list.
 
-This method is more efficient than calling `list.take(list.length - n)`.
+This method is more efficient than calling `list.take(list.length - n)` (if the list length isn't already known).
 
 ```helios
 list.drop_end(n: Int) -> []ItemType
@@ -252,7 +252,7 @@ list.take(n: Int) -> []ItemType
 
 Takes the last `n` items from the list. Throws an error if `n` is negative or larger than the length of the list.
 
-This method is more efficient than calling `list.drop(list.length - n)`.
+This method is more efficient than calling `list.drop(list.length - n)` (if the list length isn't already known).
 
 ```helios
 list.take_end(n: Int) -> []ItemType
