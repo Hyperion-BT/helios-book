@@ -112,6 +112,24 @@ Returns `true` if any of the items in the list satisfy the predicate.
 list.any(predicate: (ItemType) -> Bool) -> Bool
 ```
 
+### `drop`
+
+Drops list items counting from the beginning, returning the rest of the list. Throws an error if `n` is negative or larger than the length of the list.
+
+```helios
+list.drop(n: Int) -> []ItemType
+```
+
+### `drop_end`
+
+Drops list items counting from the end, returning the non-dropped part of the list. Throws an error if `n` is negative or larger than the length of the list.
+
+This method is more efficient than calling `list.take(list.length - n)`.
+
+```helios
+list.drop_end(n: Int) -> []ItemType
+```
+
 ### `filter`
 
 Returns a list of all the items in the old list that satisfy the predicate.
@@ -220,4 +238,22 @@ Sorts the list using insertion sort.
 
 ```helios
 list.sort((a: ItemType, b: ItemType) -> Bool) -> []ItemType
+```
+
+### `take`
+
+Takes the first `n` items from the list. Throws an error if `n` is negative or larger than the length of the list.
+
+```helios
+list.take(n: Int) -> []ItemType
+```
+
+### `take_end`
+
+Takes the last `n` items from the list. Throws an error if `n` is negative or larger than the length of the list.
+
+This method is more efficient than calling `list.drop(list.length - n)`.
+
+```helios
+list.take_end(n: Int) -> []ItemType
 ```
