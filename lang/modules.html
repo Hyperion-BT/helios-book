@@ -163,9 +163,19 @@
 </blockquote>
 <h3 id="namespace-import"><a class="header" href="#namespace-import">Namespace import</a></h3>
 <p>Entire modules can also be imported directly as a namespace.</p>
-<pre><code>import MyModule
+<pre><code class="language-helios">import MyModule
 ...
-MyModule::ImportedName1 ...
+MyModule::MyStruct ...
+</code></pre>
+<p>Namespaces can be nested:</p>
+<pre><code class="language-helios">import MyModule
+...
+MyModule::MySubModule::MyStruct ...
+</code></pre>
+<p>The <code>import {...} from ...</code> syntax can also be used to unwrap submodules:</p>
+<pre><code class="language-helios">import { MySubModule as RenamedSubModule } from MyModule
+...
+RenamedSubModule::MyStruct
 </code></pre>
 <h3 id="webpack"><a class="header" href="#webpack">Webpack</a></h3>
 <p>When using the <a href="../integrations/webpack.html">Webpack loader</a> you must use relative paths instead of module names when importing:</p>
