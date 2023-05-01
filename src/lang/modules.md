@@ -21,10 +21,25 @@ The imported names act as if the original statements were defined in the source 
 
 Entire modules can also be imported directly as a namespace.
 
-```
+```helios
 import MyModule
 ...
-MyModule::ImportedName1 ...
+MyModule::MyStruct ...
+```
+
+Namespaces can be nested:
+```helios
+import MyModule
+...
+MyModule::MySubModule::MyStruct ...
+```
+
+The `import {...} from ...` syntax can also be used to unwrap submodules:
+
+```helios
+import { MySubModule as RenamedSubModule } from MyModule
+...
+RenamedSubModule::MyStruct
 ```
 
 ### Webpack
