@@ -14,6 +14,14 @@ real = 0.001 // 0.1%
 Real::from_data(data: Data) -> Real
 ```
 
+### `sqrt`
+
+Calculates the square root of a `Real` number. The result has a maximal error of `0.000001`. Throws an error if the input number is negative.
+
+```helios
+Real::sqrt(a: Real) -> Real
+```
+
 ## Operators
 
 >**Note**: any binary operator defined for `Real` can use `Int` as either the lhs or rhs.

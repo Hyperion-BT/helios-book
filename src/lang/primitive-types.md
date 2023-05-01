@@ -19,6 +19,12 @@ my_hex     = 0x11;
 my_octal   = 0o121; ...
 ```
 
+Large `Int`s can be delimited with underscores at power-of-3 positions to improve readability:
+
+```helios
+my_large_decimal = 1_000_000; ...
+```
+
 More information about the `Int` type can be found [here](./builtins/int.md).
 
 ## `Real`
@@ -27,6 +33,12 @@ Helios' `Real` type represents a fixed point real number with 6 decimal places. 
 
 ```helios
 fee = 0.0001 // 0.01%
+```
+
+Similar to `Int`, underscores can be used at power-of-3 positions to improve readability:
+
+```helios
+fee = 0.000_1 // 0.01%
 ```
 
 More information about the `Real` type can be found [here](./builtins/real.md).

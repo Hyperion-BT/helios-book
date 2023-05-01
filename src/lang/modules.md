@@ -10,12 +10,22 @@ Helios top-level statements can be placed in modules and can then be imported by
 import { 
     ImportedName1 as NewName1,
     ImportedName2
-} from my_module
+} from MyModule
 ```
 
 The imported names act as if the original statements were defined in the source where they are imported.
 
 > **Note**: currently every top-level statement is public and exported by default, including other `import` statements.
+
+### Namespace import
+
+Entire modules can also be imported directly as a namespace.
+
+```
+import MyModule
+...
+MyModule::ImportedName1 ...
+```
 
 ### Webpack
 
@@ -27,3 +37,5 @@ import {
     ImportedName2
 } from "<rel-path-to-module>.hl"
 ```
+
+The Webpack loader currently doesn't support importing namespaces using relative paths (WiP).

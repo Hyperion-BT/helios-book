@@ -64,6 +64,14 @@ Parses a string representation of an integer of the form `((-)?[1-9][0-9]*)|0` (
 Int::parse(string: String) -> Int
 ```
 
+### `sqrt`
+
+Calculates the square root of an integer. The result is truncated if it can't be represented by a whole number. Throws an error if the input number is negative.
+
+```helios
+Int::sqrt(a: Int) -> Int
+```
+
 ## Operators
 
 ### `==`
