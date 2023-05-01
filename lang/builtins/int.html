@@ -181,6 +181,10 @@
 <p>Parses a string representation of an integer of the form <code>((-)?[1-9][0-9]*)|0</code> (i.e. a non zero-padded integer). Throws an error if the string representation of the integer doesn't respect this format. Note that <code>-0</code> isn't allowed, so zeros can only be represented by a single <code>0</code> digit.</p>
 <pre><code class="language-helios">Int::parse(string: String) -&gt; Int
 </code></pre>
+<h3 id="sqrt"><a class="header" href="#sqrt"><code>sqrt</code></a></h3>
+<p>Calculates the square root of an integer. The result is truncated if it can't be represented by a whole number. Throws an error if the input number is negative.</p>
+<pre><code class="language-helios">Int::sqrt(a: Int) -&gt; Int
+</code></pre>
 <h2 id="operators"><a class="header" href="#operators">Operators</a></h2>
 <h3 id=""><a class="header" href="#"><code>==</code></a></h3>
 <pre><code class="language-helios">Int == Int -&gt; Bool

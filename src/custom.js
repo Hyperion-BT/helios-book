@@ -12,12 +12,12 @@ hljs.registerLanguage('helios', function(hljs) {
 
 	let BUILTIN_TYPES = {
 		className: 'type',
-		begin: '\\b(Int|Bool|Option|Map|String|ByteArray)',
+		begin: '\\b(Int|Bool|Option|Map|String|ByteArray|Real)',
 	};
 
 	let NUMBERS = {
 		className: 'number',
-		begin: '(-?)(\\b0[xob][a-fA-F0-9]+|(\\b[\\d]+(\\.[\\d]*)?|\\.[\\d]+)([eE][-+]?[\\d]+)?)(?!D)'
+		begin: '(-?)(\\b0[xob][a-fA-F0-9]+|(\\b[\\d][\\d_]*(\\.[\\d_]*)?|\\.[\\d_]+)([eE][-+]?[\\d]+)?)(?!D)'
 	};
 
 	let BYTE_ARRAYS = {

@@ -165,10 +165,16 @@ my_binary  = 0b10001;
 my_hex     = 0x11;
 my_octal   = 0o121; ...
 </code></pre>
+<p>Large <code>Int</code>s can be delimited with underscores at power-of-3 positions to improve readability:</p>
+<pre><code class="language-helios">my_large_decimal = 1_000_000; ...
+</code></pre>
 <p>More information about the <code>Int</code> type can be found <a href="./builtins/int.html">here</a>.</p>
 <h2 id="real"><a class="header" href="#real"><code>Real</code></a></h2>
 <p>Helios' <code>Real</code> type represents a fixed point real number with 6 decimal places. <code>Real</code> is designed for use in calculations involving relative fees.</p>
 <pre><code class="language-helios">fee = 0.0001 // 0.01%
+</code></pre>
+<p>Similar to <code>Int</code>, underscores can be used at power-of-3 positions to improve readability:</p>
+<pre><code class="language-helios">fee = 0.000_1 // 0.01%
 </code></pre>
 <p>More information about the <code>Real</code> type can be found <a href="./builtins/real.html">here</a>.</p>
 <h2 id="bool"><a class="header" href="#bool"><code>Bool</code></a></h2>

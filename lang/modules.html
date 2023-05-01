@@ -155,12 +155,18 @@
 <pre><code class="language-helios">import { 
     ImportedName1 as NewName1,
     ImportedName2
-} from my_module
+} from MyModule
 </code></pre>
 <p>The imported names act as if the original statements were defined in the source where they are imported.</p>
 <blockquote>
 <p><strong>Note</strong>: currently every top-level statement is public and exported by default, including other <code>import</code> statements.</p>
 </blockquote>
+<h3 id="namespace-import"><a class="header" href="#namespace-import">Namespace import</a></h3>
+<p>Entire modules can also be imported directly as a namespace.</p>
+<pre><code>import MyModule
+...
+MyModule::ImportedName1 ...
+</code></pre>
 <h3 id="webpack"><a class="header" href="#webpack">Webpack</a></h3>
 <p>When using the <a href="../integrations/webpack.html">Webpack loader</a> you must use relative paths instead of module names when importing:</p>
 <pre><code class="language-helios">import { 
@@ -168,6 +174,7 @@
     ImportedName2
 } from &quot;&lt;rel-path-to-module&gt;.hl&quot;
 </code></pre>
+<p>The Webpack loader currently doesn't support importing namespaces using relative paths (WiP).</p>
 
                     </main>
 

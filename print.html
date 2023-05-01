@@ -370,10 +370,16 @@ my_binary  = 0b10001;
 my_hex     = 0x11;
 my_octal   = 0o121; ...
 </code></pre>
+<p>Large <code>Int</code>s can be delimited with underscores at power-of-3 positions to improve readability:</p>
+<pre><code class="language-helios">my_large_decimal = 1_000_000; ...
+</code></pre>
 <p>More information about the <code>Int</code> type can be found <a href="lang/./builtins/int.html">here</a>.</p>
 <h2 id="real"><a class="header" href="#real"><code>Real</code></a></h2>
 <p>Helios' <code>Real</code> type represents a fixed point real number with 6 decimal places. <code>Real</code> is designed for use in calculations involving relative fees.</p>
 <pre><code class="language-helios">fee = 0.0001 // 0.01%
+</code></pre>
+<p>Similar to <code>Int</code>, underscores can be used at power-of-3 positions to improve readability:</p>
+<pre><code class="language-helios">fee = 0.000_1 // 0.01%
 </code></pre>
 <p>More information about the <code>Real</code> type can be found <a href="lang/./builtins/real.html">here</a>.</p>
 <h2 id="bool"><a class="header" href="#bool"><code>Bool</code></a></h2>
@@ -1093,12 +1099,18 @@ const uplcProgram = program.compile();
 <pre><code class="language-helios">import { 
     ImportedName1 as NewName1,
     ImportedName2
-} from my_module
+} from MyModule
 </code></pre>
 <p>The imported names act as if the original statements were defined in the source where they are imported.</p>
 <blockquote>
 <p><strong>Note</strong>: currently every top-level statement is public and exported by default, including other <code>import</code> statements.</p>
 </blockquote>
+<h3 id="namespace-import"><a class="header" href="#namespace-import">Namespace import</a></h3>
+<p>Entire modules can also be imported directly as a namespace.</p>
+<pre><code>import MyModule
+...
+MyModule::ImportedName1 ...
+</code></pre>
 <h3 id="webpack"><a class="header" href="#webpack">Webpack</a></h3>
 <p>When using the <a href="lang/../integrations/webpack.html">Webpack loader</a> you must use relative paths instead of module names when importing:</p>
 <pre><code class="language-helios">import { 
@@ -1106,6 +1118,7 @@ const uplcProgram = program.compile();
     ImportedName2
 } from &quot;&lt;rel-path-to-module&gt;.hl&quot;
 </code></pre>
+<p>The Webpack loader currently doesn't support importing namespaces using relative paths (WiP).</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="builtins"><a class="header" href="#builtins">Builtins</a></h1>
 <p>This section contains a reference of all the Helios builtins.</p>
 <h2 id="primitive-types-1"><a class="header" href="#primitive-types-1">Primitive types</a></h2>
@@ -1643,6 +1656,10 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="parse"><a class="header" href="#parse"><code>parse</code></a></h3>
 <p>Parses a string representation of an integer of the form <code>((-)?[1-9][0-9]*)|0</code> (i.e. a non zero-padded integer). Throws an error if the string representation of the integer doesn't respect this format. Note that <code>-0</code> isn't allowed, so zeros can only be represented by a single <code>0</code> digit.</p>
 <pre><code class="language-helios">Int::parse(string: String) -&gt; Int
+</code></pre>
+<h3 id="sqrt"><a class="header" href="#sqrt"><code>sqrt</code></a></h3>
+<p>Calculates the square root of an integer. The result is truncated if it can't be represented by a whole number. Throws an error if the input number is negative.</p>
+<pre><code class="language-helios">Int::sqrt(a: Int) -&gt; Int
 </code></pre>
 <h2 id="operators-10"><a class="header" href="#operators-10">Operators</a></h2>
 <h3 id="-38"><a class="header" href="#-38"><code>==</code></a></h3>
@@ -2241,6 +2258,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h2 id="associated-functions-14"><a class="header" href="#associated-functions-14">Associated functions</a></h2>
 <h3 id="from_data-17"><a class="header" href="#from_data-17"><code>from_data</code></a></h3>
 <pre><code class="language-helios">Real::from_data(data: Data) -&gt; Real
+</code></pre>
+<h3 id="sqrt-1"><a class="header" href="#sqrt-1"><code>sqrt</code></a></h3>
+<p>Calculates the square root of a <code>Real</code> number. The result has a maximal error of <code>0.000001</code>. Throws an error if the input number is negative.</p>
+<pre><code class="language-helios">Real::sqrt(a: Real) -&gt; Real
 </code></pre>
 <h2 id="operators-18"><a class="header" href="#operators-18">Operators</a></h2>
 <blockquote>
