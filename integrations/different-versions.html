@@ -149,15 +149,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="different-versions-of-helios-for-on-chain-vs-off-chain"><a class="header" href="#different-versions-of-helios-for-on-chain-vs-off-chain">Different versions of Helios for on-chain vs. off-chain</a></h1>
-<p>If you have already launched your dApp to mainnet, and want to keep using exactly the same script hashes while also benefiting from improvements to the <a href="../api/index.html">Helios off-chain API</a>, you can install a second version of Helios alongside the version you want to use for compiling on-chain code.</p>
+<p>If you have already launched your dApp to mainnet, and want to keep using exactly the same script hashes while also benefiting from improvements to the <a href="../api/index.html">Helios off-chain API</a>, you can install a second version of Helios alongside the version you want to keep using for compiling on-chain code.</p>
 <blockquote>
-<p><strong>Note</strong>: the <a href="./webpack.html">Helios Webpack loader</a> requires the version of the library you want to use for compiling to be installed as <code>&quot;@hyperionbt/helios&quot;</code></p>
+<p><strong>Note</strong>: the <a href="./webpack.html">Helios Webpack loader</a> requires the version of the library you want to use for compiling on-chain code to be installed as <code>&quot;@hyperionbt/helios&quot;</code></p>
 </blockquote>
-<p>To install the latest version of Helios using an alias:</p>
+<p>To install the latest version of Helios alongside the old verion, you must use an alias:</p>
 <pre><code>npm install helios-api@npm:@hyperionbt/helios
 </code></pre>
-<p>Or to install a specific version of Helios using an alias:</p>
-<pre><code>npm install helios-api@npm:@hyperionbt/helios@^0.13.0
+<p>Alternatively you can also install a specific version of Helios using an alias:</p>
+<pre><code>npm install helios-api@npm:@hyperionbt/helios@^0.13.33
 </code></pre>
 <p>You can then import this aliased version of Helios in your Javascript/Typescript project:</p>
 <pre><code class="language-ts">import { UplcProgram } from &quot;helios-api&quot;
@@ -165,9 +165,25 @@
 ...
 </code></pre>
 <h2 id="transfering-uplcprogram-instances"><a class="header" href="#transfering-uplcprogram-instances">Transfering <code>UplcProgram</code> instances</a></h2>
-<p>In order to use the <a href="../api/reference/uplcprogram.html"><code>UplcProgram</code></a> instance, compiled by the older version of Helios, in the off-chain code (using the newer version of Helios), you must <em>transfer</em> it.</p>
-<p>Currently that can be achieved by serializing/deserializing it.</p>
-<pre><code class="language-ts">import { Program } from &quot;@hyperionbt/helios&quot;
+<p>In order to properly use an <a href="../api/reference/uplcprogram.html"><code>UplcProgram</code></a> instance compiled by an older version of Helios you must <em>transfer</em> it (which ensures the script hash stays the same).</p>
+<pre><code class="language-ts">// old version of Helios used to compile the contract
+import { Program } from &quot;@hyperionbt/helios&quot; 
+
+// newest version of Helios
+import { UplcProgram } from &quot;helios-api&quot; 
+
+const src = `spending ...`
+
+const uplcProgram = Program.new(src).compile(true).transfer(UplcProgram)
+</code></pre>
+<p>The <a href="../api/reference/uplcprogram.html#transfer"><code>transfer()</code></a> method also transfers the code mapping wrt. the original Helios code.</p>
+<p>The <a href="../api/reference/uplcprogram.html#transfer"><code>transfer()</code></a> method is only available in versions of Helios &gt;= v0.13.32.</p>
+<h3 id="older-versions-of-helios"><a class="header" href="#older-versions-of-helios">Older versions of Helios</a></h3>
+<p>For versions of Helios &lt;= v0.13.31 <em>transfering</em> can be achieved by serializing/deserializing the <a href="../api/reference/uplcprogram.html"><code>UplcProgram</code></a> instance.</p>
+<pre><code class="language-ts">// old version of Helios used to compile the contract
+import { Program } from &quot;@hyperionbt/helios&quot;
+
+// newest version of Helios
 import { UplcProgram } from &quot;helios-api&quot;
 
 const src = `spending ...`

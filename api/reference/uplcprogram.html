@@ -207,6 +207,14 @@
 <p>Serialize a <code>UplcProgram</code> using CBOR (wraps the flat encoded program).</p>
 <pre><code class="language-ts">uplcProgram.toCbor(): number[]
 </code></pre>
+<h3 id="transfer"><a class="header" href="#transfer"><code>transfer</code></a></h3>
+<p>Transfers a <code>UplcProgram</code> from an old version of Helios to a new version of Helios, keeping the script hash the same.</p>
+<p>The main benefit of calling this method instead of serializing/deserializing is that the code mapping is maintained.</p>
+<pre><code class="language-ts">import { UplcProgram } from &quot;&lt;new-verion-of-helios&gt;&quot;
+
+uplcProgram.transfer(UplcProgram): UplcProgram
+</code></pre>
+<p>See the <a href="../../integrations/different-versions.html"><em>different versions of Helios</em></a> page to learn of how to install a second version of Helios alongside the version of Helios you want to use to compile on-chain code.</p>
 
                     </main>
 
