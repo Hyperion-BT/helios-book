@@ -172,6 +172,8 @@ Executes all the attached scripts with appropriate redeemers and calculates exec
 
 Inputs, minted assets, and withdrawals are sorted.
 
+Sets the validatity range automatically if a call to [`tx.time_range`](../../lang/builtins/tx.md#time_range) is detected in any of the attached scripts.
+
 ```ts
 tx.finalize(
     networkParams: helios.NetworkParams,

@@ -31,6 +31,14 @@ Gets a complete list of UTxOs at a given [address](./address.md).
 network.getUtxos(address: helios.Address): Promise<helios.UTxO[]>
 ```
 
+### `initNetworkParams`
+
+Creates a new [`NetworkParams`](./networkparams.md) instance that has access to current slot (so that [`Tx`](./tx.md) validity range can be set automatically during [`finalize()`](./tx.md#finalize)).
+
+```ts
+network.initNetworkParams(networkParams: helios.NetworkParams): helios.NetworkParams
+```
+
 ### `submitTx`
 
 Validates and submits a transaction to the emulated mempool. Any input UTxOs are immediately marked as spent.
