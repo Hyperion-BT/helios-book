@@ -247,6 +247,7 @@
 <h3 id="finalize"><a class="header" href="#finalize"><code>finalize</code></a></h3>
 <p>Executes all the attached scripts with appropriate redeemers and calculates execution budgets. Balances the transaction, and optionally uses some spare UTxOs if the current inputs don't contain enough lovelace to cover the fees and min output deposits.</p>
 <p>Inputs, minted assets, and withdrawals are sorted.</p>
+<p>Sets the validatity range automatically if a call to <a href="../../lang/builtins/tx.html#time_range"><code>tx.time_range</code></a> is detected in any of the attached scripts.</p>
 <pre><code class="language-ts">tx.finalize(
     networkParams: helios.NetworkParams,
     changeAddress: helios.Address,

@@ -166,6 +166,10 @@
 <p>Gets a complete list of UTxOs at a given <a href="./address.html">address</a>.</p>
 <pre><code class="language-ts">network.getUtxos(address: helios.Address): Promise&lt;helios.UTxO[]&gt;
 </code></pre>
+<h3 id="initnetworkparams"><a class="header" href="#initnetworkparams"><code>initNetworkParams</code></a></h3>
+<p>Creates a new <a href="./networkparams.html"><code>NetworkParams</code></a> instance that has access to current slot (so that <a href="./tx.html"><code>Tx</code></a> validity range can be set automatically during <a href="./tx.html#finalize"><code>finalize()</code></a>).</p>
+<pre><code class="language-ts">network.initNetworkParams(networkParams: helios.NetworkParams): helios.NetworkParams
+</code></pre>
 <h3 id="submittx"><a class="header" href="#submittx"><code>submitTx</code></a></h3>
 <p>Validates and submits a transaction to the emulated mempool. Any input UTxOs are immediately marked as spent.</p>
 <pre><code class="language-ts">network.submitTx(tx: helios.Tx): Promise&lt;helios.TxId&gt;

@@ -4692,6 +4692,10 @@ const wallet = new helios.Cip30Wallet(handle)
 <p>Gets a complete list of UTxOs at a given <a href="api/reference/./address.html">address</a>.</p>
 <pre><code class="language-ts">network.getUtxos(address: helios.Address): Promise&lt;helios.UTxO[]&gt;
 </code></pre>
+<h3 id="initnetworkparams"><a class="header" href="#initnetworkparams"><code>initNetworkParams</code></a></h3>
+<p>Creates a new <a href="api/reference/./networkparams.html"><code>NetworkParams</code></a> instance that has access to current slot (so that <a href="api/reference/./tx.html"><code>Tx</code></a> validity range can be set automatically during <a href="api/reference/./tx.html#finalize"><code>finalize()</code></a>).</p>
+<pre><code class="language-ts">network.initNetworkParams(networkParams: helios.NetworkParams): helios.NetworkParams
+</code></pre>
 <h3 id="submittx-3"><a class="header" href="#submittx-3"><code>submitTx</code></a></h3>
 <p>Validates and submits a transaction to the emulated mempool. Any input UTxOs are immediately marked as spent.</p>
 <pre><code class="language-ts">network.submitTx(tx: helios.Tx): Promise&lt;helios.TxId&gt;
@@ -5021,6 +5025,7 @@ const networkParams = new helios.NetworkParams(
 <h3 id="finalize"><a class="header" href="#finalize"><code>finalize</code></a></h3>
 <p>Executes all the attached scripts with appropriate redeemers and calculates execution budgets. Balances the transaction, and optionally uses some spare UTxOs if the current inputs don't contain enough lovelace to cover the fees and min output deposits.</p>
 <p>Inputs, minted assets, and withdrawals are sorted.</p>
+<p>Sets the validatity range automatically if a call to <a href="api/reference/../../lang/builtins/tx.html#time_range"><code>tx.time_range</code></a> is detected in any of the attached scripts.</p>
 <pre><code class="language-ts">tx.finalize(
     networkParams: helios.NetworkParams,
     changeAddress: helios.Address,
