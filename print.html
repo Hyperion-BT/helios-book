@@ -6298,7 +6298,7 @@ func main(_, ctx: ScriptContext) -&gt; Bool {
 	tx: Tx = ctx.tx;
 
     nft_assetclass: AssetClass = AssetClass::new(
-		ctx.get_current_minting_policy_hash(), 
+		ctx.get_current_minting_policy_hash(),
 		&quot;example-nft&quot;.encode_utf8()
 	);
 
@@ -6327,13 +6327,13 @@ func main(_, ctx: ScriptContext) -&gt; Bool {
 	tx: Tx = ctx.tx;
 
     nft_assetclass: AssetClass = AssetClass::new(
-		ctx.get_current_minting_policy(), 
+		ctx.get_current_minting_policy_hash(),
 		&quot;example-nft&quot;.encode_utf8()
 	);
 
     value_minted: Value = tx.minted;
 
-    value_minted == Value::new(nft_assetclass, 1) &amp;&amp; 
+    value_minted == Value::new(nft_assetclass, 1) &amp;&amp;
     tx.inputs
         .any((input: TxInput) -&gt; Bool {input.output_id == OUTPUT_ID})
 
