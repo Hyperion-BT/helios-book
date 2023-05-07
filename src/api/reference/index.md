@@ -47,6 +47,7 @@ Can only be imported in typescript files.
   * [`ListData`](./listdata.md)
   * [`MapData`](./mapdata.md)
   * [`MintingPolicyHash`](./mintingpolicyhash.md)
+  * [`NativeScript`](./nativescript.md)
   * [`NetworkEmulator`](./networkemulator.md)
   * [`NetworkParams`](./networkparams.md)
   * [`Program`](./program.md)

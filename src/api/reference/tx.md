@@ -34,7 +34,7 @@ tx.addCollateral(input: helios.TxInput): helios.Tx
 
 ### `addInput`
 
-Add a [`UTxO`](./utxo.md) instance as an input to the transaction being built. Throws an error if the UTxO is locked at a script address but a redeemer isn't specified.
+Add a [`UTxO`](./utxo.md) instance as an input to the transaction being built. Throws an error if the UTxO is locked at a script address but a redeemer isn't specified (unless the script is a known [`NativeScript`](./nativescript.md)).
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
@@ -47,7 +47,7 @@ tx.addInput(
 
 ### `addInputs`
 
-Add multiple [`UTxO`](./utxo.md) instances as inputs to the transaction being built. Throws an error if the UTxOs are locked at a script address but a redeemer isn't specified.
+Add multiple [`UTxO`](./utxo.md) instances as inputs to the transaction being built. Throws an error if the UTxOs are locked at a script address but a redeemer isn't specified (unless the script is a known [`NativeScript`](./nativescript.md)).
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
@@ -156,15 +156,17 @@ tx.addSigner(hash: helios.PubKeyHash): helios.Tx
 
 ### `attachScript`
 
-Attach a script witness to the transaction being built. The script witness is a [`UplcProgram`](./uplcprogram.md) instance and can be created by compiling a Helios [`Program`](./program.md).
+Attach a script witness to the transaction being built. The script witness can be either [`UplcProgram`](./uplcprogram.md) or a legacy [`NativeScript`](./nativescript.md). A [`UplcProgram`](./uplcprogram.md) instance can be created by compiling a Helios [`Program`](./program.md). A legacy [`NativeScript`](./nativescript.md) instance can be created by deserializing its original CBOR representation.
 
 Throws an error if script has already been added. Throws an error if the script isn't used upon finalization.
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
 ```ts
-tx.attachScript(script: helios.UplcProgram): helios.Tx
+tx.attachScript(script: helios.UplcProgram | helios.NativeScript): helios.Tx
 ```
+
+> **Note**: a [`NativeScript`](./nativescript.md) must be attached **before** associated inputs are added or tokens are minted.
 
 ### `finalize`
 
@@ -188,11 +190,13 @@ Mint a list of tokens associated with a given [`MintingPolicyHash`](./mintingpol
 
 Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
 
+Also throws an error if the redeemer is `null`, and the minting policy **isn't** a known [`NativeScript`](./nativescript.md).
+
 ```ts
 tx.mintTokens(
     mph: helios.MintingPolicyHash,
     tokens: [number[] | string, bigint][],
-    redeemer: helios.UplcData | helios.UplcDataValue
+    redeemer: helios.UplcData | helios.UplcDataValue | null
 ): helios.Tx
 ```
 
@@ -206,24 +210,28 @@ tx.toCbor(): number[]
 
 ### `validFrom`
 
-Set the start of the valid time range.
+Set the start of the valid time range by specifying either a `Date` or a `bigint` slot.
 
-Mutates the transaction. Only available when building the transaction. Returns the transaction instance so build methods can be chained.
+Mutates the transaction. Only available when building the transaction. 
+
+Returns the transaction instance so build methods can be chained.
 
 ```ts
-tx.validFrom(time: Date): helios.Tx
+tx.validFrom(dateOrSlot: Date | bigint): helios.Tx
 ```
 
 >**Note**: since Helios v0.13.29 this is set automatically if any of the validator scripts call [`tx.time_range`](../../lang/builtins/tx.md#time_range).
 
 ### `validTo`
 
-Set the end of the valid time range. Mutates the transaction. Only available when building a transaction.
+Set the end of the valid time range by specifying either a `Date` or a `bigint` slot.
+
+Mutates the transaction. Only available when building a transaction.
 
 Returns the transaction instance so build methods can be chained.
 
 ```ts
-tx.validTo(time: Date): helios.Tx
+tx.validTo(time: Date | bigint): helios.Tx
 ```
 
 >**Note**: since Helios v0.13.29 this is set automatically if any of the validator scripts call [`tx.time_range`](../../lang/builtins/tx.md#time_range).

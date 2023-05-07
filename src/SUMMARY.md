@@ -112,6 +112,7 @@
     - [ListData](./api/reference/listdata.md)
     - [MapData](./api/reference/mapdata.md)
     - [MintingPolicyHash](./api/reference/mintingpolicyhash.md)
+    - [NativeScript](./api/reference/nativescript.md)
     - [Network](./api/reference/network.md)
     - [NetworkEmulator](./api/reference/networkemulator.md)
     - [NetworkParams](./api/reference/networkparams.md)
