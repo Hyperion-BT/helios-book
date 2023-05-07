@@ -159,6 +159,15 @@
 <p>Converts a the JSON representation of a <code>NativeScript</code> into a <code>NativeScript</code> instance.</p>
 <pre><code class="language-ts">helios.NativeScript.fromJson(json: string | Object): helios.NativeScript
 </code></pre>
+<h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
+<h3 id="mintingpolicyhash"><a class="header" href="#mintingpolicyhash"><code>mintingPolicyHash</code></a></h3>
+<p>A <code>NativeScript</code> can be used as either a validator script or a minting script. This getter returns the <code>hash()</code> as a <a href="./mintingpolicyhash.html"><code>MintingPolicyHash</code></a> instance.</p>
+<pre><code class="language-ts">native_script.mintingPolicyHash: helios.MintingPolicyHash
+</code></pre>
+<h3 id="validatorhash"><a class="header" href="#validatorhash"><code>validatorHash</code></a></h3>
+<p>A <code>NativeScript</code> can be used as either a validator script or a minting script. This getter returns the <code>hash()</code> as a <a href="./validatorhash.html"><code>ValidatorHash</code></a> instance.</p>
+<pre><code class="language-ts">native_script.validatorHash: helios.ValidatorHash
+</code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <h3 id="hash"><a class="header" href="#hash"><code>hash</code></a></h3>
 <p>Calculates the blake2b-224 (28 bytes) hash of the <code>NativeScript</code>. (Note: a <code>0</code> byte is prepended before to the serialized CBOR representation, before calculating the hash).</p>

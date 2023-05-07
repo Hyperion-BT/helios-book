@@ -4675,6 +4675,15 @@ const wallet = new helios.Cip30Wallet(handle)
 <p>Converts a the JSON representation of a <code>NativeScript</code> into a <code>NativeScript</code> instance.</p>
 <pre><code class="language-ts">helios.NativeScript.fromJson(json: string | Object): helios.NativeScript
 </code></pre>
+<h2 id="getters-31"><a class="header" href="#getters-31">Getters</a></h2>
+<h3 id="mintingpolicyhash-2"><a class="header" href="#mintingpolicyhash-2"><code>mintingPolicyHash</code></a></h3>
+<p>A <code>NativeScript</code> can be used as either a validator script or a minting script. This getter returns the <code>hash()</code> as a <a href="api/reference/./mintingpolicyhash.html"><code>MintingPolicyHash</code></a> instance.</p>
+<pre><code class="language-ts">native_script.mintingPolicyHash: helios.MintingPolicyHash
+</code></pre>
+<h3 id="validatorhash-2"><a class="header" href="#validatorhash-2"><code>validatorHash</code></a></h3>
+<p>A <code>NativeScript</code> can be used as either a validator script or a minting script. This getter returns the <code>hash()</code> as a <a href="api/reference/./validatorhash.html"><code>ValidatorHash</code></a> instance.</p>
+<pre><code class="language-ts">native_script.validatorHash: helios.ValidatorHash
+</code></pre>
 <h2 id="methods-49"><a class="header" href="#methods-49">Methods</a></h2>
 <h3 id="hash-5"><a class="header" href="#hash-5"><code>hash</code></a></h3>
 <p>Calculates the blake2b-224 (28 bytes) hash of the <code>NativeScript</code>. (Note: a <code>0</code> byte is prepended before to the serialized CBOR representation, before calculating the hash).</p>
@@ -4767,7 +4776,7 @@ const networkParams = new helios.NetworkParams(
 ): helios.Program
 </code></pre>
 <p>The 1st argument here is the source of the entrypoint of the program. The 2nd argument here is optional, and is a list of the sources of modules that can be import by the entrypoint source.</p>
-<h2 id="getters-31"><a class="header" href="#getters-31">Getters</a></h2>
+<h2 id="getters-32"><a class="header" href="#getters-32">Getters</a></h2>
 <h3 id="name"><a class="header" href="#name"><code>name</code></a></h3>
 <p>Get the name of the script (contained in the <a href="api/reference/../../lang/script-structure.html#script-purpose-1">header of the script</a>).</p>
 <pre><code class="language-ts">program.name: string
@@ -4814,7 +4823,7 @@ const networkParams = new helios.NetworkParams(
 <p>Construct a <code>PubKeyHash</code> from its hexadecimal string representation.</p>
 <pre><code class="language-ts">helios.PubKeyHash.fromHex(hex: string): helios.PubKeyHash
 </code></pre>
-<h2 id="getters-32"><a class="header" href="#getters-32">Getters</a></h2>
+<h2 id="getters-33"><a class="header" href="#getters-33">Getters</a></h2>
 <h3 id="bytes-4"><a class="header" href="#bytes-4"><code>bytes</code></a></h3>
 <p>Get the underlying bytes.</p>
 <pre><code class="language-ts">pubkey_hash.bytes: number[]
@@ -4890,7 +4899,7 @@ const networkParams = new helios.NetworkParams(
     stake_address: helios.StakeAddress
 ): boolean
 </code></pre>
-<h2 id="getters-33"><a class="header" href="#getters-33">Getters</a></h2>
+<h2 id="getters-34"><a class="header" href="#getters-34">Getters</a></h2>
 <h3 id="stakinghash-2"><a class="header" href="#stakinghash-2"><code>stakingHash</code></a></h3>
 <p>Returns the underlying <a href="api/reference/./stakingvalidatorhash.html"><code>StakeKeyHash](./stakekeyhash.md) or [</code>StakingValidatorHash`</a>.</p>
 <pre><code class="language-ts">stake_address.stakingHash: (helios.StakeKeyHash | helios.StakingValidatorHash)
@@ -4921,7 +4930,7 @@ const networkParams = new helios.NetworkParams(
 <p>Construct a <code>StakeKeyHash</code> from its hexadecimal string representation.</p>
 <pre><code class="language-ts">helios.StakeKeyHash.fromHex(hex: string): helios.StakeKeyHash
 </code></pre>
-<h2 id="getters-34"><a class="header" href="#getters-34">Getters</a></h2>
+<h2 id="getters-35"><a class="header" href="#getters-35">Getters</a></h2>
 <h3 id="bytes-5"><a class="header" href="#bytes-5"><code>bytes</code></a></h3>
 <p>Get the underlying bytes.</p>
 <pre><code class="language-ts">stakekey_hash.bytes: number[]
@@ -4942,7 +4951,7 @@ const networkParams = new helios.NetworkParams(
 <p>Construct a <code>StakingValidatorHash</code> from the hexadecimal string representation of the underlying bytes.</p>
 <pre><code class="language-ts">helios.StakingValidatorHash.fromHex(hex: string): helios.StakingValidatorHash
 </code></pre>
-<h2 id="getters-35"><a class="header" href="#getters-35">Getters</a></h2>
+<h2 id="getters-36"><a class="header" href="#getters-36">Getters</a></h2>
 <h3 id="bytes-6"><a class="header" href="#bytes-6"><code>bytes</code></a></h3>
 <p>Get the underlying bytes.</p>
 <pre><code class="language-ts">staking_validator_hash.bytes: number[]
@@ -4959,8 +4968,8 @@ const networkParams = new helios.NetworkParams(
 </code></pre>
 <h2 id="static-methods-19"><a class="header" href="#static-methods-19">Static methods</a></h2>
 <h3 id="fromcbor-16"><a class="header" href="#fromcbor-16"><code>fromCbor</code></a></h3>
-<p>Deserialize a CBOR encoded Cardano transaction.</p>
-<pre><code class="language-ts">helios.Tx.fromCbor(bytes: number[]): helios.Tx
+<p>Deserialize a CBOR encoded Cardano transaction (input is either an array of bytes, or a hex string).</p>
+<pre><code class="language-ts">helios.Tx.fromCbor(bytes: number[] | string): helios.Tx
 </code></pre>
 <h2 id="methods-56"><a class="header" href="#methods-56">Methods</a></h2>
 <h3 id="addcollateral"><a class="header" href="#addcollateral"><code>addCollateral</code></a></h3>
@@ -5104,7 +5113,7 @@ const networkParams = new helios.NetworkParams(
 <p>Construct a <code>TxId</code> from the hexadecimal string representation of the underlying bytes.</p>
 <pre><code class="language-ts">helios.TxId.fromHex(hex: string): helios.TxId
 </code></pre>
-<h2 id="getters-36"><a class="header" href="#getters-36">Getters</a></h2>
+<h2 id="getters-37"><a class="header" href="#getters-37">Getters</a></h2>
 <h3 id="bytes-7"><a class="header" href="#bytes-7"><code>bytes</code></a></h3>
 <p>Get the underlying bytes.</p>
 <pre><code class="language-ts">tx_id.bytes: number[]
@@ -5130,7 +5139,7 @@ const networkParams = new helios.NetworkParams(
 <p>Shift <code>bytes</code> to the next CBOR element.</p>
 <pre><code class="language-ts">helios.TxOutput.fromCbor(bytes: number[]): helios.TxOutput
 </code></pre>
-<h2 id="getters-37"><a class="header" href="#getters-37">Getters</a></h2>
+<h2 id="getters-38"><a class="header" href="#getters-38">Getters</a></h2>
 <h3 id="address-4"><a class="header" href="#address-4"><code>address</code></a></h3>
 <p>Get the <a href="api/reference/./address.html"><code>Address</code></a> to which the <code>TxOutput</code> will be sent.</p>
 <pre><code class="language-ts">tx_output.address: helios.Address
@@ -5179,7 +5188,7 @@ const networkParams = new helios.NetworkParams(
 <p>Shifts <code>bytes</code> to the next CBOR element.</p>
 <pre><code class="language-ts">helios.TxWitnesses.fromCbor(bytes: number[]): helios.TxWitnesses
 </code></pre>
-<h2 id="getters-38"><a class="header" href="#getters-38">Getters</a></h2>
+<h2 id="getters-39"><a class="header" href="#getters-39">Getters</a></h2>
 <h3 id="signatures"><a class="header" href="#signatures"><code>signatures</code></a></h3>
 <p>Gets the list of <a href="api/reference/./signature.html"><code>Signature</code></a> instances created by a wallet.</p>
 <pre><code class="language-ts">tx_witnesses.signatures: helios.Signature[]
@@ -5221,7 +5230,7 @@ const networkParams = new helios.NetworkParams(
 <div style="break-before: page; page-break-before: always;"></div><h1 id="uplcdatavalue"><a class="header" href="#uplcdatavalue"><code>UplcDataValue</code></a></h1>
 <p>Represents a child instance of <a href="api/reference/./uplcvalue.html"><code>UplcValue</code></a>, wrapping a <a href="api/reference/./uplcdata.html"><code>UplcData</code></a> instance.</p>
 <p>Everything except a Helios <a href="api/reference/../../lang/builtins/bool.html"><code>Bool</code></a> value <a href="api/reference/./program.html#evalparam">evaluates</a> to a <code>UplcDataValue</code>.</p>
-<h2 id="getters-39"><a class="header" href="#getters-39">Getters</a></h2>
+<h2 id="getters-40"><a class="header" href="#getters-40">Getters</a></h2>
 <h3 id="data-4"><a class="header" href="#data-4"><code>data</code></a></h3>
 <p>Get the underlying <a href="api/reference/./uplcdata.html"><code>UplcData</code></a>.</p>
 <pre><code class="language-ts">uplc_data_value.data: helios.UplcData
@@ -5250,12 +5259,12 @@ const networkParams = new helios.NetworkParams(
 <p>Deserialize a <code>UplcProgram</code> from bytes or from a hexadecimal string.</p>
 <pre><code class="language-ts">helios.UplcProgram.fromCbor(bytes: number[] | string): helios.UplcProgram
 </code></pre>
-<h2 id="getters-40"><a class="header" href="#getters-40">Getters</a></h2>
-<h3 id="validatorhash-2"><a class="header" href="#validatorhash-2"><code>validatorHash</code></a></h3>
+<h2 id="getters-41"><a class="header" href="#getters-41">Getters</a></h2>
+<h3 id="validatorhash-3"><a class="header" href="#validatorhash-3"><code>validatorHash</code></a></h3>
 <p>Returns the <a href="api/reference/./validatorhash.html"><code>ValidatorHash</code></a> of the script. Throws an error if this isn't a spending validator script.</p>
 <pre><code class="language-ts">uplcProgram.validatorHash: helios.ValidatorHash
 </code></pre>
-<h3 id="mintingpolicyhash-2"><a class="header" href="#mintingpolicyhash-2"><code>mintingPolicyHash</code></a></h3>
+<h3 id="mintingpolicyhash-3"><a class="header" href="#mintingpolicyhash-3"><code>mintingPolicyHash</code></a></h3>
 <p>Returns the <a href="api/reference/./mintingpolicyhash.html"><code>MintingPolicyHash</code></a> of the script. Throws an error if this isn't a minting policy.</p>
 <pre><code class="language-ts">uplcProgram.mintingPolicyHash: helios.MintingPolicyHash
 </code></pre>
@@ -5337,7 +5346,15 @@ uplcProgram.transfer(UplcProgram): UplcProgram
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="usererror"><a class="header" href="#usererror"><code>UserError</code></a></h1>
 <p>Represents an error thrown when there is a mistake in a Helios source.</p>
-<h2 id="getters-41"><a class="header" href="#getters-41">Getters</a></h2>
+<h2 id="getters-42"><a class="header" href="#getters-42">Getters</a></h2>
+<h3 id="context"><a class="header" href="#context"><code>context</code></a></h3>
+<p>Filled with CBOR hex representations of <code>Datum</code>, <code>Redeemer</code> and <code>ScriptContext</code> by validation scripts throwing errors during <a href="api/reference/./tx.html#finalize"><code>tx.finalize()</code></a>; and <code>Redeemer</code> and <code>ScriptContext</code> by minting scripts throwing errors.</p>
+<pre><code class="language-ts">user_error.context: {
+    Datum?: string,
+    Redeemer?: string,
+    ScriptContext?: string
+}
+</code></pre>
 <h3 id="message"><a class="header" href="#message"><code>message</code></a></h3>
 <p>Gets the error message.</p>
 <pre><code class="language-ts">user_error.message: string
@@ -5351,7 +5368,7 @@ uplcProgram.transfer(UplcProgram): UplcProgram
     origOutput: helios.TxOutput
 )
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="validatorhash-3"><a class="header" href="#validatorhash-3"><code>ValidatorHash</code></a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="validatorhash-4"><a class="header" href="#validatorhash-4"><code>ValidatorHash</code></a></h1>
 <p>Represents a blake2b-224 hash of a spending validator script (first encoded as a CBOR byte-array and prepended by a script version byte).</p>
 <h2 id="static-methods-31"><a class="header" href="#static-methods-31">Static methods</a></h2>
 <h3 id="fromcbor-22"><a class="header" href="#fromcbor-22"><code>fromCbor</code></a></h3>
@@ -5363,7 +5380,7 @@ uplcProgram.transfer(UplcProgram): UplcProgram
 <p>Construct a <code>ValidatorHash</code> from the hexadecimal string representation of the underlying bytes.</p>
 <pre><code class="language-ts">helios.ValidatorHash.fromHex(hex: string): helios.ValidatorHash
 </code></pre>
-<h2 id="getters-42"><a class="header" href="#getters-42">Getters</a></h2>
+<h2 id="getters-43"><a class="header" href="#getters-43">Getters</a></h2>
 <h3 id="bytes-8"><a class="header" href="#bytes-8"><code>bytes</code></a></h3>
 <p>Get the underlying bytes.</p>
 <pre><code class="language-ts">validator_hash.bytes: number[]
@@ -5391,7 +5408,7 @@ uplcProgram.transfer(UplcProgram): UplcProgram
 <p>Turns a <a href="api/reference/./uplcdata.html"><code>UplcData</code></a> instance into a <code>Value</code>. Throws an error if it isn't in the right format.</p>
 <pre><code class="language-ts">helios.Value.fromData(data: helios.UplcData): helios.Value
 </code></pre>
-<h2 id="getters-43"><a class="header" href="#getters-43">Getters</a></h2>
+<h2 id="getters-44"><a class="header" href="#getters-44">Getters</a></h2>
 <h3 id="assets-1"><a class="header" href="#assets-1"><code>assets</code></a></h3>
 <p>Gets the <code>Assets</code> contained in the <code>Value</code>.</p>
 <pre><code class="language-ts">value.assets: helios.Assets
@@ -5439,7 +5456,7 @@ uplcProgram.transfer(UplcProgram): UplcProgram
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="wallet"><a class="header" href="#wallet"><code>Wallet</code></a></h1>
 <p>An interface type for a wallet that manages a user's UTxOs and addresses. Notably implemented by <a href="api/reference/./cip30wallet.html"><code>Cip30Wallet</code></a> and <a href="api/reference/./walletemulator.html"><code>WalletEmulator</code></a>.</p>
-<h2 id="getters-44"><a class="header" href="#getters-44">Getters</a></h2>
+<h2 id="getters-45"><a class="header" href="#getters-45">Getters</a></h2>
 <h3 id="usedaddresses-1"><a class="header" href="#usedaddresses-1"><code>usedAddresses</code></a></h3>
 <p>Gets a list of addresses which already contain UTxOs.</p>
 <pre><code class="language-ts">wallet.usedAddresses: Promise&lt;helios.Address[]&gt;
@@ -5468,7 +5485,7 @@ uplcProgram.transfer(UplcProgram): UplcProgram
 <div style="break-before: page; page-break-before: always;"></div><h1 id="walletemulator"><a class="header" href="#walletemulator"><code>WalletEmulator</code></a></h1>
 <p>An emulated <a href="api/reference/./wallet.html"><code>Wallet</code></a>, created by calling <a href="api/reference/./networkemulator.html#createwallet"><code>emulator.createWallet()</code></a>.</p>
 <p>This wallet only has a single private/public key, which isn't rotated. Staking is not yet supported.</p>
-<h2 id="getters-45"><a class="header" href="#getters-45">Getters</a></h2>
+<h2 id="getters-46"><a class="header" href="#getters-46">Getters</a></h2>
 <h3 id="address-5"><a class="header" href="#address-5"><code>address</code></a></h3>
 <p>Gets the <a href="api/reference/./address.html"><code>Address</code></a> of the wallet.</p>
 <pre><code class="language-ts">wallet.address: helios.Address
@@ -5507,7 +5524,7 @@ uplcProgram.transfer(UplcProgram): UplcProgram
 <h2 id="constructor-21"><a class="header" href="#constructor-21">Constructor</a></h2>
 <pre><code class="language-ts">const helper = new helios.WalletHelper(wallet: helios.Wallet)
 </code></pre>
-<h2 id="getters-46"><a class="header" href="#getters-46">Getters</a></h2>
+<h2 id="getters-47"><a class="header" href="#getters-47">Getters</a></h2>
 <h3 id="alladdresses"><a class="header" href="#alladdresses"><code>allAddresses</code></a></h3>
 <p>Concatenation of <a href="api/reference/./wallet.html#usedaddresses"><code>usedAddresses</code></a> and <a href="api/reference/./wallet.html#unusedaddresses"><code>unusedAddresses</code></a>.</p>
 <pre><code class="language-ts">helper.allAddresses: Promise&lt;helios.Address[]&gt;

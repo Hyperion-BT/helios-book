@@ -151,6 +151,14 @@
                         <h1 id="usererror"><a class="header" href="#usererror"><code>UserError</code></a></h1>
 <p>Represents an error thrown when there is a mistake in a Helios source.</p>
 <h2 id="getters"><a class="header" href="#getters">Getters</a></h2>
+<h3 id="context"><a class="header" href="#context"><code>context</code></a></h3>
+<p>Filled with CBOR hex representations of <code>Datum</code>, <code>Redeemer</code> and <code>ScriptContext</code> by validation scripts throwing errors during <a href="./tx.html#finalize"><code>tx.finalize()</code></a>; and <code>Redeemer</code> and <code>ScriptContext</code> by minting scripts throwing errors.</p>
+<pre><code class="language-ts">user_error.context: {
+    Datum?: string,
+    Redeemer?: string,
+    ScriptContext?: string
+}
+</code></pre>
 <h3 id="message"><a class="header" href="#message"><code>message</code></a></h3>
 <p>Gets the error message.</p>
 <pre><code class="language-ts">user_error.message: string

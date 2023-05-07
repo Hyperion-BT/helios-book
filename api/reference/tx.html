@@ -156,8 +156,8 @@
 </code></pre>
 <h2 id="static-methods"><a class="header" href="#static-methods">Static methods</a></h2>
 <h3 id="fromcbor"><a class="header" href="#fromcbor"><code>fromCbor</code></a></h3>
-<p>Deserialize a CBOR encoded Cardano transaction.</p>
-<pre><code class="language-ts">helios.Tx.fromCbor(bytes: number[]): helios.Tx
+<p>Deserialize a CBOR encoded Cardano transaction (input is either an array of bytes, or a hex string).</p>
+<pre><code class="language-ts">helios.Tx.fromCbor(bytes: number[] | string): helios.Tx
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <h3 id="addcollateral"><a class="header" href="#addcollateral"><code>addCollateral</code></a></h3>
