@@ -20,6 +20,24 @@ Converts a the JSON representation of a `NativeScript` into a `NativeScript` ins
 helios.NativeScript.fromJson(json: string | Object): helios.NativeScript
 ```
 
+## Getters
+
+### `mintingPolicyHash`
+
+A `NativeScript` can be used as either a validator script or a minting script. This getter returns the `hash()` as a [`MintingPolicyHash`](./mintingpolicyhash.md) instance.
+
+```ts
+native_script.mintingPolicyHash: helios.MintingPolicyHash
+```
+
+### `validatorHash`
+
+A `NativeScript` can be used as either a validator script or a minting script. This getter returns the `hash()` as a [`ValidatorHash`](./validatorhash.md) instance.
+
+```ts
+native_script.validatorHash: helios.ValidatorHash
+```
+
 ## Methods
 
 ### `hash`

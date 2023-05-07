@@ -14,10 +14,10 @@ new helios.Tx()
 
 ### `fromCbor`
 
-Deserialize a CBOR encoded Cardano transaction.
+Deserialize a CBOR encoded Cardano transaction (input is either an array of bytes, or a hex string).
 
 ```ts
-helios.Tx.fromCbor(bytes: number[]): helios.Tx
+helios.Tx.fromCbor(bytes: number[] | string): helios.Tx
 ```
 
 ## Methods
