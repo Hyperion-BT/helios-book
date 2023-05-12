@@ -1,7 +1,7 @@
 # `UplcData`
 
 Parent class of:
-* [`ByteArrayData`](/.bytearraydata.md)
+* [`ByteArrayData`](./bytearraydata.md)
 * [`ConstrData`](./constrdata.md)
 * [`IntData`](./intdata.md)
 * [`ListData`](./listdata.md)
@@ -16,7 +16,7 @@ Deserializes a CBOR encoded `UplcData` child instance.
 Shift `bytes` to the next CBOR element.
 
 ```ts
-helios.UplcData.fromCbor(bytes: number[]): 
+helios.UplcData.fromCbor(bytes: number[]):
     helios.ByteArrayData |
     helios.ConstrData |
     helios.IntData |
