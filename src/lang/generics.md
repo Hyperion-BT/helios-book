@@ -52,7 +52,7 @@ enum BinaryTree[A] {
     Node {
         value: A
         left:  BinaryTree[A]
-        right: BinaryeTree[A]
+        right: BinaryTree[A]
     }
 }
 ```
