@@ -169,7 +169,10 @@ const result: Rational = example_rational.add(example_rational)
 </code></pre>
 <p>Methods are accessed using a <code>.</code> (i.e. a dot). Methods cannot modify <code>self</code> as all Helios values are immutable (instead they should return new instantations of the own type).</p>
 <blockquote>
-<p><strong>Note:</strong> <code>self</code> is a reserved word and can only be used for the first argument of a method. The <code>self</code> argument can't have a type annotation and is always implicitely typed.</p>
+<p><strong>Note</strong>: <code>self</code> is a reserved word and can only be used for the first argument of a method. The <code>self</code> argument can't have a type annotation and is always implicitely typed.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: methods within the same struct or enum scope can call eachother in any order (mutual recursion).</p>
 </blockquote>
 <h2 id="methods-can-be-used-as-values"><a class="header" href="#methods-can-be-used-as-values">Methods can be used as values</a></h2>
 <p>A method is syntactic sugar for a <strong>curried function</strong> (a function that returns a function) that takes <code>self</code> as it's first argument:</p>
