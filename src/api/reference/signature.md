@@ -8,7 +8,7 @@ Transactions must be signed by the owners of the public keys of the input UTxOs.
 
 ```ts
 new helios.Signature(
-    pubKey: number[],
+    pubKey: number[] | PubKey,
     signatureBytes: number[]
 )
 ```
@@ -21,6 +21,24 @@ Deserialize a CBOR encoded `Signature` instance.
 
 ```ts
 helios.Signature.fromCbor(bytes: number{}): helios.Signature
+```
+
+## Getters
+
+### `pubKey`
+
+Returns the [`PubKey`](./pubkey.md) that was used to create the `Signature`.
+
+```ts
+signature.pubKey: helios.PubKey
+```
+
+### `pubKeyHash`
+
+Returns the [`PubKeyHash`](./pubkeyhash.md) of the [`PubKey`](./pubkey.md) that was used to create the `Signature`.
+
+```ts
+signature.pubKeyHash: helios.PubKeyHash
 ```
 
 ## Methods

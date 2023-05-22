@@ -2,6 +2,19 @@
 
 This page documents breaking changes and major features of major version releases
 
+## v0.14
+
+### Language
+* support for generics
+* variable arguments in `main` removed
+* `const` statements now have mandatory type annotation, but optional value
+* mutual recursion possible within `struct` and `enum` scopes
+* three builtin typeclasses added: `Any`, `<empty>`, and `Valuable`
+
+### API
+* `program.parameters` accepts namespaced `const` names
+* `program.parameters` acceps names prefixed with `?` to avoid errors if parameter doesn't exist
+
 ## v0.13
 
 ### Language

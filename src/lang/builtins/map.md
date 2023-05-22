@@ -163,7 +163,7 @@ map.find_value_safe(predicate: (ValueType) -> Bool) -> Option[ValueType]
 ### `fold`
 
 ```helios
-map.fold(
+map.fold[ReducedType: Any](
     reducer: (ReducedType, KeyType, ValueType) -> ReducedType, 
     init: ReducedType
 ) -> ReducedType
@@ -174,7 +174,7 @@ map.fold(
 Fold that allows breaking the loop before reaching the end of the map. Can also be used to fold from the last to the first entry of the `Map` instead of the other way around.
 
 ```helios
-map.fold_lazy(
+map.fold_lazy[ReducedType: Any](
     reducer: (KeyType, ValueType, next: () -> ReducedType) -> ReducedType,
     final: ReducedType
 ) -> ReducedType
@@ -225,7 +225,7 @@ map.is_empty() -> Bool
 Creates a new `Map` by transforming the `Map` keys and values.
 
 ```helios
-map.map(
+map.map[NewKeyType, NewValueType](
     mapper: (KeyType, ValueType) -> (NewKeyType, NewValueType)
 ) -> Map[NewKeyType]NewValueType
 ```
@@ -262,5 +262,27 @@ map.sort(
         key_a: KeyType, value_a: ValueType, 
         key_b: KeyType, value_b: ValueType
     ) -> Bool
+) -> Map[KeyType]ValueType
+```
+
+### `update`
+
+Changes the value of the first entry matching a given key. Throws an error if the key isn't found.
+
+```helios
+map.update(
+    key: KeyType,
+    n: (old_value: ValueType) -> ValueType
+) -> Map[KeyType]ValueType
+```
+
+### `update_safe`
+
+Changes the values of all entries matching a given key. Doesn't throw an error if the key isn't found.
+
+```helios
+map.update_safe(
+    key: KeyType, 
+    fn: (old_value: ValueType) -> ValueType
 ) -> Map[KeyType]ValueType
 ```

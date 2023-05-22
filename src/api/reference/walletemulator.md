@@ -14,6 +14,22 @@ Gets the [`Address`](./address.md) of the wallet.
 wallet.address: helios.Address
 ```
 
+### `privateKey`
+
+Gets the [`PrivateKey`](./privatekey.md) of the wallet.
+
+```ts
+wallet.privateKey: helios.PrivateKey
+```
+
+### `pubKey`
+
+Gets the [`PubKey`](./pubkey.md) of the wallet.
+
+```ts
+wallet.pubKey: helios.PubKey
+```
+
 ### `pubKeyHash`
 
 Gets the [`PubKeyHash`](./pubkeyhash.md) of the wallet.

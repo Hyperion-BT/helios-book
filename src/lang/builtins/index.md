@@ -16,6 +16,11 @@ This section contains a reference of all the Helios builtins.
   * [Map](./map.md)
   * [Option](./option.md)
 
+## Type classes
+
+  * [Any](./any.md)
+  * [Valuable](./valuable.md)
+
 ## Money types
 
   * [AssetClass](./assetclass.md) (i.e. the kind of 'currency')

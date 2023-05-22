@@ -55,7 +55,9 @@ Option[SomeType] != Option[SomeType] -> Bool
 Maps `None` to `None` and `Some` to `Some`.
 
 ```helios
-option.map(fn: (some: OldSomeType) -> NewSomeType) -> Option[NewSomeType]
+option.map[NewSomeType](
+    fn: (some: OldSomeType) -> NewSomeType
+) -> Option[NewSomeType]
 ```
 
 ### `serialize`

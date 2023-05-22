@@ -59,13 +59,17 @@ Instantiating these constructors creates objects with [`HeliosData`](./heliosdat
 
 ### `parameters`
 
-Parameters can be set using the `parameters` setter. Parameters are [`const` statements](../../lang/variables.html#const-statements) that are visible in the main Helios script. In many cases a Javascript value can be used directly (i.e. JSON-like).
+Parameters can be set using the `parameters` setter. Parameters are [`const` statements](../../lang/variables.html#const-statements). In many cases a Javascript value can be used directly (i.e. JSON-like).
 
 ```ts
 program.parameters = {MY_PARAM: my_param, ...} as {[name: string]: helios.HeliosData | any}
 ```
 
 Primitive Javascript values can also be used as a rhs when setting parameters like this. Helios will intelligently convert these in the necessary [`HeliosData`](./heliosdata.md) instances.
+
+>**Note**: the parameter name can be prefixed with a `?` to avoid the setter throwing an error if the associated `const` statement doesn't exist.
+
+>**Note**: the parameter name can be namespaced using the `::` separator for `const` statements that are not in the top-scope of the main module.
 
 ## Methods
 

@@ -23,6 +23,22 @@ TxInput::new(
 
 ## Getters
 
+### `address`
+
+Shortcut for `tx_input.output.address`:
+
+```helios
+tx_input.address -> Address
+```
+
+### `datum`
+
+Shortcut for `tx_input.output.datum`:
+
+```helios
+tx_intput.datum -> OutputDatum
+```
+
 ### `output_id`
 
 Returns the [`TxOutputId`](./txoutputid.md) of the underlying UTxO.
@@ -37,6 +53,14 @@ Returns the underlying UTxO as a [`TxOutput`](./txoutput.md).
 
 ```helios
 tx_input.output -> TxOutput
+```
+
+### `value`
+
+Shortcut for `tx_input.output.value`:
+
+```helios
+tx_intput.value -> Value
 ```
 
 ## Operators

@@ -23,7 +23,7 @@ func fib(n: Int) -> Int {
 }
 ```
 
-> **Note:**: a function can only reference itself when recursing. Helios doesn't support hoisting, so mutual recursion by referring to functions defined after the current function isn't possible:
+> **Note:**: a function can only reference itself when recursing. Helios doesn't support hoisting, so mutual recursion by referring to functions defined after the current function in the top-scope isn't possible (for struct and enum methods this is however possible):
 >
 > ```helios
 > 01 func a(n: Int) -> Int {

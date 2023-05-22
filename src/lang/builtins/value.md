@@ -46,6 +46,24 @@ Instantiates a `Value` using a raw map.
 Value::from_map(raw_value: Map[MintingPolicyHash]Map[ByteArray]Int) -> Value
 ```
 
+### `sum`
+
+Sums any list with items that implement the [`Valuable`](./valuable.md) type class.
+
+```helios
+Value::sum[V: Valuable](list: []V) -> Value
+```
+
+## Getters
+
+### `value`
+
+Returns self. Allows `Value` to implement the [`Valuable`](./valuable.md) type class, which in turn allows using [`Value::sum()`](./value.md#sum) associated method for a list of `Value`.
+
+```helios
+value.value -> Value
+```
+
 ## Operators
 
 ### `==`

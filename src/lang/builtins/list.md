@@ -154,12 +154,22 @@ Returns the first item in the list that satisfies the predicate, wrapped in an [
 list.find_safe(predicate: (ItemType) -> Bool) -> Option[ItemType]
 ```
 
+### `flatten`
+
+Only defined for nested lists, i.e. `[][]NestedItemType`.
+
+```helios
+nested_list: [][]NestedItemType = ...;
+
+nested_list.flatten() -> []NestedItemType
+```
+
 ### `fold`
 
 Folds a list into a single value by continuosly applying the binary function to the items of the list. The result type is a type parameter of this method: `ReducedType`.
 
 ```helios
-list.fold(
+list.fold[ReducedType: Any](
     reducer: (ReducedType, ItemType) -> ReducedType, 
     init: ReducedType
 ) -> ReducedType
@@ -170,7 +180,7 @@ list.fold(
 Fold that allows breaking the loop before reaching the end of the list. Can also be used to fold from the last to the first entry of the list instead of the other way around.
 
 ```helios
-list.fold_lazy(
+list.fold_lazy[ReducedType: Any](
     reducer: (item: ItemType, next: () -> ReducedType) -> ReducedType,
     final: ReducedType
 ) -> ReducedType
@@ -210,12 +220,22 @@ Returns `true` if the list is empty.
 list.is_empty() -> Bool
 ```
 
+### `join`
+
+Only defined for `[]String` and `[]ByteArray`. `join()` takes an optional separator (defaults to the empty `String` or the empty `ByteArray`).
+
+```helios
+string_list.join(separator: String = "") -> String
+
+bytearray_list.join(separator: ByteArray = #) -> ByteArray
+```
+
 ### `map`
 
 Transforms each item of a list. The resulting list item type is a type parameter of this method: `NewItemType`.
 
 ```helios
-list.map(mapper: (ItemType) -> NewItemType) -> []NewItemType
+list.map[NewItemType](mapper: (ItemType) -> NewItemType) -> []NewItemType
 ```
 
 ### `prepend`
@@ -238,6 +258,15 @@ Sorts the list using insertion sort.
 
 ```helios
 list.sort((a: ItemType, b: ItemType) -> Bool) -> []ItemType
+```
+
+### `sum`
+
+Only defined for `[]Int` and `[]Real`.
+
+```helios
+int_list.sum() -> Int
+real_list.sum() -> Real
 ```
 
 ### `take`

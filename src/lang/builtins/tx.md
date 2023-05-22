@@ -218,6 +218,17 @@ tx.outputs_locked_by_datum(
 ) -> []TxOutput
 ```
 
+### `value_paid_to`
+
+Returns the output [`Value`](./value.md) sent to a generic payment address, with a specific inline datum.
+
+```helios
+tx.value_paid_to[InlineDatumDataType](
+    address: Address,
+    datum: InlineDatumDataType
+) -> Value
+```
+
 ### `value_sent_to`
 
 Returns the output [`Value`](./value.md) sent to a regular payment address.

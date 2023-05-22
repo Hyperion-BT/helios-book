@@ -26,13 +26,24 @@ Values can also be bound to names at the *top-level* of a script, or inside `str
 const AGE: Int = 123
 ```
 
-Top-level `const` statements can be [`re-bound`](../api/reference/program.md#changeparam) using the Helios API to form a new, distinct contract with a different address (see [`parameterized contracts`](./parameterized.md)).
+Top-level `const` statements can be [`re-bound`](../api/reference/program.md#parameters-1) using the Helios API to form a new, distinct contract with a different address (see [`parameterized contracts`](./parameterized.md)).
 
 > **Note**: the right-hand side of `const` can contain complex expressions and even function calls. The compiler is smart enough to evaluate these at compile-time.
 
+### `const` without right-hand-side
+
+If a `const` statements acts as a global parameter whose value must always be set, the right-hand-side can be omitted, for example:
+
+```helios
+const MY_PARAMETER: ValidatorHash
+```
+
+The compiler will throw an error if such parameters aren't set before compiling a [`Program`](../api/reference/program.md) into a [`UplcProgram`](../api/reference/uplcprogram.md). Use the [`program.parameters`](../api/reference//program.md#parameters-1) setter to set such parameters.
+
+
 ## Type annotations
 
-Assignment expressions and `const` statements usually include  a *type annotation*. For literal right-hand sides *type annotations* are optional:
+Assignment expressions usually include  a *type annotation*. For literal right-hand sides *type annotations* are optional:
 ```helios
 list_of_ints = []Int{1, 1, 2, 3, 5}; ...
 
@@ -40,3 +51,5 @@ list_of_ints = []Int{1, 1, 2, 3, 5}; ...
 
 list_of_ints: []Int = []Int{1, 1, 2, 3, 5}; ...
 ```
+
+>**Note**: `const` statements always have a type annotation. The type of the right-hand-side is never infered.
