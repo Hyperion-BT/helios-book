@@ -5,11 +5,11 @@ This page documents breaking changes and major features of major version release
 ## v0.14
 
 ### Language
-* support for generics
+* support for [generics](./lang/generics.md)
 * variable arguments in `main` removed
-* `const` statements now have mandatory type annotation, but optional value
-* mutual recursion possible within `struct` and `enum` scopes
-* three builtin typeclasses added: `Any`, `<empty>`, and `Valuable`
+* [`const`](./lang/variables.md#const-without-right-hand-side) statements now have mandatory type annotation, but optional value
+* [mutual recursion](./lang/methods.md) possible within [`struct`](./lang/structs.md) and [`enum`](./lang/enums.md) scopes
+* three builtin typeclasses added: [`Any`](./lang/builtins/any.md), [`<empty>`](./lang/generics.md#type-classes), and [`Valuable`](./lang/builtins/valuable.md)
 
 ### API
 * `program.parameters` accepts namespaced `const` names

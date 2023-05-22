@@ -23,7 +23,9 @@ const result: Rational = example_rational.add(example_rational)
 
 Methods are accessed using a `.` (i.e. a dot). Methods cannot modify `self` as all Helios values are immutable (instead they should return new instantations of the own type).
 
-> **Note:** `self` is a reserved word and can only be used for the first argument of a method. The `self` argument can't have a type annotation and is always implicitely typed.
+> **Note**: `self` is a reserved word and can only be used for the first argument of a method. The `self` argument can't have a type annotation and is always implicitely typed.
+
+> **Note**: methods within the same struct or enum scope can call eachother in any order (mutual recursion).
 
 ## Methods can be used as values
 A method is syntactic sugar for a **curried function** (a function that returns a function) that takes `self` as it's first argument:
