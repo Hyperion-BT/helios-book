@@ -9,7 +9,7 @@ Blockchain query interface. Notably implemented by [`BlockfrostV0`](./blockfrost
 Gets a complete list of UTxOs at a given [address](./address.md).
 
 ```ts
-network.getUtxs(address: helios.Address): Promise<helios.UTxO[]>
+network.getUtxos(address: helios.Address): Promise<helios.UTxO[]>
 ```
 
 ### `submitTx`
