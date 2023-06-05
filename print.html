@@ -2310,6 +2310,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <pre><code class="language-helios">OutputDatum != OutputDatum -&gt; Bool
 </code></pre>
 <h2 id="methods-15"><a class="header" href="#methods-15">Methods</a></h2>
+<h3 id="get_inline_data-1"><a class="header" href="#get_inline_data-1"><code>get_inline_data</code></a></h3>
+<p>Throws an error if the <code>OutputDatum</code> instance isn't <code>Inline</code>.</p>
+<pre><code class="language-helios">output_datum.get_inline_data() -&gt; Data
+</code></pre>
 <h3 id="serialize-15"><a class="header" href="#serialize-15"><code>serialize</code></a></h3>
 <pre><code class="language-helios">output_datum.serialize() -&gt; ByteArray
 </code></pre>
@@ -3358,6 +3362,9 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="sum-1"><a class="header" href="#sum-1"><code>sum</code></a></h3>
 <p>Sums any list with items that implement the <a href="lang/builtins/./valuable.html"><code>Valuable</code></a> type class.</p>
 <pre><code class="language-helios">Value::sum[V: Valuable](list: []V) -&gt; Value
+</code></pre>
+<p>For example:</p>
+<pre><code class="language-helios">Value::sum(list: []Value) -&gt; Value
 </code></pre>
 <h2 id="getters-20"><a class="header" href="#getters-20">Getters</a></h2>
 <h3 id="value-3"><a class="header" href="#value-3"><code>value</code></a></h3>
