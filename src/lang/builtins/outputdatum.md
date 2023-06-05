@@ -85,6 +85,14 @@ OutputDatum != OutputDatum -> Bool
 
 ## Methods
 
+### `get_inline_data`
+
+Throws an error if the `OutputDatum` instance isn't `Inline`.
+
+```helios
+output_datum.get_inline_data() -> Data
+```
+
 ### `serialize`
 
 ```helios

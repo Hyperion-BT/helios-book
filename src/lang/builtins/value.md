@@ -54,6 +54,12 @@ Sums any list with items that implement the [`Valuable`](./valuable.md) type cla
 Value::sum[V: Valuable](list: []V) -> Value
 ```
 
+For example:
+
+```helios
+Value::sum(list: []Value) -> Value
+```
+
 ## Getters
 
 ### `value`
