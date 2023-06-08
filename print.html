@@ -1948,7 +1948,7 @@ validator_credential.hash -&gt; ValidatorHash
 nested_list.flatten() -&gt; []NestedItemType
 </code></pre>
 <h3 id="fold"><a class="header" href="#fold"><code>fold</code></a></h3>
-<p>Folds a list into a single value by continuosly applying the binary function to the items of the list. The result type is a type parameter of this method: <code>ReducedType</code>.</p>
+<p>Folds a list into a single value by continuosly applying the binary function to the items of the list.</p>
 <pre><code class="language-helios">list.fold[ReducedType: Any](
     reducer: (ReducedType, ItemType) -&gt; ReducedType, 
     init: ReducedType
@@ -1960,6 +1960,22 @@ nested_list.flatten() -&gt; []NestedItemType
     reducer: (item: ItemType, next: () -&gt; ReducedType) -&gt; ReducedType,
     final: ReducedType
 ) -&gt; ReducedType
+</code></pre>
+<h3 id="fold2"><a class="header" href="#fold2"><code>fold2</code></a></h3>
+<p>Folds a list into two values.</p>
+<pre><code class="language-helios">list.fold2[ReducedType1: Any, ReducedType2: Any](
+    reducer: (ReducedType1, ReducedType2, ItemType) -&gt; (ReducedType1, ReducedType2),
+    init1: ReducedType1,
+    init2: ReducedType2
+) -&gt; (ReducedType1, ReducedType2)
+</code></pre>
+<h3 id="fold2_lazy"><a class="header" href="#fold2_lazy"><code>fold2_lazy</code></a></h3>
+<p>Fold into two values, while allowing breaking the loop before reaching the end of the list.</p>
+<pre><code class="language-helios">list.fold2_lazy[ReducedType1: Any, ReducedType2: Any](
+    reducer: (item: ItemType, next: () -&gt; (ReducedType1, ReducedType2)) -&gt; (ReducedType1, ReducedType2),
+    init1: ReducedType1,
+    init2: ReducedType2
+) -&gt; (ReducedType1, ReducedType2)
 </code></pre>
 <h3 id="for_each"><a class="header" href="#for_each"><code>for_each</code></a></h3>
 <p>Print or assert something for each item. Returns void.</p>
