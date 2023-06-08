@@ -26,7 +26,8 @@ Tx::new(
     time_range:  TimeRange,
     signatories: []PubKeyHash,
     redeemers:   Map[ScriptPurpose]AnyType,
-    datums:      Map[DatumHash]AnyType
+    datums:      Map[DatumHash]AnyType,
+    id:          TxId
 ) -> Tx
 ```
 
