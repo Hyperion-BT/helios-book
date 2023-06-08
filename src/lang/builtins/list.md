@@ -166,7 +166,7 @@ nested_list.flatten() -> []NestedItemType
 
 ### `fold`
 
-Folds a list into a single value by continuosly applying the binary function to the items of the list. The result type is a type parameter of this method: `ReducedType`.
+Folds a list into a single value by continuosly applying the binary function to the items of the list.
 
 ```helios
 list.fold[ReducedType: Any](
@@ -184,6 +184,30 @@ list.fold_lazy[ReducedType: Any](
     reducer: (item: ItemType, next: () -> ReducedType) -> ReducedType,
     final: ReducedType
 ) -> ReducedType
+```
+
+### `fold2`
+
+Folds a list into two values.
+
+```helios
+list.fold2[ReducedType1: Any, ReducedType2: Any](
+    reducer: (ReducedType1, ReducedType2, ItemType) -> (ReducedType1, ReducedType2),
+    init1: ReducedType1,
+    init2: ReducedType2
+) -> (ReducedType1, ReducedType2)
+```
+
+### `fold2_lazy`
+
+Fold into two values, while allowing breaking the loop before reaching the end of the list.
+
+```helios
+list.fold2_lazy[ReducedType1: Any, ReducedType2: Any](
+    reducer: (item: ItemType, next: () -> (ReducedType1, ReducedType2)) -> (ReducedType1, ReducedType2),
+    init1: ReducedType1,
+    init2: ReducedType2
+) -> (ReducedType1, ReducedType2)
 ```
 
 ### `for_each`
