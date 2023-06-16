@@ -196,6 +196,18 @@ none_int = Option[Int]::None; ...
 <pre><code class="language-helios">Option[Int]::Some{my_int} = option; ...
 </code></pre>
 <p>More information about <code>Option</code> can be found <a href="./builtins/option.html">here</a>.</p>
+<h2 id="nested-literal-constructors"><a class="header" href="#nested-literal-constructors">Nested literal constructors</a></h2>
+<p>If a literal List, <code>Map</code>, or <code>Option</code> contains other literal constructors, the types of those literal constructors can be omitted.</p>
+<pre><code class="language-helios">struct Pair {
+  a: Int
+  b: Int
+}
+...
+list = []Pair{{0, 0}, {1, 1}, {2, 2}};
+map = Map[Pair]Pair{{0, 0}: {0, 0}, {1, 1}: {1, 1}, {2, 2}: {2, 2}};
+nested_list = [][]Pair{{{0, 0}, {1, 1}, {2, 2}}, {{0, 0}, {1, 1}, {2, 2}}};
+option = Option[Pair]::Some{{0, 0}}
+</code></pre>
 
                     </main>
 

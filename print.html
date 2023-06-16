@@ -487,6 +487,18 @@ none_int = Option[Int]::None; ...
 <pre><code class="language-helios">Option[Int]::Some{my_int} = option; ...
 </code></pre>
 <p>More information about <code>Option</code> can be found <a href="lang/./builtins/option.html">here</a>.</p>
+<h2 id="nested-literal-constructors"><a class="header" href="#nested-literal-constructors">Nested literal constructors</a></h2>
+<p>If a literal List, <code>Map</code>, or <code>Option</code> contains other literal constructors, the types of those literal constructors can be omitted.</p>
+<pre><code class="language-helios">struct Pair {
+  a: Int
+  b: Int
+}
+...
+list = []Pair{{0, 0}, {1, 1}, {2, 2}};
+map = Map[Pair]Pair{{0, 0}: {0, 0}, {1, 1}: {1, 1}, {2, 2}: {2, 2}};
+nested_list = [][]Pair{{{0, 0}, {1, 1}, {2, 2}}, {{0, 0}, {1, 1}, {2, 2}}};
+option = Option[Pair]::Some{{0, 0}}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="branching"><a class="header" href="#branching">Branching</a></h1>
 <p>Helios has conventional <code>if-else</code> syntax for branching:</p>
 <pre><code class="language-helios">if (tag == 0) {
@@ -1990,8 +2002,12 @@ nested_list.flatten() -&gt; []NestedItemType
 bytearray_list.join(separator: ByteArray = #) -&gt; ByteArray
 </code></pre>
 <h3 id="map-1"><a class="header" href="#map-1"><code>map</code></a></h3>
-<p>Transforms each item of a list. The resulting list item type is a type parameter of this method: <code>NewItemType</code>.</p>
+<p>Transforms each item of a list.</p>
 <pre><code class="language-helios">list.map[NewItemType](mapper: (ItemType) -&gt; NewItemType) -&gt; []NewItemType
+</code></pre>
+<h3 id="map_option"><a class="header" href="#map_option"><code>map_option</code></a></h3>
+<p>Transforms and filters a list in one call.</p>
+<pre><code class="language-helios">list.map_option[NewItemType](mapper: (ItemType) -&gt; Option[NewItemType]) -&gt; []NewItemType
 </code></pre>
 <h3 id="prepend-1"><a class="header" href="#prepend-1"><code>prepend</code></a></h3>
 <p>Creates a new list by prepending an item to the old list.</p>
@@ -2000,9 +2016,17 @@ bytearray_list.join(separator: ByteArray = #) -&gt; ByteArray
 <h3 id="serialize-11"><a class="header" href="#serialize-11"><code>serialize</code></a></h3>
 <pre><code class="language-helios">list.serialize() -&gt; ByteArray
 </code></pre>
+<h3 id="set"><a class="header" href="#set"><code>set</code></a></h3>
+<p>Creates a new list, replacing an item at an <code>index</code>. Throws an error if the <code>index</code> is out of range.</p>
+<pre><code class="language-helios">list.set(index: Int, item: ItemType) -&gt; []ItemType
+</code></pre>
 <h3 id="sort"><a class="header" href="#sort"><code>sort</code></a></h3>
 <p>Sorts the list using insertion sort.</p>
 <pre><code class="language-helios">list.sort((a: ItemType, b: ItemType) -&gt; Bool) -&gt; []ItemType
+</code></pre>
+<h3 id="split_at"><a class="header" href="#split_at"><code>split_at</code></a></h3>
+<p>Splits the list at an <code>index</code>. Throws an error if the <code>index</code> is out of range.</p>
+<pre><code class="language-helios">list.split_at(index: Int) -&gt; ([]ItemType, []ItemType)
 </code></pre>
 <h3 id="sum"><a class="header" href="#sum"><code>sum</code></a></h3>
 <p>Only defined for <code>[]Int</code> and <code>[]Real</code>.</p>
@@ -2151,7 +2175,7 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id="serialize-12"><a class="header" href="#serialize-12"><code>serialize</code></a></h3>
 <pre><code class="language-helios">map.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="set"><a class="header" href="#set"><code>set</code></a></h3>
+<h3 id="set-1"><a class="header" href="#set-1"><code>set</code></a></h3>
 <p>Sets the first entry with given key to a new value. This entry is appended to end of the <code>Map</code> if the key isn't found.</p>
 <pre><code class="language-helios">map.set(key: KeyType, value: ValueType) -&gt; Map[KeyType]ValueType
 </code></pre>
