@@ -1036,28 +1036,28 @@ const rational_3: Rational = rational_1.add(rational_2) // 823/226 or 3.64159...
 <p>Helios validator scripts have a function called <code>main</code> that returns a boolean (<code>true</code>  or <code>false</code>) when validating the spending of a UTxO. </p>
 <p>For a spending validator, <code>main</code> takes three arguments:</p>
 <ul>
-<li><code>Datum</code>: data stored on-chain that is linked to the locked UTxO (not avaiable for minting/staking scripts)</li>
-<li><code>Redeemer</code>: data specified by the user attempting to spend the locked UTxO</li>
+<li>Datum: data stored on-chain that is linked to the locked UTxO (not avaiable for minting/staking scripts)</li>
+<li>Redeemer: data specified by the user attempting to spend the locked UTxO</li>
 <li><a href="lang/./builtins/scriptcontext.html"><code>ScriptContext</code></a>: information about the transaction spending the locked UTxO</li>
 </ul>
-<p><code>Datum</code> and <code>Redeemer</code> are user-defined but <a href="lang/./builtins/scriptcontext.html"><code>ScriptContext</code></a> is a builtin type.</p>
+<p>The datum and the redeemer can be of any type, but the last argument must always have type <a href="lang/./builtins/scriptcontext.html"><code>ScriptContext</code></a>.</p>
 <p>The structure of a validator script looks as follows:</p>
 <pre><code class="language-helios">// --- (1) ---
 spending my_validator       
 
 // --- (2) ---
-struct Datum {..}           
+struct MyDatum {..}           
 
 // --- (3) ---
-enum Redeemer {..}          
+enum MyRedeemer {..}          
                             
 // --- (4) ---
-func main(datum: Datum, redeemer: Redeemer, ctx: ScriptContext) -&gt; Bool {
+func main(datum: MyDatum, redeemer: MyRedeemer, ctx: ScriptContext) -&gt; Bool {
     ...                  
 }
 
 // --- (5) ---
-const MY_DATUM = Datum {...}
+const MY_DATUM = MyDatum {...}
 </code></pre>
 <h2 id="script-purpose-1"><a class="header" href="#script-purpose-1">Script purpose (1)</a></h2>
 <p>In Helios all scripts start with a  <strong>script purpose</strong>, followed by the name of the script. There are 5 script purposes:</p>
@@ -1079,11 +1079,11 @@ const MY_DATUM = Datum {...}
 <p><strong>Note</strong>: the name of each Helios source is registered in the global scope, so these names can't be used by statements, nor for the lhs of assignments. So eg. the entrypoint script can't be named <code>main</code> as that would conflict with the entrypoint function.</p>
 </blockquote>
 <h2 id="datum-2"><a class="header" href="#datum-2">Datum (2)</a></h2>
-<p>Each UTxO locked at a script address will also have an associated datum. The script can choose to use the datum as part of the spending validation, or it can choose to ignore the datum if it is irrelevant.</p>
-<p>If the script uses the datum then a <code>struct</code> or <code>enum</code> must be defined above <code>main</code> that is named <code>Datum</code>.</p>
+<p>Each UTxO locked at a script address will also have an associated datum. The script can choose to use the datum as part of the spending validation, or it can choose to ignore the datum using an underscore (<code>_</code>) if it is irrelevant.</p>
+<p>The datum can have any type.</p>
 <h2 id="redeemer-3"><a class="header" href="#redeemer-3">Redeemer (3)</a></h2>
-<p>Each UTxO used as an input for a transaction also has a redeemer attached. This is data specified by the user attempting to spend that UTxO. The script can again choose to use or ignore the redeemer during validation.</p>
-<p>If the script uses the redeemer then a <code>struct</code> or <code>enum</code> must be defined above <code>main</code> that is named <code>Redeemer</code>.</p>
+<p>Each UTxO used as an input for a transaction also has a redeemer attached. This is data specified by the user attempting to spend that UTxO. The script can again choose to use or ignore the redeemer using an underscore (<code>_</code>) if it is irrelevant to the validation.</p>
+<p>The redeemer can have any type.</p>
 <h2 id="main-function-4"><a class="header" href="#main-function-4"><code>main</code> function (4)</a></h2>
 <p>The <code>main</code> function (4) of a validator script accepts up to three optional arguments and returns a <code>Bool</code>:</p>
 <ul>
@@ -1091,22 +1091,18 @@ const MY_DATUM = Datum {...}
 <li><strong>redeemer (3)</strong></li>
 <li><strong>script context</strong></li>
 </ul>
-<p>Each <code>main</code> argument must appear in that order, but can be ignored with an underscore (<code>_</code>).</p>
 <pre><code class="language-helios">spending my_validator
 
 ...
 
 // redeemer is ignored
-func main(datum: Datum, _, context: ScriptContext) -&gt; Bool {
+func main(datum: MyDatum, _, context: ScriptContext) -&gt; Bool {
     ...
 }
 
 ...
 </code></pre>
 <p>Most of the data needed for writing useful validators is contained in the <a href="lang/./builtins/scriptcontext.html"><code>ScriptContext</code></a>.</p>
-<blockquote>
-<p><strong>Note</strong>: The datum and the redeemer are user-defined types (structs or enums) that currently <strong>must</strong> be named <code>Datum</code> and <code>Redeemer</code>.</p>
-</blockquote>
 <h2 id="data-generators-and-test-functions-5"><a class="header" href="#data-generators-and-test-functions-5">Data generators and test functions (5)</a></h2>
 <p>After the <code>main</code> function you can define functions and constants for:</p>
 <ul>
@@ -1121,15 +1117,6 @@ func main(datum: Datum, _, context: ScriptContext) -&gt; Bool {
 <ul>
 <li>not all names need to be used (relevant for function arguments and assignments)</li>
 <li>structs can be empty</li>
-</ul>
-<p>Special constructors, that aren't available in <code>main</code>, become available in this part of the script:</p>
-<ul>
-<li><a href="lang/./builtins/scriptcontext.html#new_certifying"><code>ScriptContext::new_certifying</code></a></li>
-<li><a href="lang/./builtins/scriptcontext.html#new_minting"><code>ScriptContext::new_minting</code></a></li>
-<li><a href="lang/./builtins/scriptcontext.html#new_rewarding"><code>ScriptContext::new_rewarding</code></a></li>
-<li><a href="lang/./builtins/scriptcontext.html#new_spending"><code>ScriptContext::new_spending</code></a></li>
-<li><a href="lang/./builtins/tx.html#new"><code>Tx::new</code></a></li>
-<li><a href="lang/./builtins/txinput.html#new"><code>TxInput::new</code></a></li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><p>The following example is the most trivial possible script.</p>
 <h2 id="example-always_succeeds"><a class="header" href="#example-always_succeeds">Example: <code>always_succeeds</code></a></h2>
