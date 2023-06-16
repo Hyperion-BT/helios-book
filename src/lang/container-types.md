@@ -21,7 +21,6 @@ x: Int = some_ints.get(2); ...   // x == 3
 
 More information about lists can be found [here](./builtins/list.md).
 
-
 ## `Map`
 
 A `Map` in Helios is internally represented as a list of key-value pairs. Both key and value can have any type except a function type. Uniqueness of keys isn't guaranteed.
@@ -67,3 +66,19 @@ Option[Int]::Some{my_int} = option; ...
 ```
 
 More information about `Option` can be found [here](./builtins/option.md).
+
+## Nested literal constructors
+
+If a literal List, `Map`, or `Option` contains other literal constructors, the types of those literal constructors can be omitted.
+
+```helios
+struct Pair {
+  a: Int
+  b: Int
+}
+...
+list = []Pair{{0, 0}, {1, 1}, {2, 2}};
+map = Map[Pair]Pair{{0, 0}: {0, 0}, {1, 1}: {1, 1}, {2, 2}: {2, 2}};
+nested_list = [][]Pair{{{0, 0}, {1, 1}, {2, 2}}, {{0, 0}, {1, 1}, {2, 2}}};
+option = Option[Pair]::Some{{0, 0}}
+```

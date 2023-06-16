@@ -256,10 +256,18 @@ bytearray_list.join(separator: ByteArray = #) -> ByteArray
 
 ### `map`
 
-Transforms each item of a list. The resulting list item type is a type parameter of this method: `NewItemType`.
+Transforms each item of a list.
 
 ```helios
 list.map[NewItemType](mapper: (ItemType) -> NewItemType) -> []NewItemType
+```
+
+### `map_option`
+
+Transforms and filters a list in one call.
+
+```helios
+list.map_option[NewItemType](mapper: (ItemType) -> Option[NewItemType]) -> []NewItemType
 ```
 
 ### `prepend`
@@ -276,12 +284,28 @@ list.prepend(item: ItemType) -> []ItemType
 list.serialize() -> ByteArray
 ```
 
+### `set`
+
+Creates a new list, replacing an item at an `index`. Throws an error if the `index` is out of range.
+
+```helios
+list.set(index: Int, item: ItemType) -> []ItemType
+```
+
 ### `sort`
 
 Sorts the list using insertion sort.
 
 ```helios
 list.sort((a: ItemType, b: ItemType) -> Bool) -> []ItemType
+```
+
+### `split_at`
+
+Splits the list at an `index`. Throws an error if the `index` is out of range.
+
+```helios
+list.split_at(index: Int) -> ([]ItemType, []ItemType)
 ```
 
 ### `sum`
