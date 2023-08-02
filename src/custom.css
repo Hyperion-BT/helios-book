@@ -22,3 +22,46 @@ h1.menu-title::before {
 	background-repeat: no-repeat;
 	background-position: 5px 5px;
 }*/
+
+@media only screen and (min-width: 756px) {
+	ul.toc {
+		column-count: 2;
+	}
+}
+
+h2#table-of-contents + div.toc {
+	display: none
+}
+
+h2#table-of-contents[expanded] + div.toc {
+	display: block
+}
+
+h2#table-of-contents > a:last-child {
+	text-decoration: none;
+	color: inherit;
+	
+}
+
+h2#table-of-contents > a:last-child::after {
+	content: "❱";
+	display: inline-block;
+	margin-left: 10px;
+}
+
+h2#table-of-contents[expanded] > a:last-child::after {
+	transform: rotate(90deg);
+}
+
+div.vspace {
+	width: 100%;
+	height: 20px;
+}
+
+h4[id^="parameters"] + div.table-wrapper > table {
+	margin: unset;
+}
+
+h4[id^="parameters"] + div.table-wrapper > table > thead {
+	display: none;
+}

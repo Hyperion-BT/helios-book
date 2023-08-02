@@ -4,7 +4,7 @@ This section contains a complete reference of all the functions and classes expo
 
 Typescript annotations are used to document types. 
 
-## Overview
+## Overview  
 
 ### Global constants and variables
 

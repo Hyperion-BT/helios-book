@@ -2,3 +2,6 @@
 book/*
 book/**
 *.swp
+node_modules
+log.*
+*.log
