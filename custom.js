@@ -1,51 +1,51 @@
 // highlighting of helios code blocks
 hljs.registerLanguage('helios', function(hljs) {
-	let KEYWORDS = {
+	const KEYWORDS = {
 		className: 'keyword',
 		begin: '[\\s]*\\b(import|func|const|struct|enum|module|spending|minting|staking|testing|if|else|switch|print|as|from|error|assert|copy)\\b'
-	};
+	}
 
-	let LITERALS = {
+	const LITERALS = {
 		className: 'literal',
 		begin: '\\b(false|true)\\b',
-	};
+	}
 
-	let BUILTIN_TYPES = {
+	const BUILTIN_TYPES = {
 		className: 'type',
 		begin: '\\b(Int|Bool|Option|Map|String|ByteArray|Real)',
-	};
+	}
 
-	let NUMBERS = {
+	const NUMBERS = {
 		className: 'number',
 		begin: '(-?)(\\b0[xob][a-fA-F0-9]+|(\\b[\\d][\\d_]*(\\.[\\d_]*)?|\\.[\\d_]+)([eE][-+]?[\\d]+)?)(?!D)'
-	};
+	}
 
-	let BYTE_ARRAYS = {
+	const BYTE_ARRAYS = {
 		className: 'literal',
 		begin: '#[a-fA-F0-9.]*',
-	};
+	}
 
-	let PARAM_TYPE = {
+	const PARAM_TYPE = {
 		className: 'param-type',
 		begin: '\\b[A-Za-z]*Type\\b',
-	};
+	}
 
-	let VARIABLE = {
+	const VARIABLE = {
 		className: 'variable',
 		begin: '\\b(self)',
-	};
+	}
 
-	let STRINGS = {
+	const STRINGS = {
 		className: 'string',
 		begin: '"', end: '"',
 		illegal: '\\n',
 		contains: [ hljs.BACKSLASH_ESCAPE ],
 		relevance: 0
-	};
+	}
 
-	let INLINE_COMMENT = hljs.COMMENT('//', '[^\\\\]$');
+	const INLINE_COMMENT = hljs.COMMENT('//', '[^\\\\]$')
 
-	var config = {
+	const config = {
 		aliases: [ '4d' ],
 		keyword:KEYWORDS,
 		contains: [
@@ -60,14 +60,26 @@ hljs.registerLanguage('helios', function(hljs) {
 			VARIABLE,
 			PARAM_TYPE,
 		]
-	};
+	}
 
-	return config;
-});
+	return config
+})
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
 	document.querySelectorAll('pre code.language-helios').forEach((el) => {
-		hljs.highlightBlock(el);
-	});
-});
+		hljs.highlightBlock(el)
+	})
+
+	document.querySelectorAll('strong[aria-hidden="true"]').forEach((el) => {
+		if (el.innerHTML.split(".").length > 3) {
+			el.parentNode?.removeChild(el)
+		}
+	})
+
+	const active = document.getElementById(window.location.hash?.slice(1) ?? "")
+
+	if (active && active.tagName.toLowerCase() == "h2") {
+		active.setAttribute("expanded", "")
+	}
+})
