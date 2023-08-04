@@ -65,3 +65,11 @@ h4[id^="parameters"] + div.table-wrapper > table {
 h4[id^="parameters"] + div.table-wrapper > table > thead {
 	display: none;
 }
+
+h5[id^="parameters"] + div.table-wrapper > table {
+	margin: unset;
+}
+
+h5[id^="parameters"] + div.table-wrapper > table > thead {
+	display: none;
+}

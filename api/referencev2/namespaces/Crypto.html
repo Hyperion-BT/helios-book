@@ -1,0 +1,546 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Crypto - The Helios Smart Contract Language</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../../../favicon.svg">
+        <link rel="shortcut icon" href="../../../favicon.png">
+        <link rel="stylesheet" href="../../../css/variables.css">
+        <link rel="stylesheet" href="../../../css/general.css">
+        <link rel="stylesheet" href="../../../css/chrome.css">
+        <link rel="stylesheet" href="../../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../../highlight.css">
+        <link rel="stylesheet" href="../../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../../src/custom.css">
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item affix "><a href="../../../intro.html">Introduction</a></li><li class="chapter-item affix "><a href="../../../understanding-eutxos.html">Understanding eUTxOs</a></li><li class="chapter-item affix "><a href="../../../changelog.html">Changelog</a></li><li class="chapter-item "><a href="../../../lang/index.html"><strong aria-hidden="true">1.</strong> Helios language</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../lang/comments.html"><strong aria-hidden="true">1.1.</strong> Comments</a></li><li class="chapter-item "><a href="../../../lang/variables.html"><strong aria-hidden="true">1.2.</strong> Variables</a></li><li class="chapter-item "><a href="../../../lang/primitive-types.html"><strong aria-hidden="true">1.3.</strong> Primitive types</a></li><li class="chapter-item "><a href="../../../lang/container-types.html"><strong aria-hidden="true">1.4.</strong> Container types</a></li><li class="chapter-item "><a href="../../../lang/branching.html"><strong aria-hidden="true">1.5.</strong> Branching</a></li><li class="chapter-item "><a href="../../../lang/print_error_assert.html"><strong aria-hidden="true">1.6.</strong> Print, error, assert</a></li><li class="chapter-item "><a href="../../../lang/functions/index.html"><strong aria-hidden="true">1.7.</strong> Functions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../lang/functions/multiple_return_values.html"> Multiple return values</a></li><li class="chapter-item "><a href="../../../lang/functions/void.html"> Void functions</a></li><li class="chapter-item "><a href="../../../lang/functions/anonymous.html"> Anonymous functions</a></li><li class="chapter-item "><a href="../../../lang/functions/unused_arguments.html"> Unused arguments</a></li><li class="chapter-item "><a href="../../../lang/functions/optional_arguments.html"> Optional arguments</a></li><li class="chapter-item "><a href="../../../lang/functions/named_arguments.html"> Named arguments</a></li><li class="chapter-item "><a href="../../../lang/functions/values.html"> Function values</a></li><li class="chapter-item "><a href="../../../lang/functions/example.html"> Example: Collatz sequence</a></li></ol></li><li class="chapter-item "><a href="../../../lang/operators.html"><strong aria-hidden="true">1.8.</strong> Operators</a></li><li class="chapter-item "><a href="../../../lang/structs.html"><strong aria-hidden="true">1.9.</strong> Structs</a></li><li class="chapter-item "><a href="../../../lang/enums.html"><strong aria-hidden="true">1.10.</strong> Enums</a></li><li class="chapter-item "><a href="../../../lang/destructuring.html"><strong aria-hidden="true">1.11.</strong> Destructuring</a></li><li class="chapter-item "><a href="../../../lang/methods.html"><strong aria-hidden="true">1.12.</strong> Methods</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../lang/associated-functions-and-constants.html"> Associated functions and constants</a></li><li class="chapter-item "><a href="../../../lang/automatic-methods.html"> Automatic methods</a></li><li class="chapter-item "><a href="../../../lang/example-rational.html"> Example: Rational</a></li></ol></li><li class="chapter-item "><a href="../../../lang/generics.html"><strong aria-hidden="true">1.13.</strong> Generics</a></li><li class="chapter-item "><a href="../../../lang/script-structure.html"><strong aria-hidden="true">1.14.</strong> Structure of a script</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../lang/example-script.html"> Example: always_succeeds</a></li><li class="chapter-item "><a href="../../../lang/parameterized.html"> Contract Parameters</a></li></ol></li><li class="chapter-item "><a href="../../../lang/modules.html"><strong aria-hidden="true">1.15.</strong> Modules</a></li><li class="chapter-item "><a href="../../../lang/builtins/index.html"><strong aria-hidden="true">1.16.</strong> Builtins</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../lang/builtins/address.html"> Address</a></li><li class="chapter-item "><a href="../../../lang/builtins/any.html"> Any</a></li><li class="chapter-item "><a href="../../../lang/builtins/assetclass.html"> AssetClass</a></li><li class="chapter-item "><a href="../../../lang/builtins/bool.html"> Bool</a></li><li class="chapter-item "><a href="../../../lang/builtins/bytearray.html"> ByteArray</a></li><li class="chapter-item "><a href="../../../lang/builtins/credential.html"> Credential</a></li><li class="chapter-item "><a href="../../../lang/builtins/data.html"> Data</a></li><li class="chapter-item "><a href="../../../lang/builtins/datumhash.html"> DatumHash</a></li><li class="chapter-item "><a href="../../../lang/builtins/dcert.html"> DCert</a></li><li class="chapter-item "><a href="../../../lang/builtins/duration.html"> Duration</a></li><li class="chapter-item "><a href="../../../lang/builtins/int.html"> Int</a></li><li class="chapter-item "><a href="../../../lang/builtins/list.html"> List</a></li><li class="chapter-item "><a href="../../../lang/builtins/map.html"> Map</a></li><li class="chapter-item "><a href="../../../lang/builtins/mintingpolicyhash.html"> MintingPolicyHash</a></li><li class="chapter-item "><a href="../../../lang/builtins/option.html"> Option</a></li><li class="chapter-item "><a href="../../../lang/builtins/outputdatum.html"> OutputDatum</a></li><li class="chapter-item "><a href="../../../lang/builtins/pubkey.html"> PubKey</a></li><li class="chapter-item "><a href="../../../lang/builtins/pubkeyhash.html"> PubKeyHash</a></li><li class="chapter-item "><a href="../../../lang/builtins/real.html"> Real</a></li><li class="chapter-item "><a href="../../../lang/builtins/scriptcontext.html"> ScriptContext</a></li><li class="chapter-item "><a href="../../../lang/builtins/scripthash.html"> ScriptHash</a></li><li class="chapter-item "><a href="../../../lang/builtins/scriptpurpose.html"> ScriptPurpose</a></li><li class="chapter-item "><a href="../../../lang/builtins/stakekeyhash.html"> StakeKeyHash</a></li><li class="chapter-item "><a href="../../../lang/builtins/stakingcredential.html"> StakingCredential</a></li><li class="chapter-item "><a href="../../../lang/builtins/stakinghash.html"> StakingHash</a></li><li class="chapter-item "><a href="../../../lang/builtins/stakingpurpose.html"> StakingPurpose</a></li><li class="chapter-item "><a href="../../../lang/builtins/stakingvalidatorhash.html"> StakingValidatorHash</a></li><li class="chapter-item "><a href="../../../lang/builtins/string.html"> String</a></li><li class="chapter-item "><a href="../../../lang/builtins/time.html"> Time</a></li><li class="chapter-item "><a href="../../../lang/builtins/timerange.html"> TimeRange</a></li><li class="chapter-item "><a href="../../../lang/builtins/tx.html"> Tx</a></li><li class="chapter-item "><a href="../../../lang/builtins/txid.html"> TxId</a></li><li class="chapter-item "><a href="../../../lang/builtins/txinput.html"> TxInput</a></li><li class="chapter-item "><a href="../../../lang/builtins/txoutput.html"> TxOutput</a></li><li class="chapter-item "><a href="../../../lang/builtins/txoutputid.html"> TxOutputId</a></li><li class="chapter-item "><a href="../../../lang/builtins/validatorhash.html"> ValidatorHash</a></li><li class="chapter-item "><a href="../../../lang/builtins/valuable.html"> Valuable</a></li><li class="chapter-item "><a href="../../../lang/builtins/value.html"> Value</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../../api/index.html"><strong aria-hidden="true">2.</strong> Helios API</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../api/setup.html"><strong aria-hidden="true">2.1.</strong> Setup</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../api/deno.html"> Deno</a></li></ol></li><li class="chapter-item "><a href="../../../api/compiling.html"><strong aria-hidden="true">2.2.</strong> Compiling Helios sources</a></li><li class="chapter-item "><a href="../../../api/generating.html"><strong aria-hidden="true">2.3.</strong> Generating datums and redeemers</a></li><li class="chapter-item "><a href="../../../api/building/index.html"><strong aria-hidden="true">2.4.</strong> Building transactions</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../api/building/inputs.html"> Transaction inputs</a></li><li class="chapter-item "><a href="../../../api/building/outputs.html"> Transaction outputs</a></li><li class="chapter-item "><a href="../../../api/building/collateral.html"> Collateral</a></li><li class="chapter-item "><a href="../../../api/building/signers.html"> Explicit signers</a></li><li class="chapter-item "><a href="../../../api/building/minting.html"> Minting</a></li><li class="chapter-item "><a href="../../../api/building/finalizing.html"> Finalizing</a></li><li class="chapter-item "><a href="../../../api/building/signing-and-submitting.html"> Signing and submitting</a></li></ol></li><li class="chapter-item "><a href="../../../api/picoswap/index.html"><strong aria-hidden="true">2.5.</strong> Example: PicoSwap</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../api/picoswap/script.html"> Main script</a></li><li class="chapter-item "><a href="../../../api/picoswap/datums.html"> Generating datums</a></li><li class="chapter-item "><a href="../../../api/picoswap/contract-class.html"> Contract helper class</a></li><li class="chapter-item "><a href="../../../api/picoswap/new-sale.html"> Creating a new sale</a></li><li class="chapter-item "><a href="../../../api/picoswap/cancel-sale.html"> Canceling a sale</a></li><li class="chapter-item "><a href="../../../api/picoswap/buying.html"> Buying for-sale assets</a></li></ol></li><li class="chapter-item "><a href="../../../api/reference/index.html"><strong aria-hidden="true">2.6.</strong> API Reference</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../api/reference/globals.html"> Globals</a></li><li class="chapter-item "><a href="../../../api/reference/functions.html"> Functions</a></li><li class="chapter-item "><a href="../../../api/reference/address.html"> Address</a></li><li class="chapter-item "><a href="../../../api/reference/assetclass.html"> AssetClass</a></li><li class="chapter-item "><a href="../../../api/reference/assets.html"> Assets</a></li><li class="chapter-item "><a href="../../../api/reference/blockfrostv0.html"> BlockfrostV0</a></li><li class="chapter-item "><a href="../../../api/reference/bytearraydata.html"> ByteArrayData</a></li><li class="chapter-item "><a href="../../../api/reference/cbordata.html"> CborData</a></li><li class="chapter-item "><a href="../../../api/reference/cip30handle.html"> Cip30Handle</a></li><li class="chapter-item "><a href="../../../api/reference/cip30wallet.html"> Cip30Wallet</a></li><li class="chapter-item "><a href="../../../api/reference/coinselection.html"> CoinSelection</a></li><li class="chapter-item "><a href="../../../api/reference/constrdata.html"> ConstrData</a></li><li class="chapter-item "><a href="../../../api/reference/crypto.html"> Crypto</a></li><li class="chapter-item "><a href="../../../api/reference/datum.html"> Datum</a></li><li class="chapter-item "><a href="../../../api/reference/datumhash.html"> DatumHash</a></li><li class="chapter-item "><a href="../../../api/reference/fuzzytest.html"> FuzzyTest</a></li><li class="chapter-item "><a href="../../../api/reference/heliosdata.html"> HeliosData</a></li><li class="chapter-item "><a href="../../../api/reference/intdata.html"> IntData</a></li><li class="chapter-item "><a href="../../../api/reference/listdata.html"> ListData</a></li><li class="chapter-item "><a href="../../../api/reference/mapdata.html"> MapData</a></li><li class="chapter-item "><a href="../../../api/reference/mintingpolicyhash.html"> MintingPolicyHash</a></li><li class="chapter-item "><a href="../../../api/reference/nativescript.html"> NativeScript</a></li><li class="chapter-item "><a href="../../../api/reference/network.html"> Network</a></li><li class="chapter-item "><a href="../../../api/reference/networkemulator.html"> NetworkEmulator</a></li><li class="chapter-item "><a href="../../../api/reference/networkparams.html"> NetworkParams</a></li><li class="chapter-item "><a href="../../../api/reference/privatekey.html"> PrivateKey</a></li><li class="chapter-item "><a href="../../../api/reference/program.html"> Program</a></li><li class="chapter-item "><a href="../../../api/reference/pubkey.html"> PubKey</a></li><li class="chapter-item "><a href="../../../api/reference/pubkeyhash.html"> PubKeyHash</a></li><li class="chapter-item "><a href="../../../api/reference/signature.html"> Signature</a></li><li class="chapter-item "><a href="../../../api/reference/stakeaddress.html"> StakeAddress</a></li><li class="chapter-item "><a href="../../../api/reference/stakekeyhash.html"> StakeKeyHash</a></li><li class="chapter-item "><a href="../../../api/reference/stakingvalidatorhash.html"> StakingValidatorHash</a></li><li class="chapter-item "><a href="../../../api/reference/tx.html"> Tx</a></li><li class="chapter-item "><a href="../../../api/reference/txid.html"> TxId</a></li><li class="chapter-item "><a href="../../../api/reference/txoutput.html"> TxOutput</a></li><li class="chapter-item "><a href="../../../api/reference/txrefinput.html"> TxRefInput</a></li><li class="chapter-item "><a href="../../../api/reference/txwitnesses.html"> TxWitnesses</a></li><li class="chapter-item "><a href="../../../api/reference/uplcbool.html"> UplcBool</a></li><li class="chapter-item "><a href="../../../api/reference/uplcbytearray.html"> UplcByteArray</a></li><li class="chapter-item "><a href="../../../api/reference/uplcdata.html"> UplcData</a></li><li class="chapter-item "><a href="../../../api/reference/uplcdatavalue.html"> UplcDataValue</a></li><li class="chapter-item "><a href="../../../api/reference/uplcint.html"> UplcInt</a></li><li class="chapter-item "><a href="../../../api/reference/uplcpair.html"> UplcPair</a></li><li class="chapter-item "><a href="../../../api/reference/uplcprogram.html"> UplcProgram</a></li><li class="chapter-item "><a href="../../../api/reference/uplcstring.html"> UplcString</a></li><li class="chapter-item "><a href="../../../api/reference/uplcunit.html"> UplcUnit</a></li><li class="chapter-item "><a href="../../../api/reference/uplcvalue.html"> UplcValue</a></li><li class="chapter-item "><a href="../../../api/reference/usererror.html"> UserError</a></li><li class="chapter-item "><a href="../../../api/reference/utxo.html"> UTxO</a></li><li class="chapter-item "><a href="../../../api/reference/validatorhash.html"> ValidatorHash</a></li><li class="chapter-item "><a href="../../../api/reference/value.html"> Value</a></li><li class="chapter-item "><a href="../../../api/reference/wallet.html"> Wallet</a></li><li class="chapter-item "><a href="../../../api/reference/walletemulator.html"> WalletEmulator</a></li><li class="chapter-item "><a href="../../../api/reference/wallethelper.html"> WalletHelper</a></li></ol></li><li class="chapter-item expanded "><a href="../../../api/referencev2/index.html"><strong aria-hidden="true">2.7.</strong> API Reference (auto-gen)</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../api/referencev2/classes/index.html"> Classes</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../api/referencev2/classes/Address.html"> Address</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/AssetClass.html"> AssetClass</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Assets.html"> Assets</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Bip32PrivateKey.html"> Bip32PrivateKey</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/BlockfrostV0.html"> BlockfrostV0</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/ByteArray.html"> ByteArray</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/ByteArrayData.html"> ByteArrayData</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/CborData.html"> CborData</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Cip30Wallet.html"> Cip30Wallet</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/CoinSelection.html"> CoinSelection</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/ConstrData.html"> ConstrData</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Datum.html"> Datum</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/DatumHash.html"> DatumHash</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Ed25519PrivateKey.html"> Ed25519PrivateKey</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/FuzzyTest.html"> FuzzyTest</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/HInt.html"> HInt</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Hash.html"> Hash</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/HashedDatum.html"> HashedDatum</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/HeliosData.html"> HeliosData</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/IntData.html"> IntData</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/ListData.html"> ListData</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/MapData.html"> MapData</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/MintingPolicyHash.html"> MintingPolicyHash</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/MintingRedeemer.html"> MintingRedeemer</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/NativeScript.html"> NativeScript</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/NetworkEmulator.html"> NetworkEmulator</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/NetworkParams.html"> NetworkParams</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Program.html"> Program</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/PubKey.html"> PubKey</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/PubKeyHash.html"> PubKeyHash</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Redeemer.html"> Redeemer</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/RemoteWallet.html"> RemoteWallet</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/RootPrivateKey.html"> RootPrivateKey</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/RuntimeError.html"> RuntimeError</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/ScriptHash.html"> ScriptHash</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Signature.html"> Signature</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Site.html"> Site</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Source.html"> Source</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/SpendingRedeemer.html"> SpendingRedeemer</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/StakeAddress.html"> StakeAddress</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/StakeKeyHash.html"> StakeKeyHash</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/StakingValidatorHash.html"> StakingValidatorHash</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Tx.html"> Tx</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/TxBody.html"> TxBody</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/TxId.html"> TxId</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/TxInput.html"> TxInput</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/TxOutput.html"> TxOutput</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/TxOutputId.html"> TxOutputId</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/TxWitnesses.html"> TxWitnesses</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcBool.html"> UplcBool</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcBuiltin.html"> UplcBuiltin</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcByteArray.html"> UplcByteArray</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcCall.html"> UplcCall</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcConst.html"> UplcConst</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcData.html"> UplcData</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcDataValue.html"> UplcDataValue</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcDelay.html"> UplcDelay</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcError.html"> UplcError</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcForce.html"> UplcForce</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcInt.html"> UplcInt</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcLambda.html"> UplcLambda</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcList.html"> UplcList</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcPair.html"> UplcPair</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcProgram.html"> UplcProgram</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcString.html"> UplcString</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcTerm.html"> UplcTerm</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcType.html"> UplcType</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcUnit.html"> UplcUnit</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcValue.html"> UplcValue</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UplcVariable.html"> UplcVariable</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/UserError.html"> UserError</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/ValidatorHash.html"> ValidatorHash</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/Value.html"> Value</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/WalletEmulator.html"> WalletEmulator</a></li><li class="chapter-item "><a href="../../../api/referencev2/classes/WalletHelper.html"> WalletHelper</a></li></ol></li><li class="chapter-item "><a href="../../../api/referencev2/functions.html"> Functions</a></li><li class="chapter-item "><a href="../../../api/referencev2/interfaces/index.html"> Interfaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../api/referencev2/interfaces/Network.html"> Network</a></li><li class="chapter-item "><a href="../../../api/referencev2/interfaces/PrivateKey.html"> PrivateKey</a></li><li class="chapter-item "><a href="../../../api/referencev2/interfaces/Wallet.html"> Wallet</a></li></ol></li><li class="chapter-item expanded "><a href="../../../api/referencev2/namespaces/index.html"> Namespaces</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../api/referencev2/namespaces/Cbor.html"> Cbor</a></li><li class="chapter-item expanded "><a href="../../../api/referencev2/namespaces/Crypto.html" class="active"> Crypto</a></li><li class="chapter-item "><a href="../../../api/referencev2/namespaces/Ed25519.html"> Ed25519</a></li><li class="chapter-item "><a href="../../../api/referencev2/namespaces/config.html"> config</a></li></ol></li><li class="chapter-item "><a href="../../../api/referencev2/types.html"> Types</a></li><li class="chapter-item "><a href="../../../api/referencev2/variables.html"> Variables</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../../cli/index.html"><strong aria-hidden="true">3.</strong> Helios CLI</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../cli/setup.html"><strong aria-hidden="true">3.1.</strong> Setup</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../cli/install.html"> Install helios-cli</a></li><li class="chapter-item "><a href="../../../cli/cardano-node.html"> Setup cardano-node</a></li><li class="chapter-item "><a href="../../../cli/wallet.html"> Wallet setup</a></li></ol></li><li class="chapter-item "><a href="../../../cli/usage.html"><strong aria-hidden="true">3.2.</strong> Using helios-cli</a></li><li class="chapter-item "><a href="../../../cli/example-always-succeeds.html"><strong aria-hidden="true">3.3.</strong> Example: Always succeeds</a></li><li class="chapter-item "><a href="../../../cli/example-time-lock.html"><strong aria-hidden="true">3.4.</strong> Example: Time lock</a></li></ol></li><li class="chapter-item "><a href="../../../integrations/index.html"><strong aria-hidden="true">4.</strong> Integrations</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../integrations/different-versions.html"><strong aria-hidden="true">4.1.</strong> Different versions of Helios</a></li><li class="chapter-item "><a href="../../../integrations/vscode.html"><strong aria-hidden="true">4.2.</strong> VSCode</a></li><li class="chapter-item "><a href="../../../integrations/webpack.html"><strong aria-hidden="true">4.3.</strong> Webpack</a></li></ol></li><li class="chapter-item "><a href="../../../advanced-concepts/index.html"><strong aria-hidden="true">5.</strong> Advanced concepts</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../advanced-concepts/exploits.html"><strong aria-hidden="true">5.1.</strong> Exploits</a></li><li class="chapter-item "><a href="../../../advanced-concepts/ir/index.html"><strong aria-hidden="true">5.2.</strong> Intermediate representation</a></li><li class="chapter-item "><a href="../../../advanced-concepts/ir/simplification.html"><strong aria-hidden="true">5.3.</strong> Simplification</a></li><li class="chapter-item "><a href="../../../advanced-concepts/minting/index.html"><strong aria-hidden="true">5.4.</strong> Minting native assets</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../../advanced-concepts/minting/signature.html"> Signature based minting</a></li><li class="chapter-item "><a href="../../../advanced-concepts/minting/unique.html"> Unique minting</a></li></ol></li><li class="chapter-item "><a href="../../../advanced-concepts/vesting-contract.html"><strong aria-hidden="true">5.5.</strong> Vesting contract</a></li><li class="chapter-item "><a href="../../../advanced-concepts/english-auction.html"><strong aria-hidden="true">5.6.</strong> English auction</a></li><li class="chapter-item "><a href="../../../advanced-concepts/oracle-pools.html"><strong aria-hidden="true">5.7.</strong> Oracle pools</a></li><li class="chapter-item "><a href="../../../advanced-concepts/dapps.html"><strong aria-hidden="true">5.8.</strong> dApp recommendations</a></li><li class="chapter-item "><a href="../../../advanced-concepts/tx-finalization.html"><strong aria-hidden="true">5.9.</strong> Tx finalization</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Helios Smart Contract Language</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/hyperion-bt/helios-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p><a href="../../../api/index.html">Helios API</a>/ <a href="../../../api/referencev2/index.html">API Reference (auto-gen)</a>/ <a href="../../../api/referencev2/namespaces/index.html">Namespaces</a>/</p>
+<h1 id="crypto"><a class="header" href="#crypto">Crypto</a></h1>
+<p>A collection of cryptography primitives are included here in order to avoid external dependencies
+mulberry32: random number generator
+base32 encoding and decoding
+bech32 encoding, checking, and decoding
+sha2_256, sha2_512, sha3 and blake2b hashing</p>
+<h2 id="table-of-contents"><a class="header" href='javascript:(() => {
+        document.getElementById("table-of-contents").setAttribute("expanded", "");
+        window.location.hash = "#table-of-contents"
+    })();'>Index</a><a href='javascript:(() => {
+        const h = document.getElementById("table-of-contents");
+        if (h.getAttribute("expanded") == "") {
+            h.removeAttribute("expanded")
+        } else {
+            h.setAttribute("expanded", "")
+        }
+    })();'></a></h2><div class="toc"><h3 id="functions"><a class="header" href="#functions"><a class="header" href="#functions">Functions</a></a></h3><ul class="toc"><li><a href="Crypto.html#blake2b">blake2b</a></li><li><a href="Crypto.html#decodebase32">decodeBase32</a></li><li><a href="Crypto.html#decodebech32">decodeBech32</a></li><li><a href="Crypto.html#encodebase32">encodeBase32</a></li><li><a href="Crypto.html#encodebech32">encodeBech32</a></li><li><a href="Crypto.html#hmacsha2_256">hmacSha2_256</a></li><li><a href="Crypto.html#hmacsha2_512">hmacSha2_512</a></li><li><a href="Crypto.html#mulberry32">mulberry32</a></li><li><a href="Crypto.html#pbkdf2">pbkdf2</a></li><li><a href="Crypto.html#rand">rand</a></li><li><a href="Crypto.html#sha2_256">sha2_256</a></li><li><a href="Crypto.html#sha2_512">sha2_512</a></li><li><a href="Crypto.html#sha3">sha3</a></li><li><a href="Crypto.html#verifybech32">verifyBech32</a></li></ul></div>
+<h2 id="functions"><a class="header" href="#functions">Functions</a></h2>
+<h3 id="blake2b"><a class="header" href="#blake2b">blake2b</a></h3>
+<p>▸ <strong>blake2b</strong>(<code>bytes</code>, <code>digestSize?</code>): <code>number</code>[]</p>
+<p>Calculates blake2b hash of a list of uint8 numbers (variable digest size).
+Result is also a list of uint8 number.
+Blake2b is a 64bit algorithm, so we need to be careful when replicating 64-bit operations with 2 32-bit numbers (low-word overflow must spill into high-word, and shifts must go over low/high boundary)</p>
+<h4 id="parameters"><a class="header" href="#parameters">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>bytes</code></td><td style="text-align: left"><code>number</code>[]</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><code>digestSize?</code></td><td style="text-align: left"><code>number</code></td><td style="text-align: left">at most 64</td></tr>
+</tbody></table>
+</div>
+<h4 id="returns"><a class="header" href="#returns">Returns</a></h4>
+<p><code>number</code>[]</p>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.blake2b([0, 1])) =&gt; &quot;01cf79da4945c370c68b265ef70641aaa65eaa8f5953e3900d97724c2c5aa095&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.blake2b(textToBytes(&quot;abc&quot;), 64)) =&gt; &quot;ba80a53f981c4d0d6a2797b69f12f6e94c212f14685ac4b74b12bb6fdbffa2d17d87c5392aab792dc252d5de4533cc9518d38aa8dbf1925ab92386edd4009923&quot;
+</code></pre>
+<div class="vspace"></div>
+<h3 id="decodebase32"><a class="header" href="#decodebase32">decodeBase32</a></h3>
+<p>▸ <strong>decodeBase32</strong>(<code>encoded</code>, <code>alphabet?</code>): <code>number</code>[]</p>
+<p>Decode base32 string into bytes.</p>
+<h4 id="parameters-1"><a class="header" href="#parameters-1">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>encoded</code></td><td style="text-align: left"><code>string</code></td></tr>
+<tr><td style="text-align: left"><code>alphabet?</code></td><td style="text-align: left"><code>string</code></td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-1"><a class="header" href="#returns-1">Returns</a></h4>
+<p><code>number</code>[]</p>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToText(Crypto.decodeBase32(&quot;my&quot;)) =&gt; &quot;f&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToText(Crypto.decodeBase32(&quot;mzxq&quot;)) =&gt; &quot;fo&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToText(Crypto.decodeBase32(&quot;mzxw6&quot;)) =&gt; &quot;foo&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToText(Crypto.decodeBase32(&quot;mzxw6yq&quot;)) =&gt; &quot;foob&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToText(Crypto.decodeBase32(&quot;mzxw6ytb&quot;)) =&gt; &quot;fooba&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToText(Crypto.decodeBase32(&quot;mzxw6ytboi&quot;)) =&gt; &quot;foobar&quot;
+</code></pre>
+<div class="vspace"></div>
+<h3 id="decodebech32"><a class="header" href="#decodebech32">decodeBech32</a></h3>
+<p>▸ <strong>decodeBech32</strong>(<code>addr</code>): [<code>string</code>, <code>number</code>[]]</p>
+<p>Decomposes a bech32 checksummed string (i.e. Cardano address), and returns the human readable part and the original bytes
+Throws an error if checksum is invalid.</p>
+<h4 id="parameters-2"><a class="header" href="#parameters-2">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>addr</code></td><td style="text-align: left"><code>string</code></td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-2"><a class="header" href="#returns-2">Returns</a></h4>
+<p>[<code>string</code>, <code>number</code>[]]</p>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.decodeBech32(&quot;addr_test1wz54prcptnaullpa3zkyc8ynfddc954m9qw5v3nj7mzf2wggs2uld&quot;)[1]) =&gt; &quot;70a9508f015cfbcffc3d88ac4c1c934b5b82d2bb281d464672f6c49539&quot;
+</code></pre>
+<div class="vspace"></div>
+<h3 id="encodebase32"><a class="header" href="#encodebase32">encodeBase32</a></h3>
+<p>▸ <strong>encodeBase32</strong>(<code>bytes</code>, <code>alphabet?</code>): <code>string</code></p>
+<p>Encode bytes in special base32.</p>
+<h4 id="parameters-3"><a class="header" href="#parameters-3">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>bytes</code></td><td style="text-align: left"><code>number</code>[]</td><td style="text-align: left">uint8 numbers</td></tr>
+<tr><td style="text-align: left"><code>alphabet?</code></td><td style="text-align: left"><code>string</code></td><td style="text-align: left">list of chars</td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-3"><a class="header" href="#returns-3">Returns</a></h4>
+<p><code>string</code></p>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.encodeBase32(textToBytes(&quot;f&quot;)) =&gt; &quot;my&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.encodeBase32(textToBytes(&quot;fo&quot;)) =&gt; &quot;mzxq&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.encodeBase32(textToBytes(&quot;foo&quot;)) =&gt; &quot;mzxw6&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.encodeBase32(textToBytes(&quot;foob&quot;)) =&gt; &quot;mzxw6yq&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.encodeBase32(textToBytes(&quot;fooba&quot;)) =&gt; &quot;mzxw6ytb&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.encodeBase32(textToBytes(&quot;foobar&quot;)) =&gt; &quot;mzxw6ytboi&quot;
+</code></pre>
+<div class="vspace"></div>
+<h3 id="encodebech32"><a class="header" href="#encodebech32">encodeBech32</a></h3>
+<p>▸ <strong>encodeBech32</strong>(<code>hrp</code>, <code>data</code>): <code>string</code></p>
+<p>Creates a bech32 checksummed string (used to represent Cardano addresses)</p>
+<h4 id="parameters-4"><a class="header" href="#parameters-4">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>hrp</code></td><td style="text-align: left"><code>string</code></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><code>data</code></td><td style="text-align: left"><code>number</code>[]</td><td style="text-align: left">uint8 0 - 256</td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-4"><a class="header" href="#returns-4">Returns</a></h4>
+<p><code>string</code></p>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.encodeBech32(&quot;foo&quot;, textToBytes(&quot;foobar&quot;)) =&gt; &quot;foo1vehk7cnpwgry9h96&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.encodeBech32(&quot;addr_test&quot;, hexToBytes(&quot;70a9508f015cfbcffc3d88ac4c1c934b5b82d2bb281d464672f6c49539&quot;)) =&gt; &quot;addr_test1wz54prcptnaullpa3zkyc8ynfddc954m9qw5v3nj7mzf2wggs2uld&quot;
+</code></pre>
+<div class="vspace"></div>
+<h3 id="hmacsha2_256"><a class="header" href="#hmacsha2_256">hmacSha2_256</a></h3>
+<p>▸ <strong>hmacSha2_256</strong>(<code>key</code>, <code>message</code>): <code>number</code>[]</p>
+<h4 id="parameters-5"><a class="header" href="#parameters-5">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>key</code></td><td style="text-align: left"><code>number</code>[]</td></tr>
+<tr><td style="text-align: left"><code>message</code></td><td style="text-align: left"><code>number</code>[]</td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-5"><a class="header" href="#returns-5">Returns</a></h4>
+<p><code>number</code>[]</p>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.hmacSha2_256(textToBytes(&quot;key&quot;), textToBytes(&quot;The quick brown fox jumps over the lazy dog&quot;))) =&gt; &quot;f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8&quot;
+</code></pre>
+<div class="vspace"></div>
+<h3 id="hmacsha2_512"><a class="header" href="#hmacsha2_512">hmacSha2_512</a></h3>
+<p>▸ <strong>hmacSha2_512</strong>(<code>key</code>, <code>message</code>): <code>number</code>[]</p>
+<h4 id="parameters-6"><a class="header" href="#parameters-6">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>key</code></td><td style="text-align: left"><code>number</code>[]</td></tr>
+<tr><td style="text-align: left"><code>message</code></td><td style="text-align: left"><code>number</code>[]</td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-6"><a class="header" href="#returns-6">Returns</a></h4>
+<p><code>number</code>[]</p>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.hmacSha2_512(textToBytes(&quot;key&quot;), textToBytes(&quot;The quick brown fox jumps over the lazy dog&quot;))) =&gt; &quot;b42af09057bac1e2d41708e48a902e09b5ff7f12ab428a4fe86653c73dd248fb82f948a549f7b791a5b41915ee4d1ec3935357e4e2317250d0372afa2ebeeb3a&quot;
+</code></pre>
+<div class="vspace"></div>
+<h3 id="mulberry32"><a class="header" href="#mulberry32">mulberry32</a></h3>
+<p>▸ <strong>mulberry32</strong>(<code>seed</code>): <a href="../types.html#numbergenerator"><code>NumberGenerator</code></a></p>
+<p>Returns a simple random number generator.</p>
+<h4 id="parameters-7"><a class="header" href="#parameters-7">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>seed</code></td><td style="text-align: left"><code>number</code></td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-7"><a class="header" href="#returns-7">Returns</a></h4>
+<p><a href="../types.html#numbergenerator"><code>NumberGenerator</code></a></p>
+<ul>
+<li>a random number generator</li>
+</ul>
+<div class="vspace"></div>
+<h3 id="pbkdf2"><a class="header" href="#pbkdf2">pbkdf2</a></h3>
+<p>▸ <strong>pbkdf2</strong>(<code>prf</code>, <code>password</code>, <code>salt</code>, <code>iters</code>, <code>dkLength</code>): <code>number</code>[]</p>
+<h4 id="parameters-8"><a class="header" href="#parameters-8">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>prf</code></td><td style="text-align: left">(<code>key</code>: <code>number</code>[], <code>msg</code>: <code>number</code>[]) =&gt; <code>number</code>[]</td></tr>
+<tr><td style="text-align: left"><code>password</code></td><td style="text-align: left"><code>number</code>[]</td></tr>
+<tr><td style="text-align: left"><code>salt</code></td><td style="text-align: left"><code>number</code>[]</td></tr>
+<tr><td style="text-align: left"><code>iters</code></td><td style="text-align: left"><code>number</code></td></tr>
+<tr><td style="text-align: left"><code>dkLength</code></td><td style="text-align: left"><code>number</code></td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-8"><a class="header" href="#returns-8">Returns</a></h4>
+<p><code>number</code>[]</p>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.pbkdf2(Crypto.hmacSha2_256, textToBytes(&quot;password&quot;), textToBytes(&quot;salt&quot;), 1, 20)) =&gt; &quot;120fb6cffcf8b32c43e7225256c4f837a86548c9&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.pbkdf2(Crypto.hmacSha2_512, textToBytes(&quot;password&quot;), textToBytes(&quot;salt&quot;), 2, 20)) =&gt; &quot;e1d9c16aa681708a45f5c7c4e215ceb66e011a2e&quot;
+</code></pre>
+<div class="vspace"></div>
+<h3 id="rand"><a class="header" href="#rand">rand</a></h3>
+<p>▸ <strong>rand</strong>(<code>seed</code>): <a href="../types.html#numbergenerator"><code>NumberGenerator</code></a></p>
+<p>Alias for rand generator of choice.</p>
+<h4 id="parameters-9"><a class="header" href="#parameters-9">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>seed</code></td><td style="text-align: left"><code>number</code></td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-9"><a class="header" href="#returns-9">Returns</a></h4>
+<p><a href="../types.html#numbergenerator"><code>NumberGenerator</code></a></p>
+<ul>
+<li>the random number generator function</li>
+</ul>
+<div class="vspace"></div>
+<h3 id="sha2_256"><a class="header" href="#sha2_256">sha2_256</a></h3>
+<p>▸ <strong>sha2_256</strong>(<code>bytes</code>): <code>number</code>[]</p>
+<p>Calculates sha2-256 (32bytes) hash of a list of uint8 numbers.
+Result is also a list of uint8 number.</p>
+<h4 id="parameters-10"><a class="header" href="#parameters-10">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>bytes</code></td><td style="text-align: left"><code>number</code>[]</td><td style="text-align: left">list of uint8 numbers</td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-10"><a class="header" href="#returns-10">Returns</a></h4>
+<p><code>number</code>[]</p>
+<ul>
+<li>list of uint8 numbers</li>
+</ul>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.sha2_256([0x61, 0x62, 0x63])) =&gt; &quot;ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.sha2_256(textToBytes(&quot;Hello, World!&quot;)) =&gt; [223, 253, 96, 33, 187, 43, 213, 176, 175, 103, 98, 144, 128, 158, 195, 165, 49, 145, 221, 129, 199, 247, 10, 75, 40, 104, 138, 54, 33, 130, 152, 111]
+</code></pre>
+<div class="vspace"></div>
+<h3 id="sha2_512"><a class="header" href="#sha2_512">sha2_512</a></h3>
+<p>▸ <strong>sha2_512</strong>(<code>bytes</code>): <code>number</code>[]</p>
+<p>Calculates sha2-512 (64bytes) hash of a list of uint8 numbers.
+Result is also a list of uint8 number.</p>
+<h4 id="parameters-11"><a class="header" href="#parameters-11">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>bytes</code></td><td style="text-align: left"><code>number</code>[]</td><td style="text-align: left">list of uint8 numbers</td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-11"><a class="header" href="#returns-11">Returns</a></h4>
+<p><code>number</code>[]</p>
+<ul>
+<li>list of uint8 numbers</li>
+</ul>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.sha2_512([0x61, 0x62, 0x63])) =&gt; &quot;ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.sha2_512([])) =&gt; &quot;cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.sha2_512(textToBytes(&quot;abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq&quot;))) =&gt; &quot;204a8fc6dda82f0a0ced7beb8e08a41657c16ef468b228a8279be331a703c33596fd15c13b1b07f9aa1d3bea57789ca031ad85c7a71dd70354ec631238ca3445&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.sha2_512(textToBytes(&quot;abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstuu&quot;))) =&gt; &quot;23565d109ac0e2aa9fb162385178895058b28489a6bc31cb55491ed83956851ab1d4bbd46440586f5c9c4b69c9c280118cbc55c71495d258cc27cc6bb25ee720&quot;
+</code></pre>
+<div class="vspace"></div>
+<h3 id="sha3"><a class="header" href="#sha3">sha3</a></h3>
+<p>▸ <strong>sha3</strong>(<code>bytes</code>): <code>number</code>[]</p>
+<p>Calculates sha3-256 (32bytes) hash of a list of uint8 numbers.
+Result is also a list of uint8 number.
+Sha3 only bit-wise operations, so 64-bit operations can easily be replicated using 2 32-bit operations instead</p>
+<h4 id="parameters-12"><a class="header" href="#parameters-12">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>bytes</code></td><td style="text-align: left"><code>number</code>[]</td><td style="text-align: left">list of uint8 numbers</td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-12"><a class="header" href="#returns-12">Returns</a></h4>
+<p><code>number</code>[]</p>
+<ul>
+<li>list of uint8 numbers</li>
+</ul>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.sha3(textToBytes(&quot;abc&quot;))) =&gt; &quot;3a985da74fe225b2045c172d6bd390bd855f086e3e9d525b46bfe24511431532&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.sha3((new Array(136)).fill(1))) =&gt; &quot;b36dc2167c4d9dda1a58b87046c8d76a6359afe3612c4de8a38857e09117b2db&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.sha3((new Array(135)).fill(2))) =&gt; &quot;5bdf5d815d29a9d7161c66520efc17c2edd7898f2b99a029e8d2e4ff153407f4&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.sha3((new Array(134)).fill(3))) =&gt; &quot;8e6575663dfb75a88f94a32c5b363c410278b65020734560d968aadd6896a621&quot;
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">bytesToHex(Crypto.sha3((new Array(137)).fill(4))) =&gt; &quot;f10b39c3e455006aa42120b9751faa0f35c821211c9d086beb28bf3c4134c6c6&quot;
+</code></pre>
+<div class="vspace"></div>
+<h3 id="verifybech32"><a class="header" href="#verifybech32">verifyBech32</a></h3>
+<p>▸ <strong>verifyBech32</strong>(<code>addr</code>): <code>boolean</code></p>
+<p>Verify a bech32 checksum</p>
+<h4 id="parameters-13"><a class="header" href="#parameters-13">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>addr</code></td><td style="text-align: left"><code>string</code></td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-13"><a class="header" href="#returns-13">Returns</a></h4>
+<p><code>boolean</code></p>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.verifyBech32(&quot;foo1vehk7cnpwgry9h96&quot;) =&gt; true
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.verifyBech32(&quot;foo1vehk7cnpwgry9h97&quot;) =&gt; false
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.verifyBech32(&quot;a12uel5l&quot;) =&gt; true
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.verifyBech32(&quot;mm1crxm3i&quot;) =&gt; false
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.verifyBech32(&quot;A1G7SGD8&quot;) =&gt; false
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.verifyBech32(&quot;abcdef1qpzry9x8gf2tvdw0s3jn54khce6mua7lmqqqxw&quot;) =&gt; true
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.verifyBech32(&quot;?1ezyfcl&quot;) =&gt; true
+</code></pre>
+<p><strong><code>Example</code></strong></p>
+<pre><code class="language-ts">Crypto.verifyBech32(&quot;addr_test1wz54prcptnaullpa3zkyc8ynfddc954m9qw5v3nj7mzf2wggs2uld&quot;) =&gt; true
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../api/referencev2/namespaces/Cbor.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../../../api/referencev2/namespaces/Ed25519.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../api/referencev2/namespaces/Cbor.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../../../api/referencev2/namespaces/Ed25519.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr.min.js"></script>
+        <script src="../../../mark.min.js"></script>
+        <script src="../../../searcher.js"></script>
+
+        <script src="../../../clipboard.min.js"></script>
+        <script src="../../../highlight.js"></script>
+        <script src="../../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../../src/custom.js"></script>
+
+
+    </div>
+    </body>
+</html>
