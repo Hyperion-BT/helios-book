@@ -299,7 +299,7 @@ function makeTocCollapsible(src) {
 function cleanTitle(src) {
     const lines = src.split("\n")
 
-    const m = lines[0]?.match(/^#\s*(Class|Namespace):(.*$)/)
+    const m = lines[0]?.match(/^#\s*(Class|Namespace|Interface):(.*$)/)
 
     if (m) {
         lines[0] = `# ${m[2]}`

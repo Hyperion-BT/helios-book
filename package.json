@@ -8,12 +8,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "mdbook build",
     "postbuild": "node ./postprocess.js",
-	"sync-helios": "cp -t ./node_modules/@hyperionbt/helios ../helios/*"
+    "sync-helios": "cp -t ./node_modules/@hyperionbt/helios ../helios/*"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hyperionbt/helios": "^0.15.0",
+    "@hyperionbt/helios": "^0.15.2",
     "@jsdoc/ast": "^0.2.1",
     "@jsdoc/parse": "^0.3.1",
     "typedoc": "^0.24.8",
