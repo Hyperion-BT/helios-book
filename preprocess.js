@@ -523,10 +523,10 @@ class ApiSection {
         const subSection = node.appendChild({
             name: this.#name,
             content: this.toIndex(),
-            path: `api/referencev2/${this.#name.toLowerCase()}/index.md`
+            path: `api/reference/${this.#name.toLowerCase()}/index.md`
         }).lastChild
 
-        this.#doclets.forEach(s => subSection.appendChild(s.toIncompleteSectionNode(`api/referencev2/${this.#name.toLowerCase()}`)))
+        this.#doclets.forEach(s => subSection.appendChild(s.toIncompleteSectionNode(`api/reference/${this.#name.toLowerCase()}`)))
     }
 }
 
@@ -599,7 +599,7 @@ ${this.#doclets.map(d => d.src).join("\n")}`
         node.appendChild({
             name: this.#name,
             content: this.toIndex(),
-            path: `api/referencev2/${this.#name.toLowerCase()}.md`
+            path: `api/reference/${this.#name.toLowerCase()}.md`
         })
     }
 
@@ -724,7 +724,7 @@ This section contains a complete reference of all the classes, functions, interf
 Typescript annotations are used to document types.
     
 ${this.toIndex()}`,
-            path: "api/referencev2/index.md"
+            path: "api/reference/index.md"
         }).lastChild
 
         this.#classes.inject(apiSection)
