@@ -448,6 +448,10 @@ async function collectFileApiDoclets(filePath, section) {
         }
     })
 
+	if (subSectionName && subSectionStart != -1) {
+		doclets.push(new ApiDoclet(subSectionName, lines.slice(subSectionStart).join("\n")))
+	}
+
     return doclets
 }
 
@@ -713,8 +717,8 @@ ${this.#classes.toSubIndex()}${this.#functions.toSubIndex()}${this.#interfaces.t
      */
     inject(book) {
         const apiSection = book.section("Helios API").appendChild({
-            name: "API Reference (auto-gen)",
-            content: `# API Reference (auto-gen)
+            name: "API Reference",
+            content: `# API Reference
 This section contains a complete reference of all the classes, functions, interfaces, types and variables exported by the Helios library.
 
 Typescript annotations are used to document types.

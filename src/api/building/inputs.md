@@ -1,11 +1,10 @@
 # Transaction inputs
 
-Each transaction input is an instance of the `UTxO` class. A `UTxO` represents a `TxOutputId` and, when building a new transaction, also contains the underlying `TxOutput`.
+Each transaction input is an instance of the `TxInput` class. A `TxInput` represents a `TxOutputId` and, when building a new transaction, also contains the underlying `TxOutput`.
 
 ```js
-const utxo = new helios.UTxO(
-    helios.TxId.fromHex("..."), // hash of the tx that created the utxo
-    0n, // utxo index as bigint
+const utxo = new helios.TxInput(
+    helios.TxOutputId.fromHex("...", 0n),
     new helios.TxOutput(...) // TxOutput with address, value and datum fields
 )
 ```
