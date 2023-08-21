@@ -363,7 +363,8 @@ async function generateApiDocs() {
         "declaration": true,
         "emitDeclarationOnly": true,
         "declarationMap": false,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+		"strictNullChecks": true
     }
 }`)
 
