@@ -219,22 +219,22 @@
 <p><code>string</code></p>
 <div class="vspace"></div>
 <h3 id="pubkeyhash"><a class="header" href="#pubkeyhash">pubKeyHash</a></h3>
-<p>• <code>get</code> <strong>pubKeyHash</strong>(): <a href="PubKeyHash.html"><code>PubKeyHash</code></a></p>
+<p>• <code>get</code> <strong>pubKeyHash</strong>(): <code>null</code> | <a href="PubKeyHash.html"><code>PubKeyHash</code></a></p>
 <p>Returns the underlying <code>PubKeyHash</code> of a simple payment address, or <code>null</code> for a script address.</p>
 <h4 id="returns-2"><a class="header" href="#returns-2">Returns</a></h4>
-<p><a href="PubKeyHash.html"><code>PubKeyHash</code></a></p>
+<p><code>null</code> | <a href="PubKeyHash.html"><code>PubKeyHash</code></a></p>
 <div class="vspace"></div>
 <h3 id="stakinghash"><a class="header" href="#stakinghash">stakingHash</a></h3>
-<p>• <code>get</code> <strong>stakingHash</strong>(): <a href="StakeKeyHash.html"><code>StakeKeyHash</code></a> | <a href="StakingValidatorHash.html"><code>StakingValidatorHash</code></a></p>
+<p>• <code>get</code> <strong>stakingHash</strong>(): <code>null</code> | <a href="StakeKeyHash.html"><code>StakeKeyHash</code></a> | <a href="StakingValidatorHash.html"><code>StakingValidatorHash</code></a></p>
 <p>Returns the underlying <code>StakeKeyHash</code> or <code>StakingValidatorHash</code>, or <code>null</code> for non-staked addresses.</p>
 <h4 id="returns-3"><a class="header" href="#returns-3">Returns</a></h4>
-<p><a href="StakeKeyHash.html"><code>StakeKeyHash</code></a> | <a href="StakingValidatorHash.html"><code>StakingValidatorHash</code></a></p>
+<p><code>null</code> | <a href="StakeKeyHash.html"><code>StakeKeyHash</code></a> | <a href="StakingValidatorHash.html"><code>StakingValidatorHash</code></a></p>
 <div class="vspace"></div>
 <h3 id="validatorhash"><a class="header" href="#validatorhash">validatorHash</a></h3>
-<p>• <code>get</code> <strong>validatorHash</strong>(): <a href="ValidatorHash.html"><code>ValidatorHash</code></a></p>
+<p>• <code>get</code> <strong>validatorHash</strong>(): <code>null</code> | <a href="ValidatorHash.html"><code>ValidatorHash</code></a></p>
 <p>Returns the underlying <code>ValidatorHash</code> of a script address, or <code>null</code> for a regular payment address.</p>
 <h4 id="returns-4"><a class="header" href="#returns-4">Returns</a></h4>
-<p><a href="ValidatorHash.html"><code>ValidatorHash</code></a></p>
+<p><code>null</code> | <a href="ValidatorHash.html"><code>ValidatorHash</code></a></p>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <h3 id="dump"><a class="header" href="#dump">dump</a></h3>
 <p>▸ <strong>dump</strong>(): <code>any</code></p>
@@ -324,7 +324,7 @@ in combination with an optional staking hash (<code>StakeKeyHash</code> or <code
 <h4 id="parameters-4"><a class="header" href="#parameters-4">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>hash</code></td><td style="text-align: left"><a href="PubKeyHash.html"><code>PubKeyHash</code></a> | <a href="ValidatorHash.html"><code>ValidatorHash</code></a></td><td style="text-align: left"></td></tr>
-<tr><td style="text-align: left"><code>stakingHash?</code></td><td style="text-align: left"><a href="StakeKeyHash.html"><code>StakeKeyHash</code></a> | <a href="StakingValidatorHash.html"><code>StakingValidatorHash</code></a></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><code>stakingHash?</code></td><td style="text-align: left"><code>null</code> | <a href="StakeKeyHash.html"><code>StakeKeyHash</code></a> | <a href="StakingValidatorHash.html"><code>StakingValidatorHash</code></a></td><td style="text-align: left"></td></tr>
 <tr><td style="text-align: left"><code>isTestnet?</code></td><td style="text-align: left"><code>boolean</code></td><td style="text-align: left">Defaults to <code>config.IS_TESTNET</code></td></tr>
 </tbody></table>
 </div>

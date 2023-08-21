@@ -183,12 +183,17 @@
         } else {
             h.setAttribute("expanded", "")
         }
-    })();'></a></h2><div class="toc"><h3 id="variables"><a class="header" href="#variables"><a class="header" href="#variables">Variables</a></a></h3><ul class="toc"><li><a href="config.html#auto_set_validity_range">AUTO_SET_VALIDITY_RANGE</a></li><li><a href="config.html#debug">DEBUG</a></li><li><a href="config.html#experimental_cek">EXPERIMENTAL_CEK</a></li><li><a href="config.html#ignore_unevaluated_constants">IGNORE_UNEVALUATED_CONSTANTS</a></li><li><a href="config.html#is_testnet">IS_TESTNET</a></li><li><a href="config.html#n_dummy_inputs">N_DUMMY_INPUTS</a></li><li><a href="config.html#strict_babbage">STRICT_BABBAGE</a></li><li><a href="config.html#validity_range_end_offset">VALIDITY_RANGE_END_OFFSET</a></li><li><a href="config.html#validity_range_start_offset">VALIDITY_RANGE_START_OFFSET</a></li></ul><h3 id="functions"><a class="header" href="#functions"><a class="header" href="#functions">Functions</a></a></h3><ul class="toc"><li><a href="config.html#set">set</a></li></ul></div>
+    })();'></a></h2><div class="toc"><h3 id="variables"><a class="header" href="#variables"><a class="header" href="#variables">Variables</a></a></h3><ul class="toc"><li><a href="config.html#auto_set_validity_range">AUTO_SET_VALIDITY_RANGE</a></li><li><a href="config.html#check_casts">CHECK_CASTS</a></li><li><a href="config.html#debug">DEBUG</a></li><li><a href="config.html#experimental_cek">EXPERIMENTAL_CEK</a></li><li><a href="config.html#ignore_unevaluated_constants">IGNORE_UNEVALUATED_CONSTANTS</a></li><li><a href="config.html#is_testnet">IS_TESTNET</a></li><li><a href="config.html#n_dummy_inputs">N_DUMMY_INPUTS</a></li><li><a href="config.html#strict_babbage">STRICT_BABBAGE</a></li><li><a href="config.html#validity_range_end_offset">VALIDITY_RANGE_END_OFFSET</a></li><li><a href="config.html#validity_range_start_offset">VALIDITY_RANGE_START_OFFSET</a></li></ul><h3 id="functions"><a class="header" href="#functions"><a class="header" href="#functions">Functions</a></a></h3><ul class="toc"><li><a href="config.html#set">set</a></li></ul></div>
 <h2 id="variables"><a class="header" href="#variables">Variables</a></h2>
 <h3 id="auto_set_validity_range"><a class="header" href="#auto_set_validity_range">AUTO_SET_VALIDITY_RANGE</a></h3>
 <p>• <code>Const</code> <strong>AUTO_SET_VALIDITY_RANGE</strong>: <code>boolean</code></p>
 <p>The validity time range can be set automatically if a call to tx.time_range in a Helios script is detected.
 If <code>false</code> the validity range is still set automatically if not set manually but a warning is printed.</p>
+<p>Default: <code>false</code>.</p>
+<div class="vspace"></div>
+<h3 id="check_casts"><a class="header" href="#check_casts">CHECK_CASTS</a></h3>
+<p>• <code>Const</code> <strong>CHECK_CASTS</strong>: <code>boolean</code></p>
+<p>Check that <code>from_data</code> casts make sense during runtime. This ony impacts unsimplified UplcPrograms.</p>
 <p>Default: <code>false</code>.</p>
 <div class="vspace"></div>
 <h3 id="debug"><a class="header" href="#debug">DEBUG</a></h3>
@@ -246,6 +251,7 @@ This value must be '1' or '2'.</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>props</code></td><td style="text-align: left"><code>Object</code></td></tr>
 <tr><td style="text-align: left"><code>props.AUTO_SET_VALIDITY_RANGE?</code></td><td style="text-align: left"><code>boolean</code></td></tr>
+<tr><td style="text-align: left"><code>props.CHECK_CASTS?</code></td><td style="text-align: left"><code>boolean</code></td></tr>
 <tr><td style="text-align: left"><code>props.DEBUG?</code></td><td style="text-align: left"><code>boolean</code></td></tr>
 <tr><td style="text-align: left"><code>props.EXPERIMENTAL_CEK?</code></td><td style="text-align: left"><code>boolean</code></td></tr>
 <tr><td style="text-align: left"><code>props.IGNORE_UNEVALUATED_CONSTANTS?</code></td><td style="text-align: left"><code>boolean</code></td></tr>

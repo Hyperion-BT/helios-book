@@ -199,8 +199,8 @@
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>address</code></td><td style="text-align: left"><a href="Address.html"><code>Address</code></a></td></tr>
 <tr><td style="text-align: left"><code>value</code></td><td style="text-align: left"><a href="Value.html"><code>Value</code></a></td></tr>
-<tr><td style="text-align: left"><code>datum?</code></td><td style="text-align: left"><a href="Datum.html"><code>Datum</code></a></td></tr>
-<tr><td style="text-align: left"><code>refScript?</code></td><td style="text-align: left"><a href="UplcProgram.html"><code>UplcProgram</code></a></td></tr>
+<tr><td style="text-align: left"><code>datum?</code></td><td style="text-align: left"><code>null</code> | <a href="Datum.html"><code>Datum</code></a></td></tr>
+<tr><td style="text-align: left"><code>refScript?</code></td><td style="text-align: left"><code>null</code> | <a href="UplcProgram.html"><code>UplcProgram</code></a></td></tr>
 </tbody></table>
 </div>
 <h4 id="overrides"><a class="header" href="#overrides">Overrides</a></h4>
@@ -213,15 +213,15 @@
 <p><a href="Address.html"><code>Address</code></a></p>
 <div class="vspace"></div>
 <h3 id="datum"><a class="header" href="#datum">datum</a></h3>
-<p>• <code>get</code> <strong>datum</strong>(): <a href="Datum.html"><code>Datum</code></a></p>
+<p>• <code>get</code> <strong>datum</strong>(): <code>null</code> | <a href="Datum.html"><code>Datum</code></a></p>
 <p>Get the optional <code>Datum</code> associated with the <code>TxOutput</code>.</p>
 <h4 id="returns-1"><a class="header" href="#returns-1">Returns</a></h4>
-<p><a href="Datum.html"><code>Datum</code></a></p>
+<p><code>null</code> | <a href="Datum.html"><code>Datum</code></a></p>
 <div class="vspace"></div>
 <h3 id="refscript"><a class="header" href="#refscript">refScript</a></h3>
-<p>• <code>get</code> <strong>refScript</strong>(): <a href="UplcProgram.html"><code>UplcProgram</code></a></p>
+<p>• <code>get</code> <strong>refScript</strong>(): <code>null</code> | <a href="UplcProgram.html"><code>UplcProgram</code></a></p>
 <h4 id="returns-2"><a class="header" href="#returns-2">Returns</a></h4>
-<p><a href="UplcProgram.html"><code>UplcProgram</code></a></p>
+<p><code>null</code> | <a href="UplcProgram.html"><code>UplcProgram</code></a></p>
 <div class="vspace"></div>
 <h3 id="value"><a class="header" href="#value">value</a></h3>
 <p>• <code>get</code> <strong>value</strong>(): <a href="Value.html"><code>Value</code></a></p>
@@ -248,7 +248,7 @@ The network requires this to avoid the creation of unusable dust UTxOs.</p>
 <h4 id="parameters-2"><a class="header" href="#parameters-2">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>networkParams</code></td><td style="text-align: left"><a href="NetworkParams.html"><code>NetworkParams</code></a></td></tr>
-<tr><td style="text-align: left"><code>updater?</code></td><td style="text-align: left">(<code>output</code>: <a href="TxOutput.html"><code>TxOutput</code></a>) =&gt; <code>void</code></td></tr>
+<tr><td style="text-align: left"><code>updater?</code></td><td style="text-align: left"><code>null</code> | (<code>output</code>: <a href="TxOutput.html"><code>TxOutput</code></a>) =&gt; <code>void</code></td></tr>
 </tbody></table>
 </div>
 <h4 id="returns-5"><a class="header" href="#returns-5">Returns</a></h4>

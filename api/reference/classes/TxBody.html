@@ -190,7 +190,7 @@
         } else {
             h.setAttribute("expanded", "")
         }
-    })();'></a></h2><div class="toc"><h3 id="constructors"><a class="header" href="#constructors"><a class="header" href="#constructors">Constructors</a></a></h3><ul class="toc"><li><a href="TxBody.html#constructor">constructor</a></li></ul><h3 id="accessors"><a class="header" href="#accessors"><a class="header" href="#accessors">Accessors</a></a></h3><ul class="toc"><li><a href="TxBody.html#collateral">collateral</a></li><li><a href="TxBody.html#fee">fee</a></li><li><a href="TxBody.html#firstvalidslot">firstValidSlot</a></li><li><a href="TxBody.html#inputs">inputs</a></li><li><a href="TxBody.html#lastvalidslot">lastValidSlot</a></li><li><a href="TxBody.html#minted">minted</a></li><li><a href="TxBody.html#outputs">outputs</a></li><li><a href="TxBody.html#signers">signers</a></li></ul><h3 id="methods"><a class="header" href="#methods"><a class="header" href="#methods">Methods</a></a></h3><ul class="toc"><li><a href="TxBody.html#dump">dump</a></li><li><a href="TxBody.html#suminputandmintedassets">sumInputAndMintedAssets</a></li><li><a href="TxBody.html#suminputandmintedvalue">sumInputAndMintedValue</a></li><li><a href="TxBody.html#suminputvalue">sumInputValue</a></li><li><a href="TxBody.html#sumoutputassets">sumOutputAssets</a></li><li><a href="TxBody.html#sumoutputvalue">sumOutputValue</a></li><li><a href="TxBody.html#tocbor">toCbor</a></li><li><a href="TxBody.html#tocborhex">toCborHex</a></li><li><a href="TxBody.html#fromcbor">fromCbor</a></li></ul></div>
+    })();'></a></h2><div class="toc"><h3 id="constructors"><a class="header" href="#constructors"><a class="header" href="#constructors">Constructors</a></a></h3><ul class="toc"><li><a href="TxBody.html#constructor">constructor</a></li></ul><h3 id="accessors"><a class="header" href="#accessors"><a class="header" href="#accessors">Accessors</a></a></h3><ul class="toc"><li><a href="TxBody.html#collateral">collateral</a></li><li><a href="TxBody.html#fee">fee</a></li><li><a href="TxBody.html#firstvalidslot">firstValidSlot</a></li><li><a href="TxBody.html#inputs">inputs</a></li><li><a href="TxBody.html#lastvalidslot">lastValidSlot</a></li><li><a href="TxBody.html#minted">minted</a></li><li><a href="TxBody.html#outputs">outputs</a></li><li><a href="TxBody.html#refinputs">refInputs</a></li><li><a href="TxBody.html#signers">signers</a></li></ul><h3 id="methods"><a class="header" href="#methods"><a class="header" href="#methods">Methods</a></a></h3><ul class="toc"><li><a href="TxBody.html#dump">dump</a></li><li><a href="TxBody.html#suminputandmintedassets">sumInputAndMintedAssets</a></li><li><a href="TxBody.html#suminputandmintedvalue">sumInputAndMintedValue</a></li><li><a href="TxBody.html#suminputvalue">sumInputValue</a></li><li><a href="TxBody.html#sumoutputassets">sumOutputAssets</a></li><li><a href="TxBody.html#sumoutputvalue">sumOutputValue</a></li><li><a href="TxBody.html#tocbor">toCbor</a></li><li><a href="TxBody.html#tocborhex">toCborHex</a></li><li><a href="TxBody.html#fromcbor">fromCbor</a></li></ul></div>
 <h2 id="constructors"><a class="header" href="#constructors">Constructors</a></h2>
 <h3 id="constructor"><a class="header" href="#constructor">constructor</a></h3>
 <p>• <strong>new TxBody</strong>()</p>
@@ -208,9 +208,9 @@
 <p><code>bigint</code></p>
 <div class="vspace"></div>
 <h3 id="firstvalidslot"><a class="header" href="#firstvalidslot">firstValidSlot</a></h3>
-<p>• <code>get</code> <strong>firstValidSlot</strong>(): <code>bigint</code></p>
+<p>• <code>get</code> <strong>firstValidSlot</strong>(): <code>null</code> | <code>bigint</code></p>
 <h4 id="returns-2"><a class="header" href="#returns-2">Returns</a></h4>
-<p><code>bigint</code></p>
+<p><code>null</code> | <code>bigint</code></p>
 <div class="vspace"></div>
 <h3 id="inputs"><a class="header" href="#inputs">inputs</a></h3>
 <p>• <code>get</code> <strong>inputs</strong>(): <a href="TxInput.html"><code>TxInput</code></a>[]</p>
@@ -218,9 +218,9 @@
 <p><a href="TxInput.html"><code>TxInput</code></a>[]</p>
 <div class="vspace"></div>
 <h3 id="lastvalidslot"><a class="header" href="#lastvalidslot">lastValidSlot</a></h3>
-<p>• <code>get</code> <strong>lastValidSlot</strong>(): <code>bigint</code></p>
+<p>• <code>get</code> <strong>lastValidSlot</strong>(): <code>null</code> | <code>bigint</code></p>
 <h4 id="returns-4"><a class="header" href="#returns-4">Returns</a></h4>
-<p><code>bigint</code></p>
+<p><code>null</code> | <code>bigint</code></p>
 <div class="vspace"></div>
 <h3 id="minted"><a class="header" href="#minted">minted</a></h3>
 <p>• <code>get</code> <strong>minted</strong>(): <a href="Assets.html"><code>Assets</code></a></p>
@@ -232,52 +232,57 @@
 <h4 id="returns-6"><a class="header" href="#returns-6">Returns</a></h4>
 <p><a href="TxOutput.html"><code>TxOutput</code></a>[]</p>
 <div class="vspace"></div>
+<h3 id="refinputs"><a class="header" href="#refinputs">refInputs</a></h3>
+<p>• <code>get</code> <strong>refInputs</strong>(): <a href="TxInput.html"><code>TxInput</code></a>[]</p>
+<h4 id="returns-7"><a class="header" href="#returns-7">Returns</a></h4>
+<p><a href="TxInput.html"><code>TxInput</code></a>[]</p>
+<div class="vspace"></div>
 <h3 id="signers"><a class="header" href="#signers">signers</a></h3>
 <p>• <code>get</code> <strong>signers</strong>(): <a href="PubKeyHash.html"><code>PubKeyHash</code></a>[]</p>
-<h4 id="returns-7"><a class="header" href="#returns-7">Returns</a></h4>
+<h4 id="returns-8"><a class="header" href="#returns-8">Returns</a></h4>
 <p><a href="PubKeyHash.html"><code>PubKeyHash</code></a>[]</p>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <h3 id="dump"><a class="header" href="#dump">dump</a></h3>
 <p>▸ <strong>dump</strong>(): <code>any</code></p>
-<h4 id="returns-8"><a class="header" href="#returns-8">Returns</a></h4>
+<h4 id="returns-9"><a class="header" href="#returns-9">Returns</a></h4>
 <p><code>any</code></p>
 <div class="vspace"></div>
 <h3 id="suminputandmintedassets"><a class="header" href="#suminputandmintedassets">sumInputAndMintedAssets</a></h3>
 <p>▸ <strong>sumInputAndMintedAssets</strong>(): <a href="Assets.html"><code>Assets</code></a></p>
-<h4 id="returns-9"><a class="header" href="#returns-9">Returns</a></h4>
+<h4 id="returns-10"><a class="header" href="#returns-10">Returns</a></h4>
 <p><a href="Assets.html"><code>Assets</code></a></p>
 <div class="vspace"></div>
 <h3 id="suminputandmintedvalue"><a class="header" href="#suminputandmintedvalue">sumInputAndMintedValue</a></h3>
 <p>▸ <strong>sumInputAndMintedValue</strong>(): <a href="Value.html"><code>Value</code></a></p>
 <p>Throws error if any part of the sum is negative (i.e. more is burned than input)</p>
-<h4 id="returns-10"><a class="header" href="#returns-10">Returns</a></h4>
+<h4 id="returns-11"><a class="header" href="#returns-11">Returns</a></h4>
 <p><a href="Value.html"><code>Value</code></a></p>
 <div class="vspace"></div>
 <h3 id="suminputvalue"><a class="header" href="#suminputvalue">sumInputValue</a></h3>
 <p>▸ <strong>sumInputValue</strong>(): <a href="Value.html"><code>Value</code></a></p>
-<h4 id="returns-11"><a class="header" href="#returns-11">Returns</a></h4>
+<h4 id="returns-12"><a class="header" href="#returns-12">Returns</a></h4>
 <p><a href="Value.html"><code>Value</code></a></p>
 <div class="vspace"></div>
 <h3 id="sumoutputassets"><a class="header" href="#sumoutputassets">sumOutputAssets</a></h3>
 <p>▸ <strong>sumOutputAssets</strong>(): <a href="Assets.html"><code>Assets</code></a></p>
-<h4 id="returns-12"><a class="header" href="#returns-12">Returns</a></h4>
+<h4 id="returns-13"><a class="header" href="#returns-13">Returns</a></h4>
 <p><a href="Assets.html"><code>Assets</code></a></p>
 <div class="vspace"></div>
 <h3 id="sumoutputvalue"><a class="header" href="#sumoutputvalue">sumOutputValue</a></h3>
 <p>▸ <strong>sumOutputValue</strong>(): <a href="Value.html"><code>Value</code></a></p>
-<h4 id="returns-13"><a class="header" href="#returns-13">Returns</a></h4>
+<h4 id="returns-14"><a class="header" href="#returns-14">Returns</a></h4>
 <p><a href="Value.html"><code>Value</code></a></p>
 <div class="vspace"></div>
 <h3 id="tocbor"><a class="header" href="#tocbor">toCbor</a></h3>
 <p>▸ <strong>toCbor</strong>(): <code>number</code>[]</p>
-<h4 id="returns-14"><a class="header" href="#returns-14">Returns</a></h4>
+<h4 id="returns-15"><a class="header" href="#returns-15">Returns</a></h4>
 <p><code>number</code>[]</p>
 <h4 id="inherited-from-1"><a class="header" href="#inherited-from-1">Inherited from</a></h4>
 <p><a href="CborData.html">CborData</a>.<a href="CborData.html#tocbor">toCbor</a></p>
 <div class="vspace"></div>
 <h3 id="tocborhex"><a class="header" href="#tocborhex">toCborHex</a></h3>
 <p>▸ <strong>toCborHex</strong>(): <code>string</code></p>
-<h4 id="returns-15"><a class="header" href="#returns-15">Returns</a></h4>
+<h4 id="returns-16"><a class="header" href="#returns-16">Returns</a></h4>
 <p><code>string</code></p>
 <h4 id="inherited-from-2"><a class="header" href="#inherited-from-2">Inherited from</a></h4>
 <p><a href="CborData.html">CborData</a>.<a href="CborData.html#tocborhex">toCborHex</a></p>
@@ -289,7 +294,7 @@
 <tr><td style="text-align: left"><code>bytes</code></td><td style="text-align: left"><code>number</code>[]</td></tr>
 </tbody></table>
 </div>
-<h4 id="returns-16"><a class="header" href="#returns-16">Returns</a></h4>
+<h4 id="returns-17"><a class="header" href="#returns-17">Returns</a></h4>
 <p><a href="TxBody.html"><code>TxBody</code></a></p>
 
                     </main>

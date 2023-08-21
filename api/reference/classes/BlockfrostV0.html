@@ -220,6 +220,7 @@
 <div class="vspace"></div>
 <h3 id="getutxo"><a class="header" href="#getutxo">getUtxo</a></h3>
 <p>▸ <strong>getUtxo</strong>(<code>id</code>): <code>Promise</code>&lt;<a href="TxInput.html"><code>TxInput</code></a>&gt;</p>
+<p>If the UTxO isn't found an error is throw with the following message format: &quot;UTxO &lt;txId.utxoId&gt; not found&quot;.</p>
 <h4 id="parameters-1"><a class="header" href="#parameters-1">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>id</code></td><td style="text-align: left"><a href="TxOutputId.html"><code>TxOutputId</code></a></td></tr>
@@ -246,7 +247,7 @@ Returns oldest UTxOs first, newest last.</p>
 <div class="vspace"></div>
 <h3 id="hasutxo"><a class="header" href="#hasutxo">hasUtxo</a></h3>
 <p>▸ <strong>hasUtxo</strong>(<code>utxo</code>): <code>Promise</code>&lt;<code>boolean</code>&gt;</p>
-<p>Used by BlockfrostV0.resolve()</p>
+<p>Used by <code>BlockfrostV0.resolve()</code>.</p>
 <h4 id="parameters-3"><a class="header" href="#parameters-3">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>utxo</code></td><td style="text-align: left"><a href="TxInput.html"><code>TxInput</code></a></td></tr>
