@@ -25,3 +25,29 @@ The fields can also be named:
 ```helios
 const x = Rational { bottom: 3, top: 1 }
 ```
+
+## CIP 68 tags
+
+Regular Helios structs are internally implemented as data-lists. 
+
+This internal data-list format isn't convenient for datums that are intended for public reading/writing. For such applications it is recommended to use the [CIP 68](https://cips.cardano.org/cips/cip68/) data-map format.
+
+Helios will automatically use the [CIP 68](https://cips.cardano.org/cips/cip68/) format internally if any `struct` field is tagged. The tags are internally converted into the data-map keys.
+
+```helios
+struct TaggedRational {
+    top:    Int "@top"     // the tag can be any valid utf-8 string
+    bottom: Int "@bottom"
+}
+```
+
+Any missing tags default to the field name:
+
+```helios
+struct TaggedRational {
+    top:    Int "@top"
+    bottom: Int         // data-map key will be "bottom"
+}
+```
+
+Field tagging isn't available for enum variants.
