@@ -425,7 +425,12 @@ This must be refetched from the network if the tx needs to be analyzed</p>
 <p><code>Promise</code>&lt;<code>void</code>&gt;</p>
 <div class="vspace"></div>
 <h3 id="dump"><a class="header" href="#dump">dump</a></h3>
-<p>▸ <strong>dump</strong>(): <code>any</code></p>
+<p>▸ <strong>dump</strong>(<code>params?</code>): <code>any</code></p>
+<h4 id="parameters-14"><a class="header" href="#parameters-14">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>params?</code></td><td style="text-align: left"><code>null</code> | <a href="NetworkParams.html"><code>NetworkParams</code></a></td><td style="text-align: left">If specified: dump all the runtime details of each redeemer (datum, redeemer, scriptContext)</td></tr>
+</tbody></table>
+</div>
 <h4 id="returns-17"><a class="header" href="#returns-17">Returns</a></h4>
 <p><code>any</code></p>
 <div class="vspace"></div>
@@ -435,7 +440,7 @@ This must be refetched from the network if the tx needs to be analyzed</p>
 Balances the transaction, and optionally uses some spare UTxOs if the current inputs don't contain enough lovelace to cover the fees and min output deposits.</p>
 <p>Inputs, minted assets, and withdrawals are sorted.</p>
 <p>Sets the validatity range automatically if a call to <code>tx.time_range</code> is detected in any of the attached Helios scripts.</p>
-<h4 id="parameters-14"><a class="header" href="#parameters-14">Parameters</a></h4>
+<h4 id="parameters-15"><a class="header" href="#parameters-15">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>networkParams</code></td><td style="text-align: left"><a href="NetworkParams.html"><code>NetworkParams</code></a></td><td style="text-align: left"></td></tr>
 <tr><td style="text-align: left"><code>changeAddress</code></td><td style="text-align: left"><a href="Address.html"><code>Address</code></a></td><td style="text-align: left"></td></tr>
@@ -453,7 +458,7 @@ Balances the transaction, and optionally uses some spare UTxOs if the current in
 <h3 id="isvalid"><a class="header" href="#isvalid">isValid</a></h3>
 <p>▸ <strong>isValid</strong>(<code>slot</code>): <code>boolean</code></p>
 <p>Used by emulator to check if tx is valid.</p>
-<h4 id="parameters-15"><a class="header" href="#parameters-15">Parameters</a></h4>
+<h4 id="parameters-16"><a class="header" href="#parameters-16">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>slot</code></td><td style="text-align: left"><code>bigint</code></td></tr>
 </tbody></table>
@@ -470,7 +475,7 @@ The token names can either by a list of bytes or a hexadecimal string.</p>
 Only available during transaction building the transaction.
 Returns the transaction instance so build methods can be chained.</p>
 <p>Also throws an error if the redeemer is <code>null</code>, and the minting policy isn't a known <code>NativeScript</code>.</p>
-<h4 id="parameters-16"><a class="header" href="#parameters-16">Parameters</a></h4>
+<h4 id="parameters-17"><a class="header" href="#parameters-17">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>mph</code></td><td style="text-align: left"><a href="../types.html#hashprops"><code>HashProps</code></a> | <a href="MintingPolicyHash.html"><code>MintingPolicyHash</code></a></td><td style="text-align: left"></td></tr>
 <tr><td style="text-align: left"><code>tokens</code></td><td style="text-align: left">[<a href="ByteArray.html"><code>ByteArray</code></a> | <a href="../types.html#bytearrayprops"><code>ByteArrayProps</code></a>, <a href="HInt.html"><code>HInt</code></a> | <a href="../types.html#hintprops"><code>HIntProps</code></a>][]</td><td style="text-align: left">list of pairs of [tokenName, quantity], tokenName can be list of bytes or hex-string</td></tr>
@@ -496,7 +501,7 @@ Returns the transaction instance so build methods can be chained.</p>
 <div class="vspace"></div>
 <h3 id="totxdata"><a class="header" href="#totxdata">toTxData</a></h3>
 <p>▸ <strong>toTxData</strong>(<code>networkParams</code>): <a href="UplcData.html"><code>UplcData</code></a></p>
-<h4 id="parameters-17"><a class="header" href="#parameters-17">Parameters</a></h4>
+<h4 id="parameters-18"><a class="header" href="#parameters-18">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>networkParams</code></td><td style="text-align: left"><a href="NetworkParams.html"><code>NetworkParams</code></a></td></tr>
 </tbody></table>
@@ -513,7 +518,7 @@ Returns the transaction instance so build methods can be chained.</p>
 <blockquote>
 <p><strong>Note</strong>: since Helios v0.13.29 this is set automatically if any of the Helios validator scripts call <code>tx.time_range</code>.</p>
 </blockquote>
-<h4 id="parameters-18"><a class="header" href="#parameters-18">Parameters</a></h4>
+<h4 id="parameters-19"><a class="header" href="#parameters-19">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>slotOrTime</code></td><td style="text-align: left"><code>bigint</code> | <code>Date</code></td></tr>
 </tbody></table>
@@ -530,7 +535,7 @@ Returns the transaction instance so build methods can be chained.</p>
 <blockquote>
 <p><strong>Note</strong>: since Helios v0.13.29 this is set automatically if any of the Helios validator scripts call <code>tx.time_range</code>.</p>
 </blockquote>
-<h4 id="parameters-19"><a class="header" href="#parameters-19">Parameters</a></h4>
+<h4 id="parameters-20"><a class="header" href="#parameters-20">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>slotOrTime</code></td><td style="text-align: left"><code>bigint</code> | <code>Date</code></td></tr>
 </tbody></table>
@@ -547,7 +552,7 @@ Returns the transaction instance so build methods can be chained.</p>
 <h3 id="finalizeuplcdata"><a class="header" href="#finalizeuplcdata">finalizeUplcData</a></h3>
 <p>▸ <code>Static</code> <strong>finalizeUplcData</strong>(<code>data</code>, <code>networkParams</code>, <code>changeAddress</code>, <code>spareUtxos</code>, <code>scripts</code>): <code>Promise</code>&lt;<a href="Tx.html"><code>Tx</code></a>&gt;</p>
 <p>Used by bundler for macro finalization</p>
-<h4 id="parameters-20"><a class="header" href="#parameters-20">Parameters</a></h4>
+<h4 id="parameters-21"><a class="header" href="#parameters-21">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th><th style="text-align: left">Description</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>data</code></td><td style="text-align: left"><a href="UplcData.html"><code>UplcData</code></a></td><td style="text-align: left"></td></tr>
 <tr><td style="text-align: left"><code>networkParams</code></td><td style="text-align: left"><a href="NetworkParams.html"><code>NetworkParams</code></a></td><td style="text-align: left"></td></tr>
@@ -562,7 +567,7 @@ Returns the transaction instance so build methods can be chained.</p>
 <h3 id="fromcbor"><a class="header" href="#fromcbor">fromCbor</a></h3>
 <p>▸ <code>Static</code> <strong>fromCbor</strong>(<code>raw</code>): <a href="Tx.html"><code>Tx</code></a></p>
 <p>Deserialize a CBOR encoded Cardano transaction (input is either an array of bytes, or a hex string).</p>
-<h4 id="parameters-21"><a class="header" href="#parameters-21">Parameters</a></h4>
+<h4 id="parameters-22"><a class="header" href="#parameters-22">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>raw</code></td><td style="text-align: left"><code>string</code> | <code>number</code>[]</td></tr>
 </tbody></table>

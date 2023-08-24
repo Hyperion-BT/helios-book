@@ -188,7 +188,7 @@
         } else {
             h.setAttribute("expanded", "")
         }
-    })();'></a></h2><div class="toc"><h3 id="constructors"><a class="header" href="#constructors"><a class="header" href="#constructors">Constructors</a></a></h3><ul class="toc"><li><a href="BlockfrostV0.html#constructor">constructor</a></li></ul><h3 id="methods"><a class="header" href="#methods"><a class="header" href="#methods">Methods</a></a></h3><ul class="toc"><li><a href="BlockfrostV0.html#dumpmempool">dumpMempool</a></li><li><a href="BlockfrostV0.html#getlatestepoch">getLatestEpoch</a></li><li><a href="BlockfrostV0.html#getparameters">getParameters</a></li><li><a href="BlockfrostV0.html#getutxo">getUtxo</a></li><li><a href="BlockfrostV0.html#getutxos">getUtxos</a></li><li><a href="BlockfrostV0.html#hasutxo">hasUtxo</a></li><li><a href="BlockfrostV0.html#submittx">submitTx</a></li><li><a href="BlockfrostV0.html#resolve">resolve</a></li></ul></div>
+    })();'></a></h2><div class="toc"><h3 id="constructors"><a class="header" href="#constructors"><a class="header" href="#constructors">Constructors</a></a></h3><ul class="toc"><li><a href="BlockfrostV0.html#constructor">constructor</a></li></ul><h3 id="accessors"><a class="header" href="#accessors"><a class="header" href="#accessors">Accessors</a></a></h3><ul class="toc"><li><a href="BlockfrostV0.html#networkname">networkName</a></li></ul><h3 id="methods"><a class="header" href="#methods"><a class="header" href="#methods">Methods</a></a></h3><ul class="toc"><li><a href="BlockfrostV0.html#dumpmempool">dumpMempool</a></li><li><a href="BlockfrostV0.html#getlatestepoch">getLatestEpoch</a></li><li><a href="BlockfrostV0.html#getparameters">getParameters</a></li><li><a href="BlockfrostV0.html#getutxo">getUtxo</a></li><li><a href="BlockfrostV0.html#getutxos">getUtxos</a></li><li><a href="BlockfrostV0.html#hasutxo">hasUtxo</a></li><li><a href="BlockfrostV0.html#submittx">submitTx</a></li><li><a href="BlockfrostV0.html#resolve">resolve</a></li><li><a href="BlockfrostV0.html#resolveusingutxo">resolveUsingUtxo</a></li><li><a href="BlockfrostV0.html#resolveusingwallet">resolveUsingWallet</a></li></ul></div>
 <h2 id="constructors"><a class="header" href="#constructors">Constructors</a></h2>
 <h3 id="constructor"><a class="header" href="#constructor">constructor</a></h3>
 <p>• <strong>new BlockfrostV0</strong>(<code>networkName</code>, <code>projectId</code>)</p>
@@ -199,21 +199,26 @@
 <tr><td style="text-align: left"><code>projectId</code></td><td style="text-align: left"><code>string</code></td></tr>
 </tbody></table>
 </div>
+<h2 id="accessors"><a class="header" href="#accessors">Accessors</a></h2>
+<h3 id="networkname"><a class="header" href="#networkname">networkName</a></h3>
+<p>• <code>get</code> <strong>networkName</strong>(): <code>string</code></p>
+<h4 id="returns"><a class="header" href="#returns">Returns</a></h4>
+<p><code>string</code></p>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <h3 id="dumpmempool"><a class="header" href="#dumpmempool">dumpMempool</a></h3>
 <p>▸ <strong>dumpMempool</strong>(): <code>Promise</code>&lt;<code>void</code>&gt;</p>
 <p>Allows inspecting the live Blockfrost mempool.</p>
-<h4 id="returns"><a class="header" href="#returns">Returns</a></h4>
+<h4 id="returns-1"><a class="header" href="#returns-1">Returns</a></h4>
 <p><code>Promise</code>&lt;<code>void</code>&gt;</p>
 <div class="vspace"></div>
 <h3 id="getlatestepoch"><a class="header" href="#getlatestepoch">getLatestEpoch</a></h3>
 <p>▸ <strong>getLatestEpoch</strong>(): <code>Promise</code>&lt;<code>any</code>&gt;</p>
-<h4 id="returns-1"><a class="header" href="#returns-1">Returns</a></h4>
+<h4 id="returns-2"><a class="header" href="#returns-2">Returns</a></h4>
 <p><code>Promise</code>&lt;<code>any</code>&gt;</p>
 <div class="vspace"></div>
 <h3 id="getparameters"><a class="header" href="#getparameters">getParameters</a></h3>
 <p>▸ <strong>getParameters</strong>(): <code>Promise</code>&lt;<a href="NetworkParams.html"><code>NetworkParams</code></a>&gt;</p>
-<h4 id="returns-2"><a class="header" href="#returns-2">Returns</a></h4>
+<h4 id="returns-3"><a class="header" href="#returns-3">Returns</a></h4>
 <p><code>Promise</code>&lt;<a href="NetworkParams.html"><code>NetworkParams</code></a>&gt;</p>
 <h4 id="implementation-of"><a class="header" href="#implementation-of">Implementation of</a></h4>
 <p><a href="../interfaces/Network.html">Network</a>.<a href="../interfaces/Network.html#getparameters">getParameters</a></p>
@@ -226,7 +231,7 @@
 <tr><td style="text-align: left"><code>id</code></td><td style="text-align: left"><a href="TxOutputId.html"><code>TxOutputId</code></a></td></tr>
 </tbody></table>
 </div>
-<h4 id="returns-3"><a class="header" href="#returns-3">Returns</a></h4>
+<h4 id="returns-4"><a class="header" href="#returns-4">Returns</a></h4>
 <p><code>Promise</code>&lt;<a href="TxInput.html"><code>TxInput</code></a>&gt;</p>
 <h4 id="implementation-of-1"><a class="header" href="#implementation-of-1">Implementation of</a></h4>
 <p><a href="../interfaces/Network.html">Network</a>.<a href="../interfaces/Network.html#getutxo">getUtxo</a></p>
@@ -240,7 +245,7 @@ Returns oldest UTxOs first, newest last.</p>
 <tr><td style="text-align: left"><code>address</code></td><td style="text-align: left"><a href="Address.html"><code>Address</code></a></td></tr>
 </tbody></table>
 </div>
-<h4 id="returns-4"><a class="header" href="#returns-4">Returns</a></h4>
+<h4 id="returns-5"><a class="header" href="#returns-5">Returns</a></h4>
 <p><code>Promise</code>&lt;<a href="TxInput.html"><code>TxInput</code></a>[]&gt;</p>
 <h4 id="implementation-of-2"><a class="header" href="#implementation-of-2">Implementation of</a></h4>
 <p><a href="../interfaces/Network.html">Network</a>.<a href="../interfaces/Network.html#getutxos">getUtxos</a></p>
@@ -253,7 +258,7 @@ Returns oldest UTxOs first, newest last.</p>
 <tr><td style="text-align: left"><code>utxo</code></td><td style="text-align: left"><a href="TxInput.html"><code>TxInput</code></a></td></tr>
 </tbody></table>
 </div>
-<h4 id="returns-5"><a class="header" href="#returns-5">Returns</a></h4>
+<h4 id="returns-6"><a class="header" href="#returns-6">Returns</a></h4>
 <p><code>Promise</code>&lt;<code>boolean</code>&gt;</p>
 <div class="vspace"></div>
 <h3 id="submittx"><a class="header" href="#submittx">submitTx</a></h3>
@@ -264,16 +269,47 @@ Returns oldest UTxOs first, newest last.</p>
 <tr><td style="text-align: left"><code>tx</code></td><td style="text-align: left"><a href="Tx.html"><code>Tx</code></a></td></tr>
 </tbody></table>
 </div>
-<h4 id="returns-6"><a class="header" href="#returns-6">Returns</a></h4>
+<h4 id="returns-7"><a class="header" href="#returns-7">Returns</a></h4>
 <p><code>Promise</code>&lt;<a href="TxId.html"><code>TxId</code></a>&gt;</p>
 <h4 id="implementation-of-3"><a class="header" href="#implementation-of-3">Implementation of</a></h4>
 <p><a href="../interfaces/Network.html">Network</a>.<a href="../interfaces/Network.html#submittx">submitTx</a></p>
 <div class="vspace"></div>
 <h3 id="resolve"><a class="header" href="#resolve">resolve</a></h3>
-<p>▸ <code>Static</code> <strong>resolve</strong>(<code>wallet</code>, <code>projectIds</code>): <code>Promise</code>&lt;<a href="BlockfrostV0.html"><code>BlockfrostV0</code></a>&gt;</p>
-<p>Connects to the same network a given <code>Wallet</code> is connected to (preview, preprod or mainnet).</p>
+<p>▸ <code>Static</code> <strong>resolve</strong>(<code>utxoOrWallet</code>, <code>projectIds</code>): <code>Promise</code>&lt;<a href="BlockfrostV0.html"><code>BlockfrostV0</code></a>&gt;</p>
+<p>Connects to the same network a given <code>Wallet</code> or the given <code>TxInput</code> (preview, preprod or mainnet).</p>
 <p>Throws an error if a Blockfrost project_id is missing for that specific network.</p>
 <h4 id="parameters-5"><a class="header" href="#parameters-5">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>utxoOrWallet</code></td><td style="text-align: left"><a href="TxInput.html"><code>TxInput</code></a> | <a href="../interfaces/Wallet.html"><code>Wallet</code></a></td></tr>
+<tr><td style="text-align: left"><code>projectIds</code></td><td style="text-align: left"><code>Object</code></td></tr>
+<tr><td style="text-align: left"><code>projectIds.mainnet?</code></td><td style="text-align: left"><code>string</code></td></tr>
+<tr><td style="text-align: left"><code>projectIds.preprod?</code></td><td style="text-align: left"><code>string</code></td></tr>
+<tr><td style="text-align: left"><code>projectIds.preview?</code></td><td style="text-align: left"><code>string</code></td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-8"><a class="header" href="#returns-8">Returns</a></h4>
+<p><code>Promise</code>&lt;<a href="BlockfrostV0.html"><code>BlockfrostV0</code></a>&gt;</p>
+<div class="vspace"></div>
+<h3 id="resolveusingutxo"><a class="header" href="#resolveusingutxo">resolveUsingUtxo</a></h3>
+<p>▸ <code>Static</code> <strong>resolveUsingUtxo</strong>(<code>refUtxo</code>, <code>projectIds</code>): <code>Promise</code>&lt;<a href="BlockfrostV0.html"><code>BlockfrostV0</code></a>&gt;</p>
+<p>Throws an error if a Blockfrost project_id is missing for that specific network.</p>
+<h4 id="parameters-6"><a class="header" href="#parameters-6">Parameters</a></h4>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
+<tr><td style="text-align: left"><code>refUtxo</code></td><td style="text-align: left"><a href="TxInput.html"><code>TxInput</code></a></td></tr>
+<tr><td style="text-align: left"><code>projectIds</code></td><td style="text-align: left"><code>Object</code></td></tr>
+<tr><td style="text-align: left"><code>projectIds.mainnet?</code></td><td style="text-align: left"><code>string</code></td></tr>
+<tr><td style="text-align: left"><code>projectIds.preprod?</code></td><td style="text-align: left"><code>string</code></td></tr>
+<tr><td style="text-align: left"><code>projectIds.preview?</code></td><td style="text-align: left"><code>string</code></td></tr>
+</tbody></table>
+</div>
+<h4 id="returns-9"><a class="header" href="#returns-9">Returns</a></h4>
+<p><code>Promise</code>&lt;<a href="BlockfrostV0.html"><code>BlockfrostV0</code></a>&gt;</p>
+<div class="vspace"></div>
+<h3 id="resolveusingwallet"><a class="header" href="#resolveusingwallet">resolveUsingWallet</a></h3>
+<p>▸ <code>Static</code> <strong>resolveUsingWallet</strong>(<code>wallet</code>, <code>projectIds</code>): <code>Promise</code>&lt;<a href="BlockfrostV0.html"><code>BlockfrostV0</code></a>&gt;</p>
+<p>Connects to the same network a given <code>Wallet</code> is connected to (preview, preprod or mainnet).</p>
+<p>Throws an error if a Blockfrost project_id is missing for that specific network.</p>
+<h4 id="parameters-7"><a class="header" href="#parameters-7">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>wallet</code></td><td style="text-align: left"><a href="../interfaces/Wallet.html"><code>Wallet</code></a></td></tr>
 <tr><td style="text-align: left"><code>projectIds</code></td><td style="text-align: left"><code>Object</code></td></tr>
@@ -282,7 +318,7 @@ Returns oldest UTxOs first, newest last.</p>
 <tr><td style="text-align: left"><code>projectIds.preview?</code></td><td style="text-align: left"><code>string</code></td></tr>
 </tbody></table>
 </div>
-<h4 id="returns-7"><a class="header" href="#returns-7">Returns</a></h4>
+<h4 id="returns-10"><a class="header" href="#returns-10">Returns</a></h4>
 <p><code>Promise</code>&lt;<a href="BlockfrostV0.html"><code>BlockfrostV0</code></a>&gt;</p>
 
                     </main>
