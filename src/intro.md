@@ -1,35 +1,30 @@
 # Introduction to Helios
 
-[Helios](https://github.com/Hyperion-BT/Helios) is a [DSL](./lang/index.md) (Domain Specific Language) for writing smart contracts for the [Cardano](https://www.cardano.org) blockchain.
+[Helios](https://github.com/Hyperion-BT/Helios) is a Javascript/Typescript SDK for the [Cardano](https://www.cardano.org) blockchain. Helios is all you need to build dApps on Cardano, including a simple smart contract language: the **[Helios language](./lang/index.md)**.
 
-The [Helios library](https://github.com/Hyperion-BT/Helios) is written in Javascript/Typescript and has an [API](./api/index.md) for:
-  * compiling Helios sources into [Plutus-Core](https://github.com/input-output-hk/plutus)
-  * building and submitting transactions to the Cardano blockchain
-
-## Code sample
+## Example smart contract
 
 ```helios
-// all Helios programs begin with a script purpose
+// all Helios scripts begin with a script purpose
 spending always_true 
 
-// the 'main' function contains the core validator logic
-// returns true if a given UTxO is allowed to be spent
+// the spending entrypoint function accepts three arguments and 
+//  contains the core validator logic
+// 'main' returns true if a given UTxO is allowed to be spent
 func main(_, _, _) -> Bool {
-    // Helios is an expression based language
+    // the Helios DSL is expression based
     true
 }
-
-// Note: the datum, redeemer, and scriptcontext are ignored by the underscores
 ```
 
 ## Structure of this book
 
 Before starting to use Helios to create smart contracts and build dApps it is important to understand Cardano's eUTxO model very well. If you don't yet, we recommend you read the [Understanding eUTxOs](./understanding-eutxos.md) preface first.
 
-[Chapter 1](./lang/index.md) covers the language itself, including a complete reference of the Helios builtins.
+[Chapter 1](./lang/index.md) covers the language, including a complete reference of the language builtins.
 
-[Chapter 2](./api/index.md) covers setting up the Helios library, compiling smart contracts, and building and submitting smart contract transactions, using only Javascript/Typescript.
+[Chapter 2](./api/index.md) covers how to use the Helios API to compile smart contracts, and create smart contract transactions, including a complete reference of the library exports.
 
-[Chapter 3](./cli/index.md) covers how to use Helios smart contracts with *cardano-cli*.
+[Chapter 3](./cli/index.md) covers how to use the Helios CLI to build dApps, including a complete reference of the CLI commands.
 
-[Chapter 4](./advanced-concepts/index.md) covers minting policies, exploits to be aware of, some more complex scripts, and some recommendations for building dApps.
+[Chapter 4](./further-reading/index.md) contains a variety of articles to help you become a better Cardano dApp architect.

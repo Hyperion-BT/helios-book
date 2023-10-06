@@ -1,6 +1,6 @@
 # Generics
 
-Helios supports generic type parameters for [functions](./functions/index.md), [structs](./structs.md), and [enums](./enums.md). The syntax for generics is similar to [lists](./builtins/list.md), [`Map`](./builtins/map.md) and [`Option`](./builtins/option.md).
+Helios supports generic type parameters for [functions](./functions/index.md), [structs](./user-defined-types/structs.md), and [enums](./user-defined-types/enums.md). The syntax for generics is similar to [lists](./builtins/list.md), [`Map`](./builtins/map.md) and [`Option`](./builtins/option.md).
 
 ## Generic functions
 
@@ -12,7 +12,7 @@ func deserialize[A](a: Data) -> A {
 }
 ```
 
-When calling a function the type parameters are infered wherever possible. In this example however `A` can't be inferred and must be specified before calling the function:
+When calling a function, the type parameters are infered wherever possible. In this example however `A` can't be inferred and must be specified before calling the function:
 
 ```helios
 my_bool: Bool = deserialze[Bool](my_bool_data); ...
@@ -28,7 +28,7 @@ func get_value[V: Valuable](v: V) -> Value {
 
 ## Generic structs and enums
 
-User types like [structs](./structs.md) and [enums](./enums.md) can also have generic type parameters. For example:
+User types like [structs](./user-defined-types/structs.md) and [enums](./user-defined-types/enums.md) can also have generic type parameters. For example:
 
 ```helios
 struct Pair[A, B] {
@@ -57,7 +57,7 @@ enum BinaryTree[A] {
 }
 ```
 
-Similar to generic function, the type parameters of generic structs and enums can be constrained using typeclasses.
+Similar to generic functions, the type parameters of generic structs and enums can be constrained using typeclasses.
 
 >**Note**: all type parameters must be used in the fields of the struct or enum, not just in the methods.
 
@@ -67,7 +67,7 @@ Similar to generic function, the type parameters of generic structs and enums ca
 
 Typeclasses are used to constrain a type parameter of a generic function or user-type.
 
-User-defined typeclasses aren't yet possible, but there are however three builtin typeclasses:
+User-defined typeclasses aren't yet possible, there are however three builtin typeclasses:
 * [`Any`](./builtins/any.md) (matches any data-type of function-type)
-* *empty* (this is the default, matches any data-type)
+* *empty* (this is the default, matches any data-type, but not function-types)
 * [`Valuable`](./builtins/valuable.md) (matches any type with the `.value -> Value` getter, so [`TxInput`](./builtins/txinput.md), [`TxOutput`](./builtins/txoutput.md), and [`Value`](./builtins/value.md) itself)

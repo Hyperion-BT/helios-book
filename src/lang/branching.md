@@ -14,7 +14,7 @@ if (tag == 0) {
 
 The last expression in each branch block is implicitly returned (much like Rust).
 
-The following is valid syntax:
+`if-else` can be used like any other expression:
 
 ```helios
 x: Int = 

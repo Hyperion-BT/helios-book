@@ -11,7 +11,9 @@ func assert_even(n: Int) -> () {
 The syntax for calling user-defined void functions is the same as for `print`, `error` and `assert`:
 
 ```helios
-func main(ctx: ScriptContext) -> Bool {
+spending my_validator
+
+func main(_, _, ctx: ScriptContext) -> Bool {
     assert_even(ctx.outputs.length);
     ...
 }

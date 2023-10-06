@@ -10,7 +10,7 @@ import * as helios from "helios"
 
 ## `Tx`
 
-A new [`Tx`](../reference/tx.md) instance acts as a transaction builder, using builder pattern methods.
+A new [`Tx`](../reference/classes/Tx.md) instance acts as a transaction builder, using builder pattern methods.
 
 ```js
 const tx = new helios.Tx()

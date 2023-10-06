@@ -21,7 +21,7 @@ const MY_DATUM = Datum {
 }`
 ```
 
-Remember that after the `main` function you can define data generators and test functions (see [script structure](../lang/script-structure.md)).
+Remember that after the `main` function you can define data generators and test functions (see [script structure](../lang/script-structure/index.md)).
 
 `MY_DATUM` in this example can be evaluated using the API:
 

@@ -1,6 +1,6 @@
 # Functions
 
-Functions are a core feature of Helios. All Helios functions are *pure*, which means they don't have side effects and always return the same result when given the same arguments.
+All Helios functions are *pure*, which means they don't have side effects (except throwing errors) and always return the same result when given the same arguments.
 
 Function statements are defined using the `func` keyword. Helios has no `return` statement, the last expression in a function is *implicitly returned* (like in Rust):
 
@@ -23,7 +23,7 @@ func fib(n: Int) -> Int {
 }
 ```
 
-> **Note:**: a function can only reference itself when recursing. Helios doesn't support hoisting, so mutual recursion by referring to functions defined after the current function in the top-scope isn't possible (for struct and enum methods this is however possible):
+> **Note:**: a function can only reference itself when recursing. Helios doesn't support hoisting, so mutual recursion by referring to functions defined after the current function in the top-scope isn't possible (for [struct and enum methods](../user-defined-types/methods/index.md) this is however possible):
 >
 > ```helios
 > 01 func a(n: Int) -> Int {

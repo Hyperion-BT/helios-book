@@ -25,6 +25,14 @@ hljs.registerLanguage('helios', function(hljs) {
 		begin: '#[a-fA-F0-9.]*',
 	}
 
+	const UTF8_BYTE_ARRAYS = {
+		className: 'literal',
+		begin: 'b"', end: '"',
+		illegal: '\\n',
+		contains: [ hljs.BACKSLASH_ESCAPE ],
+		relevance: 0
+	}
+
 	const PARAM_TYPE = {
 		className: 'param-type',
 		begin: '\\b[A-Za-z]*Type\\b',
@@ -57,6 +65,7 @@ hljs.registerLanguage('helios', function(hljs) {
 			LITERALS,
 			BUILTIN_TYPES,
 			BYTE_ARRAYS,
+			UTF8_BYTE_ARRAYS,
 			VARIABLE,
 			PARAM_TYPE,
 		]

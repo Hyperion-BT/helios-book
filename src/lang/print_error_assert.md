@@ -19,7 +19,7 @@ func main() -> Bool {
 
 ## `error`
 
-Helios has a special `error` builtin, which can be used to throw errors inside branches of [`if-else`](./branching.md) expressions, and cases of [`switch`](./enums.md#switch) expressions. At least one branch or case must be non-error-throwing for the `if-else` or `switch` expression to return a non-void value.
+Helios has a special `error` builtin, which can be used to throw errors inside branches of [`if-else`](./branching.md) expressions, and cases of [`switch`](./user-defined-types/enums.md#switch) expressions. At least one branch or case must be non-error-throwing for the `if-else` or `switch` expression to return a non-void value.
 
 ```helios
 if (cond) {

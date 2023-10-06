@@ -39,7 +39,6 @@ This section contains a reference of all the Helios builtins.
   * [PubKey](./pubkey.md)
   * [PubKeyHash](./pubkeyhash.md)
   * [ScriptHash](./scripthash.md)
-  * [StakeKeyHash](./stakekeyhash.md)
   * [StakingValidatorHash](./stakingvalidatorhash.md)
   * [ValidatorHash](./validatorhash.md)
 

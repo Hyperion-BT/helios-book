@@ -1,14 +1,14 @@
 # `StakingHash`
 
 An enum with two variants: 
-  * `StakeKey` (wraps [`StakeKeyHash`](./stakekeyhash.md)) 
+  * `StakeKey` (wraps [`PubKeyHash`](./pubkeyhash.md)) 
   * `Validator` (wraps [`StakingValidatorHash`](./stakingvalidatorhash.md))
 
 <br/>
 
 Example instantiation:
 ```helios
-stakekey_stakinghash: StakingHash::StakeKey = StakingHash::new_stakekey(StakeKeyHash::new(#...));
+stakekey_stakinghash: StakingHash::StakeKey = StakingHash::new_stakekey(PubKeyHash::new(#...));
 
 validator_stakinghash: StakingHash::Validator = StakingHash::new_validator(StakingValidatorHash::new(#...)); ...
 ```
@@ -18,7 +18,7 @@ validator_stakinghash: StakingHash::Validator = StakingHash::new_validator(Staki
 ### `new_stakekey`
 
 ```helios
-StakingHash::new_stakekey(skh: StakeKeyHash) -> StakingHash::StakeKey
+StakingHash::new_stakekey(skh: PubKeyHash) -> StakingHash::StakeKey
 ```
 
 ### `new_validator`
@@ -40,7 +40,7 @@ StakingHash::from_data(data: Data) -> StakingHash
 Get the underlying hash.
 
 ```helios
-stakekey_stakinghash.hash -> StakeKeyHash
+stakekey_stakinghash.hash -> PubKeyHash
 
 validator_stakinghash.hash -> StakingValidatorHash
 ```

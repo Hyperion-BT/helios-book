@@ -1,6 +1,6 @@
 # Modules
 
-Helios top-level statements can be placed in modules and can then be imported by other Helios sources. Modules can be made available during compile-time by including them in a list as the second argument of the [`Program` constructor](../api/reference/program.md).
+Helios top-level statements can be placed in modules and can then be imported by other Helios sources. Modules can be made available during compile-time by including them in a list as the second argument of the [`Program` constructor](../api/reference/classes/Program.md).
 
 ## `import`
 
@@ -50,7 +50,7 @@ RenamedSubModule::MyStruct{...}
 
 ### Webpack
 
-When using the [Webpack loader](../integrations/webpack.md) you must use relative paths instead of module names when importing:
+When using the [Webpack loader](../further-reading/integrations/webpack.md) you must use relative paths instead of module names when importing:
 
 ```helios
 import { 

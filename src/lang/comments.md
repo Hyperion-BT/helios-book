@@ -7,6 +7,8 @@ Helios comments are C-like.
 Single-line comments use two forward slashes (`//`):
 
 ```helios
+spending always_succeeds
+
 func main(_, _, _) -> Bool {
 	// This is a comment.
 	true
@@ -18,6 +20,8 @@ func main(_, _, _) -> Bool {
 Multi-line and inline comments use `/* ... */`:
 
 ```helios
+spending always_succeeds
+
 func main(_, _, _ /* inline comment */) -> Bool {
 	/*
 		This is a multi-line comment.

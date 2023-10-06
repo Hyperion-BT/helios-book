@@ -14,7 +14,7 @@ ScriptContext::from_data(data: Data) -> ScriptContext
 
 ### `new_certifying`
 
-Construct a `ScriptContext` instance with a `staking`/`certifying` [`ScriptPurpose`](./scriptpurpose.md). **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+Construct a `ScriptContext` instance with a `staking`/`certifying` [`ScriptPurpose`](./scriptpurpose.md). **Only available after `main`**, see [script structure](../script-structure/index.md#data-generators-and-test-functions-5).
 
 Throws an error if the current script purpose isn't `staking` or `testing`.
 
@@ -27,7 +27,7 @@ ScriptContext::new_certifying(
 
 ### `new_minting`
 
-Construct a `ScriptContext` instance with a `minting` [`ScriptPurpose`](./scriptpurpose.md). **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+Construct a `ScriptContext` instance with a `minting` [`ScriptPurpose`](./scriptpurpose.md). **Only available after `main`**, see [script structure](../script-structure/index.md#data-generators-and-test-functions-5).
 
 Throws an error if the current script purpose isn't `minting` or `testing`.
 
@@ -40,7 +40,7 @@ ScriptContext::new_minting(
 
 ### `new_rewarding`
 
-Construct a `ScriptContext` instance with a `staking`/`rewarding` [`ScriptPurpose`](./scriptpurpose.md). **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+Construct a `ScriptContext` instance with a `staking`/`rewarding` [`ScriptPurpose`](./scriptpurpose.md). **Only available after `main`**, see [script structure](../script-structure/index.md#data-generators-and-test-functions-5).
 
 Throws an error if the current script purpose isn't `staking` or `testing`.
 
@@ -53,7 +53,7 @@ ScriptContext::new_rewarding(
 
 ### `new_spending`
 
-Construct a `ScriptContext` instance with a `spending` [`ScriptPurpose`](./scriptpurpose.md). **Only available after `main`**, see [script structure](../script-structure.md#data-generators-and-test-functions-5).
+Construct a `ScriptContext` instance with a `spending` [`ScriptPurpose`](./scriptpurpose.md). **Only available after `main`**, see [script structure](../script-structure/index.md#data-generators-and-test-functions-5).
 
 Throws an error if the current script purpose isn't `spending` or `testing`.
 

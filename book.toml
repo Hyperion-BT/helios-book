@@ -3,7 +3,7 @@ authors = ["Daniel Onyesoh", "Christian Schmitz"]
 language = "en"
 multilingual = false
 src = "src"
-title = "The Helios Smart Contract Language"
+title = "Helios"
 
 [build]
 build-dir = "book"

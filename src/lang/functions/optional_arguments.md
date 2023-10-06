@@ -3,8 +3,8 @@
 Some function arguments can be made optional by specifying default values:
 
 ```helios
-func incr(x: Int, by: Int = 1) -> Int {
-    x + by
+func incr(a: Int, b: Int = 1) -> Int {
+    a + b
 }
 ```
 

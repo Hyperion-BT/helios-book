@@ -3,7 +3,7 @@ The following is a more involved example of a function in Helios.
 
 # Example: Collatz sequence
 
-One of my favorite things in maths is the Collatz sequence. A Collatz sequence starts with a given number, `n`, and calculates the next number in the sequence using the following rules:
+A Collatz sequence starts with a given number, `n`, and calculates the next number in the sequence using the following rules:
 
    1. if `n == 1` the sequence ends
    2. if `n` is even the next number is `n / 2`
