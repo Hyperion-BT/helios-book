@@ -6,7 +6,7 @@ Represents a Cardano address.
 
 ### `from_bytes`
 
-Decodes raw address bytes.
+Decodes raw address bytes (see [CIP 19](https://cips.cardano.org/cips/cip19/)). [`IS_TESTNET`](../../api/reference/namespaces/config.md#is_testnet) must be set to `false` for this to work for mainnet addresses.
 
 ```helios
 Address::from_bytes(bytes: ByteArray) -> Address
@@ -20,7 +20,7 @@ Address::from_data(data: Data) -> Address
 
 ### `from_hex`
 
-Decodes the hexadecimal encoded bytes of a raw address.
+Decodes the hexadecimal encoded bytes of a raw address (see [CIP 19](https://cips.cardano.org/cips/cip19/)). [`IS_TESTNET`](../../api/reference/namespaces/config.md#is_testnet) must be set to `false` for this to work for mainnet addresses.
 
 ```helios
 Address::from_hex(hex: String) -> Address
@@ -79,7 +79,7 @@ address.serialize() -> ByteArray
 
 ### `to_bytes`
 
-Returns the raw address bytes.
+Returns the raw address bytes (see [CIP 19](https://cips.cardano.org/cips/cip19/)). [`IS_TESTNET`](../../api/reference/namespaces/config.md#is_testnet) must be set to `false` for this to return a raw mainnet addresses.
 
 ```helios
 address.to_bytes() -> ByteArray
@@ -87,7 +87,7 @@ address.to_bytes() -> ByteArray
 
 ### `to_hex`
 
-Encodes the raw address bytes as a hexadecimal `String`.
+Encodes the raw address bytes as a hexadecimal `String` (see [CIP 19](https://cips.cardano.org/cips/cip19/)). [`IS_TESTNET`](../../api/reference/namespaces/config.md#is_testnet) must be set to `false` for this to return a raw mainnet addresses.
 
 ```
 address.to_hex() -> String
