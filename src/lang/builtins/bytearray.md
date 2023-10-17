@@ -16,6 +16,14 @@ byte_array = #213212; ...
 ByteArray::from_data(data: Data) -> ByteArray
 ```
 
+### `parse`
+
+Parses a hexadecimal encoded `ByteArray`.
+
+```helios
+ByteArray::parse(hex: String) -> String
+```
+
 ## Getters
 
 ### `length`

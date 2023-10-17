@@ -35,6 +35,8 @@ pair.copy(second: 3) // == Pair{1, 3}
 MyType::from_data(data: Data) -> MyType
 ```
 
+If you set [`CHECK_CASTS`](../../../api/reference/namespaces/config.md#check_casts) to `true`, a warning will be printed if the structure of `data` doesn't match the type.
+
 ## `serialize`
 
 The `serialize` method is automatically defined on every user-type, and thus `serialize` is a reserved name that can't be used for other methods.
