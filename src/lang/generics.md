@@ -68,6 +68,6 @@ Similar to generic functions, the type parameters of generic structs and enums c
 Typeclasses are used to constrain a type parameter of a generic function or user-type.
 
 User-defined typeclasses aren't yet possible, there are however three builtin typeclasses:
-* [`Any`](./builtins/any.md) (matches any data-type of function-type)
+* [`Any`](./builtins/any.md) (matches any data-type or function-type)
 * *empty* (this is the default, matches any data-type, but not function-types)
 * [`Valuable`](./builtins/valuable.md) (matches any type with the `.value -> Value` getter, so [`TxInput`](./builtins/txinput.md), [`TxOutput`](./builtins/txoutput.md), and [`Value`](./builtins/value.md) itself)

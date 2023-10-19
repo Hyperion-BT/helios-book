@@ -13,9 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hyperionbt/helios": "^0.16.0",
+    "@hyperionbt/helios": "^0.16.1",
     "@jsdoc/ast": "^0.2.1",
     "@jsdoc/parse": "^0.3.1",
+    "helios": "^0.0.5",
     "typedoc": "^0.24.8",
     "typedoc-plugin-markdown": "^3.15.3"
   }
