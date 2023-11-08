@@ -292,6 +292,14 @@ Creates a new list, replacing an item at an `index`. Throws an error if the `ind
 list.set(index: Int, item: ItemType) -> []ItemType
 ```
 
+### `show`
+
+Returns a string representation of the list and its content. This can be useful for debugging.
+
+```helios
+list.show() -> String
+```
+
 ### `sort`
 
 Sorts the list using insertion sort.

@@ -47,4 +47,14 @@ The `serialize` method is automatically defined on every user-type, and thus `se
 my_instance.serialize() -> ByteArray
 ```
 
-> **Note**: when debugging you can inspect the output of `print(my_data.serialize().show())` using [this cbor tool](https://cbor.nemo157.com).
+> **Note**: when debugging you can inspect the output of `print(x.serialize().show())` using [this cbor tool](https://cbor.nemo157.com).
+
+## `show`
+
+The `show` method returns a string representation of underlying instance, which is convenient when debugging.
+
+```helios
+my_instance.show() -> String
+```
+
+> **Note**: usually you will use `print(x.show())` instead `print(x.serialize().show())` when debugging.

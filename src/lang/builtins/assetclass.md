@@ -64,3 +64,11 @@ AssetClass != AssetClass -> Bool
 ```helios
 asset_class.serialize() -> ByteArray
 ```
+
+### `show`
+
+Returns the hexadecimal representation of the `MintingPolicyHash` and the token name, separated by a period (`.`).
+
+```helios
+asset_class.show() -> String
+```

@@ -10,6 +10,6 @@ func sub(a: Int, b: Int) -> Int {
 sub(b: 1, a: 2) // == 1
 ```
 
-Named arguments can't be mixed with positional arguments.
+A function call can't mix named arguments with positional arguments.
 
 Named arguments are mostly used when calling the [`copy()`](../user-defined-types/methods/automatic-methods.md#copy) method.

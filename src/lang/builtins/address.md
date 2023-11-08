@@ -77,6 +77,14 @@ Address != Address -> Bool
 address.serialize() -> ByteArray
 ```
 
+### `show`
+
+Alias for [`to_hex`](#to_hex).
+
+```helios
+address.show() -> String
+```
+
 ### `to_bytes`
 
 Returns the raw address bytes (see [CIP 19](https://cips.cardano.org/cips/cip19/)). [`IS_TESTNET`](../../api/reference/namespaces/config.md#is_testnet) must be set to `false` for this to return a raw mainnet addresses.
@@ -89,6 +97,6 @@ address.to_bytes() -> ByteArray
 
 Encodes the raw address bytes as a hexadecimal `String` (see [CIP 19](https://cips.cardano.org/cips/cip19/)). [`IS_TESTNET`](../../api/reference/namespaces/config.md#is_testnet) must be set to `false` for this to return a raw mainnet addresses.
 
-```
+```helios
 address.to_hex() -> String
 ```

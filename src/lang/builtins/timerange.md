@@ -84,12 +84,6 @@ TimeRange != TimeRange -> Bool
 
 ## Methods
 
-### `serialize`
-
-```helios
-time_range.serialize() -> ByteArray
-```
-
 ### `contains`
 
 Returns `true` if a `TimeRange` contains the given time.
@@ -112,6 +106,12 @@ Returns `true` if the start of a `TimeRange` is after the given time. Always ret
 
 ```helios
 time_range.is_after(time: Time) -> Bool
+```
+
+### `serialize`
+
+```helios
+time_range.serialize() -> ByteArray
 ```
 
 ### `show`

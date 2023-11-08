@@ -66,6 +66,14 @@ option.map[NewSomeType](
 option.serialize() -> ByteArray
 ```
 
+### `show`
+
+Returns a string representation of the option, and, in case of `Some`, its content. This can be useful for debugging.
+
+```helios
+option.show() -> String
+```
+
 ### `unwrap`
 
 Returns the value wrapped by `Some`. Throws an error if `None`.

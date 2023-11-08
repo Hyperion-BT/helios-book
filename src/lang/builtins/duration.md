@@ -143,3 +143,11 @@ Duration % Duration -> Duration
 ```helios
 duration.serialize() -> ByteArray
 ```
+
+### `show`
+
+Returns the string representation of the `Duration` in milliseconds.
+
+```helios
+duration.show() -> String
+```

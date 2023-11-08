@@ -4,6 +4,7 @@ Helios has 3 **container** types:
   * List (linked list)
   * `Map` (association list of key-value pairs)
   * `Option` (equivalent to `Maybe` in Haskell)
+  * Tuple (fixed list with heterogenous item types)
 
 
 ## List
@@ -66,6 +67,36 @@ Option[Int]::Some{my_int} = option; ...
 ```
 
 More information about `Option` can be found [here](./builtins/option.md).
+
+## Tuple
+
+A tuple is a collection of two or more items which can have different types.
+
+```helios
+my_tuple = (1, "hello", true)
+```
+
+Tuples are convenient when returning multiple values from a function:
+
+```helios
+func my_pair(a: Int) -> (Int, Int) {
+    (a+1, a+2)
+}
+```
+
+Tuples can contain anything, including functions. The contents of a tuple can be accessed through destructuring, or via getters:
+
+```helios
+(my_number: Int, my_string: String, my_bool: Bool) = my_tuple;
+
+my_number_alt: Int = my_tuple.first;
+my_string_alt: String = my_tuple.second;
+my_bool_alt: Bool = my_tuple.third
+```
+
+> **Note**: tuples in Helios are limited to 5 entries. The getters are named `first`, `second`, `third`, `fourth` and `fifth`.
+
+> **Note**: although tuples can be used as fields in structs/enums this is not recommended as it can become unclear what the meaning is of the tuples items, and there is also a performance penalty to doing so.
 
 ## Nested literal constructors
 

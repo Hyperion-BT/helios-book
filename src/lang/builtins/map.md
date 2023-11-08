@@ -252,6 +252,14 @@ Sets the first entry with given key to a new value. This entry is appended to en
 map.set(key: KeyType, value: ValueType) -> Map[KeyType]ValueType
 ```
 
+### `show`
+
+Returns a string representation of the map and its content. This can be useful for debugging.
+
+```helios
+map.show() -> String
+```
+
 ### `sort`
 
 Sorts the map using insertion sort. The comparison function should return `true` if `a` and `b` are in the correct order.
