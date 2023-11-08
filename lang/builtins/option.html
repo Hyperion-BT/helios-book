@@ -217,6 +217,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
 <pre><code class="language-helios">option.serialize() -&gt; ByteArray
 </code></pre>
+<h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
+<p>Returns a string representation of the option, and, in case of <code>Some</code>, its content. This can be useful for debugging.</p>
+<pre><code class="language-helios">option.show() -&gt; String
+</code></pre>
 <h3 id="unwrap"><a class="header" href="#unwrap"><code>unwrap</code></a></h3>
 <p>Returns the value wrapped by <code>Some</code>. Throws an error if <code>None</code>.</p>
 <pre><code class="language-helios">option.unwrap() -&gt; SomeType

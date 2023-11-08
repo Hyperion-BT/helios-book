@@ -206,7 +206,14 @@ pair.copy(second: 3) // == Pair{1, 3}
 <pre><code class="language-helios">my_instance.serialize() -&gt; ByteArray
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: when debugging you can inspect the output of <code>print(my_data.serialize().show())</code> using <a href="https://cbor.nemo157.com">this cbor tool</a>.</p>
+<p><strong>Note</strong>: when debugging you can inspect the output of <code>print(x.serialize().show())</code> using <a href="https://cbor.nemo157.com">this cbor tool</a>.</p>
+</blockquote>
+<h2 id="show"><a class="header" href="#show"><code>show</code></a></h2>
+<p>The <code>show</code> method returns a string representation of underlying instance, which is convenient when debugging.</p>
+<pre><code class="language-helios">my_instance.show() -&gt; String
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: usually you will use <code>print(x.show())</code> instead <code>print(x.serialize().show())</code> when debugging.</p>
 </blockquote>
 
                     </main>

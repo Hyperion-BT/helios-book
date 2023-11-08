@@ -219,9 +219,6 @@
 <pre><code class="language-helios">TimeRange != TimeRange -&gt; Bool
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
-<h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
-<pre><code class="language-helios">time_range.serialize() -&gt; ByteArray
-</code></pre>
 <h3 id="contains"><a class="header" href="#contains"><code>contains</code></a></h3>
 <p>Returns <code>true</code> if a <code>TimeRange</code> contains the given time.</p>
 <pre><code class="language-helios">time_range.contains(time: Time) -&gt; Bool
@@ -233,6 +230,9 @@
 <h3 id="is_after"><a class="header" href="#is_after"><code>is_after</code></a></h3>
 <p>Returns <code>true</code> if the start of a <code>TimeRange</code> is after the given time. Always returns <code>false</code> if the start of the <code>TimeRange</code> is negative infinity.</p>
 <pre><code class="language-helios">time_range.is_after(time: Time) -&gt; Bool
+</code></pre>
+<h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
+<pre><code class="language-helios">time_range.serialize() -&gt; ByteArray
 </code></pre>
 <h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
 <pre><code class="language-helios">time_range.show() -&gt; String

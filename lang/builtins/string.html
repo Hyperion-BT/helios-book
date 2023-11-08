@@ -184,6 +184,10 @@
 <h3 id="from_data"><a class="header" href="#from_data"><code>from_data</code></a></h3>
 <pre><code class="language-helios">String::from_data(data: Data) -&gt; String
 </code></pre>
+<h3 id="is_valid_utf8"><a class="header" href="#is_valid_utf8"><code>is_valid_utf8</code></a></h3>
+<p>Method that checks if a <code>ByteArray</code> contains a valid utf-8 encoded string.</p>
+<pre><code class="language-helios">String::is_valid_utf8(bytes: ByteArray) -&gt; Bool
+</code></pre>
 <h2 id="operators"><a class="header" href="#operators">Operators</a></h2>
 <h3 id=""><a class="header" href="#"><code>==</code></a></h3>
 <pre><code class="language-helios">String == String -&gt; Bool
@@ -196,20 +200,24 @@
 <pre><code class="language-helios">String + String -&gt; String
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
-<h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
-<pre><code class="language-helios">string.serialize() -&gt; ByteArray
-</code></pre>
 <h3 id="encode_utf8"><a class="header" href="#encode_utf8"><code>encode_utf8</code></a></h3>
 <p>Turns a <code>String</code> into a sequence of utf-8 bytes.</p>
 <pre><code class="language-helios">string.encode_utf() -&gt; ByteArray
 </code></pre>
-<h3 id="starts_with"><a class="header" href="#starts_with"><code>starts_with</code></a></h3>
-<p>Checks if a <code>String</code> starts with a given prefix.</p>
-<pre><code class="language-helios">string.starts_with(prefix: String) -&gt; Bool
-</code></pre>
 <h3 id="ends_with"><a class="header" href="#ends_with"><code>ends_with</code></a></h3>
 <p>Checks if a <code>String</code> ends with a given suffix.</p>
 <pre><code class="language-helios">string.ends_with(suffix: String) -&gt; Bool
+</code></pre>
+<h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
+<pre><code class="language-helios">string.serialize() -&gt; ByteArray
+</code></pre>
+<h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
+<p>Returns the string wrapped with quotes. This is useful when debugging.</p>
+<pre><code class="language-helios">string.show() -&gt; String
+</code></pre>
+<h3 id="starts_with"><a class="header" href="#starts_with"><code>starts_with</code></a></h3>
+<p>Checks if a <code>String</code> starts with a given prefix.</p>
+<pre><code class="language-helios">string.starts_with(prefix: String) -&gt; Bool
 </code></pre>
 
                     </main>

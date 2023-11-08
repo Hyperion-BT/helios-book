@@ -217,13 +217,17 @@
 <h3 id="serialize"><a class="header" href="#serialize"><code>serialize</code></a></h3>
 <pre><code class="language-helios">address.serialize() -&gt; ByteArray
 </code></pre>
+<h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
+<p>Alias for <a href="#to_hex"><code>to_hex</code></a>.</p>
+<pre><code class="language-helios">address.show() -&gt; String
+</code></pre>
 <h3 id="to_bytes"><a class="header" href="#to_bytes"><code>to_bytes</code></a></h3>
 <p>Returns the raw address bytes (see <a href="https://cips.cardano.org/cips/cip19/">CIP 19</a>). <a href="../../api/reference/namespaces/config.html#is_testnet"><code>IS_TESTNET</code></a> must be set to <code>false</code> for this to return a raw mainnet addresses.</p>
 <pre><code class="language-helios">address.to_bytes() -&gt; ByteArray
 </code></pre>
 <h3 id="to_hex"><a class="header" href="#to_hex"><code>to_hex</code></a></h3>
 <p>Encodes the raw address bytes as a hexadecimal <code>String</code> (see <a href="https://cips.cardano.org/cips/cip19/">CIP 19</a>). <a href="../../api/reference/namespaces/config.html#is_testnet"><code>IS_TESTNET</code></a> must be set to <code>false</code> for this to return a raw mainnet addresses.</p>
-<pre><code>address.to_hex() -&gt; String
+<pre><code class="language-helios">address.to_hex() -&gt; String
 </code></pre>
 
                     </main>

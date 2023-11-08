@@ -340,6 +340,10 @@ bytearray_list.join(separator: ByteArray = #) -&gt; ByteArray
 <p>Creates a new list, replacing an item at an <code>index</code>. Throws an error if the <code>index</code> is out of range.</p>
 <pre><code class="language-helios">list.set(index: Int, item: ItemType) -&gt; []ItemType
 </code></pre>
+<h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
+<p>Returns a string representation of the list and its content. This can be useful for debugging.</p>
+<pre><code class="language-helios">list.show() -&gt; String
+</code></pre>
 <h3 id="sort"><a class="header" href="#sort"><code>sort</code></a></h3>
 <p>Sorts the list using insertion sort.</p>
 <pre><code class="language-helios">list.sort((a: ItemType, b: ItemType) -&gt; Bool) -&gt; []ItemType

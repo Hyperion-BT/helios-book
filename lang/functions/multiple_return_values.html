@@ -177,16 +177,20 @@
                     <main>
                         <p><a href="../../lang/index.html">Helios language</a>/ <a href="../../lang/functions/index.html">Functions</a>/</p>
 <h1 id="multiple-return-values"><a class="header" href="#multiple-return-values">Multiple return values</a></h1>
-<p>A Helios function can return multiple values:</p>
+<p>A Helios function can return multiple values using <a href="../container-types.html#tuple">tuples</a>:</p>
 <pre><code class="language-helios">func swap(a: Int, b: Int) -&gt; (Int, Int) {
     (b, a)
 }
 </code></pre>
-<p>You can assign to multiple return values:</p>
+<p>You can assign to multiple return values using tuple destructuring:</p>
 <pre><code class="language-helios">(a: Int, b: Int) = swap(10, 20); ... // a==20 &amp;&amp; b==10
 </code></pre>
 <p>Some of the multiple return values can be discarded with an underscore (<code>_</code>):</p>
 <pre><code class="language-helios">(a: Int, _) = swap(10, 20); ...
+</code></pre>
+<h2 id="automatic-unpacking-of-tuples"><a class="header" href="#automatic-unpacking-of-tuples">Automatic unpacking of tuples</a></h2>
+<p>Tuples are automatically unpacked during a function call, in a way that matches the type signature of the function being called:</p>
+<pre><code class="language-helios">(a: Int, b: Int) = swap(swap(10, 20)); // a==10 &amp;&amp; b==20
 </code></pre>
 
                     </main>

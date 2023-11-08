@@ -313,6 +313,10 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <p>Sets the first entry with given key to a new value. This entry is appended to end of the <code>Map</code> if the key isn't found.</p>
 <pre><code class="language-helios">map.set(key: KeyType, value: ValueType) -&gt; Map[KeyType]ValueType
 </code></pre>
+<h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
+<p>Returns a string representation of the map and its content. This can be useful for debugging.</p>
+<pre><code class="language-helios">map.show() -&gt; String
+</code></pre>
 <h3 id="sort"><a class="header" href="#sort"><code>sort</code></a></h3>
 <p>Sorts the map using insertion sort. The comparison function should return <code>true</code> if <code>a</code> and <code>b</code> are in the correct order.</p>
 <pre><code class="language-helios">map.sort(

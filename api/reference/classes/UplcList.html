@@ -179,12 +179,21 @@
 <h1 id="uplclist"><a class="header" href="#uplclist">UplcList</a></h1>
 <p>Plutus-core list value class.
 Only used during evaluation.</p>
+<p><strong><code>Implements</code></strong></p>
 <h2 id="hierarchy"><a class="header" href="#hierarchy">Hierarchy</a></h2>
 <ul>
 <li>
 <p><a href="UplcValueImpl.html"><code>UplcValueImpl</code></a></p>
 <p>↳ <strong><code>UplcList</code></strong></p>
 </li>
+</ul>
+<h2 id="implements"><a class="header" href="#implements">Implements</a></h2>
+<ul>
+<li><a href="UplcList.html"><code>UplcList</code></a></li>
+</ul>
+<h2 id="implemented-by"><a class="header" href="#implemented-by">Implemented by</a></h2>
+<ul>
+<li><a href="UplcList.html"><code>UplcList</code></a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href='javascript:(() => {
         document.getElementById("table-of-contents").setAttribute("expanded", "");
@@ -208,12 +217,14 @@ Only used during evaluation.</p>
 </tbody></table>
 </div>
 <h4 id="overrides"><a class="header" href="#overrides">Overrides</a></h4>
-<p><a href="UplcValueImpl.html">UplcValueImpl</a>.<a href="UplcValueImpl.html#constructor">constructor</a></p>
+<p>UplcValueImpl.constructor</p>
 <h2 id="accessors"><a class="header" href="#accessors">Accessors</a></h2>
 <h3 id="bool"><a class="header" href="#bool">bool</a></h3>
 <p>• <code>get</code> <strong>bool</strong>(): <code>boolean</code></p>
 <h4 id="returns"><a class="header" href="#returns">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of"><a class="header" href="#implementation-of">Implementation of</a></h4>
+<p>UplcList.bool</p>
 <h4 id="inherited-from"><a class="header" href="#inherited-from">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
@@ -221,6 +232,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-1"><a class="header" href="#returns-1">Returns</a></h4>
 <p><code>number</code>[]</p>
+<h4 id="implementation-of-1"><a class="header" href="#implementation-of-1">Implementation of</a></h4>
+<p>UplcList.bytes</p>
 <h4 id="inherited-from-1"><a class="header" href="#inherited-from-1">Inherited from</a></h4>
 <p>UplcValueImpl.bytes</p>
 <div class="vspace"></div>
@@ -228,6 +241,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>data</strong>(): <a href="UplcData.html"><code>UplcData</code></a></p>
 <h4 id="returns-2"><a class="header" href="#returns-2">Returns</a></h4>
 <p><a href="UplcData.html"><code>UplcData</code></a></p>
+<h4 id="implementation-of-2"><a class="header" href="#implementation-of-2">Implementation of</a></h4>
+<p>UplcList.data</p>
 <h4 id="inherited-from-2"><a class="header" href="#inherited-from-2">Inherited from</a></h4>
 <p>UplcValueImpl.data</p>
 <div class="vspace"></div>
@@ -235,6 +250,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>first</strong>(): <a href="../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-3"><a class="header" href="#returns-3">Returns</a></h4>
 <p><a href="../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-3"><a class="header" href="#implementation-of-3">Implementation of</a></h4>
+<p>UplcList.first</p>
 <h4 id="inherited-from-3"><a class="header" href="#inherited-from-3">Inherited from</a></h4>
 <p>UplcValueImpl.first</p>
 <div class="vspace"></div>
@@ -243,11 +260,15 @@ Only used during evaluation.</p>
 <p>10 + nItemType type bits, value bits of each item (must be corrected by itemType)</p>
 <h4 id="returns-4"><a class="header" href="#returns-4">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-4"><a class="header" href="#implementation-of-4">Implementation of</a></h4>
+<p>UplcList.flatSize</p>
 <div class="vspace"></div>
 <h3 id="int"><a class="header" href="#int">int</a></h3>
 <p>• <code>get</code> <strong>int</strong>(): <code>bigint</code></p>
 <h4 id="returns-5"><a class="header" href="#returns-5">Returns</a></h4>
 <p><code>bigint</code></p>
+<h4 id="implementation-of-5"><a class="header" href="#implementation-of-5">Implementation of</a></h4>
+<p>UplcList.int</p>
 <h4 id="inherited-from-4"><a class="header" href="#inherited-from-4">Inherited from</a></h4>
 <p>UplcValueImpl.int</p>
 <div class="vspace"></div>
@@ -255,6 +276,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>itemType</strong>(): <a href="UplcType.html"><code>UplcType</code></a></p>
 <h4 id="returns-6"><a class="header" href="#returns-6">Returns</a></h4>
 <p><a href="UplcType.html"><code>UplcType</code></a></p>
+<h4 id="implementation-of-6"><a class="header" href="#implementation-of-6">Implementation of</a></h4>
+<p>UplcList.itemType</p>
 <h4 id="inherited-from-5"><a class="header" href="#inherited-from-5">Inherited from</a></h4>
 <p>UplcValueImpl.itemType</p>
 <div class="vspace"></div>
@@ -262,6 +285,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>length</strong>(): <code>number</code></p>
 <h4 id="returns-7"><a class="header" href="#returns-7">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-7"><a class="header" href="#implementation-of-7">Implementation of</a></h4>
+<p>UplcList.length</p>
 <h4 id="inherited-from-6"><a class="header" href="#inherited-from-6">Inherited from</a></h4>
 <p>UplcValueImpl.length</p>
 <div class="vspace"></div>
@@ -269,6 +294,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>list</strong>(): <a href="../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
 <h4 id="returns-8"><a class="header" href="#returns-8">Returns</a></h4>
 <p><a href="../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
+<h4 id="implementation-of-8"><a class="header" href="#implementation-of-8">Implementation of</a></h4>
+<p>UplcList.list</p>
 <h4 id="inherited-from-7"><a class="header" href="#inherited-from-7">Inherited from</a></h4>
 <p>UplcValueImpl.list</p>
 <div class="vspace"></div>
@@ -276,11 +303,15 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>memSize</strong>(): <code>number</code></p>
 <h4 id="returns-9"><a class="header" href="#returns-9">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-9"><a class="header" href="#implementation-of-9">Implementation of</a></h4>
+<p>UplcList.memSize</p>
 <div class="vspace"></div>
 <h3 id="second"><a class="header" href="#second">second</a></h3>
 <p>• <code>get</code> <strong>second</strong>(): <a href="../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-10"><a class="header" href="#returns-10">Returns</a></h4>
 <p><a href="../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-10"><a class="header" href="#implementation-of-10">Implementation of</a></h4>
+<p>UplcList.second</p>
 <h4 id="inherited-from-8"><a class="header" href="#inherited-from-8">Inherited from</a></h4>
 <p>UplcValueImpl.second</p>
 <div class="vspace"></div>
@@ -288,6 +319,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>site</strong>(): <a href="Site.html"><code>Site</code></a></p>
 <h4 id="returns-11"><a class="header" href="#returns-11">Returns</a></h4>
 <p><a href="Site.html"><code>Site</code></a></p>
+<h4 id="implementation-of-11"><a class="header" href="#implementation-of-11">Implementation of</a></h4>
+<p>UplcList.site</p>
 <h4 id="inherited-from-9"><a class="header" href="#inherited-from-9">Inherited from</a></h4>
 <p>UplcValueImpl.site</p>
 <div class="vspace"></div>
@@ -295,6 +328,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>string</strong>(): <code>string</code></p>
 <h4 id="returns-12"><a class="header" href="#returns-12">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-12"><a class="header" href="#implementation-of-12">Implementation of</a></h4>
+<p>UplcList.string</p>
 <h4 id="inherited-from-10"><a class="header" href="#inherited-from-10">Inherited from</a></h4>
 <p>UplcValueImpl.string</p>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
@@ -302,8 +337,10 @@ Only used during evaluation.</p>
 <p>▸ <strong>assertUnit</strong>(): <a href="UplcUnit.html"><code>UplcUnit</code></a></p>
 <h4 id="returns-13"><a class="header" href="#returns-13">Returns</a></h4>
 <p><a href="UplcUnit.html"><code>UplcUnit</code></a></p>
+<h4 id="implementation-of-13"><a class="header" href="#implementation-of-13">Implementation of</a></h4>
+<p>UplcList.assertUnit</p>
 <h4 id="inherited-from-11"><a class="header" href="#inherited-from-11">Inherited from</a></h4>
-<p><a href="UplcValueImpl.html">UplcValueImpl</a>.<a href="UplcValueImpl.html#assertunit">assertUnit</a></p>
+<p>UplcValueImpl.assertUnit</p>
 <div class="vspace"></div>
 <h3 id="copy"><a class="header" href="#copy">copy</a></h3>
 <p>▸ <strong>copy</strong>(<code>newSite</code>): <a href="UplcList.html"><code>UplcList</code></a></p>
@@ -314,46 +351,60 @@ Only used during evaluation.</p>
 </div>
 <h4 id="returns-14"><a class="header" href="#returns-14">Returns</a></h4>
 <p><a href="UplcList.html"><code>UplcList</code></a></p>
+<h4 id="implementation-of-14"><a class="header" href="#implementation-of-14">Implementation of</a></h4>
+<p>UplcList.copy</p>
 <div class="vspace"></div>
 <h3 id="isany"><a class="header" href="#isany">isAny</a></h3>
 <p>▸ <strong>isAny</strong>(): <code>boolean</code></p>
 <h4 id="returns-15"><a class="header" href="#returns-15">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-15"><a class="header" href="#implementation-of-15">Implementation of</a></h4>
+<p>UplcList.isAny</p>
 <h4 id="inherited-from-12"><a class="header" href="#inherited-from-12">Inherited from</a></h4>
-<p><a href="UplcValueImpl.html">UplcValueImpl</a>.<a href="UplcValueImpl.html#isany">isAny</a></p>
+<p>UplcValueImpl.isAny</p>
 <div class="vspace"></div>
 <h3 id="isdata"><a class="header" href="#isdata">isData</a></h3>
 <p>▸ <strong>isData</strong>(): <code>boolean</code></p>
 <h4 id="returns-16"><a class="header" href="#returns-16">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-16"><a class="header" href="#implementation-of-16">Implementation of</a></h4>
+<p>UplcList.isData</p>
 <h4 id="inherited-from-13"><a class="header" href="#inherited-from-13">Inherited from</a></h4>
-<p><a href="UplcValueImpl.html">UplcValueImpl</a>.<a href="UplcValueImpl.html#isdata">isData</a></p>
+<p>UplcValueImpl.isData</p>
 <div class="vspace"></div>
 <h3 id="isdatalist"><a class="header" href="#isdatalist">isDataList</a></h3>
 <p>▸ <strong>isDataList</strong>(): <code>boolean</code></p>
 <h4 id="returns-17"><a class="header" href="#returns-17">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-17"><a class="header" href="#implementation-of-17">Implementation of</a></h4>
+<p>UplcList.isDataList</p>
 <div class="vspace"></div>
 <h3 id="isdatamap"><a class="header" href="#isdatamap">isDataMap</a></h3>
 <p>▸ <strong>isDataMap</strong>(): <code>boolean</code></p>
 <h4 id="returns-18"><a class="header" href="#returns-18">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-18"><a class="header" href="#implementation-of-18">Implementation of</a></h4>
+<p>UplcList.isDataMap</p>
 <div class="vspace"></div>
 <h3 id="islist"><a class="header" href="#islist">isList</a></h3>
 <p>▸ <strong>isList</strong>(): <code>boolean</code></p>
 <p>Distinguishes a list from a map</p>
 <h4 id="returns-19"><a class="header" href="#returns-19">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-19"><a class="header" href="#implementation-of-19">Implementation of</a></h4>
+<p>UplcList.isList</p>
 <h4 id="inherited-from-14"><a class="header" href="#inherited-from-14">Inherited from</a></h4>
-<p><a href="UplcValueImpl.html">UplcValueImpl</a>.<a href="UplcValueImpl.html#islist">isList</a></p>
+<p>UplcValueImpl.isList</p>
 <div class="vspace"></div>
 <h3 id="ispair"><a class="header" href="#ispair">isPair</a></h3>
 <p>▸ <strong>isPair</strong>(): <code>boolean</code></p>
 <p>Distinguishes a pair from a mapItem</p>
 <h4 id="returns-20"><a class="header" href="#returns-20">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-20"><a class="header" href="#implementation-of-20">Implementation of</a></h4>
+<p>UplcList.isPair</p>
 <h4 id="inherited-from-15"><a class="header" href="#inherited-from-15">Inherited from</a></h4>
-<p><a href="UplcValueImpl.html">UplcValueImpl</a>.<a href="UplcValueImpl.html#ispair">isPair</a></p>
+<p>UplcValueImpl.isPair</p>
 <div class="vspace"></div>
 <h3 id="toflatvalue"><a class="header" href="#toflatvalue">toFlatValue</a></h3>
 <p>▸ <strong>toFlatValue</strong>(<code>bitWriter</code>): <code>void</code></p>
@@ -366,8 +417,10 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-21"><a class="header" href="#returns-21">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-21"><a class="header" href="#implementation-of-21">Implementation of</a></h4>
+<p>UplcList.toFlatValue</p>
 <h4 id="inherited-from-16"><a class="header" href="#inherited-from-16">Inherited from</a></h4>
-<p><a href="UplcValueImpl.html">UplcValueImpl</a>.<a href="UplcValueImpl.html#toflatvalue">toFlatValue</a></p>
+<p>UplcValueImpl.toFlatValue</p>
 <div class="vspace"></div>
 <h3 id="toflatvalueinternal"><a class="header" href="#toflatvalueinternal">toFlatValueInternal</a></h3>
 <p>▸ <strong>toFlatValueInternal</strong>(<code>bitWriter</code>): <code>void</code></p>
@@ -379,8 +432,10 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-22"><a class="header" href="#returns-22">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-22"><a class="header" href="#implementation-of-22">Implementation of</a></h4>
+<p>UplcList.toFlatValueInternal</p>
 <h4 id="inherited-from-17"><a class="header" href="#inherited-from-17">Inherited from</a></h4>
-<p><a href="UplcValueImpl.html">UplcValueImpl</a>.<a href="UplcValueImpl.html#toflatvalueinternal">toFlatValueInternal</a></p>
+<p>UplcValueImpl.toFlatValueInternal</p>
 <div class="vspace"></div>
 <h3 id="transfer"><a class="header" href="#transfer">transfer</a></h3>
 <p>▸ <strong>transfer</strong>(<code>other</code>): <code>any</code></p>
@@ -391,13 +446,17 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-23"><a class="header" href="#returns-23">Returns</a></h4>
 <p><code>any</code></p>
+<h4 id="implementation-of-23"><a class="header" href="#implementation-of-23">Implementation of</a></h4>
+<p>UplcList.transfer</p>
 <div class="vspace"></div>
 <h3 id="typebits"><a class="header" href="#typebits">typeBits</a></h3>
 <p>▸ <strong>typeBits</strong>(): <code>string</code></p>
 <h4 id="returns-24"><a class="header" href="#returns-24">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-24"><a class="header" href="#implementation-of-24">Implementation of</a></h4>
+<p>UplcList.typeBits</p>
 <h4 id="inherited-from-18"><a class="header" href="#inherited-from-18">Inherited from</a></h4>
-<p><a href="UplcValueImpl.html">UplcValueImpl</a>.<a href="UplcValueImpl.html#typebits">typeBits</a></p>
+<p>UplcValueImpl.typeBits</p>
 <div class="vspace"></div>
 <h3 id="new"><a class="header" href="#new">new</a></h3>
 <p>▸ <code>Static</code> <strong>new</strong>(<code>type</code>, <code>items</code>): <a href="UplcList.html"><code>UplcList</code></a></p>

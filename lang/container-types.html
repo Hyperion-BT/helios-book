@@ -182,6 +182,7 @@
 <li>List (linked list)</li>
 <li><code>Map</code> (association list of key-value pairs)</li>
 <li><code>Option</code> (equivalent to <code>Maybe</code> in Haskell)</li>
+<li>Tuple (fixed list with heterogenous item types)</li>
 </ul>
 <h2 id="list"><a class="header" href="#list">List</a></h2>
 <p>Helios has a builtin linked list type, similar to Haskell's <code>List</code>. The syntax for a list type is <code>[]ItemType</code> where <code>ItemType</code> is a parameter type that represents the type of the contained items. The <code>ItemType</code> can be any type except a function type.</p>
@@ -224,6 +225,28 @@ none_int = Option[Int]::None; ...
 <pre><code class="language-helios">Option[Int]::Some{my_int} = option; ...
 </code></pre>
 <p>More information about <code>Option</code> can be found <a href="./builtins/option.html">here</a>.</p>
+<h2 id="tuple"><a class="header" href="#tuple">Tuple</a></h2>
+<p>A tuple is a collection of two or more items which can have different types.</p>
+<pre><code class="language-helios">my_tuple = (1, &quot;hello&quot;, true)
+</code></pre>
+<p>Tuples are convenient when returning multiple values from a function:</p>
+<pre><code class="language-helios">func my_pair(a: Int) -&gt; (Int, Int) {
+    (a+1, a+2)
+}
+</code></pre>
+<p>Tuples can contain anything, including functions. The contents of a tuple can be accessed through destructuring, or via getters:</p>
+<pre><code class="language-helios">(my_number: Int, my_string: String, my_bool: Bool) = my_tuple;
+
+my_number_alt: Int = my_tuple.first;
+my_string_alt: String = my_tuple.second;
+my_bool_alt: Bool = my_tuple.third
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: tuples in Helios are limited to 5 entries. The getters are named <code>first</code>, <code>second</code>, <code>third</code>, <code>fourth</code> and <code>fifth</code>.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: although tuples can be used as fields in structs/enums this is not recommended as it can become unclear what the meaning is of the tuples items, and there is also a performance penalty to doing so.</p>
+</blockquote>
 <h2 id="nested-literal-constructors"><a class="header" href="#nested-literal-constructors">Nested literal constructors</a></h2>
 <p>If a literal List, <code>Map</code>, or <code>Option</code> contains other literal constructors, the types of those literal constructors can be omitted.</p>
 <pre><code class="language-helios">struct Pair {

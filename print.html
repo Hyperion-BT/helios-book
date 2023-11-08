@@ -490,6 +490,7 @@ my_bytes = b&quot;Hello world&quot;
 <li>List (linked list)</li>
 <li><code>Map</code> (association list of key-value pairs)</li>
 <li><code>Option</code> (equivalent to <code>Maybe</code> in Haskell)</li>
+<li>Tuple (fixed list with heterogenous item types)</li>
 </ul>
 <h2 id="list"><a class="header" href="#list">List</a></h2>
 <p>Helios has a builtin linked list type, similar to Haskell's <code>List</code>. The syntax for a list type is <code>[]ItemType</code> where <code>ItemType</code> is a parameter type that represents the type of the contained items. The <code>ItemType</code> can be any type except a function type.</p>
@@ -532,6 +533,28 @@ none_int = Option[Int]::None; ...
 <pre><code class="language-helios">Option[Int]::Some{my_int} = option; ...
 </code></pre>
 <p>More information about <code>Option</code> can be found <a href="lang/./builtins/option.html">here</a>.</p>
+<h2 id="tuple"><a class="header" href="#tuple">Tuple</a></h2>
+<p>A tuple is a collection of two or more items which can have different types.</p>
+<pre><code class="language-helios">my_tuple = (1, &quot;hello&quot;, true)
+</code></pre>
+<p>Tuples are convenient when returning multiple values from a function:</p>
+<pre><code class="language-helios">func my_pair(a: Int) -&gt; (Int, Int) {
+    (a+1, a+2)
+}
+</code></pre>
+<p>Tuples can contain anything, including functions. The contents of a tuple can be accessed through destructuring, or via getters:</p>
+<pre><code class="language-helios">(my_number: Int, my_string: String, my_bool: Bool) = my_tuple;
+
+my_number_alt: Int = my_tuple.first;
+my_string_alt: String = my_tuple.second;
+my_bool_alt: Bool = my_tuple.third
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: tuples in Helios are limited to 5 entries. The getters are named <code>first</code>, <code>second</code>, <code>third</code>, <code>fourth</code> and <code>fifth</code>.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: although tuples can be used as fields in structs/enums this is not recommended as it can become unclear what the meaning is of the tuples items, and there is also a performance penalty to doing so.</p>
+</blockquote>
 <h2 id="nested-literal-constructors"><a class="header" href="#nested-literal-constructors">Nested literal constructors</a></h2>
 <p>If a literal List, <code>Map</code>, or <code>Option</code> contains other literal constructors, the types of those literal constructors can be omitted.</p>
 <pre><code class="language-helios">struct Pair {
@@ -636,16 +659,20 @@ option = Option[Pair]::Some{{0, 0}}
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="lang/functions/../../lang/index.html">Helios language</a>/ <a href="lang/functions/../../lang/functions/index.html">Functions</a>/</p>
 <h1 id="multiple-return-values"><a class="header" href="#multiple-return-values">Multiple return values</a></h1>
-<p>A Helios function can return multiple values:</p>
+<p>A Helios function can return multiple values using <a href="lang/functions/../container-types.html#tuple">tuples</a>:</p>
 <pre><code class="language-helios">func swap(a: Int, b: Int) -&gt; (Int, Int) {
     (b, a)
 }
 </code></pre>
-<p>You can assign to multiple return values:</p>
+<p>You can assign to multiple return values using tuple destructuring:</p>
 <pre><code class="language-helios">(a: Int, b: Int) = swap(10, 20); ... // a==20 &amp;&amp; b==10
 </code></pre>
 <p>Some of the multiple return values can be discarded with an underscore (<code>_</code>):</p>
 <pre><code class="language-helios">(a: Int, _) = swap(10, 20); ...
+</code></pre>
+<h2 id="automatic-unpacking-of-tuples"><a class="header" href="#automatic-unpacking-of-tuples">Automatic unpacking of tuples</a></h2>
+<p>Tuples are automatically unpacked during a function call, in a way that matches the type signature of the function being called:</p>
+<pre><code class="language-helios">(a: Int, b: Int) = swap(swap(10, 20)); // a==10 &amp;&amp; b==20
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="lang/functions/../../lang/index.html">Helios language</a>/ <a href="lang/functions/../../lang/functions/index.html">Functions</a>/</p>
 <h1 id="void-functions"><a class="header" href="#void-functions">Void functions</a></h1>
@@ -703,7 +730,7 @@ map.sort((a_key: ByteArray, _, b_key: ByteArray, _) -&gt; Bool {
 
 sub(b: 1, a: 2) // == 1
 </code></pre>
-<p>Named arguments can't be mixed with positional arguments.</p>
+<p>A function call can't mix named arguments with positional arguments.</p>
 <p>Named arguments are mostly used when calling the <a href="lang/functions/../user-defined-types/methods/automatic-methods.html#copy"><code>copy()</code></a> method.</p>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="lang/functions/../../lang/index.html">Helios language</a>/ <a href="lang/functions/../../lang/functions/index.html">Functions</a>/</p>
 <h1 id="function-values"><a class="header" href="#function-values">Function values</a></h1>
@@ -1060,7 +1087,14 @@ pair.copy(second: 3) // == Pair{1, 3}
 <pre><code class="language-helios">my_instance.serialize() -&gt; ByteArray
 </code></pre>
 <blockquote>
-<p><strong>Note</strong>: when debugging you can inspect the output of <code>print(my_data.serialize().show())</code> using <a href="https://cbor.nemo157.com">this cbor tool</a>.</p>
+<p><strong>Note</strong>: when debugging you can inspect the output of <code>print(x.serialize().show())</code> using <a href="https://cbor.nemo157.com">this cbor tool</a>.</p>
+</blockquote>
+<h2 id="show"><a class="header" href="#show"><code>show</code></a></h2>
+<p>The <code>show</code> method returns a string representation of underlying instance, which is convenient when debugging.</p>
+<pre><code class="language-helios">my_instance.show() -&gt; String
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: usually you will use <code>print(x.show())</code> instead <code>print(x.serialize().show())</code> when debugging.</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="lang/user-defined-types/methods/../../../lang/index.html">Helios language</a>/ <a href="lang/user-defined-types/methods/../../../lang/user-defined-types/index.html">User-defined types</a>/ <a href="lang/user-defined-types/methods/../../../lang/user-defined-types/methods/index.html">Methods</a>/
 The following is a complete example of a struct with both associated functions and regular methods.</p>
@@ -1416,13 +1450,17 @@ RenamedSubModule::MyStruct{...}
 <h3 id="serialize-1"><a class="header" href="#serialize-1"><code>serialize</code></a></h3>
 <pre><code class="language-helios">address.serialize() -&gt; ByteArray
 </code></pre>
+<h3 id="show-1"><a class="header" href="#show-1"><code>show</code></a></h3>
+<p>Alias for <a href="lang/builtins/address.html#to_hex"><code>to_hex</code></a>.</p>
+<pre><code class="language-helios">address.show() -&gt; String
+</code></pre>
 <h3 id="to_bytes"><a class="header" href="#to_bytes"><code>to_bytes</code></a></h3>
 <p>Returns the raw address bytes (see <a href="https://cips.cardano.org/cips/cip19/">CIP 19</a>). <a href="lang/builtins/../../api/reference/namespaces/config.html#is_testnet"><code>IS_TESTNET</code></a> must be set to <code>false</code> for this to return a raw mainnet addresses.</p>
 <pre><code class="language-helios">address.to_bytes() -&gt; ByteArray
 </code></pre>
 <h3 id="to_hex"><a class="header" href="#to_hex"><code>to_hex</code></a></h3>
 <p>Encodes the raw address bytes as a hexadecimal <code>String</code> (see <a href="https://cips.cardano.org/cips/cip19/">CIP 19</a>). <a href="lang/builtins/../../api/reference/namespaces/config.html#is_testnet"><code>IS_TESTNET</code></a> must be set to <code>false</code> for this to return a raw mainnet addresses.</p>
-<pre><code>address.to_hex() -&gt; String
+<pre><code class="language-helios">address.to_hex() -&gt; String
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="lang/builtins/../../lang/index.html">Helios language</a>/ <a href="lang/builtins/../../lang/builtins/index.html">Builtins</a>/</p>
 <h1 id="any"><a class="header" href="#any"><code>Any</code></a></h1>
@@ -1464,6 +1502,10 @@ RenamedSubModule::MyStruct{...}
 <h2 id="methods-2"><a class="header" href="#methods-2">Methods</a></h2>
 <h3 id="serialize-2"><a class="header" href="#serialize-2"><code>serialize</code></a></h3>
 <pre><code class="language-helios">asset_class.serialize() -&gt; ByteArray
+</code></pre>
+<h3 id="show-2"><a class="header" href="#show-2"><code>show</code></a></h3>
+<p>Returns the hexadecimal representation of the <code>MintingPolicyHash</code> and the token name, separated by a period (<code>.</code>).</p>
+<pre><code class="language-helios">asset_class.show() -&gt; String
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="lang/builtins/../../lang/index.html">Helios language</a>/ <a href="lang/builtins/../../lang/builtins/index.html">Builtins</a>/</p>
 <h1 id="bool-1"><a class="header" href="#bool-1"><code>Bool</code></a></h1>
@@ -1509,7 +1551,7 @@ bool_false = false; ...
 <h3 id="serialize-3"><a class="header" href="#serialize-3"><code>serialize</code></a></h3>
 <pre><code class="language-helios">bool.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show"><a class="header" href="#show"><code>show</code></a></h3>
+<h3 id="show-3"><a class="header" href="#show-3"><code>show</code></a></h3>
 <p><code>false</code> is turned into <code>&quot;false&quot;</code>, and <code>true</code> is turned into <code>&quot;true&quot;</code>.</p>
 <pre><code class="language-helios">bool.show() -&gt; String
 </code></pre>
@@ -1597,7 +1639,7 @@ bool_false = false; ...
 <p>Calculates the sha3-256 hash of a <code>ByteArray</code>. The result is 32 bytes long.</p>
 <pre><code class="language-helios">byte_array.sha3() -&gt; ByteArray
 </code></pre>
-<h3 id="show-1"><a class="header" href="#show-1"><code>show</code></a></h3>
+<h3 id="show-4"><a class="header" href="#show-4"><code>show</code></a></h3>
 <p>Converts a <code>ByteArray</code> into its hexadecimal representation.</p>
 <pre><code class="language-helios">byte_array.show() -&gt; String
 </code></pre>
@@ -1701,7 +1743,7 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="serialize-7"><a class="header" href="#serialize-7"><code>serialize</code></a></h3>
 <pre><code class="language-helios">datum_hash.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-2"><a class="header" href="#show-2"><code>show</code></a></h3>
+<h3 id="show-5"><a class="header" href="#show-5"><code>show</code></a></h3>
 <p>Hexadecimal representation of a <code>DatumHash</code>.</p>
 <pre><code class="language-helios">datum_hash.show() -&gt; String
 </code></pre>
@@ -1858,6 +1900,10 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="serialize-9"><a class="header" href="#serialize-9"><code>serialize</code></a></h3>
 <pre><code class="language-helios">duration.serialize() -&gt; ByteArray
 </code></pre>
+<h3 id="show-6"><a class="header" href="#show-6"><code>show</code></a></h3>
+<p>Returns the string representation of the <code>Duration</code> in milliseconds.</p>
+<pre><code class="language-helios">duration.show() -&gt; String
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="lang/builtins/../../lang/index.html">Helios language</a>/ <a href="lang/builtins/../../lang/builtins/index.html">Builtins</a>/</p>
 <h1 id="int-1"><a class="header" href="#int-1"><code>Int</code></a></h1>
 <p>This is an unbounded integer (like Haskell's <code>Integer</code> type).</p>
@@ -1959,7 +2005,7 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="serialize-10"><a class="header" href="#serialize-10"><code>serialize</code></a></h3>
 <pre><code class="language-helios">int.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-3"><a class="header" href="#show-3"><code>show</code></a></h3>
+<h3 id="show-7"><a class="header" href="#show-7"><code>show</code></a></h3>
 <p>Returns decimal representation of integer.</p>
 <pre><code class="language-helios">int.show() -&gt; String
 </code></pre>
@@ -2155,6 +2201,10 @@ bytearray_list.join(separator: ByteArray = #) -&gt; ByteArray
 <p>Creates a new list, replacing an item at an <code>index</code>. Throws an error if the <code>index</code> is out of range.</p>
 <pre><code class="language-helios">list.set(index: Int, item: ItemType) -&gt; []ItemType
 </code></pre>
+<h3 id="show-8"><a class="header" href="#show-8"><code>show</code></a></h3>
+<p>Returns a string representation of the list and its content. This can be useful for debugging.</p>
+<pre><code class="language-helios">list.show() -&gt; String
+</code></pre>
 <h3 id="sort"><a class="header" href="#sort"><code>sort</code></a></h3>
 <p>Sorts the list using insertion sort.</p>
 <pre><code class="language-helios">list.sort((a: ItemType, b: ItemType) -&gt; Bool) -&gt; []ItemType
@@ -2315,6 +2365,10 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <p>Sets the first entry with given key to a new value. This entry is appended to end of the <code>Map</code> if the key isn't found.</p>
 <pre><code class="language-helios">map.set(key: KeyType, value: ValueType) -&gt; Map[KeyType]ValueType
 </code></pre>
+<h3 id="show-9"><a class="header" href="#show-9"><code>show</code></a></h3>
+<p>Returns a string representation of the map and its content. This can be useful for debugging.</p>
+<pre><code class="language-helios">map.show() -&gt; String
+</code></pre>
 <h3 id="sort-1"><a class="header" href="#sort-1"><code>sort</code></a></h3>
 <p>Sorts the map using insertion sort. The comparison function should return <code>true</code> if <code>a</code> and <code>b</code> are in the correct order.</p>
 <pre><code class="language-helios">map.sort(
@@ -2378,7 +2432,7 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id="serialize-13"><a class="header" href="#serialize-13"><code>serialize</code></a></h3>
 <pre><code class="language-helios">mph.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-4"><a class="header" href="#show-4"><code>show</code></a></h3>
+<h3 id="show-10"><a class="header" href="#show-10"><code>show</code></a></h3>
 <p>Hexadecimal representation of <code>MintingPolicyHash</code>.</p>
 <pre><code class="language-helios">mph.show() -&gt; String
 </code></pre>
@@ -2423,6 +2477,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="serialize-14"><a class="header" href="#serialize-14"><code>serialize</code></a></h3>
 <pre><code class="language-helios">option.serialize() -&gt; ByteArray
+</code></pre>
+<h3 id="show-11"><a class="header" href="#show-11"><code>show</code></a></h3>
+<p>Returns a string representation of the option, and, in case of <code>Some</code>, its content. This can be useful for debugging.</p>
+<pre><code class="language-helios">option.show() -&gt; String
 </code></pre>
 <h3 id="unwrap"><a class="header" href="#unwrap"><code>unwrap</code></a></h3>
 <p>Returns the value wrapped by <code>Some</code>. Throws an error if <code>None</code>.</p>
@@ -2508,7 +2566,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="serialize-16"><a class="header" href="#serialize-16"><code>serialize</code></a></h3>
 <pre><code class="language-helios">pub_key.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-5"><a class="header" href="#show-5"><code>show</code></a></h3>
+<h3 id="show-12"><a class="header" href="#show-12"><code>show</code></a></h3>
 <p>Hexadecimal representation of a <code>PubKey</code>.</p>
 <pre><code class="language-helios">pub_key.show() -&gt; String
 </code></pre>
@@ -2554,7 +2612,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="serialize-17"><a class="header" href="#serialize-17"><code>serialize</code></a></h3>
 <pre><code class="language-helios">pkh.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-6"><a class="header" href="#show-6"><code>show</code></a></h3>
+<h3 id="show-13"><a class="header" href="#show-13"><code>show</code></a></h3>
 <p>Hexadecimal representation of a <code>PubKeyHash</code>.</p>
 <pre><code class="language-helios">pkh.show() -&gt; String
 </code></pre>
@@ -2629,7 +2687,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="serialize-18"><a class="header" href="#serialize-18"><code>serialize</code></a></h3>
 <pre><code class="language-helios">real.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-7"><a class="header" href="#show-7"><code>show</code></a></h3>
+<h3 id="show-14"><a class="header" href="#show-14"><code>show</code></a></h3>
 <pre><code class="language-helios">real.show() -&gt; String
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="lang/builtins/../../lang/index.html">Helios language</a>/ <a href="lang/builtins/../../lang/builtins/index.html">Builtins</a>/</p>
@@ -2952,7 +3010,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="serialize-25"><a class="header" href="#serialize-25"><code>serialize</code></a></h3>
 <pre><code class="language-helios">staking_validator_hash.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-8"><a class="header" href="#show-8"><code>show</code></a></h3>
+<h3 id="show-15"><a class="header" href="#show-15"><code>show</code></a></h3>
 <p>Hexadecimal representation of the <code>StakingValidatorHash</code>.</p>
 <pre><code class="language-helios">staking_validator_hash.show() -&gt; String
 </code></pre>
@@ -2964,6 +3022,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h2 id="associated-functions-22"><a class="header" href="#associated-functions-22">Associated functions</a></h2>
 <h3 id="from_data-25"><a class="header" href="#from_data-25"><code>from_data</code></a></h3>
 <pre><code class="language-helios">String::from_data(data: Data) -&gt; String
+</code></pre>
+<h3 id="is_valid_utf8"><a class="header" href="#is_valid_utf8"><code>is_valid_utf8</code></a></h3>
+<p>Method that checks if a <code>ByteArray</code> contains a valid utf-8 encoded string.</p>
+<pre><code class="language-helios">String::is_valid_utf8(bytes: ByteArray) -&gt; Bool
 </code></pre>
 <h2 id="operators-26"><a class="header" href="#operators-26">Operators</a></h2>
 <h3 id="-99"><a class="header" href="#-99"><code>==</code></a></h3>
@@ -2977,20 +3039,24 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">String + String -&gt; String
 </code></pre>
 <h2 id="methods-26"><a class="header" href="#methods-26">Methods</a></h2>
-<h3 id="serialize-26"><a class="header" href="#serialize-26"><code>serialize</code></a></h3>
-<pre><code class="language-helios">string.serialize() -&gt; ByteArray
-</code></pre>
 <h3 id="encode_utf8"><a class="header" href="#encode_utf8"><code>encode_utf8</code></a></h3>
 <p>Turns a <code>String</code> into a sequence of utf-8 bytes.</p>
 <pre><code class="language-helios">string.encode_utf() -&gt; ByteArray
 </code></pre>
-<h3 id="starts_with-1"><a class="header" href="#starts_with-1"><code>starts_with</code></a></h3>
-<p>Checks if a <code>String</code> starts with a given prefix.</p>
-<pre><code class="language-helios">string.starts_with(prefix: String) -&gt; Bool
-</code></pre>
 <h3 id="ends_with-1"><a class="header" href="#ends_with-1"><code>ends_with</code></a></h3>
 <p>Checks if a <code>String</code> ends with a given suffix.</p>
 <pre><code class="language-helios">string.ends_with(suffix: String) -&gt; Bool
+</code></pre>
+<h3 id="serialize-26"><a class="header" href="#serialize-26"><code>serialize</code></a></h3>
+<pre><code class="language-helios">string.serialize() -&gt; ByteArray
+</code></pre>
+<h3 id="show-16"><a class="header" href="#show-16"><code>show</code></a></h3>
+<p>Returns the string wrapped with quotes. This is useful when debugging.</p>
+<pre><code class="language-helios">string.show() -&gt; String
+</code></pre>
+<h3 id="starts_with-1"><a class="header" href="#starts_with-1"><code>starts_with</code></a></h3>
+<p>Checks if a <code>String</code> starts with a given prefix.</p>
+<pre><code class="language-helios">string.starts_with(prefix: String) -&gt; Bool
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="lang/builtins/../../lang/index.html">Helios language</a>/ <a href="lang/builtins/../../lang/builtins/index.html">Builtins</a>/</p>
 <h1 id="time"><a class="header" href="#time"><code>Time</code></a></h1>
@@ -3035,7 +3101,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="serialize-27"><a class="header" href="#serialize-27"><code>serialize</code></a></h3>
 <pre><code class="language-helios">time.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-9"><a class="header" href="#show-9"><code>show</code></a></h3>
+<h3 id="show-17"><a class="header" href="#show-17"><code>show</code></a></h3>
 <p>Decimal representation of the underlying raw <code>Int</code>.</p>
 <pre><code class="language-helios">time.show() -&gt; String
 </code></pre>
@@ -3083,9 +3149,6 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <pre><code class="language-helios">TimeRange != TimeRange -&gt; Bool
 </code></pre>
 <h2 id="methods-28"><a class="header" href="#methods-28">Methods</a></h2>
-<h3 id="serialize-28"><a class="header" href="#serialize-28"><code>serialize</code></a></h3>
-<pre><code class="language-helios">time_range.serialize() -&gt; ByteArray
-</code></pre>
 <h3 id="contains"><a class="header" href="#contains"><code>contains</code></a></h3>
 <p>Returns <code>true</code> if a <code>TimeRange</code> contains the given time.</p>
 <pre><code class="language-helios">time_range.contains(time: Time) -&gt; Bool
@@ -3098,7 +3161,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <p>Returns <code>true</code> if the start of a <code>TimeRange</code> is after the given time. Always returns <code>false</code> if the start of the <code>TimeRange</code> is negative infinity.</p>
 <pre><code class="language-helios">time_range.is_after(time: Time) -&gt; Bool
 </code></pre>
-<h3 id="show-10"><a class="header" href="#show-10"><code>show</code></a></h3>
+<h3 id="serialize-28"><a class="header" href="#serialize-28"><code>serialize</code></a></h3>
+<pre><code class="language-helios">time_range.serialize() -&gt; ByteArray
+</code></pre>
+<h3 id="show-18"><a class="header" href="#show-18"><code>show</code></a></h3>
 <pre><code class="language-helios">time_range.show() -&gt; String
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="lang/builtins/../../lang/index.html">Helios language</a>/ <a href="lang/builtins/../../lang/builtins/index.html">Builtins</a>/</p>
@@ -3291,7 +3357,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="serialize-30"><a class="header" href="#serialize-30"><code>serialize</code></a></h3>
 <pre><code class="language-helios">tx_id.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-11"><a class="header" href="#show-11"><code>show</code></a></h3>
+<h3 id="show-19"><a class="header" href="#show-19"><code>show</code></a></h3>
 <p>Hexadecimal representation of a <code>TxId</code>.</p>
 <pre><code class="language-helios">tx_id.show() -&gt; String
 </code></pre>
@@ -3468,7 +3534,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="serialize-34"><a class="header" href="#serialize-34"><code>serialize</code></a></h3>
 <pre><code class="language-helios">validator_hash.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-12"><a class="header" href="#show-12"><code>show</code></a></h3>
+<h3 id="show-20"><a class="header" href="#show-20"><code>show</code></a></h3>
 <p>Hexadecimal representation of the <code>ValidatorHash</code>.</p>
 <pre><code class="language-helios">validator_hash.show() -&gt; String
 </code></pre>
@@ -3596,7 +3662,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="serialize-35"><a class="header" href="#serialize-35"><code>serialize</code></a></h3>
 <pre><code class="language-helios">value.serialize() -&gt; ByteArray
 </code></pre>
-<h3 id="show-13"><a class="header" href="#show-13"><code>show</code></a></h3>
+<h3 id="show-21"><a class="header" href="#show-21"><code>show</code></a></h3>
 <p>Returns a formatted <a href="lang/builtins/./string.html"><code>String</code></a> showing all the assets contained in a <code>Value</code>.</p>
 <pre><code class="language-helios">value.show() -&gt; String
 </code></pre>
@@ -4143,7 +4209,7 @@ async function buyTx(contract) {
 <h3 id="interfaces"><a class="header" href="#interfaces">Interfaces</a></h3>
 <ul class="toc interfaces"><li><a href="api/reference/./interfaces/Network.html">Network</a></li><li><a href="api/reference/./interfaces/PrivateKey.html">PrivateKey</a></li><li><a href="api/reference/./interfaces/UplcValue.html">UplcValue</a></li><li><a href="api/reference/./interfaces/Wallet.html">Wallet</a></li></ul>
 <h3 id="types"><a class="header" href="#types">Types</a></h3>
-<ul class="toc types"><li><a href="api/reference/./types.html#addressprops">AddressProps</a></li><li><a href="api/reference/./types.html#assetclassprops">AssetClassProps</a></li><li><a href="api/reference/./types.html#assetsprops">AssetsProps</a></li><li><a href="api/reference/./types.html#bytearrayprops">ByteArrayProps</a></li><li><a href="api/reference/./types.html#cip30handle">Cip30Handle</a></li><li><a href="api/reference/./types.html#coinselectionalgorithm">CoinSelectionAlgorithm</a></li><li><a href="api/reference/./types.html#cost">Cost</a></li><li><a href="api/reference/./types.html#curvepoint">CurvePoint</a></li><li><a href="api/reference/./types.html#datumhashprops">DatumHashProps</a></li><li><a href="api/reference/./types.html#decoder">Decoder</a></li><li><a href="api/reference/./types.html#hintprops">HIntProps</a></li><li><a href="api/reference/./types.html#hashprops">HashProps</a></li><li><a href="api/reference/./types.html#liveslotgetter">LiveSlotGetter</a></li><li><a href="api/reference/./types.html#metadata">Metadata</a></li><li><a href="api/reference/./types.html#mintingpolicyhashprops">MintingPolicyHashProps</a></li><li><a href="api/reference/./types.html#networksliceutxos">NetworkSliceUTxOs</a></li><li><a href="api/reference/./types.html#numbergenerator">NumberGenerator</a></li><li><a href="api/reference/./types.html#profile">Profile</a></li><li><a href="api/reference/./types.html#programconfig">ProgramConfig</a></li><li><a href="api/reference/./types.html#programproperties">ProgramProperties</a></li><li><a href="api/reference/./types.html#propertytest">PropertyTest</a></li><li><a href="api/reference/./types.html#pubkeyhashprops">PubKeyHashProps</a></li><li><a href="api/reference/./types.html#pubkeyprops">PubKeyProps</a></li><li><a href="api/reference/./types.html#scriptpurpose">ScriptPurpose</a></li><li><a href="api/reference/./types.html#stakingvalidatorhashprops">StakingValidatorHashProps</a></li><li><a href="api/reference/./types.html#transferuplcast">TransferUplcAst</a></li><li><a href="api/reference/./types.html#transferableuplcprogram">TransferableUplcProgram</a></li><li><a href="api/reference/./types.html#txidprops">TxIdProps</a></li><li><a href="api/reference/./types.html#txoutputidprops">TxOutputIdProps</a></li><li><a href="api/reference/./types.html#uplcrtecallbacks">UplcRTECallbacks</a></li><li><a href="api/reference/./types.html#uplcrawstack">UplcRawStack</a></li><li><a href="api/reference/./types.html#usertypes">UserTypes</a></li><li><a href="api/reference/./types.html#validatorhashprops">ValidatorHashProps</a></li><li><a href="api/reference/./types.html#valuegenerator">ValueGenerator</a></li><li><a href="api/reference/./types.html#valueprops">ValueProps</a></li></ul>
+<ul class="toc types"><li><a href="api/reference/./types.html#addressprops">AddressProps</a></li><li><a href="api/reference/./types.html#assetclassprops">AssetClassProps</a></li><li><a href="api/reference/./types.html#assetsprops">AssetsProps</a></li><li><a href="api/reference/./types.html#bytearrayprops">ByteArrayProps</a></li><li><a href="api/reference/./types.html#cip30handle">Cip30Handle</a></li><li><a href="api/reference/./types.html#coinselectionalgorithm">CoinSelectionAlgorithm</a></li><li><a href="api/reference/./types.html#cost">Cost</a></li><li><a href="api/reference/./types.html#curvepoint">CurvePoint</a></li><li><a href="api/reference/./types.html#datumhashprops">DatumHashProps</a></li><li><a href="api/reference/./types.html#decoder">Decoder</a></li><li><a href="api/reference/./types.html#hintprops">HIntProps</a></li><li><a href="api/reference/./types.html#hashprops">HashProps</a></li><li><a href="api/reference/./types.html#liveslotgetter">LiveSlotGetter</a></li><li><a href="api/reference/./types.html#metadata">Metadata</a></li><li><a href="api/reference/./types.html#mintingpolicyhashprops">MintingPolicyHashProps</a></li><li><a href="api/reference/./types.html#networksliceutxos">NetworkSliceUTxOs</a></li><li><a href="api/reference/./types.html#numbergenerator">NumberGenerator</a></li><li><a href="api/reference/./types.html#profile">Profile</a></li><li><a href="api/reference/./types.html#programconfig">ProgramConfig</a></li><li><a href="api/reference/./types.html#programproperties">ProgramProperties</a></li><li><a href="api/reference/./types.html#propertytest">PropertyTest</a></li><li><a href="api/reference/./types.html#pubkeyhashprops">PubKeyHashProps</a></li><li><a href="api/reference/./types.html#pubkeyprops">PubKeyProps</a></li><li><a href="api/reference/./types.html#scriptpurpose">ScriptPurpose</a></li><li><a href="api/reference/./types.html#stakingvalidatorhashprops">StakingValidatorHashProps</a></li><li><a href="api/reference/./types.html#transferuplcast">TransferUplcAst</a></li><li><a href="api/reference/./types.html#transferableuplcprogram">TransferableUplcProgram</a></li><li><a href="api/reference/./types.html#txidprops">TxIdProps</a></li><li><a href="api/reference/./types.html#txoutputidprops">TxOutputIdProps</a></li><li><a href="api/reference/./types.html#uint64fast">UInt64Fast</a></li><li><a href="api/reference/./types.html#uplcrtecallbacks">UplcRTECallbacks</a></li><li><a href="api/reference/./types.html#uplcrawstack">UplcRawStack</a></li><li><a href="api/reference/./types.html#usertypes">UserTypes</a></li><li><a href="api/reference/./types.html#validatorhashprops">ValidatorHashProps</a></li><li><a href="api/reference/./types.html#valuegenerator">ValueGenerator</a></li><li><a href="api/reference/./types.html#valueprops">ValueProps</a></li></ul>
 <h3 id="variables-1"><a class="header" href="#variables-1">Variables</a></h3>
 <ul class="toc variables"><li><a href="api/reference/./variables.html#bip32_harden">BIP32_HARDEN</a></li><li><a href="api/reference/./variables.html#bip39_dict_en">BIP39_DICT_EN</a></li><li><a href="api/reference/./variables.html#default_uplc_rte_callbacks">DEFAULT_UPLC_RTE_CALLBACKS</a></li><li><a href="api/reference/./variables.html#version">VERSION</a></li></ul>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/classes/../../../api/index.html">Helios API</a>/ <a href="api/reference/classes/../../../api/reference/index.html">API Reference</a>/</p>
@@ -6949,7 +7015,6 @@ but outside helios scripts there isn't much sense to keep using the name 'Output
 <div class="vspace"></div>
 <h3 id="resolveusingutxo-1"><a class="header" href="#resolveusingutxo-1">resolveUsingUtxo</a></h3>
 <p>▸ <code>Static</code> <strong>resolveUsingUtxo</strong>(<code>refUtxo</code>): <code>Promise</code>&lt;<a href="api/reference/classes/KoiosV0.html"><code>KoiosV0</code></a>&gt;</p>
-<p>Throws an error if a Blockfrost project_id is missing for that specific network.</p>
 <h4 id="parameters-135"><a class="header" href="#parameters-135">Parameters</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
 <tr><td style="text-align: left"><code>refUtxo</code></td><td style="text-align: left"><a href="api/reference/classes/TxInput.html"><code>TxInput</code></a></td></tr>
@@ -11480,12 +11545,17 @@ Only works after the tx has been finalized.</p>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/classes/../../../api/index.html">Helios API</a>/ <a href="api/reference/classes/../../../api/reference/index.html">API Reference</a>/ <a href="api/reference/classes/../../../api/reference/classes/index.html">Classes</a>/</p>
 <h1 id="uplcbool"><a class="header" href="#uplcbool">UplcBool</a></h1>
 <p>JS/TS equivalent of the Helios language <code>Bool</code> type.</p>
+<p><strong><code>Implements</code></strong></p>
 <h2 id="hierarchy-38"><a class="header" href="#hierarchy-38">Hierarchy</a></h2>
 <ul>
 <li>
 <p><a href="api/reference/classes/UplcValueImpl.html"><code>UplcValueImpl</code></a></p>
 <p>↳ <strong><code>UplcBool</code></strong></p>
 </li>
+</ul>
+<h2 id="implements-11"><a class="header" href="#implements-11">Implements</a></h2>
+<ul>
+<li><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href='javascript:(() => {
         document.getElementById("table-of-contents").setAttribute("expanded", "");
@@ -11514,6 +11584,8 @@ Only works after the tx has been finalized.</p>
 <p>• <code>get</code> <strong>bool</strong>(): <code>boolean</code></p>
 <h4 id="returns-635"><a class="header" href="#returns-635">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-47"><a class="header" href="#implementation-of-47">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bool">bool</a></p>
 <h4 id="inherited-from-225"><a class="header" href="#inherited-from-225">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
@@ -11521,6 +11593,8 @@ Only works after the tx has been finalized.</p>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-636"><a class="header" href="#returns-636">Returns</a></h4>
 <p><code>number</code>[]</p>
+<h4 id="implementation-of-48"><a class="header" href="#implementation-of-48">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bytes">bytes</a></p>
 <h4 id="inherited-from-226"><a class="header" href="#inherited-from-226">Inherited from</a></h4>
 <p>UplcValueImpl.bytes</p>
 <div class="vspace"></div>
@@ -11528,6 +11602,8 @@ Only works after the tx has been finalized.</p>
 <p>• <code>get</code> <strong>data</strong>(): <a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
 <h4 id="returns-637"><a class="header" href="#returns-637">Returns</a></h4>
 <p><a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
+<h4 id="implementation-of-49"><a class="header" href="#implementation-of-49">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#data">data</a></p>
 <h4 id="inherited-from-227"><a class="header" href="#inherited-from-227">Inherited from</a></h4>
 <p>UplcValueImpl.data</p>
 <div class="vspace"></div>
@@ -11535,6 +11611,8 @@ Only works after the tx has been finalized.</p>
 <p>• <code>get</code> <strong>first</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-638"><a class="header" href="#returns-638">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-50"><a class="header" href="#implementation-of-50">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#first">first</a></p>
 <h4 id="inherited-from-228"><a class="header" href="#inherited-from-228">Inherited from</a></h4>
 <p>UplcValueImpl.first</p>
 <div class="vspace"></div>
@@ -11543,11 +11621,15 @@ Only works after the tx has been finalized.</p>
 <p>4 for type, 1 for value</p>
 <h4 id="returns-639"><a class="header" href="#returns-639">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-51"><a class="header" href="#implementation-of-51">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#flatsize">flatSize</a></p>
 <div class="vspace"></div>
 <h3 id="int-3"><a class="header" href="#int-3">int</a></h3>
 <p>• <code>get</code> <strong>int</strong>(): <code>bigint</code></p>
 <h4 id="returns-640"><a class="header" href="#returns-640">Returns</a></h4>
 <p><code>bigint</code></p>
+<h4 id="implementation-of-52"><a class="header" href="#implementation-of-52">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#int">int</a></p>
 <h4 id="inherited-from-229"><a class="header" href="#inherited-from-229">Inherited from</a></h4>
 <p>UplcValueImpl.int</p>
 <div class="vspace"></div>
@@ -11555,6 +11637,8 @@ Only works after the tx has been finalized.</p>
 <p>• <code>get</code> <strong>itemType</strong>(): <a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
 <h4 id="returns-641"><a class="header" href="#returns-641">Returns</a></h4>
 <p><a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
+<h4 id="implementation-of-53"><a class="header" href="#implementation-of-53">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#itemtype">itemType</a></p>
 <h4 id="inherited-from-230"><a class="header" href="#inherited-from-230">Inherited from</a></h4>
 <p>UplcValueImpl.itemType</p>
 <div class="vspace"></div>
@@ -11562,6 +11646,8 @@ Only works after the tx has been finalized.</p>
 <p>• <code>get</code> <strong>length</strong>(): <code>number</code></p>
 <h4 id="returns-642"><a class="header" href="#returns-642">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-54"><a class="header" href="#implementation-of-54">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#length">length</a></p>
 <h4 id="inherited-from-231"><a class="header" href="#inherited-from-231">Inherited from</a></h4>
 <p>UplcValueImpl.length</p>
 <div class="vspace"></div>
@@ -11569,6 +11655,8 @@ Only works after the tx has been finalized.</p>
 <p>• <code>get</code> <strong>list</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
 <h4 id="returns-643"><a class="header" href="#returns-643">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
+<h4 id="implementation-of-55"><a class="header" href="#implementation-of-55">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#list">list</a></p>
 <h4 id="inherited-from-232"><a class="header" href="#inherited-from-232">Inherited from</a></h4>
 <p>UplcValueImpl.list</p>
 <div class="vspace"></div>
@@ -11576,11 +11664,15 @@ Only works after the tx has been finalized.</p>
 <p>• <code>get</code> <strong>memSize</strong>(): <code>number</code></p>
 <h4 id="returns-644"><a class="header" href="#returns-644">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-56"><a class="header" href="#implementation-of-56">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#memsize">memSize</a></p>
 <div class="vspace"></div>
 <h3 id="second-1"><a class="header" href="#second-1">second</a></h3>
 <p>• <code>get</code> <strong>second</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-645"><a class="header" href="#returns-645">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-57"><a class="header" href="#implementation-of-57">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#second">second</a></p>
 <h4 id="inherited-from-233"><a class="header" href="#inherited-from-233">Inherited from</a></h4>
 <p>UplcValueImpl.second</p>
 <div class="vspace"></div>
@@ -11588,6 +11680,8 @@ Only works after the tx has been finalized.</p>
 <p>• <code>get</code> <strong>site</strong>(): <a href="api/reference/classes/Site.html"><code>Site</code></a></p>
 <h4 id="returns-646"><a class="header" href="#returns-646">Returns</a></h4>
 <p><a href="api/reference/classes/Site.html"><code>Site</code></a></p>
+<h4 id="implementation-of-58"><a class="header" href="#implementation-of-58">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#site">site</a></p>
 <h4 id="inherited-from-234"><a class="header" href="#inherited-from-234">Inherited from</a></h4>
 <p>UplcValueImpl.site</p>
 <div class="vspace"></div>
@@ -11595,6 +11689,8 @@ Only works after the tx has been finalized.</p>
 <p>• <code>get</code> <strong>string</strong>(): <code>string</code></p>
 <h4 id="returns-647"><a class="header" href="#returns-647">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-59"><a class="header" href="#implementation-of-59">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#string">string</a></p>
 <h4 id="inherited-from-235"><a class="header" href="#inherited-from-235">Inherited from</a></h4>
 <p>UplcValueImpl.string</p>
 <h2 id="methods-91"><a class="header" href="#methods-91">Methods</a></h2>
@@ -11602,6 +11698,8 @@ Only works after the tx has been finalized.</p>
 <p>▸ <strong>assertUnit</strong>(): <a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
 <h4 id="returns-648"><a class="header" href="#returns-648">Returns</a></h4>
 <p><a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
+<h4 id="implementation-of-60"><a class="header" href="#implementation-of-60">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#assertunit">assertUnit</a></p>
 <h4 id="inherited-from-236"><a class="header" href="#inherited-from-236">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#assertunit">assertUnit</a></p>
 <div class="vspace"></div>
@@ -11614,11 +11712,15 @@ Only works after the tx has been finalized.</p>
 </div>
 <h4 id="returns-649"><a class="header" href="#returns-649">Returns</a></h4>
 <p><a href="api/reference/classes/UplcBool.html"><code>UplcBool</code></a></p>
+<h4 id="implementation-of-61"><a class="header" href="#implementation-of-61">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#copy">copy</a></p>
 <div class="vspace"></div>
 <h3 id="isany"><a class="header" href="#isany">isAny</a></h3>
 <p>▸ <strong>isAny</strong>(): <code>boolean</code></p>
 <h4 id="returns-650"><a class="header" href="#returns-650">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-62"><a class="header" href="#implementation-of-62">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isany">isAny</a></p>
 <h4 id="inherited-from-237"><a class="header" href="#inherited-from-237">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isany">isAny</a></p>
 <div class="vspace"></div>
@@ -11626,6 +11728,8 @@ Only works after the tx has been finalized.</p>
 <p>▸ <strong>isData</strong>(): <code>boolean</code></p>
 <h4 id="returns-651"><a class="header" href="#returns-651">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-63"><a class="header" href="#implementation-of-63">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isdata">isData</a></p>
 <h4 id="inherited-from-238"><a class="header" href="#inherited-from-238">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isdata">isData</a></p>
 <div class="vspace"></div>
@@ -11634,6 +11738,8 @@ Only works after the tx has been finalized.</p>
 <p>Distinguishes a list from a map</p>
 <h4 id="returns-652"><a class="header" href="#returns-652">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-64"><a class="header" href="#implementation-of-64">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#islist">isList</a></p>
 <h4 id="inherited-from-239"><a class="header" href="#inherited-from-239">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#islist">isList</a></p>
 <div class="vspace"></div>
@@ -11642,6 +11748,8 @@ Only works after the tx has been finalized.</p>
 <p>Distinguishes a pair from a mapItem</p>
 <h4 id="returns-653"><a class="header" href="#returns-653">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-65"><a class="header" href="#implementation-of-65">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#ispair">isPair</a></p>
 <h4 id="inherited-from-240"><a class="header" href="#inherited-from-240">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#ispair">isPair</a></p>
 <div class="vspace"></div>
@@ -11656,6 +11764,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-654"><a class="header" href="#returns-654">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-66"><a class="header" href="#implementation-of-66">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalue">toFlatValue</a></p>
 <h4 id="inherited-from-241"><a class="header" href="#inherited-from-241">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalue">toFlatValue</a></p>
 <div class="vspace"></div>
@@ -11669,6 +11779,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-655"><a class="header" href="#returns-655">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-67"><a class="header" href="#implementation-of-67">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <h4 id="inherited-from-242"><a class="header" href="#inherited-from-242">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <div class="vspace"></div>
@@ -11681,11 +11793,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-656"><a class="header" href="#returns-656">Returns</a></h4>
 <p><code>any</code></p>
+<h4 id="implementation-of-68"><a class="header" href="#implementation-of-68">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#transfer">transfer</a></p>
 <div class="vspace"></div>
 <h3 id="typebits"><a class="header" href="#typebits">typeBits</a></h3>
 <p>▸ <strong>typeBits</strong>(): <code>string</code></p>
 <h4 id="returns-657"><a class="header" href="#returns-657">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-69"><a class="header" href="#implementation-of-69">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#typebits">typeBits</a></p>
 <h4 id="inherited-from-243"><a class="header" href="#inherited-from-243">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#typebits">typeBits</a></p>
 <div class="vspace"></div>
@@ -11790,12 +11906,17 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/classes/../../../api/index.html">Helios API</a>/ <a href="api/reference/classes/../../../api/reference/index.html">API Reference</a>/ <a href="api/reference/classes/../../../api/reference/classes/index.html">Classes</a>/</p>
 <h1 id="uplcbytearray"><a class="header" href="#uplcbytearray">UplcByteArray</a></h1>
 <p>Primitive equivalent of <code>ByteArrayData</code>.</p>
+<p><strong><code>Implements</code></strong></p>
 <h2 id="hierarchy-40"><a class="header" href="#hierarchy-40">Hierarchy</a></h2>
 <ul>
 <li>
 <p><a href="api/reference/classes/UplcValueImpl.html"><code>UplcValueImpl</code></a></p>
 <p>↳ <strong><code>UplcByteArray</code></strong></p>
 </li>
+</ul>
+<h2 id="implements-12"><a class="header" href="#implements-12">Implements</a></h2>
+<ul>
+<li><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href='javascript:(() => {
         document.getElementById("table-of-contents").setAttribute("expanded", "");
@@ -11824,6 +11945,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bool</strong>(): <code>boolean</code></p>
 <h4 id="returns-666"><a class="header" href="#returns-666">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-70"><a class="header" href="#implementation-of-70">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bool">bool</a></p>
 <h4 id="inherited-from-248"><a class="header" href="#inherited-from-248">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
@@ -11831,6 +11954,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-667"><a class="header" href="#returns-667">Returns</a></h4>
 <p><code>number</code>[]</p>
+<h4 id="implementation-of-71"><a class="header" href="#implementation-of-71">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bytes">bytes</a></p>
 <h4 id="inherited-from-249"><a class="header" href="#inherited-from-249">Inherited from</a></h4>
 <p>UplcValueImpl.bytes</p>
 <div class="vspace"></div>
@@ -11838,6 +11963,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>data</strong>(): <a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
 <h4 id="returns-668"><a class="header" href="#returns-668">Returns</a></h4>
 <p><a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
+<h4 id="implementation-of-72"><a class="header" href="#implementation-of-72">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#data">data</a></p>
 <h4 id="inherited-from-250"><a class="header" href="#inherited-from-250">Inherited from</a></h4>
 <p>UplcValueImpl.data</p>
 <div class="vspace"></div>
@@ -11845,6 +11972,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>first</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-669"><a class="header" href="#returns-669">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-73"><a class="header" href="#implementation-of-73">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#first">first</a></p>
 <h4 id="inherited-from-251"><a class="header" href="#inherited-from-251">Inherited from</a></h4>
 <p>UplcValueImpl.first</p>
 <div class="vspace"></div>
@@ -11853,11 +11982,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>4 for header, 8 bits per byte, 8 bits per chunk of 256 bytes, 8 bits final padding</p>
 <h4 id="returns-670"><a class="header" href="#returns-670">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-74"><a class="header" href="#implementation-of-74">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#flatsize">flatSize</a></p>
 <div class="vspace"></div>
 <h3 id="int-4"><a class="header" href="#int-4">int</a></h3>
 <p>• <code>get</code> <strong>int</strong>(): <code>bigint</code></p>
 <h4 id="returns-671"><a class="header" href="#returns-671">Returns</a></h4>
 <p><code>bigint</code></p>
+<h4 id="implementation-of-75"><a class="header" href="#implementation-of-75">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#int">int</a></p>
 <h4 id="inherited-from-252"><a class="header" href="#inherited-from-252">Inherited from</a></h4>
 <p>UplcValueImpl.int</p>
 <div class="vspace"></div>
@@ -11865,6 +11998,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>itemType</strong>(): <a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
 <h4 id="returns-672"><a class="header" href="#returns-672">Returns</a></h4>
 <p><a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
+<h4 id="implementation-of-76"><a class="header" href="#implementation-of-76">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#itemtype">itemType</a></p>
 <h4 id="inherited-from-253"><a class="header" href="#inherited-from-253">Inherited from</a></h4>
 <p>UplcValueImpl.itemType</p>
 <div class="vspace"></div>
@@ -11872,6 +12007,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>length</strong>(): <code>number</code></p>
 <h4 id="returns-673"><a class="header" href="#returns-673">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-77"><a class="header" href="#implementation-of-77">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#length">length</a></p>
 <h4 id="inherited-from-254"><a class="header" href="#inherited-from-254">Inherited from</a></h4>
 <p>UplcValueImpl.length</p>
 <div class="vspace"></div>
@@ -11879,6 +12016,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>list</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
 <h4 id="returns-674"><a class="header" href="#returns-674">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
+<h4 id="implementation-of-78"><a class="header" href="#implementation-of-78">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#list">list</a></p>
 <h4 id="inherited-from-255"><a class="header" href="#inherited-from-255">Inherited from</a></h4>
 <p>UplcValueImpl.list</p>
 <div class="vspace"></div>
@@ -11886,11 +12025,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>memSize</strong>(): <code>number</code></p>
 <h4 id="returns-675"><a class="header" href="#returns-675">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-79"><a class="header" href="#implementation-of-79">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#memsize">memSize</a></p>
 <div class="vspace"></div>
 <h3 id="second-2"><a class="header" href="#second-2">second</a></h3>
 <p>• <code>get</code> <strong>second</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-676"><a class="header" href="#returns-676">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-80"><a class="header" href="#implementation-of-80">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#second">second</a></p>
 <h4 id="inherited-from-256"><a class="header" href="#inherited-from-256">Inherited from</a></h4>
 <p>UplcValueImpl.second</p>
 <div class="vspace"></div>
@@ -11898,6 +12041,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>site</strong>(): <a href="api/reference/classes/Site.html"><code>Site</code></a></p>
 <h4 id="returns-677"><a class="header" href="#returns-677">Returns</a></h4>
 <p><a href="api/reference/classes/Site.html"><code>Site</code></a></p>
+<h4 id="implementation-of-81"><a class="header" href="#implementation-of-81">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#site">site</a></p>
 <h4 id="inherited-from-257"><a class="header" href="#inherited-from-257">Inherited from</a></h4>
 <p>UplcValueImpl.site</p>
 <div class="vspace"></div>
@@ -11905,6 +12050,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>string</strong>(): <code>string</code></p>
 <h4 id="returns-678"><a class="header" href="#returns-678">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-82"><a class="header" href="#implementation-of-82">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#string">string</a></p>
 <h4 id="inherited-from-258"><a class="header" href="#inherited-from-258">Inherited from</a></h4>
 <p>UplcValueImpl.string</p>
 <h2 id="methods-93"><a class="header" href="#methods-93">Methods</a></h2>
@@ -11912,6 +12059,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>assertUnit</strong>(): <a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
 <h4 id="returns-679"><a class="header" href="#returns-679">Returns</a></h4>
 <p><a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
+<h4 id="implementation-of-83"><a class="header" href="#implementation-of-83">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#assertunit">assertUnit</a></p>
 <h4 id="inherited-from-259"><a class="header" href="#inherited-from-259">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#assertunit">assertUnit</a></p>
 <div class="vspace"></div>
@@ -11924,11 +12073,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-680"><a class="header" href="#returns-680">Returns</a></h4>
 <p><a href="api/reference/classes/UplcByteArray.html"><code>UplcByteArray</code></a></p>
+<h4 id="implementation-of-84"><a class="header" href="#implementation-of-84">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#copy">copy</a></p>
 <div class="vspace"></div>
 <h3 id="isany-1"><a class="header" href="#isany-1">isAny</a></h3>
 <p>▸ <strong>isAny</strong>(): <code>boolean</code></p>
 <h4 id="returns-681"><a class="header" href="#returns-681">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-85"><a class="header" href="#implementation-of-85">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isany">isAny</a></p>
 <h4 id="inherited-from-260"><a class="header" href="#inherited-from-260">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isany">isAny</a></p>
 <div class="vspace"></div>
@@ -11936,6 +12089,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>isData</strong>(): <code>boolean</code></p>
 <h4 id="returns-682"><a class="header" href="#returns-682">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-86"><a class="header" href="#implementation-of-86">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isdata">isData</a></p>
 <h4 id="inherited-from-261"><a class="header" href="#inherited-from-261">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isdata">isData</a></p>
 <div class="vspace"></div>
@@ -11944,6 +12099,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a list from a map</p>
 <h4 id="returns-683"><a class="header" href="#returns-683">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-87"><a class="header" href="#implementation-of-87">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#islist">isList</a></p>
 <h4 id="inherited-from-262"><a class="header" href="#inherited-from-262">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#islist">isList</a></p>
 <div class="vspace"></div>
@@ -11952,6 +12109,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a pair from a mapItem</p>
 <h4 id="returns-684"><a class="header" href="#returns-684">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-88"><a class="header" href="#implementation-of-88">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#ispair">isPair</a></p>
 <h4 id="inherited-from-263"><a class="header" href="#inherited-from-263">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#ispair">isPair</a></p>
 <div class="vspace"></div>
@@ -11966,6 +12125,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-685"><a class="header" href="#returns-685">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-89"><a class="header" href="#implementation-of-89">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalue">toFlatValue</a></p>
 <h4 id="inherited-from-264"><a class="header" href="#inherited-from-264">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalue">toFlatValue</a></p>
 <div class="vspace"></div>
@@ -11979,6 +12140,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-686"><a class="header" href="#returns-686">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-90"><a class="header" href="#implementation-of-90">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <h4 id="inherited-from-265"><a class="header" href="#inherited-from-265">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <div class="vspace"></div>
@@ -11991,11 +12154,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-687"><a class="header" href="#returns-687">Returns</a></h4>
 <p><code>any</code></p>
+<h4 id="implementation-of-91"><a class="header" href="#implementation-of-91">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#transfer">transfer</a></p>
 <div class="vspace"></div>
 <h3 id="typebits-1"><a class="header" href="#typebits-1">typeBits</a></h3>
 <p>▸ <strong>typeBits</strong>(): <code>string</code></p>
 <h4 id="returns-688"><a class="header" href="#returns-688">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-92"><a class="header" href="#implementation-of-92">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#typebits">typeBits</a></p>
 <h4 id="inherited-from-266"><a class="header" href="#inherited-from-266">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#typebits">typeBits</a></p>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/classes/../../../api/index.html">Helios API</a>/ <a href="api/reference/classes/../../../api/reference/index.html">API Reference</a>/ <a href="api/reference/classes/../../../api/reference/classes/index.html">Classes</a>/</p>
@@ -12233,13 +12400,18 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p><a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/classes/../../../api/index.html">Helios API</a>/ <a href="api/reference/classes/../../../api/reference/index.html">API Reference</a>/ <a href="api/reference/classes/../../../api/reference/classes/index.html">Classes</a>/</p>
 <h1 id="uplcdatavalue"><a class="header" href="#uplcdatavalue">UplcDataValue</a></h1>
-<p>Child type of <code>UplcValue</code> that wraps a <code>UplcData</code> instance.</p>
+<p><code>UplcValue</code> that wraps a <code>UplcData</code> instance.</p>
+<p><strong><code>Implements</code></strong></p>
 <h2 id="hierarchy-44"><a class="header" href="#hierarchy-44">Hierarchy</a></h2>
 <ul>
 <li>
 <p><a href="api/reference/classes/UplcValueImpl.html"><code>UplcValueImpl</code></a></p>
 <p>↳ <strong><code>UplcDataValue</code></strong></p>
 </li>
+</ul>
+<h2 id="implements-13"><a class="header" href="#implements-13">Implements</a></h2>
+<ul>
+<li><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href='javascript:(() => {
         document.getElementById("table-of-contents").setAttribute("expanded", "");
@@ -12268,6 +12440,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bool</strong>(): <code>boolean</code></p>
 <h4 id="returns-705"><a class="header" href="#returns-705">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-93"><a class="header" href="#implementation-of-93">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bool">bool</a></p>
 <h4 id="inherited-from-278"><a class="header" href="#inherited-from-278">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
@@ -12275,6 +12449,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-706"><a class="header" href="#returns-706">Returns</a></h4>
 <p><code>number</code>[]</p>
+<h4 id="implementation-of-94"><a class="header" href="#implementation-of-94">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bytes">bytes</a></p>
 <h4 id="inherited-from-279"><a class="header" href="#inherited-from-279">Inherited from</a></h4>
 <p>UplcValueImpl.bytes</p>
 <div class="vspace"></div>
@@ -12282,6 +12458,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>data</strong>(): <a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
 <h4 id="returns-707"><a class="header" href="#returns-707">Returns</a></h4>
 <p><a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
+<h4 id="implementation-of-95"><a class="header" href="#implementation-of-95">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#data">data</a></p>
 <h4 id="inherited-from-280"><a class="header" href="#inherited-from-280">Inherited from</a></h4>
 <p>UplcValueImpl.data</p>
 <div class="vspace"></div>
@@ -12289,6 +12467,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>first</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-708"><a class="header" href="#returns-708">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-96"><a class="header" href="#implementation-of-96">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#first">first</a></p>
 <h4 id="inherited-from-281"><a class="header" href="#inherited-from-281">Inherited from</a></h4>
 <p>UplcValueImpl.first</p>
 <div class="vspace"></div>
@@ -12297,11 +12477,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Same number of header bits as UplcByteArray</p>
 <h4 id="returns-709"><a class="header" href="#returns-709">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-97"><a class="header" href="#implementation-of-97">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#flatsize">flatSize</a></p>
 <div class="vspace"></div>
 <h3 id="int-5"><a class="header" href="#int-5">int</a></h3>
 <p>• <code>get</code> <strong>int</strong>(): <code>bigint</code></p>
 <h4 id="returns-710"><a class="header" href="#returns-710">Returns</a></h4>
 <p><code>bigint</code></p>
+<h4 id="implementation-of-98"><a class="header" href="#implementation-of-98">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#int">int</a></p>
 <h4 id="inherited-from-282"><a class="header" href="#inherited-from-282">Inherited from</a></h4>
 <p>UplcValueImpl.int</p>
 <div class="vspace"></div>
@@ -12309,6 +12493,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>itemType</strong>(): <a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
 <h4 id="returns-711"><a class="header" href="#returns-711">Returns</a></h4>
 <p><a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
+<h4 id="implementation-of-99"><a class="header" href="#implementation-of-99">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#itemtype">itemType</a></p>
 <h4 id="inherited-from-283"><a class="header" href="#inherited-from-283">Inherited from</a></h4>
 <p>UplcValueImpl.itemType</p>
 <div class="vspace"></div>
@@ -12316,6 +12502,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>length</strong>(): <code>number</code></p>
 <h4 id="returns-712"><a class="header" href="#returns-712">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-100"><a class="header" href="#implementation-of-100">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#length">length</a></p>
 <h4 id="inherited-from-284"><a class="header" href="#inherited-from-284">Inherited from</a></h4>
 <p>UplcValueImpl.length</p>
 <div class="vspace"></div>
@@ -12323,6 +12511,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>list</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
 <h4 id="returns-713"><a class="header" href="#returns-713">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
+<h4 id="implementation-of-101"><a class="header" href="#implementation-of-101">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#list">list</a></p>
 <h4 id="inherited-from-285"><a class="header" href="#inherited-from-285">Inherited from</a></h4>
 <p>UplcValueImpl.list</p>
 <div class="vspace"></div>
@@ -12330,11 +12520,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>memSize</strong>(): <code>number</code></p>
 <h4 id="returns-714"><a class="header" href="#returns-714">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-102"><a class="header" href="#implementation-of-102">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#memsize">memSize</a></p>
 <div class="vspace"></div>
 <h3 id="second-3"><a class="header" href="#second-3">second</a></h3>
 <p>• <code>get</code> <strong>second</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-715"><a class="header" href="#returns-715">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-103"><a class="header" href="#implementation-of-103">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#second">second</a></p>
 <h4 id="inherited-from-286"><a class="header" href="#inherited-from-286">Inherited from</a></h4>
 <p>UplcValueImpl.second</p>
 <div class="vspace"></div>
@@ -12342,6 +12536,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>site</strong>(): <a href="api/reference/classes/Site.html"><code>Site</code></a></p>
 <h4 id="returns-716"><a class="header" href="#returns-716">Returns</a></h4>
 <p><a href="api/reference/classes/Site.html"><code>Site</code></a></p>
+<h4 id="implementation-of-104"><a class="header" href="#implementation-of-104">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#site">site</a></p>
 <h4 id="inherited-from-287"><a class="header" href="#inherited-from-287">Inherited from</a></h4>
 <p>UplcValueImpl.site</p>
 <div class="vspace"></div>
@@ -12349,6 +12545,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>string</strong>(): <code>string</code></p>
 <h4 id="returns-717"><a class="header" href="#returns-717">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-105"><a class="header" href="#implementation-of-105">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#string">string</a></p>
 <h4 id="inherited-from-288"><a class="header" href="#inherited-from-288">Inherited from</a></h4>
 <p>UplcValueImpl.string</p>
 <h2 id="methods-97"><a class="header" href="#methods-97">Methods</a></h2>
@@ -12356,6 +12554,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>assertUnit</strong>(): <a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
 <h4 id="returns-718"><a class="header" href="#returns-718">Returns</a></h4>
 <p><a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
+<h4 id="implementation-of-106"><a class="header" href="#implementation-of-106">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#assertunit">assertUnit</a></p>
 <h4 id="inherited-from-289"><a class="header" href="#inherited-from-289">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#assertunit">assertUnit</a></p>
 <div class="vspace"></div>
@@ -12368,11 +12568,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-719"><a class="header" href="#returns-719">Returns</a></h4>
 <p><a href="api/reference/classes/UplcDataValue.html"><code>UplcDataValue</code></a></p>
+<h4 id="implementation-of-107"><a class="header" href="#implementation-of-107">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#copy">copy</a></p>
 <div class="vspace"></div>
 <h3 id="isany-2"><a class="header" href="#isany-2">isAny</a></h3>
 <p>▸ <strong>isAny</strong>(): <code>boolean</code></p>
 <h4 id="returns-720"><a class="header" href="#returns-720">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-108"><a class="header" href="#implementation-of-108">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isany">isAny</a></p>
 <h4 id="inherited-from-290"><a class="header" href="#inherited-from-290">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isany">isAny</a></p>
 <div class="vspace"></div>
@@ -12380,6 +12584,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>isData</strong>(): <code>boolean</code></p>
 <h4 id="returns-721"><a class="header" href="#returns-721">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-109"><a class="header" href="#implementation-of-109">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isdata">isData</a></p>
 <h4 id="inherited-from-291"><a class="header" href="#inherited-from-291">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isdata">isData</a></p>
 <div class="vspace"></div>
@@ -12388,6 +12594,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a list from a map</p>
 <h4 id="returns-722"><a class="header" href="#returns-722">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-110"><a class="header" href="#implementation-of-110">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#islist">isList</a></p>
 <h4 id="inherited-from-292"><a class="header" href="#inherited-from-292">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#islist">isList</a></p>
 <div class="vspace"></div>
@@ -12396,6 +12604,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a pair from a mapItem</p>
 <h4 id="returns-723"><a class="header" href="#returns-723">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-111"><a class="header" href="#implementation-of-111">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#ispair">isPair</a></p>
 <h4 id="inherited-from-293"><a class="header" href="#inherited-from-293">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#ispair">isPair</a></p>
 <div class="vspace"></div>
@@ -12410,6 +12620,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-724"><a class="header" href="#returns-724">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-112"><a class="header" href="#implementation-of-112">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalue">toFlatValue</a></p>
 <h4 id="inherited-from-294"><a class="header" href="#inherited-from-294">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalue">toFlatValue</a></p>
 <div class="vspace"></div>
@@ -12423,6 +12635,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-725"><a class="header" href="#returns-725">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-113"><a class="header" href="#implementation-of-113">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <h4 id="inherited-from-295"><a class="header" href="#inherited-from-295">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <div class="vspace"></div>
@@ -12435,11 +12649,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-726"><a class="header" href="#returns-726">Returns</a></h4>
 <p><code>any</code></p>
+<h4 id="implementation-of-114"><a class="header" href="#implementation-of-114">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#transfer">transfer</a></p>
 <div class="vspace"></div>
 <h3 id="typebits-2"><a class="header" href="#typebits-2">typeBits</a></h3>
 <p>▸ <strong>typeBits</strong>(): <code>string</code></p>
 <h4 id="returns-727"><a class="header" href="#returns-727">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-115"><a class="header" href="#implementation-of-115">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#typebits">typeBits</a></p>
 <h4 id="inherited-from-296"><a class="header" href="#inherited-from-296">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#typebits">typeBits</a></p>
 <div class="vspace"></div>
@@ -12667,7 +12885,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>↳ <strong><code>UplcInt</code></strong></p>
 </li>
 </ul>
-<h2 id="implements-11"><a class="header" href="#implements-11">Implements</a></h2>
+<h2 id="implements-14"><a class="header" href="#implements-14">Implements</a></h2>
 <ul>
 <li><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></li>
 </ul>
@@ -12705,7 +12923,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bool</strong>(): <code>boolean</code></p>
 <h4 id="returns-741"><a class="header" href="#returns-741">Returns</a></h4>
 <p><code>boolean</code></p>
-<h4 id="implementation-of-47"><a class="header" href="#implementation-of-47">Implementation of</a></h4>
+<h4 id="implementation-of-116"><a class="header" href="#implementation-of-116">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bool">bool</a></p>
 <h4 id="inherited-from-309"><a class="header" href="#inherited-from-309">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
@@ -12714,7 +12932,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-742"><a class="header" href="#returns-742">Returns</a></h4>
 <p><code>number</code>[]</p>
-<h4 id="implementation-of-48"><a class="header" href="#implementation-of-48">Implementation of</a></h4>
+<h4 id="implementation-of-117"><a class="header" href="#implementation-of-117">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bytes">bytes</a></p>
 <h4 id="inherited-from-310"><a class="header" href="#inherited-from-310">Inherited from</a></h4>
 <p>UplcValueImpl.bytes</p>
@@ -12723,7 +12941,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>data</strong>(): <a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
 <h4 id="returns-743"><a class="header" href="#returns-743">Returns</a></h4>
 <p><a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
-<h4 id="implementation-of-49"><a class="header" href="#implementation-of-49">Implementation of</a></h4>
+<h4 id="implementation-of-118"><a class="header" href="#implementation-of-118">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#data">data</a></p>
 <h4 id="inherited-from-311"><a class="header" href="#inherited-from-311">Inherited from</a></h4>
 <p>UplcValueImpl.data</p>
@@ -12732,7 +12950,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>first</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-744"><a class="header" href="#returns-744">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
-<h4 id="implementation-of-50"><a class="header" href="#implementation-of-50">Implementation of</a></h4>
+<h4 id="implementation-of-119"><a class="header" href="#implementation-of-119">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#first">first</a></p>
 <h4 id="inherited-from-312"><a class="header" href="#inherited-from-312">Inherited from</a></h4>
 <p>UplcValueImpl.first</p>
@@ -12742,14 +12960,14 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>4 for type, 7 for simple int, (7 + 1)*ceil(n/7) for large int</p>
 <h4 id="returns-745"><a class="header" href="#returns-745">Returns</a></h4>
 <p><code>number</code></p>
-<h4 id="implementation-of-51"><a class="header" href="#implementation-of-51">Implementation of</a></h4>
+<h4 id="implementation-of-120"><a class="header" href="#implementation-of-120">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#flatsize">flatSize</a></p>
 <div class="vspace"></div>
 <h3 id="int-6"><a class="header" href="#int-6">int</a></h3>
 <p>• <code>get</code> <strong>int</strong>(): <code>bigint</code></p>
 <h4 id="returns-746"><a class="header" href="#returns-746">Returns</a></h4>
 <p><code>bigint</code></p>
-<h4 id="implementation-of-52"><a class="header" href="#implementation-of-52">Implementation of</a></h4>
+<h4 id="implementation-of-121"><a class="header" href="#implementation-of-121">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#int">int</a></p>
 <h4 id="inherited-from-313"><a class="header" href="#inherited-from-313">Inherited from</a></h4>
 <p>UplcValueImpl.int</p>
@@ -12758,7 +12976,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>itemType</strong>(): <a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
 <h4 id="returns-747"><a class="header" href="#returns-747">Returns</a></h4>
 <p><a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
-<h4 id="implementation-of-53"><a class="header" href="#implementation-of-53">Implementation of</a></h4>
+<h4 id="implementation-of-122"><a class="header" href="#implementation-of-122">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#itemtype">itemType</a></p>
 <h4 id="inherited-from-314"><a class="header" href="#inherited-from-314">Inherited from</a></h4>
 <p>UplcValueImpl.itemType</p>
@@ -12767,7 +12985,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>length</strong>(): <code>number</code></p>
 <h4 id="returns-748"><a class="header" href="#returns-748">Returns</a></h4>
 <p><code>number</code></p>
-<h4 id="implementation-of-54"><a class="header" href="#implementation-of-54">Implementation of</a></h4>
+<h4 id="implementation-of-123"><a class="header" href="#implementation-of-123">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#length">length</a></p>
 <h4 id="inherited-from-315"><a class="header" href="#inherited-from-315">Inherited from</a></h4>
 <p>UplcValueImpl.length</p>
@@ -12776,7 +12994,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>list</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
 <h4 id="returns-749"><a class="header" href="#returns-749">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
-<h4 id="implementation-of-55"><a class="header" href="#implementation-of-55">Implementation of</a></h4>
+<h4 id="implementation-of-124"><a class="header" href="#implementation-of-124">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#list">list</a></p>
 <h4 id="inherited-from-316"><a class="header" href="#inherited-from-316">Inherited from</a></h4>
 <p>UplcValueImpl.list</p>
@@ -12785,14 +13003,14 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>memSize</strong>(): <code>number</code></p>
 <h4 id="returns-750"><a class="header" href="#returns-750">Returns</a></h4>
 <p><code>number</code></p>
-<h4 id="implementation-of-56"><a class="header" href="#implementation-of-56">Implementation of</a></h4>
+<h4 id="implementation-of-125"><a class="header" href="#implementation-of-125">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#memsize">memSize</a></p>
 <div class="vspace"></div>
 <h3 id="second-4"><a class="header" href="#second-4">second</a></h3>
 <p>• <code>get</code> <strong>second</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-751"><a class="header" href="#returns-751">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
-<h4 id="implementation-of-57"><a class="header" href="#implementation-of-57">Implementation of</a></h4>
+<h4 id="implementation-of-126"><a class="header" href="#implementation-of-126">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#second">second</a></p>
 <h4 id="inherited-from-317"><a class="header" href="#inherited-from-317">Inherited from</a></h4>
 <p>UplcValueImpl.second</p>
@@ -12801,7 +13019,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>site</strong>(): <a href="api/reference/classes/Site.html"><code>Site</code></a></p>
 <h4 id="returns-752"><a class="header" href="#returns-752">Returns</a></h4>
 <p><a href="api/reference/classes/Site.html"><code>Site</code></a></p>
-<h4 id="implementation-of-58"><a class="header" href="#implementation-of-58">Implementation of</a></h4>
+<h4 id="implementation-of-127"><a class="header" href="#implementation-of-127">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#site">site</a></p>
 <h4 id="inherited-from-318"><a class="header" href="#inherited-from-318">Inherited from</a></h4>
 <p>UplcValueImpl.site</p>
@@ -12810,7 +13028,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>string</strong>(): <code>string</code></p>
 <h4 id="returns-753"><a class="header" href="#returns-753">Returns</a></h4>
 <p><code>string</code></p>
-<h4 id="implementation-of-59"><a class="header" href="#implementation-of-59">Implementation of</a></h4>
+<h4 id="implementation-of-128"><a class="header" href="#implementation-of-128">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#string">string</a></p>
 <h4 id="inherited-from-319"><a class="header" href="#inherited-from-319">Inherited from</a></h4>
 <p>UplcValueImpl.string</p>
@@ -12819,7 +13037,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>assertUnit</strong>(): <a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
 <h4 id="returns-754"><a class="header" href="#returns-754">Returns</a></h4>
 <p><a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
-<h4 id="implementation-of-60"><a class="header" href="#implementation-of-60">Implementation of</a></h4>
+<h4 id="implementation-of-129"><a class="header" href="#implementation-of-129">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#assertunit">assertUnit</a></p>
 <h4 id="inherited-from-320"><a class="header" href="#inherited-from-320">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#assertunit">assertUnit</a></p>
@@ -12833,14 +13051,14 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-755"><a class="header" href="#returns-755">Returns</a></h4>
 <p><a href="api/reference/classes/UplcInt.html"><code>UplcInt</code></a></p>
-<h4 id="implementation-of-61"><a class="header" href="#implementation-of-61">Implementation of</a></h4>
+<h4 id="implementation-of-130"><a class="header" href="#implementation-of-130">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#copy">copy</a></p>
 <div class="vspace"></div>
 <h3 id="isany-3"><a class="header" href="#isany-3">isAny</a></h3>
 <p>▸ <strong>isAny</strong>(): <code>boolean</code></p>
 <h4 id="returns-756"><a class="header" href="#returns-756">Returns</a></h4>
 <p><code>boolean</code></p>
-<h4 id="implementation-of-62"><a class="header" href="#implementation-of-62">Implementation of</a></h4>
+<h4 id="implementation-of-131"><a class="header" href="#implementation-of-131">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isany">isAny</a></p>
 <h4 id="inherited-from-321"><a class="header" href="#inherited-from-321">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isany">isAny</a></p>
@@ -12849,7 +13067,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>isData</strong>(): <code>boolean</code></p>
 <h4 id="returns-757"><a class="header" href="#returns-757">Returns</a></h4>
 <p><code>boolean</code></p>
-<h4 id="implementation-of-63"><a class="header" href="#implementation-of-63">Implementation of</a></h4>
+<h4 id="implementation-of-132"><a class="header" href="#implementation-of-132">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isdata">isData</a></p>
 <h4 id="inherited-from-322"><a class="header" href="#inherited-from-322">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isdata">isData</a></p>
@@ -12859,7 +13077,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a list from a map</p>
 <h4 id="returns-758"><a class="header" href="#returns-758">Returns</a></h4>
 <p><code>boolean</code></p>
-<h4 id="implementation-of-64"><a class="header" href="#implementation-of-64">Implementation of</a></h4>
+<h4 id="implementation-of-133"><a class="header" href="#implementation-of-133">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#islist">isList</a></p>
 <h4 id="inherited-from-323"><a class="header" href="#inherited-from-323">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#islist">isList</a></p>
@@ -12869,7 +13087,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a pair from a mapItem</p>
 <h4 id="returns-759"><a class="header" href="#returns-759">Returns</a></h4>
 <p><code>boolean</code></p>
-<h4 id="implementation-of-65"><a class="header" href="#implementation-of-65">Implementation of</a></h4>
+<h4 id="implementation-of-134"><a class="header" href="#implementation-of-134">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#ispair">isPair</a></p>
 <h4 id="inherited-from-324"><a class="header" href="#inherited-from-324">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#ispair">isPair</a></p>
@@ -12885,7 +13103,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-760"><a class="header" href="#returns-760">Returns</a></h4>
 <p><code>void</code></p>
-<h4 id="implementation-of-66"><a class="header" href="#implementation-of-66">Implementation of</a></h4>
+<h4 id="implementation-of-135"><a class="header" href="#implementation-of-135">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalue">toFlatValue</a></p>
 <h4 id="inherited-from-325"><a class="header" href="#inherited-from-325">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalue">toFlatValue</a></p>
@@ -12900,7 +13118,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-761"><a class="header" href="#returns-761">Returns</a></h4>
 <p><code>void</code></p>
-<h4 id="implementation-of-67"><a class="header" href="#implementation-of-67">Implementation of</a></h4>
+<h4 id="implementation-of-136"><a class="header" href="#implementation-of-136">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <h4 id="inherited-from-326"><a class="header" href="#inherited-from-326">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalueinternal">toFlatValueInternal</a></p>
@@ -12944,14 +13162,14 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-764"><a class="header" href="#returns-764">Returns</a></h4>
 <p><code>any</code></p>
-<h4 id="implementation-of-68"><a class="header" href="#implementation-of-68">Implementation of</a></h4>
+<h4 id="implementation-of-137"><a class="header" href="#implementation-of-137">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#transfer">transfer</a></p>
 <div class="vspace"></div>
 <h3 id="typebits-3"><a class="header" href="#typebits-3">typeBits</a></h3>
 <p>▸ <strong>typeBits</strong>(): <code>string</code></p>
 <h4 id="returns-765"><a class="header" href="#returns-765">Returns</a></h4>
 <p><code>string</code></p>
-<h4 id="implementation-of-69"><a class="header" href="#implementation-of-69">Implementation of</a></h4>
+<h4 id="implementation-of-138"><a class="header" href="#implementation-of-138">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#typebits">typeBits</a></p>
 <h4 id="inherited-from-327"><a class="header" href="#inherited-from-327">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#typebits">typeBits</a></p>
@@ -13086,12 +13304,21 @@ Differs from bytesToBigInt in utils.js because only 7 bits are used from each by
 <h1 id="uplclist"><a class="header" href="#uplclist">UplcList</a></h1>
 <p>Plutus-core list value class.
 Only used during evaluation.</p>
+<p><strong><code>Implements</code></strong></p>
 <h2 id="hierarchy-50"><a class="header" href="#hierarchy-50">Hierarchy</a></h2>
 <ul>
 <li>
 <p><a href="api/reference/classes/UplcValueImpl.html"><code>UplcValueImpl</code></a></p>
 <p>↳ <strong><code>UplcList</code></strong></p>
 </li>
+</ul>
+<h2 id="implements-15"><a class="header" href="#implements-15">Implements</a></h2>
+<ul>
+<li><a href="api/reference/classes/UplcList.html"><code>UplcList</code></a></li>
+</ul>
+<h2 id="implemented-by"><a class="header" href="#implemented-by">Implemented by</a></h2>
+<ul>
+<li><a href="api/reference/classes/UplcList.html"><code>UplcList</code></a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href='javascript:(() => {
         document.getElementById("table-of-contents").setAttribute("expanded", "");
@@ -13115,12 +13342,14 @@ Only used during evaluation.</p>
 </tbody></table>
 </div>
 <h4 id="overrides-43"><a class="header" href="#overrides-43">Overrides</a></h4>
-<p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#constructor">constructor</a></p>
+<p>UplcValueImpl.constructor</p>
 <h2 id="accessors-61"><a class="header" href="#accessors-61">Accessors</a></h2>
 <h3 id="bool-7"><a class="header" href="#bool-7">bool</a></h3>
 <p>• <code>get</code> <strong>bool</strong>(): <code>boolean</code></p>
 <h4 id="returns-775"><a class="header" href="#returns-775">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-139"><a class="header" href="#implementation-of-139">Implementation of</a></h4>
+<p>UplcList.bool</p>
 <h4 id="inherited-from-332"><a class="header" href="#inherited-from-332">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
@@ -13128,6 +13357,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-776"><a class="header" href="#returns-776">Returns</a></h4>
 <p><code>number</code>[]</p>
+<h4 id="implementation-of-140"><a class="header" href="#implementation-of-140">Implementation of</a></h4>
+<p>UplcList.bytes</p>
 <h4 id="inherited-from-333"><a class="header" href="#inherited-from-333">Inherited from</a></h4>
 <p>UplcValueImpl.bytes</p>
 <div class="vspace"></div>
@@ -13135,6 +13366,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>data</strong>(): <a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
 <h4 id="returns-777"><a class="header" href="#returns-777">Returns</a></h4>
 <p><a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
+<h4 id="implementation-of-141"><a class="header" href="#implementation-of-141">Implementation of</a></h4>
+<p>UplcList.data</p>
 <h4 id="inherited-from-334"><a class="header" href="#inherited-from-334">Inherited from</a></h4>
 <p>UplcValueImpl.data</p>
 <div class="vspace"></div>
@@ -13142,6 +13375,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>first</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-778"><a class="header" href="#returns-778">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-142"><a class="header" href="#implementation-of-142">Implementation of</a></h4>
+<p>UplcList.first</p>
 <h4 id="inherited-from-335"><a class="header" href="#inherited-from-335">Inherited from</a></h4>
 <p>UplcValueImpl.first</p>
 <div class="vspace"></div>
@@ -13150,11 +13385,15 @@ Only used during evaluation.</p>
 <p>10 + nItemType type bits, value bits of each item (must be corrected by itemType)</p>
 <h4 id="returns-779"><a class="header" href="#returns-779">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-143"><a class="header" href="#implementation-of-143">Implementation of</a></h4>
+<p>UplcList.flatSize</p>
 <div class="vspace"></div>
 <h3 id="int-7"><a class="header" href="#int-7">int</a></h3>
 <p>• <code>get</code> <strong>int</strong>(): <code>bigint</code></p>
 <h4 id="returns-780"><a class="header" href="#returns-780">Returns</a></h4>
 <p><code>bigint</code></p>
+<h4 id="implementation-of-144"><a class="header" href="#implementation-of-144">Implementation of</a></h4>
+<p>UplcList.int</p>
 <h4 id="inherited-from-336"><a class="header" href="#inherited-from-336">Inherited from</a></h4>
 <p>UplcValueImpl.int</p>
 <div class="vspace"></div>
@@ -13162,6 +13401,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>itemType</strong>(): <a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
 <h4 id="returns-781"><a class="header" href="#returns-781">Returns</a></h4>
 <p><a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
+<h4 id="implementation-of-145"><a class="header" href="#implementation-of-145">Implementation of</a></h4>
+<p>UplcList.itemType</p>
 <h4 id="inherited-from-337"><a class="header" href="#inherited-from-337">Inherited from</a></h4>
 <p>UplcValueImpl.itemType</p>
 <div class="vspace"></div>
@@ -13169,6 +13410,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>length</strong>(): <code>number</code></p>
 <h4 id="returns-782"><a class="header" href="#returns-782">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-146"><a class="header" href="#implementation-of-146">Implementation of</a></h4>
+<p>UplcList.length</p>
 <h4 id="inherited-from-338"><a class="header" href="#inherited-from-338">Inherited from</a></h4>
 <p>UplcValueImpl.length</p>
 <div class="vspace"></div>
@@ -13176,6 +13419,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>list</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
 <h4 id="returns-783"><a class="header" href="#returns-783">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
+<h4 id="implementation-of-147"><a class="header" href="#implementation-of-147">Implementation of</a></h4>
+<p>UplcList.list</p>
 <h4 id="inherited-from-339"><a class="header" href="#inherited-from-339">Inherited from</a></h4>
 <p>UplcValueImpl.list</p>
 <div class="vspace"></div>
@@ -13183,11 +13428,15 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>memSize</strong>(): <code>number</code></p>
 <h4 id="returns-784"><a class="header" href="#returns-784">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-148"><a class="header" href="#implementation-of-148">Implementation of</a></h4>
+<p>UplcList.memSize</p>
 <div class="vspace"></div>
 <h3 id="second-5"><a class="header" href="#second-5">second</a></h3>
 <p>• <code>get</code> <strong>second</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-785"><a class="header" href="#returns-785">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-149"><a class="header" href="#implementation-of-149">Implementation of</a></h4>
+<p>UplcList.second</p>
 <h4 id="inherited-from-340"><a class="header" href="#inherited-from-340">Inherited from</a></h4>
 <p>UplcValueImpl.second</p>
 <div class="vspace"></div>
@@ -13195,6 +13444,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>site</strong>(): <a href="api/reference/classes/Site.html"><code>Site</code></a></p>
 <h4 id="returns-786"><a class="header" href="#returns-786">Returns</a></h4>
 <p><a href="api/reference/classes/Site.html"><code>Site</code></a></p>
+<h4 id="implementation-of-150"><a class="header" href="#implementation-of-150">Implementation of</a></h4>
+<p>UplcList.site</p>
 <h4 id="inherited-from-341"><a class="header" href="#inherited-from-341">Inherited from</a></h4>
 <p>UplcValueImpl.site</p>
 <div class="vspace"></div>
@@ -13202,6 +13453,8 @@ Only used during evaluation.</p>
 <p>• <code>get</code> <strong>string</strong>(): <code>string</code></p>
 <h4 id="returns-787"><a class="header" href="#returns-787">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-151"><a class="header" href="#implementation-of-151">Implementation of</a></h4>
+<p>UplcList.string</p>
 <h4 id="inherited-from-342"><a class="header" href="#inherited-from-342">Inherited from</a></h4>
 <p>UplcValueImpl.string</p>
 <h2 id="methods-103"><a class="header" href="#methods-103">Methods</a></h2>
@@ -13209,8 +13462,10 @@ Only used during evaluation.</p>
 <p>▸ <strong>assertUnit</strong>(): <a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
 <h4 id="returns-788"><a class="header" href="#returns-788">Returns</a></h4>
 <p><a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
+<h4 id="implementation-of-152"><a class="header" href="#implementation-of-152">Implementation of</a></h4>
+<p>UplcList.assertUnit</p>
 <h4 id="inherited-from-343"><a class="header" href="#inherited-from-343">Inherited from</a></h4>
-<p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#assertunit">assertUnit</a></p>
+<p>UplcValueImpl.assertUnit</p>
 <div class="vspace"></div>
 <h3 id="copy-5"><a class="header" href="#copy-5">copy</a></h3>
 <p>▸ <strong>copy</strong>(<code>newSite</code>): <a href="api/reference/classes/UplcList.html"><code>UplcList</code></a></p>
@@ -13221,46 +13476,60 @@ Only used during evaluation.</p>
 </div>
 <h4 id="returns-789"><a class="header" href="#returns-789">Returns</a></h4>
 <p><a href="api/reference/classes/UplcList.html"><code>UplcList</code></a></p>
+<h4 id="implementation-of-153"><a class="header" href="#implementation-of-153">Implementation of</a></h4>
+<p>UplcList.copy</p>
 <div class="vspace"></div>
 <h3 id="isany-4"><a class="header" href="#isany-4">isAny</a></h3>
 <p>▸ <strong>isAny</strong>(): <code>boolean</code></p>
 <h4 id="returns-790"><a class="header" href="#returns-790">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-154"><a class="header" href="#implementation-of-154">Implementation of</a></h4>
+<p>UplcList.isAny</p>
 <h4 id="inherited-from-344"><a class="header" href="#inherited-from-344">Inherited from</a></h4>
-<p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isany">isAny</a></p>
+<p>UplcValueImpl.isAny</p>
 <div class="vspace"></div>
 <h3 id="isdata-4"><a class="header" href="#isdata-4">isData</a></h3>
 <p>▸ <strong>isData</strong>(): <code>boolean</code></p>
 <h4 id="returns-791"><a class="header" href="#returns-791">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-155"><a class="header" href="#implementation-of-155">Implementation of</a></h4>
+<p>UplcList.isData</p>
 <h4 id="inherited-from-345"><a class="header" href="#inherited-from-345">Inherited from</a></h4>
-<p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isdata">isData</a></p>
+<p>UplcValueImpl.isData</p>
 <div class="vspace"></div>
 <h3 id="isdatalist"><a class="header" href="#isdatalist">isDataList</a></h3>
 <p>▸ <strong>isDataList</strong>(): <code>boolean</code></p>
 <h4 id="returns-792"><a class="header" href="#returns-792">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-156"><a class="header" href="#implementation-of-156">Implementation of</a></h4>
+<p>UplcList.isDataList</p>
 <div class="vspace"></div>
 <h3 id="isdatamap"><a class="header" href="#isdatamap">isDataMap</a></h3>
 <p>▸ <strong>isDataMap</strong>(): <code>boolean</code></p>
 <h4 id="returns-793"><a class="header" href="#returns-793">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-157"><a class="header" href="#implementation-of-157">Implementation of</a></h4>
+<p>UplcList.isDataMap</p>
 <div class="vspace"></div>
 <h3 id="islist-4"><a class="header" href="#islist-4">isList</a></h3>
 <p>▸ <strong>isList</strong>(): <code>boolean</code></p>
 <p>Distinguishes a list from a map</p>
 <h4 id="returns-794"><a class="header" href="#returns-794">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-158"><a class="header" href="#implementation-of-158">Implementation of</a></h4>
+<p>UplcList.isList</p>
 <h4 id="inherited-from-346"><a class="header" href="#inherited-from-346">Inherited from</a></h4>
-<p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#islist">isList</a></p>
+<p>UplcValueImpl.isList</p>
 <div class="vspace"></div>
 <h3 id="ispair-4"><a class="header" href="#ispair-4">isPair</a></h3>
 <p>▸ <strong>isPair</strong>(): <code>boolean</code></p>
 <p>Distinguishes a pair from a mapItem</p>
 <h4 id="returns-795"><a class="header" href="#returns-795">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-159"><a class="header" href="#implementation-of-159">Implementation of</a></h4>
+<p>UplcList.isPair</p>
 <h4 id="inherited-from-347"><a class="header" href="#inherited-from-347">Inherited from</a></h4>
-<p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#ispair">isPair</a></p>
+<p>UplcValueImpl.isPair</p>
 <div class="vspace"></div>
 <h3 id="toflatvalue-4"><a class="header" href="#toflatvalue-4">toFlatValue</a></h3>
 <p>▸ <strong>toFlatValue</strong>(<code>bitWriter</code>): <code>void</code></p>
@@ -13273,8 +13542,10 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-796"><a class="header" href="#returns-796">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-160"><a class="header" href="#implementation-of-160">Implementation of</a></h4>
+<p>UplcList.toFlatValue</p>
 <h4 id="inherited-from-348"><a class="header" href="#inherited-from-348">Inherited from</a></h4>
-<p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalue">toFlatValue</a></p>
+<p>UplcValueImpl.toFlatValue</p>
 <div class="vspace"></div>
 <h3 id="toflatvalueinternal-4"><a class="header" href="#toflatvalueinternal-4">toFlatValueInternal</a></h3>
 <p>▸ <strong>toFlatValueInternal</strong>(<code>bitWriter</code>): <code>void</code></p>
@@ -13286,8 +13557,10 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-797"><a class="header" href="#returns-797">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-161"><a class="header" href="#implementation-of-161">Implementation of</a></h4>
+<p>UplcList.toFlatValueInternal</p>
 <h4 id="inherited-from-349"><a class="header" href="#inherited-from-349">Inherited from</a></h4>
-<p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalueinternal">toFlatValueInternal</a></p>
+<p>UplcValueImpl.toFlatValueInternal</p>
 <div class="vspace"></div>
 <h3 id="transfer-19"><a class="header" href="#transfer-19">transfer</a></h3>
 <p>▸ <strong>transfer</strong>(<code>other</code>): <code>any</code></p>
@@ -13298,13 +13571,17 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-798"><a class="header" href="#returns-798">Returns</a></h4>
 <p><code>any</code></p>
+<h4 id="implementation-of-162"><a class="header" href="#implementation-of-162">Implementation of</a></h4>
+<p>UplcList.transfer</p>
 <div class="vspace"></div>
 <h3 id="typebits-4"><a class="header" href="#typebits-4">typeBits</a></h3>
 <p>▸ <strong>typeBits</strong>(): <code>string</code></p>
 <h4 id="returns-799"><a class="header" href="#returns-799">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-163"><a class="header" href="#implementation-of-163">Implementation of</a></h4>
+<p>UplcList.typeBits</p>
 <h4 id="inherited-from-350"><a class="header" href="#inherited-from-350">Inherited from</a></h4>
-<p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#typebits">typeBits</a></p>
+<p>UplcValueImpl.typeBits</p>
 <div class="vspace"></div>
 <h3 id="new-22"><a class="header" href="#new-22">new</a></h3>
 <p>▸ <code>Static</code> <strong>new</strong>(<code>type</code>, <code>items</code>): <a href="api/reference/classes/UplcList.html"><code>UplcList</code></a></p>
@@ -13328,7 +13605,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>↳ <strong><code>UplcPair</code></strong></p>
 </li>
 </ul>
-<h2 id="implements-12"><a class="header" href="#implements-12">Implements</a></h2>
+<h2 id="implements-16"><a class="header" href="#implements-16">Implements</a></h2>
 <ul>
 <li><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></li>
 </ul>
@@ -13360,7 +13637,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bool</strong>(): <code>boolean</code></p>
 <h4 id="returns-801"><a class="header" href="#returns-801">Returns</a></h4>
 <p><code>boolean</code></p>
-<h4 id="implementation-of-70"><a class="header" href="#implementation-of-70">Implementation of</a></h4>
+<h4 id="implementation-of-164"><a class="header" href="#implementation-of-164">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bool">bool</a></p>
 <h4 id="inherited-from-351"><a class="header" href="#inherited-from-351">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
@@ -13369,7 +13646,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-802"><a class="header" href="#returns-802">Returns</a></h4>
 <p><code>number</code>[]</p>
-<h4 id="implementation-of-71"><a class="header" href="#implementation-of-71">Implementation of</a></h4>
+<h4 id="implementation-of-165"><a class="header" href="#implementation-of-165">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bytes">bytes</a></p>
 <h4 id="inherited-from-352"><a class="header" href="#inherited-from-352">Inherited from</a></h4>
 <p>UplcValueImpl.bytes</p>
@@ -13378,7 +13655,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>data</strong>(): <a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
 <h4 id="returns-803"><a class="header" href="#returns-803">Returns</a></h4>
 <p><a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
-<h4 id="implementation-of-72"><a class="header" href="#implementation-of-72">Implementation of</a></h4>
+<h4 id="implementation-of-166"><a class="header" href="#implementation-of-166">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#data">data</a></p>
 <h4 id="inherited-from-353"><a class="header" href="#inherited-from-353">Inherited from</a></h4>
 <p>UplcValueImpl.data</p>
@@ -13387,7 +13664,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>first</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-804"><a class="header" href="#returns-804">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
-<h4 id="implementation-of-73"><a class="header" href="#implementation-of-73">Implementation of</a></h4>
+<h4 id="implementation-of-167"><a class="header" href="#implementation-of-167">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#first">first</a></p>
 <h4 id="inherited-from-354"><a class="header" href="#inherited-from-354">Inherited from</a></h4>
 <p>UplcValueImpl.first</p>
@@ -13397,14 +13674,14 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>16 additional type bits on top of #first and #second bits</p>
 <h4 id="returns-805"><a class="header" href="#returns-805">Returns</a></h4>
 <p><code>number</code></p>
-<h4 id="implementation-of-74"><a class="header" href="#implementation-of-74">Implementation of</a></h4>
+<h4 id="implementation-of-168"><a class="header" href="#implementation-of-168">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#flatsize">flatSize</a></p>
 <div class="vspace"></div>
 <h3 id="int-8"><a class="header" href="#int-8">int</a></h3>
 <p>• <code>get</code> <strong>int</strong>(): <code>bigint</code></p>
 <h4 id="returns-806"><a class="header" href="#returns-806">Returns</a></h4>
 <p><code>bigint</code></p>
-<h4 id="implementation-of-75"><a class="header" href="#implementation-of-75">Implementation of</a></h4>
+<h4 id="implementation-of-169"><a class="header" href="#implementation-of-169">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#int">int</a></p>
 <h4 id="inherited-from-355"><a class="header" href="#inherited-from-355">Inherited from</a></h4>
 <p>UplcValueImpl.int</p>
@@ -13413,7 +13690,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>itemType</strong>(): <a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
 <h4 id="returns-807"><a class="header" href="#returns-807">Returns</a></h4>
 <p><a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
-<h4 id="implementation-of-76"><a class="header" href="#implementation-of-76">Implementation of</a></h4>
+<h4 id="implementation-of-170"><a class="header" href="#implementation-of-170">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#itemtype">itemType</a></p>
 <h4 id="inherited-from-356"><a class="header" href="#inherited-from-356">Inherited from</a></h4>
 <p>UplcValueImpl.itemType</p>
@@ -13427,7 +13704,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>length</strong>(): <code>number</code></p>
 <h4 id="returns-809"><a class="header" href="#returns-809">Returns</a></h4>
 <p><code>number</code></p>
-<h4 id="implementation-of-77"><a class="header" href="#implementation-of-77">Implementation of</a></h4>
+<h4 id="implementation-of-171"><a class="header" href="#implementation-of-171">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#length">length</a></p>
 <h4 id="inherited-from-357"><a class="header" href="#inherited-from-357">Inherited from</a></h4>
 <p>UplcValueImpl.length</p>
@@ -13436,7 +13713,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>list</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
 <h4 id="returns-810"><a class="header" href="#returns-810">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
-<h4 id="implementation-of-78"><a class="header" href="#implementation-of-78">Implementation of</a></h4>
+<h4 id="implementation-of-172"><a class="header" href="#implementation-of-172">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#list">list</a></p>
 <h4 id="inherited-from-358"><a class="header" href="#inherited-from-358">Inherited from</a></h4>
 <p>UplcValueImpl.list</p>
@@ -13445,14 +13722,14 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>memSize</strong>(): <code>number</code></p>
 <h4 id="returns-811"><a class="header" href="#returns-811">Returns</a></h4>
 <p><code>number</code></p>
-<h4 id="implementation-of-79"><a class="header" href="#implementation-of-79">Implementation of</a></h4>
+<h4 id="implementation-of-173"><a class="header" href="#implementation-of-173">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#memsize">memSize</a></p>
 <div class="vspace"></div>
 <h3 id="second-6"><a class="header" href="#second-6">second</a></h3>
 <p>• <code>get</code> <strong>second</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-812"><a class="header" href="#returns-812">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
-<h4 id="implementation-of-80"><a class="header" href="#implementation-of-80">Implementation of</a></h4>
+<h4 id="implementation-of-174"><a class="header" href="#implementation-of-174">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#second">second</a></p>
 <h4 id="inherited-from-359"><a class="header" href="#inherited-from-359">Inherited from</a></h4>
 <p>UplcValueImpl.second</p>
@@ -13461,7 +13738,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>site</strong>(): <a href="api/reference/classes/Site.html"><code>Site</code></a></p>
 <h4 id="returns-813"><a class="header" href="#returns-813">Returns</a></h4>
 <p><a href="api/reference/classes/Site.html"><code>Site</code></a></p>
-<h4 id="implementation-of-81"><a class="header" href="#implementation-of-81">Implementation of</a></h4>
+<h4 id="implementation-of-175"><a class="header" href="#implementation-of-175">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#site">site</a></p>
 <h4 id="inherited-from-360"><a class="header" href="#inherited-from-360">Inherited from</a></h4>
 <p>UplcValueImpl.site</p>
@@ -13470,7 +13747,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>string</strong>(): <code>string</code></p>
 <h4 id="returns-814"><a class="header" href="#returns-814">Returns</a></h4>
 <p><code>string</code></p>
-<h4 id="implementation-of-82"><a class="header" href="#implementation-of-82">Implementation of</a></h4>
+<h4 id="implementation-of-176"><a class="header" href="#implementation-of-176">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#string">string</a></p>
 <h4 id="inherited-from-361"><a class="header" href="#inherited-from-361">Inherited from</a></h4>
 <p>UplcValueImpl.string</p>
@@ -13484,7 +13761,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>assertUnit</strong>(): <a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
 <h4 id="returns-816"><a class="header" href="#returns-816">Returns</a></h4>
 <p><a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
-<h4 id="implementation-of-83"><a class="header" href="#implementation-of-83">Implementation of</a></h4>
+<h4 id="implementation-of-177"><a class="header" href="#implementation-of-177">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#assertunit">assertUnit</a></p>
 <h4 id="inherited-from-362"><a class="header" href="#inherited-from-362">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#assertunit">assertUnit</a></p>
@@ -13498,14 +13775,14 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-817"><a class="header" href="#returns-817">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
-<h4 id="implementation-of-84"><a class="header" href="#implementation-of-84">Implementation of</a></h4>
+<h4 id="implementation-of-178"><a class="header" href="#implementation-of-178">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#copy">copy</a></p>
 <div class="vspace"></div>
 <h3 id="isany-5"><a class="header" href="#isany-5">isAny</a></h3>
 <p>▸ <strong>isAny</strong>(): <code>boolean</code></p>
 <h4 id="returns-818"><a class="header" href="#returns-818">Returns</a></h4>
 <p><code>boolean</code></p>
-<h4 id="implementation-of-85"><a class="header" href="#implementation-of-85">Implementation of</a></h4>
+<h4 id="implementation-of-179"><a class="header" href="#implementation-of-179">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isany">isAny</a></p>
 <h4 id="inherited-from-363"><a class="header" href="#inherited-from-363">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isany">isAny</a></p>
@@ -13514,7 +13791,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>isData</strong>(): <code>boolean</code></p>
 <h4 id="returns-819"><a class="header" href="#returns-819">Returns</a></h4>
 <p><code>boolean</code></p>
-<h4 id="implementation-of-86"><a class="header" href="#implementation-of-86">Implementation of</a></h4>
+<h4 id="implementation-of-180"><a class="header" href="#implementation-of-180">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isdata">isData</a></p>
 <h4 id="inherited-from-364"><a class="header" href="#inherited-from-364">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isdata">isData</a></p>
@@ -13524,7 +13801,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a list from a map</p>
 <h4 id="returns-820"><a class="header" href="#returns-820">Returns</a></h4>
 <p><code>boolean</code></p>
-<h4 id="implementation-of-87"><a class="header" href="#implementation-of-87">Implementation of</a></h4>
+<h4 id="implementation-of-181"><a class="header" href="#implementation-of-181">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#islist">isList</a></p>
 <h4 id="inherited-from-365"><a class="header" href="#inherited-from-365">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#islist">isList</a></p>
@@ -13534,7 +13811,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a pair from a mapItem</p>
 <h4 id="returns-821"><a class="header" href="#returns-821">Returns</a></h4>
 <p><code>boolean</code></p>
-<h4 id="implementation-of-88"><a class="header" href="#implementation-of-88">Implementation of</a></h4>
+<h4 id="implementation-of-182"><a class="header" href="#implementation-of-182">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#ispair">isPair</a></p>
 <h4 id="inherited-from-366"><a class="header" href="#inherited-from-366">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#ispair">isPair</a></p>
@@ -13550,7 +13827,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-822"><a class="header" href="#returns-822">Returns</a></h4>
 <p><code>void</code></p>
-<h4 id="implementation-of-89"><a class="header" href="#implementation-of-89">Implementation of</a></h4>
+<h4 id="implementation-of-183"><a class="header" href="#implementation-of-183">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalue">toFlatValue</a></p>
 <h4 id="inherited-from-367"><a class="header" href="#inherited-from-367">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalue">toFlatValue</a></p>
@@ -13565,7 +13842,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-823"><a class="header" href="#returns-823">Returns</a></h4>
 <p><code>void</code></p>
-<h4 id="implementation-of-90"><a class="header" href="#implementation-of-90">Implementation of</a></h4>
+<h4 id="implementation-of-184"><a class="header" href="#implementation-of-184">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <h4 id="inherited-from-368"><a class="header" href="#inherited-from-368">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalueinternal">toFlatValueInternal</a></p>
@@ -13579,14 +13856,14 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-824"><a class="header" href="#returns-824">Returns</a></h4>
 <p><code>any</code></p>
-<h4 id="implementation-of-91"><a class="header" href="#implementation-of-91">Implementation of</a></h4>
+<h4 id="implementation-of-185"><a class="header" href="#implementation-of-185">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#transfer">transfer</a></p>
 <div class="vspace"></div>
 <h3 id="typebits-5"><a class="header" href="#typebits-5">typeBits</a></h3>
 <p>▸ <strong>typeBits</strong>(): <code>string</code></p>
 <h4 id="returns-825"><a class="header" href="#returns-825">Returns</a></h4>
 <p><code>string</code></p>
-<h4 id="implementation-of-92"><a class="header" href="#implementation-of-92">Implementation of</a></h4>
+<h4 id="implementation-of-186"><a class="header" href="#implementation-of-186">Implementation of</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#typebits">typeBits</a></p>
 <h4 id="inherited-from-369"><a class="header" href="#inherited-from-369">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#typebits">typeBits</a></p>
@@ -13843,12 +14120,17 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/classes/../../../api/index.html">Helios API</a>/ <a href="api/reference/classes/../../../api/reference/index.html">API Reference</a>/ <a href="api/reference/classes/../../../api/reference/classes/index.html">Classes</a>/</p>
 <h1 id="uplcstring"><a class="header" href="#uplcstring">UplcString</a></h1>
 <p>Primitive string value.</p>
+<p><strong><code>Implements</code></strong></p>
 <h2 id="hierarchy-52"><a class="header" href="#hierarchy-52">Hierarchy</a></h2>
 <ul>
 <li>
 <p><a href="api/reference/classes/UplcValueImpl.html"><code>UplcValueImpl</code></a></p>
 <p>↳ <strong><code>UplcString</code></strong></p>
 </li>
+</ul>
+<h2 id="implements-17"><a class="header" href="#implements-17">Implements</a></h2>
+<ul>
+<li><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href='javascript:(() => {
         document.getElementById("table-of-contents").setAttribute("expanded", "");
@@ -13877,6 +14159,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bool</strong>(): <code>boolean</code></p>
 <h4 id="returns-853"><a class="header" href="#returns-853">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-187"><a class="header" href="#implementation-of-187">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bool">bool</a></p>
 <h4 id="inherited-from-370"><a class="header" href="#inherited-from-370">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
@@ -13884,6 +14168,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-854"><a class="header" href="#returns-854">Returns</a></h4>
 <p><code>number</code>[]</p>
+<h4 id="implementation-of-188"><a class="header" href="#implementation-of-188">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bytes">bytes</a></p>
 <h4 id="inherited-from-371"><a class="header" href="#inherited-from-371">Inherited from</a></h4>
 <p>UplcValueImpl.bytes</p>
 <div class="vspace"></div>
@@ -13891,6 +14177,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>data</strong>(): <a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
 <h4 id="returns-855"><a class="header" href="#returns-855">Returns</a></h4>
 <p><a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
+<h4 id="implementation-of-189"><a class="header" href="#implementation-of-189">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#data">data</a></p>
 <h4 id="inherited-from-372"><a class="header" href="#inherited-from-372">Inherited from</a></h4>
 <p>UplcValueImpl.data</p>
 <div class="vspace"></div>
@@ -13898,6 +14186,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>first</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-856"><a class="header" href="#returns-856">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-190"><a class="header" href="#implementation-of-190">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#first">first</a></p>
 <h4 id="inherited-from-373"><a class="header" href="#inherited-from-373">Inherited from</a></h4>
 <p>UplcValueImpl.first</p>
 <div class="vspace"></div>
@@ -13905,11 +14195,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>flatSize</strong>(): <code>number</code></p>
 <h4 id="returns-857"><a class="header" href="#returns-857">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-191"><a class="header" href="#implementation-of-191">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#flatsize">flatSize</a></p>
 <div class="vspace"></div>
 <h3 id="int-9"><a class="header" href="#int-9">int</a></h3>
 <p>• <code>get</code> <strong>int</strong>(): <code>bigint</code></p>
 <h4 id="returns-858"><a class="header" href="#returns-858">Returns</a></h4>
 <p><code>bigint</code></p>
+<h4 id="implementation-of-192"><a class="header" href="#implementation-of-192">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#int">int</a></p>
 <h4 id="inherited-from-374"><a class="header" href="#inherited-from-374">Inherited from</a></h4>
 <p>UplcValueImpl.int</p>
 <div class="vspace"></div>
@@ -13917,6 +14211,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>itemType</strong>(): <a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
 <h4 id="returns-859"><a class="header" href="#returns-859">Returns</a></h4>
 <p><a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
+<h4 id="implementation-of-193"><a class="header" href="#implementation-of-193">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#itemtype">itemType</a></p>
 <h4 id="inherited-from-375"><a class="header" href="#inherited-from-375">Inherited from</a></h4>
 <p>UplcValueImpl.itemType</p>
 <div class="vspace"></div>
@@ -13924,6 +14220,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>length</strong>(): <code>number</code></p>
 <h4 id="returns-860"><a class="header" href="#returns-860">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-194"><a class="header" href="#implementation-of-194">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#length">length</a></p>
 <h4 id="inherited-from-376"><a class="header" href="#inherited-from-376">Inherited from</a></h4>
 <p>UplcValueImpl.length</p>
 <div class="vspace"></div>
@@ -13931,6 +14229,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>list</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
 <h4 id="returns-861"><a class="header" href="#returns-861">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
+<h4 id="implementation-of-195"><a class="header" href="#implementation-of-195">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#list">list</a></p>
 <h4 id="inherited-from-377"><a class="header" href="#inherited-from-377">Inherited from</a></h4>
 <p>UplcValueImpl.list</p>
 <div class="vspace"></div>
@@ -13938,11 +14238,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>memSize</strong>(): <code>number</code></p>
 <h4 id="returns-862"><a class="header" href="#returns-862">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-196"><a class="header" href="#implementation-of-196">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#memsize">memSize</a></p>
 <div class="vspace"></div>
 <h3 id="second-7"><a class="header" href="#second-7">second</a></h3>
 <p>• <code>get</code> <strong>second</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-863"><a class="header" href="#returns-863">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-197"><a class="header" href="#implementation-of-197">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#second">second</a></p>
 <h4 id="inherited-from-378"><a class="header" href="#inherited-from-378">Inherited from</a></h4>
 <p>UplcValueImpl.second</p>
 <div class="vspace"></div>
@@ -13950,6 +14254,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>site</strong>(): <a href="api/reference/classes/Site.html"><code>Site</code></a></p>
 <h4 id="returns-864"><a class="header" href="#returns-864">Returns</a></h4>
 <p><a href="api/reference/classes/Site.html"><code>Site</code></a></p>
+<h4 id="implementation-of-198"><a class="header" href="#implementation-of-198">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#site">site</a></p>
 <h4 id="inherited-from-379"><a class="header" href="#inherited-from-379">Inherited from</a></h4>
 <p>UplcValueImpl.site</p>
 <div class="vspace"></div>
@@ -13957,6 +14263,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>string</strong>(): <code>string</code></p>
 <h4 id="returns-865"><a class="header" href="#returns-865">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-199"><a class="header" href="#implementation-of-199">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#string">string</a></p>
 <h4 id="inherited-from-380"><a class="header" href="#inherited-from-380">Inherited from</a></h4>
 <p>UplcValueImpl.string</p>
 <h2 id="methods-106"><a class="header" href="#methods-106">Methods</a></h2>
@@ -13964,6 +14272,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>assertUnit</strong>(): <a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
 <h4 id="returns-866"><a class="header" href="#returns-866">Returns</a></h4>
 <p><a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
+<h4 id="implementation-of-200"><a class="header" href="#implementation-of-200">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#assertunit">assertUnit</a></p>
 <h4 id="inherited-from-381"><a class="header" href="#inherited-from-381">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#assertunit">assertUnit</a></p>
 <div class="vspace"></div>
@@ -13976,11 +14286,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-867"><a class="header" href="#returns-867">Returns</a></h4>
 <p><a href="api/reference/classes/UplcString.html"><code>UplcString</code></a></p>
+<h4 id="implementation-of-201"><a class="header" href="#implementation-of-201">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#copy">copy</a></p>
 <div class="vspace"></div>
 <h3 id="isany-6"><a class="header" href="#isany-6">isAny</a></h3>
 <p>▸ <strong>isAny</strong>(): <code>boolean</code></p>
 <h4 id="returns-868"><a class="header" href="#returns-868">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-202"><a class="header" href="#implementation-of-202">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isany">isAny</a></p>
 <h4 id="inherited-from-382"><a class="header" href="#inherited-from-382">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isany">isAny</a></p>
 <div class="vspace"></div>
@@ -13988,6 +14302,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>isData</strong>(): <code>boolean</code></p>
 <h4 id="returns-869"><a class="header" href="#returns-869">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-203"><a class="header" href="#implementation-of-203">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isdata">isData</a></p>
 <h4 id="inherited-from-383"><a class="header" href="#inherited-from-383">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isdata">isData</a></p>
 <div class="vspace"></div>
@@ -13996,6 +14312,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a list from a map</p>
 <h4 id="returns-870"><a class="header" href="#returns-870">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-204"><a class="header" href="#implementation-of-204">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#islist">isList</a></p>
 <h4 id="inherited-from-384"><a class="header" href="#inherited-from-384">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#islist">isList</a></p>
 <div class="vspace"></div>
@@ -14004,6 +14322,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a pair from a mapItem</p>
 <h4 id="returns-871"><a class="header" href="#returns-871">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-205"><a class="header" href="#implementation-of-205">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#ispair">isPair</a></p>
 <h4 id="inherited-from-385"><a class="header" href="#inherited-from-385">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#ispair">isPair</a></p>
 <div class="vspace"></div>
@@ -14018,6 +14338,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-872"><a class="header" href="#returns-872">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-206"><a class="header" href="#implementation-of-206">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalue">toFlatValue</a></p>
 <h4 id="inherited-from-386"><a class="header" href="#inherited-from-386">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalue">toFlatValue</a></p>
 <div class="vspace"></div>
@@ -14031,6 +14353,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-873"><a class="header" href="#returns-873">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-207"><a class="header" href="#implementation-of-207">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <h4 id="inherited-from-387"><a class="header" href="#inherited-from-387">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <div class="vspace"></div>
@@ -14043,11 +14367,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-874"><a class="header" href="#returns-874">Returns</a></h4>
 <p><code>any</code></p>
+<h4 id="implementation-of-208"><a class="header" href="#implementation-of-208">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#transfer">transfer</a></p>
 <div class="vspace"></div>
 <h3 id="typebits-6"><a class="header" href="#typebits-6">typeBits</a></h3>
 <p>▸ <strong>typeBits</strong>(): <code>string</code></p>
 <h4 id="returns-875"><a class="header" href="#returns-875">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-209"><a class="header" href="#implementation-of-209">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#typebits">typeBits</a></p>
 <h4 id="inherited-from-388"><a class="header" href="#inherited-from-388">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#typebits">typeBits</a></p>
 <div class="vspace"></div>
@@ -14216,12 +14544,17 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/classes/../../../api/index.html">Helios API</a>/ <a href="api/reference/classes/../../../api/reference/index.html">API Reference</a>/ <a href="api/reference/classes/../../../api/reference/classes/index.html">Classes</a>/</p>
 <h1 id="uplcunit"><a class="header" href="#uplcunit">UplcUnit</a></h1>
 <p>Primitive unit value.</p>
+<p><strong><code>Implements</code></strong></p>
 <h2 id="hierarchy-54"><a class="header" href="#hierarchy-54">Hierarchy</a></h2>
 <ul>
 <li>
 <p><a href="api/reference/classes/UplcValueImpl.html"><code>UplcValueImpl</code></a></p>
 <p>↳ <strong><code>UplcUnit</code></strong></p>
 </li>
+</ul>
+<h2 id="implements-18"><a class="header" href="#implements-18">Implements</a></h2>
+<ul>
+<li><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href='javascript:(() => {
         document.getElementById("table-of-contents").setAttribute("expanded", "");
@@ -14249,6 +14582,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bool</strong>(): <code>boolean</code></p>
 <h4 id="returns-890"><a class="header" href="#returns-890">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-210"><a class="header" href="#implementation-of-210">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bool">bool</a></p>
 <h4 id="inherited-from-390"><a class="header" href="#inherited-from-390">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
@@ -14256,6 +14591,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-891"><a class="header" href="#returns-891">Returns</a></h4>
 <p><code>number</code>[]</p>
+<h4 id="implementation-of-211"><a class="header" href="#implementation-of-211">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#bytes">bytes</a></p>
 <h4 id="inherited-from-391"><a class="header" href="#inherited-from-391">Inherited from</a></h4>
 <p>UplcValueImpl.bytes</p>
 <div class="vspace"></div>
@@ -14263,6 +14600,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>data</strong>(): <a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
 <h4 id="returns-892"><a class="header" href="#returns-892">Returns</a></h4>
 <p><a href="api/reference/classes/UplcData.html"><code>UplcData</code></a></p>
+<h4 id="implementation-of-212"><a class="header" href="#implementation-of-212">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#data">data</a></p>
 <h4 id="inherited-from-392"><a class="header" href="#inherited-from-392">Inherited from</a></h4>
 <p>UplcValueImpl.data</p>
 <div class="vspace"></div>
@@ -14270,6 +14609,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>first</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-893"><a class="header" href="#returns-893">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-213"><a class="header" href="#implementation-of-213">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#first">first</a></p>
 <h4 id="inherited-from-393"><a class="header" href="#inherited-from-393">Inherited from</a></h4>
 <p>UplcValueImpl.first</p>
 <div class="vspace"></div>
@@ -14277,11 +14618,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>flatSize</strong>(): <code>number</code></p>
 <h4 id="returns-894"><a class="header" href="#returns-894">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-214"><a class="header" href="#implementation-of-214">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#flatsize">flatSize</a></p>
 <div class="vspace"></div>
 <h3 id="int-10"><a class="header" href="#int-10">int</a></h3>
 <p>• <code>get</code> <strong>int</strong>(): <code>bigint</code></p>
 <h4 id="returns-895"><a class="header" href="#returns-895">Returns</a></h4>
 <p><code>bigint</code></p>
+<h4 id="implementation-of-215"><a class="header" href="#implementation-of-215">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#int">int</a></p>
 <h4 id="inherited-from-394"><a class="header" href="#inherited-from-394">Inherited from</a></h4>
 <p>UplcValueImpl.int</p>
 <div class="vspace"></div>
@@ -14289,6 +14634,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>itemType</strong>(): <a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
 <h4 id="returns-896"><a class="header" href="#returns-896">Returns</a></h4>
 <p><a href="api/reference/classes/UplcType.html"><code>UplcType</code></a></p>
+<h4 id="implementation-of-216"><a class="header" href="#implementation-of-216">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#itemtype">itemType</a></p>
 <h4 id="inherited-from-395"><a class="header" href="#inherited-from-395">Inherited from</a></h4>
 <p>UplcValueImpl.itemType</p>
 <div class="vspace"></div>
@@ -14296,6 +14643,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>length</strong>(): <code>number</code></p>
 <h4 id="returns-897"><a class="header" href="#returns-897">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-217"><a class="header" href="#implementation-of-217">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#length">length</a></p>
 <h4 id="inherited-from-396"><a class="header" href="#inherited-from-396">Inherited from</a></h4>
 <p>UplcValueImpl.length</p>
 <div class="vspace"></div>
@@ -14303,6 +14652,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>list</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
 <h4 id="returns-898"><a class="header" href="#returns-898">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a>[]</p>
+<h4 id="implementation-of-218"><a class="header" href="#implementation-of-218">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#list">list</a></p>
 <h4 id="inherited-from-397"><a class="header" href="#inherited-from-397">Inherited from</a></h4>
 <p>UplcValueImpl.list</p>
 <div class="vspace"></div>
@@ -14310,11 +14661,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>memSize</strong>(): <code>number</code></p>
 <h4 id="returns-899"><a class="header" href="#returns-899">Returns</a></h4>
 <p><code>number</code></p>
+<h4 id="implementation-of-219"><a class="header" href="#implementation-of-219">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#memsize">memSize</a></p>
 <div class="vspace"></div>
 <h3 id="second-8"><a class="header" href="#second-8">second</a></h3>
 <p>• <code>get</code> <strong>second</strong>(): <a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
 <h4 id="returns-900"><a class="header" href="#returns-900">Returns</a></h4>
 <p><a href="api/reference/classes/../interfaces/UplcValue.html"><code>UplcValue</code></a></p>
+<h4 id="implementation-of-220"><a class="header" href="#implementation-of-220">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#second">second</a></p>
 <h4 id="inherited-from-398"><a class="header" href="#inherited-from-398">Inherited from</a></h4>
 <p>UplcValueImpl.second</p>
 <div class="vspace"></div>
@@ -14322,6 +14677,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>site</strong>(): <a href="api/reference/classes/Site.html"><code>Site</code></a></p>
 <h4 id="returns-901"><a class="header" href="#returns-901">Returns</a></h4>
 <p><a href="api/reference/classes/Site.html"><code>Site</code></a></p>
+<h4 id="implementation-of-221"><a class="header" href="#implementation-of-221">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#site">site</a></p>
 <h4 id="inherited-from-399"><a class="header" href="#inherited-from-399">Inherited from</a></h4>
 <p>UplcValueImpl.site</p>
 <div class="vspace"></div>
@@ -14329,6 +14686,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>• <code>get</code> <strong>string</strong>(): <code>string</code></p>
 <h4 id="returns-902"><a class="header" href="#returns-902">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-222"><a class="header" href="#implementation-of-222">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#string">string</a></p>
 <h4 id="inherited-from-400"><a class="header" href="#inherited-from-400">Inherited from</a></h4>
 <p>UplcValueImpl.string</p>
 <h2 id="methods-109"><a class="header" href="#methods-109">Methods</a></h2>
@@ -14336,6 +14695,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>assertUnit</strong>(): <a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
 <h4 id="returns-903"><a class="header" href="#returns-903">Returns</a></h4>
 <p><a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
+<h4 id="implementation-of-223"><a class="header" href="#implementation-of-223">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#assertunit">assertUnit</a></p>
 <h4 id="inherited-from-401"><a class="header" href="#inherited-from-401">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#assertunit">assertUnit</a></p>
 <div class="vspace"></div>
@@ -14348,11 +14709,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-904"><a class="header" href="#returns-904">Returns</a></h4>
 <p><a href="api/reference/classes/UplcUnit.html"><code>UplcUnit</code></a></p>
+<h4 id="implementation-of-224"><a class="header" href="#implementation-of-224">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#copy">copy</a></p>
 <div class="vspace"></div>
 <h3 id="isany-7"><a class="header" href="#isany-7">isAny</a></h3>
 <p>▸ <strong>isAny</strong>(): <code>boolean</code></p>
 <h4 id="returns-905"><a class="header" href="#returns-905">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-225"><a class="header" href="#implementation-of-225">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isany">isAny</a></p>
 <h4 id="inherited-from-402"><a class="header" href="#inherited-from-402">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isany">isAny</a></p>
 <div class="vspace"></div>
@@ -14360,6 +14725,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>▸ <strong>isData</strong>(): <code>boolean</code></p>
 <h4 id="returns-906"><a class="header" href="#returns-906">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-226"><a class="header" href="#implementation-of-226">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#isdata">isData</a></p>
 <h4 id="inherited-from-403"><a class="header" href="#inherited-from-403">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#isdata">isData</a></p>
 <div class="vspace"></div>
@@ -14368,6 +14735,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a list from a map</p>
 <h4 id="returns-907"><a class="header" href="#returns-907">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-227"><a class="header" href="#implementation-of-227">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#islist">isList</a></p>
 <h4 id="inherited-from-404"><a class="header" href="#inherited-from-404">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#islist">isList</a></p>
 <div class="vspace"></div>
@@ -14376,6 +14745,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <p>Distinguishes a pair from a mapItem</p>
 <h4 id="returns-908"><a class="header" href="#returns-908">Returns</a></h4>
 <p><code>boolean</code></p>
+<h4 id="implementation-of-228"><a class="header" href="#implementation-of-228">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#ispair">isPair</a></p>
 <h4 id="inherited-from-405"><a class="header" href="#inherited-from-405">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#ispair">isPair</a></p>
 <div class="vspace"></div>
@@ -14390,6 +14761,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-909"><a class="header" href="#returns-909">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-229"><a class="header" href="#implementation-of-229">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalue">toFlatValue</a></p>
 <h4 id="inherited-from-406"><a class="header" href="#inherited-from-406">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalue">toFlatValue</a></p>
 <div class="vspace"></div>
@@ -14403,6 +14776,8 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-910"><a class="header" href="#returns-910">Returns</a></h4>
 <p><code>void</code></p>
+<h4 id="implementation-of-230"><a class="header" href="#implementation-of-230">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <h4 id="inherited-from-407"><a class="header" href="#inherited-from-407">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#toflatvalueinternal">toFlatValueInternal</a></p>
 <div class="vspace"></div>
@@ -14415,11 +14790,15 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 </div>
 <h4 id="returns-911"><a class="header" href="#returns-911">Returns</a></h4>
 <p><code>any</code></p>
+<h4 id="implementation-of-231"><a class="header" href="#implementation-of-231">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#transfer">transfer</a></p>
 <div class="vspace"></div>
 <h3 id="typebits-8"><a class="header" href="#typebits-8">typeBits</a></h3>
 <p>▸ <strong>typeBits</strong>(): <code>string</code></p>
 <h4 id="returns-912"><a class="header" href="#returns-912">Returns</a></h4>
 <p><code>string</code></p>
+<h4 id="implementation-of-232"><a class="header" href="#implementation-of-232">Implementation of</a></h4>
+<p><a href="api/reference/classes/../interfaces/UplcValue.html">UplcValue</a>.<a href="api/reference/classes/../interfaces/UplcValue.html#typebits">typeBits</a></p>
 <h4 id="inherited-from-408"><a class="header" href="#inherited-from-408">Inherited from</a></h4>
 <p><a href="api/reference/classes/UplcValueImpl.html">UplcValueImpl</a>.<a href="api/reference/classes/UplcValueImpl.html#typebits">typeBits</a></p>
 <div class="vspace"></div>
@@ -15370,7 +15749,7 @@ Can be used as a marker of Helios sources so that syntax highlighting can work i
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/interfaces/../../../api/index.html">Helios API</a>/ <a href="api/reference/interfaces/../../../api/reference/index.html">API Reference</a>/ <a href="api/reference/interfaces/../../../api/reference/interfaces/index.html">Interfaces</a>/</p>
 <h1 id="network"><a class="header" href="#network">Network</a></h1>
 <p>Blockchain query interface.</p>
-<h2 id="implemented-by"><a class="header" href="#implemented-by">Implemented by</a></h2>
+<h2 id="implemented-by-1"><a class="header" href="#implemented-by-1">Implemented by</a></h2>
 <ul>
 <li><a href="api/reference/interfaces/../classes/BlockfrostV0.html"><code>BlockfrostV0</code></a></li>
 <li><a href="api/reference/interfaces/../classes/KoiosV0.html"><code>KoiosV0</code></a></li>
@@ -15438,7 +15817,7 @@ Can be used as a marker of Helios sources so that syntax highlighting can work i
 <p><code>Promise</code>&lt;<a href="api/reference/interfaces/../classes/TxId.html"><code>TxId</code></a>&gt;</p>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/interfaces/../../../api/index.html">Helios API</a>/ <a href="api/reference/interfaces/../../../api/reference/index.html">API Reference</a>/ <a href="api/reference/interfaces/../../../api/reference/interfaces/index.html">Interfaces</a>/</p>
 <h1 id="privatekey-1"><a class="header" href="#privatekey-1">PrivateKey</a></h1>
-<h2 id="implemented-by-1"><a class="header" href="#implemented-by-1">Implemented by</a></h2>
+<h2 id="implemented-by-2"><a class="header" href="#implemented-by-2">Implemented by</a></h2>
 <ul>
 <li><a href="api/reference/interfaces/../classes/Bip32PrivateKey.html"><code>Bip32PrivateKey</code></a></li>
 <li><a href="api/reference/interfaces/../classes/Ed25519PrivateKey.html"><code>Ed25519PrivateKey</code></a></li>
@@ -15479,10 +15858,15 @@ Can be used as a marker of Helios sources so that syntax highlighting can work i
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/interfaces/../../../api/index.html">Helios API</a>/ <a href="api/reference/interfaces/../../../api/reference/index.html">API Reference</a>/ <a href="api/reference/interfaces/../../../api/reference/interfaces/index.html">Interfaces</a>/</p>
 <h1 id="uplcvalue"><a class="header" href="#uplcvalue">UplcValue</a></h1>
 <p>UplcValue is passed around by Plutus-core expressions.</p>
-<h2 id="implemented-by-2"><a class="header" href="#implemented-by-2">Implemented by</a></h2>
+<h2 id="implemented-by-3"><a class="header" href="#implemented-by-3">Implemented by</a></h2>
 <ul>
+<li><a href="api/reference/interfaces/../classes/UplcBool.html"><code>UplcBool</code></a></li>
+<li><a href="api/reference/interfaces/../classes/UplcByteArray.html"><code>UplcByteArray</code></a></li>
+<li><a href="api/reference/interfaces/../classes/UplcDataValue.html"><code>UplcDataValue</code></a></li>
 <li><a href="api/reference/interfaces/../classes/UplcInt.html"><code>UplcInt</code></a></li>
 <li><a href="api/reference/interfaces/../classes/UplcPair.html"><code>UplcPair</code></a></li>
+<li><a href="api/reference/interfaces/../classes/UplcString.html"><code>UplcString</code></a></li>
+<li><a href="api/reference/interfaces/../classes/UplcUnit.html"><code>UplcUnit</code></a></li>
 </ul>
 <h2 id="table-of-contents"><a class="header" href='javascript:(() => {
         document.getElementById("table-of-contents").setAttribute("expanded", "");
@@ -15639,7 +16023,7 @@ Can be used as a marker of Helios sources so that syntax highlighting can work i
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/interfaces/../../../api/index.html">Helios API</a>/ <a href="api/reference/interfaces/../../../api/reference/index.html">API Reference</a>/ <a href="api/reference/interfaces/../../../api/reference/interfaces/index.html">Interfaces</a>/</p>
 <h1 id="wallet"><a class="header" href="#wallet">Wallet</a></h1>
 <p>An interface type for a wallet that manages a user's UTxOs and addresses.</p>
-<h2 id="implemented-by-3"><a class="header" href="#implemented-by-3">Implemented by</a></h2>
+<h2 id="implemented-by-4"><a class="header" href="#implemented-by-4">Implemented by</a></h2>
 <ul>
 <li><a href="api/reference/interfaces/../classes/Cip30Wallet.html"><code>Cip30Wallet</code></a></li>
 <li><a href="api/reference/interfaces/../classes/RemoteWallet.html"><code>RemoteWallet</code></a></li>
@@ -16742,7 +17126,7 @@ This value must be '1' or '2'.</p>
 <p><code>void</code></p>
 <div style="break-before: page; page-break-before: always;"></div><p><a href="api/reference/../../api/index.html">Helios API</a>/ <a href="api/reference/../../api/reference/index.html">API Reference</a>/</p>
 <h1 id="types-2"><a class="header" href="#types-2">Types</a></h1>
-<ul class="toc types"><li><a href="api/reference/types.html#addressprops">AddressProps</a></li><li><a href="api/reference/types.html#assetclassprops">AssetClassProps</a></li><li><a href="api/reference/types.html#assetsprops">AssetsProps</a></li><li><a href="api/reference/types.html#bytearrayprops">ByteArrayProps</a></li><li><a href="api/reference/types.html#cip30handle">Cip30Handle</a></li><li><a href="api/reference/types.html#coinselectionalgorithm">CoinSelectionAlgorithm</a></li><li><a href="api/reference/types.html#cost">Cost</a></li><li><a href="api/reference/types.html#curvepoint">CurvePoint</a></li><li><a href="api/reference/types.html#datumhashprops">DatumHashProps</a></li><li><a href="api/reference/types.html#decoder">Decoder</a></li><li><a href="api/reference/types.html#hintprops">HIntProps</a></li><li><a href="api/reference/types.html#hashprops">HashProps</a></li><li><a href="api/reference/types.html#liveslotgetter">LiveSlotGetter</a></li><li><a href="api/reference/types.html#metadata">Metadata</a></li><li><a href="api/reference/types.html#mintingpolicyhashprops">MintingPolicyHashProps</a></li><li><a href="api/reference/types.html#networksliceutxos">NetworkSliceUTxOs</a></li><li><a href="api/reference/types.html#numbergenerator">NumberGenerator</a></li><li><a href="api/reference/types.html#profile">Profile</a></li><li><a href="api/reference/types.html#programconfig">ProgramConfig</a></li><li><a href="api/reference/types.html#programproperties">ProgramProperties</a></li><li><a href="api/reference/types.html#propertytest">PropertyTest</a></li><li><a href="api/reference/types.html#pubkeyhashprops">PubKeyHashProps</a></li><li><a href="api/reference/types.html#pubkeyprops">PubKeyProps</a></li><li><a href="api/reference/types.html#scriptpurpose">ScriptPurpose</a></li><li><a href="api/reference/types.html#stakingvalidatorhashprops">StakingValidatorHashProps</a></li><li><a href="api/reference/types.html#transferuplcast">TransferUplcAst</a></li><li><a href="api/reference/types.html#transferableuplcprogram">TransferableUplcProgram</a></li><li><a href="api/reference/types.html#txidprops">TxIdProps</a></li><li><a href="api/reference/types.html#txoutputidprops">TxOutputIdProps</a></li><li><a href="api/reference/types.html#uplcrtecallbacks">UplcRTECallbacks</a></li><li><a href="api/reference/types.html#uplcrawstack">UplcRawStack</a></li><li><a href="api/reference/types.html#usertypes">UserTypes</a></li><li><a href="api/reference/types.html#validatorhashprops">ValidatorHashProps</a></li><li><a href="api/reference/types.html#valuegenerator">ValueGenerator</a></li><li><a href="api/reference/types.html#valueprops">ValueProps</a></li></ul>
+<ul class="toc types"><li><a href="api/reference/types.html#addressprops">AddressProps</a></li><li><a href="api/reference/types.html#assetclassprops">AssetClassProps</a></li><li><a href="api/reference/types.html#assetsprops">AssetsProps</a></li><li><a href="api/reference/types.html#bytearrayprops">ByteArrayProps</a></li><li><a href="api/reference/types.html#cip30handle">Cip30Handle</a></li><li><a href="api/reference/types.html#coinselectionalgorithm">CoinSelectionAlgorithm</a></li><li><a href="api/reference/types.html#cost">Cost</a></li><li><a href="api/reference/types.html#curvepoint">CurvePoint</a></li><li><a href="api/reference/types.html#datumhashprops">DatumHashProps</a></li><li><a href="api/reference/types.html#decoder">Decoder</a></li><li><a href="api/reference/types.html#hintprops">HIntProps</a></li><li><a href="api/reference/types.html#hashprops">HashProps</a></li><li><a href="api/reference/types.html#liveslotgetter">LiveSlotGetter</a></li><li><a href="api/reference/types.html#metadata">Metadata</a></li><li><a href="api/reference/types.html#mintingpolicyhashprops">MintingPolicyHashProps</a></li><li><a href="api/reference/types.html#networksliceutxos">NetworkSliceUTxOs</a></li><li><a href="api/reference/types.html#numbergenerator">NumberGenerator</a></li><li><a href="api/reference/types.html#profile">Profile</a></li><li><a href="api/reference/types.html#programconfig">ProgramConfig</a></li><li><a href="api/reference/types.html#programproperties">ProgramProperties</a></li><li><a href="api/reference/types.html#propertytest">PropertyTest</a></li><li><a href="api/reference/types.html#pubkeyhashprops">PubKeyHashProps</a></li><li><a href="api/reference/types.html#pubkeyprops">PubKeyProps</a></li><li><a href="api/reference/types.html#scriptpurpose">ScriptPurpose</a></li><li><a href="api/reference/types.html#stakingvalidatorhashprops">StakingValidatorHashProps</a></li><li><a href="api/reference/types.html#transferuplcast">TransferUplcAst</a></li><li><a href="api/reference/types.html#transferableuplcprogram">TransferableUplcProgram</a></li><li><a href="api/reference/types.html#txidprops">TxIdProps</a></li><li><a href="api/reference/types.html#txoutputidprops">TxOutputIdProps</a></li><li><a href="api/reference/types.html#uint64fast">UInt64Fast</a></li><li><a href="api/reference/types.html#uplcrtecallbacks">UplcRTECallbacks</a></li><li><a href="api/reference/types.html#uplcrawstack">UplcRawStack</a></li><li><a href="api/reference/types.html#usertypes">UserTypes</a></li><li><a href="api/reference/types.html#validatorhashprops">ValidatorHashProps</a></li><li><a href="api/reference/types.html#valuegenerator">ValueGenerator</a></li><li><a href="api/reference/types.html#valueprops">ValueProps</a></li></ul>
 <h3 id="addressprops"><a class="header" href="#addressprops">AddressProps</a></h3>
 <p>Ƭ <strong>AddressProps</strong>: <code>number</code>[] | <code>string</code></p>
 <p>An array of bytes, a Bech32 encoded address, or the hexadecimal representation of the underlying bytes.</p>
@@ -16997,6 +17381,12 @@ messages: printed messages (can be helpful when debugging)</p>
 <h3 id="txoutputidprops"><a class="header" href="#txoutputidprops">TxOutputIdProps</a></h3>
 <p>Ƭ <strong>TxOutputIdProps</strong>: <code>string</code> | [<a href="api/reference/classes/TxId.html"><code>TxId</code></a> | <a href="api/reference/types.html#txidprops"><code>TxIdProps</code></a>, <a href="api/reference/classes/HInt.html"><code>HInt</code></a> | <a href="api/reference/types.html#hintprops"><code>HIntProps</code></a>] | { <code>txId</code>: <a href="api/reference/classes/TxId.html"><code>TxId</code></a> | <a href="api/reference/types.html#txidprops"><code>TxIdProps</code></a> ; <code>utxoId</code>: <a href="api/reference/classes/HInt.html"><code>HInt</code></a> | <a href="api/reference/types.html#hintprops"><code>HIntProps</code></a>  }</p>
 <div class="vspace"></div>
+<h3 id="uint64fast"><a class="header" href="#uint64fast">UInt64Fast</a></h3>
+<p>Ƭ <strong>UInt64Fast</strong>: [<code>number</code>, <code>number</code>]</p>
+<p>TODO: switch to using UInt64Fast instead of UInt64 everywhere
+First entry: high
+Second entry: low</p>
+<div class="vspace"></div>
 <h3 id="uplcrtecallbacks"><a class="header" href="#uplcrtecallbacks">UplcRTECallbacks</a></h3>
 <p>Ƭ <strong>UplcRTECallbacks</strong>: <code>Object</code></p>
 <h4 id="type-declaration-33"><a class="header" href="#type-declaration-33">Type declaration</a></h4>
@@ -17056,7 +17446,7 @@ This is used to detect small IRFuncExprs and inline them</p>
 <p>Configures the Uplc evaluator to print messages to <code>console</code>.</p>
 <div class="vspace"></div>
 <h3 id="version"><a class="header" href="#version">VERSION</a></h3>
-<p>• <code>Const</code> <strong>VERSION</strong>: <code>&quot;0.16.1&quot;</code></p>
+<p>• <code>Const</code> <strong>VERSION</strong>: <code>&quot;0.16.4&quot;</code></p>
 <p>Current version of the Helios library.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="helios-cli"><a class="header" href="#helios-cli">Helios CLI</a></h1>
 <p>This chapter explains how to use the <a href="https://github.com/Hyperion-BT/helios-cli"><em>helios-cli</em></a>, and how to build and submit transactions using <em>cardano-cli</em>.</p>
