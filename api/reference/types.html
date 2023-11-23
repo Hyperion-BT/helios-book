@@ -177,7 +177,7 @@
                     <main>
                         <p><a href="../../api/index.html">Helios API</a>/ <a href="../../api/reference/index.html">API Reference</a>/</p>
 <h1 id="types"><a class="header" href="#types">Types</a></h1>
-<ul class="toc types"><li><a href="#addressprops">AddressProps</a></li><li><a href="#assetclassprops">AssetClassProps</a></li><li><a href="#assetsprops">AssetsProps</a></li><li><a href="#bytearrayprops">ByteArrayProps</a></li><li><a href="#cip30handle">Cip30Handle</a></li><li><a href="#coinselectionalgorithm">CoinSelectionAlgorithm</a></li><li><a href="#cost">Cost</a></li><li><a href="#curvepoint">CurvePoint</a></li><li><a href="#datumhashprops">DatumHashProps</a></li><li><a href="#decoder">Decoder</a></li><li><a href="#hintprops">HIntProps</a></li><li><a href="#hashprops">HashProps</a></li><li><a href="#liveslotgetter">LiveSlotGetter</a></li><li><a href="#metadata">Metadata</a></li><li><a href="#mintingpolicyhashprops">MintingPolicyHashProps</a></li><li><a href="#networksliceutxos">NetworkSliceUTxOs</a></li><li><a href="#numbergenerator">NumberGenerator</a></li><li><a href="#profile">Profile</a></li><li><a href="#programconfig">ProgramConfig</a></li><li><a href="#programproperties">ProgramProperties</a></li><li><a href="#propertytest">PropertyTest</a></li><li><a href="#pubkeyhashprops">PubKeyHashProps</a></li><li><a href="#pubkeyprops">PubKeyProps</a></li><li><a href="#scriptpurpose">ScriptPurpose</a></li><li><a href="#stakingvalidatorhashprops">StakingValidatorHashProps</a></li><li><a href="#transferuplcast">TransferUplcAst</a></li><li><a href="#transferableuplcprogram">TransferableUplcProgram</a></li><li><a href="#txidprops">TxIdProps</a></li><li><a href="#txoutputidprops">TxOutputIdProps</a></li><li><a href="#uint64fast">UInt64Fast</a></li><li><a href="#uplcrtecallbacks">UplcRTECallbacks</a></li><li><a href="#uplcrawstack">UplcRawStack</a></li><li><a href="#usertypes">UserTypes</a></li><li><a href="#validatorhashprops">ValidatorHashProps</a></li><li><a href="#valuegenerator">ValueGenerator</a></li><li><a href="#valueprops">ValueProps</a></li></ul>
+<ul class="toc types"><li><a href="#addressprops">AddressProps</a></li><li><a href="#assetclassprops">AssetClassProps</a></li><li><a href="#assetsprops">AssetsProps</a></li><li><a href="#bytearrayprops">ByteArrayProps</a></li><li><a href="#cip30handle">Cip30Handle</a></li><li><a href="#coinselectionalgorithm">CoinSelectionAlgorithm</a></li><li><a href="#cost">Cost</a></li><li><a href="#costcount">CostCount</a></li><li><a href="#curvepoint">CurvePoint</a></li><li><a href="#datumhashprops">DatumHashProps</a></li><li><a href="#decoder">Decoder</a></li><li><a href="#hintprops">HIntProps</a></li><li><a href="#hashprops">HashProps</a></li><li><a href="#liveslotgetter">LiveSlotGetter</a></li><li><a href="#metadata">Metadata</a></li><li><a href="#mintingpolicyhashprops">MintingPolicyHashProps</a></li><li><a href="#networksliceutxos">NetworkSliceUTxOs</a></li><li><a href="#numbergenerator">NumberGenerator</a></li><li><a href="#profile">Profile</a></li><li><a href="#programconfig">ProgramConfig</a></li><li><a href="#programproperties">ProgramProperties</a></li><li><a href="#propertytest">PropertyTest</a></li><li><a href="#pubkeyhashprops">PubKeyHashProps</a></li><li><a href="#pubkeyprops">PubKeyProps</a></li><li><a href="#scriptpurpose">ScriptPurpose</a></li><li><a href="#stakingvalidatorhashprops">StakingValidatorHashProps</a></li><li><a href="#transferuplcast">TransferUplcAst</a></li><li><a href="#transferableuplcprogram">TransferableUplcProgram</a></li><li><a href="#txidprops">TxIdProps</a></li><li><a href="#txoutputidprops">TxOutputIdProps</a></li><li><a href="#uint64fast">UInt64Fast</a></li><li><a href="#uplcrtecallbacks">UplcRTECallbacks</a></li><li><a href="#uplcrawstack">UplcRawStack</a></li><li><a href="#usertypes">UserTypes</a></li><li><a href="#validatorhashprops">ValidatorHashProps</a></li><li><a href="#valuegenerator">ValueGenerator</a></li><li><a href="#valueprops">ValueProps</a></li></ul>
 <h3 id="addressprops"><a class="header" href="#addressprops">AddressProps</a></h3>
 <p>Ƭ <strong>AddressProps</strong>: <code>number</code>[] | <code>string</code></p>
 <p>An array of bytes, a Bech32 encoded address, or the hexadecimal representation of the underlying bytes.</p>
@@ -247,6 +247,9 @@ declare global {
 <tr><td style="text-align: left"><code>mem</code></td><td style="text-align: left"><code>bigint</code></td></tr>
 </tbody></table>
 </div><div class="vspace"></div>
+<h3 id="costcount"><a class="header" href="#costcount">CostCount</a></h3>
+<p>Ƭ <strong>CostCount</strong>: <a href="types.html#cost"><code>Cost</code></a> &amp; { <code>count</code>: <code>number</code>  }</p>
+<div class="vspace"></div>
 <h3 id="curvepoint"><a class="header" href="#curvepoint">CurvePoint</a></h3>
 <p>Ƭ <strong>CurvePoint</strong>&lt;<code>T</code>&gt;: <code>Object</code></p>
 <h4 id="type-parameters"><a class="header" href="#type-parameters">Type parameters</a></h4>
@@ -325,13 +328,13 @@ result: result of evaluation
 messages: printed messages (can be helpful when debugging)</p>
 <h4 id="type-declaration-7"><a class="header" href="#type-declaration-7">Type declaration</a></h4>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Name</th><th style="text-align: left">Type</th></tr></thead><tbody>
-<tr><td style="text-align: left"><code>builtins?</code></td><td style="text-align: left">{ <code>[name: string]</code>: <a href="types.html#cost"><code>Cost</code></a>;  }</td></tr>
+<tr><td style="text-align: left"><code>builtins?</code></td><td style="text-align: left">{ <code>[name: string]</code>: <a href="types.html#costcount"><code>CostCount</code></a>;  }</td></tr>
 <tr><td style="text-align: left"><code>cpu</code></td><td style="text-align: left"><code>bigint</code></td></tr>
 <tr><td style="text-align: left"><code>mem</code></td><td style="text-align: left"><code>bigint</code></td></tr>
 <tr><td style="text-align: left"><code>messages?</code></td><td style="text-align: left"><code>string</code>[]</td></tr>
 <tr><td style="text-align: left"><code>result?</code></td><td style="text-align: left"><a href="classes/RuntimeError.html"><code>RuntimeError</code></a> | <a href="interfaces/UplcValue.html"><code>UplcValue</code></a></td></tr>
 <tr><td style="text-align: left"><code>size?</code></td><td style="text-align: left"><code>number</code></td></tr>
-<tr><td style="text-align: left"><code>terms?</code></td><td style="text-align: left">{ <code>[name: string]</code>: <a href="types.html#cost"><code>Cost</code></a>;  }</td></tr>
+<tr><td style="text-align: left"><code>terms?</code></td><td style="text-align: left">{ <code>[name: string]</code>: <a href="types.html#costcount"><code>CostCount</code></a>;  }</td></tr>
 </tbody></table>
 </div><div class="vspace"></div>
 <h3 id="programconfig"><a class="header" href="#programconfig">ProgramConfig</a></h3>
