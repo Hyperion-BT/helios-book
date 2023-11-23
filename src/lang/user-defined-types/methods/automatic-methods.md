@@ -37,6 +37,14 @@ MyType::from_data(data: Data) -> MyType
 
 If you set [`CHECK_CASTS`](../../../api/reference/namespaces/config.md#check_casts) to `true`, a warning will be printed if the structure of `data` doesn't match the type.
 
+## `is_valid_data`
+
+Deep check that the given data matches the expected format.
+
+```helios
+MyType::is_valid_data(data: Data) -> Bool
+```
+
 ## `serialize`
 
 The `serialize` method is automatically defined on every user-type, and thus `serialize` is a reserved name that can't be used for other methods.
@@ -57,4 +65,4 @@ The `show` method returns a string representation of underlying instance, which 
 my_instance.show() -> String
 ```
 
-> **Note**: usually you will use `print(x.show())` instead `print(x.serialize().show())` when debugging.
+> **Note**: usually you will use `print(x.show())` instead of `print(x.serialize().show())` when debugging.

@@ -22,6 +22,14 @@ Map[KeyType]ValueType::from_data(data: Data) -> Map[KeyType]ValueType
 
 ## Getters
 
+### `head`
+
+Get the key and the value of the first entry.
+
+```helios
+map.head -> (KeyType, ValueType)
+```
+
 ### `head_key`
 
 Returns the key of the first entry in the `Map`. Throws an error if the `Map` is empty.
@@ -204,13 +212,6 @@ Returns the value of the first entry in the map that matches the given key (wrap
 map.get_safe(key: KeyType) -> Option[ValueType]
 ```
 
-### `head`
-
-Get the key and the value of the first entry.
-
-```helios
-map.head() -> (KeyType, ValueType)
-```
 
 ### `is_empty`
 
