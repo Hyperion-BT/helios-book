@@ -24,6 +24,14 @@ Casts the generic [`ScriptHash`](./scripthash.md) type into `StakingValidatorHas
 StakingValidatorHash::from_script_hash(hash: ScriptHash) -> StakingValidatorHash
 ```
 
+## Getters
+
+### `bytes`
+
+```helios
+staking_validator_hash.bytes -> ByteArray
+```
+
 ## Operators
 
 ### `==`

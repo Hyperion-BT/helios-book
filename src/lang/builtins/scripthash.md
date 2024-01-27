@@ -12,6 +12,14 @@ This is returned by the [`TxOutput.ref_script_hash`](./txoutput.md#ref_script_ha
 ScriptHash::from_data(data: Data) -> ScriptHash
 ```
 
+## Getters
+
+### `bytes`
+
+```helios
+script_hash.bytes -> ByteArray
+```
+
 ## Operators
 
 ### `==`

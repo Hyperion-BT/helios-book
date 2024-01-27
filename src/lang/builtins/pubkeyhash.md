@@ -24,6 +24,14 @@ PubKeyHash::new(bytes: ByteArray) -> PubKeyHash
 PubKeyHash::from_data(data: Data) -> PubKeyHash
 ```
 
+## Getters
+
+### `bytes`
+
+```helios
+pkh.bytes -> ByteArray
+```
+
 ## Operators
 
 ### `==`

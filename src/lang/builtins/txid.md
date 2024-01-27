@@ -17,6 +17,12 @@ TxId::new(bytes: ByteArray) -> TxId
 TxId::from_data(data: Data) -> TxId
 ```
 
+## Getters
+
+```helios
+tx_id.bytes -> ByteArray
+```
+
 ## Operators
 
 ### `==`

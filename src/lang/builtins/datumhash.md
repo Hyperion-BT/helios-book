@@ -16,6 +16,14 @@ DatumHash::new(bytes: ByteArray) -> DatumHash
 DatumHash::from_data(data: Data) -> DatumHash
 ```
 
+## Getters
+
+### `bytes`
+
+```helios
+datum_hash.bytes -> ByteArray
+```
+
 ## Operators
 
 ### `==`
