@@ -1726,6 +1726,10 @@ validator_credential.hash -&gt; ValidatorHash
 <h3 id="from_data-6"><a class="header" href="#from_data-6"><code>from_data</code></a></h3>
 <pre><code class="language-helios">DatumHash::from_data(data: Data) -&gt; DatumHash
 </code></pre>
+<h2 id="getters-5"><a class="header" href="#getters-5">Getters</a></h2>
+<h3 id="bytes"><a class="header" href="#bytes"><code>bytes</code></a></h3>
+<pre><code class="language-helios">datum_hash.bytes -&gt; ByteArray
+</code></pre>
 <h2 id="operators-7"><a class="header" href="#operators-7">Operators</a></h2>
 <h3 id="-20"><a class="header" href="#-20"><code>==</code></a></h3>
 <pre><code class="language-helios">DatumHash == DatumHash -&gt; Bool
@@ -1791,7 +1795,7 @@ validator_credential.hash -&gt; ValidatorHash
 	epoch: Int
 ) -&gt; DCert::RetirePool
 </code></pre>
-<h2 id="getters-5"><a class="header" href="#getters-5">Getters</a></h2>
+<h2 id="getters-6"><a class="header" href="#getters-6">Getters</a></h2>
 <h3 id="dcertregister"><a class="header" href="#dcertregister"><code>DCert::Register</code></a></h3>
 <h4 id="credential-2"><a class="header" href="#credential-2"><code>credential</code></a></h4>
 <pre><code class="language-helios">register_dcert.credential -&gt; StakingCredential
@@ -2070,7 +2074,7 @@ validator_credential.hash -&gt; ValidatorHash
 <p>Creates a new list of length <code>n</code>, where very contained item is the same.</p>
 <pre><code class="language-helios">[]ItemType::new_const(n: Int, item: ItemType) -&gt; []ItemType
 </code></pre>
-<h2 id="getters-6"><a class="header" href="#getters-6">Getters</a></h2>
+<h2 id="getters-7"><a class="header" href="#getters-7">Getters</a></h2>
 <h3 id="length-1"><a class="header" href="#length-1"><code>length</code></a></h3>
 <p>Returns the length of a list.</p>
 <pre><code class="language-helios">list.length -&gt; Int
@@ -2248,7 +2252,7 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <h3 id="from_data-11"><a class="header" href="#from_data-11"><code>from_data</code></a></h3>
 <pre><code class="language-helios">Map[KeyType]ValueType::from_data(data: Data) -&gt; Map[KeyType]ValueType
 </code></pre>
-<h2 id="getters-7"><a class="header" href="#getters-7">Getters</a></h2>
+<h2 id="getters-8"><a class="header" href="#getters-8">Getters</a></h2>
 <h3 id="head-1"><a class="header" href="#head-1"><code>head</code></a></h3>
 <p>Get the key and the value of the first entry.</p>
 <pre><code class="language-helios">map.head -&gt; (KeyType, ValueType)
@@ -2415,6 +2419,10 @@ print(my_map.get(&quot;zero&quot;).show()); ... // prints &quot;0&quot;
 <p>Casts the generic <a href="lang/builtins/./scripthash.html"><code>ScriptHash</code></a> type into <code>MintingPolicyHash</code>.</p>
 <pre><code class="language-helios">MintingPolicyHash::from_script_hash(hash: ScriptHash) -&gt; MintingPolicyHash
 </code></pre>
+<h2 id="getters-9"><a class="header" href="#getters-9">Getters</a></h2>
+<h3 id="bytes-1"><a class="header" href="#bytes-1"><code>bytes</code></a></h3>
+<pre><code class="language-helios">mph.bytes -&gt; ByteArray
+</code></pre>
 <h2 id="operators-13"><a class="header" href="#operators-13">Operators</a></h2>
 <h3 id="-54"><a class="header" href="#-54"><code>==</code></a></h3>
 <pre><code class="language-helios">MintingPolicyHash == MintingPolicyHash -&gt; Bool
@@ -2458,7 +2466,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="from_data-13"><a class="header" href="#from_data-13"><code>from_data</code></a></h3>
 <pre><code class="language-helios">Option[SomeType]::from_data(data: Data) -&gt; Option[SomeType]
 </code></pre>
-<h2 id="getters-8"><a class="header" href="#getters-8">Getters</a></h2>
+<h2 id="getters-10"><a class="header" href="#getters-10">Getters</a></h2>
 <h3 id="optionsometypesome"><a class="header" href="#optionsometypesome"><code>Option[SomeType]::Some</code></a></h3>
 <h4 id="some"><a class="header" href="#some"><code>some</code></a></h4>
 <p>Returns content of <code>Option[</code><em><code>SomeType</code></em><code>]::Some</code>.</p>
@@ -2517,7 +2525,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 <p>Construct a new <code>OutputDatum::None</code> instance.</p>
 <pre><code class="language-helios">OutputDatum::new_none() -&gt; OutputDatum::None
 </code></pre>
-<h2 id="getters-9"><a class="header" href="#getters-9">Getters</a></h2>
+<h2 id="getters-11"><a class="header" href="#getters-11">Getters</a></h2>
 <h3 id="outputdatum-1"><a class="header" href="#outputdatum-1"><code>OutputDatum</code></a></h3>
 <h4 id="get_inline_data"><a class="header" href="#get_inline_data"><code>get_inline_data</code></a></h4>
 <p>Short-hand for <code>output_datum.switch{inline: Inline =&gt; inline.data, _ =&gt; error(&quot;not an inline datum&quot;)}</code>:</p>
@@ -2594,6 +2602,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 </code></pre>
 <h3 id="from_data-16"><a class="header" href="#from_data-16"><code>from_data</code></a></h3>
 <pre><code class="language-helios">PubKeyHash::from_data(data: Data) -&gt; PubKeyHash
+</code></pre>
+<h2 id="getters-12"><a class="header" href="#getters-12">Getters</a></h2>
+<h3 id="bytes-2"><a class="header" href="#bytes-2"><code>bytes</code></a></h3>
+<pre><code class="language-helios">pkh.bytes -&gt; ByteArray
 </code></pre>
 <h2 id="operators-17"><a class="header" href="#operators-17">Operators</a></h2>
 <h3 id="-66"><a class="header" href="#-66"><code>==</code></a></h3>
@@ -2736,7 +2748,7 @@ option_none: Option[Int] = Option[Int]::None; ...
     output_id: TxOutputId
 ) -&gt; ScriptContext
 </code></pre>
-<h2 id="getters-10"><a class="header" href="#getters-10">Getters</a></h2>
+<h2 id="getters-13"><a class="header" href="#getters-13">Getters</a></h2>
 <h3 id="tx"><a class="header" href="#tx"><code>tx</code></a></h3>
 <p>Get the <a href="lang/builtins/./tx.html"><code>Tx</code></a> data structure.</p>
 <pre><code class="language-helios">ctx.tx -&gt; Tx
@@ -2791,6 +2803,10 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="from_data-19"><a class="header" href="#from_data-19"><code>from_data</code></a></h3>
 <pre><code class="language-helios">ScriptHash::from_data(data: Data) -&gt; ScriptHash
 </code></pre>
+<h2 id="getters-14"><a class="header" href="#getters-14">Getters</a></h2>
+<h3 id="bytes-3"><a class="header" href="#bytes-3"><code>bytes</code></a></h3>
+<pre><code class="language-helios">script_hash.bytes -&gt; ByteArray
+</code></pre>
 <h2 id="operators-20"><a class="header" href="#operators-20">Operators</a></h2>
 <h3 id="-83"><a class="header" href="#-83"><code>==</code></a></h3>
 <pre><code class="language-helios">ScriptHash == ScriptHash -&gt; Bool
@@ -2828,7 +2844,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="new_certifying-1"><a class="header" href="#new_certifying-1"><code>new_certifying</code></a></h3>
 <pre><code class="language-helios">ScriptPurpose::new_certifying(dcert: DCert) -&gt; ScriptPurpose::Certifying
 </code></pre>
-<h2 id="getters-11"><a class="header" href="#getters-11">Getters</a></h2>
+<h2 id="getters-15"><a class="header" href="#getters-15">Getters</a></h2>
 <h3 id="scriptpurposeminting"><a class="header" href="#scriptpurposeminting"><code>ScriptPurpose::Minting</code></a></h3>
 <h4 id="policy_hash"><a class="header" href="#policy_hash"><code>policy_hash</code></a></h4>
 <p>Returnt the <a href="lang/builtins/./mintingpolicyhash.html"><code>MintingPolicyHash</code></a> of the UTxO whose minting or burning is being validated.</p>
@@ -2879,7 +2895,7 @@ option_none: Option[Int] = Option[Int]::None; ...
 <h3 id="from_data-21"><a class="header" href="#from_data-21"><code>from_data</code></a></h3>
 <pre><code class="language-helios">StakingCredential::from_data(data: Data) -&gt; StakingCredential
 </code></pre>
-<h2 id="getters-12"><a class="header" href="#getters-12">Getters</a></h2>
+<h2 id="getters-16"><a class="header" href="#getters-16">Getters</a></h2>
 <h3 id="stakingcredentialhash"><a class="header" href="#stakingcredentialhash"><code>StakingCredential::Hash</code></a></h3>
 <h4 id="hash-2"><a class="header" href="#hash-2"><code>hash</code></a></h4>
 <p>Get the underlying <a href="lang/builtins/./stakinghash.html"><code>StakingHash</code></a>.</p>
@@ -2928,7 +2944,7 @@ validator_stakinghash: StakingHash::Validator = StakingHash::new_validator(Staki
 <h3 id="from_data-22"><a class="header" href="#from_data-22"><code>from_data</code></a></h3>
 <pre><code class="language-helios">StakingHash::from_data(data: Data) -&gt; StakingHash
 </code></pre>
-<h2 id="getters-13"><a class="header" href="#getters-13">Getters</a></h2>
+<h2 id="getters-17"><a class="header" href="#getters-17">Getters</a></h2>
 <h3 id="hash-3"><a class="header" href="#hash-3"><code>hash</code></a></h3>
 <p>Get the underlying hash.</p>
 <pre><code class="language-helios">stakekey_stakinghash.hash -&gt; PubKeyHash
@@ -2957,7 +2973,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="from_data-23"><a class="header" href="#from_data-23"><code>from_data</code></a></h3>
 <pre><code class="language-helios">StakingPurpose::from_data(data: Data) -&gt; StakingPurpose
 </code></pre>
-<h2 id="getters-14"><a class="header" href="#getters-14">Getters</a></h2>
+<h2 id="getters-18"><a class="header" href="#getters-18">Getters</a></h2>
 <h3 id="stakingpurposerewarding"><a class="header" href="#stakingpurposerewarding"><code>StakingPurpose::Rewarding</code></a></h3>
 <h4 id="credential-5"><a class="header" href="#credential-5"><code>credential</code></a></h4>
 <p>Returns the <a href="lang/builtins/./stakingcredential.html"><code>StakingCredential</code></a> for which rewards are being withdrawn.</p>
@@ -2992,6 +3008,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="from_script_hash-1"><a class="header" href="#from_script_hash-1"><code>from_script_hash</code></a></h3>
 <p>Casts the generic <a href="lang/builtins/./scripthash.html"><code>ScriptHash</code></a> type into <code>StakingValidatorHash</code>.</p>
 <pre><code class="language-helios">StakingValidatorHash::from_script_hash(hash: ScriptHash) -&gt; StakingValidatorHash
+</code></pre>
+<h2 id="getters-19"><a class="header" href="#getters-19">Getters</a></h2>
+<h3 id="bytes-4"><a class="header" href="#bytes-4"><code>bytes</code></a></h3>
+<pre><code class="language-helios">staking_validator_hash.bytes -&gt; ByteArray
 </code></pre>
 <h2 id="operators-25"><a class="header" href="#operators-25">Operators</a></h2>
 <h3 id="-93"><a class="header" href="#-93"><code>==</code></a></h3>
@@ -3138,7 +3158,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="from_data-27"><a class="header" href="#from_data-27"><code>from_data</code></a></h3>
 <pre><code class="language-helios">TimeRange::from_data(data: Data) -&gt; TimeRange
 </code></pre>
-<h2 id="getters-15"><a class="header" href="#getters-15">Getters</a></h2>
+<h2 id="getters-20"><a class="header" href="#getters-20">Getters</a></h2>
 <h3 id="start"><a class="header" href="#start"><code>start</code></a></h3>
 <p>Returns the start <a href="lang/builtins/./time.html"><code>Time</code></a> of a <code>TimeRange</code>. Throws an error if start is non-finite.</p>
 <pre><code class="language-helios">time_range.start -&gt; Time
@@ -3200,7 +3220,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <blockquote>
 <p><strong>Note</strong>: the value type of the <code>redeemers</code> and <code>datums</code> fields can be any type when instantiating a new <code>Tx</code> instance. But when getting the <code>redeemers</code> and the <code>datums</code> the value type is actually <code>Data</code> (see <a href="lang/builtins/./tx.html#redeemers"><code>redeemers</code></a> and <a href="lang/builtins/./tx.html#datums"><code>datums</code></a>).</p>
 </blockquote>
-<h2 id="getters-16"><a class="header" href="#getters-16">Getters</a></h2>
+<h2 id="getters-21"><a class="header" href="#getters-21">Getters</a></h2>
 <h3 id="inputs"><a class="header" href="#inputs"><code>inputs</code></a></h3>
 <p>Returns the list of <a href="lang/builtins/./txinput.html"><code>TxInput</code></a>s of the transaction.</p>
 <pre><code class="language-helios">tx.inputs -&gt; []TxInput
@@ -3340,6 +3360,9 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="from_data-29"><a class="header" href="#from_data-29"><code>from_data</code></a></h3>
 <pre><code class="language-helios">TxId::from_data(data: Data) -&gt; TxId
 </code></pre>
+<h2 id="getters-22"><a class="header" href="#getters-22">Getters</a></h2>
+<pre><code class="language-helios">tx_id.bytes -&gt; ByteArray
+</code></pre>
 <h2 id="operators-30"><a class="header" href="#operators-30">Operators</a></h2>
 <h3 id="-113"><a class="header" href="#-113"><code>==</code></a></h3>
 <pre><code class="language-helios">TxId == TxId -&gt; Bool
@@ -3381,7 +3404,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
     output:    TxOutput
 ) -&gt; TxInput
 </code></pre>
-<h2 id="getters-17"><a class="header" href="#getters-17">Getters</a></h2>
+<h2 id="getters-23"><a class="header" href="#getters-23">Getters</a></h2>
 <h3 id="address-2"><a class="header" href="#address-2"><code>address</code></a></h3>
 <p>Shortcut for <code>tx_input.output.address</code>:</p>
 <pre><code class="language-helios">tx_input.address -&gt; Address
@@ -3428,7 +3451,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
     datum:   OutputDatum
 ) -&gt; TxOutput
 </code></pre>
-<h2 id="getters-18"><a class="header" href="#getters-18">Getters</a></h2>
+<h2 id="getters-24"><a class="header" href="#getters-24">Getters</a></h2>
 <h3 id="address-3"><a class="header" href="#address-3"><code>address</code></a></h3>
 <p>Returns the <a href="lang/builtins/./address.html"><code>Address</code></a> at which the <code>TxOutput</code> is located.</p>
 <pre><code class="language-helios">tx_output.address -&gt; Address
@@ -3466,7 +3489,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="from_data-32"><a class="header" href="#from_data-32"><code>from_data</code></a></h3>
 <pre><code class="language-helios">TxOutputId::from_data(data: Data) -&gt; TxOutputId
 </code></pre>
-<h2 id="getters-19"><a class="header" href="#getters-19">Getters</a></h2>
+<h2 id="getters-25"><a class="header" href="#getters-25">Getters</a></h2>
 <h3 id="index"><a class="header" href="#index"><code>index</code></a></h3>
 <p>Index of the UTxO in the producing transaction:</p>
 <pre><code class="language-helios">tx_output_id.index -&gt; Int
@@ -3516,6 +3539,10 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <h3 id="from_script_hash-2"><a class="header" href="#from_script_hash-2"><code>from_script_hash</code></a></h3>
 <p>Casts the generic <a href="lang/builtins/./scripthash.html"><code>ScriptHash</code></a> type into <code>ValidatorHash</code>.</p>
 <pre><code class="language-helios">ValidatorHash::from_script_hash(hash: ScriptHash) -&gt; ValidatorHash
+</code></pre>
+<h2 id="getters-26"><a class="header" href="#getters-26">Getters</a></h2>
+<h3 id="bytes-5"><a class="header" href="#bytes-5"><code>bytes</code></a></h3>
+<pre><code class="language-helios">validator_hash.bytes -&gt; ByteArray
 </code></pre>
 <h2 id="operators-34"><a class="header" href="#operators-34">Operators</a></h2>
 <h3 id="-129"><a class="header" href="#-129"><code>==</code></a></h3>
@@ -3587,7 +3614,7 @@ validator_stakinghash.hash -&gt; StakingValidatorHash
 <p>For example:</p>
 <pre><code class="language-helios">Value::sum(list: []Value) -&gt; Value
 </code></pre>
-<h2 id="getters-20"><a class="header" href="#getters-20">Getters</a></h2>
+<h2 id="getters-27"><a class="header" href="#getters-27">Getters</a></h2>
 <h3 id="value-3"><a class="header" href="#value-3"><code>value</code></a></h3>
 <p>Returns self. Allows <code>Value</code> to implement the <a href="lang/builtins/./valuable.html"><code>Valuable</code></a> type class, which in turn allows using <a href="lang/builtins/./value.html#sum"><code>Value::sum()</code></a> associated method for a list of <code>Value</code>.</p>
 <pre><code class="language-helios">value.value -&gt; Value
@@ -4258,7 +4285,7 @@ async function buyTx(contract) {
 <h4 id="overrides"><a class="header" href="#overrides">Overrides</a></h4>
 <p><a href="api/reference/classes/HeliosData.html">HeliosData</a>.<a href="api/reference/classes/HeliosData.html#constructor">constructor</a></p>
 <h2 id="accessors"><a class="header" href="#accessors">Accessors</a></h2>
-<h3 id="bytes"><a class="header" href="#bytes">bytes</a></h3>
+<h3 id="bytes-6"><a class="header" href="#bytes-6">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns"><a class="header" href="#returns">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -4846,7 +4873,7 @@ Mutates 'this'</p>
 </tbody></table>
 </div>
 <h2 id="accessors-3"><a class="header" href="#accessors-3">Accessors</a></h2>
-<h3 id="bytes-1"><a class="header" href="#bytes-1">bytes</a></h3>
+<h3 id="bytes-7"><a class="header" href="#bytes-7">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-60"><a class="header" href="#returns-60">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -5127,7 +5154,7 @@ Returns oldest UTxOs first, newest last.</p>
 <h4 id="overrides-3"><a class="header" href="#overrides-3">Overrides</a></h4>
 <p><a href="api/reference/classes/HeliosData.html">HeliosData</a>.<a href="api/reference/classes/HeliosData.html#constructor">constructor</a></p>
 <h2 id="accessors-5"><a class="header" href="#accessors-5">Accessors</a></h2>
-<h3 id="bytes-2"><a class="header" href="#bytes-2">bytes</a></h3>
+<h3 id="bytes-8"><a class="header" href="#bytes-8">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-79"><a class="header" href="#returns-79">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -5856,7 +5883,7 @@ But outside helios scripts there isn't much sense to keep using the name 'Output
 <h4 id="inherited-from-28"><a class="header" href="#inherited-from-28">Inherited from</a></h4>
 <p><a href="api/reference/classes/Hash.html">Hash</a>.<a href="api/reference/classes/Hash.html#constructor">constructor</a></p>
 <h2 id="properties"><a class="header" href="#properties">Properties</a></h2>
-<h3 id="bytes-3"><a class="header" href="#bytes-3">bytes</a></h3>
+<h3 id="bytes-9"><a class="header" href="#bytes-9">bytes</a></h3>
 <p>• <code>Readonly</code> <strong>bytes</strong>: <code>number</code>[]</p>
 <h4 id="inherited-from-29"><a class="header" href="#inherited-from-29">Inherited from</a></h4>
 <p><a href="api/reference/classes/Hash.html">Hash</a>.<a href="api/reference/classes/Hash.html#bytes">bytes</a></p>
@@ -6008,7 +6035,7 @@ But outside helios scripts there isn't much sense to keep using the name 'Output
 <h4 id="overrides-9"><a class="header" href="#overrides-9">Overrides</a></h4>
 <p><a href="api/reference/classes/HeliosData.html">HeliosData</a>.<a href="api/reference/classes/HeliosData.html#constructor">constructor</a></p>
 <h2 id="accessors-12"><a class="header" href="#accessors-12">Accessors</a></h2>
-<h3 id="bytes-4"><a class="header" href="#bytes-4">bytes</a></h3>
+<h3 id="bytes-10"><a class="header" href="#bytes-10">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-152"><a class="header" href="#returns-152">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -6135,7 +6162,7 @@ This is not cryptographically secure, only use this for testing purpose</p>
 <h4 id="returns-163"><a class="header" href="#returns-163">Returns</a></h4>
 <p><a href="api/reference/classes/../types.html#valuegenerator"><code>ValueGenerator</code></a></p>
 <div class="vspace"></div>
-<h3 id="bytes-5"><a class="header" href="#bytes-5">bytes</a></h3>
+<h3 id="bytes-11"><a class="header" href="#bytes-11">bytes</a></h3>
 <p>▸ <strong>bytes</strong>(<code>minLength?</code>, <code>maxLength?</code>): <a href="api/reference/classes/../types.html#valuegenerator"><code>ValueGenerator</code></a></p>
 <p>Returns a generator for bytearrays</p>
 <h4 id="parameters-87"><a class="header" href="#parameters-87">Parameters</a></h4>
@@ -6571,7 +6598,7 @@ This is not cryptographically secure, only use this for testing purpose</p>
 <h4 id="overrides-11"><a class="header" href="#overrides-11">Overrides</a></h4>
 <p><a href="api/reference/classes/HeliosData.html">HeliosData</a>.<a href="api/reference/classes/HeliosData.html#constructor">constructor</a></p>
 <h2 id="properties-1"><a class="header" href="#properties-1">Properties</a></h2>
-<h3 id="bytes-6"><a class="header" href="#bytes-6">bytes</a></h3>
+<h3 id="bytes-12"><a class="header" href="#bytes-12">bytes</a></h3>
 <p>• <code>Readonly</code> <strong>bytes</strong>: <code>number</code>[]</p>
 <h2 id="accessors-14"><a class="header" href="#accessors-14">Accessors</a></h2>
 <h3 id="hex-5"><a class="header" href="#hex-5">hex</a></h3>
@@ -7304,7 +7331,7 @@ but outside helios scripts there isn't much sense to keep using the name 'Output
 <h4 id="inherited-from-81"><a class="header" href="#inherited-from-81">Inherited from</a></h4>
 <p><a href="api/reference/classes/ScriptHash.html">ScriptHash</a>.<a href="api/reference/classes/ScriptHash.html#constructor">constructor</a></p>
 <h2 id="properties-2"><a class="header" href="#properties-2">Properties</a></h2>
-<h3 id="bytes-7"><a class="header" href="#bytes-7">bytes</a></h3>
+<h3 id="bytes-13"><a class="header" href="#bytes-13">bytes</a></h3>
 <p>• <code>Readonly</code> <strong>bytes</strong>: <code>number</code>[]</p>
 <h4 id="inherited-from-82"><a class="header" href="#inherited-from-82">Inherited from</a></h4>
 <p><a href="api/reference/classes/ScriptHash.html">ScriptHash</a>.<a href="api/reference/classes/ScriptHash.html#bytes">bytes</a></p>
@@ -8169,7 +8196,7 @@ If there aren't enough inputs to cover the maxTxFee and the min deposits of newl
 <h4 id="overrides-24"><a class="header" href="#overrides-24">Overrides</a></h4>
 <p><a href="api/reference/classes/HeliosData.html">HeliosData</a>.<a href="api/reference/classes/HeliosData.html#constructor">constructor</a></p>
 <h2 id="accessors-26"><a class="header" href="#accessors-26">Accessors</a></h2>
-<h3 id="bytes-8"><a class="header" href="#bytes-8">bytes</a></h3>
+<h3 id="bytes-14"><a class="header" href="#bytes-14">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-331"><a class="header" href="#returns-331">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -8299,7 +8326,7 @@ If there aren't enough inputs to cover the maxTxFee and the min deposits of newl
 <h4 id="inherited-from-110"><a class="header" href="#inherited-from-110">Inherited from</a></h4>
 <p><a href="api/reference/classes/Hash.html">Hash</a>.<a href="api/reference/classes/Hash.html#constructor">constructor</a></p>
 <h2 id="properties-3"><a class="header" href="#properties-3">Properties</a></h2>
-<h3 id="bytes-9"><a class="header" href="#bytes-9">bytes</a></h3>
+<h3 id="bytes-15"><a class="header" href="#bytes-15">bytes</a></h3>
 <p>• <code>Readonly</code> <strong>bytes</strong>: <code>number</code>[]</p>
 <h4 id="inherited-from-111"><a class="header" href="#inherited-from-111">Inherited from</a></h4>
 <p><a href="api/reference/classes/Hash.html">Hash</a>.<a href="api/reference/classes/Hash.html#bytes">bytes</a></p>
@@ -8724,7 +8751,7 @@ If there aren't enough inputs to cover the maxTxFee and the min deposits of newl
 </tbody></table>
 </div>
 <h2 id="accessors-30"><a class="header" href="#accessors-30">Accessors</a></h2>
-<h3 id="bytes-10"><a class="header" href="#bytes-10">bytes</a></h3>
+<h3 id="bytes-16"><a class="header" href="#bytes-16">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-383"><a class="header" href="#returns-383">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -8932,7 +8959,7 @@ If there aren't enough inputs to cover the maxTxFee and the min deposits of newl
 <h4 id="inherited-from-127"><a class="header" href="#inherited-from-127">Inherited from</a></h4>
 <p><a href="api/reference/classes/Hash.html">Hash</a>.<a href="api/reference/classes/Hash.html#constructor">constructor</a></p>
 <h2 id="properties-5"><a class="header" href="#properties-5">Properties</a></h2>
-<h3 id="bytes-11"><a class="header" href="#bytes-11">bytes</a></h3>
+<h3 id="bytes-17"><a class="header" href="#bytes-17">bytes</a></h3>
 <p>• <code>Readonly</code> <strong>bytes</strong>: <code>number</code>[]</p>
 <h4 id="inherited-from-128"><a class="header" href="#inherited-from-128">Inherited from</a></h4>
 <p><a href="api/reference/classes/Hash.html">Hash</a>.<a href="api/reference/classes/Hash.html#bytes">bytes</a></p>
@@ -9062,7 +9089,7 @@ If there aren't enough inputs to cover the maxTxFee and the min deposits of newl
 <h4 id="overrides-26"><a class="header" href="#overrides-26">Overrides</a></h4>
 <p><a href="api/reference/classes/CborData.html">CborData</a>.<a href="api/reference/classes/CborData.html#constructor">constructor</a></p>
 <h2 id="accessors-33"><a class="header" href="#accessors-33">Accessors</a></h2>
-<h3 id="bytes-12"><a class="header" href="#bytes-12">bytes</a></h3>
+<h3 id="bytes-18"><a class="header" href="#bytes-18">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-406"><a class="header" href="#returns-406">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -9663,7 +9690,7 @@ Also used by VSCode plugin</p>
 </tbody></table>
 </div>
 <h2 id="accessors-38"><a class="header" href="#accessors-38">Accessors</a></h2>
-<h3 id="bytes-13"><a class="header" href="#bytes-13">bytes</a></h3>
+<h3 id="bytes-19"><a class="header" href="#bytes-19">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-464"><a class="header" href="#returns-464">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -9796,7 +9823,7 @@ Throws an error if the Address doesn't have a staking credential.</p>
 <h4 id="inherited-from-156"><a class="header" href="#inherited-from-156">Inherited from</a></h4>
 <p><a href="api/reference/classes/ScriptHash.html">ScriptHash</a>.<a href="api/reference/classes/ScriptHash.html#constructor">constructor</a></p>
 <h2 id="properties-6"><a class="header" href="#properties-6">Properties</a></h2>
-<h3 id="bytes-14"><a class="header" href="#bytes-14">bytes</a></h3>
+<h3 id="bytes-20"><a class="header" href="#bytes-20">bytes</a></h3>
 <p>• <code>Readonly</code> <strong>bytes</strong>: <code>number</code>[]</p>
 <h4 id="inherited-from-157"><a class="header" href="#inherited-from-157">Inherited from</a></h4>
 <p><a href="api/reference/classes/ScriptHash.html">ScriptHash</a>.<a href="api/reference/classes/ScriptHash.html#bytes">bytes</a></p>
@@ -10590,7 +10617,7 @@ Returns the transaction instance so build methods can be chained.</p>
 <h4 id="inherited-from-172"><a class="header" href="#inherited-from-172">Inherited from</a></h4>
 <p><a href="api/reference/classes/Hash.html">Hash</a>.<a href="api/reference/classes/Hash.html#constructor">constructor</a></p>
 <h2 id="properties-7"><a class="header" href="#properties-7">Properties</a></h2>
-<h3 id="bytes-15"><a class="header" href="#bytes-15">bytes</a></h3>
+<h3 id="bytes-21"><a class="header" href="#bytes-21">bytes</a></h3>
 <p>• <code>Readonly</code> <strong>bytes</strong>: <code>number</code>[]</p>
 <h4 id="inherited-from-173"><a class="header" href="#inherited-from-173">Inherited from</a></h4>
 <p><a href="api/reference/classes/Hash.html">Hash</a>.<a href="api/reference/classes/Hash.html#bytes">bytes</a></p>
@@ -11686,7 +11713,7 @@ Only works after the tx has been finalized.</p>
 <h4 id="inherited-from-225"><a class="header" href="#inherited-from-225">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
-<h3 id="bytes-16"><a class="header" href="#bytes-16">bytes</a></h3>
+<h3 id="bytes-22"><a class="header" href="#bytes-22">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-644"><a class="header" href="#returns-644">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -12047,7 +12074,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <h4 id="inherited-from-248"><a class="header" href="#inherited-from-248">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
-<h3 id="bytes-17"><a class="header" href="#bytes-17">bytes</a></h3>
+<h3 id="bytes-23"><a class="header" href="#bytes-23">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-675"><a class="header" href="#returns-675">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -12542,7 +12569,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <h4 id="inherited-from-278"><a class="header" href="#inherited-from-278">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
-<h3 id="bytes-18"><a class="header" href="#bytes-18">bytes</a></h3>
+<h3 id="bytes-24"><a class="header" href="#bytes-24">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-714"><a class="header" href="#returns-714">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -13025,7 +13052,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <h4 id="inherited-from-309"><a class="header" href="#inherited-from-309">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
-<h3 id="bytes-19"><a class="header" href="#bytes-19">bytes</a></h3>
+<h3 id="bytes-25"><a class="header" href="#bytes-25">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-750"><a class="header" href="#returns-750">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -13450,7 +13477,7 @@ Only used during evaluation.</p>
 <h4 id="inherited-from-332"><a class="header" href="#inherited-from-332">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
-<h3 id="bytes-20"><a class="header" href="#bytes-20">bytes</a></h3>
+<h3 id="bytes-26"><a class="header" href="#bytes-26">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-784"><a class="header" href="#returns-784">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -13739,7 +13766,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <h4 id="inherited-from-351"><a class="header" href="#inherited-from-351">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
-<h3 id="bytes-21"><a class="header" href="#bytes-21">bytes</a></h3>
+<h3 id="bytes-27"><a class="header" href="#bytes-27">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-810"><a class="header" href="#returns-810">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -14261,7 +14288,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <h4 id="inherited-from-370"><a class="header" href="#inherited-from-370">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
-<h3 id="bytes-22"><a class="header" href="#bytes-22">bytes</a></h3>
+<h3 id="bytes-28"><a class="header" href="#bytes-28">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-862"><a class="header" href="#returns-862">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -14684,7 +14711,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <h4 id="inherited-from-390"><a class="header" href="#inherited-from-390">Inherited from</a></h4>
 <p>UplcValueImpl.bool</p>
 <div class="vspace"></div>
-<h3 id="bytes-23"><a class="header" href="#bytes-23">bytes</a></h3>
+<h3 id="bytes-29"><a class="header" href="#bytes-29">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-899"><a class="header" href="#returns-899">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -14957,7 +14984,7 @@ Member function not named 'toFlat' as not to confuse with 'toFlat' member of ter
 <h4 id="returns-923"><a class="header" href="#returns-923">Returns</a></h4>
 <p><code>boolean</code></p>
 <div class="vspace"></div>
-<h3 id="bytes-24"><a class="header" href="#bytes-24">bytes</a></h3>
+<h3 id="bytes-30"><a class="header" href="#bytes-30">bytes</a></h3>
 <p>• <code>get</code> <strong>bytes</strong>(): <code>number</code>[]</p>
 <h4 id="returns-924"><a class="header" href="#returns-924">Returns</a></h4>
 <p><code>number</code>[]</p>
@@ -15252,7 +15279,7 @@ Dumps the error</p>
 <h4 id="inherited-from-417"><a class="header" href="#inherited-from-417">Inherited from</a></h4>
 <p><a href="api/reference/classes/ScriptHash.html">ScriptHash</a>.<a href="api/reference/classes/ScriptHash.html#constructor">constructor</a></p>
 <h2 id="properties-20"><a class="header" href="#properties-20">Properties</a></h2>
-<h3 id="bytes-25"><a class="header" href="#bytes-25">bytes</a></h3>
+<h3 id="bytes-31"><a class="header" href="#bytes-31">bytes</a></h3>
 <p>• <code>Readonly</code> <strong>bytes</strong>: <code>number</code>[]</p>
 <h4 id="inherited-from-418"><a class="header" href="#inherited-from-418">Inherited from</a></h4>
 <p><a href="api/reference/classes/ScriptHash.html">ScriptHash</a>.<a href="api/reference/classes/ScriptHash.html#bytes">bytes</a></p>
@@ -15987,7 +16014,7 @@ Can be used as a marker of Helios sources so that syntax highlighting can work i
 <h3 id="bool-12"><a class="header" href="#bool-12">bool</a></h3>
 <p>• <strong>bool</strong>: <code>boolean</code></p>
 <div class="vspace"></div>
-<h3 id="bytes-26"><a class="header" href="#bytes-26">bytes</a></h3>
+<h3 id="bytes-32"><a class="header" href="#bytes-32">bytes</a></h3>
 <p>• <strong>bytes</strong>: <code>number</code>[]</p>
 <div class="vspace"></div>
 <h3 id="copy-9"><a class="header" href="#copy-9">copy</a></h3>
